@@ -1,0 +1,462 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, inital-scale=1.0">
+	<title>AlTo - 혼자, 다같이 Alone Together</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/common.css" />
+	<link rel="stylesheet" href="css/layout.css" />	
+	<link rel="stylesheet" href="css/list.css" /> 
+	<link rel="stylesheet" href="css/club.css" /> 
+	<script type="text/javascript">
+		$(function() {
+			$("#tab_area").css("display","none")
+			$("#m_cate").css("display","none")
+			$("#s_cate").css("display","none")
+			$("#area_list").css("display","none")
+			
+			/* tab메뉴 선택 시 - 영역 노출하기 */
+			$("#tab_menu li").filter(":first").click(function() {
+				$("#tab_area").toggle()
+				$("#m_cate").toggle()
+				
+				if ($("#m_cate ul").find("li").hasClass('select')) {
+					$("#s_cate").show()
+				}else {
+					$("#s_cate").hide()
+				}				
+			})
+			
+			$("#tab_menu li").filter(":last").click(function() {
+				$("#tab_area").toggle()
+				$("#area_list").toggle()
+			})
+			
+			/* 메인카테고리 선택 시 - 서브카테고리 영역 노출 */
+			$("#m_cate ul li").click(function() {
+				$(this).toggleClass("select")
+				$("#m_cate ul li.all").removeClass("select")
+				
+				if ($("#m_cate ul").find("li").hasClass('select')) {
+					$("#s_cate").show()
+					if(!($("#tab_menu").find("li").hasClass('select'))) {
+						$("#tab_menu li").addClass("select")
+					}
+					$("#tab_menu li").removeClass("select")
+				}else {
+					$("#s_cate").hide()
+					$("#m_cate ul li.all").addClass("select")
+					$("#tab_menu li").removeClass("select")
+				}
+			})
+			
+			/* 클럽개설 버튼 팝업 */
+			$("#open_btn").mouseover(function() {
+				$("div.info_div").show()
+			})
+			$("#open_btn").mouseout(function() {
+				$("div.info_div").hide()
+			})
+			
+			/* select 정렬선택 */
+			$("#selectBoxArea div").filter(":first").click(function() {
+				$("div.select_list").toggle()
+			})
+			
+		})
+	</script>
+</head>
+<body>
+	<%@include file="header.jsp" %>
+	
+	<!-- CONTENTS -->
+	<section>
+		<ul id="tab_menu">
+			<li class="select">창작</li>
+			<li>성동구&nbsp;용산구&nbsp;중구</li>
+		</ul>
+		
+		<div id="tab_area">
+			<div id="m_cate">
+				<ul>
+					<li class="all"><a href="">전체</a></li>
+					<li class="select">
+						<img src="img/hobby_img/h_001.png" />
+						<p class="hobby_name">창작</p>
+					</li>
+			        <li>
+						<img src="img/hobby_img/h_002.png" />
+						<p class="hobby_name">액티비티</p>
+			        </li>
+			        <li>
+						<img src="img/hobby_img/h_003.png" />
+						<p class="hobby_name">아웃도어</p>
+					</li>
+			        <li>
+						<img src="img/hobby_img/h_004.png" />
+						<p class="hobby_name">사진/영상</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_005.png" />
+						<p class="hobby_name">음악</p>	
+					</li>
+					<li>
+						<img src="img/hobby_img/h_006.png" />
+						<p class="hobby_name">게임</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_007.png" />
+						<p class="hobby_name">여행</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_008.png" />
+						<p class="hobby_name">요리</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_009.png" />
+						<p class="hobby_name">문화</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_010.png" />
+						<p class="hobby_name">봉사</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_011.png" />
+						<p class="hobby_name">직무/커리어</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_012.png" />
+						<p class="hobby_name">수집</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_013.png" />
+						<p class="hobby_name">반려동물</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_014.png" />
+						<p class="hobby_name">차/오토바이</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_015.png" />
+						<p class="hobby_name">자유주제</p>
+					</li>
+				</ul>
+			</div>
+			<div id="s_cate">
+				<ul>
+					<li class="select">전체</li>
+					<li>드로잉</li>
+					<li>공예</li>
+					<li>DIY</li>
+				</ul>
+			</div>
+			<div id="area_list" class="">
+				<ul>
+					<li class="online">온라인</li>
+					<li>전체</li>
+					<li>강남구</li>
+					<li>강동구</li>
+					<li>강북구</li>
+					<li>강서구</li>
+					<li>관악구</li>
+					<li>광진구</li>
+					<li>구로구</li>
+					<li>금천구</li>
+					<li>노원구</li>
+					<li>도봉구</li>
+					<li>동대문구</li>
+					<li>동작구</li>
+					<li>마포구</li>
+					<li>서대문구</li>
+					<li>서초구</li>
+					<li class="select">성동구</li>
+					<li>성북구</li>
+					<li>송파구</li>
+					<li>양천구</li>
+					<li>영등포구</li>
+					<li class="select">용산구</li>
+					<li>은평구</li>
+				</ul>
+			</div>
+			<button type="button" id="opSearch_btn">선택 조건으로 검색</button>
+		</div>
+		
+		<div id="selectBoxArea">
+			<div class="selectBox">Best순</div>
+			<div class="selectBox select_list">
+				<ul>
+					<li>회원수 많은</li>
+					<li>회원수 적은</li>
+					<li>최근 일정</li>
+					<li>신규</li>
+					<li>오래된</li>
+				</ul>
+			</div>
+		</div>
+		
+		
+		<div id="search_result">
+			<h2>검색 결과</h2>
+			<div>
+				<ul class="club">
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+					<li>
+						<img class="club_img" src="img/club_test.png" />
+						<span class="area">성동구</span>
+						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
+						<span class="memNum">50명</span>
+						<p class="club_schedule">
+							<span class="s_icon"></span><span>6/11(토)</span>
+							<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+						</p>
+						<span class="like_icon">관심</span>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		
+		<div class="info_div">
+			<p>원하는 모임을 찾지 못하셨나요?</p>
+			<span class="p_color">그럼 직접 만들어보세요!</span>
+		</div>
+		<div id="open_btn"></div>
+		
+		<!-- 로그인 알림 팝업 -->
+		<div class="popup_div">
+			<p>회원이 아닌 경우 모임을<br/> 개설 할 수 없습니다.</p>
+			<button type="button" class="pointBtn">로그인</button>
+			<button type="button" class="basicBtn">닫기</button>
+		</div>
+		<!-- 수정 실패 알림 팝업 -->
+		<div class="popup_div">
+			<p>변경사항이 적용되지<br/>않습니다.</p>
+			<button type="button" class="pointBtn">닫기</button>
+			<button type="button" class="basicBtn">취소</button>
+		</div>
+		<!-- 주제변경 알림 팝업 -->
+		<div class="popup_div">
+			<p><span class="select">7일 동안</span><br/>재변경이 제한 됩니다.<br/>주제를 변경하시겠습니까?</p>
+			<button type="button" class="pointBtn">네</button>
+			<button type="button" class="basicBtn">아니오</button>
+		</div>
+		<!-- 주제변경 7일 제한 알림 팝업 -->
+		<div class="popup_div">
+			<p>주제는 <span class="select">7일 이내<br/>재변경이 불가능</span>합니다.</p>
+			<button type="button" class="pointBtn">확인</button>
+		</div>
+		
+		<!-- 모임 개설 팝업 -->
+		<div id="step1" class="clubPopup">
+			<h3>주제 선택</h3>
+			<button type="button" class="closeBtn">닫기</button>
+			<div id="cateChoice">
+				<ul>
+					<li>
+						<img src="img/hobby_img/h_001.png" />
+						<p class="hobby_name">창작</p>
+					</li>
+			        <li>
+						<img src="img/hobby_img/h_002.png" />
+						<p class="hobby_name">액티비티</p>
+			        </li>
+			        <li>
+						<img src="img/hobby_img/h_003.png" />
+						<p class="hobby_name">아웃도어</p>
+					</li>
+			        <li>
+						<img src="img/hobby_img/h_004.png" />
+						<p class="hobby_name">사진/영상</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_005.png" />
+						<p class="hobby_name">음악</p>	
+					</li>
+					<li>
+						<img src="img/hobby_img/h_006.png" />
+						<p class="hobby_name">게임</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_007.png" />
+						<p class="hobby_name">여행</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_008.png" />
+						<p class="hobby_name">요리</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_009.png" />
+						<p class="hobby_name">문화</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_010.png" />
+						<p class="hobby_name">봉사</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_011.png" />
+						<p class="hobby_name">직무/커리어</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_012.png" />
+						<p class="hobby_name">수집</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_013.png" />
+						<p class="hobby_name">반려동물</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_014.png" />
+						<p class="hobby_name">차/오토바이</p>
+					</li>
+					<li>
+						<img src="img/hobby_img/h_015.png" />
+						<p class="hobby_name">자유주제</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="step2" class="clubPopup">
+			<button type="button" class="prevBtn">이전</button>
+			<button type="button" class="closeBtn">닫기</button>
+			<h3>모임 개설</h3>
+			<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
+				<span class="icon_area"></span>
+				<input type="text" class="size1" name="mainArea" value="주요활동 지역 찾기" /><br/>
+				<span class="icon_hobby"></span>
+				<input type="text" class="size1" name="clubName" value="모임 이름" /><br/>
+				<textarea name="clubCont">모임 소개 또는 목표</textarea><br/>
+				<span class="icon_mem"></span><p>모임 최대 인원</p>
+				<input type="text" class="size2" name="maxMam" value="200" /><br/>
+				<input type="submit" class="pointBtn size0" value="모임 만들기" />
+			</form>
+		</div>
+		
+		<!-- 지역 검색 팝업 -->
+		<div id="step3" class="clubPopup">
+			<button type="button" class="prevBtn">이전</button>
+			<button type="button" class="closeBtn">닫기</button>
+			<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
+				<input type="text" class="size1" name="mainArea" value="주요활동 지역 찾기" /><br/>				
+			</form>
+			<div id="resultList">
+				
+			</div>
+		</div>
+		
+		<!-- 모임 편집 팝업 -->
+		<div id="step4" class="clubPopup">
+			<button type="button" class="closeBtn">닫기</button>
+			<h3>모임 수정</h3>
+			<p class="club_since">모임 개설일 since 2022/06/10</p>
+			<form action="" name="clubEditFrm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+				<span class="icon_area"></span><label>주요지역</label>
+				<input type="text" class="size3" name="mainArea" value="성동구" /><br/>
+				<span class="icon_hobby"></span><label>상세 취미</label>
+				<input type="text" class="size3" name="clubHobby" value="공예" /><br/>
+				<input type="button" class="size0 non_img" name="clubPhoto" value="모임 사진 등록하기" /><br/>
+				<textarea name="clubCont">클럽 소개글</textarea><br/>
+				<span class="icon_mem"></span><p>모임 최대 인원</p>
+				<input type="text" class="size2" name="maxMam" value="200" /><br/>
+				<input type="submit" class="pointBtn size0" value="수정하기" />
+			</form>
+		</div>
+		
+	</section>
+	
+	<%@include file="footer.jsp" %>
+</body>
+</html>

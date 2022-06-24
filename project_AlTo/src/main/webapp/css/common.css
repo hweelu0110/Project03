@@ -1,0 +1,73 @@
+@charset "UTF-8";
+html { font-size: calc(6px + .5vw); }
+header {
+    top: 0;
+}
+
+html,
+body a,
+button,
+dd,
+div,
+dl,
+dt,
+html,
+input,
+label,
+li,
+p,
+span,
+textarea,
+ul,
+th,
+td {
+    font-family: -apple-system,BlinkMacSystemFont,'Pretendard JP',Pretendard,system-ui,Roboto,'Helvetica Neue','Segoe UI','Noto Sans KR','Malgun Gothic',sans-serif;
+}
+blockquote,
+body,
+dd,
+dl,
+dt,
+fieldset,
+figure,
+hr,
+html,
+iframe,
+legend,
+li,
+ol,
+p,
+pre,
+textarea,
+a,
+button,
+ul,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+}
+h2 {
+    margin: 0;
+    padding: 0;
+}
+li {
+    list-style: none;
+}
+
+input,
+textarea {
+    background-color: #F8F8F8;
+    border-radius: 2px;
+    box-sizing: border-box;
+    border: none;
+    padding: 5px;
+}
+textarea {
+    resize: none;
+}
+
+
+
