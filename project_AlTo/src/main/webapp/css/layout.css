@@ -44,7 +44,9 @@ nav #main_menu li {
 	background-color: #F8F8F8; 
 }
 #allSearch_keyword {	
-    width: 260px;    
+    width: 260px; 
+    border: none;
+    margin: 0;   
 }
 #search_btn {
 	background-image: url(../img/alto_common_icon.png);
@@ -69,10 +71,9 @@ section {
 	clear:both;
 	margin: auto;
     max-width: 1000px;
+    overflow: hidden;
 }
-section div {
-	position: relative;
-}
+section div { position: relative; }
 
 #ban_area {
 	display: flex;

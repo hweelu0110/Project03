@@ -3,12 +3,12 @@
 <!-- HEADER -->
 	<header>
 		<div>
-			<h1 id="logo"><a href="main.jsp">AlTo Alone Together</a></h1>
+			<h1 id="logo"><a href="../main.jsp">AlTo Alone Together</a></h1>
 			<nav>
 				<ul id="main_menu">
-					<li><a href="clubMain.jsp">모임</a></li>
-					<li><a href="">클래스</a></li>
-					<li><a href="">취미용품</a></li>
+					<li><a href="../club/clubMain.jsp">모임</a></li>
+					<li><a href="../class/classMain.jsp">클래스</a></li>
+					<li><a href="../item/itemMain.jsp">취미용품</a></li>
 				</ul>
 			</nav>
 			<form action="allSearch.jsp" id="allSearch" name="allSearchForm" method="post">

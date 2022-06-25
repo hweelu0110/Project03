@@ -21,7 +21,7 @@ section { padding: 30px 30px 70px; }
 #tab_area { 
 	position: absolute;
     top: 66px; 
-	z-index: 1;
+	z-index: 2;
 	overflow: hidden;
 }
 
@@ -90,7 +90,7 @@ section { padding: 30px 30px 70px; }
 }
 
 #search_result { margin-top: 40px; margin-bottom: 80px; }
-#search_result div { padding-left: 50px; }
+#search_result div.searchList { padding-left: 50px; }
 #search_result ul li { 
 	position: relative;
 	width: 250px; 
@@ -164,31 +164,6 @@ div.info_div .p_color {
 	background-repeat: no-repeat;
     background-size: 40px;
     cursor: pointer;
-}
-
-/* popup div style */
-.popup_div {
-	width: fit-content;
-    padding: 20px 40px;
-    font-size: 13px;    
-    text-align: center;
-    background: #fff;
-    border: 1px solid #cdcdcd;
-    border-radius: 12px;
-}
-.popup_div p { margin-bottom: 20px; }
-.pointBtn {
-	padding: 8px 20px;
-	font-weight: bold;
-	background: #F3BE34;
-    border-radius: 8px;
-}
-.basicBtn {
-	padding: 8px 15px;
-	color: #F9F9F9;
-    font-weight: bold;
-    background: #666;
-    border-radius: 8px;
 }
 
 /* 모임개설 popup style */
@@ -271,17 +246,8 @@ div.info_div .p_color {
 }
 
 /* input Style */
-.clubPopup input[type=text], .clubPopup textarea {
-	width: 100%;
-	padding: 5px 7px;
-	margin-bottom: 10px;
-	color: #494c57;
-	font-size: 12px;
-    border: 1px solid #e4e4e4;       
-}
-.clubPopup textarea { height: 150px; }
+.clubPopup textarea { width: 100%; height: 150px; }
 
-input.size0 { width: 100%; }
 input[type=text].size1 { width: 287px; float: right; }
 input[type=text].size2 { width: 40px; float: right; }
 input[type=text].size3 { width: 200px; float: right; }
@@ -317,14 +283,24 @@ input.club_img {
 #cateChoice ul li img { width: 80px; }
 
 /* 모임 채팅 */
+#clubChat { margin: 0 auto; width: fit-content; overflow: hidden; }
+#clubChat>div {
+	float: left; 
+	background: #F8F8F8;
+    border: 1px solid #494c57;
+}
 #clubChatWindow {
 	width: 500px;
     height: 500px;
     padding: 10px;
-    margin: 0 auto;
-    background: #F8F8F8;
-    border: 1px solid #666;
+    margin-right: 20px;    
 }
+#clubChatWindow input {
+	width: 85%;
+	margin-top: 10px;
+    background: #fff;
+}
+
 #chatView {
 	height: 390px;
     padding: 0 10px;
@@ -401,7 +377,26 @@ input.club_img {
 }
 
 /* 일정 멤버 목록 */
-#schedual_member ul li img { width: 40px; }
+#schedual_member { width: 200px; padding: 20px; }
+#schedual_member ul li { position: relative; cursor: pointer; }
+#schedual_member ul li img { width: 40px; vertical-align: middle; }
+#schedual_member ul li span {	
+    position: absolute;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#schedual_member ul li span.memName { 
+	width: 76px; 
+	height: 32px;
+	overflow: hidden;
+}
+#schedual_member ul li span.manager { 
+	right: 0; 
+	font-size: 10px;
+	font-weight: bold;
+	color: #777;
+}
 
 
 

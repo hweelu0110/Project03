@@ -42,6 +42,7 @@ textarea,
 a,
 button,
 ul,
+h2,
 h3,
 h4,
 h5,
@@ -49,13 +50,8 @@ h6 {
     margin: 0;
     padding: 0;
 }
-h2 {
-    margin: 0;
-    padding: 0;
-}
-li {
-    list-style: none;
-}
+
+li { list-style: none; }
 
 input,
 textarea {
@@ -65,9 +61,53 @@ textarea {
     border: none;
     padding: 5px;
 }
-textarea {
-    resize: none;
+textarea { resize: none; }
+
+/* textbox Style */
+input[type=text], text {
+	width: 100%;
+    padding: 5px 7px;
+    margin-bottom: 10px;
+    color: #494c57;
+    font-size: 12px;
+    border: 1px solid #e4e4e4;
+    border-radius: 2px;
 }
+input.size0 { width: 100%; }
 
+/* button Style */
+button {
+	font-size: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.pointBtn {
+	padding: 8px 20px;
+	font-weight: bold;
+	background: #F3BE34;
+    border-radius: 3px;
+}
+.basicBtn {
+	padding: 8px 15px;
+	color: #F9F9F9;
+    font-weight: bold;
+    background: #666;
+    border-radius: 3px;
+}
+button.size0 { width: 100%; }
 
-
+/* popup div style */
+.popup_div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: fit-content;
+    padding: 20px 40px;
+    font-size: 13px;    
+    text-align: center;
+    background: #fff;
+    border: 1px solid #cdcdcd;
+    border-radius: 12px;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+.popup_div p { margin-bottom: 20px; }

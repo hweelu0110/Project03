@@ -5,18 +5,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<title>AlTo - 혼자, 다같이 Alone Together</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="css/reset.css" />
-	<link rel="stylesheet" href="css/common.css" />
-	<link rel="stylesheet" href="css/layout.css" />	
-	<link rel="stylesheet" href="css/list.css" /> 
-	<link rel="stylesheet" href="css/club.css" /> 
+	<%@include file="../headinfo.jsp" %>
+	<link rel="stylesheet" href="../css/list.css" /> 	
+	<link rel="stylesheet" href="../css/club.css" /> 
+	
 	<script type="text/javascript">
 		$(function() {
 			$("#tab_area").css("display","none")
@@ -72,11 +64,12 @@
 				$("div.select_list").toggle()
 			})
 			
+			
 		})
 	</script>
 </head>
 <body>
-	<%@include file="header.jsp" %>
+	<%@include file="../header.jsp" %>
 	
 	<!-- CONTENTS -->
 	<section>
@@ -90,63 +83,63 @@
 				<ul>
 					<li class="all"><a href="">전체</a></li>
 					<li class="select">
-						<img src="img/hobby_img/h_001.png" />
+						<img src="../img/hobby_img/h_001.png" />
 						<p class="hobby_name">창작</p>
 					</li>
 			        <li>
-						<img src="img/hobby_img/h_002.png" />
+						<img src="../img/hobby_img/h_002.png" />
 						<p class="hobby_name">액티비티</p>
 			        </li>
 			        <li>
-						<img src="img/hobby_img/h_003.png" />
+						<img src="../img/hobby_img/h_003.png" />
 						<p class="hobby_name">아웃도어</p>
 					</li>
 			        <li>
-						<img src="img/hobby_img/h_004.png" />
+						<img src="../img/hobby_img/h_004.png" />
 						<p class="hobby_name">사진/영상</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_005.png" />
+						<img src="../img/hobby_img/h_005.png" />
 						<p class="hobby_name">음악</p>	
 					</li>
 					<li>
-						<img src="img/hobby_img/h_006.png" />
+						<img src="../img/hobby_img/h_006.png" />
 						<p class="hobby_name">게임</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_007.png" />
+						<img src="../img/hobby_img/h_007.png" />
 						<p class="hobby_name">여행</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_008.png" />
+						<img src="../img/hobby_img/h_008.png" />
 						<p class="hobby_name">요리</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_009.png" />
+						<img src="../img/hobby_img/h_009.png" />
 						<p class="hobby_name">문화</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_010.png" />
+						<img src="../img/hobby_img/h_010.png" />
 						<p class="hobby_name">봉사</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_011.png" />
+						<img src="../img/hobby_img/h_011.png" />
 						<p class="hobby_name">직무/커리어</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_012.png" />
+						<img src="../img/hobby_img/h_012.png" />
 						<p class="hobby_name">수집</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_013.png" />
+						<img src="../img/hobby_img/h_013.png" />
 						<p class="hobby_name">반려동물</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_014.png" />
+						<img src="../img/hobby_img/h_014.png" />
 						<p class="hobby_name">차/오토바이</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_015.png" />
+						<img src="../img/hobby_img/h_015.png" />
 						<p class="hobby_name">자유주제</p>
 					</li>
 				</ul>
@@ -206,12 +199,12 @@
 		
 		<div id="search_result">
 			<h2>검색 결과</h2>
-			<div>
+			<div class="searchList">
 				<ul class="club">
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -221,9 +214,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -233,9 +226,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -245,9 +238,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -257,9 +250,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -269,9 +262,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -281,9 +274,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -293,9 +286,9 @@
 						<span class="like_icon">관심</span>
 					</li>
 					<li>
-						<img class="club_img" src="img/club_test.png" />
+						<img class="club_img" src="../img/club_test.png" />
 						<span class="area">성동구</span>
-						<span class="hobby_icon"><img src="img/hobby_img/h_001.png" /></span>
+						<span class="hobby_icon"><img src="../img/hobby_img/h_001.png" /></span>
 						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
 						<span class="memNum">50명</span>
 						<p class="club_schedule">
@@ -319,24 +312,24 @@
 		<div class="popup_div">
 			<p>회원이 아닌 경우 모임을<br/> 개설 할 수 없습니다.</p>
 			<button type="button" class="pointBtn">로그인</button>
-			<button type="button" class="basicBtn">닫기</button>
+			<button type="button" class="basicBtn closeBtn">닫기</button>
 		</div>
 		<!-- 수정 실패 알림 팝업 -->
 		<div class="popup_div">
 			<p>변경사항이 적용되지<br/>않습니다.</p>
 			<button type="button" class="pointBtn">닫기</button>
-			<button type="button" class="basicBtn">취소</button>
+			<button type="button" class="basicBtn closeBtn">취소</button>
 		</div>
 		<!-- 주제변경 알림 팝업 -->
 		<div class="popup_div">
 			<p><span class="select">7일 동안</span><br/>재변경이 제한 됩니다.<br/>주제를 변경하시겠습니까?</p>
 			<button type="button" class="pointBtn">네</button>
-			<button type="button" class="basicBtn">아니오</button>
+			<button type="button" class="basicBtn closeBtn">아니오</button>
 		</div>
 		<!-- 주제변경 7일 제한 알림 팝업 -->
 		<div class="popup_div">
 			<p>주제는 <span class="select">7일 이내<br/>재변경이 불가능</span>합니다.</p>
-			<button type="button" class="pointBtn">확인</button>
+			<button type="button" class="pointBtn closeBtn">확인</button>
 		</div>
 		
 		<!-- 모임 개설 팝업 -->
@@ -346,63 +339,63 @@
 			<div id="cateChoice">
 				<ul>
 					<li>
-						<img src="img/hobby_img/h_001.png" />
+						<img src="../img/hobby_img/h_001.png" />
 						<p class="hobby_name">창작</p>
 					</li>
 			        <li>
-						<img src="img/hobby_img/h_002.png" />
+						<img src="../img/hobby_img/h_002.png" />
 						<p class="hobby_name">액티비티</p>
 			        </li>
 			        <li>
-						<img src="img/hobby_img/h_003.png" />
+						<img src="../img/hobby_img/h_003.png" />
 						<p class="hobby_name">아웃도어</p>
 					</li>
 			        <li>
-						<img src="img/hobby_img/h_004.png" />
+						<img src="../img/hobby_img/h_004.png" />
 						<p class="hobby_name">사진/영상</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_005.png" />
+						<img src="../img/hobby_img/h_005.png" />
 						<p class="hobby_name">음악</p>	
 					</li>
 					<li>
-						<img src="img/hobby_img/h_006.png" />
+						<img src="../img/hobby_img/h_006.png" />
 						<p class="hobby_name">게임</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_007.png" />
+						<img src="../img/hobby_img/h_007.png" />
 						<p class="hobby_name">여행</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_008.png" />
+						<img src="../img/hobby_img/h_008.png" />
 						<p class="hobby_name">요리</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_009.png" />
+						<img src="../img/hobby_img/h_009.png" />
 						<p class="hobby_name">문화</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_010.png" />
+						<img src="../img/hobby_img/h_010.png" />
 						<p class="hobby_name">봉사</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_011.png" />
+						<img src="../img/hobby_img/h_011.png" />
 						<p class="hobby_name">직무/커리어</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_012.png" />
+						<img src="../img/hobby_img/h_012.png" />
 						<p class="hobby_name">수집</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_013.png" />
+						<img src="../img/hobby_img/h_013.png" />
 						<p class="hobby_name">반려동물</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_014.png" />
+						<img src="../img/hobby_img/h_014.png" />
 						<p class="hobby_name">차/오토바이</p>
 					</li>
 					<li>
-						<img src="img/hobby_img/h_015.png" />
+						<img src="../img/hobby_img/h_015.png" />
 						<p class="hobby_name">자유주제</p>
 					</li>
 				</ul>
@@ -457,6 +450,6 @@
 		
 	</section>
 	
-	<%@include file="footer.jsp" %>
+	<%@include file="../footer.jsp" %>
 </body>
 </html>

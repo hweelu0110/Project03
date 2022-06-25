@@ -348,6 +348,20 @@
 		      </div>
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
+		       <!-- Initialize Swiper -->
+			    <script>
+			      var swiper = new Swiper(".mySwiper4", {
+			        slidesPerView: 8,
+			        spaceBetween: 10,
+			        slidesPerGroup: 8,
+			        loop: false,
+			        loopFillGroupWithBlank: true,
+			        navigation: {
+			          nextEl: ".swiper-button-next",
+			          prevEl: ".swiper-button-prev",
+			        },
+			      });
+			    </script>
 			</div>
 			
 			<div class="float_left">
@@ -438,6 +452,20 @@
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
 			    </div>
+			     <!-- Initialize Swiper -->
+			    <script>
+			      var swiper = new Swiper(".mySwiper5", {
+			        slidesPerView: 8,
+			        spaceBetween: 10,
+			        slidesPerGroup: 8,
+			        loop: false,
+			        loopFillGroupWithBlank: true,
+			        navigation: {
+			          nextEl: ".swiper-button-next",
+			          prevEl: ".swiper-button-prev",
+			        },
+			      });
+			    </script>
 			</div>
 			
 			<div>
@@ -701,6 +729,20 @@
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
 		    </div>
+		     <!-- Initialize Swiper -->
+		    <script>
+		      var swiper = new Swiper(".mySwiper3", {
+		        slidesPerView: 8,
+		        spaceBetween: 10,
+		        slidesPerGroup: 8,
+		        loop: false,
+		        loopFillGroupWithBlank: true,
+		        navigation: {
+		          nextEl: ".swiper-button-next",
+		          prevEl: ".swiper-button-prev",
+		        },
+		      });
+		    </script>
 		</div>
 		
 		<div id="sec_04">
@@ -811,6 +853,20 @@
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
 		    </div>
+		     <!-- Initialize Swiper -->
+		    <script>
+		      var swiper = new Swiper(".mySwiper4", {
+		        slidesPerView: 8,
+		        spaceBetween: 10,
+		        slidesPerGroup: 8,
+		        loop: false,
+		        loopFillGroupWithBlank: true,
+		        navigation: {
+		          nextEl: ".swiper-button-next",
+		          prevEl: ".swiper-button-prev",
+		        },
+		      });
+		    </script>
 		</div>
 		
 		<div id="sec_05">
@@ -907,7 +963,7 @@
 				</div>
 		      </div>
 		      <div class="swiper-button-next"></div>
-		      <div class="swiper-button-prev"></div>
+		      <div class="swiper-button-prev"></div>		      
 		    </div>
 			
 			<!-- Initialize Swiper -->
@@ -1024,6 +1080,20 @@
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
 		    </div>
+		     <!-- Initialize Swiper -->
+		    <script>
+		      var swiper = new Swiper(".mySwiper3", {
+		        slidesPerView: 8,
+		        spaceBetween: 10,
+		        slidesPerGroup: 8,
+		        loop: false,
+		        loopFillGroupWithBlank: true,
+		        navigation: {
+		          nextEl: ".swiper-button-next",
+		          prevEl: ".swiper-button-prev",
+		        },
+		      });
+		    </script>
 		</div>
 		
 		<div id="sec_07">
