@@ -71,7 +71,6 @@ section {
 	clear:both;
 	margin: auto;
     max-width: 1000px;
-    overflow: hidden;
 }
 section div { position: relative; }
 

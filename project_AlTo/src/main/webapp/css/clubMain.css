@@ -4,9 +4,14 @@
 #cate_menu { 
 	width: 610px;
     margin: 0 auto;
-    padding-top: 20px;
+    padding-top: 20px;    
 }
 #cate_menu ul li { display: inline-block; }
+#cate_menu ul li a {
+	display: inline-block;
+	width: 6rem;
+	text-align: center;
+}
 #cate_menu ul li img { width: 6rem; }
 #cate_menu ul li .hobby_name { text-align: center; }
 

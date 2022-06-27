@@ -30,6 +30,7 @@
 }
 .paySection h3 { margin-bottom: 20px; }
 .paySection p { font-family: 'Noto Sans KR', sans-serif; }
+.paySection button { font-size: 12px; }
 
 /* notice Style */
 .paySection .noti1,.popup_div .noti1 {
@@ -46,12 +47,26 @@
     font-family: 'Noto Sans KR', sans-serif;
 }
 
+#payment_div .popup_div {
+	padding: 20px;
+    width: 370px;
+    text-align: left;
+    font-size: 11px;
+    display: none;
+}
+.popup_div h4 {
+	font-size: 15px;
+    margin-bottom: 10px;
+}
+.popup_div .btn_area button { width: 48%; }
 .popup_div .noti1 { margin-bottom: 20px; }
+
 
 /* input Style */
 input[type=text] { padding: 8px 15px; margin: 0; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
+input[type=text].size3 { width: 215px; }
 /* 필수 입력 text */
 .paySection .notiTxt { border: 1px solid #F3BE34; }
 
@@ -179,7 +194,7 @@ select {
 }
 
 /* 결제 완료 */
-#payComInfo { width: 100%; }
+#payComInfo { clear:right; width: 100%; }
 #payComInfo table { 
 	margin-bottom: 30px;
 	border: none; 
@@ -198,3 +213,45 @@ select {
     font-weight: bold;
     text-decoration: underline;
 }
+
+#delChange {
+	float: right;
+    padding: 5px 5px 5px 20px;
+	font-size: 10px;
+	border-radius: 3px;
+	background-color: #777;
+	background-size: 80px;
+	background-position: -63px 8px;
+	background-repeat: no-repeat;
+	background-image: url(../img/alto_common_icon.png);
+	cursor: pointer;
+}
+
+/* 배송지 변경 popup */
+#delEditPopup {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+	width: 370px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #cdcdcd;
+    border-radius: 12px;
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+#delEditPopup .closeBtn {
+	position: absolute;
+	right: 10px;
+    width: 16px;
+    height: 16px;
+    background-size: 120px;
+    background-position: -12px 0px;
+    background-image: url(../img/alto_common_icon.png);
+    text-indent: -9999px;
+}
+#delEditPopup .size1 { width: 197px; }
+#delEditPopup .size0 { margin-top: 10px; }
+#delEditPopup p { margin-top: 5px; }
+#delEditPopup .margin { margin-bottom: 5px; }

@@ -7,6 +7,13 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/payment.css" />	
+	<script type="text/javascript">
+		$(function() {
+			$("#delChange").click(function() {
+				$("#delEditPopup").show()
+			})
+		})
+	</script>
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -29,6 +36,7 @@
 			
 			<div class="paySection">	
 				<h3>배송 정보</h3>
+				<p id="delChange">배송지 변경</p>
 				<div id="payComInfo">
 					<table>
 						<tr>
@@ -73,6 +81,28 @@
 			
 				<button type="submit" class="basicBtn size0">환불하기</button>
 			</div>
+		</div>
+		
+		<!-- 배송지 변경 popup -->
+		<div id="delEditPopup" class="paySection">
+			<button type="button" class="closeBtn">닫기</button>
+			<h3>배송지 변경하기</h3>
+			
+			<form action="" name="deliveryEditFrm" method="post">
+				<p>받으시는 분</p>
+				<input type="text" name="userName" value="김지선" /><br/>
+				<span class="noti1">배송 시 수령인 확인을 위해 실명을 입력해 주세요.</span><br/>
+				<p>휴대폰 번호</p>
+				<input type="text" name="userPhone" value="01012345678" /><br/>
+				<p>배송 주소</p>
+				<input type="text" name="zipcode" class="size3 margin" value="우편번호" />
+				<button type="button" name="find_zipcode" class="pointBtn">우편번호 찾기</button><br/>
+				<input type="text" name="add" class="margin" value="주소" /><br/>
+				<input type="text" name="detail" class="margin" value="상세주소" /><br/>				
+				<p>배송 요청사항</p>
+				<input type="text" name="request" value="예)경비실에 맡겨주세요" />
+				<input type="submit" name="saveBtn" class="pointBtn size0" value="저장하기" />
+			</form>
 		</div>
 	</section>
 	

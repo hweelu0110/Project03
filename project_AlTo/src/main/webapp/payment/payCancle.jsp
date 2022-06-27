@@ -17,7 +17,6 @@
 			
 			<div class="paySection">
 				<h3>주문 정보</h3>
-				<div id="reChoice">상세로 이동</div>
 				<div class="item_info">
 					<img src="../img/class_test.jpg" />
 					<div>
@@ -43,8 +42,22 @@
 				<p class="point_txt2">총 환불 금액 <span>399,800원</span></p>
 			</div>	
 			
-			<button type="submit" class="pointBtn size0">다음</button>
-		</div>
+			<button type="submit" class="pointBtn size0" onclick="return confirmPopup()">다음</button>
+			
+			<div class="popup_div">
+				<h4>환불 요청하기</h4>
+				<p>
+					수강권과 이용 내역이 모두 사라지며, 환불 후 취소할 수 없습니다.<br/>
+					그래도 환불하시겠습니까?
+				</p>
+				<div class="btn_area">
+					<button type="button" class="basicBtn">취소하기</button>
+					<button type="button" class="pointBtn">환불하기</button>
+				</div>
+				
+			</div>
+		</div>		
+		
 	</section>
 	
 	<%@include file="../footer.jsp" %>
