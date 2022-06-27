@@ -77,6 +77,8 @@ section div { position: relative; }
 
 #ban_area {
 	display: flex;
+	padding: 20px 0 40px;
+    background: #f8f8f8;
 	justify-content: space-around;
 }
 #ban_area a {
