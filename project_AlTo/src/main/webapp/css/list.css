@@ -109,10 +109,10 @@
 .swiper-slide .club_name {
 	width: 157px;
     height: 21px;
-	bottom: 6px;
+	bottom: 9px;
     left: 2.5rem;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 16px;
     font-weight: bold;
     text-align: left;
     overflow: hidden;
@@ -191,19 +191,19 @@
 }
 .club .hobby_icon {
 	left: -1px;
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 20px;
+    height: 20px;
     top: 5px;
 }
 .club .hobby_icon img { margin: 0; }
 .club .club_name {
 	text-align: left;
-    left: 23px;
-    top: 7px;
-    width: 140px;
+    left: 21px;
+    top: 3px;
+    width: 135px;
     height: 17px;
     color: #000;
-    font-size: 0.9rem;
+    font-size: 13.5px;
     overflow: hidden;
 }
 .club .memNum {
@@ -228,7 +228,7 @@
 }
 .club .club_info .club_schedule {	
 	top: 35px;
-    left: 15px;
+    left: -2px;
     height: 18px;
     font-weight: 700;
     font-size: 0.7rem;

@@ -11,7 +11,7 @@ header div {
 	margin: auto;
 	width: 1000px;
 }
-header li {
+header li a {
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -33,7 +33,7 @@ nav {
 nav #main_menu li {
 	display: inline;
 	margin-left: 10px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;    
 }
 
@@ -71,24 +71,35 @@ section {
 	clear:both;
 	margin: auto;
     max-width: 1000px;
+    min-width: 960px;
 }
 section div { position: relative; }
 
 #ban_area {
-	display: flex;
-	padding: 20px 0 40px;
-    background: #f8f8f8;
-	justify-content: space-around;
+	width: 100%;
+	padding: 20px 0 20px;
+    background: #e4e4e4;
+    overflow: hidden;
+}
+#ban_area div { 
+	max-width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+}
+#ban_area div div {
+	display: inline-block;
+	width: 300px;
 }
 #ban_area a {
 	position: relative;
 	display: inline-block;
 	background-repeat: no-repeat;
-    background-size: 24rem;
-    width: 24rem;
-    height: 12rem;
+    width: 100%;
+    height: 150px;
     color: #fff;
     padding: 10px; 
+    text-align: left;
+    border-radius: 3px;
 }
 #ban_area div:nth-child(1) a {
 	background-image: url(../img/ban_bg01.gif);
@@ -102,13 +113,13 @@ section div { position: relative; }
 }
 #ban_area a span {
 	position: absolute;
-	font-size: 2em;
+	font-size: 30px;
 	font-family: 'Do Hyeon', sans-serif;
 }
-#ban_area a:nth-child(2) span {
+#ban_area div div:nth-child(2) a span {
 	top: 100px;
 }
-#ban_area a:nth-child(3) span {
+#ban_area div div:nth-child(3) a span {
 	top: 64px;
     left: 87px;
     text-align: right;

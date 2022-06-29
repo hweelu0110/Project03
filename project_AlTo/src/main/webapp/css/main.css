@@ -1,7 +1,7 @@
 @charset "UTF-8";
 #quick_btn {
 	position: absolute;
-    top: -25px;
+    top: -249px;
     left: 75%;
     padding: 5px;
     background: #494c57;
@@ -14,7 +14,7 @@
 }
 #member_section {
 	position: absolute;
-    top: 0;
+    top: -223px;
     left: 50%;
     width: 700px;
     padding: 10px;
@@ -95,11 +95,13 @@
     font-weight: 700;
 }
 
+#sec_member { overflow: hidden; }
 #sec_member,#sec_member .mySwiper4 { margin-bottom: 40px; }
 #sec_member .float_left {
 	float: left;
     margin: 0 50px;
 }
+#sec_member .float_right { float: right; }
 
 /* 모임 바로가기 설정 팝업 */
 #clubQuikList { display: none; }

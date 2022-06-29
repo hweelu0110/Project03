@@ -98,6 +98,14 @@
 	</header>
 	
 	<!-- CONTENTS -->
+	<div id="ban_area">
+		<div>
+			<div><a href=""><span>혼자 오셨어요?</span></a></div>
+			<div><a href=""><span>다함께 즐기는 취미생활</span></a></div>
+			<div><a href=""><span>취미!<br/>없으면 만들면 되지</span></a></div>
+		</div>		
+	</div>
+	
 	<section>
 		<div id="quick_btn">퀵메뉴 열기</div>
 		<div id="member_section">
@@ -129,12 +137,6 @@
 				</ul>
 			</div>
 			<p class="mem_close">접기</p>
-		</div>
-	
-		<div id="ban_area">
-			<div><a href=""><span>혼자 오셨어요?</span></a></div>
-			<div><a href=""><span>다함께 즐기는 취미생활</span></a></div>
-			<div><a href=""><span>취미!<br/>없으면 만들면 되지</span></a></div>
 		</div>
 				
 		<div id="sec_01">
@@ -444,7 +446,7 @@
 			    </div>
 			</div>
 			
-			<div>
+			<div class="float_right">
 				<h2>추천 취미용품</h2>
 				<div class="swiper mySwiper5">
 			      <div class="swiper-wrapper product">
