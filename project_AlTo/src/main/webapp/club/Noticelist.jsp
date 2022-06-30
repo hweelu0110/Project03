@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/clublist.css" />
+	<link rel="stylesheet" href="../css/list2.css" />
 </head>
 <body>
 	<%@include file="../header.jsp" %>
