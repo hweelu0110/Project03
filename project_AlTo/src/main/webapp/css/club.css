@@ -20,6 +20,8 @@ section { padding: 30px 30px 70px; }
 
 #tab_area { 
 	position: absolute;
+	width: 700px;
+	height: 245px;
     top: 66px; 
 	z-index: 2;
 	overflow: hidden;
@@ -66,7 +68,7 @@ section { padding: 30px 30px 70px; }
 
 #area_list {
 	padding: 10px;
-    width: 90px;
+    width: 123px;
     height: 245px;
     float: left;
     background-color: #F8F8F8; 
@@ -84,7 +86,8 @@ section { padding: 30px 30px 70px; }
 	top: 211px;
 	padding: 7px;
 	margin-left: 10px;
-	background: #f3be34;	
+	background: #f3be34;
+	font-size: 12px;	
 	font-weight: 700;
 	border: 1px solid #494c57;
 }

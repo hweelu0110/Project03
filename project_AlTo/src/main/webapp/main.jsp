@@ -20,7 +20,7 @@
 	<script src="js/common.js"></script>		 
 	<script type="text/javascript">
 		function quickList() {
-			//모임 바로가기
+			//모임 바로가기 출력
 			let lis = $("#clubQuikList .my_club").children().length
 			$("#member_section .my_club").html("")
 			for (let i = 1 ; i <= lis ; i++) {					
@@ -40,7 +40,7 @@
 		}
 		
 		$(function() {			
-			//로그인 한 경우 메뉴 숨김
+			//로그인 한 경우 서브 메뉴 숨김
 			$("#sub_menu .no_mem").css("display","none")
 			$(".mem_close").click(function(){
 				$("#member_section").slideUp(500)
@@ -52,11 +52,13 @@
 				$("#quick_btn").hide()
 			})
 			
+			//모임 바로 가기 수정하기
 			$("#member_section div .sub_menu li:nth-child(2)").click(function() {
-				let top = ($(window).scrollTop() + ($(window).height() - $("#clubQuikList").height()) / 2)
-				let left = ($(window).scrollLeft() + ($(window).width() - $("#clubQuikList").width()) / 2)
-				$("#clubQuikList").css('top',top)
-				$("#clubQuikList").css('left',left)
+				$("#clubQuikList").css({
+	                "top": (($(window).height()-$("#clubQuikList").outerHeight())/2+$(window).scrollTop())+"px",
+	                "left": (($(window).width()-$("#clubQuikList").outerWidth())/2+$(window).scrollLeft())+"px"	             
+	             }); 
+				
 				$("#clubQuikList").show()
 			})
 			
@@ -97,7 +99,7 @@
 		</div>		
 	</header>
 	
-	<!-- CONTENTS -->
+	<!-- Top Banner Area -->
 	<div id="ban_area">
 		<div>
 			<div><a href=""><span>혼자 오셨어요?</span></a></div>
@@ -106,39 +108,41 @@
 		</div>		
 	</div>
 	
-	<section>
-		<div id="quick_btn">퀵메뉴 열기</div>
-		<div id="member_section">
-			<div>
-				<h2>모임 바로가기</h2>
-				<ul class="sub_menu">
-					<li><a href="">전체목록</a></li>
-					<li>설정</li>
-				</ul>
-				<ul class="my_club">
-					
-				</ul>
-			</div>
-			<div>
-				<p class="sub_menu"><a href="">내정보수정</a></p>
-				<h2 class="my_area">내 지역</h2>
-				<ul class="area_list">
-					<li>성동구</li>
-					<li>강남구</li>
-					<li>용산구</li>
-				</ul>
-				<h2 class="my_hobby">내 취미</h2>
-				<ul class="hobby_list">
-					<li><img src="img/hobby_img/h_001.png"></li>
-					<li><img src="img/hobby_img/h_002.png"></li>
-					<li><img src="img/hobby_img/h_003.png"></li>
-					<li><img src="img/hobby_img/h_004.png"></li>
-					<li><img src="img/hobby_img/h_005.png"></li>
-				</ul>
-			</div>
-			<p class="mem_close">접기</p>
-		</div>
+	<!-- Login Main Contents -->
+	<div id="quick_btn">퀵메뉴 열기</div>
+	<div id="member_section">
+		<div>
+			<h2>모임 바로가기</h2>
+			<ul class="sub_menu">
+				<li><a href="">전체목록</a></li>
+				<li>설정</li>
+			</ul>
+			<ul class="my_club">
 				
+			</ul>
+		</div>
+		<div>
+			<p class="sub_menu"><a href="">내정보수정</a></p>
+			<h2 class="my_area">내 지역</h2>
+			<ul class="area_list">
+				<li>성동구</li>
+				<li>강남구</li>
+				<li>용산구</li>
+			</ul>
+			<h2 class="my_hobby">내 취미</h2>
+			<ul class="hobby_list">
+				<li><img src="img/hobby_img/h_001.png"></li>
+				<li><img src="img/hobby_img/h_002.png"></li>
+				<li><img src="img/hobby_img/h_003.png"></li>
+				<li><img src="img/hobby_img/h_004.png"></li>
+				<li><img src="img/hobby_img/h_005.png"></li>
+			</ul>
+		</div>
+		<p class="mem_close">접기</p>
+	</div>
+	
+	<!-- CONTENTS -->
+	<section>				
 		<div id="sec_01">
 			<h2>지금 가장 '핫'한 취미</h2>
 			
@@ -247,7 +251,7 @@
 		    <script>
 		      var swiper = new Swiper(".mySwiper", {
 		        slidesPerView: 8,
-		        spaceBetween: 10,
+		        spaceBetween: 20,
 		        slidesPerGroup: 8,
 		        loop: false,
 		        loopFillGroupWithBlank: true,
@@ -485,7 +489,7 @@
 			    <script>
 			      var swiper = new Swiper(".mySwiper5", {
 			        slidesPerView: 2,
-			        spaceBetween: 10,
+			        spaceBetween: 30,
 			        slidesPerGroup: 2,
 			        loop: false,
 			        loopFillGroupWithBlank: true,
@@ -576,7 +580,7 @@
 		    <script>
 		      var swiper = new Swiper(".mySwiper2", {
 		        slidesPerView: 4,
-		        spaceBetween: 17,
+		        spaceBetween: 20,
 		        slidesPerGroup: 4,
 		        loop: false,
 		        loopFillGroupWithBlank: true,
@@ -1048,7 +1052,7 @@
 		    <script>
 		      var swiper = new Swiper(".mySwiper3", {
 		        slidesPerView: 8,
-		        spaceBetween: 10,
+		        spaceBetween: 20,
 		        slidesPerGroup: 8,
 		        loop: false,
 		        loopFillGroupWithBlank: true,
@@ -1185,50 +1189,52 @@
 		    </script>
 		</div>
 		
-		<!-- 내모임 바로가기 수정 팝업 -->
-		<div id="clubQuikList" class="popup_div">
-			<h4>모임 바로가기 설정</h4>
-			<button type="button" name="closeBtn" class="closeBtn">닫기</button>
-			<ul class="my_club">
-				<li class="select">
-					<a href="">
-						<img src="img/hobby_img/h_001.png">
-						<span class="club_name">뜨개 모임1</span>
-						<span class="club_schd">6/11(화) 일정이름</span>
-					</a>
-				</li>
-				<li class="select">
-					<a href="">
-						<img src="img/hobby_img/h_002.png">
-						<span class="club_name">운동하자</span>
-						<span class="club_schd">6/22(수) 일정이름2</span>
-					</a>
-				</li>
-				<li class="select">
-					<a href="">
-						<img src="img/hobby_img/h_003.png">
-						<span class="club_name">캠핑클럽 :: 바깥바람 쐽시다</span>
-						<span class="club_schd">6/25(토) 일정이름3</span>
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<img src="img/hobby_img/h_004.png">
-						<span class="club_name">사진의 고수</span>
-						<span class="club_schd"></span>
-					</a>
-				</li>
-				<li class="select">
-					<a href="">
-						<img src="img/hobby_img/h_005.png">
-						<span class="club_name">보컬 트레이닝</span>
-						<span class="club_schd"></span>
-					</a>
-				</li>
-			</ul>
-			<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
-		</div>
+		
 	</section>
+	
+	<!-- 내모임 바로가기 수정 팝업 -->
+	<div id="clubQuikList" class="popup_div">
+		<h4>모임 바로가기 설정</h4>
+		<button type="button" name="closeBtn" class="closeBtn">닫기</button>
+		<ul class="my_club">
+			<li class="select">
+				<a href="">
+					<img src="img/hobby_img/h_001.png">
+					<span class="club_name">뜨개 모임1</span>
+					<span class="club_schd">6/11(화) 일정이름</span>
+				</a>
+			</li>
+			<li class="select">
+				<a href="">
+					<img src="img/hobby_img/h_002.png">
+					<span class="club_name">운동하자</span>
+					<span class="club_schd">6/22(수) 일정이름2</span>
+				</a>
+			</li>
+			<li class="select">
+				<a href="">
+					<img src="img/hobby_img/h_003.png">
+					<span class="club_name">캠핑클럽 :: 바깥바람 쐽시다</span>
+					<span class="club_schd">6/25(토) 일정이름3</span>
+				</a>
+			</li>
+			<li>
+				<a href="">
+					<img src="img/hobby_img/h_004.png">
+					<span class="club_name">사진의 고수</span>
+					<span class="club_schd"></span>
+				</a>
+			</li>
+			<li class="select">
+				<a href="">
+					<img src="img/hobby_img/h_005.png">
+					<span class="club_name">보컬 트레이닝</span>
+					<span class="club_schd"></span>
+				</a>
+			</li>
+		</ul>
+		<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
+	</div>
 	
 	<!-- FOOTER -->
 	<footer>

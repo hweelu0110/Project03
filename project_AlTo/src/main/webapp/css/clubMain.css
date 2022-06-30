@@ -2,28 +2,33 @@
 #main_menu li:nth-child(1) { color: #00c7ae; }
 
 #cate_menu { 
-	width: 610px;
+	width: 680px;
     margin: 0 auto;
     padding-top: 20px;    
 }
-#cate_menu ul li { display: inline-block; }
+#cate_menu ul li { display: inline-block; margin: 5px; }
 #cate_menu ul li a {
 	display: inline-block;
-	width: 6rem;
+	width: 70px;
 	text-align: center;
 }
-#cate_menu ul li img { width: 6rem; }
-#cate_menu ul li .hobby_name { text-align: center; }
+#cate_menu ul li img { width: 70px; }
+#cate_menu ul li .hobby_name { text-align: center; font-size: 12px; }
 
-#pop_hobby ul { float: left; margin: 43px 0px; }
-#pop_hobby ul li { display: inline-block; margin-right: 16px; }
-#pop_hobby ul li img { width: 4rem; }
+#pop_hobby ul { float: left; margin: 43px 0px 0px 27px; }
+#pop_hobby ul li { 
+	position: relative;
+	display: inline-block; 
+	margin-right: 16px;
+	text-align: center; 
+}
+#pop_hobby ul li img { width: 60px; }
 #pop_hobby ul li .rank_info {
 	position: absolute;
     line-height: 0;
     font-size: 2.9em;
     font-weight: 700;
-    top: -0.3em;
+    bottom: 30px;
     left: -17px;
     color: #34343c;
     font-family: 'Jua', sans-serif;

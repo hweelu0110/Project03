@@ -52,7 +52,7 @@
     color: #34343c;
 }
 
-#sec_01 { margin:30px 50px 20px; }
+#sec_01 { margin:30px 50px 40px; }
 /* 취미 순위 */
 #sec_01 .swiper-slide img {
 	width: 6rem;
@@ -79,7 +79,7 @@
     font-weight: bold;    
 }
 
-#sec_02,#sec_03,#sec_04,#sec_05,#sec_06 { margin-bottom: 40px; }
+#sec_02,#sec_03,#sec_04,#sec_05,#sec_06 { margin-bottom: 70px; }
 /* BEST 모임 swiper */
 .swiper-slide img {
   display: block;
@@ -91,7 +91,7 @@
 .swiper-slide span,.swiper-slide p { position: absolute; }
 .swiper-slide .area {
 	background-color: #fff;
-    width: 3rem;
+    width: 32px;
     position: absolute;
     top: 3px;
     left: 3px;

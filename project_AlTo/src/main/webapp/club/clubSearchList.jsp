@@ -17,26 +17,44 @@
 			$("#area_list").css("display","none")
 			
 			/* tab메뉴 선택 시 - 영역 노출하기 */
+			/* 취미 탭메뉴 */
 			$("#tab_menu li").filter(":first").click(function() {
-				$("#tab_area").toggle()
-				$("#m_cate").toggle()
+				$(this).toggleClass("select")	
+				alert($("#m_cate_all").nextAll().hasClass('.select'))				
 				
-				if ($("#m_cate ul").find("li").hasClass('select')) {
+				if ($("#area_list").css("display") == "block") {					
+					$("#area_list").css("left","-1px")
+					$("#m_cate").toggle()
+				} else {
+					$("#tab_area").toggle()
+					$("#m_cate").toggle()
+				}
+				
+				if ($("#m_cate_all").nextAll().hasClass('.select') && $("#m_cate").css("display") == "block") {					
 					$("#s_cate").show()
 				}else {
 					$("#s_cate").hide()
-				}				
+				}
 			})
 			
+			/* 지역 탭메뉴 */
 			$("#tab_menu li").filter(":last").click(function() {
-				$("#tab_area").toggle()
-				$("#area_list").toggle()
+				$(this).toggleClass("select")
+				
+				if ($("#m_cate").css("display") == "block") {
+					$("#area_list").css("left","-1px")
+					$("#area_list").toggle()					
+				}else if ($("#m_cate").css("display") == "none") {
+					$("#tab_area").toggle()	
+					$("#area_list").css("left","52px")
+					$("#area_list").toggle()
+				}				
+				
 			})
 			
 			/* 메인카테고리 선택 시 - 서브카테고리 영역 노출 */
 			$("#m_cate ul li").click(function() {
 				$(this).toggleClass("select")
-				$("#m_cate ul li.all").removeClass("select")
 				
 				if ($("#m_cate ul").find("li").hasClass('select')) {
 					$("#s_cate").show()
@@ -74,15 +92,15 @@
 	<!-- CONTENTS -->
 	<section>
 		<ul id="tab_menu">
-			<li class="select">창작</li>
+			<li>창작</li>
 			<li>성동구&nbsp;용산구&nbsp;중구</li>
 		</ul>
 		
 		<div id="tab_area">
 			<div id="m_cate">
 				<ul>
-					<li class="all"><a href="">전체</a></li>
-					<li class="select">
+					<li id="m_cate_all" class="all select"><a href="">전체</a></li>
+					<li>
 						<img src="../img/hobby_img/h_001.png" />
 						<p class="hobby_name">창작</p>
 					</li>
