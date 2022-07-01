@@ -3,17 +3,26 @@
  */
  
 /* 브라우저 가운데 팝업 띄우기 */
-function confirmPopup() {
-	let top = ($(window).scrollTop() + ($(window).height() - $(".popup_div").height()) / 2)
-	let left = ($(window).scrollLeft() + ($(window).width() - $(".popup_div").width()) / 2)
-	$(".popup_div").css('top',top)
-	$(".popup_div").css('left',left)
-	$(".popup_div").show()			
+function confirmPopup(popup) {
+	popup.css({
+		"position":"absolute",
+        "top": (($(window).height()-popup.outerHeight())/2+$(window).scrollTop())+"px",
+        "left": (($(window).width()-popup.outerWidth())/2+$(window).scrollLeft())+"px"	             
+     }); 
+	
+	popup.show()			
 }
 
- 
+
 $(function () {
+	$(".popup_div").hide()
+	
+	/* 팝업창 닫기 버튼 */ 
 	$(".closeBtn").click(function() {
 		$(this).parent("div").hide()
+	})
+	
+	$(".like_icon").click(function() {
+		confirmPopup($("#login_popup"))
 	})
 })
