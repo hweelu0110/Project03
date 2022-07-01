@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>일정등록</title>
 	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/clubschedule.css" />
+	<link rel="stylesheet" href="../css/schedule.css" />
 	<script type="text/javascript">
 		function validateForm() {
 			if($("#title2").val() == ""){

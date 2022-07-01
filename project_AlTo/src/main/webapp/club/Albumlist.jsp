@@ -6,8 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/album.css" />
-	<link rel="stylesheet" href="../css/clubschedule.css" />
+	<link rel="stylesheet" href="../css/albumlayout.css" />
+	<link rel="stylesheet" href="../css/schedule.css" />
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -16,7 +16,7 @@
 	<section>
 		<h2>사진첩</h2>
 	<ul>
-	<li>
+	<li class="image">
 		<a>
 			<img alt="" src="../img/image.jpg" width="200" height="200">
 		</a>
@@ -34,7 +34,7 @@
 			</dd>
 		</dl>
 	</li>
-	<li>
+	<li class="image">
 		<a>
 			<img alt="" src="../img/image.jpg" width="200" height="200">
 		</a>
