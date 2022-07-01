@@ -7,6 +7,28 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/payment.css" />	
+	<script type="text/javascript">
+		$(function() {
+			/* 필수 입력 알림 css */
+			$("#del_info .essential").addClass("notiTxt")
+			
+			$("#del_info .essential").keyup(function() {
+				if ($(this).val() == "") {
+					$(this).addClass("notiTxt")
+					$(this).next("span.noti2").css("text-indent","0")
+				}else {
+					$(this).removeClass("notiTxt")
+					$(this).next("span.noti2").css("text-indent","-9999px")
+				}
+			})			
+			
+			/* 결제 방식 선택 */
+			$(".pay_method li").click(function() {
+				$(this).addClass("choice")
+				$(this).siblings().removeClass("choice")
+			})
+		})
+	</script>
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -17,7 +39,7 @@
 			
 			<div class="paySection">
 				<h3>주문 정보</h3>
-				<div id="reChoice">상세로 이동</div>
+				<p id="reChoice">상세로 이동</p>
 				<div class="item_info">
 					<img src="../img/class_test.jpg" />
 					<div>
@@ -36,17 +58,6 @@
 				</div>					
 			</div>
 			
-			<div class="paySection">
-				<h3>쿠폰</h3>
-				
-				<p class="noti1">정보</p>
-				<div class="couponInfo">최대 할인 쿠폰 자동 적용</div>
-				<form action="" name="couponFrm" method="post">
-					<input type="text" name="coupon_price" class="size1" value="40,000원" disabled />
-					<input type="submit" name="couponBtn" class="pointBtn" value="쿠폰 변경" />
-				</form>
-			</div>
-			
 			<div id="del_info" class="paySection">
 				<h3>배송 정보</h3>
 				
@@ -57,15 +68,15 @@
 					<p>휴대폰 번호</p>
 					<input type="text" name="userPhone" value="01012345678" /><br/>
 					<p>배송 주소</p>
-					<input type="text" name="zipcode" class="size1 notiTxt" value="우편번호" />
-					<button type="button" name="find_zipcode" class="pointBtn">우편번호 찾기</button><br/>
+					<input type="text" name="zipcode" class="essential size1" value="" placeholder="우편번호" />
 					<span class="noti2">필수 입력입니다.</span><br/>
-					<input type="text" name="add" class="notiTxt" value="주소" /><br/>
+					<button type="button" name="find_zipcode" class="pointBtn">우편번호 찾기</button>
+					<input type="text" name="add" class="essential" value="" placeholder="주소" />
 					<span class="noti2">필수 입력입니다.</span><br/>
-					<input type="text" name="detail" class="notiTxt" value="상세주소" /><br/>
+					<input type="text" name="detail" class="essential" value="" placeholder="상세주소" />
 					<span class="noti2">필수 입력입니다.</span><br/>					
 					<p>배송 요청사항</p>
-					<input type="text" name="request" value="예)경비실에 맡겨주세요" />
+					<input type="text" name="request" value="" placeholder="예)경비실에 맡겨주세요" />
 				</form>
 			</div>
 			

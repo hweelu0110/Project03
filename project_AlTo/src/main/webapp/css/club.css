@@ -13,7 +13,7 @@ section { padding: 30px 30px 70px; }
     background: #F8F8F8;
     border: 2px solid #494c57;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -24,7 +24,8 @@ section { padding: 30px 30px 70px; }
 	height: 245px;
     top: 66px; 
 	z-index: 2;
-	overflow: hidden;
+	font-size: 11px;
+	overflow: hidden;	
 }
 
 #m_cate {
@@ -38,7 +39,6 @@ section { padding: 30px 30px 70px; }
 	width: 60px;
 	margin-bottom: 5px;
 	text-align: center;
-	font-size: 11px;
 	display: inline-block;
 	cursor: pointer;
 }
@@ -76,10 +76,10 @@ section { padding: 30px 30px 70px; }
 	overflow-y: scroll;
 	-ms-overflow-style: none;
 }
-#area_list::-webkit-scrollbar{
-	display: none;
-}
+#area_list::-webkit-scrollbar{ display: none; }
+#area_list li { cursor: pointer; }
 #area_list li.online { margin-bottom: 10px; }
+
 
 #opSearch_btn {
 	position: absolute;
@@ -171,11 +171,14 @@ div.info_div .p_color {
 
 /* 모임개설 popup style */
 .clubPopup {
+	position: relative;
 	padding: 20px;
     width: 370px;
     text-align: center;
     border: 1px solid #cdcdcd;
     border-radius: 12px;
+    background: #fff;
+    z-index: 1;
 }
 .clubPopup h3 {
 	margin-bottom: 20px;
@@ -203,7 +206,7 @@ div.info_div .p_color {
 	background-position: 3px 0px;
 	background-repeat: no-repeat;
 	background-image: url(../img/alto_common_icon.png);
-	text-indent: -9999px;
+	text-indent: -9999px;	
 }
 
 /* form Style */
@@ -218,6 +221,7 @@ div.info_div .p_color {
     background-repeat: no-repeat;
     background-image: url(../img/alto_common_icon.png);
 }
+.clubPopup form span.icon_mem { background-position: -100px -62px; }
 .clubPopup form span.icon_hobby {
 	clear: both;
 	background-size: 28px;
