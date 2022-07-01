@@ -16,7 +16,7 @@ function confirmPopup(popup) {
 
 $(function () {
 	$(".popup_div").hide()
-	
+		
 	/* 팝업창 닫기 버튼 */ 
 	$(".closeBtn").click(function() {
 		$(this).parent("div").hide()

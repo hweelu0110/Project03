@@ -21,10 +21,12 @@
 				$("div.info_div").hide()
 			})	
 			
+			/* 클럽개설 1단계 popup */
 			$("#open_btn").click(function() {
 				confirmPopup($("#step1"))
 			})
 			
+			/* 클럽개설 2단계 popup */
 			$("#step1 ul li").click(function() {
 				let hobbyImg = $(this).children('img').attr('src')
 				$("#step2 .icon_hobby").css({
@@ -32,6 +34,11 @@
 				})
 				$("#step1").hide()
 				confirmPopup($("#step2"))
+			})
+			
+			/* 지역 검색 팝업 */
+			$("#step2 form input:nth-child(1)").click(function() {
+				$("#step3").show()
 			})
 		})
 	</script>
@@ -277,8 +284,15 @@
 		<div id="open_btn"></div>		
 	</section>
 	
-	<!-- 로그인 알림 팝업 -->
+	<!-- 모임개설 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
+		<p>관심 추가는 로그인이 필요합니다.</p>
+		<button type="button" class="pointBtn">로그인</button>
+		<button type="button" class="basicBtn closeBtn">닫기</button>
+	</div>
+	
+	<!-- 모임개설 로그인 알림 팝업 -->
+	<div class="popup_div">
 		<p>회원이 아닌 경우 모임을<br/> 개설 할 수 없습니다.</p>
 		<button type="button" class="pointBtn">로그인</button>
 		<button type="button" class="basicBtn closeBtn">닫기</button>
@@ -377,10 +391,10 @@
 		<h3>모임 개설</h3>
 		<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
 			<span class="icon_area"></span>
-			<input type="text" class="size1" name="mainArea" value="주요활동 지역 찾기" /><br/>
+			<input type="text" class="size1" name="mainArea" value="" placeholder="주요활동 지역 찾기" /><br/>
 			<span class="icon_hobby"></span>
-			<input type="text" class="size1" name="clubName" value="모임 이름" /><br/>
-			<textarea name="clubCont">모임 소개 또는 목표</textarea><br/>
+			<input type="text" class="size1" name="clubName" value="" placeholder="모임 이름" /><br/>
+			<textarea name="clubCont" placeholder="모임 소개 또는 목표"></textarea><br/>
 			<span class="icon_mem"></span><p>모임 최대 인원</p>
 			<input type="text" class="size2" name="maxMam" value="200" /><br/>
 			<input type="submit" class="pointBtn size0" value="모임 만들기" />

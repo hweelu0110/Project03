@@ -17,6 +17,17 @@
 	position: absolute;
     top: 24px;
     right: 24px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url(../img/alto_common_icon.png);
+    background-repeat: no-repeat;
+    background-size: 75px;
+    background-position: -61px 4px;
+    background-color: #e4e4e4;
+    border-radius: 3px;
+    text-indent: -9999px;
+    cursor: pointer;
 }
 
 .paySection {
@@ -30,7 +41,12 @@
 }
 .paySection h3 { margin-bottom: 20px; }
 .paySection p { font-family: 'Noto Sans KR', sans-serif; }
-.paySection button { font-size: 12px; }
+.paySection button { 
+	position: absolute;
+    top: 248px;
+    right: 52px;
+	font-size: 12px;
+}
 
 /* notice Style */
 .paySection .noti1,.popup_div .noti1 {
@@ -139,6 +155,7 @@ input[type=text].size3 { width: 215px; }
 	border-radius: 3px;
 	text-align: center;
     font-size: 12px;
+    cursor: pointer;
 }
 .pay_method li.choice { border: 1px solid #F3BE34; }
 

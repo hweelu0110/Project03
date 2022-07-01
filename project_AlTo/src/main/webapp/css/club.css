@@ -221,6 +221,7 @@ div.info_div .p_color {
     background-repeat: no-repeat;
     background-image: url(../img/alto_common_icon.png);
 }
+.clubPopup form span.icon_mem { background-position: -100px -62px; }
 .clubPopup form span.icon_hobby {
 	clear: both;
 	background-size: 28px;
