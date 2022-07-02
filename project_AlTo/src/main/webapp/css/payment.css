@@ -43,7 +43,7 @@
 .paySection p { font-family: 'Noto Sans KR', sans-serif; }
 .paySection button { 
 	position: absolute;
-    top: 248px;
+    top: 263px;
     right: 52px;
 	font-size: 12px;
 }
@@ -79,7 +79,7 @@
 
 
 /* input Style */
-input[type=text] { padding: 8px 15px; margin: 0; }
+input[type=text] { padding: 8px 15px; margin: 5px 0 0; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
 input[type=text].size3 { width: 215px; }
