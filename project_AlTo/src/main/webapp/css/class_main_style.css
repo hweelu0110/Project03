@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 992px;
+  font-family: "Helvetica";
+}
+
+#addTable{
+    width: 80%;
+    height: 700px;
+	margin-left:auto; 
+    margin-right:auto;
+}
+
+textarea {
+    width: 100%;
+    height: 6.25em;
+    border: none;
+    resize: none;
+  }
+
+.cate {
+	font-size: 9px;
+	text-align: left;
+	margin: 0px;
+}
+
+#search_submit {
+	background-repeat: no-repeat; 
+	align-content: center;
+	border: 0;
+	display: inline;
+	vertical-align: middle;
+	
+}
+
+.hero_header {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  padding: 0;
+  width: 740px;
+  text-align: center;
+  border: none;
+}
+
+#class_main_s {
+  width: 450px;  /* 원하는 너비 설정 */ 
+  height: auto;  /* 높이값 초기화 */
+  line-height : normal;  /* line-height 초기화 */
+  padding: .8em .5em; /* 원하는 여백 설정, 상하단 여백으로 높이를 조절 */
+  font-family: inherit;  /* 폰트 상속 */
+  border-radius: 50px;  /* iSO 둥근모서리 제거 */
+  outline-style: none;  /* 포커스시 발생하는 효과 제거를 원한다면 */
+  -webkit-appearance: none;  /* 브라우저별 기본 스타일링 제거 */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+#class_cate_Se {
+	border: none;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	height: 200px;
+	font-size: 9px;
+	font-weight: bold;
+}
+
+#class_cate_Se img {
+	width: 70px;
+  	height: 70px;
+ 	margin-right: 10px;
+}
