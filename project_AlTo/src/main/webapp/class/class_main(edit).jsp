@@ -106,9 +106,9 @@
 		      </a>
 		      <a href="#">
 		        <img src="../img/class/1.jpg">
-		        <p class="cate">요리</p>
-		        <p class="title">비건 도시락 만들기</p>
-		        <p class="price">29,000원</p>
+		        <p class="class_cate">요리</p>
+		        <p class="class_title">비건 도시락 만들기</p>
+		        <p class="class_price">29,000원</p>
 		      </a>
 	      </div>
 	      
