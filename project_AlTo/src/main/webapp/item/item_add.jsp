@@ -35,13 +35,46 @@
 				target.appendChild(opt);
 			}
 		}
+		
+		function validateForm(form) {
+			if(form.itemName.value == ""){
+				alert("상품명을 입력하세요.")
+				form.itemName.focus();
+				return false;
+			}
+			
+			if(form.item_price.value == ""){
+				alert("금액을 입력하세요.")
+				form.item_price.focus();
+				return false;
+			}
+			
+			if(form.item_stock.value == ""){
+				alert("판매 수량을 선택하세요.")
+				form.item_stock.focus();
+				return false;
+			}
+			
+			if(form.item_info.value==""){
+				alert("상품 소개를 입력하세요.")
+				form.item_info.focus();
+				return false;
+			}
+			
+			if(form.isfile5.value == "" || form.isfile6.value == "" || form.isfile7.value == "" || form.isfile8.value == "" ){
+				alert("첨부파일 선택은 총 4개가 선택되어야 합니다.")
+				form.isfile1.focus();
+				return false;
+			}
+		}
+		
 	</script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
 	
 	<div class="container my-3">
-	<form id="item_form1" name="item_form1" enctype="multipart/form-data" method="post">
+	<form action="#" name="item_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
 				<tr class="table-dark">
@@ -52,7 +85,7 @@
 				<tr>
 					<td width="20%"><b>상품명</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="className" id="className" placeholder="클래스명을 입력하세요">
+						<input type="text" name="itemName" placeholder="상품명을 입력하세요">
 					</td>
 				</tr>
 				<tr>
@@ -82,19 +115,19 @@
 				<tr>
 					<td width="20%"><b>참여금액</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="class_price" id="class_price" placeholder="금액을 입력하세요"> </td>
+						<input type="text" name="item_price" placeholder="금액을 입력하세요"> </td>
 					</td>
 				</tr>
 				<tr>
 					<td width="20%"><b>재고수</b></td>
 					<td colspan="2" width="40%">
-					<input type="text" name="class_stock" id="class_stock" placeholder="판매 가능 수량을 입력하세요">
+					<input type="text" name="item_stock" placeholder="판매 가능 수량을 입력하세요">
 					</td>
 				</tr>
 				<tr>
 					<td><b>취미용품 소개</b></td>
 					<td colspan="3">
-					<textarea>상품 설명을 작성해주세요</textarea>
+					<textarea name="item_info">상품 설명을 작성해주세요</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -102,16 +135,16 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<input type="file">
-					<input type="file">
-					<input type="file">
-					<input type="file">
+					<input type="file" name="isfile5" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile6" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile7" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile8" accept="image/jpeg, image/png, image/jpg">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="6" align="right">
 					<button type="reset" class="btn secondary"> 취소 </button>
-					<button type="button" class="btn btn-warning"> 등록 </button>
+					<button type="submit" class="btn btn-warning"> 등록 </button>
 					</td>
 				</tr>
 			</tbody>

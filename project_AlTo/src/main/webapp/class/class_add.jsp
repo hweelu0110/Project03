@@ -35,13 +35,79 @@
 				target.appendChild(opt);
 			}
 		}
+		
+		function validateForm(form) {
+			if(form.className.value == ""){
+				alert("클래스 이름을 입력하세요.")
+				form.className.focus();
+				return false;
+			}
+			
+			if(form.stuNum.value == ""){
+				alert("최대 인원을 입력하세요.")
+				form.stuNum.focus();
+				return false;
+			} else if(form.stuNum.value > 101){
+				alert("최대 인원은 100명입니다.")
+				form.stuNum.focus();
+				return false;
+			}
+			
+			if(form.class_price.value == ""){
+				alert("금액을 입력하세요.")
+				form.class_price.focus();
+				return false;
+			}
+			
+			if(form.location.value == ""){
+				alert("지역을 선택하세요.")
+				form.location.focus();
+				return false;
+			}
+			
+			if(form.startdate.value == ""){
+				alert("시작일을 선택하세요.")
+				form.startdate.focus();
+				return false;
+			}
+			
+			if(form.enddate.value == ""){
+				alert("종료일을 선택하세요.")
+				form.enddate.focus();
+				return false;
+			}
+			
+			if(form.class_info.value==""){
+				alert("강의 소개를 입력하세요.")
+				form.class_info.focus();
+				return false;
+			}
+			
+			if(form.class_curri.value==""){
+				alert("커리큘럼을 입력하세요.")
+				form.class_curri.focus();
+				return false;
+			}
+			
+			if(form.tc_info.value==""){
+				alert("강사 소개를 입력하세요.")
+				form.tc_info.focus();
+				return false;
+			}
+			
+			if(form.isfile1.value == "" || form.isfile2.value == "" || form.isfile3.value == "" || form.isfile4.value == "" ){
+				alert("첨부파일 선택은 총 4개가 선택되어야 합니다.")
+				form.isfile1.focus();
+				return false;
+			}
+		}
 	</script>
 </head>
 <body>
 	<%@ include file="../header.jsp" %>
 	
 	<div class="container my-3">
-	<form id="class_form1" name="class_form1" enctype="multipart/form-data" method="post">
+	<form action="#" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
 				<tr class="table-dark">
@@ -52,21 +118,21 @@
 				<tr>
 					<td width="10%"><b>클래스명</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="className" id="className" placeholder="클래스명을 입력하세요">
+						<input type="text" name="className" placeholder="클래스명을 입력하세요" />
 					</td>
 					<td width="10%"><b>참여인원</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="stuNum" id="stuNum" placeholder="최대 인원은 100명입니다.">
+						<input type="text" name="stuNum" placeholder="최대 인원은 100명입니다." />
 					</td>
 				</tr>
 				<tr>
 					<td width="10%"><b>개설자</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="class_userName" id="class_userName" placeholder="개설자 아이디 자동반영" disabled>
+						<input type="text" name="class_userName" placeholder="개설자 아이디 자동반영" disabled />
 					</td>
 					<td width="10%"><b>참여금액</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="class_price" id="class_price" placeholder="금액을 입력하세요"> </td>
+						<input type="text" name="class_price" placeholder="금액을 입력하세요" /> </td>
 					</td>
 				</tr>
 				<tr>
@@ -75,7 +141,7 @@
 						<select name="location">
 						    <option value="">지역을 선택하세요</option>
 						    <optgroup label="온라인">
-						    	<option value="온라인" selected="selected">온라인</option>
+						    	<option value="온라인">온라인</option>
 						    </optgroup>
 						    <optgroup label="오프라인">
 							    <option value="종로구">서울시 종로구</option>
@@ -133,16 +199,16 @@
 				</tr>
 				<tr>
 					<td width="10%"><b>시작일</b></td>
-					<td colspan="2" width="40%"><input type="date"> </td>
+					<td colspan="2" width="40%"><input type="date" name="startdate"> </td>
 					<td width="10%"><b>종료일</b></td>
-					<td colspan="2" width="40%"><input type="date"> </td>
+					<td colspan="2" width="40%"><input type="date" name="enddate"> </td>
 				</tr>
 				<tr>
 					<td colspan="6"><b>강의 소개</b></td>
 				</tr>
 				<tr>
 					<td colspan="6">
-					<textarea>상세 클래스 설명을 작성해주세요</textarea>
+					<textarea name="class_info">상세 클래스 설명을 작성해주세요</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -150,7 +216,7 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<textarea>클래스 커리큘럼을 작성해주세요</textarea>
+					<textarea name="class_curri">클래스 커리큘럼을 작성해주세요</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -158,7 +224,7 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<textarea>강사 소개를 작성해주세요</textarea>
+					<textarea name="tc_info">강사 소개를 작성해주세요</textarea>
 					</td>
 				</tr>
 				<tr>
@@ -166,16 +232,16 @@
 				<tr>
 				<tr>
 					<td colspan="6">
-					<input type="file">
-					<input type="file">
-					<input type="file">
-					<input type="file">
+					<input type="file" name="isfile1" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile2" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile3" accept="image/jpeg, image/png, image/jpg">
+					<input type="file" name="isfile4" accept="image/jpeg, image/png, image/jpg">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="6" align="right">
 					<button type="reset" class="btn secondary"> 취소 </button>
-					<button type="button" class="btn btn-warning"> 등록 </button>
+					<button type="submit" class="btn btn-warning"> 등록 </button>
 					</td>
 				</tr>
 			</tbody>
