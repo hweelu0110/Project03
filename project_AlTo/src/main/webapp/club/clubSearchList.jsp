@@ -124,7 +124,7 @@
 					<li class="all select">전체</li>
 				</ul>
 			</div>
-			<div id="area_list" class="">
+			<div id="area_list">
 				<ul>
 					<li class="online">온라인</li>
 					<li class="all select">전체</li>
@@ -284,7 +284,7 @@
 		<div id="open_btn"></div>		
 	</section>
 	
-	<!-- 모임개설 로그인 알림 팝업 -->
+	<!-- 관심 추가 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
 		<p>관심 추가는 로그인이 필요합니다.</p>
 		<button type="button" class="pointBtn">로그인</button>

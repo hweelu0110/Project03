@@ -105,14 +105,15 @@
 	$("#area_list ul li").click(function() {
 		$(this).toggleClass("select")
 		
-		if ($("#area_list ul").find("li").hasClass('select')) {
-			$("#area_list ul li.all").removeClass("select")				
+		if ($("#area_list ul li.all").nextAll().hasClass('select')) {
+			$("#area_list ul li.all").removeClass("select")
+			$("#area_list ul li.online").removeClass("select")
 		}else {
 			$("#area_list ul li.all").addClass("select")
 		}
 		
 		if ($(this).hasClass("select")) {
-			if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역"){
+			if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역" ||$("#tab_menu li:nth-child(2) span").text() === "온라인"){
 				$("#tab_menu li:nth-child(2)").html("")
 				$("#tab_menu li:nth-child(2)").append("<span>"+$(this).text()+"</span>")
 			}else {
@@ -155,16 +156,10 @@
 	
 	/* 온라인 선택 시 그 외 선택 초기화 처리  */
 	$("#area_list ul li.online").click(function() {			
-		if ($(this).hasClass("select")) {
-			$(this).addClass("select")
-			$(this).siblings().removeClass("select")
-			$("#tab_menu li:nth-child(2)").html("<span>온라인</span>")
-		}else {
-			$(this).removeClass("select")
-			$("#area_list ul li.all").addClass("select")
-			$("#tab_menu li:nth-child(2)").html("<span>전체 지역</span>")
-			
-		}				
+		$(this).addClass("select")
+		$(this).siblings().removeClass("select")
+		$("#tab_menu li:nth-child(2)").html("<span>온라인</span>")
+					
 	})
 	
 	/* select 정렬선택 */

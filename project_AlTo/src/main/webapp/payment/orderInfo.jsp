@@ -8,6 +8,7 @@
 	<%@include file="../headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/payment.css" />	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="../js/essential-textbox.js"></script>
 	<script type="text/javascript">
 		/* 우편번호 검색 api */
 		function sample6_execDaumPostcode() {
@@ -38,31 +39,7 @@
 	            }
 	        }).open();
 	    }
-		$(function() {
-			/* 필수 입력 알림 css */
-			let essen = $("#del_info .essential").length
-			for (let i=0 ; i <= essen ; i++) {
-				
-				if ($("#del_info .essential:eq("+i+")").val() == "") {
-					$("#del_info .essential:eq("+i+")").addClass("notiTxt")
-					$("#del_info .essential:eq("+i+")").next("span.noti2").css("display","block")
-				}else {
-					$("#del_info .essential:eq("+i+")").removeClass("notiTxt")
-					$("#del_info .essential:eq("+i+")").next("span.noti2").css("display","none")
-				}
-				
-			}			
-			
-			$("#del_info .essential").on("change keyup paste", function() {
-				if ($(this).val() == "") {
-					$(this).addClass("notiTxt")
-					$(this).next("span.noti2").css("display","block")
-				}else {
-					$(this).removeClass("notiTxt")
-					$(this).next("span.noti2").css("display","none")
-				}
-			})
-			
+		$(function() {			
 			/* 결제 방식 선택 */
 			$(".pay_method li").click(function() {
 				$(this).addClass("choice")
