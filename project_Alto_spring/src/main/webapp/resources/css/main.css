@@ -106,7 +106,7 @@
 
 /* 모임 바로가기 설정 팝업 */
 #clubQuikList { display: none; }
-.popup_div { 
+#clubQuikList { 
 	width: 200px;
 	padding: 20px;
 	background: #F8F8F8;
@@ -122,7 +122,7 @@
 	background: #fff;
 	border: 1px solid #494c57;
 }
-.popup_div .closeBtn {
+.popup_div .closeBtn_style {
 	position: absolute;
 	top: 20px;
 	right: 10px;
@@ -133,4 +133,4 @@
     background-image: url(../img/alto_common_icon.png);
     text-indent: -9999px;
 }
-.popup_div .basicBtn { font-size: 12px; }
+#clubQuikList .basicBtn { font-size: 12px; }

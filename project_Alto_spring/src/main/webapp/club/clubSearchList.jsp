@@ -283,38 +283,7 @@
 		</div>
 		<div id="open_btn"></div>		
 	</section>
-	
-	<!-- 관심 추가 로그인 알림 팝업 -->
-	<div id="login_popup" class="popup_div">
-		<p>관심 추가는 로그인이 필요합니다.</p>
-		<button type="button" class="pointBtn">로그인</button>
-		<button type="button" class="basicBtn closeBtn">닫기</button>
-	</div>
-	
-	<!-- 모임개설 로그인 알림 팝업 -->
-	<div class="popup_div">
-		<p>회원이 아닌 경우 모임을<br/> 개설 할 수 없습니다.</p>
-		<button type="button" class="pointBtn">로그인</button>
-		<button type="button" class="basicBtn closeBtn">닫기</button>
-	</div>
-	<!-- 수정 실패 알림 팝업 -->
-	<div class="popup_div">
-		<p>변경사항이 적용되지<br/>않습니다.</p>
-		<button type="button" class="pointBtn">닫기</button>
-		<button type="button" class="basicBtn closeBtn">취소</button>
-	</div>
-	<!-- 주제변경 알림 팝업 -->
-	<div class="popup_div">
-		<p><span class="select">7일 동안</span><br/>재변경이 제한 됩니다.<br/>주제를 변경하시겠습니까?</p>
-		<button type="button" class="pointBtn">네</button>
-		<button type="button" class="basicBtn closeBtn">아니오</button>
-	</div>
-	<!-- 주제변경 7일 제한 알림 팝업 -->
-	<div class="popup_div">
-		<p>주제는 <span class="select">7일 이내<br/>재변경이 불가능</span>합니다.</p>
-		<button type="button" class="pointBtn closeBtn">확인</button>
-	</div>
-	
+		
 	<!-- 모임 개설 팝업 -->
 	<div id="step1" class="clubPopup">
 		<h3>주제 선택</h3>
@@ -430,7 +399,7 @@
 			<input type="submit" class="pointBtn size0" value="수정하기" />
 		</form>
 	</div>
-	
+	<%@include file="../common_popup.jsp" %>
 	<%@include file="../footer.jsp" %>
 </body>
 </html>

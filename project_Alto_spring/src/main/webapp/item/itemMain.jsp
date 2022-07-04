@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%@ include file="../headinfo.jsp"%>
-<link rel="stylesheet" href="../css/list.css" /> 
-<link href="../css/class_main_style.css?after" rel="stylesheet" />
+<link rel="stylesheet" href="../resources/css/list.css" /> 
+<link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
 <!-- <link href="../css/class_main_sl.css?after" rel="stylesheet" /> -->
 <title>ALTO - 취미용품 메인</title>
 <script type="text/javascript">

@@ -22,6 +22,10 @@ $(function () {
 		$(this).parent("div").hide()
 	})
 	
+	$(".closeBtn_style").click(function() {
+		$(this).parent("div").hide()
+	})
+	
 	$(".like_icon").click(function() {
 		confirmPopup($("#login_popup"))
 	})

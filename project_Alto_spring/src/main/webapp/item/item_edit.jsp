@@ -5,11 +5,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="../css/class_main_style.css" rel="stylesheet" />
+	<link href="../resources/css/class_main_style.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 	<%@ include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/club.css">
+	<link rel="stylesheet" href="../resources/css/club.css">
 	<title>ALTO - 취미용품 수정</title>
 	<script>
 		function categoryChange(e) {

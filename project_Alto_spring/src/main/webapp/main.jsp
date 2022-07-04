@@ -1195,7 +1195,7 @@
 	<!-- 내모임 바로가기 수정 팝업 -->
 	<div id="clubQuikList" class="popup_div">
 		<h4>모임 바로가기 설정</h4>
-		<button type="button" name="closeBtn" class="closeBtn">닫기</button>
+		<button type="button" name="closeBtn" class="closeBtn_style">닫기</button>
 		<ul class="my_club">
 			<li class="select">
 				<a href="">
@@ -1235,6 +1235,8 @@
 		</ul>
 		<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
 	</div>
+	
+	<%@include file="common_popup.jsp" %>
 	
 	<!-- FOOTER -->
 	<footer>
