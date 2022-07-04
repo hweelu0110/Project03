@@ -8,8 +8,9 @@
 	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="../css/reset.css" />
-	<link rel="stylesheet" href="../css/common.css" />
-	<link rel="stylesheet" href="../css/layout.css" />
-	<link rel="stylesheet" href="../css/clubheader.css" />
-	<script src="../js/common.js"></script>
+	<link rel="stylesheet" href="../resources/css/reset.css" />
+	<link rel="stylesheet" href="../resources/css/common.css" />
+	<link rel="stylesheet" href="../resources/css/layout.css" />
+	<link rel="stylesheet" href="../resources/css/clubheader.css" />
+	<script src="../resources/js/common.js"></script>	
+

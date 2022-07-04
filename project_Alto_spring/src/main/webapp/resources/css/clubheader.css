@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#title {
+		text-align: center;
+	}
+#menu1 ul {
+	width:1000px;
+	margin: 0 auto;
+	overflow:hidden;
+}
+
+#menu1 ul li {
+	width:25%;
+	float: left;
+	height: 40px;
+	list-style:none;
+	line-height: 40px;
+	text-align: center;
+	background: #EAEAEA;
+	font-weight: bolder;
+}
+
+#menu1 ul li a {
+	display:block;
+}
+
+#menu1 ul li a:hover{
+	background: #F3BE34;
+	color:#fff
+}
