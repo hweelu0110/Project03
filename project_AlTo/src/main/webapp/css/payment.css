@@ -17,6 +17,17 @@
 	position: absolute;
     top: 24px;
     right: 24px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-image: url(../img/alto_common_icon.png);
+    background-repeat: no-repeat;
+    background-size: 75px;
+    background-position: -61px 4px;
+    background-color: #e4e4e4;
+    border-radius: 3px;
+    text-indent: -9999px;
+    cursor: pointer;
 }
 
 .paySection {
@@ -30,7 +41,12 @@
 }
 .paySection h3 { margin-bottom: 20px; }
 .paySection p { font-family: 'Noto Sans KR', sans-serif; }
-.paySection button { font-size: 12px; }
+.paySection button { 
+	position: absolute;
+    top: 263px;
+    right: 52px;
+	font-size: 12px;
+}
 
 /* notice Style */
 .paySection .noti1,.popup_div .noti1 {
@@ -63,7 +79,7 @@
 
 
 /* input Style */
-input[type=text] { padding: 8px 15px; margin: 0; }
+input[type=text] { padding: 8px 15px; margin: 5px 0 0; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
 input[type=text].size3 { width: 215px; }
@@ -139,6 +155,7 @@ input[type=text].size3 { width: 215px; }
 	border-radius: 3px;
 	text-align: center;
     font-size: 12px;
+    cursor: pointer;
 }
 .pay_method li.choice { border: 1px solid #F3BE34; }
 
@@ -163,17 +180,26 @@ select {
 	width: 50%;
     float: left;
 }
+.card_info2 { float: right; }
 
 .payInfo .checkStyle {
 	padding: 10px 10px 10px 40px;
+	background-image: url(../img/check_icon.png);
+	background-repeat: no-repeat;
+	background-size: 40px;
+	background-position: 1px 9px;
+	cursor: pointer;
 }
+.payInfo .checked { background-position: 1px -36px; }
 #cashBill_area .checkStyle {
 	color: #e4e4e4;
 	border: 1px solid #e4e4e4;
+	background-position: 0px -77px;
 }
 #cashBill_area .checked {
 	color: #F3BE34;
 	border: 1px solid #F3BE34;
+	background-position: 0px -118px;
 }
 #cashBill_area .option02 { display: none; }
 

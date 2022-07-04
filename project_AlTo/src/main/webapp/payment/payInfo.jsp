@@ -7,6 +7,38 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/payment.css" />	
+	<script src="../js/essential-textbox.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$("#cashBill").click(function() {
+				$(this).toggleClass("checked")
+				
+				if ($(this).hasClass("checked")) {
+					$("#cashBill_area").show()									
+				}else {
+					$("#cashBill_area").hide()
+					$("#option01").addClass("checked")
+					$("#option02").removeClass("checked")
+					$("p.option01").show()
+					$("p.option02").hide()	
+				}
+			})
+			
+			$("#option01").click(function() {
+				$(this).addClass("checked")
+				$("#option02").removeClass("checked")
+				$("p.option01").show()
+				$("p.option02").hide()
+			})
+			
+			$("#option02").click(function() {
+				$(this).addClass("checked")
+				$("#option01").removeClass("checked")
+				$("p.option02").show()
+				$("p.option01").hide()
+			})
+		})
+	</script>
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -28,16 +60,16 @@
 						<option value="cardNum">현대카드 (1233)</option>
 					</select><br/>
 					<p>카드 번호</p>
-					<input type="text" name="cardNumber" class="notiTxt" value="0000-0000-0000-0000" /><br/>
-					<span class="noti2">최소 14자 이상 입력해 주세요.</span><br/>
+					<input type="text" name="cardNumber" class="essential" placeholder="0000-0000-0000-0000" />
+					<span class="noti2">최소 14자 이상 입력해 주세요.</span>
 					<div class="card_info">
 						<p>유효기간</p>
-						<input type="text" name="userPhone" class="size2 notiTxt" value="01012345678" />
+						<input type="text" name="expiry" class="size2 essential" placeholder="MM/YY" />
 						<span class="noti2">입력해 주세요.</span>
 					</div>
-					<div>
+					<div class="card_info2">
 						<p>생년월일</p>
-						<input type="text" name="zipcode" class="size2 notiTxt" value="우편번호" />
+						<input type="text" name="birth" class="size2 essential" placeholder="YYMMDD" />
 						<span class="noti2">생년월일 6자리를 입력해 주세요.</span><br/>
 					</div>
 				</form>
@@ -71,14 +103,14 @@
 						<option value="089">케이뱅크</option>
 					</select><br/>
 					
-					<p id="cashBill" class="checkStyle">현금영수증 발행</p>
+					<p id="cashBill" class="checkStyle checked">현금영수증 발행</p>
 					<div id="cashBill_area">
 						<p id="option01" class="checkStyle checked">소득공제용</p>
 						<p id="option02" class="checkStyle">지출증빙용</p>
 						<p class="option01">휴대폰 번호</p>
 						<p class="option02">사업자 등록번호</p>
-						<input type="text" name="cashBillNum" class="notiTxt" value="숫자만 입력해주세요" />
-						<span class="noti2">현금영수증 발행 번호를 입력해주세요</span><br/>
+						<input type="text" name="cashBillNum" class="essential" placeholder="숫자만 입력해주세요" />
+						<span class="noti2">현금영수증 발행 번호를 입력해주세요</span>
 					</div>					
 				</form>
 			</div>			

@@ -8,65 +8,7 @@
 	<%@include file="../headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/list.css" /> 	
 	<link rel="stylesheet" href="../css/club.css" /> 
-	
-	<script type="text/javascript">
-		$(function() {
-			$("#tab_area").css("display","none")
-			$("#m_cate").css("display","none")
-			$("#s_cate").css("display","none")
-			$("#area_list").css("display","none")
-			
-			/* tab메뉴 선택 시 - 영역 노출하기 */
-			$("#tab_menu li").filter(":first").click(function() {
-				$("#tab_area").toggle()
-				$("#m_cate").toggle()
-				
-				if ($("#m_cate ul").find("li").hasClass('select')) {
-					$("#s_cate").show()
-				}else {
-					$("#s_cate").hide()
-				}				
-			})
-			
-			$("#tab_menu li").filter(":last").click(function() {
-				$("#tab_area").toggle()
-				$("#area_list").toggle()
-			})
-			
-			/* 메인카테고리 선택 시 - 서브카테고리 영역 노출 */
-			$("#m_cate ul li").click(function() {
-				$(this).toggleClass("select")
-				$("#m_cate ul li.all").removeClass("select")
-				
-				if ($("#m_cate ul").find("li").hasClass('select')) {
-					$("#s_cate").show()
-					if(!($("#tab_menu").find("li").hasClass('select'))) {
-						$("#tab_menu li").addClass("select")
-					}
-					$("#tab_menu li").removeClass("select")
-				}else {
-					$("#s_cate").hide()
-					$("#m_cate ul li.all").addClass("select")
-					$("#tab_menu li").removeClass("select")
-				}
-			})
-			
-			/* 클럽개설 버튼 팝업 */
-			$("#open_btn").mouseover(function() {
-				$("div.info_div").show()
-			})
-			$("#open_btn").mouseout(function() {
-				$("div.info_div").hide()
-			})
-			
-			/* select 정렬선택 */
-			$("#selectBoxArea div").filter(":first").click(function() {
-				$("div.select_list").toggle()
-			})
-			
-			
-		})
-	</script>
+	<script src="../js/search_tabmenu.js"></script>
 </head>
 <body>
 	<%@include file="../header.jsp" %>
@@ -74,15 +16,15 @@
 	<!-- CONTENTS -->
 	<section>
 		<ul id="tab_menu">
-			<li class="select">창작</li>
-			<li>성동구&nbsp;용산구&nbsp;중구</li>
+			<li><span>전체 취미</span></li>
+			<li><span>전체 지역</span></li>
 		</ul>
 		
 		<div id="tab_area">
 			<div id="m_cate">
 				<ul>
-					<li class="all"><a href="">전체</a></li>
-					<li class="select">
+					<li id="m_cate_all" class="all select">전체</li>
+					<li>
 						<img src="../img/hobby_img/h_001.png" />
 						<p class="hobby_name">창작</p>
 					</li>
@@ -146,16 +88,13 @@
 			</div>
 			<div id="s_cate">
 				<ul>
-					<li class="select">전체</li>
-					<li>드로잉</li>
-					<li>공예</li>
-					<li>DIY</li>
+					<li class="all select">전체</li>
 				</ul>
 			</div>
 			<div id="area_list" class="">
 				<ul>
 					<li class="online">온라인</li>
-					<li>전체</li>
+					<li class="all select">전체</li>
 					<li>강남구</li>
 					<li>강동구</li>
 					<li>강북구</li>
@@ -171,13 +110,16 @@
 					<li>마포구</li>
 					<li>서대문구</li>
 					<li>서초구</li>
-					<li class="select">성동구</li>
+					<li>성동구</li>
 					<li>성북구</li>
 					<li>송파구</li>
 					<li>양천구</li>
 					<li>영등포구</li>
-					<li class="select">용산구</li>
+					<li>용산구</li>
 					<li>은평구</li>
+					<li>종로구</li>
+					<li>중구</li>
+					<li>중랑구</li>
 				</ul>
 			</div>
 			<button type="button" id="opSearch_btn">선택 조건으로 검색</button>
@@ -510,7 +452,7 @@
 			    <script>
 			      var swiper = new Swiper(".mySwiper4", {
 			        slidesPerView: 5,
-			        spaceBetween: 10,
+			        spaceBetween: 20,
 			        slidesPerGroup: 5,
 			        loop: false,
 			        loopFillGroupWithBlank: true,
