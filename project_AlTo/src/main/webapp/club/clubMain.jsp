@@ -19,91 +19,121 @@
 				<li>
 					<a href="clubSearchList.jsp">
 						<img src="../img/hobby_img/h_001.png" />
-						<span class="hobby_name">창작</span>
+						<div>
+							<p class="hobby_name">창작</p>
+						</div>
 					</a>
 				</li>
 		        <li>
 		        	<a href="">
 						<img src="../img/hobby_img/h_002.png" />
-						<span class="hobby_name">액티비티</span>
+						<div>
+							<p class="hobby_name">액티비티</p>
+						</div>
 					</a>
 		        </li>
 		        <li>
 					<a href="">
 						<img src="../img/hobby_img/h_003.png" />
-						<span class="hobby_name">아웃도어</span>
+						<div>
+							<p class="hobby_name">아웃도어</p>
+						</div>
 					</a>
 				</li>
 		        <li>
 					<a href="">
 						<img src="../img/hobby_img/h_004.png" />
-						<span class="hobby_name">사진/영상</span>
+						<div>
+							<p class="hobby_name">사진/영상</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_005.png" />
-						<span class="hobby_name">음악</span>
+						<div>
+							<p class="hobby_name">음악</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_006.png" />
-						<span class="hobby_name">게임</span>
+						<div>
+							<p class="hobby_name">게임</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_007.png" />
-						<span class="hobby_name">여행</span>
+						<div>
+							<p class="hobby_name">여행</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_008.png" />
-						<span class="hobby_name">요리</span>
+						<div>
+							<p class="hobby_name">요리</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_009.png" />
-						<span class="hobby_name">문화</span>
+						<div>
+							<p class="hobby_name">문화</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_010.png" />
-						<span class="hobby_name">봉사</span>
+						<div>
+							<p class="hobby_name">봉사</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_011.png" />
-						<span class="hobby_name">직무/커리어</span>
+						<div>
+							<p class="hobby_name">직무/커리어</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_012.png" />
-						<span class="hobby_name">수집</span>
+						<div>
+							<p class="hobby_name">수집</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_013.png" />
-						<span class="hobby_name">반려동물</span>
+						<div>
+							<p class="hobby_name">반려동물</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_014.png" />
-						<span class="hobby_name">차/오토바이</span>
+						<div>
+							<p class="hobby_name">차/오토바이</p>
+						</div>
 					</a>
 				</li>
 				<li>
 					<a href="">
 						<img src="../img/hobby_img/h_015.png" />
-						<span class="hobby_name">자유주제</span>
+						<div>
+							<p class="hobby_name">자유주제</p>
+						</div>
 					</a>
 				</li>
 			</ul>
