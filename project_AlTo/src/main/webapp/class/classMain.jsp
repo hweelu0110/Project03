@@ -6,8 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%@ include file="../headinfo.jsp"%>
+<link rel="stylesheet" href="../css/list.css" />
 <link href="../css/class_main_style.css?after" rel="stylesheet" />
-<link href="../css/class_main_sl.css?after" rel="stylesheet" />
+<!-- <link href="../css/class_main_sl.css?after" rel="stylesheet" /> -->
 <title>ALTO - 클래스 메인</title>
 <script type="text/javascript">
 		
@@ -64,170 +65,216 @@
 		</div>
 
 		<div id="sec_03">
-			<h2>BEST</h2>
-
-			<div class="swiper mySwiper4 class_products">
-				<div class="swiper-wrapper product">
-					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">성동구</span>
+				<h2>BEST</h2>
+				
+				<div class="swiper mySwiper4">
+			      <div class="swiper-wrapper product">
+		        	<div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">성동구</span>	
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">건강한 수제 간식 만들기</p>
-							<p class="class_price">45,000원</p>
+							<p class="class_name">미니어처의 세계 미니어처의 세계 미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
+						</div>
+					</div>
+			        <div class="swiper-slide">
+			        	<img class="class_img" src="../img/class_test.jpg" />
+			        	<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
+						<div>
+							<p class="class_name">쉽고 정확한 조색을 위한 CMYK 푸드 컬러 차트</p>
+							<p class="hobby_name">창작</p>
+							<p class="class_price">1,100원</p>											
+						</div>
+			        </div>
+			        <div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area area_online">온라인</span>	
+						<div>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>						
+						</div>
+					</div>
+			        <div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
+						<div>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>					
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">음악</p>
-							<p class="class_title">처음부터 배우는 기타 클래스</p>
-							<p class="class_price">89,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area obj_area_online">온라인</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">사진</p>
-							<p class="class_title">인생 첫 DSRL 배우기</p>
-							<p class="class_price">69,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>					
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">액티비티</p>
-							<p class="class_title">하루 10분으로 변화하는 요가</p>
-							<p class="class_price">79,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">비건 도시락 만들기</p>
-							<p class="class_price">29,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">건강한 수제 간식 만들기</p>
-							<p class="class_price">45,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<span class="area">중구</span>	
 						<div>
-							<p class="class_cate">음악</p>
-							<p class="class_title">처음부터 배우는 기타 클래스</p>
-							<p class="class_price">89,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
-					<div class="swiper-slide">
-						<img src="../img/class/1.jpg" class="classOb">
-						<span class="obj_area">중구</span>
-						<div>
-							<p class="class_cate">사진</p>
-							<p class="class_title">인생 첫 DSRL 배우기</p>
-							<p class="class_price">69,000원</p>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
+			      </div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-button-prev"></div>
+			    </div>
 			</div>
-		</div>
-
-		<div id="sec_04">
-			<h2>NEW</h2>
-			<div class="swiper mySwiper4 class_products">
-				<div class="swiper-wrapper product">
-					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">성동구</span>
+			
+			<div id="sec_04">
+				<h2>NEW</h2>
+				<div class="swiper mySwiper4">
+			      <div class="swiper-wrapper product">
+		        	<div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">건강한 수제 간식 만들기</p>
-							<p class="class_price">45,000원</p>
+							<p class="class_name">미니어처의 세계 미니어처의 세계 미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
+						</div>
+					</div>
+			        <div class="swiper-slide">
+			        	<img class="class_img" src="../img/class_test.jpg" />
+			        	<span class="like_icon">관심</span>
+						<div>
+							<p class="class_name">쉽고 정확한 조색을 위한 CMYK 푸드 컬러 차트</p>
+							<p class="hobby_name">창작</p>
+							<p class="class_price">1,100원</p>											
+						</div>
+			        </div>
+			        <div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<div>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>						
+						</div>
+					</div>
+			        <div class="swiper-slide">
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
+						<div>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>					
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">음악</p>
-							<p class="class_title">처음부터 배우는 기타 클래스</p>
-							<p class="class_price">89,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area obj_area_online">온라인</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">사진</p>
-							<p class="class_title">인생 첫 DSRL 배우기</p>
-							<p class="class_price">69,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>					
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">액티비티</p>
-							<p class="class_title">하루 10분으로 변화하는 요가</p>
-							<p class="class_price">79,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">비건 도시락 만들기</p>
-							<p class="class_price">29,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">요리</p>
-							<p class="class_title">건강한 수제 간식 만들기</p>
-							<p class="class_price">45,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
 					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
+						<img class="class_img" src="../img/class_test.jpg" />
+						<span class="like_icon">관심</span>
 						<div>
-							<p class="class_cate">음악</p>
-							<p class="class_title">처음부터 배우는 기타 클래스</p>
-							<p class="class_price">89,000원</p>
+							<p class="class_name">미니어처의 세계</p>
+							<p class="hobby_name">요리</p>
+							<p class="class_price">11,000원</p>				
 						</div>
 					</div>
-					<div class="swiper-slide">
-						<img src="../img/class/2.jpg" class="classOb">
-						<span class="obj_area">중구</span>
-						<div>
-							<p class="class_cate">사진</p>
-							<p class="class_title">인생 첫 DSRL 배우기</p>
-							<p class="class_price">69,000원</p>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
-			</div>
-			<!-- Initialize Swiper -->
-			<script>
+			      </div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-button-prev"></div>
+			    </div>
+			    <!-- Initialize Swiper -->
+			    <script>
 			      var swiper = new Swiper(".mySwiper4", {
 			        slidesPerView: 5,
 			        spaceBetween: 10,
@@ -240,7 +287,7 @@
 			        },
 			      });
 			    </script>
-		</div>
+			</div>	
 
 	</section>
 	<%@ include file="../footer.jsp"%>

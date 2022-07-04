@@ -6,25 +6,25 @@
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-
+/* 
 .class_products img{
   width: 200px;
   height: 200px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
-
-.class_products a{
+ */
+/* .class_products a{
   text-decoration: none;
   color: black;
   float: left;
   font-size: 16px;
 }
-
+ */
 .class_cate {
 	font-size: 9px;
 	text-align: left;
-	margin: 0px;
+	margin-bottom: 20px;
 }
 
 .class_title {
@@ -51,10 +51,11 @@
   font-size: 9px;
 }
 
+/* 
 
-/* 참고 추가 */
+참고 추가
 
-/* swiper button */
+swiper button
 .swiper-button-prev {
 	--swiper-navigation-size: 22px;
 	left: 0px;
@@ -100,3 +101,4 @@
 }
 
 .swiper-slide .obj_area_online { background-color: #34343c; color:#ffd040; }
+ */
