@@ -1,0 +1,105 @@
+@charset "UTF-8";
+#member_div {
+	width: 640px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #e4e4e4;
+}
+#member_div h2 {
+	padding: 10px;
+    background: #fff;
+    font-size: 25px;
+    border-radius: 3px;
+}
+#member_div h4 { margin-bottom: 10px; }
+
+.memSection {
+	padding: 24px;
+	margin-bottom: 10px;
+	background: #fff;
+	font-size: 15px;
+    border-radius: 3px;    
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow: hidden;
+}
+.memSection textarea { height: 150px; }
+.memSection h3 { margin-bottom: 20px; }
+.memSection p { 
+	font-family: 'Noto Sans KR', sans-serif;
+	margin-bottom: 5px;
+}
+
+/* notice Style */
+.memSection .noti1,.popup_div .noti1 {
+	margin: 4px 0;
+    color: #777;
+	font-size: 11px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.memSection .noti2 {
+	margin-left: 5px;
+    color: #F3BE34;
+	font-size: 11px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 이용약관동의 */
+.checkStyle {
+	padding: 10px 10px 10px 40px;
+	background-image: url(../img/check_icon.png);
+	background-repeat: no-repeat;
+	background-size: 40px;
+	background-position: 1px 9px;
+	cursor: pointer;
+}
+.checked { background-position: 1px -36px; }
+
+/* 회원정보 입력 */
+.memInfo .noti2 {
+	display: block;
+	margin: 4px 0;
+}
+
+.align_div { width: 270px; }
+.float_left { float: left; }
+.float_right { float: right; }
+
+.gender_div {
+	display: inline-block;
+    width: 90px;
+    height: 32px;
+    padding: 6px 8px;
+    font-size: 12px;
+    vertical-align: middle;
+}
+.gender_div span {
+	vertical-align: middle;
+    background: #ddd;
+    padding: 8px 11px;
+}
+
+
+#member_div .popup_div {
+	padding: 20px;
+    width: 370px;
+    text-align: left;
+    font-size: 11px;
+    display: none;
+}
+.popup_div h4 {
+	font-size: 15px;
+    margin-bottom: 10px;
+}
+.popup_div .btn_area button { width: 48%; }
+.popup_div .noti1 { margin-bottom: 20px; }
+
+
+/* input Style */
+input[type=text] { padding: 8px 15px; margin: 10px 0 0; }
+input[type=text].size1 { width: 410px; }
+input[type=text].size2 { width: 260px; }
+input[type=text].size3 { width: 215px; }
+/* 필수 입력 text */
+.memSection .notiTxt { border: 1px solid #F3BE34; }
+
+

@@ -41,10 +41,10 @@
 }
 .paySection h3 { margin-bottom: 20px; }
 .paySection p { font-family: 'Noto Sans KR', sans-serif; }
-.paySection button { 
+#delEditPopup button { 
 	position: absolute;
-    top: 263px;
-    right: 52px;
+    top: 243px;
+    right: 20px;
 	font-size: 12px;
 }
 
@@ -110,23 +110,15 @@ input[type=text].size3 { width: 215px; }
 	color: #777;
 }
 
-/* 쿠폰 */
-.couponInfo {
-	position: absolute;
-    top: 60px;
-    left: 50px;
-    width: fit-content;
-	padding: 3px 10px;    
-    font-size: 11px;    
-    background: #fff;
-    border: 1px solid #F3BE34;
-    display: none;
-}
-
 /* 배송 정보 */
 #del_info p {
 	font-size: 14px;
 	margin-top: 15px;
+}
+#del_info button {
+	position: absolute;
+    top: 261px;
+    right: 25px;
 }
 
 /* 결제 금액 */
@@ -269,6 +261,7 @@ select {
 }
 #delEditPopup .closeBtn {
 	position: absolute;
+	top: 10px;
 	right: 10px;
     width: 16px;
     height: 16px;

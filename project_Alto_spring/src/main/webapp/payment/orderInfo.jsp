@@ -6,9 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/payment.css" />	
+	<link rel="stylesheet" href="../resources/css/payment.css" />	
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="../js/essential-textbox.js"></script>
+	<script src="../resources/js/essential-textbox.js"></script>
 	<script type="text/javascript">
 		/* 우편번호 검색 api */
 		function sample6_execDaumPostcode() {
