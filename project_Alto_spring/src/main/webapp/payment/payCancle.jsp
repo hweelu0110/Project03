@@ -5,11 +5,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/payment.css" />	
 </head>
 <body>
-	<%@include file="../header.jsp" %>
+	<%@include file="../layout/header.jsp" %>
 	
 	<section>
 		<div id="payment_div">
@@ -60,6 +60,6 @@
 		
 	</section>
 	
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

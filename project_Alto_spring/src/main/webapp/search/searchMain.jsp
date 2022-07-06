@@ -5,13 +5,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../css/list.css" /> 	
 	<link rel="stylesheet" href="../css/club.css" /> 
 	<script src="../js/search_tabmenu.js"></script>
 </head>
 <body>
-	<%@include file="../header.jsp" %>
+	<%@include file="../layout/header.jsp" %>
 	
 	<!-- CONTENTS -->
 	<section>
@@ -467,6 +467,6 @@
 		</div>		
 	</section>
 	
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>
