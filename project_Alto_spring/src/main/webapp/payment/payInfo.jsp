@@ -6,8 +6,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/payment.css" />	
-	<script src="../resources/js/essential-textbox.js"></script>
+	<link rel="stylesheet" href="../css/payment.css" />	
+	<script src="../js/essential-textbox.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#cashBill").click(function() {

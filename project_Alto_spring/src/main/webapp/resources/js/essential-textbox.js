@@ -26,17 +26,5 @@
 			$(this).next("span.noti2").css("display","none")
 		}
 	})
-	
-	$("span.noti2").css("display","none")
-		
-	$("#member_div .essential").on("change keyup paste", function() {
-		if ($(this).val() == "") {
-			$(this).addClass("notiTxt")
-			$(this).next("span.noti2").css("display","block")
-		}else {
-			$(this).removeClass("notiTxt")
-			$(this).next("span.noti2").css("display","none")
-		}
-	})
 			
 })
