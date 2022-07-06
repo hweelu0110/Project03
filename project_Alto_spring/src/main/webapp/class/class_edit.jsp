@@ -8,7 +8,7 @@
 	<link href="../resources/css/class_main_style.css" rel="stylesheet" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<%@ include file="../headinfo.jsp" %>
+	<%@ include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/club.css">
 	<title>ALTO - 클래스 개설</title>
 	<script>
@@ -104,7 +104,7 @@
 	</script>
 </head>
 <body>
-	<%@ include file="../header.jsp" %>
+	<%@ include file="../layout/header.jsp" %>
 	
 	<div class="container my-3">
 	<form action="#" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
@@ -262,6 +262,6 @@
 		</table>	
 	</form>
 	</div>
-	<%@ include file="../footer.jsp" %>
+	<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>

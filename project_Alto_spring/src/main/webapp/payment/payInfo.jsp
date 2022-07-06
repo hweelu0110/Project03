@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/payment.css" />	
 	<script src="../resources/js/essential-textbox.js"></script>
 	<script type="text/javascript">
@@ -41,7 +41,7 @@
 	</script>
 </head>
 <body>
-	<%@include file="../header.jsp" %>
+	<%@include file="../layout/header.jsp" %>
 	
 	<section>
 		<!-- 카드 결제 인 경우  -->
@@ -129,6 +129,6 @@
 		</div>
 	</section>
 	
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

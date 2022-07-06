@@ -5,15 +5,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/schedule.css" />
 </head>
 <body>
-	<%@include file="../header.jsp" %>
-	<%@include file="../clubheader.jsp" %>
-	
+	<%@include file="../layout/header.jsp" %>
+	<%@include file="../layout/clubheader.jsp" %>
 	<section>
-	<h2>게시판 등록</h2>
+	<h2>사진첩</h2>
 	<form>
 		<table>
 			<tr>
@@ -26,21 +25,9 @@
 				<td>제목</td>
 				<td>
 					<input type="text" id="title2" class="title2" style="width: 70%" placeholder="제목을 입력해주세요." />
-					<select id="searchField">
-							<option value="">전체보기</option>
-							<option value="content">자유글</option>
-							<option value="review">정모후기</option>
-							<option value="signup">가입인사</option>
-							<option value="notice">공지사항</option>
-					</select>
 				</td>
 			</tr>
-			<tr>
-				<td>내용</td>
-				<td>
-					<textarea id="content" style="width: 70%; height: 100px;"></textarea>
-				</td>
-			</tr>
+			
 			<tr>
 				<td>파일 첨부</td>
 				<td>
@@ -68,7 +55,7 @@
 			
 			<tr>
 				<td colspan="2" align="center">
-					<button type="reset" class="btn01" onclick="location.href='Noticedetail.jsp'">취소</button>
+					<button type="reset" class="btn01" onclick="location.href='Albumdetail.jsp'">취소</button>
 					<button type="submit" class="btn02">수정하기</button>
 				</td>
 			</tr>	
@@ -77,6 +64,8 @@
 		
 	</form>
 	</section>
-	<%@include file="../footer.jsp" %>	
+	
+	
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

@@ -5,37 +5,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/schedule.css" />
-	<script type="text/javascript">
-		function validateForm() {
-			if($("#title2").val() == ""){
-		        alert("제목을 입력하세요.");
-		        $("#title2").focus();
-		        return false;
-		      }
-			
-			if($("#searchField").val() == ""){
-		        alert("카테고리를 선택해주세요.");
-		        return false;
-		      }
-
-			if($("#content").val() == ""){
-		        alert("내용을 입력해주세요.");
-		        $("#content").focus();
-		        return false;
-		      }
-		}
-	</script>
+	<%@include file="../layout/headinfo.jsp" %>
+	<link rel="stylesheet" href="../resources/css/schedule.css" />
 </head>
-
 <body>
-	<%@include file="../header.jsp" %>
-	<%@include file="../clubheader.jsp" %>
+	<%@include file="../layout/header.jsp" %>
+	<%@include file="../layout/clubheader.jsp" %>
 	
 	<section>
 	<h2>게시판 등록</h2>
-	<form method="post"  onsubmit="return validateForm()">
+	<form>
 		<table>
 			<tr>
 				<td>작성자</td>
@@ -67,6 +46,7 @@
 				<td>
 					<div class="input-file"  >
   					<input type="text"  style="width: 70%">
+  					<label>삭제</label>
   					<label>찾아보기</label>
 					</div>
 					<div class="input-file"  >
@@ -88,8 +68,8 @@
 			
 			<tr>
 				<td colspan="2" align="center">
-					<button type="reset" class="btn01" onclick="location.href='Noticelist.jsp'">취소</button>
-					<button type="submit" class="btn02">등록하기</button>
+					<button type="reset" class="btn01" onclick="location.href='Noticedetail.jsp'">취소</button>
+					<button type="submit" class="btn02">수정하기</button>
 				</td>
 			</tr>	
 			
@@ -97,8 +77,6 @@
 		
 	</form>
 	</section>
-	
-	
- 	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>	
 </body>
 </html>
