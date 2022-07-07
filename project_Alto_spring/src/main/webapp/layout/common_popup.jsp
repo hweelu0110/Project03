@@ -1,19 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-	<!-- 관심 추가 로그인 알림 팝업 -->
+	<!-- 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
-		<p>관심 추가는 로그인이 필요합니다.</p>
+		<p>로그인이 필요합니다.</p>
 		<button type="button" class="pointBtn">로그인</button>
 		<button type="button" class="basicBtn closeBtn">닫기</button>
 	</div>
 	
-	<!-- 모임개설 로그인 알림 팝업 -->
-	<div id="clubOpen_login_popup" class="popup_div">
-		<p>회원이 아닌 경우 모임을<br/> 개설 할 수 없습니다.</p>
-		<button type="button" class="pointBtn">로그인</button>
-		<button type="button" class="basicBtn closeBtn">닫기</button>
-	</div>
 	<!-- 수정 실패 알림 팝업 -->
 	<div id="edit_cancle_popup" class="popup_div">
 		<p>변경사항이 적용되지<br/>않습니다.</p>

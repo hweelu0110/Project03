@@ -3,7 +3,7 @@
  */
  
  $(function() {
-	/* 필수 입력 알림 css */
+	/* 필수 입력 알림 css */	
 	let essen = $("#payment_div .essential").length
 	for (let i=0 ; i <= essen ; i++) {
 		
@@ -17,6 +17,7 @@
 		
 	}			
 	
+	/* 결제 */
 	$("#payment_div .essential").on("change keyup paste", function() {
 		if ($(this).val() == "") {
 			$(this).addClass("notiTxt")
@@ -28,7 +29,8 @@
 	})
 	
 	$("span.noti2").css("display","none")
-		
+	
+	/* 회원가입 */	
 	$("#member_div .essential").on("change keyup paste", function() {
 		if ($(this).val() == "") {
 			$(this).addClass("notiTxt")
@@ -38,5 +40,7 @@
 			$(this).next("span.noti2").css("display","none")
 		}
 	})
+	
+
 			
 })

@@ -64,20 +64,29 @@
 .float_left { float: left; }
 .float_right { float: right; }
 
+.info_div {
+	overflow: hidden;
+    width: 552px;
+}
+.info_div .float_right { padding-top: 10px; }
 .gender_div {
-	display: inline-block;
-    width: 90px;
-    height: 32px;
-    padding: 6px 8px;
+    display: inline-block;
+    width: 73px;
+    height: 33px;
     font-size: 12px;
-    vertical-align: middle;
+    vertical-align: middle;   
 }
 .gender_div span {
-	vertical-align: middle;
+	display: inline-block;
     background: #ddd;
-    padding: 8px 11px;
+    padding: 8px 12px;
+    font-family: 'Noto Sans KR', sans-serif;
+    cursor: pointer;
 }
-
+.gender_div span.select {
+	background: #F3BE34;
+    font-weight: 700;
+}
 
 #member_div .popup_div {
 	padding: 20px;
@@ -95,7 +104,7 @@
 
 
 /* input Style */
-input[type=text] { padding: 8px 15px; margin: 10px 0 0; }
+input[type=text], input[type=password] { padding: 8px 15px; margin: 10px 0 0; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
 input[type=text].size3 { width: 215px; }
