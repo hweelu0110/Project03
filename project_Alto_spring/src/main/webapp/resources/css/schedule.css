@@ -21,3 +21,8 @@ span{font-size: 12px; color: #494c57;  padding: 5px 7px;}
 
 h2{padding-top: 20px;}
 
+.like {margin-right: 5px;}
+.comment{float: left;}
+.comment2 {width: 850px; height: 80px;}
+.btn03 {width: 100px; height: 80px; background-color: #F3BE34; margin-bottom: 50px; float: right; margin-top: 20px; margin-right: 20px;}
+
