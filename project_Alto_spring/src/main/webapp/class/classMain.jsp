@@ -8,7 +8,7 @@
 <%@ include file="../headinfo.jsp"%>
 <link rel="stylesheet" href="../resources/css/list.css" />
 <link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
-<!-- <link href="../css/class_main_sl.css?after" rel="stylesheet" /> -->
+<!-- <link href="../resources/css/class_main_sl.css?after" rel="stylesheet" /> -->
 <title>ALTO - 클래스 메인</title>
 <script type="text/javascript">
 		
