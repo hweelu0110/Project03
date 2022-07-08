@@ -1,26 +1,30 @@
 .class_products {
-	vertical-align: middle;
+  flex-direction: column;
+  vertical-align:middle;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .class_products h1 {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
-/* 
-.class_products img{
+
+.class_products_img {
   width: 200px;
   height: 200px;
   margin-right: 20px;
   margin-bottom: 20px;
 }
- */
-/* .class_products a{
+
+.class_products a{
   text-decoration: none;
   color: black;
   float: left;
   font-size: 16px;
 }
- */
+
 .class_cate {
 	font-size: 9px;
 	text-align: left;

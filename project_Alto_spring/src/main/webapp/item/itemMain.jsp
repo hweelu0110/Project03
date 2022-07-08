@@ -19,11 +19,6 @@
 
 	<section>
 		<div class="hero_header">
-			<form>
-				<input type="text" id="class_main_s" placeholder="취미용품을 검색해보세요">
-				<input type="image" src="../resources/img/class/search-icon.png" alt="제출"
-					id="search_submit">
-			</form>
 			<table id="class_cate_Se">
 				<tr align="center">
 					<td><img alt="창작" src="../resources/img/hobby_img/h_001.png"><br>창작
