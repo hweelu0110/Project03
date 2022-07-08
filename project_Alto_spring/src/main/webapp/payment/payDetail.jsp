@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<%@include file="../layout/headinfo.jsp" %>
-	<link rel="stylesheet" href="../css/payment.css" />	
+	<link rel="stylesheet" href="../resources/css/payment.css" />	
 	<script type="text/javascript">
 		$(function() {
 			$("#delChange").click(function() {

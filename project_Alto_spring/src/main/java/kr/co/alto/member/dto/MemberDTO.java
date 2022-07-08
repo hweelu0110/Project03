@@ -2,6 +2,9 @@ package kr.co.alto.member.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component("memberDTO")
 public class MemberDTO {
 	private String id;
 	private String pwd;

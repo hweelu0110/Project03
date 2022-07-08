@@ -16,10 +16,10 @@
 				<input type="submit" id="search_btn" value="검색" />
 			</form> 
 			<ul id="sub_menu">
-				<li class="no_mem"><a href="">로그인</a></li>
+				<li class="no_mem"><a href="../member/loginFrm.jsp">로그인</a></li>
 				<li class="mem"><a href="">로그아웃</a></li>
-				<li class="no_mem"><a href="">회원가입</a></li>
-				<li class="mem"><a href="">마이페이지</a></li>
+				<li class="no_mem"><a href="../member/joinFrm.jsp">회원가입</a></li>
+				<li class="mem"><a href="../mypage/myMain.jsp">마이페이지</a></li>
 				<li>FAQ</li>
 			</ul>
 		</div>		

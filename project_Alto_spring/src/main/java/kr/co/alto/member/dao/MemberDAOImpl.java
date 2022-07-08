@@ -3,18 +3,18 @@ package kr.co.alto.member.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 import kr.co.alto.member.dto.MemberDTO;
 
-
+@Repository("memberDAO")
 public class MemberDAOImpl implements MemberDAO {
+	@Autowired
 	private SqlSession sqlSession;
 	
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
-
 	@Override
 	public List<MemberDTO> selectAllMemberList() throws DataAccessException {
 		List<MemberDTO> membersList = sqlSession.selectList("mapper.member.selectAllMemberList");

@@ -23,7 +23,8 @@
 			
 			/* 클럽개설 1단계 popup */
 			$("#open_btn").click(function() {
-				confirmPopup($("#step1"))
+				//confirmPopup($("#step1"))
+				confirmPopup($("#login_popup"), "모임 개설은 ")
 			})
 			
 			/* 클럽개설 2단계 popup */
