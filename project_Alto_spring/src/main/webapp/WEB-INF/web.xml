@@ -8,10 +8,7 @@
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/config/action-mybatis.xml
-			/WEB-INF/config/action-service.xml
-		</param-value>
+		<param-value>/WEB-INF/config/action-mybatis.xml</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->

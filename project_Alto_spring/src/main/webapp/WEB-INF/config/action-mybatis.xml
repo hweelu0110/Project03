@@ -35,9 +35,5 @@
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>	
 	</bean>
-	
-	<!-- sqlSession 빈을 memeberDAO빈 속성에 주입 -->
-	<bean id="memberDAO" class="kr.co.alto.member.dao.MemberDAOImpl">
-		<property name="sqlSession" ref="sqlSession" ></property>
-	</bean>
+		
 </beans>

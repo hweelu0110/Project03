@@ -55,6 +55,7 @@
 .checked { background-position: 1px -36px; }
 
 /* 회원정보 입력 */
+#member_div.member_info { width: 450px; }
 .memInfo .noti2 {
 	display: block;
 	margin: 4px 0;
@@ -66,9 +67,9 @@
 
 .info_div {
 	overflow: hidden;
-    width: 552px;
+    width: 362px;
 }
-.info_div .float_right { padding-top: 10px; }
+.info_div .float_right { width: 70px; padding-top: 10px; }
 .gender_div {
     display: inline-block;
     width: 73px;

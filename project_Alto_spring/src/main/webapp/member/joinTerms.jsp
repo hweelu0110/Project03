@@ -92,7 +92,7 @@
 				</textarea>
 			</div>
 						
-			<button id="termsBtn" type="submit" class="basicBtn size0" disabled onclick="location.href='memberInfo.jsp'">다음</button>
+			<button id="termsBtn" type="submit" class="basicBtn size0" disabled onclick="location.href='joinFrm.jsp'">다음</button>
 		</div>
 	</section>
 	
