@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
 
-
 @Controller("memberController")
 public class MemberControllerImpl extends MultiActionController implements MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Override
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -66,8 +66,8 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		String filename = uri.substring(begin, end);
 		if (filename.indexOf(".") != -1) {
 			filename = filename.substring(0, filename.lastIndexOf("."));
-		}
-		
+		}		
+
 //		if (filename.indexOf("/") != -1) {
 //			filename = filename.substring(filename.lastIndexOf("/"), filename.length());
 //		}
