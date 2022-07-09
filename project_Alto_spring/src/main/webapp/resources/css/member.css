@@ -9,6 +9,7 @@
 	padding: 10px;
     background: #fff;
     font-size: 25px;
+    font-weight: 700;
     border-radius: 3px;
 }
 #member_div h4 { margin-bottom: 10px; }
@@ -88,6 +89,24 @@
 	background: #F3BE34;
     font-weight: 700;
 }
+
+/* 활동지역 */
+#area_list { width: 317px; margin: 0 auto; }
+#area_list ul li { 
+	display: inline-block;
+    width: 92px;
+    margin: 5px;
+    color: #494c57;
+    font-size: 13px;
+    font-weight: 700;    
+    padding: 5px 10px 5px 30px;
+    background: #e4e4e4;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#area_list ul li.select { background: #F3BE34; }
+#area_list ul li label { cursor: pointer; }
+
 
 #member_div .popup_div {
 	padding: 20px;

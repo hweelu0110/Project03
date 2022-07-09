@@ -3,9 +3,15 @@
     
 	<!-- 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
-		<p>로그인이 필요합니다.</p>
+		<p></p>
 		<button type="button" class="pointBtn">로그인</button>
 		<button type="button" class="basicBtn closeBtn">닫기</button>
+	</div>
+	
+	<!-- 확인 팝업 -->
+	<div id="confirm_popup" class="popup_div">
+		<p></p>
+		<button type="button" class="pointBtn closeBtn">확인</button>
 	</div>
 	
 	<!-- 수정 실패 알림 팝업 -->
