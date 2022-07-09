@@ -3,7 +3,7 @@
 <!-- HEADER -->
 	<header>
 		<div>
-			<h1 id="logo"><a href="../main.jsp">AlTo Alone Together</a></h1>
+			<h1 id="logo"><a href="../main.do">AlTo Alone Together</a></h1>
 			<nav>
 				<ul id="main_menu">
 					<li><a href="../club/clubMain.jsp">모임</a></li>
