@@ -10,34 +10,15 @@
 
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/views/member" />	<!-- jsp 파일 위치 지정 -->
+		<property name="prefix" value="/WEB-INF/views/" />	<!-- jsp 파일 위치 지정 -->
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<bean id="memberController" class="kr.co.springmybatis.controller.MemberControllerImpl">
-		<property name="methodNameResolver">
-			<ref local="memberMethodResolver" />
-		</property>
-		<property name="memberService" ref="memberService" />
-	</bean>
+	<!-- 클래스 레벨에 @RequestMapping을 처리 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	<!-- 메서드 레벨에 @RequestMapping을 처리 -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	
-	<bean id="memberMethodResolver" 
-			class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
-		<property name="mappings">
-			<props>
-				<prop key="/member/listMembers.do">listMembers</prop>
-				<prop key="/member/addMember.do">addMember</prop>
-				<prop key="/member/removeMember.do">removeMember</prop>
-				<prop key="/member/memberForm.do">form</prop>
-			</props>
-		</property>
-	</bean>
-	
-	<bean id="memberUrlMappign" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-		<property name="mappings">
-			<props>
-				<prop key="/member/*.do">memberController</prop>
-			</props>
-		</property>
-	</bean>
+	<!-- 애너테이션 적용할 패키지 설정 -->
+	<context:component-scan base-package="kr.co.alto" />
 </beans>
