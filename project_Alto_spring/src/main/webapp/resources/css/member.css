@@ -107,6 +107,21 @@
 #area_list ul li.select { background: #F3BE34; }
 #area_list ul li label { cursor: pointer; }
 
+/* 관심취미 */
+#hobby_list { text-align: center; }
+#hobby_list ul li { 
+	position: relative;
+	display: inline-block;
+	margin: 0 12px 10px;
+	cursor: pointer;
+}
+#hobby_list ul li img { width: 80px; }
+#hobby_list ul li img.select {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
 
 #member_div .popup_div {
 	padding: 20px;
