@@ -20,6 +20,7 @@
 	<section>
 		<div class="hero_header">
 			<table id="class_cate_Se">
+				<tr>　　</tr>
 				<tr align="center">
 					<td><img alt="창작" src="../resources/img/hobby_img/h_001.png"><br>창작
 					</td>
@@ -61,7 +62,6 @@
 
 		<div id="sec_03">
 				<h2>BEST</h2>
-				
 				<div class="swiper mySwiper4">
 			      <div class="swiper-wrapper product">
 		        	<div class="swiper-slide">

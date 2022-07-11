@@ -55,33 +55,7 @@
   font-size: 9px;
 }
 
-/* 
-
-참고 추가
-
-swiper button
-.swiper-button-prev {
-	--swiper-navigation-size: 22px;
-	left: 0px;
-	top: 40%;
-    right: auto;
-    width: 37px;
-    height: 45px;
-    background: #F9F9F9;
-    color: #34343c;
-}
-
-.swiper-button-next {
-	--swiper-navigation-size: 22px;
-	right: 0px;
-	top: 40%;
-    width: 37px;
-    height: 45px;
-    background: #F9F9F9;
-    color: #34343c;
-}
-
-.swiper-slide .obj_area {
+.obj_area {
 	background-color: #fff;
     width: 3rem;
     position: absolute;
@@ -104,5 +78,4 @@ swiper button
     color: #00c7ae;
 }
 
-.swiper-slide .obj_area_online { background-color: #34343c; color:#ffd040; }
- */
+.obj_area_online { background-color: #34343c; color:#ffd040; }

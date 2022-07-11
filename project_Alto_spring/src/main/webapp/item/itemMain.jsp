@@ -20,6 +20,7 @@
 	<section>
 		<div class="hero_header">
 			<table id="class_cate_Se">
+			<tr>　　</tr>
 				<tr align="center">
 					<td><img alt="창작" src="../resources/img/hobby_img/h_001.png"><br>창작
 					</td>
