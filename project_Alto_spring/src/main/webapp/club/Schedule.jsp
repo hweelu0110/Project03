@@ -6,7 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>일정등록</title>
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/schedule.css" />
 	<script type="text/javascript">
 		function validateForm() {
@@ -34,8 +34,8 @@
 	</script>
 </head>
 <body>
-	<%@include file="../header.jsp" %>
-	<%@include file="../clubheader.jsp" %>
+	<%@include file="../layout/header.jsp" %>
+	<%@include file="../layout/clubheader.jsp" %>
 	<section>
 	<h2>일정 등록</h2>
 	<form method="post"  onsubmit="return validateForm()">
@@ -79,6 +79,6 @@
 	</form>
 	</section>
 	
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

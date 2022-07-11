@@ -1236,7 +1236,7 @@
 		<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
 	</div>
 	
-	<%@include file="common_popup.jsp" %>
+	<%@include file="/layout/common_popup.jsp" %>
 	
 	<!-- FOOTER -->
 	<footer>

@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/list.css" /> 	
 	<link rel="stylesheet" href="../resources/css/club.css" /> 
 	<script src="../resources/js/search_tabmenu.js"></script>
@@ -24,6 +24,7 @@
 			/* 클럽개설 1단계 popup */
 			$("#open_btn").click(function() {
 				confirmPopup($("#step1"))
+				//confirmPopup($("#login_popup"), "모임 개설은 로그인이 필요합니다.")
 			})
 			
 			/* 클럽개설 2단계 popup */
@@ -44,7 +45,7 @@
 	</script>
 </head>
 <body>
-	<%@include file="../header.jsp" %>
+	<%@include file="../layout/header.jsp" %>
 	
 	<!-- CONTENTS -->
 	<section>
@@ -399,7 +400,7 @@
 			<input type="submit" class="pointBtn size0" value="수정하기" />
 		</form>
 	</div>
-	<%@include file="../common_popup.jsp" %>
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/common_popup.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

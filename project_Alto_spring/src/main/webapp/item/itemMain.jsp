@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%@ include file="../headinfo.jsp"%>
+<%@ include file="../layout/headinfo.jsp"%>
 <link rel="stylesheet" href="../resources/css/list.css" /> 
 <link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
 <!-- <link href="../resources/css/class_main_sl.css?after" rel="stylesheet" /> -->
@@ -15,7 +15,7 @@
 	</script>
 </head>
 <body>
-	<%@ include file="../header.jsp"%>
+	<%@ include file="../layout/header.jsp"%>
 
 	<section>
 		<div class="hero_header">
@@ -286,6 +286,6 @@
 			</div>
 
 	</section>
-	<%@ include file="../footer.jsp"%>
+	<%@ include file="../layout/footer.jsp"%>
 </body>
 </html>
