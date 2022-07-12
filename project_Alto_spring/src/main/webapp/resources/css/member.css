@@ -123,6 +123,33 @@
 	display: none;
 }
 
+/* 관심취미 - 소분류 */
+#hobby_list .main_hobby{
+	text-align: left;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#hobby_list .main_hobby img {
+	width: 30px;
+	vertical-align: middle;
+}
+#hobby_list .sub_hobby {
+	display: inline-block;
+    width: fit-content;
+    padding: 5px 9px 0px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border: 1px solid #494c57;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#hobby_list .sub_hobby.select {
+	background: #F3BE34;
+    font-weight: 700;
+}
+
 #member_div .popup_div {
 	padding: 20px;
     width: 370px;

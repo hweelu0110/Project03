@@ -114,4 +114,11 @@
 			DELETE FROM T_MEMBER WHERE id = #{id}
 		]]>
 	</delete>
+	
+	<select id="loginById" resultMap="memResult" parameterType="memberDTO">
+		<![CDATA[
+			SELECT * FROM T_MEMBER
+			WHERE ID = #{id} AND PWD = #{pwd}
+		]]>		
+	</select>
 </mapper>

@@ -1,5 +1,6 @@
 package kr.co.alto.hobby.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.hobby.dto.HobbysubDTO;
 
 
 @Service("hobbyService")
@@ -23,6 +25,12 @@ public class HobbyServiceImpl implements HobbyService {
 	public List<HobbyDTO> listHobbys() throws DataAccessException {
 		List<HobbyDTO> hobbyList = hobbyDAO.selectAllHobbyList();
 		return hobbyList;
+	}
+
+	@Override
+	public List<HobbysubDTO> listHobbysub(HashMap<String, String> codeList) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList = hobbyDAO.selectHobbysubList(codeList);
+		return hobbysubList;
 	}
 
 }

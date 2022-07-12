@@ -10,19 +10,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<title>AlTo - 혼자, 다같이 Alone Together</title>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
-	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="resources/css/reset.css" />
-	<link rel="stylesheet" href="resources/css/common.css" />
-	<link rel="stylesheet" href="resources/css/layout.css" />	
-	<link rel="stylesheet" href="resources/css/list.css" /> 
-	<link rel="stylesheet" href="resources/css/main.css" />  
-	<script src="resources/js/common.js"></script>		 
+	<link rel="stylesheet" href="${path}/resources/css/list.css" /> 
+	<link rel="stylesheet" href="${path}/resources/css/main.css" />  	 
 	<script type="text/javascript">
 		function quickList() {
 			//모임 바로가기 출력
@@ -79,31 +68,6 @@
 	</script>
 </head> 
 <body>
-	<!-- HEADER -->
-	<header>
-		<div>
-			<h1 id="logo"><a href="main.jsp">AlTo Alone Together</a></h1>
-			<nav>
-				<ul id="main_menu">
-					<li><a href="club/clubMain.jsp">모임</a></li>
-					<li><a href="class/classMain.jsp">클래스</a></li>
-					<li><a href="item/itemMain.jsp">취미용품</a></li>
-				</ul>
-			</nav>
-			<form action="allSearch.jsp" id="allSearch" name="allSearchForm" method="post">
-				<input type="text" id="allSearch_keyword" name="keyword" value="취미를 검색해보세요!" />
-				<input type="submit" id="search_btn" value="검색" />
-			</form> 
-			<ul id="sub_menu">
-				<li class="no_mem"><a href="">로그인</a></li>
-				<li class="mem"><a href="">로그아웃</a></li>
-				<li class="no_mem"><a href="">회원가입</a></li>
-				<li class="mem"><a href="">마이페이지</a></li>
-				<li>FAQ</li>
-			</ul>
-		</div>		
-	</header>
-	
 	<!-- Top Banner Area -->
 	<div id="ban_area">
 		<div>
@@ -1241,24 +1205,7 @@
 		<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
 	</div>
 	
-	<%@include file="../../layout/common_popup.jsp" %>
+	<%@include file="layout/common_popup.jsp" %>
 	
-	<!-- FOOTER -->
-	<footer>
-		<div>
-			<ul>
-				<li class="first">서비스이용약관</li>
-				<li>개인정보처리방침</li>
-				<li>1:1 문의</li>
-			</ul>
-			<p><span>AlTo 알토</span> _ 혼자, 다같이 Alone, Together</p>
-			<div>
-				<p>대표자 : 알토 사업자정보확인 개인정보관리책임자: 알토 사업자등록번호 : 123-45-67890</p>
-				<p>사업장 : 서울특별시 서초구 서초대로77길 54(서초더블유타원 13,14층)</p>
-				<p>1:1 문의 운영 시간 (평일/주말 09시~18시, 공휴일 휴무) 고객센터 : 1234-4567</p>
-			</div>
-			<p class="f_copy">Copyright by AlTo. All rights reserved.</p>			
-		</div>
-	</footer>
 </body>
 </html>
