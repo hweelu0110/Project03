@@ -5,7 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/schedule.css" />
 	<script type="text/javascript">
 		function validateForm() {
@@ -24,14 +24,14 @@
 
 </head>
 <body>
-<%@include file="../header.jsp" %>
-<%@include file="../clubheader.jsp" %>
+<%@include file="../layout/header.jsp" %>
+<%@include file="../layout/clubheader.jsp" %>
 	<section>
 	<h2>모임 가입</h2>
 	<form method="post"  onsubmit="return validateForm()">
 		<table>
 			<tr>
-				<td>작성자</td>
+				<td width=200 style="word-break:break-all">작성자</td>
 				<td>
 					<input type="text" class="title2" style="width: 150px" id="name" />
 				</td>
@@ -67,6 +67,6 @@
 		
 	</form>
 	</section>
-<%@include file="../footer.jsp" %>
+<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

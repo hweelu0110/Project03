@@ -5,20 +5,20 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
+	<%@include file="../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/schedule.css" />
 	
 </head>
 <body>
-	<%@include file="../header.jsp" %>
-	<%@include file="../clubheader.jsp" %>
+	<%@include file="../layout/header.jsp" %>
+	<%@include file="../layout/clubheader.jsp" %>
 	
 	<section>
 	<h2>일정 등록</h2>
 	<form method="post"  onsubmit="return validateForm()">
 		<table>
 			<tr>
-				<td>작성자</td>
+				<td width=200 style="word-break:break-all">작성자</td>
 				<td>
 					<input type="text" class="title" style="width: 150px" id="name" />
 				</td>
@@ -57,6 +57,6 @@
 	</section>
 	
 	
-	<%@include file="../footer.jsp" %>
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

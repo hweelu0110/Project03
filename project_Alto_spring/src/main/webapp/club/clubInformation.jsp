@@ -5,13 +5,13 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/clubInformation.css" /> 
+	<%@include file="../layout/headinfo.jsp" %>
+	<link rel="stylesheet" href="../resources/css/clubInfo.css" /> 
 </head>
 <body>
 
-	<%@include file="../header.jsp" %>
-	<%@include file="../clubheader.jsp" %>
+	<%@include file="../layout/header.jsp" %>
+	<%@include file="../layout/clubheader.jsp" %>
 	
 	<section>
 		<div>
@@ -63,7 +63,7 @@
 			
 			<div class="right">
 				<div id="schedual_member">
-					<h2>일정 멤버 (14명)</h2>
+					<h2>모임 멤버 (14명)</h2>
 					<ul>
 						<li>
 							<img src="../resources/img/user_test.png" />
@@ -82,6 +82,7 @@
 			
 	</section>
 	
-	<%@include file="../footer.jsp" %>
+	
+	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>
