@@ -19,9 +19,34 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 		
 	<context:component-scan base-package="kr.co.alto" />
+	
+	<!-- Tiles ViewResolver 사용 화면 표시 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	
+	<!-- Tiles 관련 빈 설정 - TilesConfigurer 클래스 이용 빈 생성 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>classpath:tiles/*.xml</beans:value>  <!-- tiles 설정 xml파일 경로 -->			
+			</beans:list>
+		</beans:property>
+		<beans:property name="preparerFactoryClass" 
+				value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
+	</beans:bean>	
+	
+	<!-- MultipartResolver -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="50000000" /> <!-- 최대업로드 사이즈 -->
+		<beans:property name="maxInMemorySize" value="1000000" /> <!-- 디스크에 임시파일 생성 전 메모리 보관 가능 용량 -->
+		<beans:property name="defaultEncoding" value="utf-8" />
+	</beans:bean>
 	
 	<!-- 회원가입 메일 인증 -->
 	<beans:bean id="mailSender"	class="org.springframework.mail.javamail.JavaMailSenderImpl">

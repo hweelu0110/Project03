@@ -1,5 +1,6 @@
 package kr.co.alto.hobby.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.hobby.service.HobbyService;
 
 
@@ -65,5 +67,28 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 						
 			return filename;
 		}
+
+		@Override
+		@RequestMapping(value = "/member/memHobby_sub.do", method = RequestMethod.POST)
+		public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			String viewName = getViewName(request);
+			
+			String hobbyCodeList = request.getParameter("hobbyCodeList");
+			String[] arrhcodelist = hobbyCodeList.split(",");
+			HashMap<String, String> codeList = new HashMap<String, String>();
+			
+			codeList.put("code1", arrhcodelist[0]);
+			codeList.put("code2", arrhcodelist[1]);
+			codeList.put("code3", arrhcodelist[2]);
+			codeList.put("code4", arrhcodelist[3]);
+			codeList.put("code5", arrhcodelist[4]);
+			
+			
+			List<HobbysubDTO> hobbysublist = hobbyService.listHobbysub(codeList);
+			ModelAndView mav = new ModelAndView(viewName);
+			mav.addObject("hobbysublist", hobbysublist);
+			return mav;
+		}
+
 
 }
