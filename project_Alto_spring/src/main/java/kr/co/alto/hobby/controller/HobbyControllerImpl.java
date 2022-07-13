@@ -27,7 +27,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 	@Override
 	@RequestMapping(value = "/member/memHobby.do", method = RequestMethod.GET)
 	public ModelAndView listHobbys(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = (String) request.getAttribute("viewName");
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
 		
 		ModelAndView mav = new ModelAndView(viewName);
@@ -36,59 +36,28 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		return mav;
 	}
 	
-	// request 객체의 URL 요청명에서 .do를 제외한 뷰이름 가져오기
-		private String getViewName(HttpServletRequest request) {
-			
-			String contextPath = request.getContextPath();
-			//주소창의 현재 uri 받아오기
-			String uri = (String) request.getAttribute("javax.servlet.include.reqest_uri");
-			if(uri == null || uri.trim().equals("")) {
-				uri = request.getRequestURI();
-			}
-			
-			int begin = 0;
-			if (!((contextPath == null) || ("".equals(contextPath)))) {
-				begin = contextPath.length();
-			}
-			
-			int end;
-			if (uri.indexOf(";") != -1) {
-				end = uri.indexOf(";");
-			} else if (uri.indexOf("?") != -1) {
-				end = uri.indexOf("?");
-			} else {
-				end = uri.length();
-			}
-			
-			String filename = uri.substring(begin, end);
-			if (filename.indexOf(".") != -1) {
-				filename = filename.substring(0, filename.lastIndexOf("."));
-			}
-						
-			return filename;
-		}
 
-		@Override
-		@RequestMapping(value = "/member/memHobby_sub.do", method = RequestMethod.POST)
-		public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			String viewName = getViewName(request);
-			
-			String hobbyCodeList = request.getParameter("hobbyCodeList");
-			String[] arrhcodelist = hobbyCodeList.split(",");
-			HashMap<String, String> codeList = new HashMap<String, String>();
-			
-			codeList.put("code1", arrhcodelist[0]);
-			codeList.put("code2", arrhcodelist[1]);
-			codeList.put("code3", arrhcodelist[2]);
-			codeList.put("code4", arrhcodelist[3]);
-			codeList.put("code5", arrhcodelist[4]);
-			
-			
-			List<HobbysubDTO> hobbysublist = hobbyService.listHobbysub(codeList);
-			ModelAndView mav = new ModelAndView(viewName);
-			mav.addObject("hobbysublist", hobbysublist);
-			return mav;
-		}
+	@Override
+	@RequestMapping(value = "/member/memHobby_sub.do", method = RequestMethod.POST)
+	public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		
+		String hobbyCodeList = request.getParameter("hobbyCodeList");
+		String[] arrhcodelist = hobbyCodeList.split(",");
+		HashMap<String, String> codeList = new HashMap<String, String>();
+		
+		codeList.put("code1", arrhcodelist[0]);
+		codeList.put("code2", arrhcodelist[1]);
+		codeList.put("code3", arrhcodelist[2]);
+		codeList.put("code4", arrhcodelist[3]);
+		codeList.put("code5", arrhcodelist[4]);
+		
+		
+		List<HobbysubDTO> hobbysublist = hobbyService.listHobbysub(codeList);
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("hobbysublist", hobbysublist);
+		return mav;
+	}
 
 
 }

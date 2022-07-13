@@ -17,20 +17,21 @@
 			$("#hobby_list div.sub_hobby").click(function() {	
 				
 				let cate = $(this).attr("class")
-				alert(cate)
-				cate.replace("",".")
-				alert(cate)
+				let cnt = $(this).siblings(".sub_hobby").length
+				let selectCnt = 0
 				
-				if($(this).hasClass("select")) {
-					$(this).removeClass("select")									
-				}else {
-					if ($(this).siblings("."+cate+".select").length < 5) {
-						$(this).toggleClass("select")
-						$(this).children(".select").css("display","block")
-					}else {
-						confirmPopup($("#confirm_popup"),"관심 취미는 최대 5개 까지 선택 가능합니다.")
+				for(let i=0; i<=cnt;i++) {
+					let ele = $("#hobby_list div.sub_hobby:eq("+i+")")
+					if(ele.attr("class") == (cate+" select")) {
+						++selectCnt
 					}
-				}				
+				}
+				
+				if(selectCnt < 5) {
+					$(this).toggleClass("select")
+				}else {
+					confirmPopup($("#confirm_popup"),"소분류 취미는 최대 5개 까지 선택 가능합니다.")
+				}								
 			})			
 		})
 	</script>	

@@ -9,18 +9,15 @@ public class MemberDTO {
 	private String id;
 	private String pwd;
 	private String name;
-	private String email;
+	private String gender;
+	private Date birth;
+	private String phone;
+	private String img;
+	private String open;
 	private Date joinDate;
+	private int authkey;
 	
 	public MemberDTO() {}
-
-	public MemberDTO(String id, String pwd, String name, String email) {
-		//super();
-		this.id = id;
-		this.pwd = pwd;
-		this.name = name;
-		this.email = email;
-	}
 
 	public String getId() {
 		return id;
@@ -46,12 +43,44 @@ public class MemberDTO {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
+	}
+
+	public String getOpen() {
+		return open;
+	}
+
+	public void setOpen(String open) {
+		this.open = open;
 	}
 
 	public Date getJoinDate() {
@@ -61,7 +90,15 @@ public class MemberDTO {
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
 	}
-	
+
+	public int getAuthkey() {
+		return authkey;
+	}
+
+	public void setAuthkey(int authkey) {
+		this.authkey = authkey;
+	}
+
 	
 
 }
