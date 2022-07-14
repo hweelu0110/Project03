@@ -1,18 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@ include file="../layout/headinfo.jsp" %>
+	<%@ include file="../../../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/list.css" /> 	
 	<link rel="stylesheet" href="../resources/css/club.css" /> 
 	<link href="../resources/css/class_main_sl.css?after" rel="stylesheet" />
 	<script src="../resources/js/search_tabmenu.js"></script>
 </head>
 <body>
-	<%@ include file="../layout/header.jsp" %>
+	<%@ include file="../../../layout/header.jsp" %>
 	
 	<!-- CONTENTS -->
 	<section>
@@ -144,10 +149,10 @@
 			<h2>검색 결과</h2>
 			<div class="class_products">
 		      <a href="#">
-		        <img src="../resources/img/class/1.jpg" class="class_products_img">
+		        <img src="${contextPath }/download?imageFileName=${imageFileName }" class="class_products_img">
 		        <p class="class_cate">요리</p>
-		        <p class="class_title">건강한 수제 간식 만들기</p>
-		        <p class="class_price">45,000원</p>
+		        <p class="class_title">${map.className }</p>
+		        <p class="class_price">${map.class_price }</p>
 		      </a>
 		      <a href="#">
 		        <img src="../resources/img/class/1.jpg" class="class_products_img">
@@ -267,6 +272,6 @@
 		</div>		
 	</section>
 	
-	<%@ include file="../layout/footer.jsp" %>
+	<%@ include file="../../../layout/footer.jsp" %>
 </body>
 </html>
