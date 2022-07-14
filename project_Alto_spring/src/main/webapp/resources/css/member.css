@@ -71,6 +71,11 @@
     width: 362px;
 }
 .info_div .float_right { width: 70px; padding-top: 10px; }
+.duplBtn {
+	display: inline-block;
+    font-size: 12px;
+    padding: 8px 10px;
+}
 .gender_div {
     display: inline-block;
     width: 73px;

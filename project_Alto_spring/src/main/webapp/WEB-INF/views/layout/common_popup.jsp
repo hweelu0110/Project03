@@ -1,5 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>common_popup</title>	
+</head>
+<body>
     
 	<!-- 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
@@ -31,3 +44,6 @@
 		<p>주제는 <span class="select">7일 이내<br/>재변경이 불가능</span>합니다.</p>
 		<button type="button" class="pointBtn closeBtn">확인</button>
 	</div>
+	
+</body>
+</html>	

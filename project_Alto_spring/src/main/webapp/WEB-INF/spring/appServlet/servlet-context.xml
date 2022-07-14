@@ -75,4 +75,12 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
+	<beans:bean id="loginInterceptor" class="kr.co.alto.interceptor.LoginInterceptor"/>
+	<interceptors>
+	    <interceptor>
+	        <mapping path="/member/login"/>
+	        <beans:ref bean="loginInterceptor"/>
+	    </interceptor>
+	</interceptors>
+	
 </beans:beans>

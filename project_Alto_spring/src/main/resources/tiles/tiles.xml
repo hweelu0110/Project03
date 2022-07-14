@@ -14,12 +14,20 @@
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
 	</definition>
 	
-	<!-- 메인 -->
+	<!-- main -->
 	<definition name="main" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />		
 	</definition>
 	
-
+	<!-- member -->
+	<definition name="/member/joinTerms" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinTerms.jsp" />		
+	</definition>
+	
+	<definition name="/member/joinFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinFrm.jsp" />		
+	</definition>
+	
 	<definition name="/member/memArea" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/memArea.jsp" />		
 	</definition>

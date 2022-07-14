@@ -1,5 +1,6 @@
 package kr.co.alto.member.service;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.alto.mail.MailUtils;
 import kr.co.alto.mail.TempKey;
 import kr.co.alto.member.dao.MemberDAO;
+import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 
 @Service("memberService")
@@ -21,23 +23,7 @@ import kr.co.alto.member.dto.MemberDTO;
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberDAO memberDAO;
-	
-	@Override
-	public List<MemberDTO> listMembers() throws DataAccessException {
-		List<MemberDTO> membersList = memberDAO.selectAllMemberList();
-		return membersList;
-	}
-
-	@Override
-	public int addMember(MemberDTO memberDTO) throws DataAccessException {
-		return memberDAO.insertMember(memberDTO);
-	}
-
-	@Override
-	public int removeMember(String id) throws DataAccessException {		
-		return memberDAO.deleteMember(id);
-	}
+	private MemberDAO memberDAO;	
 	
 	@Inject
 	private JavaMailSender mailSender;
@@ -73,6 +59,17 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int idCnt(MemberDTO memberDTO) throws Exception {
 		return memberDAO.idCnt(memberDTO);
+	}
+
+	@Override
+	public MemberDTO login(LoginDTO loginDTO) throws Exception {
+		return memberDAO.login(loginDTO);
+	}
+
+	@Override
+	public void keepLogin(String id, String id2, Date sessionLimit) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

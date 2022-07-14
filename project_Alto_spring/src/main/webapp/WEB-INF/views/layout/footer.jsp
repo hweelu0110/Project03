@@ -1,12 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>header</title>	
+</head>
+<body>
+
 <!-- FOOTER -->
 	<footer>
 		<div>
 			<ul>
-				<li class="first">서비스이용약관</li>
-				<li>개인정보처리방침</li>
-				<li>1:1 문의</li>
+				<li class="first"><a href="">서비스이용약관</a></li>
+				<li><a href="">개인정보처리방침</a></li>
+				<li><a href="">1:1 문의</a></li>
 			</ul>
 			<p><span>AlTo 알토</span> _ 혼자, 다같이 Alone, Together</p>
 			<div>
@@ -17,3 +31,6 @@
 			<p class="f_copy">Copyright by AlTo. All rights reserved.</p>			
 		</div>
 	</footer>
+	
+</body>
+</html>

@@ -14,8 +14,8 @@ function checkAll() {
 	if (!vali) {			
 		return false
 	}
-	alert("입력완료!")
-	return true	
+	$("#join").submit()
+	return false	
 }
 	
 function checkExistData(element, value) {
@@ -157,6 +157,13 @@ function checkGender() {
 		$(this).addClass("select")
 		$(this).siblings().removeClass("select")
 		$(".gender_div").next("span.noti2").css("display","none")
+		
+		if($(this).text() == '남') {
+			$("#gender").attr("value","M")
+		}else {
+			$("#gender").attr("value","W")
+		}
+		
 	})
 			
 })

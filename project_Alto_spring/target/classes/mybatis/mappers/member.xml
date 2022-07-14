@@ -5,17 +5,22 @@
 
 <mapper namespace="mapper.member">
 	<resultMap type="memberDTO" id="memResult">		
-		<result property="id" column="id" />		
-		<result property="pwd" column="pwd" />
-		<result property="name" column="name" />
-		<result property="email" column="email" />
-		<result property="joinDate" column="joinDate" />
+		<result property="email" column="MEM_ID" />		
+		<result property="pwd" column="MEM_PWD" />
+		<result property="name" column="MEM_NAME" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="phone" column="PHONE" />
+		<result property="img" column="IMG" />
+		<result property="open" column="MEM_OPEN" />
+		<result property="joinDate" column="JOINDATE" />
 	</resultMap>
+
 	
 	<!-- 회원가입 -->
 	<insert id="register">
-		INSERT INTO EZEN.ALTO_MEMBER(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH, PHONE)
-		VALUES(#{id}, #{pwd}, #{name}, #{gender}, #{birth}, #{phone})
+		INSERT INTO EZEN.ALTO_MEMBER(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH)
+		VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{birth})
 	</insert>
 	
 	<select id="idCnt" parameterType="memberDTO" resultType="int">
@@ -35,105 +40,10 @@
 		]]>
 	</update>
 															
-	<select id="selectAllMemberList" resultMap="memResult">	
-		<![CDATA[
-			SELECT * FROM T_MEMBER ORDER BY JOINDATE DESC
-		]]>
-	</select>
+	<!-- 로그인 -->
+	<select id="login" resultMap="MemberDTO">
+		select * from ALTO_MEMBER where MEM_ID = #{email}	
+	</select>	
 	
-	<!-- resultType : sql문 조회 결과 이름을 호출한 메서드로 반환 -->
-	<select id="selectName" resultType="String">
-		<![CDATA[
-			SELECT name FROM T_MEMBER WHERE ID = 'lee'
-		]]>
-	</select>
 	
-	<select id="selectPwd" resultType="String">
-		<![CDATA[
-			SELECT pwd FROM T_MEMBER WHERE ID = 'lee'
-		]]>
-	</select>
-	
-	<!-- resultType : 조회된 한개의 레코드 memberDTO에 저장 -->
-	<!-- parameterType : MemberDAO에서 SQL문 호출시 전달되는 매개변수 타입 -->
-	<select id="selectMemberById" resultType="memberDTO" parameterType="String">
-		<![CDATA[
-			SELECT * FROM T_MEMBER WHERE ID = #{id}
-		]]>
-	</select>
-	
-	<select id="selectMemberByPwd" resultMap="memResult" parameterType="int">
-		<![CDATA[
-			SELECT * FROM T_MEMBER WHERE pwd = #{pwd}
-		]]>
-	</select>
-	
-	<select id="searchMember" parameterType="memberDTO" resultMap="memResult">
-		<![CDATA[
-			SELECT * FROM T_MEMBER
-		]]>
-		<where>
-			<if test="name != '' and name != null">
-				name = #{name}
-			</if>
-			<if test="email != '' and email != null">
-				and email = #{email}
-			</if>
-		</where>
-			order by joinDate desc
-	</select>
-	
-	<select id="searchMember2" parameterType="memberDTO" resultMap="memResult">
-		<![CDATA[
-			SELECT * FROM T_MEMBER
-		]]>
-		<where>
-			<choose>
-				<when test="name != '' and name != null and email != '' and email != null">
-					name = #{name} and email = #{email}
-				</when>
-				<when test="name != '' and name != null">
-					name = #{name}
-				</when>
-				<when test="email != '' and email != null">
-					email = #{email}
-				</when>
-			</choose>
-		</where>
-			order by joinDate desc
-	</select>
-	
-	<insert id="insertMember" parameterType="memberDTO">
-		<![CDATA[
-			INSERT INTO T_MEMBER (id, pwd, name, email) 
-			VALUES (#{id},#{pwd},#{name},#{email})
-		]]>		
-	</insert>
-	
-	<insert id="insertMember2" parameterType="java.util.HashMap">
-		<![CDATA[
-			INSERT INTO T_MEMBER (id, pwd, name, email) 
-			VALUES (#{id},#{pwd},#{name},#{email})
-		]]>		
-	</insert>
-	
-	<update id="updateMember" parameterType="memberDTO">
-		<![CDATA[
-			UPDATE T_MEMBER SET pwd = #{pwd}, name = #{name}, email = #{email} 
-			WHERE id = #{id}
-		]]>	
-	</update>
-	
-	<delete id="deleteMember" parameterType="String">
-		<![CDATA[
-			DELETE FROM T_MEMBER WHERE id = #{id}
-		]]>
-	</delete>
-	
-	<select id="loginById" resultMap="memResult" parameterType="memberDTO">
-		<![CDATA[
-			SELECT * FROM T_MEMBER
-			WHERE ID = #{id} AND PWD = #{pwd}
-		]]>		
-	</select>
 </mapper>

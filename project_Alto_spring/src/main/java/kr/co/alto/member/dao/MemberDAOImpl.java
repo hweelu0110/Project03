@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 
 @Repository("memberDAO")
@@ -60,5 +61,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int idCnt(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectOne("mapper.member.idCnt", memberDTO);
+	}
+
+	@Override
+	public MemberDTO login(LoginDTO loginDTO) throws Exception {
+		System.out.println("DAOloginDTO"+loginDTO.getMemberPw());
+		return sqlSession.selectOne("mapper.member.login", loginDTO);
 	}
 }
