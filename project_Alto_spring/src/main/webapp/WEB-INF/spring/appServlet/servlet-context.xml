@@ -2,6 +2,7 @@
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
@@ -19,15 +20,33 @@
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean>
 		
 	<context:component-scan base-package="kr.co.alto" />
 	
-	<!-- 멀티파트 리졸버 -->
+	<!-- Tiles ViewResolver 사용 화면 표시 -->
+	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
+	</beans:bean>
+	
+	<!-- Tiles 관련 빈 설정 - TilesConfigurer 클래스 이용 빈 생성 -->
+	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>classpath:tiles/*.xml</beans:value>  <!-- tiles 설정 xml파일 경로 -->			
+			</beans:list>
+		</beans:property>
+		<beans:property name="preparerFactoryClass" 
+				value="org.springframework.web.servlet.view.tiles2.SpringBeanPreparerFactory" />
+	</beans:bean>	
+	
+	<!-- MultipartResolver -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<beans:property name="maxUploadSize" value="50000000" />	<!-- 최대로 업로드 가능한 파일의 크기 설정 -->
-		<beans:property name="maxInMemorySize" value="1000000" />	<!-- 디스크에 임시 파일을 생성하기 전 메모리 보관할수 있는 최대 바이트 크기 설정 -->
-		<beans:property name="defaultEncoding" value="utf-8" />		<!-- 전달되는 매개변수의 인코딩 설정 -->	
+		<beans:property name="maxUploadSize" value="50000000" /> <!-- 최대업로드 사이즈 -->
+		<beans:property name="maxInMemorySize" value="1000000" /> <!-- 디스크에 임시파일 생성 전 메모리 보관 가능 용량 -->
+		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
 	
 	<!-- 회원가입 메일 인증 -->
@@ -47,5 +66,13 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
+	
+	<!-- 인터셉터 기능 사용 설정 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*/*.do"/> <!-- 모든 요청에 대해 인터셉트 수행 -->
+			<beans:bean class="kr.co.alto.interceptor.ViewNameInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans:beans>

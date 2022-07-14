@@ -1,5 +1,6 @@
 package kr.co.alto.hobby.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.hobby.dto.HobbysubDTO;
 
 
 @Repository("hobbyDAO")
@@ -21,6 +23,12 @@ public class HobbyDAOImpl implements HobbyDAO {
 		List<HobbyDTO> hobbyList = sqlSession.selectList("mapper.hobby.selectAllHobbyList");
 
 		return hobbyList;
+	}
+
+	@Override
+	public List<HobbysubDTO> selectHobbysubList(HashMap<String, String> codeList) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList = sqlSession.selectList("mapper.hobby.selectHobbysubList", codeList);
+		return hobbysubList;
 	}
 
 }

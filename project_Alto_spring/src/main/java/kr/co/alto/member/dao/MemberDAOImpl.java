@@ -1,6 +1,8 @@
 package kr.co.alto.member.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -31,5 +33,32 @@ public class MemberDAOImpl implements MemberDAO {
 	public int deleteMember(String id) throws DataAccessException {
 		int reault = sqlSession.delete("mapper.member.deleteMember", id);
 		return reault;
+	}
+
+	@Override
+	public void createAuthKey(String memberEmail, String authKey) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("authKey", authKey);
+		
+		sqlSession.selectOne("mapper.member.createAuthKey", map);
+		
+	}
+
+	@Override
+	public void memberAuth(String memberEmail) throws Exception {
+		sqlSession.update("mapper.member.memberAuth", memberEmail);
+		
+	}
+
+	@Override
+	public void register(MemberDTO memberDTO) throws Exception {
+		sqlSession.insert("mapper.member.register", memberDTO);
+		
+	}
+
+	@Override
+	public int idCnt(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne("mapper.member.idCnt", memberDTO);
 	}
 }

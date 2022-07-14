@@ -24,7 +24,7 @@ public class AreaControllerImpl extends MultiActionController implements AreaCon
 	@Override
 	@RequestMapping(value = "/member/memArea.do", method = RequestMethod.GET)
 	public ModelAndView listAreas(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = (String) request.getAttribute("viewName");
 		List<AreaDTO> areaList = areaService.listAreas();
 		
 		ModelAndView mav = new ModelAndView(viewName);
@@ -33,36 +33,4 @@ public class AreaControllerImpl extends MultiActionController implements AreaCon
 		return mav;
 	}
 	
-	// request 객체의 URL 요청명에서 .do를 제외한 뷰이름 가져오기
-		private String getViewName(HttpServletRequest request) {
-			
-			String contextPath = request.getContextPath();
-			//주소창의 현재 uri 받아오기
-			String uri = (String) request.getAttribute("javax.servlet.include.reqest_uri");
-			if(uri == null || uri.trim().equals("")) {
-				uri = request.getRequestURI();
-			}
-			
-			int begin = 0;
-			if (!((contextPath == null) || ("".equals(contextPath)))) {
-				begin = contextPath.length();
-			}
-			
-			int end;
-			if (uri.indexOf(";") != -1) {
-				end = uri.indexOf(";");
-			} else if (uri.indexOf("?") != -1) {
-				end = uri.indexOf("?");
-			} else {
-				end = uri.length();
-			}
-			
-			String filename = uri.substring(begin, end);
-			if (filename.indexOf(".") != -1) {
-				filename = filename.substring(0, filename.lastIndexOf("."));
-			}
-						
-			return filename;
-		}
-
 }

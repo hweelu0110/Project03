@@ -5,7 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+
 public interface HobbyController {
 	
 	public ModelAndView listHobbys(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
