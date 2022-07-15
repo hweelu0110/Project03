@@ -14,8 +14,11 @@ function checkAll() {
 	if (!vali) {			
 		return false
 	}
-	$("#join").submit()
-	return false	
+	if (confirm("회원가입하시겠습니까?")) {
+		$("#join").submit()
+		return false
+	}
+	
 }
 	
 function checkExistData(element, value) {

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.type.TypeReference;
 import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,12 +36,15 @@ import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
 
 @Controller("memberController")
+@RequestMapping("/member")
 public class MemberControllerImpl extends MultiActionController implements MemberController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService memberService;
 		
-	@RequestMapping(value = "/member/joinTerms.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinTerms.do", method = RequestMethod.GET)
 	public ModelAndView joinTerms(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
@@ -48,7 +53,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		return mav;
 	}
 	
-	@RequestMapping(value = "/member/joinFrm.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinFrm.do", method = RequestMethod.GET)
 	public ModelAndView joinFrm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
@@ -58,18 +63,18 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	}
 
 	@Override
-	@RequestMapping(value = "/register", method=RequestMethod.POST)
+	@RequestMapping(value = "/register.do", method=RequestMethod.POST)
 	public String register(MemberDTO memberDTO, RedirectAttributes rttr, Model model) throws Exception {
-		
-		String hashedPw = BCrypt.hashpw(memberDTO.getPwd(), BCrypt.gensalt());
-		memberDTO.setPwd(hashedPw);
+		logger.info("register");
+		String hashedPw = BCrypt.hashpw(memberDTO.getMem_pwd(), BCrypt.gensalt());
+		memberDTO.setMem_pwd(hashedPw);
 		memberService.register(memberDTO);
 		model.addAttribute("member", memberDTO);
 		
 		rttr.addFlashAttribute("msg", "가입이 완료되었습니다.");
-		rttr.addAttribute("memberEmail", memberDTO.getId());
+		rttr.addAttribute("memberEmail", memberDTO.getMem_id());
 		
-		return "redirect:/member/registerAuth";
+		return "redirect:/member/registerAuth.do";
 	}
 
 	@Override
@@ -89,7 +94,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			MemberDTO searchDTO = (MemberDTO) mapper.readValue(filterJSON,new com.fasterxml.jackson.core.type.TypeReference<MemberDTO>() {
+			MemberDTO searchDTO = mapper.readValue(filterJSON,new com.fasterxml.jackson.core.type.TypeReference<MemberDTO>() {
 			});
 			int idCnt = memberService.idCnt(searchDTO);
 			
@@ -124,7 +129,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 		MemberDTO memberDTO = memberService.login(loginDTO);
 		
-		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMemberPw(), memberDTO.getPwd())) {
+		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMemberPw(), memberDTO.getMem_pwd())) {
 			return "/member/loginCheck";
 		}
 		
@@ -138,7 +143,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		if (loginDTO.isUseCookie()) {
 			int amount = 60*60*24*7;
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
-			memberService.keepLogin(memberDTO.getId(), httpSession.getId(), sessionLimit);
+			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
 		}
 		return "main";
 	}

@@ -21,6 +21,7 @@ public interface MemberController {
 	
 	public String register(MemberDTO memberDTO, RedirectAttributes rttr, Model model)throws Exception;
 	public String idCnt(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception;
+	
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception;
 	

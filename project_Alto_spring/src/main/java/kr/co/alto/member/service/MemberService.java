@@ -13,6 +13,7 @@ public interface MemberService {
 	
 	public void register(MemberDTO memberDTO) throws Exception;
 	public int idCnt(MemberDTO memberDTO) throws Exception;
+	
 	public MemberDTO login(LoginDTO loginDTO) throws Exception;
 	public void memberAuth(String memberEmail) throws Exception;
 	public void keepLogin(String id, String id2, Date sessionLimit);

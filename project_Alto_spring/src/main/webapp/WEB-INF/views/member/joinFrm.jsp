@@ -17,7 +17,7 @@
 	<script src="${path}/resources/js/essential-textbox.js"></script>	
 	<script type="text/javascript">
 		function duplicate() {
-			let email = $("#email").val()
+			let email = $("#mem_id").val()
 			
 			let submitObj = new Object()
 			submitObj.email=email;
@@ -25,17 +25,17 @@
 			$.ajax({
 				url: "/member/idCnt",
 				type: "post",
-				contentType: "application/json; ccharset-utf-8",
+				contentType: "application/json; charset-utf-8",
 				data: JSON.stringify(submitObj),
 				dataType: "json"
 				}).done(function(resMap) {
 					if (resMap.res == "ok") {
 						if (resMap.idCnt == 0) {
 							alert("사용할 수 있는 이메일입니다.")
-							$("#email_yn").val("Y")
+							$("#memberId_yn").val("Y")
 						}else {
 							alert("중복된 이메일 입니다.")
-							$("#email_yn").val("N")
+							$("#memberId_yn").val("N")
 						}
 					}
 				}).fail(function(e) {
@@ -51,12 +51,12 @@
 	<section>
 		<div id="member_div" class="member_info">
 			<h2>회원정보입력</h2>
-			<form id="join" name="memberFrm" method="post" action="/member/register" >
+			<form id="join" name="memberFrm" method="post" action="${path}/member/register.do">
 				<div class="memSection">
 					<div class="info_div">
 						<div class="align_div float_left">
-							<input type="hidden" id="email_yn" name="email_yn" value="N"/>
-							<input type="text" name="email" id="email" class="essential" placeholder="이메일" />
+							<input type="hidden" id="memberId_yn" name="memberId_yn" value="N"/>
+							<input type="text" name="mem_id" id="mem_id" class="essential" placeholder="이메일" />
 							<span class="noti2">필수 입력입니다.</span>
 						</div>
 						<div class="align_div float_right">

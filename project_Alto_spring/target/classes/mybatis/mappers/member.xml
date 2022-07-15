@@ -5,27 +5,24 @@
 
 <mapper namespace="mapper.member">
 	<resultMap type="memberDTO" id="memResult">		
-		<result property="email" column="MEM_ID" />		
-		<result property="pwd" column="MEM_PWD" />
-		<result property="name" column="MEM_NAME" />
+		<result property="mem_id" column="MEM_ID" />		
+		<result property="mem_pwd" column="MEM_PWD" />
+		<result property="mem_name" column="MEM_NAME" />
 		<result property="gender" column="GENDER" />
 		<result property="birth" column="BIRTH" />
-		<result property="phone" column="PHONE" />
-		<result property="img" column="IMG" />
-		<result property="open" column="MEM_OPEN" />
-		<result property="joinDate" column="JOINDATE" />
+		<result property="memberId_yn" column="MEMBER_ID_YN" />
 	</resultMap>
 
 	
 	<!-- 회원가입 -->
 	<insert id="register">
-		INSERT INTO EZEN.ALTO_MEMBER(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH)
-		VALUES(#{email}, #{pwd}, #{name}, #{gender}, #{birth})
+		INSERT INTO ALTO_MEMBER(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH, MEMBER_ID_YN)
+		VALUES(#{mem_id}, #{mem_pwd}, #{mem_name}, #{gender}, #{birth}, #{memberId_yn})
 	</insert>
 	
-	<select id="idCnt" parameterType="memberDTO" resultType="int">
+	<select id="idCnt" parameterType="memberDTO" resultType="java.lang.Integer">
 		<![CDATA[
-			select count(*) from ALTO_MEMBER where mem_id = #{id}
+			select count(*) from ALTO_MEMBER where mem_id = #{mem_id}
 		]]>
 	</select>
 	
@@ -36,13 +33,13 @@
 	<update id="memberAuth">
 		<![CDATA[
 			update ALTO_MEMBER set AUTHKEY = 1 
-			where (select count(*) from ALTO_MEMBER_AUTO where EMAIL = #{memberEmail}) > 0
+			where (select count(*) from ALTO_MEMBER_AUTO where mem_id = #{memberEmail}) > 0
 		]]>
 	</update>
 															
 	<!-- 로그인 -->
-	<select id="login" resultMap="MemberDTO">
-		select * from ALTO_MEMBER where MEM_ID = #{email}	
+	<select id="login" resultMap="memResult">
+		select * from ALTO_MEMBER where MEM_ID = #{mem_id}	
 	</select>	
 	
 	

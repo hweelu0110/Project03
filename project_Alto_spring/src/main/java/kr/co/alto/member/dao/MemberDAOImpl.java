@@ -17,27 +17,9 @@ import kr.co.alto.member.dto.MemberDTO;
 public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<MemberDTO> selectAllMemberList() throws DataAccessException {
-		List<MemberDTO> membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
-		return membersList;
-	}
 
 	@Override
-	public int insertMember(MemberDTO memberDTO) throws DataAccessException {
-		int result = sqlSession.insert("mapper.member.insertMember", memberDTO);
-		return result;
-	}
-
-	@Override
-	public int deleteMember(String id) throws DataAccessException {
-		int reault = sqlSession.delete("mapper.member.deleteMember", id);
-		return reault;
-	}
-
-	@Override
-	public void createAuthKey(String memberEmail, String authKey) throws Exception {
+	public void createAuthKey(String memberEmail, String authKey) throws DataAccessException {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberEmail", memberEmail);
 		map.put("authKey", authKey);
@@ -47,24 +29,23 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberAuth(String memberEmail) throws Exception {
+	public void memberAuth(String memberEmail) throws DataAccessException {
 		sqlSession.update("mapper.member.memberAuth", memberEmail);
 		
 	}
 
 	@Override
-	public void register(MemberDTO memberDTO) throws Exception {
-		sqlSession.insert("mapper.member.register", memberDTO);
-		
+	public void register(MemberDTO memberDTO) throws DataAccessException {
+		sqlSession.insert("mapper.member.register", memberDTO);	
 	}
 
 	@Override
-	public int idCnt(MemberDTO memberDTO) throws Exception {
+	public int idCnt(MemberDTO memberDTO) throws DataAccessException {
 		return sqlSession.selectOne("mapper.member.idCnt", memberDTO);
 	}
 
 	@Override
-	public MemberDTO login(LoginDTO loginDTO) throws Exception {
+	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException {
 		System.out.println("DAOloginDTO"+loginDTO.getMemberPw());
 		return sqlSession.selectOne("mapper.member.login", loginDTO);
 	}

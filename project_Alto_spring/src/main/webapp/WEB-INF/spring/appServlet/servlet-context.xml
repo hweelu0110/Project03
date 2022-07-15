@@ -22,8 +22,10 @@
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="2" />
 	</beans:bean>
-		
-	<context:component-scan base-package="kr.co.alto" />
+	
+	<!-- 애너테이션 적용할 패키지 설정 -->
+	<context:component-scan base-package="kr.co.alto" />		
+	
 	
 	<!-- Tiles ViewResolver 사용 화면 표시 -->
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
