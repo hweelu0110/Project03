@@ -11,10 +11,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="../resources/css/class_main_style.css" rel="stylesheet" />
+	<link href="../resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+<!-- 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	<%@ include file="../../../layout/headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/club.css">
+	 -->
 	<title>ALTO - 클래스 개설</title>
 	<script>
 		function categoryChange(e) {
@@ -109,9 +110,7 @@
 	</script>
 </head>
 <body>
-	<%@ include file="../../../layout/header.jsp" %>
-	
-	<div class="container my-3">
+	<div class="container my-3" id="classbody">
 	<form action="${contextPath }/class/upload.do" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
@@ -253,6 +252,5 @@
 		</table>	
 	</form>
 	</div>
-	<%@ include file="../../../layout/footer.jsp" %>
 </body>
 </html>

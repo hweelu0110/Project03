@@ -12,10 +12,11 @@
 }
 
 .class_products_img {
-  width: 200px;
-  height: 200px;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 10px;
+  background: url(../img/club_test.png) 100% 100% no-repeat;
+  text-indent: -9999px;
 }
 
 .class_products a{

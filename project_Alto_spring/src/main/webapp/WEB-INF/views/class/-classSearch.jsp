@@ -10,15 +10,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@ include file="../../../layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="../resources/css/list.css" /> 	
 	<link rel="stylesheet" href="../resources/css/club.css" /> 
 	<link href="../resources/css/class_main_sl.css?after" rel="stylesheet" />
 	<script src="../resources/js/search_tabmenu.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".clubPopup").hide()
+			
+			/* 클럽개설 버튼 팝업 */
+			$("#open_btn").mouseover(function() {
+				$("div.info_div").show()
+			})
+			$("#open_btn").mouseout(function() {
+				$("div.info_div").hide()
+			})	
+	</script>
 </head>
 <body>
-	<%@ include file="../../../layout/header.jsp" %>
-	
 	<!-- CONTENTS -->
 	<section>
 		<ul id="tab_menu">
@@ -268,10 +277,14 @@
 		        <p class="class_title">비건 도시락 만들기</p>
 		        <p class="class_price">29,000원</p>
 		      </a>
-	      </div>
-		</div>		
+	      </div>		
+		</div>
+		<div class="info_div">
+			<p>원하는 모임을 찾지 못하셨나요?</p>
+			<span class="p_color">그럼 직접 만들어보세요!</span>
+		</div>
+		<div id="open_btn"></div>			
 	</section>
-	
-	<%@ include file="../../../layout/footer.jsp" %>
+	<%@include file="../layout/common_popup.jsp" %>
 </body>
 </html>

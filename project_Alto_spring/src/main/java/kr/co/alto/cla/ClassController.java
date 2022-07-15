@@ -25,7 +25,18 @@ public class ClassController implements ClassControllerImpl {
 
 	//파일 저장 위치 지정
 	private static final String CURR_IMAGE_PEPO_PATH = "C:\\workspace-jsp\\altoimg";
+	
+	@Override
+	@RequestMapping(value = "/class/classMain.do", method = RequestMethod.GET)
+	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = getViewName(request);
 		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
 	@Override
 	@RequestMapping(value = "/class/classform.do", method = RequestMethod.GET)
 	public ModelAndView addMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -130,8 +141,17 @@ public class ClassController implements ClassControllerImpl {
 		}
 		return fileList;	//첨부한 파일 이름이 저장된 fileList 반환
 	}
-
-
+	
+	@RequestMapping(value = "/class/classSearch.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
 
 	@Override
 	@RequestMapping("/download")

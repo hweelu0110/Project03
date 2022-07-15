@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface ClassControllerImpl {
 	
+	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView addMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView upload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;
