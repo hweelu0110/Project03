@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.class">
+	<resultMap type="classDTO" id="classResult">		
+		<result property="class_code" column="class_code" />		
+		<result property="className" column="title" />
+		<result property="hobby_code" column="hobby_code" />
+		<result property="hobby_sub_code" column="hobby_sub_code" />
+		<result property="area_code" column="area_code" />
+		<result property="manager" column="manager" />
+		<result property="member_num" column="member_num" />
+		<result property="member_max" column="member_max" />
+		<result property="price" column="price" />
+		<result property="imgName" column="imgName" />
+		<result property="intro" column="intro" />
+		<result property="regidate" column="regidate" />
+		<result property="startdate" column="startdate" />
+		<result property="enddate" column="enddate" />
+		<result property="curriculum" column="curriculum" />
+		<result property="teacherInfo" column="teacherInfo" />
+	</resultMap>
+	
+	<select id="selectAllclassList" resultMap="classResult">
+		<![CDATA[
+			SELECT *
+			FROM ALTO_CLASS
+		]]>
+	</select>
+	
+</mapper>

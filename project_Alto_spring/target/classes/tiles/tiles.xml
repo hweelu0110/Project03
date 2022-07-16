@@ -32,6 +32,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memHobby_sub.jsp" />		
 	</definition>
 	
+	
 	<!-- 클래스 -->
 	<definition name="/class/classMain" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/class/classMain.jsp" />		
@@ -41,7 +42,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/class/classform.jsp" />		
 	</definition>
 	
-	<definition name="/class/classSearch" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/class/classSearch.jsp" />		
+	<definition name="/class/listClass" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/class/listClass.jsp" />		
 	</definition>
+	
 </tiles-definitions>

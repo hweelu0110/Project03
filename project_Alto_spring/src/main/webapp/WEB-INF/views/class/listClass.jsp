@@ -158,6 +158,31 @@
 			<h2>검색 결과</h2>
 			<div class="searchList">
 				<ul class="club">
+					<%-- 
+					<c:choose>
+						<c:when test="${empty classList }">
+							<tr height="10">
+								<td colspan="4"><p><span style="font-size: 9pt;">입력된 글이 없습니다.</span></p></td>
+							</tr>
+						</c:when>
+						
+						<c:when test="${!empty classList }">
+							<c:forEach var="classList" items="${classList }">
+								<li>
+									<img class="class_products_img" src="../resources/img/club_test.png" />
+									<span class="area">${classList.area_code }</span>
+									<span class="hobby_icon"><img src="../resources/img/hobby_img/hm000001.png" /></span>
+									<p class="club_name">${classList.className }</p>
+									<span class="memNum">${classList.member_max }</span>
+									<p class="club_schedule">
+										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+									</p>
+									<span class="like_icon">관심</span>
+								</li>
+							</c:forEach>
+						</c:when>
+					</c:choose>
+					 --%>
 					<li>
 						<img class="class_products_img" src="../resources/img/club_test.png" />
 						<span class="area">성동구</span>
