@@ -158,7 +158,6 @@
 			<h2>검색 결과</h2>
 			<div class="searchList">
 				<ul class="club">
-					<%-- 
 					<c:choose>
 						<c:when test="${empty classList }">
 							<tr height="10">
@@ -182,7 +181,7 @@
 							</c:forEach>
 						</c:when>
 					</c:choose>
-					 --%>
+					<!-- 
 					<li>
 						<img class="class_products_img" src="../resources/img/club_test.png" />
 						<span class="area">성동구</span>
@@ -271,6 +270,7 @@
 						</p>
 						<span class="like_icon">관심</span>
 					</li>
+					 -->
 				</ul>
 			</div>
 			

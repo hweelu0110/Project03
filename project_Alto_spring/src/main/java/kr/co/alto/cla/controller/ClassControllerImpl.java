@@ -50,11 +50,9 @@ public class ClassControllerImpl implements ClassController {
 	@Override
 	@RequestMapping(value = "/class/classMain.do", method = RequestMethod.GET)
 	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = (String) request.getAttribute("viewName");
 		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName(viewName);
+		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
 	
@@ -62,9 +60,9 @@ public class ClassControllerImpl implements ClassController {
 	@Override
 	@RequestMapping(value = "/class/*form.do", method = RequestMethod.GET)
 	public ModelAndView addMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		String viewName = (String) request.getAttribute("viewName");
 
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView(viewName);
 
 		List<AreaDTO> areaList = areaService.listAreas();
 		mav.addObject("areaList", areaList);
@@ -72,7 +70,6 @@ public class ClassControllerImpl implements ClassController {
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
 		mav.addObject("hobbyList", hobbyList);
 
-		mav.setViewName(viewName);
 		return mav;
 	}
 
@@ -160,44 +157,6 @@ public class ClassControllerImpl implements ClassController {
 
 	}
 	
-	
-
-	// request 객체의 URL 요청명에서 .do를 제외한 뷰이름 가져오기
-	private String getViewName(HttpServletRequest request) {
-		
-		String contextPath = request.getContextPath();
-		//주소창의 현재 uri 받아오기
-		String uri = (String) request.getAttribute("javax.servlet.include.reqest_uri");
-		if(uri == null || uri.trim().equals("")) {
-			uri = request.getRequestURI();
-		}
-		
-		int begin = 0;
-		if (!((contextPath == null) || ("".equals(contextPath)))) {
-			begin = contextPath.length();
-		}
-		
-		int end;
-		if (uri.indexOf(";") != -1) {
-			end = uri.indexOf(";");
-		} else if (uri.indexOf("?") != -1) {
-			end = uri.indexOf("?");
-		} else {
-			end = uri.length();
-		}
-		
-		String filename = uri.substring(begin, end);
-		if (filename.indexOf(".") != -1) {
-			filename = filename.substring(0, filename.lastIndexOf("."));
-		}		
-
-//		if (filename.indexOf("/") != -1) {
-//			filename = filename.substring(filename.lastIndexOf("/"), filename.length());
-//		}
-		
-		return filename;
-	}
-
 	@Override
 	@RequestMapping(value = "/class/listClass.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listClass(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -41,17 +41,16 @@ public class ClassDTO {
 	private Date enddate;
 	private String curriculum;
 	private String teacherInfo;
-	
 	public String getClass_code() {
 		return class_code;
 	}
 	public void setClass_code(String class_code) {
 		this.class_code = class_code;
 	}
-	public String getTitle() {
+	public String getClassName() {
 		return className;
 	}
-	public void setTitle(String className) {
+	public void setClassName(String className) {
 		this.className = className;
 	}
 	public String getHobby_code() {
@@ -138,5 +137,6 @@ public class ClassDTO {
 	public void setTeacherInfo(String teacherInfo) {
 		this.teacherInfo = teacherInfo;
 	}
+	
 	
 }

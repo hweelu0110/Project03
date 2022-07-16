@@ -6,7 +6,7 @@
 <mapper namespace="mapper.class">
 	<resultMap type="classDTO" id="classResult">		
 		<result property="class_code" column="class_code" />		
-		<result property="className" column="title" />
+		<result property="className" column="className" />
 		<result property="hobby_code" column="hobby_code" />
 		<result property="hobby_sub_code" column="hobby_sub_code" />
 		<result property="area_code" column="area_code" />
