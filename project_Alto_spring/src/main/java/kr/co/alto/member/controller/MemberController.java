@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,8 +23,9 @@ public interface MemberController {
 	public String register(MemberDTO memberDTO, RedirectAttributes rttr, Model model)throws Exception;
 	public String idCnt(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception;
 	
+	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception;
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception;
 	
-	public String emailConfirm(String memberEmail,Model model)throws Exception;
+	public ModelAndView emailConfirm(String memberEmail, String authKey ,HttpServletRequest request)throws Exception;
 }

@@ -42,18 +42,18 @@ public class MemberServiceImpl implements MemberService {
 						"<br/>"+memberDTO.getMem_name()+"님 "+
 						"<br/>ALTO에 회원가입해주셔서 감사합니다."+
 						"<br/>아래 [이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8080/alto/member/registerEmail?memberEmail="+
-						memberDTO.getMem_id() + "&key="+ key +
+						"<a href='http://localhost:8080/alto/member/registerEmail.do?memberEmail="+
+						memberDTO.getMem_id() + "&authKey="+ key +
 						"' target='_blenk'>[이메일 인증 확인]</a>");
-		sendMail.setFrom("[projectalto03@gmail.com]", "[김지선]");
+		sendMail.setFrom("projectalto03@gmail.com", "김지선");
 		sendMail.setTo(memberDTO.getMem_id());
 		sendMail.send();
 		
 	}
 
 	@Override
-	public void memberAuth(String memberEmail) throws Exception {
-		memberDAO.memberAuth(memberEmail);		
+	public void memberAuth(String memberEmail, String authKey) throws Exception {
+		memberDAO.memberAuth(memberEmail, authKey);		
 	}
 
 	@Override

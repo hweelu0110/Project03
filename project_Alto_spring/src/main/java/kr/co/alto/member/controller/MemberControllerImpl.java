@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
@@ -73,21 +74,39 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		
 		rttr.addFlashAttribute("msg", "가입이 완료되었습니다.");
 		rttr.addAttribute("memberEmail", memberDTO.getMem_id());
+		rttr.addAttribute("memberName", memberDTO.getMem_name());
 		
 		return "redirect:/member/registerAuth.do";
 	}
-
-	@Override
-	@RequestMapping(value = "registerEmail", method = RequestMethod.GET)
-	public String emailConfirm(String memberEmail, Model model) throws Exception {
-		memberService.memberAuth(memberEmail);
-		model.addAttribute("memberEmail", memberEmail);
+	
+	@RequestMapping(value = "/registerAuth.do", method=RequestMethod.GET)
+	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
 		
-		return "/member/registerEmail";
+		mav.setViewName(viewName);
+		mav.addObject("memberEmail", memberEmail);
+		mav.addObject("memberName", memberName);
+		
+		return mav;
 	}
 
 	@Override
-	@RequestMapping(value = "/idCnt", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerEmail.do", method = RequestMethod.GET)
+	public ModelAndView emailConfirm(String memberEmail, String authKey, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		mav.setViewName(viewName);
+		memberService.memberAuth(memberEmail, authKey);
+		mav.addObject("memberEmail", memberEmail);
+		mav.addObject("authKey", authKey);
+		
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/idCnt.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String idCnt(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception {
 		JSONObject resMap = new JSONObject();
@@ -113,29 +132,29 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	}
 
 	@Override
-	@RequestMapping(value = "/loginFrm",method = RequestMethod.GET)
+	@RequestMapping(value = "/loginFrm.do",method = RequestMethod.GET)
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception {
-		
+		String viewName = (String) request.getAttribute("viewName");
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
 		if(null != inputFlashMap) {
 			model.addAttribute("msg",(String) inputFlashMap.get("msg"));
 		}
 		
-		return "/member/loginFrm";
+		return viewName;
 	}
 
 	@Override
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 		MemberDTO memberDTO = memberService.login(loginDTO);
 		
 		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMemberPw(), memberDTO.getMem_pwd())) {
-			return "/member/loginCheck";
+			return "/member/loginCheck.do";
 		}
 		
 		if(memberDTO.getAuthkey() == 0) {
 			model.addAttribute("Auth", memberDTO.getAuthkey());
-			return "/member/registerReady";
+			return "/member/registerReady.do";
 		}
 		
 		model.addAttribute("member",memberDTO);
@@ -145,6 +164,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
 		}
-		return "main";
+		return "main.do";
 	}
+
 }

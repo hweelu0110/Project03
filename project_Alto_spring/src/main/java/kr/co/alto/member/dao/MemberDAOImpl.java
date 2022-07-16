@@ -29,8 +29,12 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void memberAuth(String memberEmail) throws DataAccessException {
-		sqlSession.update("mapper.member.memberAuth", memberEmail);
+	public void memberAuth(String memberEmail, String authKey) throws DataAccessException {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberEmail", memberEmail);
+		map.put("authKey", authKey);
+		
+		sqlSession.update("mapper.member.memberAuth", map);
 		
 	}
 

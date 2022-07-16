@@ -13,6 +13,6 @@ public interface MemberDAO {
 	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException;
 	
 	public void createAuthKey(String memberEmail, String authKey) throws DataAccessException;
-	public void memberAuth(String memberEmail) throws DataAccessException;
+	public void memberAuth(String memberEmail, String authKey) throws DataAccessException;
 
 }

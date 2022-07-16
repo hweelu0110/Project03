@@ -33,7 +33,7 @@
 	<update id="memberAuth">
 		<![CDATA[
 			update ALTO_MEMBER set AUTHKEY = 1 
-			where (select count(*) from ALTO_MEMBER_AUTO where mem_id = #{memberEmail}) > 0
+			where (select count(*) from ALTO_MEMBER_AUTH where mem_id = #{memberEmail} and authkey = #{authKey}) > 0
 		]]>
 	</update>
 															

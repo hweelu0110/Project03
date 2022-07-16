@@ -15,6 +15,6 @@ public interface MemberService {
 	public int idCnt(MemberDTO memberDTO) throws Exception;
 	
 	public MemberDTO login(LoginDTO loginDTO) throws Exception;
-	public void memberAuth(String memberEmail) throws Exception;
+	public void memberAuth(String memberEmail, String authKey) throws Exception;
 	public void keepLogin(String id, String id2, Date sessionLimit);
 }
