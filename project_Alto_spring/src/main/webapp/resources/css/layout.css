@@ -3,9 +3,7 @@ h2 { font-family: 'Noto Sans KR', sans-serif; margin-bottom: 25px; }
 header {
 	width: 100%;
 	float: left;
-	background-color: #F3BE34;
 	padding: 30px 30px 10px 30px;	
-	border-bottom: 1px solid #494c57;
 }
 header div {
 	margin: auto;
@@ -33,20 +31,20 @@ nav {
 nav #main_menu li {
 	display: inline;
 	margin-left: 10px;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 700;    
 }
 
 #allSearch { 
 	float: left; 
 	margin: 5px 0 0 30px;
-	border: 1px solid #777;
 	background-color: #F8F8F8; 
 }
 #allSearch_keyword {	
     width: 260px; 
     border: none;
-    margin: 0;   
+    margin: 0; 
+    padding: 7px 15px;  
 }
 #search_btn {
 	background-image: url(../img/alto_common_icon.png);
@@ -78,7 +76,7 @@ section div { position: relative; }
 #ban_area {
 	width: 100%;
 	padding: 20px 0 20px;
-    background: #e4e4e4;
+    background: #FFD200;
     overflow: hidden;
 }
 #ban_area div { 

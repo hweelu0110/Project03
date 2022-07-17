@@ -146,9 +146,10 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+		logger.info("loginDTO"+loginDTO.getMem_id());
 		MemberDTO memberDTO = memberService.login(loginDTO);
 		
-		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMemberPw(), memberDTO.getMem_pwd())) {
+		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMem_pwd(), memberDTO.getMem_pwd())) {
 			return "/member/loginCheck.do";
 		}
 		

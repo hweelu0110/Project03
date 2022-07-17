@@ -10,6 +10,10 @@
 		<result property="mem_name" column="MEM_NAME" />
 		<result property="gender" column="GENDER" />
 		<result property="birth" column="BIRTH" />
+		<result property="phone" column="PHONE" />
+		<result property="img" column="IMG" />
+		<result property="mem_open" column="MEM_OPEN" />
+		<result property="joindate" column="JOINDATE" />
 		<result property="memberId_yn" column="MEMBER_ID_YN" />
 	</resultMap>
 

@@ -50,7 +50,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException {
-		System.out.println("DAOloginDTO"+loginDTO.getMemberPw());
+		System.out.println("DAOloginDTO"+loginDTO.getMem_pwd());
 		return sqlSession.selectOne("mapper.member.login", loginDTO);
 	}
 }

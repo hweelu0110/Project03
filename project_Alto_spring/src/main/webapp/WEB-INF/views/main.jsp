@@ -34,18 +34,7 @@
 		}
 		
 		$(function() {			
-			//로그인 한 경우 서브 메뉴 숨김
-			$("#sub_menu .no_mem").css("display","none")
-			$(".mem_close").click(function(){
-				$("#member_section").slideUp(500)
-				$("#quick_btn").show()
-			})
-			
-			$("#quick_btn").click(function(){
-				$("#member_section").slideDown(500)
-				$("#quick_btn").hide()
-			})
-			
+						
 			//모임 바로 가기 수정하기
 			$("#member_section div .sub_menu li:nth-child(2)").click(function() {
 				$("#clubQuikList").css({
@@ -77,38 +66,41 @@
 		</div>		
 	</div>
 	
-	<!-- Login Main Contents -->
-	<div id="quick_btn">퀵메뉴 열기</div>
-	<div id="member_section">
-		<div>
-			<h2>모임 바로가기</h2>
-			<ul class="sub_menu">
-				<li><a href="">전체목록</a></li>
-				<li>설정</li>
-			</ul>
-			<ul class="my_club">
-				
-			</ul>
+	<c:if test="${not empty login}">
+		<!-- Login Main Contents -->
+		<div id="quick_btn">퀵메뉴 열기</div>
+		<div id="member_section">
+			<div>
+				<h2>모임 바로가기</h2>
+				<ul class="sub_menu">
+					<li><a href="">전체목록</a></li>
+					<li>설정</li>
+				</ul>
+				<ul class="my_club">
+					
+				</ul>
+			</div>
+			<div>
+				<p class="sub_menu"><a href="">내정보수정</a></p>
+				<h2 class="my_area">내 지역</h2>
+				<ul class="area_list">
+					<li>성동구</li>
+					<li>강남구</li>
+					<li>용산구</li>
+				</ul>
+				<h2 class="my_hobby">내 취미</h2>
+				<ul class="hobby_list">
+					<li><img src="resources/img/hobby_img/h_001.png"></li>
+					<li><img src="resources/img/hobby_img/h_002.png"></li>
+					<li><img src="resources/img/hobby_img/h_003.png"></li>
+					<li><img src="resources/img/hobby_img/h_004.png"></li>
+					<li><img src="resources/img/hobby_img/h_005.png"></li>
+				</ul>
+			</div>
+			<p class="mem_close">접기</p>
 		</div>
-		<div>
-			<p class="sub_menu"><a href="">내정보수정</a></p>
-			<h2 class="my_area">내 지역</h2>
-			<ul class="area_list">
-				<li>성동구</li>
-				<li>강남구</li>
-				<li>용산구</li>
-			</ul>
-			<h2 class="my_hobby">내 취미</h2>
-			<ul class="hobby_list">
-				<li><img src="resources/img/hobby_img/h_001.png"></li>
-				<li><img src="resources/img/hobby_img/h_002.png"></li>
-				<li><img src="resources/img/hobby_img/h_003.png"></li>
-				<li><img src="resources/img/hobby_img/h_004.png"></li>
-				<li><img src="resources/img/hobby_img/h_005.png"></li>
-			</ul>
-		</div>
-		<p class="mem_close">접기</p>
-	</div>
+	</c:if>
+	
 	
 	<!-- CONTENTS -->
 	<section>				
