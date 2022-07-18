@@ -30,6 +30,7 @@ public class ClassDTO {
 	private String hobby_code;
 	private String hobby_sub_code;
 	private String area_code;
+	private String area_name;
 	private String manager;
 	private int member_num;
 	private int member_max;
@@ -41,6 +42,7 @@ public class ClassDTO {
 	private Date enddate;
 	private String curriculum;
 	private String teacherInfo;
+	
 	public String getClass_code() {
 		return class_code;
 	}
@@ -137,6 +139,11 @@ public class ClassDTO {
 	public void setTeacherInfo(String teacherInfo) {
 		this.teacherInfo = teacherInfo;
 	}
-	
+	public String getArea_name() {
+		return area_name;
+	}
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
+	}
 	
 }

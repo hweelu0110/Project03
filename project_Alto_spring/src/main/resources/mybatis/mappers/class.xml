@@ -21,12 +21,14 @@
 		<result property="enddate" column="enddate" />
 		<result property="curriculum" column="curriculum" />
 		<result property="teacherInfo" column="teacherInfo" />
+		<result property="area_name" column="area_name" />
 	</resultMap>
 	
 	<select id="selectAllclassList" resultMap="classResult">
 		<![CDATA[
-			SELECT *
-			FROM ALTO_CLASS
+			SELECT a.NAME AS area_name, c.*
+			FROM ALTO_CLASS c, ALTO_AREA a
+			WHERE a.AREA_CODE = c.AREA_CODE
 		]]>
 	</select>
 	

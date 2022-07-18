@@ -169,10 +169,10 @@
 							<c:forEach var="classList" items="${classList }">
 								<li>
 									<img class="class_products_img" src="../resources/img/club_test.png" />
-									<span class="area">${classList.area_code }</span>
-									<span class="hobby_icon"><img src="../resources/img/hobby_img/hm000001.png" /></span>
+									<span class="area">${classList.area_name }</span>
+									<span class="hobby_icon"><img src="../resources/img/hobby_img/${classList.hobby_code }.png" /></span>
 									<p class="club_name">${classList.className }</p>
-									<span class="memNum">${classList.member_max }</span>
+									<span class="memNum" style="font-size: 11px">${classList.member_max }  명</span>
 									<p class="club_schedule">
 										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
 									</p>
