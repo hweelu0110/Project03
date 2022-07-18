@@ -135,7 +135,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		
 		Object URL = session.getAttribute("URL");
 		session.invalidate();
-		return (String)URL;
+		return "redirect:"+(String)URL;
 	}
 
 }
