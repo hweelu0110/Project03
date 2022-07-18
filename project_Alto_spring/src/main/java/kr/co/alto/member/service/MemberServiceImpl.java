@@ -57,8 +57,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int idCnt(MemberDTO memberDTO) throws Exception {
-		return memberDAO.idCnt(memberDTO);
+	public String idCnt(String mem_id) throws Exception {
+		return memberDAO.idCnt(mem_id);
 	}
 
 	@Override

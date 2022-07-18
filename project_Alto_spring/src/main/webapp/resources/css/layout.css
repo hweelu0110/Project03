@@ -37,20 +37,22 @@ nav #main_menu li {
 
 #allSearch { 
 	float: left; 
-	margin: 5px 0 0 30px;
-	background-color: #F8F8F8; 
+	margin-left: 30px;
+	background-color: #e4e4e4; 
 }
 #allSearch_keyword {	
     width: 260px; 
     border: none;
     margin: 0; 
-    padding: 7px 15px;  
+    padding: 10px 15px;  
+   	background-color: #e4e4e4;
 }
 #search_btn {
 	background-image: url(../img/alto_common_icon.png);
     background-repeat: no-repeat;
-    background-size: 135px;
-    background-position: -81px -29px;
+    background-size: 160px;
+    background-position: -97px -36px;
+    background-color: #e4e4e4;
     text-indent: -99999px;
     width: 30px;
     cursor: pointer;

@@ -13,7 +13,7 @@
 		<result property="phone" column="PHONE" />
 		<result property="img" column="IMG" />
 		<result property="mem_open" column="MEM_OPEN" />
-		<result property="joindate" column="JOINDATE" />
+		<result property="joinDate" column="JOINDATE" />
 		<result property="memberId_yn" column="MEMBER_ID_YN" />
 	</resultMap>
 
@@ -24,9 +24,10 @@
 		VALUES(#{mem_id}, #{mem_pwd}, #{mem_name}, #{gender}, #{birth}, #{memberId_yn})
 	</insert>
 	
-	<select id="idCnt" parameterType="memberDTO" resultType="java.lang.Integer">
+	<select id="idCnt" parameterType="String" resultType="String">
 		<![CDATA[
-			select count(*) from ALTO_MEMBER where mem_id = #{mem_id}
+			SELECT DECODE(COUNT(*), 1, 'true', 0, 'false') 
+			FROM ALTO_MEMBER WHERE mem_id = #{mem_id}
 		]]>
 	</select>
 	

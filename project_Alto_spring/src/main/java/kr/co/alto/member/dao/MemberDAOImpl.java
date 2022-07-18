@@ -44,13 +44,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public int idCnt(MemberDTO memberDTO) throws DataAccessException {
-		return sqlSession.selectOne("mapper.member.idCnt", memberDTO);
+	public String idCnt(String mem_id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.idCnt", mem_id);
 	}
 
 	@Override
 	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException {
-		System.out.println("DAOloginDTO"+loginDTO.getMem_pwd());
+		System.out.println("loginDTO"+loginDTO.getMem_pwd());
 		return sqlSession.selectOne("mapper.member.login", loginDTO);
 	}
 }

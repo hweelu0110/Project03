@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name="/member/joinTerms" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinTerms.jsp" />		
+	</definition>
+	
+	<definition name="/member/joinFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/registerAuth" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/registerAuth.jsp" />		
+	</definition>
+	
+	<definition name="/member/memArea" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memArea.jsp" />		
+	</definition>
+	
+	<definition name="/member/memHobby" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memHobby.jsp" />		
+	</definition>
+	
+	<definition name="/member/memHobby_sub" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memHobby_sub.jsp" />		
+	</definition>
+	
+	<definition name="/member/loginFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/loginFrm.jsp" />		
+	</definition>
+</tiles-definitions>

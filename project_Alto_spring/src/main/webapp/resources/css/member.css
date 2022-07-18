@@ -1,5 +1,11 @@
 @charset "UTF-8";
-section { overflow: hidden; }
+section { 
+	max-width: 100%;
+    border-top: 1px solid #f2f2f2;
+	background-color: #f8f8f8; 
+	overflow: hidden; 
+}
+
 #member_div {
 	width: 640px;
     margin: 70px auto;
@@ -44,6 +50,8 @@ section { overflow: hidden; }
 	font-size: 11px;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+
 
 /* 이용약관동의 */
 .checkStyle {
@@ -161,6 +169,7 @@ section { overflow: hidden; }
 	width: 380px;
     margin: 70px auto;
     padding: 20px;
+    font-size: 12px;
 }
 
 #login_div form input:nth-child(3) { margin-bottom: 10px; }
@@ -169,6 +178,8 @@ section { overflow: hidden; }
 	display: inline-block;
     margin-top: 10px;
     color: #777;
+    font-size: 11px;
+    font-weight: 700;
 }
 #login_div form .float_right { float: right; }
 
@@ -190,7 +201,7 @@ section { overflow: hidden; }
 
 
 /* input Style */
-input[type=text], input[type=password] { padding: 8px 15px; margin: 10px 0 0; }
+input[type=text], input[type=password] { padding: 8px 15px; margin: 10px 0 0; background: #fff; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
 input[type=text].size3 { width: 215px; }

@@ -8,10 +8,6 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>header</title>	
-</head>
 <body>
 	<!-- HEADER -->
 	<header>

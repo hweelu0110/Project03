@@ -9,7 +9,7 @@ import kr.co.alto.member.dto.MemberDTO;
 public interface MemberDAO {
 
 	public void register(MemberDTO memberDTO) throws DataAccessException;
-	public int idCnt(MemberDTO memberDTO) throws DataAccessException;
+	public String idCnt(String mem_id) throws DataAccessException;
 	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException;
 	
 	public void createAuthKey(String memberEmail, String authKey) throws DataAccessException;

@@ -74,16 +74,39 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/*.do"/> <!-- 모든 요청에 대해 인터셉트 수행 -->
-			<beans:bean class="kr.co.alto.interceptor.ViewNameInterceptor" />
+			<beans:bean class="kr.co.alto.common.interceptor.ViewNameInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<beans:bean id="loginInterceptor" class="kr.co.alto.interceptor.LoginInterceptor"/>
+	<beans:bean id="loginInterceptor" class="kr.co.alto.common.interceptor.LoginInterceptor"/>
 	<interceptors>
 	    <interceptor>
-	        <mapping path="/member/login"/>
+	        <mapping path="/member/login.do"/>
 	        <beans:ref bean="loginInterceptor"/>
 	    </interceptor>
+	</interceptors>
+	
+	<!-- 비회원 접근 제한 처리 -->
+	<beans:bean id="authInterceptor" class="kr.co.alto.common.interceptor.AuthInterceptor"/>
+	<interceptors>
+		<interceptor>		
+			<mapping path="/board/writeView" />
+			<mapping path="/board/updateView" />
+			<mapping path="/board/delete"/>			
+			<beans:ref bean="authInterceptor" />
+		</interceptor>	
+	</interceptors>
+	
+	<!-- 이전 URL 저장 제외 처리 -->
+	<beans:bean id="uRlInterceptor" class="kr.co.alto.common.interceptor.URIInterceptor" />
+	<interceptors>
+	  <interceptor>
+	    <mapping path="/**/**"/>
+	    <exclude-mapping path="/resources/**"/>
+	    <exclude-mapping path="/member/**"/>
+	    <exclude-mapping path="/reply/**" />
+	    <beans:ref bean="uRlInterceptor"/>
+	  </interceptor>
 	</interceptors>
 	
 </beans:beans>

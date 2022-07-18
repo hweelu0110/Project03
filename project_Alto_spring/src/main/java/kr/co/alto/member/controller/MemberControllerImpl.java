@@ -1,72 +1,49 @@
 package kr.co.alto.member.controller;
 
-import java.io.PrintWriter;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.type.TypeReference;
-import org.json.simple.JSONObject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import kr.co.alto.common.base.BaseController;
 import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
 
 @Controller("memberController")
 @RequestMapping("/member")
-public class MemberControllerImpl extends MultiActionController implements MemberController {
+public class MemberControllerImpl extends BaseController implements MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MemberService memberService;
-		
-	@RequestMapping(value = "/joinTerms.do", method = RequestMethod.GET)
-	public ModelAndView joinTerms(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		
-		return mav;
-	}
-	
-	@RequestMapping(value = "/joinFrm.do", method = RequestMethod.GET)
-	public ModelAndView joinFrm(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		mav.setViewName(viewName);
-		
-		return mav;
-	}
+	@Autowired
+	private MemberDTO memberDTO;
 
 	@Override
 	@RequestMapping(value = "/register.do", method=RequestMethod.POST)
 	public String register(MemberDTO memberDTO, RedirectAttributes rttr, Model model) throws Exception {
 		logger.info("register");
+		System.out.println(memberDTO.getMem_id());
 		String hashedPw = BCrypt.hashpw(memberDTO.getMem_pwd(), BCrypt.gensalt());
 		memberDTO.setMem_pwd(hashedPw);
 		memberService.register(memberDTO);
@@ -107,28 +84,11 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 
 	@Override
 	@RequestMapping(value = "/idCnt.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String idCnt(@RequestBody String filterJSON, HttpServletResponse response, ModelMap model) throws Exception {
-		JSONObject resMap = new JSONObject();
+	public ResponseEntity<String> idCnt(@RequestParam("mem_id") String mem_id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String result = memberService.idCnt(mem_id);
+		ResponseEntity<String> resEntity = new ResponseEntity<String>(result, HttpStatus.OK);
 		
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			MemberDTO searchDTO = mapper.readValue(filterJSON,new com.fasterxml.jackson.core.type.TypeReference<MemberDTO>() {
-			});
-			int idCnt = memberService.idCnt(searchDTO);
-			
-			resMap.put("res", "ok");
-			resMap.put("idCnt", idCnt);
-		}catch (Exception e) {
-			System.out.println(e.toString());
-			resMap.put("res","error");
-		}
-		
-		response.setContentType("text/html: charset=UTF-8");
-		PrintWriter out = response.getWriter();
-		out.print(resMap);
-		
-		return null;
+		return resEntity;
 	}
 
 	@Override
@@ -165,7 +125,17 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
 		}
-		return "main.do";
+		return "/main";
+	}
+
+	@Override
+	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request, HttpSession session) throws Exception {
+		logger.info("logout");
+		
+		Object URL = session.getAttribute("URL");
+		session.invalidate();
+		return (String)URL;
 	}
 
 }
