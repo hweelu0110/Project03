@@ -10,6 +10,15 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />
+	<c:choose>
+		<c:when test="${param.result == 'loginCheck' }">
+			<script type="text/javascript">
+				window.onload=function() {
+					alert("아이디나 비밀번호가 틀립니다. 다시 로그인 하세요!")
+				}
+			</script>
+		</c:when>
+	</c:choose>
 </head>
 <body>	
 	<section>

@@ -12,7 +12,6 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-    private static final String LOGIN = "login";
     private static final Logger logger = LoggerFactory.getLogger(LoginInterceptor.class);
 
     @Override
@@ -25,7 +24,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         if (memberDTO != null) {
             logger.info("new login success");
-            httpSession.setAttribute(LOGIN, memberDTO);
+            httpSession.setAttribute("login", memberDTO);
             
             Object destination = httpSession.getAttribute("destination");
             Object URL = httpSession.getAttribute("URL");
@@ -39,9 +38,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession httpSession = request.getSession();
         // 기존의 로그인 정보 제거
-        if (httpSession.getAttribute(LOGIN) != null) {
+        if (httpSession.getAttribute("login") != null) {
             logger.info("clear login data before");
-            httpSession.removeAttribute(LOGIN);
+            httpSession.removeAttribute("login");
         }
 
         return true;

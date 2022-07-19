@@ -9,8 +9,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>clubheader</title>	
 </head>
 <body>
 

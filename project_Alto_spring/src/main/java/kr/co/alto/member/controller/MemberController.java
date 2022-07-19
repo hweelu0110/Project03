@@ -6,9 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -23,9 +21,9 @@ public interface MemberController {
 	
 	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception;
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
-	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception;
+	public ModelAndView loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, RedirectAttributes rAttributes) throws Exception;
 	
 	public ModelAndView emailConfirm(String memberEmail, String authKey ,HttpServletRequest request)throws Exception;
 	
-	public String logout(HttpServletRequest request, HttpSession session) throws Exception;
+	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 }

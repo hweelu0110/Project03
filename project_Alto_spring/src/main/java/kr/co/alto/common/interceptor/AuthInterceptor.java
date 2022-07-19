@@ -15,10 +15,11 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 	private void saveDestination(HttpServletRequest request) {
 		String uri = request.getRequestURI();
 		String query = request.getQueryString();
+		
 		if(query == null || query.equals("null")) {
 			query = "";
 		}else {
-			query = "?"+query;
+			query = "?" + query;
 		}
 		
 		if(request.getMethod().equals("GET")) {

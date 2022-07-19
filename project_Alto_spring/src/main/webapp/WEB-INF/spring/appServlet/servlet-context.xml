@@ -17,11 +17,10 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-		<beans:property name="order" value="2" />
-	</beans:bean>
+	</beans:bean> -->
 	
 	<!-- 애너테이션 적용할 패키지 설정 -->
 	<context:component-scan base-package="kr.co.alto" />		
@@ -30,7 +29,6 @@
 	<!-- Tiles ViewResolver 사용 화면 표시 -->
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
-		<beans:property name="order" value="1" />
 	</beans:bean>
 	
 	<!-- Tiles 관련 빈 설정 - TilesConfigurer 클래스 이용 빈 생성 -->
@@ -74,6 +72,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/*.do"/> <!-- 모든 요청에 대해 인터셉트 수행 -->
+			<mvc:mapping path="/*/*/*.do"/>
 			<beans:bean class="kr.co.alto.common.interceptor.ViewNameInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -101,7 +100,9 @@
 	<beans:bean id="uRlInterceptor" class="kr.co.alto.common.interceptor.URIInterceptor" />
 	<interceptors>
 	  <interceptor>
-	    <mapping path="/**/**"/>
+		<mvc:mapping path="/*.do"/>
+	    <mvc:mapping path="/*/*.do"/>
+	    <mvc:mapping path="/*/*/*.do"/>
 	    <exclude-mapping path="/resources/**"/>
 	    <exclude-mapping path="/member/**"/>
 	    <exclude-mapping path="/reply/**" />

@@ -105,37 +105,45 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+	public ModelAndView loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, RedirectAttributes rAttributes) throws Exception {
 		logger.info("loginDTO"+loginDTO.getMem_id());
 		MemberDTO memberDTO = memberService.login(loginDTO);
 		
+		ModelAndView mav = new ModelAndView();
+		
 		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMem_pwd(), memberDTO.getMem_pwd())) {
-			return "/member/loginCheck.do";
+			rAttributes.addAttribute("result", "loginCheck");
+			mav.setViewName("redirect:/member/loginFrm.do");
+			return mav;
 		}
 		
 		if(memberDTO.getAuthkey() == 0) {
-			model.addAttribute("Auth", memberDTO.getAuthkey());
-			return "/member/registerReady.do";
+			mav.addObject("Auth", memberDTO.getAuthkey());
+			rAttributes.addAttribute("result", "authCheck");
+			mav.setViewName("redirect:/member/loginFrm.do");
+			return mav;
 		}
 		
-		model.addAttribute("member",memberDTO);
+		mav.addObject("member",memberDTO);
 		
 		if (loginDTO.isUseCookie()) {
 			int amount = 60*60*24*7;
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
 		}
-		return "/main";
+		mav.setViewName("main");
+		return mav;
 	}
 
 	@Override
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpSession session) throws Exception {
+	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		logger.info("logout");
 		
-		Object URL = session.getAttribute("URL");
+		String URL = (String) session.getAttribute("URL");
+		logger.info("URL :"+ URL);
 		session.invalidate();
-		return "redirect:"+(String)URL;
+		response.sendRedirect(URL);
 	}
 
 }

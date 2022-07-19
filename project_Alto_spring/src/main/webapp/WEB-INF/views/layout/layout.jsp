@@ -13,7 +13,11 @@
 	<tiles:insertAttribute name="header" />
 						
 	<tiles:insertAttribute name="body" />
-			
+	
+	<div class="common_popup">
+		<tiles:insertAttribute name="common_popup" />
+	</div>		
+	
 	<tiles:insertAttribute name="footer" />
 </body>
 </html>
