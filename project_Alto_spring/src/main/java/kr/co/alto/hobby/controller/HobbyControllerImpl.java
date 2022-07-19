@@ -74,6 +74,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		try{
 			List<HobbysubDTO> list= hobbyService.listHobbysub2(main_code);
 			entity = new ResponseEntity<List<HobbysubDTO>>(list, HttpStatus.OK);
+			System.out.println(entity+"테스트");
 		}catch(Exception e){
 			e.printStackTrace();	
 		}

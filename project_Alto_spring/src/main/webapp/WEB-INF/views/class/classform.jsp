@@ -29,10 +29,17 @@
 					url: '${contextPath}/select/hobbysub.do',
 					data: {main_code : _main_code},
 					success: function(result){
-						
-					/* alert('테스트'); */
+					
 					let str = JSON.stringify(result);
-					alert(str);
+					/* alert('테스트');
+					alert(str); */
+					
+					var cate_s = "";
+					for (var i = 0; i < result.length; i++) {
+						cate_s += '<option value="' + result[i].SUB_CODE + '">' + result[i].SUB_NAME + '</option>';
+					}
+						
+					$('#cate_s').html(cate_s);
 						
 					}
 				})
@@ -151,7 +158,7 @@
 						<select name="cate_m" id="cate_m" onchange="categoryChange(this)">
 							<option value="1">대분류를 선택해주세요</option>
 							<c:forEach items="${hobbyList }" var="hobby">
-						    	<option><c:out value="${hobby.name }" /></option>
+						    	<option value="${hobby.hobby_code }" />${hobby.name }</option>
 						    </c:forEach>
 						</select>
 					</td>
