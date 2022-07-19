@@ -29,4 +29,15 @@
 			AND (A.HOBBY_CODE = #{code1} OR A.HOBBY_CODE = #{code2} OR A.HOBBY_CODE = #{code3} OR A.HOBBY_CODE = #{code4} OR A.HOBBY_CODE = #{code5})
 		]]>
 	</select>
+	
+	
+	<!-- 셀렉트 문용 리스트 타입 -->
+	<select id="selectHobbysubList2" parameterType="HobbysubDTO" resultMap="hobbysubResult">	
+		<![CDATA[
+			SELECT A.HOBBY_CODE main_code, B.NAME main_name, HOBBY_SUB_CODE sub_code, A.NAME sub_name 
+			FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE 
+			AND A.HOBBY_CODE = #{main_code}
+		]]>
+	</select>
 </mapper>

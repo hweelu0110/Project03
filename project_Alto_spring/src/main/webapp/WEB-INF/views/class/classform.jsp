@@ -12,13 +12,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="../resources/css/class_main_style.css" rel="stylesheet" />
 	<link href="../resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<!-- 	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>ALTO - 클래스 개설</title>
 	<script>
-		
+		function categoryChange(e) {
+				
+				/* console.log("테스트");
+				alert("테스트"); */
+				 
+				var _main_code = $('#cate_m').val();
+				
+				alert(_main_code);
+
+				$.ajax({
+					type: 'post',
+					url: '${contextPath}/select/hobbysub.do',
+					data: {main_code : _main_code},
+					success: function(result){
+						
+					/* alert('테스트'); */
+					let str = JSON.stringify(result);
+					alert(str);
+						
+					}
+				})
+		};
+	
+	
 		function validateForm(form) {
 			if(form.className.value == ""){
 				alert("클래스 이름을 입력하세요.")
@@ -128,16 +148,16 @@
 					</td>
 					<td width="10%"><b>취미</b></td>
 					<td width="20%">
-						<select name="cate_m">
-							<option>대분류를 선택하세요</option>
+						<select name="cate_m" id="cate_m" onchange="categoryChange(this)">
+							<option value="1">대분류를 선택해주세요</option>
 							<c:forEach items="${hobbyList }" var="hobby">
 						    	<option><c:out value="${hobby.name }" /></option>
 						    </c:forEach>
 						</select>
 					</td>
 					<td width="20%">
-						<select name="cate_s">
-							<option>소분류를 선택해주세요</option>
+						<select name="cate_s" id="cate_s">
+							<!-- <option>소분류를 선택해주세요</option> -->
 						</select>
 					</td>
 				</tr>

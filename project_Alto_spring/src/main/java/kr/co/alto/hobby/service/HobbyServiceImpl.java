@@ -33,4 +33,10 @@ public class HobbyServiceImpl implements HobbyService {
 		return hobbysubList;
 	}
 
+	@Override
+	public List<HobbysubDTO> listHobbysub2(String main_code) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList2 = hobbyDAO.selectHobbysubList2(main_code);
+		return hobbysubList2;
+	}
+
 }

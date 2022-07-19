@@ -13,4 +13,5 @@ public interface HobbyService {
 	public List<HobbyDTO> listHobbys() throws DataAccessException;
 
 	public List<HobbysubDTO> listHobbysub(HashMap<String, String> codeList) throws DataAccessException;
+	public List<HobbysubDTO> listHobbysub2(String main_code) throws DataAccessException;
 }

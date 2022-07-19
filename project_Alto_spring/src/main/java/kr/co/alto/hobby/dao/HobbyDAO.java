@@ -13,4 +13,6 @@ public interface HobbyDAO {
 	public List<HobbyDTO> selectAllHobbyList() throws DataAccessException;
 
 	public List<HobbysubDTO> selectHobbysubList(HashMap<String, String> codeList) throws DataAccessException;
+	public List<HobbysubDTO> selectHobbysubList2(String main_code) throws DataAccessException;
+
 }
