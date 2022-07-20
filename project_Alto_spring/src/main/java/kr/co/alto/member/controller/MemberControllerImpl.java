@@ -1,6 +1,8 @@
 package kr.co.alto.member.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -114,6 +116,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMem_pwd(), memberDTO.getMem_pwd())) {
 			rAttributes.addAttribute("result", "loginCheck");
 			mav.setViewName("redirect:/member/loginFrm.do");
+			mav.addObject("mem_id", loginDTO.getMem_id());
 			return mav;
 		}
 		
