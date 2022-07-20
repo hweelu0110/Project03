@@ -20,6 +20,7 @@
 	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
 	</beans:bean> -->
 	
 	<!-- 애너테이션 적용할 패키지 설정 -->
@@ -29,6 +30,7 @@
 	<!-- Tiles ViewResolver 사용 화면 표시 -->
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView" />
+		<beans:property name="order" value="1" />
 	</beans:bean>
 	
 	<!-- Tiles 관련 빈 설정 - TilesConfigurer 클래스 이용 빈 생성 -->
@@ -78,28 +80,28 @@
 	</mvc:interceptors>
 	
 	<beans:bean id="loginInterceptor" class="kr.co.alto.common.interceptor.LoginInterceptor"/>
-	<interceptors>
-	    <interceptor>
-	        <mapping path="/member/login.do"/>
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/member/login.do"/>
 	        <beans:ref bean="loginInterceptor"/>
-	    </interceptor>
-	</interceptors>
+	    </mvc:interceptor>
+	</mvc:interceptors>
 	
 	<!-- 비회원 접근 제한 처리 -->
 	<beans:bean id="authInterceptor" class="kr.co.alto.common.interceptor.AuthInterceptor"/>
-	<interceptors>
-		<interceptor>		
-			<mapping path="/board/writeView" />
-			<mapping path="/board/updateView" />
-			<mapping path="/board/delete"/>			
+	<mvc:interceptors>
+		<mvc:interceptor>		
+			<mvc:mapping path="/board/writeView" />
+			<mvc:mapping path="/board/updateView" />
+			<mvc:mapping path="/board/delete"/>			
 			<beans:ref bean="authInterceptor" />
-		</interceptor>	
-	</interceptors>
+		</mvc:interceptor>	
+	</mvc:interceptors>
 	
 	<!-- 이전 URL 저장 제외 처리 -->
 	<beans:bean id="uRlInterceptor" class="kr.co.alto.common.interceptor.URIInterceptor" />
-	<interceptors>
-	  <interceptor>
+	<mvc:interceptors>
+	  <mvc:interceptor>
 		<mvc:mapping path="/*.do"/>
 	    <mvc:mapping path="/*/*.do"/>
 	    <mvc:mapping path="/*/*/*.do"/>
@@ -107,7 +109,17 @@
 	    <exclude-mapping path="/member/**"/>
 	    <exclude-mapping path="/reply/**" />
 	    <beans:ref bean="uRlInterceptor"/>
-	  </interceptor>
-	</interceptors>
+	  </mvc:interceptor>
+	</mvc:interceptors>
+	
+	<beans:bean id="autoLoginInterceptor" class="kr.co.alto.common.interceptor.AutoLoginInterceptor" />
+	<mvc:interceptors>
+	 <mvc:interceptor>
+	 	<mvc:mapping path="/*.do"/>
+	    <mvc:mapping path="/*/*.do"/>
+	    <mvc:mapping path="/*/*/*.do"/>
+	 	<beans:ref bean="autoLoginInterceptor"/>
+	 </mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans:beans>

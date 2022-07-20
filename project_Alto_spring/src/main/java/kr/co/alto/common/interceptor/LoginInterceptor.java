@@ -1,5 +1,6 @@
 package kr.co.alto.common.interceptor;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -25,6 +26,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         if (memberDTO != null) {
             logger.info("new login success");
             httpSession.setAttribute("login", memberDTO);
+            
+            if(request.getParameter("useCookie") != null) {
+            	logger.info("auto login check");
+            	Cookie loginCookie = new Cookie("loginCookie",httpSession.getId());
+            	loginCookie.setPath("/");
+            	loginCookie.setMaxAge(60*60*24*7);
+            	response.addCookie(loginCookie);
+            }
             
             Object destination = httpSession.getAttribute("destination");
             Object URL = httpSession.getAttribute("URL");

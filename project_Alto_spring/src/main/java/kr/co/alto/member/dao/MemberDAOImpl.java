@@ -1,7 +1,7 @@
 package kr.co.alto.member.dao;
 
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -52,5 +52,20 @@ public class MemberDAOImpl implements MemberDAO {
 	public MemberDTO login(LoginDTO loginDTO) throws DataAccessException {
 		System.out.println("loginDTO"+loginDTO.getMem_pwd());
 		return sqlSession.selectOne("mapper.member.login", loginDTO);
+	}
+
+	@Override
+	public void keepLogin(String mem_id, String sessionId, Date sessionLimit) throws DataAccessException {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("mem_id", mem_id);
+		paramMap.put("sessionId", sessionId);
+		paramMap.put("sessionLimit", sessionLimit);
+		
+		sqlSession.update("mapper.member.keepLogin", paramMap);
+	}
+
+	@Override
+	public MemberDTO checkSessionKey(String value) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.checkSessionKey", value);
 	}
 }
