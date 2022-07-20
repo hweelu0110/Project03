@@ -29,7 +29,7 @@ public class URIInterceptor extends HandlerInterceptorAdapter {
 			}
 			
 			if(request.getMethod().equals("GET")) {
-				logger.info("URL : " + (uri+query));
+				logger.info("URIIntercepter URL : " + (uri+query));
 				request.getSession().setAttribute("URL", uri + query);
 			}
 		}

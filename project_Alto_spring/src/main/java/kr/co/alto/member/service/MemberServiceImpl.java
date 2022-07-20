@@ -1,12 +1,10 @@
 package kr.co.alto.member.service;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -67,11 +65,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void keepLogin(String id, String id2, Date sessionLimit) {
-		// TODO Auto-generated method stub
-		
+	public void keepLogin(String mem_id, String sessionId, Date sessionLimit) throws Exception {
+		memberDAO.keepLogin(mem_id, sessionId, sessionLimit);
 	}
 
-	
+	@Override
+	public MemberDTO checkLoginBefore(String value) throws Exception {
+		return memberDAO.checkSessionKey(value);
+	}	
 	
 }

@@ -67,13 +67,13 @@
 </head>
 <body>	
 	<section>
-		<div id="login_div">
+		<div id="login_div" class="form-check form-switch">
 			<h1>로그인</h1>
-			<form name="loginFrm" method="post" action="${path}/member/login.do">
+			<form name="loginFrm" class="form-check" method="post" action="${path}/member/login.do">
 				<input type="text" name="mem_id" class="essential" placeholder="이메일" /><br/>
 				<input type="password" name="mem_pwd" class="essential" placeholder="비밀번호" /><br/>
-				<input type="checkbox" name="useCookie" id="loginKeep" />
-				<label for="loginKeep">로그인 상태 유지</label><br/>
+				<input class="form-check-input" type="checkbox" name="useCookie" id="loginKeep" />
+				<label class="form-check-label" for="loginKeep">로그인 상태 유지</label><br/>
 				<div id="login_error"></div>
 				<a>비밀번호를 잊으셨나요?</a>
 				<a class="float_right">회원가입</a>

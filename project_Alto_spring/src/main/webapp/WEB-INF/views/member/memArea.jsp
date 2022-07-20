@@ -14,7 +14,9 @@
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />	
 	<script src="${path}/resources/js/essential-textbox.js"></script>	
 	<script type="text/javascript">
+		
 		$(function() {
+			
 			$("#area_list ul li").click(function() {
 				if ($(this).siblings(".select").length < 3) {
 					$(this).toggleClass("select")
@@ -29,8 +31,20 @@
 			$("#area_list ul li label").click(function() {
 				if ($(this).parent().siblings(".select").length < 3) {
 					$(this).parent().toggleClass("select")
+					let checked = $(this).find("input:checkbox").is(":checked")
+					$(this).find("input:checkbox").prop('checked',!checked)
 				}else {
 					confirmPopup($("#confirm_popup"),"활동지역은 최대 3개 까지 선택 가능합니다.")
+					$(this).find("input:checkbox").prop('checked',false)
+				}
+			})
+			
+			$(".form-check-input").click(function() {
+				if ($(this).parent().siblings(".select").length < 3) {
+					let checked = $(this).is(":checked")
+					$(this).prop('checked',!checked)
+				}else {
+					$(this).prop('checked',false)
 				}
 			})
 		})
@@ -42,13 +56,13 @@
 		<div id="member_div" class="member_info">
 			<h2>내 지역 설정</h2>
 			<form method="post" action="${path}/member/.do">
-				<div class="memSection memInfo">					
+				<div class="memSection memInfo form-check">					
 					<div id="area_list">
 						<ul>
 							<c:forEach var="area" items="${areaList }">
 								<li>
-									<input type="checkbox" value="${area.area_code }" id="${area.area_code }">
-									<label for="${area.area_code }">
+									<input class="form-check-input" type="checkbox" value="${area.area_code }" id="${area.area_code }">
+									<label class="form-check-label" for="${area.area_code }">
 									   	${area.name }
 									</label>
 								</li>

@@ -51,8 +51,6 @@ section {
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-
-
 /* 이용약관동의 */
 .checkStyle {
 	padding: 10px 10px 10px 40px;
@@ -120,6 +118,10 @@ section {
 }
 #area_list ul li.select { background: #F3BE34; }
 #area_list ul li label { cursor: pointer; }
+#area_list .form-check-input:checked {
+	background-color: #00c7ae;
+    border-color: #00c7ae;
+}
 
 /* 관심취미 */
 #hobby_list { text-align: center; }
@@ -182,6 +184,15 @@ section {
     font-weight: 700;
 }
 #login_div form .float_right { float: right; }
+#login_div .form-check { padding-left: 0; }
+#login_div.form-switch .form-check-input {
+	margin: 2px 5px 2px 3px;
+    width: 2.5em;
+    height: 1.4em;
+}
+#login_div.form-switch .form-check-input:checked {
+	background-color: #00c7ae;
+}
 
 #login_error {
 	margin: 10px 0 0;

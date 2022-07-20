@@ -27,25 +27,37 @@
 	<select id="idCnt" parameterType="String" resultType="String">
 		<![CDATA[
 			SELECT DECODE(COUNT(*), 1, 'true', 0, 'false') 
-			FROM ALTO_MEMBER WHERE mem_id = #{mem_id}
+			FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
 		]]>
 	</select>
 	
 	<insert id="createAuthKey">
-		insert into ALTO_MEMBER_AUTH values(#{memberEmail}, #{authKey})
+		INSERT INTO ALTO_MEMBER_AUTH VALUES(#{memberEmail}, #{authKey})
 	</insert>
 	
 	<update id="memberAuth">
 		<![CDATA[
-			update ALTO_MEMBER set AUTHKEY = 1 
-			where (select count(*) from ALTO_MEMBER_AUTH where mem_id = #{memberEmail} and authkey = #{authKey}) > 0
+			UPDATE ALTO_MEMBER SET AUTHKEY = 1 
+			WHERE (SELECT COUNT(*) FROM ALTO_MEMBER_AUTH WHERE MEM_ID = #{memberEmail} AND AUTHKEY = #{authKey}) > 0
 		]]>
 	</update>
 															
 	<!-- 로그인 -->
 	<select id="login" resultMap="memResult">
-		select * from ALTO_MEMBER where MEM_ID = #{mem_id}	
+		<![CDATA[
+			SELECT * FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
+		]]>
 	</select>	
 	
+	<update id="keepLogin">
+		UPDATE ALTO_MEMBER SET SESSION_KEY = #{sessionId}, SESSION_LIMIT = #{sessionLimit}
+		WHERE mem_id = #{mem_id}
+	</update>
+	
+	<select id="checkSessionKey" resultMap="memResult">
+		<![CDATA[
+			SELECT * FROM ALTO_MEMBER WHERE SESSION_KEY = #{value} 
+		]]>
+	</select>
 	
 </mapper>

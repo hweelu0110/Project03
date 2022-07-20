@@ -21,9 +21,10 @@ public interface MemberController {
 	
 	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception;
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
-	public ModelAndView loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, RedirectAttributes rAttributes) throws Exception;
+	public String loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, Model model) throws Exception;
 	
 	public ModelAndView emailConfirm(String memberEmail, String authKey ,HttpServletRequest request)throws Exception;
 	
 	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
+	
 }

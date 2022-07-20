@@ -1,10 +1,9 @@
 package kr.co.alto.member.controller;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.util.WebUtils;
 
 import kr.co.alto.common.base.BaseController;
 import kr.co.alto.member.dto.LoginDTO;
@@ -107,35 +107,30 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, RedirectAttributes rAttributes) throws Exception {
+	public String loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, Model model) throws Exception {
 		logger.info("loginDTO"+loginDTO.getMem_id());
 		MemberDTO memberDTO = memberService.login(loginDTO);
-		
-		ModelAndView mav = new ModelAndView();
-		
+				
 		if(memberDTO == null || !BCrypt.checkpw(loginDTO.getMem_pwd(), memberDTO.getMem_pwd())) {
-			rAttributes.addAttribute("result", "loginCheck");
-			mav.setViewName("redirect:/member/loginFrm.do");
-			mav.addObject("mem_id", loginDTO.getMem_id());
-			return mav;
+			model.addAttribute("result", "loginCheck");			
+			model.addAttribute("mem_id", loginDTO.getMem_id());
+			return "redirect:/member/loginFrm.do";
 		}
 		
 		if(memberDTO.getAuthkey() == 0) {
-			mav.addObject("Auth", memberDTO.getAuthkey());
-			rAttributes.addAttribute("result", "authCheck");
-			mav.setViewName("redirect:/member/loginFrm.do");
-			return mav;
+			model.addAttribute("result", "authCheck");
+			return "redirect:/member/loginFrm.do";
 		}
 		
-		mav.addObject("member",memberDTO);
+		model.addAttribute("member",memberDTO);
 		
 		if (loginDTO.isUseCookie()) {
 			int amount = 60*60*24*7;
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
-		}
-		mav.setViewName("main");
-		return mav;
+		}	
+		
+		return "main";
 	}
 
 	@Override
@@ -143,10 +138,23 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		logger.info("logout");
 		
-		String URL = (String) session.getAttribute("URL");
-		logger.info("URL :"+ URL);
-		session.invalidate();
-		response.sendRedirect(URL);
+		Object URL = session.getAttribute("URL");
+		Object obj = session.getAttribute("login");
+		if(obj != null) {
+			memberDTO = (MemberDTO) obj;
+			session.removeAttribute("login");
+			session.invalidate();
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			if(loginCookie != null) {
+				loginCookie.setPath("/");
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				memberService.keepLogin(memberDTO.getMem_id(), "none", new Date());
+			}
+			
+		}
+		logger.info("URL :"+ URL);		
+		response.sendRedirect((String) URL);
 	}
 
 }
