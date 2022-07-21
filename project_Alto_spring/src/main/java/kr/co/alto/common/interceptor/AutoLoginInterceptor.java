@@ -15,16 +15,13 @@ import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
 
 public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
-	
-	private static final Logger logger = LoggerFactory.getLogger(AutoLoginInterceptor.class);
-	
+		
 	@Inject
 	private MemberService memberService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		logger.info("auto login check...");
 		HttpSession httpSession = request.getSession();
 		Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 		if(loginCookie != null) {
@@ -36,6 +33,4 @@ public class AutoLoginInterceptor extends HandlerInterceptorAdapter {
 
 		return true;
 	}
-	
-
 }

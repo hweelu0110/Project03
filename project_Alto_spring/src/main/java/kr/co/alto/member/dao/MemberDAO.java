@@ -20,4 +20,7 @@ public interface MemberDAO {
 	
 	public void keepLogin(String mem_id, String sessionId, Date sessionLimit) throws DataAccessException;
 	public MemberDTO checkSessionKey(String value) throws DataAccessException;
+	
+	public int findPwCheck(MemberDTO memberDTO) throws DataAccessException;
+	public int findPw(String mem_pwd, String mem_id) throws DataAccessException;
 }

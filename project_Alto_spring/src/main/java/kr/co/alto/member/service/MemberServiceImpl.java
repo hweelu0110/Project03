@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -36,14 +37,14 @@ public class MemberServiceImpl implements MemberService {
 		MailUtils sendMail = new MailUtils(mailSender);
 		sendMail.setSubject("[ALTO] 회원가입 인증 메일입니다.");
 		sendMail.setText(
-				"<h1>메일인증</h1>" +
+				"<h2>메일인증</h2>" +
 						"<br/>"+memberDTO.getMem_name()+"님 "+
 						"<br/>ALTO에 회원가입해주셔서 감사합니다."+
-						"<br/>아래 [이메일 인증 확인]을 눌러주세요."+
-						"<a href='http://localhost:8080/alto/member/registerEmail.do?memberEmail="+
-						memberDTO.getMem_id() + "&authKey="+ key +
+						"<br/>아래 링크를 눌러주세요."+
+						"<br/><br/><a href='http://localhost:8080/alto/member/registerEmail.do?memberEmail="+
+						memberDTO.getMem_id() + "&authKey="+ key +"&memberName="+memberDTO.getMem_name()+
 						"' target='_blenk'>[이메일 인증 확인]</a>");
-		sendMail.setFrom("projectalto03@gmail.com", "김지선");
+		sendMail.setFrom("projectalto03@gmail.com", "ALTO");
 		sendMail.setTo(memberDTO.getMem_id());
 		sendMail.send();
 		
@@ -72,6 +73,30 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberDTO checkLoginBefore(String value) throws Exception {
 		return memberDAO.checkSessionKey(value);
+	}
+
+	@Override
+	public int findPwCheck(MemberDTO memberDTO) throws Exception {
+		return memberDAO.findPwCheck(memberDTO);		
+	}
+
+	@Override
+	public void findPw(String mem_id) throws Exception {
+		String memberKey = new TempKey().getKey(6, false);
+		String mem_pwd = BCrypt.hashpw(memberKey, BCrypt.gensalt());
+		memberDAO.findPw(mem_pwd, mem_id);
+		MailUtils sendMail = new MailUtils(mailSender);
+		sendMail.setSubject("[ALTO] 임시 비밀번호 전송 메일입니다.");
+		sendMail.setText(
+				"<h2>임시비밀번호 발급</h2>" +
+						"<br/>비밀번호 찾기를 통한 임시 비밀번호입니다."+
+						"<br/>임시비밀번호 : <h2>"+memberKey+"</h2>"+
+						"<br/>로그인 후 비밀번호를 변경해 주세요."+
+						"<br/><a href='http://localhost:8080/alto/member/loginFrm.do'"+
+						">[로그인 페이지로 이동]</a>");
+		sendMail.setFrom("projectalto03@gmail.com", "ALTO");
+		sendMail.setTo(mem_id);
+		sendMail.send();
 	}	
 	
 }

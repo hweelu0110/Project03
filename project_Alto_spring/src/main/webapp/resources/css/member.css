@@ -183,6 +183,7 @@ section {
     font-size: 11px;
     font-weight: 700;
 }
+#login_div form a:hover { color: #34343c; }
 #login_div form .float_right { float: right; }
 #login_div .form-check { padding-left: 0; }
 #login_div.form-switch .form-check-input {
@@ -205,21 +206,39 @@ section {
     visibility: hidden;	
 }
 
-
-
-#member_div .popup_div {
-	padding: 20px;
-    width: 370px;
-    text-align: left;
-    font-size: 11px;
-    display: none;
+/* 메일 전송 알림 */
+#regiCont {
+	width: 500px;
+    margin: 70px auto;
+    padding: 30px;
+    overflow: hidden;
+    background: #f4f4f4;		    
+    font-family: 'Noto Sans KR', sans-serif;
 }
-.popup_div h4 {
+#regiCont div {
+	margin: 10px;
+    padding: 30px;
+    font-size: 12px;
+    text-align: center;
+    background: #fff;
+    border-radius: 3px;
+}
+#regiCont div .memName {
 	font-size: 15px;
-    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
 }
-.popup_div .btn_area button { width: 48%; }
-.popup_div .noti1 { margin-bottom: 20px; }
+#regiCont div .memEmail {
+	margin: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    color: #494c57;
+    font-size: 20px;
+    font-weight: 700;
+    background: #F3BE34;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+#regiCont div button { margin: 10px 5px 0 0; }
 
 
 /* input Style */

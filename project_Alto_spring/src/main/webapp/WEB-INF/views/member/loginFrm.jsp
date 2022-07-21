@@ -75,8 +75,8 @@
 				<input class="form-check-input" type="checkbox" name="useCookie" id="loginKeep" />
 				<label class="form-check-label" for="loginKeep">로그인 상태 유지</label><br/>
 				<div id="login_error"></div>
-				<a>비밀번호를 잊으셨나요?</a>
-				<a class="float_right">회원가입</a>
+				<a href="${path}/member/findPwFrm.do">비밀번호를 잊으셨나요?</a>
+				<a href="${path}/member/joinTerms.do" class="float_right">회원가입</a>
 				<button type="submit" class="pointBtn size0" onclick="return validation()">로그인</button>
 			</form>		
 		</div>

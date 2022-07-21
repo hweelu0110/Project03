@@ -1,8 +1,6 @@
 @charset "UTF-8";
 html { font-size: calc(6px + .5vw); }
-header {
-    top: 0;
-}
+header { top: 0; }
 
 html,
 body a,
@@ -50,6 +48,8 @@ h6 {
     margin: 0;
     padding: 0;
 }
+
+h1,h2,h3,h4,h5,h6 { font-weight: 700; font-size: 1.5em; }
 
 li { list-style: none; }
 

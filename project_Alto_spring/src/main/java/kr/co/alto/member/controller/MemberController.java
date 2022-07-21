@@ -23,8 +23,9 @@ public interface MemberController {
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
 	public String loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, Model model) throws Exception;
 	
-	public ModelAndView emailConfirm(String memberEmail, String authKey ,HttpServletRequest request)throws Exception;
+	public ModelAndView emailConfirm(String memberEmail, String authKey, String memberName, HttpServletRequest request)throws Exception;
 	
 	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 	
+	public ModelAndView findPw(MemberDTO memberDTO, HttpServletRequest request) throws Exception;
 }

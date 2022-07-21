@@ -16,6 +16,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/registerAuth.jsp" />		
 	</definition>
 	
+	<definition name="/member/registerEmail" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/registerEmail.jsp" />		
+	</definition>
+	
 	<definition name="/member/memArea" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/memArea.jsp" />		
 	</definition>
@@ -30,5 +34,13 @@
 	
 	<definition name="/member/loginFrm" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/loginFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/findPwFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/findPw" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPw.jsp" />		
 	</definition>
 </tiles-definitions>

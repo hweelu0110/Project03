@@ -14,16 +14,14 @@
 <body>
 	<section>
 		<div id="regiCont">
-			<h1>이메일 인증</h1>
+			<h1>임시비밀번호 발급</h1>
 			<div>
-				<p>반갑습니다 <span class="memName">${memberName}님!</span></p>
-				<p> AlTo에 가입해주셔서 감사합니다.</p>
-				<p class="memEmail">${memberEmail}</p>
-				<p>위 메일주소로 회원 가입 인증 메일을 보냈습니다.</p>
-				<p>메일 확인 후 <b>인증버튼</b>을 눌러주세요!</p>
-			</div>	
+				<p>아래의 메일주소로 임시 비밀번호가 전송되었습니다.</p>
+				<p class="memEmail">${param.mem_id}</p>
+				<button type="button" class="pointBtn" onclick="location.href='${path}/member/loginFrm.do'">로그인 하기</button>
+				<button type="button" class="basicBtn" onclick="location.href='${path}/main.do'">메인페이지</button>
+			</div>		
 		</div>
-			
 	</section>	
 </body>
 </html>

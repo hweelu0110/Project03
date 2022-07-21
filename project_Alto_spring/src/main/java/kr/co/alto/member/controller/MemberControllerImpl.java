@@ -72,7 +72,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 
 	@Override
 	@RequestMapping(value = "/registerEmail.do", method = RequestMethod.GET)
-	public ModelAndView emailConfirm(String memberEmail, String authKey, HttpServletRequest request) throws Exception {
+	public ModelAndView emailConfirm(String memberEmail, String authKey, String memberName, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
@@ -80,6 +80,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		memberService.memberAuth(memberEmail, authKey);
 		mav.addObject("memberEmail", memberEmail);
 		mav.addObject("authKey", authKey);
+		mav.addObject("memberName", memberName);
 		
 		return mav;
 	}
@@ -155,6 +156,29 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		}
 		logger.info("URL :"+ URL);		
 		response.sendRedirect((String) URL);
+	}
+
+	@Override
+	@RequestMapping(value = "/findPw.do", method = RequestMethod.POST)
+	public ModelAndView findPw(MemberDTO memberDTO, HttpServletRequest request) throws Exception {
+		logger.info("mem_pwd? : "+memberDTO.getMem_id());
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		if(memberService.findPwCheck(memberDTO) == 0) {
+			logger.info("memberPWCheck");
+			mav.addObject("msg", "가입되지 않은 이메일입니다.");
+			mav.setViewName("/member/findPwFrm");
+			
+			return mav;
+		}else {
+			memberService.findPw(memberDTO.getMem_id());
+			mav.addObject("mem_id", memberDTO.getMem_id());
+			mav.setViewName(viewName);
+			
+			return mav;
+		}
+		
 	}
 
 }
