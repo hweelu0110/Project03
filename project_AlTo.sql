@@ -150,6 +150,10 @@ INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','스티커/굿즈');
 INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','출판물');
 INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','기타');
 
+SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
+WHERE A.HOBBY_CODE = B.HOBBY_CODE 
+AND (A.HOBBY_CODE ='hm000001' OR A.HOBBY_CODE ='hm000002' OR A.HOBBY_CODE ='hm000003' OR A.HOBBY_CODE ='' OR A.HOBBY_CODE =''); 
+
 -- 지역
 DROP TABLE alto_area CASCADE CONSTRAINT;
 CREATE TABLE alto_area(
@@ -195,25 +199,36 @@ INSERT INTO ALTO_AREA VALUES ('area0026','중랑구');
 DROP TABLE alto_member CASCADE CONSTRAINT;
 CREATE TABLE alto_member(
 	mem_id	 varchar2(100) NOT NULL,
-	mem_pwd	 varchar2(20) NOT NULL,
+	mem_pwd	 varchar2(100) NOT NULL,
 	mem_name varchar2(20) NOT NULL,
 	gender	 char(1) 	 NOT NULL,
 	birth	 DATE 		 NOT NULL,
-	email	 varchar2(100) NOT NULL,
-	phone	 char(11) NOT NULL,
-	img		 varchar2(500) DEFAULT '기본이미지url',
+	phone	 char(11),
+	img		 varchar2(500),
 	mem_open char(1) DEFAULT 'Y' NOT NULL,
 	joindate DATE DEFAULT sysdate NOT NULL,
 	authkey	 NUMBER DEFAULT 0 NOT NULL,
+	member_id_yn varchar2(20),
+	session_key varchar2(50) DEFAULT 'none',
+	session_limit timestamp,
 	PRIMARY KEY (mem_id)
 );
 
+INSERT INTO ALTO_MEMBER
+(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH)
+VALUES('test@gmail.com', '1234qwer', '김시험', 'M', '1999-01-01');
+
+DELETE FROM ALTO_MEMBER
+WHERE MEM_ID='hweelu0110@gmail.com';
+
+SELECT * FROM ALTO_MEMBER WHERE MEM_ID = 'hweelu0110@gmail.com';
+
 -- 인증키 테이블
+DROP TABLE ALTO_MEMBER_AUTH CASCADE CONSTRAINT;
 CREATE TABLE alto_member_auth(
-	email	 varchar2(100) NOT NULL,
+	mem_id	 varchar2(100) NOT NULL,
 	authkey  varchar2(50)
 );
-
 
 -- 관심취미 대분류 최대 5개 / 소분류 (대분류 당)최대 5개
 DROP TABLE alto_m_hobby CASCADE CONSTRAINT;
