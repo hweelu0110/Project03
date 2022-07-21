@@ -49,6 +49,7 @@
 		]]>
 	</select>	
 	
+	<!-- 자동로그인 -->
 	<update id="keepLogin">
 		UPDATE ALTO_MEMBER SET SESSION_KEY = #{sessionId}, SESSION_LIMIT = #{sessionLimit}
 		WHERE mem_id = #{mem_id}
@@ -60,4 +61,14 @@
 		]]>
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
+	<update id="findPw">
+		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<select id="findPwCheck" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
+		]]>
+	</select>
 </mapper>

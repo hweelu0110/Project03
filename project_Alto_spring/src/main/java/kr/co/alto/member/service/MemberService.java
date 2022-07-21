@@ -17,4 +17,7 @@ public interface MemberService {
 	public void keepLogin(String mem_id, String sessionId, Date sessionLimit) throws Exception;
 	public MemberDTO checkLoginBefore(String value) throws Exception;
 	
+	public int findPwCheck(MemberDTO memberDTO) throws Exception;
+	public void findPw(String mem_id) throws Exception;
+		
 }

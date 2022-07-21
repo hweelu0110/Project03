@@ -10,9 +10,9 @@
 </head>
 <body>
 	<script type="text/javascript">
-		let memberEmail = "${memberEmail}"
+		let memberName = "${memberName}"
 		
-		alert(memberEmail + '님 회원가입을 축하합니다. 이제 로그인이 가능합니다. 확인 버튼을 누르면 로그인 페이지로 이동합니다.')
+		alert(memberName + '님 회원가입을 축하합니다.\n 이제 로그인이 가능합니다.\n 확인 버튼을 누르면 로그인 페이지로 이동합니다.')
 		
 		self.location = "${path}/member/loginFrm.do"
 	</script>
