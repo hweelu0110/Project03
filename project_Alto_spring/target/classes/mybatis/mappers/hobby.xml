@@ -8,6 +8,7 @@
 		<result property="hobby_code" column="hobby_code" />		
 		<result property="name" column="name" />
 	</resultMap>
+	
 	<resultMap type="java.util.HashMap" id="hobbysubResult">	
 		<result property="main_code" column="A.HOBBY_CODE" />	
 		<result property="main_name" column="B.NAME" />		

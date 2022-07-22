@@ -10,7 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/list.css" /> 
+	<link rel="stylesheet" href="${path}/resources/css/common/list.css" /> 
 	<link rel="stylesheet" href="${path}/resources/css/main.css" />  	 
 	<script type="text/javascript">
 		function quickList() {

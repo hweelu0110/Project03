@@ -14,7 +14,7 @@ header li a {
 }
 
 #logo a {
-	background-image: url(../img/alto_logo.png);
+	background-image: url(../../img/alto_logo.png);
 	background-repeat: no-repeat;
 	background-size: 7rem;
 	width: 8rem;
@@ -48,7 +48,7 @@ nav #main_menu li {
    	background-color: #e4e4e4;
 }
 #search_btn {
-	background-image: url(../img/alto_common_icon.png);
+	background-image: url(../../img/alto_common_icon.png);
     background-repeat: no-repeat;
     background-size: 160px;
     background-position: -97px -36px;
@@ -102,13 +102,13 @@ section div { position: relative; }
     border-radius: 3px;
 }
 #ban_area div:nth-child(1) a {
-	background-image: url(../img/ban_bg01.gif);
+	background-image: url(../../img/ban_bg01.gif);
 }
 #ban_area div:nth-child(2) a {
-	background-image: url(../img/ban_bg02.gif);
+	background-image: url(../../img/ban_bg02.gif);
 }
 #ban_area div:nth-child(3) a {
-	background-image: url(../img/ban_bg03.gif);
+	background-image: url(../../img/ban_bg03.gif);
 	color: #34343c;
 }
 #ban_area a span {
