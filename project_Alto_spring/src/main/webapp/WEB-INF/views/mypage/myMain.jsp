@@ -16,7 +16,7 @@
 		<div id="myInfo">
 			<div class="profile">
 				<img src="${path}/resources/img/profile_default.png" />
-				<a class="editBtn01" href="">프로필사진변경</a>
+				<a class="editBtn01" href="">편집</a>
 				<h1>김이름</h1>
 				<p>hweelu0110@gmail.com</p>
 				<a class="editBtn02" href="">회원정보수정</a>
@@ -24,19 +24,21 @@
 			
 			<div class="hobby">
 				<h2>내 취미</h2>
-				<a class="editBtn02" href="">수정</a>
+				<a class="editBtn02" href="">편집</a>
 				<ul>
-					<li>
-						<img src="${path}/resources/img/hobby_img/hm000001.png" />
+					<li class="noCnt">
+						<a href="${path}/mypage/memHobby.do">취미 설정하기</a>
 					</li>
 				</ul>
 			</div>
 			
 			<div class="area">
 				<h2>내 지역</h2>
-				<a class="editBtn02" href="">수정</a>
+				<a class="editBtn02" href="">편집</a>
 				<ul>
-					<li>성동구</li>
+					<li class="areaIcon">성동구</li>
+					<li class="areaIcon">성동구</li>
+					<li class="areaIcon">성동구</li>
 				</ul>
 			</div>
 		</div>
