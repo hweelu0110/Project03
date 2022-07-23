@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.board">
+	<resultMap type="boardDTO" id="articlesResult">
+		<result property="club_code" column="club_code" />
+		<result property="notice_num" column="notice_num" />
+		<result property="category" column="category" />
+		<result property="title" column="title" />
+		<result property="contents" column="contents" />
+		<result property="mem_id" column="mem_id" />
+		<result property="ofile" column="ofile" />
+		<result property="comment_num" column="comment_num" />
+		<result property="like_num" column="like_num" />
+		<result property="regidate" column="regidate" />
+		<result property="score" column="score" />
+	</resultMap>
+	
+	<select id="selectAllArticlesList" resultMap="articlesResult" > 
+		<!-- 오라클의 계층형 SQL문 -->
+		<![CDATA[ 		
+			SELECT * FROM alto_club_notice ORDER BY regidate DESC
+		 ]]>
+	</select>
+	
+	<select id="selectNewArticleNO" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
+		<![CDATA[ 	
+			SELECT nvl(MAX(notice_num),0) + 1 FROM alto_club_notice
+		]]>
+	</select>
+	
+	<insert id="insertNewArticle" parameterType="java.util.Map"> 	<!-- 글정보를 Map으로 전달함 -->
+		<![CDATA[ 		
+			INSERT INTO alto_club_notice (notice_num, title, contents, ofile, mem_id)
+			VALUES (#{notice_num}, #{title},#{contents}, null, #{mem_id})		
+		]]>
+	</insert>
+	
+</mapper>

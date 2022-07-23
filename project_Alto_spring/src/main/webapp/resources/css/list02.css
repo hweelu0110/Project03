@@ -16,4 +16,6 @@ th,td{border: 1px solid; border-top: none; height: 40px;}
 	  
 .td2{border-right: none; border-left: none;}
 	  
-.btn01{width: 80px; height: 30px; background-color: #F3BE34; margin-top: 10px; margin-bottom: 20px;}
+.btn01{width: 100px; height: 40px; background-color: #F3BE34;margin-top: 10px; margin-bottom: 10px;}
+
+.cls1 {text-decoration: none;}

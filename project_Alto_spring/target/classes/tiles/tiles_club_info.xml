@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       
+<tiles-definitions>
+	<definition name="clublayout" template="/WEB-INF/views/club_layout/layout.jsp">
+		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
+		<put-attribute name="headinfo" value="/WEB-INF/views/club_layout/headinfo.jsp" />		
+		<put-attribute name="header" value="/WEB-INF/views/club_layout/header.jsp" />
+		<put-attribute name="clubheader" value="/WEB-INF/views/club_layout/clubheader.jsp" />
+		<put-attribute name="body" value="" />		
+		<put-attribute name="footer" value="/WEB-INF/views/club_layout/footer.jsp" />
+	</definition>
+	
+	<definition name="/club/clubInformation" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubInformation.jsp" />
+	</definition>
+	
+	<definition name="/club_notice/Noticelist" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club_notice/Noticelist.jsp" />
+	</definition>
+	
+	<definition name="/club_notice/Noticeregistration" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club_notice/Noticeregistration.jsp" />
+	</definition>
+	
+		<definition name="/club_album/Albumlist" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumlist.jsp" />
+	</definition>
+
+</tiles-definitions>

@@ -9,5 +9,7 @@
 		<typeAlias type="kr.co.alto.area.dto.AreaDTO" alias="AreaDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="HobbyDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="HobbysubDTO" />
+		<typeAlias type="kr.co.alto.board.dto.BoardDTO" alias="boardDTO"/>
+		<typeAlias type="kr.co.alto.board.dto.FileDTO" alias="fileDTO"/>
 	</typeAliases>	
 </configuration>
