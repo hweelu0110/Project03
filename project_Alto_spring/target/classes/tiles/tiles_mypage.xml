@@ -8,4 +8,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/myMain.jsp" />		
 	</definition>
 	
+	<definition name="/mypage/memArea" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memArea.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/memHobby" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memHobby.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/memHobby_sub" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memHobby_sub.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/infoEditFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/infoEditFrm.jsp" />		
+	</definition>
+	
 </tiles-definitions>

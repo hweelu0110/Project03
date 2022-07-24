@@ -22,7 +22,7 @@ public class AreaControllerImpl extends MultiActionController implements AreaCon
 	private AreaService areaService;
 
 	@Override
-	@RequestMapping(value = "/member/memArea.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/memArea.do", method = RequestMethod.GET)
 	public ModelAndView listAreas(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<AreaDTO> areaList = areaService.listAreas();

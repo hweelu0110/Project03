@@ -25,7 +25,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 	private HobbyService hobbyService;
 
 	@Override
-	@RequestMapping(value = "/member/memHobby.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/memHobby.do", method = RequestMethod.GET)
 	public ModelAndView listHobbys(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
@@ -38,7 +38,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 	
 
 	@Override
-	@RequestMapping(value = "/member/memHobby_sub.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mypage/memHobby_sub.do", method = RequestMethod.POST)
 	public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		

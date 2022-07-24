@@ -19,18 +19,7 @@
 	<definition name="/member/registerEmail" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/registerEmail.jsp" />		
 	</definition>
-	
-	<definition name="/member/memArea" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/member/memArea.jsp" />		
-	</definition>
-	
-	<definition name="/member/memHobby" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/member/memHobby.jsp" />		
-	</definition>
-	
-	<definition name="/member/memHobby_sub" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/member/memHobby_sub.jsp" />		
-	</definition>
+		
 	
 	<definition name="/member/loginFrm" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/loginFrm.jsp" />		
