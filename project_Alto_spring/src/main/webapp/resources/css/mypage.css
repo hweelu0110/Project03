@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 section { overflow: hidden; }
-section a { font-family: 'Noto Sans KR', sans-serif; }
+section a { font-family: 'Noto Sans KR', sans-serif; font-size: 0.8em; }
 h1,h2,h3 {
 	font-family: 'Noto Sans KR', sans-serif;
 	margin-bottom: 10px;
@@ -17,9 +17,9 @@ h1,h2,h3 {
     overflow: hidden;
     background-color: #e4e4e4;
     background-image: url(../../resources/img/alto_common_icon.png);
+    background-repeat: no-repeat;
     background-position: -62px 5px;
     background-size: 77px;
-    background-repeat: no-repeat;
     border-radius: 50%;
     text-indent: -999px;
 }
@@ -27,6 +27,13 @@ h1,h2,h3 {
 	position: absolute;
     top: 5px;
     right: 5px;
+    width: 15px;
+    height: 15px;
+    background-image: url(../../resources/img/alto_common_icon.png);
+    background-repeat: no-repeat;    
+    background-position: -61px -25px;
+    background-size: 100px;    
+    text-indent: -9999px;    
 }
 
 /* mypage header area */
@@ -63,11 +70,11 @@ h1,h2,h3 {
 .profile h1 { 
 	padding-top: 25px;
     margin-bottom: 5px; 
-    font-size: 2em; 
 }
 .profile p {
 	font-family: 'Noto Sans KR', sans-serif;
 	color: #777;
+	font-size: 0.8em;
 }
 
 .hobby { width: 400px; }
@@ -89,6 +96,7 @@ h1,h2,h3 {
     background-color: #e4e4e4;
     border-radius: 50%;
     font-weight: 700;
+    font-size: 0.8em;
 }
 
 /* mypage side menu */

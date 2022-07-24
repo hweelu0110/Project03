@@ -54,7 +54,7 @@
 	<section>
 		<div id="member_div" class="member_info">
 			<h2>내 취미 설정</h2>
-			<form name="hobbyFrm" method="post" action="${path}/member/memHobby_sub.do" onclick="return sendHobbyList()" >
+			<form name="hobbyFrm" method="post" action="${path}/mypage/memHobby_sub.do" onclick="return sendHobbyList()" >
 				<input type="hidden" name="hobbyCodeList" />
 				<div class="memSection memInfo">					
 					<div id="hobby_list">
