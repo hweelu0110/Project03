@@ -1,6 +1,7 @@
 package kr.co.alto.cla.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,16 @@ public class ClassServiceImpl implements ClassService {
 	
 	@Override
 	public List<ClassDTO> listClass() throws Exception {
-		
 		List<ClassDTO> classList = classDAO.selectAllclassList();
 		return classList;
+	}
+
+	@Override
+	public int addNewArticle(Map classMap) throws Exception {
+		int class_code = classDAO.insertNewClass (classMap);
+		classMap.put("class_code", class_code);
+		classDAO.insertNewImage(classMap);
+		return class_code;
 	}
 
 }

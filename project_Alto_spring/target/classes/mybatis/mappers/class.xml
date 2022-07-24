@@ -24,11 +24,64 @@
 		<result property="area_name" column="area_name" />
 	</resultMap>
 	
+	<resultMap id="imgResult" type="imageDTO">
+	  <result property="imageFileNO" column="imageFileNO" />
+	  <result property="class_code" column="class_code" />
+	  <result property="imageFileName" column="imageFileName" />
+ 	</resultMap>
+	
+	<!-- 전체 조회 -->
 	<select id="selectAllclassList" resultMap="classResult">
 		<![CDATA[
 			SELECT a.NAME AS area_name, c.*
 			FROM ALTO_CLASS c, ALTO_AREA a
 			WHERE a.AREA_CODE = c.AREA_CODE
+		]]>
+	</select>
+	
+	<!-- 새글 쓰기 -->
+	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/24) -->
+	<insert id="insertNewClass"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO EZEN.ALTO_CLASS
+			(CLASS_CODE, className, HOBBY_CODE, HOBBY_SUB_CODE, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, PRICE, IMGNAME, INTRO, REGIDATE, STARTDATE, ENDDATE, CURRICULUM, TEACHERINFO)
+			VALUES(#{class_code}, #{className}, #{cate_m}, #{cate_s}, #{area_code}, 'test', '0' , #{member_max}, #{price}, null, #{intro}, sysdate , #{startdate}, #{enddate}, #{curriculum}, #{teacherInfo})
+		]]>      
+	</insert>
+
+	<!-- 새글 이미지 -->
+	<insert id="insertNewImage"  parameterType="java.util.Map">
+    	<foreach item="item"  collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" >
+      		INTO alto_class_image(imageFileNO, imageFileName, class_code)
+     		VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.class_code})
+    	</foreach>
+ 	</insert>
+  
+	<select id="selectNewclass_code" resultType="int">
+		<![CDATA[ 
+			SELECT max(class_code)+1 from alto_class
+		]]>
+	</select>
+	
+	<select id="selectNewImageFileNO" resultType="int"  >
+    	<![CDATA[
+      		SELECT nvl(max(imageFileNO),0) from alto_class_image		
+    	]]>
+	</select>
+	
+	<select id="selectClass" resultType="classDTO" parameterType="int">
+		<![CDATA[ 
+			SELECT *
+			FROM alto_class
+			WHERE imageFileNO = #{imageFileNO}
+		]]>
+	</select>
+	
+	<select id="selectImageFileList" resultMap="imgResult" parameterType="int">
+		<![CDATA[ 
+			SELECT *
+			FROM alto_class_image
+			WHERE imageFileNO = #{imageFileNO}
 		]]>
 	</select>
 	

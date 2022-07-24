@@ -22,7 +22,7 @@
 				 
 				var _main_code = $('#cate_m').val();
 				
-				alert(_main_code);
+				/* alert(_main_code); */
 
 				$.ajax({
 					type: 'post',
@@ -115,7 +115,7 @@
 </head>
 <body>
 	<div class="container my-3" id="classbody">
-	<form action="${contextPath }/class/upload.do" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+	<form action="${contextPath }/class/addNewClass.do" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
 				<tr class="table-dark">
@@ -126,7 +126,7 @@
 				<tr>
 					<td width="10%"><b>클래스명</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="title" placeholder="클래스명을 입력하세요" />
+						<input type="text" name="className" placeholder="클래스명을 입력하세요" />
 					</td>
 					<td width="10%"><b>참여인원</b></td>
 					<td colspan="2" width="40%">
@@ -149,7 +149,7 @@
 						<select name="area_code">
 						    <option value="">지역을 선택하세요</option>
 						    <c:forEach items="${areaList }" var="area">
-						    	<option><c:out value="${area.name }" /></option>
+						    	<option value="${area.area_code }" />${area.name }</option>
 						    </c:forEach>
 						</select>
 					</td>

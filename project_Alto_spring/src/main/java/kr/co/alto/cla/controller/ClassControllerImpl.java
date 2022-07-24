@@ -2,6 +2,7 @@ package kr.co.alto.cla.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -12,11 +13,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.area.service.AreaService;
 import kr.co.alto.cla.dto.ClassDTO;
+import kr.co.alto.cla.dto.ImageDTO;
 import kr.co.alto.cla.service.ClassService;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
@@ -56,10 +64,9 @@ public class ClassControllerImpl implements ClassController {
 		return mav;
 	}
 	
-	
 	@Override
 	@RequestMapping(value = "/class/*form.do", method = RequestMethod.GET)
-	public ModelAndView addMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 
 		ModelAndView mav = new ModelAndView(viewName);
@@ -74,90 +81,6 @@ public class ClassControllerImpl implements ClassController {
 	}
 
 	@Override
-	@RequestMapping(value = "/class/upload.do", method = RequestMethod.POST)
-	public ModelAndView upload(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
-
-		multipartRequest.setCharacterEncoding("utf-8");
-		
-		//매개변수 정보와 파일 정보를 저장할 Map을 생성함
-		Map map = new HashMap();
-		Enumeration enu = multipartRequest.getParameterNames();
-		
-		//전송된 매개변수 값을 key/value로 map에 저장
-		while(enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = multipartRequest.getParameter(name);
-			map.put(name, value);
-		}
-		
-		//파일을 업로드한 후 반환된 파일이름이 저장된 fileList를 다시 map 저장함
-		List<String> fileList = fileProcess(multipartRequest);
-		map.put("fileList", fileList);
-		
-		//map을 결과창으로 포워딩
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("map", map);
-		mav.setViewName("redirect:/class/listClass.do");
-		
-		return mav;
-	}
-
-	
-	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception { 
-		List<String> fileList = new ArrayList<>();
-		
-		//첨부된 파일 이름 가져옴
-		Iterator<String> fileNames = multipartRequest.getFileNames();
-		while(fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			//파일 이름에 대한 MultipartFile 객체를 가져옴 
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFilename = mFile.getOriginalFilename(); 	// 실제 파일 이름 가져옴
-			
-			fileList.add(originalFilename);			// 파일 이름을 하나씩 fileList에 저장
-			
-			File file = new File(CURR_IMAGE_PEPO_PATH+"\\"+fileName);
-			if(mFile.getSize()!=0) {						// 첨부된 파일이 있는지 체크
-				if(! file.exists()) {						// 경로에 파일이 없으면 그 경로에 해당하는 
-					if(file.getParentFile().mkdirs()) {		// 디렉토리를 생성후 파일 생성
-						file.createNewFile();
-					}
-				}
-				//임시로 저장된 실제파일로 전송
-				mFile.transferTo(new File(CURR_IMAGE_PEPO_PATH+"\\"+originalFilename));
-			}
-		}
-		return fileList;	//첨부한 파일 이름이 저장된 fileList 반환
-	}
-
-	@Override
-	@RequestMapping("/download")
-	public void download(String imageFileName, HttpServletResponse response) throws Exception {
-		
-		OutputStream out = response.getOutputStream();
-		
-		String downFile = CURR_IMAGE_PEPO_PATH+"\\"+imageFileName;
-		
-		//다운로드 될 파일 객체 생성
-		File file = new File(downFile);
-		
-		response.setHeader("Cache-Control", "no-cache");
-		//헤더에 파일 이름 설정
-		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
-		
-		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024*8];	//버퍼를 이용해 한꺼번에 8kb씩 브라우저에 전송됨
-		while(true) {
-			int count = in.read(buffer);
-			if(count == -1) break;
-			out.write(buffer, 0, count);
-		}
-		in.close();
-		out.close();
-
-	}
-	
-	@Override
 	@RequestMapping(value = "/class/listClass.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listClass(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -166,4 +89,103 @@ public class ClassControllerImpl implements ClassController {
 		mav.addObject("classList", classList);
 		return mav;
 	}
+
+	@Override
+	@RequestMapping(value = "/class/addNewClass.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addNewClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+		
+		multipartRequest.setCharacterEncoding("utf-8");
+		String imageFileName=null;
+		
+		Map classMap = new HashMap();
+		Enumeration enu=multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=multipartRequest.getParameter(name);
+			classMap.put(name,value);
+		}
+		
+		HttpSession session = multipartRequest.getSession();
+//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+//		String id = memberDTO.getId();
+//		classMap.put("id", id);
+		
+		List<String> fileList = upload(multipartRequest);
+		
+		List<ImageDTO> imageFileList = new ArrayList<ImageDTO>();
+		if(fileList!= null && fileList.size()!=0) {
+			for(String fileName : fileList) {
+				ImageDTO imageDTO = new ImageDTO();
+				imageDTO.setImageFileName(fileName);
+				imageFileList.add(imageDTO);
+			}
+			classMap.put("imageFileList", imageFileList);
+		}
+		
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+		try {
+			int class_code = classService.addNewArticle(classMap);
+			if(imageFileList!=null && imageFileList.size()!=0) {
+				for(ImageDTO  imageDTO:imageFileList) {
+					imageFileName = imageDTO.getImageFileName();
+					File srcFile = new File(CURR_IMAGE_PEPO_PATH+"\\"+"temp"+"\\"+imageFileName);
+					File destDir = new File(CURR_IMAGE_PEPO_PATH+"\\"+class_code);
+					FileUtils.moveFileToDirectory(srcFile, destDir,true);
+				}
+			}
+			message = "<script>";
+			message += " alert('새글을 추가했습니다.');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/class/listClass.do'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    
+		}catch(Exception e) {
+			if(imageFileList!=null && imageFileList.size()!=0) {
+			  for(ImageDTO  imageDTO:imageFileList) {
+			  	imageFileName = imageDTO.getImageFileName();
+				File srcFile = new File(CURR_IMAGE_PEPO_PATH+"\\"+"temp"+"\\"+imageFileName);
+			 	srcFile.delete();
+			  }
+			}
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/board/classform.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+
+	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+
+		List<String> fileList= new ArrayList<String>();
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()){
+			
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFileName=mFile.getOriginalFilename();
+			
+			fileList.add(originalFileName);
+			
+			File file = new File(CURR_IMAGE_PEPO_PATH +"\\"+"temp"+"\\" + fileName);
+			if(mFile.getSize()!=0){
+				if(!file.exists()){
+					file.getParentFile().mkdirs();
+					mFile.transferTo(new File(CURR_IMAGE_PEPO_PATH +"\\"+"temp"+ "\\"+originalFileName));
+				}
+			}
+		}
+		return fileList;
+	}
+	
+	
 }
