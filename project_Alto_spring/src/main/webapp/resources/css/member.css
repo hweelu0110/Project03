@@ -191,9 +191,8 @@ section {
     width: 2.5em;
     height: 1.4em;
 }
-#login_div.form-switch .form-check-input:checked {
-	background-color: #00c7ae;
-}
+#login_div.form-switch .form-check-input:checked,
+#memberInfo.form-switch .form-check-input:checked { background-color: #00c7ae; }
 
 #login_error {
 	margin: 10px 0 0;

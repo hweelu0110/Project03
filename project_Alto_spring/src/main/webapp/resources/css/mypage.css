@@ -120,3 +120,16 @@ h1,h2,h3 {
 	float: left;
 	padding-bottom: 70px;
 }
+
+
+/* mypage - member Info edit */
+#memberInfo {
+	width: 450px; 
+	margin: 50px auto;
+}
+#memberInfo.form-switch .form-check-input { margin: 10px; }
+#memberInfo.form-switch .form-check-label {
+	margin-top: 9px;
+	font-size: 0.8em;
+}
+#memberInfo button { margin-bottom: 10px; }
