@@ -32,14 +32,29 @@
 	
 	<!-- 전체 조회 -->
 	<select id="selectAllclassList" resultMap="classResult">
-		<![CDATA[
-			SELECT a.NAME AS area_name, c.*
-			FROM ALTO_CLASS c, ALTO_AREA a
-			WHERE a.AREA_CODE = c.AREA_CODE
+		SELECT a.NAME AS area_name, c.*
+		FROM ALTO_CLASS c, ALTO_AREA a
+		WHERE a.AREA_CODE = c.AREA_CODE
+		<if test="sort == null">
 			order by class_code desc 
-		]]>
+		</if>
+		<if test="sort == 'new'">
+			order by class_code desc 
+		</if>
+		<if test="sort == 'old'">
+			order by class_code asc
+		</if>
+		<if test="sort == 'fast'">
+			order by startdate desc
+		</if>
+		<if test="sort == 'stuU'">
+			order by member_num desc
+		</if>
+		<if test="sort == 'stuD'">
+			order by member_num asc
+		</if>
 	</select>
-	
+
 	<!-- 새글 쓰기 -->
 	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/24) -->
 	<insert id="insertNewClass"  parameterType="java.util.Map">
@@ -85,5 +100,6 @@
 			WHERE imageFileNO = #{imageFileNO}
 		]]>
 	</select>
-	
+
 </mapper>
+

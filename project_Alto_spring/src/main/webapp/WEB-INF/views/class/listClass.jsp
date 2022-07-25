@@ -144,11 +144,11 @@
 			<div class="selectBox">Best순</div>
 			<div class="selectBox select_list">
 				<ul>
-					<li>회원수 많은</li>
-					<li>회원수 적은</li>
-					<li>최근 일정</li>
-					<li>신규</li>
-					<li>오래된</li>
+					<li><a href="${contextPath }/class/listClass.do?sort=stuU">회원수 많은</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=stuD">회원수 적은</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=fast">최근 일정</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=new">신규</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=old">오래된</a></li>
 				</ul>
 			</div>
 		</div>
