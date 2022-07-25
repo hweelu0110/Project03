@@ -10,7 +10,7 @@ public class ImageDTO {
 	private int imageFileNO;
 	private String imageFileName;
 	private Date regDate;
-	private int class_code;
+	private String class_code;
 	
 	public int getImageFileNO() {
 		return imageFileNO;
@@ -30,10 +30,10 @@ public class ImageDTO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public int getClass_code() {
+	public String getClass_code() {
 		return class_code;
 	}
-	public void setClass_code(int class_code) {
+	public void setClass_code(String class_code) {
 		this.class_code = class_code;
 	}
 	

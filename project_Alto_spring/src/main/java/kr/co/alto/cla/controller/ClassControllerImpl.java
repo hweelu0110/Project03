@@ -130,7 +130,7 @@ public class ClassControllerImpl implements ClassController {
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    
 		try {
-			int class_code = classService.addNewArticle(classMap);
+			String class_code = classService.addNewArticle(classMap);
 			if(imageFileList!=null && imageFileList.size()!=0) {
 				for(ImageDTO  imageDTO:imageFileList) {
 					imageFileName = imageDTO.getImageFileName();

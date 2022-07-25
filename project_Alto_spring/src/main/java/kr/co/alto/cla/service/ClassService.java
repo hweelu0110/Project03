@@ -8,5 +8,5 @@ import kr.co.alto.cla.dto.ClassDTO;
 public interface ClassService {
 
 	public List<ClassDTO> listClass() throws Exception;
-	public int addNewArticle(Map classMap) throws Exception;
+	public String addNewArticle(Map classMap) throws Exception;
 }

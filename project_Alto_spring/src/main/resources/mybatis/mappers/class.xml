@@ -36,6 +36,7 @@
 			SELECT a.NAME AS area_name, c.*
 			FROM ALTO_CLASS c, ALTO_AREA a
 			WHERE a.AREA_CODE = c.AREA_CODE
+			order by class_code desc 
 		]]>
 	</select>
 	
@@ -57,9 +58,9 @@
     	</foreach>
  	</insert>
   
-	<select id="selectNewclass_code" resultType="int">
+	<select id="selectNewclass_code" resultType="String">
 		<![CDATA[ 
-			SELECT max(class_code)+1 from alto_class
+			SELECT LPAD(max(class_code)+1, 6, 0) from alto_class
 		]]>
 	</select>
 	

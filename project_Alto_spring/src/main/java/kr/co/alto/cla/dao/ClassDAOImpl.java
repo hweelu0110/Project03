@@ -25,8 +25,8 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	@Override
-	public int insertNewClass(Map classMap) throws DataAccessException {
-		int class_code = selectNewClass_code();
+	public String insertNewClass(Map classMap) throws DataAccessException {
+		String class_code = selectNewClass_code();
 		classMap.put("class_code", class_code);
 		System.out.println("=============");
 		System.out.println(classMap);
@@ -35,14 +35,14 @@ public class ClassDAOImpl implements ClassDAO {
 		return class_code;
 	}
 
-	private int selectNewClass_code() {
+	private String selectNewClass_code() {
 		return sqlSession.selectOne("mapper.class.selectNewclass_code");
 	}
 
 	@Override
 	public void insertNewImage(Map classMap) throws DataAccessException {
 		List<ImageDTO> imageFileList = (ArrayList) classMap.get("imageFileList");
-		int class_code = (Integer)classMap.get("class_code");
+		String class_code = (String) classMap.get("class_code");
 		int imageFileNO = selectNewImageFileNO();
 		for(ImageDTO imageDTO : imageFileList){
 			imageDTO.setImageFileNO(++imageFileNO);

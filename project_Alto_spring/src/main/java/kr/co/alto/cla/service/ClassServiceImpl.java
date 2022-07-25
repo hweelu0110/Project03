@@ -25,8 +25,8 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
-	public int addNewArticle(Map classMap) throws Exception {
-		int class_code = classDAO.insertNewClass (classMap);
+	public String addNewArticle(Map classMap) throws Exception {
+		String class_code = classDAO.insertNewClass (classMap);
 		classMap.put("class_code", class_code);
 		classDAO.insertNewImage(classMap);
 		return class_code;
