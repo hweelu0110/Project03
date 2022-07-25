@@ -99,7 +99,7 @@
 					<span class="noti2">필수 입력입니다.</span>	
 					
 				</div>
-				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll()">가입하기</button> 
+				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll(memberFrm)">가입하기</button> 
 			</form>			
 			
 		</div>

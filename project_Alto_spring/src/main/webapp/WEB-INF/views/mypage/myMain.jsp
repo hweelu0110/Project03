@@ -17,14 +17,14 @@
 			<div class="profile">
 				<img src="${path}/resources/img/profile_default.png" />
 				<a class="editBtn01" href="">편집</a>
-				<h1>김이름</h1>
-				<p>hweelu0110@gmail.com</p>
-				<a class="editBtn02" href="">회원정보수정</a>
+				<h1>${login.mem_name}</h1>
+				<p>${login.mem_id}</p>
+				<a class="editBtn02" href="${path}/mypage/infoEditFrm.do">회원정보수정</a>
 			</div>
 			
 			<div class="hobby">
 				<h2>내 취미</h2>
-				<a class="editBtn02" href="">편집</a>
+				<a class="editBtn02" href="${path}/mypage/memHobby.do">편집</a>
 				<ul>
 					<li class="noCnt">
 						<a href="${path}/mypage/memHobby.do">취미 설정하기</a>
@@ -34,7 +34,7 @@
 			
 			<div class="area">
 				<h2>내 지역</h2>
-				<a class="editBtn02" href="">편집</a>
+				<a class="editBtn02" href="${path}/mypage/memArea.do">편집</a>
 				<ul>
 					<li class="areaIcon">성동구</li>
 					<li class="areaIcon">성동구</li>

@@ -2,7 +2,7 @@
  * 필수입력 textbox
  */
  /* joinFrm Validation */
-function checkAll() {
+function checkAll(obj) {
 	let ch_pass = checkPass(memberFrm.mem_pwd.value, memberFrm.mem_pwd_2.value)
 	let ch_name = checkName(memberFrm.mem_name.value)
 	let ch_birth = checkBirth(memberFrm.birth.value)
@@ -21,7 +21,7 @@ function checkAll() {
 	}
 	
 	if (confirm("회원가입하시겠습니까?")) {
-		$("#join").submit()
+		obj.submit()
 		return false
 	}
 	

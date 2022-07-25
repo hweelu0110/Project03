@@ -51,7 +51,6 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		memberService.register(memberDTO);
 		model.addAttribute("member", memberDTO);
 		
-		rttr.addFlashAttribute("msg", "가입이 완료되었습니다.");
 		rttr.addAttribute("memberEmail", memberDTO.getMem_id());
 		rttr.addAttribute("memberName", memberDTO.getMem_name());
 		

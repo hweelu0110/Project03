@@ -87,9 +87,16 @@ button {
 }
 .basicBtn {
 	padding: 8px 15px;
+	color: #777;
+    font-weight: bold;
+    background: #e4e4e4;
+    border-radius: 3px;
+}
+.basicBtn02 {
+	padding: 8px 15px;
 	color: #F9F9F9;
     font-weight: bold;
-    background: #666;
+    background: #494C57;
     border-radius: 3px;
 }
 button.size0 { width: 100%; }

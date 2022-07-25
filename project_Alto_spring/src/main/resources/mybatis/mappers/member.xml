@@ -71,4 +71,11 @@
 			SELECT COUNT(*) FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
 		]]>
 	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="modMemInfo" parameterType="memberDTO">
+		UPDATE ALTO_MEMBER SET MEM_NAME = #{mem_name}, GENDER = #{gender}, BIRTH = #{birth}, phone = #{phone}, MEM_OPEN = #{mem_open}
+		WHERE MEM_ID = #{mem_id}
+	</update>
+	
 </mapper>
