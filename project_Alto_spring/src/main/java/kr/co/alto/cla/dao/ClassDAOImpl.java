@@ -36,7 +36,11 @@ public class ClassDAOImpl implements ClassDAO {
 	}
 
 	private String selectNewClass_code() {
-		return sqlSession.selectOne("mapper.class.selectNewclass_code");
+		int class_codeN = sqlSession.selectOne("mapper.class.selectNewclass_codeN");
+		String class_code = sqlSession.selectOne("mapper.class.selectNewclass_code", class_codeN);
+		System.out.println(class_codeN);
+		System.out.println(class_code);
+		return class_code;
 	}
 
 	@Override

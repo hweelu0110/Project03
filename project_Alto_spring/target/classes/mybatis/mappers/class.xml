@@ -73,13 +73,20 @@
     	</foreach>
  	</insert>
   
-	<select id="selectNewclass_code" resultType="String">
+  	<select id="selectNewclass_codeN" resultType="int">
 		<![CDATA[ 
-			SELECT LPAD(max(class_code)+1, 6, 0) from alto_class
+			SELECT nvl(max(class_code),0)+1
+			FROM ALTO_CLASS
+		]]>
+	</select>
+  
+	<select id="selectNewclass_code" parameterType="int" resultType="String">
+		<![CDATA[ 
+			SELECT LPAD(#{class_codeN}, 6, 0) FROM DUAL
 		]]>
 	</select>
 	
-	<select id="selectNewImageFileNO" resultType="int"  >
+	<select id="selectNewImageFileNO" resultType="int">
     	<![CDATA[
       		SELECT nvl(max(imageFileNO),0) from alto_class_image		
     	]]>
