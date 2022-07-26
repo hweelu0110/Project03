@@ -128,7 +128,11 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			int amount = 60*60*24*7;
 			Date sessionLimit = new Date(System.currentTimeMillis() + (1000*amount));
 			memberService.keepLogin(memberDTO.getMem_id(), httpSession.getId(), sessionLimit);
-		}	
+		}
+		
+		if (httpSession.getAttribute("URL") == null) {
+			httpSession.setAttribute("URL", "/alto/main.do");
+		}
 		
 		return "main";
 	}

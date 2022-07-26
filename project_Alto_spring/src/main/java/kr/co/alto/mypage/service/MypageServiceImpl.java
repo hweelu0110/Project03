@@ -19,4 +19,14 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.modMemInfo(memberDTO);
 		
 	}
+
+	@Override
+	public String pwCheck(String mem_id) throws Exception {
+		return mypageDAO.pwCheck(mem_id);
+	}
+
+	@Override
+	public void pwUpdate(String mem_id, String hashedPw) throws Exception {
+		mypageDAO.psUpdate(mem_id, hashedPw);		
+	}
 }

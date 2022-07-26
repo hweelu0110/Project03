@@ -78,4 +78,13 @@
 		WHERE MEM_ID = #{mem_id}
 	</update>
 	
+	<!-- 비밀번호 변경 -->
+	<select id="pwCheck" resultType="String">
+		SELECT MEM_PWD FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<update id="pwUpdate">
+		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
 </mapper>

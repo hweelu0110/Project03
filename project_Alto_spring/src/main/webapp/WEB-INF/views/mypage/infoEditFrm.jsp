@@ -24,18 +24,21 @@
 			}
 			
 			if($("#mem_open").val() == 'Y') {
-				$("#_mem_open").val() = 'on'
+				$("#_mem_open").attr("checked","checked")
 			}else {
-				$("#_mem_open").val() = 'off'
+				$("#_mem_open").removeAttr("checked")
 			}
 			
-			/* $("#_mem_open").click(function() {
-				if($(this).val() == 'on') {
-					$(this).attr("checked","checked")
+			$("#_mem_open").click(function() {
+				if($(this).attr("checked") == 'checked') {
+					$("#_mem_open").removeAttr("checked")
+					$("#mem_open").val("N")
 				}else {
-					$(this).attr()
+					$("#_mem_open").attr("checked","checked")
+					$("#mem_open").val("Y")
 				}
-			}) */
+			})
+			
 		})
 	</script>
 </head>
@@ -43,8 +46,9 @@
 	
 	<section>
 		<div id="memberInfo" class="form-check form-switch">
+			<a href="${path}/mypage/myMain.do" class="backBtn">back</a>
 			<h2>회원정보수정</h2>
-			<form id="join" name="modMemberFrm" method="post" action="${path}/mypage/modMemberInfo.do">
+			<form name="modMemberFrm" method="post" action="${path}/mypage/modMemberInfo.do">
 				<input type="hidden" name="mem_id" value="${login.mem_id}" />
 				<input type="hidden" name="memberId_yn" value="${login.memberId_yn}" />
 				<div class="memSection">
@@ -63,11 +67,11 @@
 					<span class="noti2">필수 입력입니다.</span>	
 					<input type="text" id="phone" name="phone" placeholder="휴대폰" value="${login.phone}" />
 					<input type="hidden" id="mem_open" name="mem_open" value="${login.mem_open}" />
-					<input class="form-check-input" type="checkbox" name="_mem_open" id="_mem_open" checked="none" />
+					<input class="form-check-input" type="checkbox" name="_mem_open" id="_mem_open"/>
 					<label class="form-check-label" for="_mem_open">정보 공개 여부</label><br/>					
 				</div>
 				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll(modMemberFrm)">수정하기</button> 
-				<button type="button" class="basicBtn02 size0">비밀번호 변경하기</button>
+				<button type="button" class="basicBtn02 size0" onclick="location.href='${path}/mypage/pwUpdateFrm.do'">비밀번호 변경하기</button>
 				<button type="button" class="basicBtn size0">회원탈퇴</button>				 
 			</form>			
 		</div>

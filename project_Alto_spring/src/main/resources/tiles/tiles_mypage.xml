@@ -24,4 +24,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/infoEditFrm.jsp" />		
 	</definition>
 	
+	<definition name="/mypage/pwUpdateFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/pwUpdateFrm.jsp" />		
+	</definition>
+	
 </tiles-definitions>

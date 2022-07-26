@@ -107,7 +107,6 @@
 	    <mvc:mapping path="/*/*/*.do"/>
 	    <exclude-mapping path="/resources/**"/>
 	    <exclude-mapping path="/member/**"/>
-	    <exclude-mapping path="/mypage/**"/>
 	    <exclude-mapping path="/reply/**" />
 	    <beans:ref bean="uRlInterceptor"/>
 	  </mvc:interceptor>
