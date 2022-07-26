@@ -46,4 +46,16 @@
 		<put-attribute name="body" value="/WEB-INF/views/class/listClass.jsp" />		
 	</definition>
 	
+	<!-- 취미용품 -->
+	<definition name="/item/itemMain" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/item/itemMain.jsp" />		
+	</definition>
+	
+	<definition name="/item/itemform" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/item/itemform.jsp" />		
+	</definition>
+	
+	<definition name="/item/listItem" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/item/listItem.jsp" />		
+	</definition>
 </tiles-definitions>

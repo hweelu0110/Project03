@@ -10,6 +10,8 @@
 		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="HobbyDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="HobbysubDTO" />
 		<typeAlias type="kr.co.alto.cla.dto.ClassDTO" alias="classDTO" />
-		<typeAlias type="kr.co.alto.cla.dto.ImageDTO" alias="imageDTO" />
+		<typeAlias type="kr.co.alto.cla.dto.ImageDTO" alias="classImageDTO" />
+		<typeAlias type="kr.co.alto.item.dto.ItemDTO" alias="itemDTO" />
+		<typeAlias type="kr.co.alto.item.dto.ImageDTO" alias="itemImageDTO" />
 	</typeAliases>	
 </configuration>

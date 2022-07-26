@@ -1,4 +1,4 @@
-package kr.co.alto.cla.controller;
+package kr.co.alto.item.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,15 +31,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.area.service.AreaService;
-import kr.co.alto.cla.dto.ClassDTO;
-import kr.co.alto.cla.dto.ImageDTO;
-import kr.co.alto.cla.service.ClassService;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.service.HobbyService;
+import kr.co.alto.item.dto.ImageDTO;
+import kr.co.alto.item.dto.ItemDTO;
+import kr.co.alto.item.service.ItemService;
 
-@Controller("classController")
-public class ClassControllerImpl implements ClassController {
+@Controller("itemController")
+public class ItemControllerImpl implements ItemController {
 	
 	@Autowired
 	private AreaService areaService;
@@ -48,17 +48,17 @@ public class ClassControllerImpl implements ClassController {
 	private HobbyService hobbyService;
 	
 	@Autowired
-	private ClassService classService;
+	private ItemService itemService;
 	
 	@Autowired
-	private ClassDTO classDTO;
+	private ItemDTO itemDTO;
 
 	//파일 저장 위치 지정
-	private static final String CURR_IMAGE_PEPO_PATH = "C:\\workspace-jsp\\altoimg\\altoclass";
+	private static final String CURR_IMAGE_PEPO_PATH = "C:\\workspace-jsp\\altoimg\\altoitem";
 	
 	@Override
-	@RequestMapping(value = "/class/classMain.do", method = RequestMethod.GET)
-	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/item/itemMain.do", method = RequestMethod.GET)
+	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		ModelAndView mav = new ModelAndView(viewName);
@@ -66,14 +66,11 @@ public class ClassControllerImpl implements ClassController {
 	}
 	
 	@Override
-	@RequestMapping(value = "/class/*form.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/item/*form.do", method = RequestMethod.GET)
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 
 		ModelAndView mav = new ModelAndView(viewName);
-
-		List<AreaDTO> areaList = areaService.listAreas();
-		mav.addObject("areaList", areaList);
 
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
 		mav.addObject("hobbyList", hobbyList);
@@ -82,30 +79,30 @@ public class ClassControllerImpl implements ClassController {
 	}
 
 	@Override
-	@RequestMapping(value = "/class/listClass.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listClass(@RequestParam(value = "sort", required = false) String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "/item/listItem.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listItem(@RequestParam(value = "sort", required = false) String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ClassDTO> classList = classService.listClass(sort);
+		List<ItemDTO> itemList = itemService.listItem(sort);
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("classList", classList);
+		mav.addObject("itemList", itemList);
 		return mav;
 	}
 
 	@Override
-	@RequestMapping(value = "/class/addNewClass.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/item/addNewItem.do", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity addNewClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public ResponseEntity addNewItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		
 		multipartRequest.setCharacterEncoding("utf-8");
 		String imageFileName=null;
 		
-		Map classMap = new HashMap();
+		Map itemMap = new HashMap();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			classMap.put(name,value);
+			itemMap.put(name,value);
 		}
 		
 		HttpSession session = multipartRequest.getSession();
@@ -122,7 +119,7 @@ public class ClassControllerImpl implements ClassController {
 				imageDTO.setImageFileName(fileName);
 				imageFileList.add(imageDTO);
 			}
-			classMap.put("imageFileList", imageFileList);
+			itemMap.put("imageFileList", imageFileList);
 		}
 		
 		String message;
@@ -131,18 +128,18 @@ public class ClassControllerImpl implements ClassController {
 	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 	    
 		try {
-			String class_code = classService.addNewArticle(classMap);
+			String item_code = itemService.addNewArticle(itemMap);
 			if(imageFileList!=null && imageFileList.size()!=0) {
 				for(ImageDTO  imageDTO:imageFileList) {
 					imageFileName = imageDTO.getImageFileName();
 					File srcFile = new File(CURR_IMAGE_PEPO_PATH+"\\"+"temp"+"\\"+imageFileName);
-					File destDir = new File(CURR_IMAGE_PEPO_PATH+"\\"+class_code);
+					File destDir = new File(CURR_IMAGE_PEPO_PATH+"\\"+item_code);
 					FileUtils.moveFileToDirectory(srcFile, destDir,true);
 				}
 			}
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/class/listClass.do'; ";
+			message += " location.href='"+multipartRequest.getContextPath()+"/item/listItem.do'; ";
 			message +=" </script>";
 		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		    
@@ -156,7 +153,7 @@ public class ClassControllerImpl implements ClassController {
 			}
 			message = " <script>";
 			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/board/classform.do'; ";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/board/itemform.do'; ";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

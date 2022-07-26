@@ -24,7 +24,7 @@
 		<result property="area_name" column="area_name" />
 	</resultMap>
 	
-	<resultMap id="imgResult" type="imageDTO">
+	<resultMap id="classImgResult" type="classImageDTO">
 	  <result property="imageFileNO" column="imageFileNO" />
 	  <result property="class_code" column="class_code" />
 	  <result property="imageFileName" column="imageFileName" />
@@ -100,7 +100,7 @@
 		]]>
 	</select>
 	
-	<select id="selectImageFileList" resultMap="imgResult" parameterType="int">
+	<select id="selectImageFileList" resultMap="classImgResult" parameterType="int">
 		<![CDATA[ 
 			SELECT *
 			FROM alto_class_image
