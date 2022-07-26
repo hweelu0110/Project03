@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -52,6 +53,55 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 			message = "<script>";
 			message += " alert('회원 정보 수정 완료');";
 			message += " location.href='"+request.getContextPath()+"/mypage/infoEditFrm.do';";
+			message += "</script>";
+			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/mypage/infoEditFrm.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+			e.printStackTrace();
+		}
+				
+		return resEnt;
+	}
+
+	@Override
+	@RequestMapping(value = "/pwCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int pwCheck(MemberDTO memberDTO) throws Exception {
+		String mem_pwd = mypageService.pwCheck(memberDTO.getMem_id());
+		if (memberDTO == null || !BCrypt.checkpw(memberDTO.getMem_pwd(), mem_pwd)) {
+			return 0;
+		}
+		return 1;
+	}
+
+	@Override
+	@RequestMapping(value = "/pwUpdate.do", method = RequestMethod.POST)
+	public ResponseEntity pwUpdate(String mem_id, String mem_pwd1, HttpServletRequest request, HttpSession session)
+			throws Exception {
+		
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type","text/html; charset=utf-8");
+		
+		String message;
+		ResponseEntity resEnt = null;
+		
+		String hashedPw = BCrypt.hashpw(mem_pwd1, BCrypt.gensalt());
+		
+		try {
+			
+			mypageService.pwUpdate(mem_id, hashedPw);
+			session.invalidate();
+			
+			message = "<script>";
+			message += " alert('비밀번호 변경 완료. 다시 로그인 해주세요.');";
+			message += " location.href='"+request.getContextPath()+"/member/loginFrm.do';";
 			message += "</script>";
 			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
