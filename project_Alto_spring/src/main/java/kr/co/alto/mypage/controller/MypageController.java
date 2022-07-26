@@ -14,4 +14,6 @@ public interface MypageController {
 	
 	public int pwCheck(MemberDTO memberDTO) throws Exception;
 	public ResponseEntity pwUpdate(String mem_id, String mem_pwd1, HttpServletRequest request, HttpSession session) throws Exception;
+	
+	public ResponseEntity delMember(String mem_id, HttpServletRequest request, HttpSession session) throws Exception;
 }

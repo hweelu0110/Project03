@@ -15,6 +15,7 @@
 		<result property="mem_open" column="MEM_OPEN" />
 		<result property="joinDate" column="JOINDATE" />
 		<result property="memberId_yn" column="MEMBER_ID_YN" />
+		<result property="del_yn" column="DEL_YN" />
 	</resultMap>
 
 	
@@ -85,6 +86,11 @@
 	
 	<update id="pwUpdate">
 		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="delMember">
+		UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = #{mem_id}
 	</update>
 	
 </mapper>

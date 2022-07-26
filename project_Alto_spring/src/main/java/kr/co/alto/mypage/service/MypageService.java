@@ -8,5 +8,7 @@ public interface MypageService {
 	
 	public String pwCheck(String mem_id) throws Exception;
 	public void pwUpdate(String mem_id, String hashedPw) throws Exception;
+	
+	public void delMember(String mem_id) throws Exception;
 
 }

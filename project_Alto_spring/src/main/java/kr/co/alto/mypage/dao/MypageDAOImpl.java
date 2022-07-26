@@ -33,4 +33,9 @@ public class MypageDAOImpl implements MypageDAO {
 		sqlSession.update("mapper.member.pwUpdate", map);
 		
 	}
+
+	@Override
+	public void delMember(String mem_id) throws DataAccessException {
+		sqlSession.update("mapper.member.delMember", mem_id);
+	}
 }
