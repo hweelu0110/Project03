@@ -3,6 +3,7 @@ package kr.co.alto.mypage.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.alto.common.base.BaseController;
+import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.controller.MemberController;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.service.MypageService;
@@ -40,13 +42,32 @@ import kr.co.alto.mypage.service.MypageService;
 public class MypageControllerImpl extends BaseController implements MypageController {
 	
 	//이미지 저장위치
-	private static String MEM_IMG_PATH = "C:\\workspace-spring\\alto\\member";
-	
+	private static String MEM_IMG_PATH = "C:\\workspace-spring\\alto\\member";	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 	
 	@Autowired
 	private MypageService mypageService;
+	@Autowired
+	private HobbyDTO hobbyDTO;
 
+	@Override
+	@RequestMapping(value = "/myMain.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mypageMain(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> mypageMap = new HashMap<>();
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
+		List<HobbyDTO> hobbyList = mypageService.selectHobbyList(mem_id);
+		mypageMap.put("hobbyList", hobbyList);		
+		mav.addObject("mypageMap", mypageMap);
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
 	@Override
 	@RequestMapping(value = "/modMemberInfo.do", method = RequestMethod.POST)
 	public ResponseEntity modMemInfo(MemberDTO memberDTO, HttpServletRequest request) throws Exception {
@@ -203,6 +224,5 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 			
 			return mem_img;
 		}
-
 		
 }

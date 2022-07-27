@@ -4,12 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.area">
-	<resultMap type="areaDTO" id="areaResult">		<!-- SQL문 실행 결과 레코드들을 typeAlias에서 지저한 memberDTO빈에 저장 -->
-		<result property="area_code" column="area_code" />		<!-- 레코드 컬럼이름에 대해 memberDTO의 같은 속성에 값을 설정 -->
+	<resultMap type="areaDTO" id="areaResult">		
+		<result property="area_code" column="area_code" />		
 		<result property="name" column="name" />
-	</resultMap>
+	</resultMap>	
 	
-	<select id="selectAllAreaList" resultMap="areaResult">	<!-- id: dao에서 해당 SQL호출 시 사용 -->
+	<select id="selectAllAreaList" resultMap="areaResult">	
 		<![CDATA[
 			SELECT * FROM alto_area
 		]]>

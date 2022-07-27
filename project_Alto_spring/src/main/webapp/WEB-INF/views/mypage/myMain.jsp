@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="hobbyList" value="${mypageMap.hobbyList}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -28,9 +29,7 @@
 		function fn_delURL() {
 			$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
 			$("#mem_imgfile").val("")			
-		}
-		
-		
+		}	
 		
 		$(function() {
 			
@@ -42,8 +41,7 @@
 				$("#mem_imgBtn").removeAttr("disabled")
 				$("#mem_imgBtn").addClass("pointBtn")
 				$("#mem_imgBtn").removeClass("basicBtn")
-			}
-			
+			}			
 			
 			$("#imgEdit_div .closeBtn").click(function() {
 				$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
@@ -72,12 +70,23 @@
 			
 			<div class="hobby">
 				<h2>내 취미</h2>
-				<a class="editBtn02" href="${path}/mypage/memHobby.do">편집</a>
-				<ul>
-					<li class="noCnt">
-						<a href="${path}/mypage/memHobby.do">취미 설정하기</a>
-					</li>
-				</ul>
+				<c:if test="${not empty hobbyList}">
+					<a class="editBtn02" href="${path}/mypage/memHobby.do">편집</a>
+					<ul>
+						<c:forEach var="hobby" items="${hobbyList}">
+							<li>
+								<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+							</li>						
+						</c:forEach>						
+					</ul>
+				</c:if>
+				<c:if test="${empty hobbyList}">
+					<ul>
+						<li class="noCnt">
+							<a href="${path}/mypage/memHobby.do">취미 설정하기</a>
+						</li>
+					</ul>
+				</c:if>				
 			</div>
 			
 			<div class="area">
