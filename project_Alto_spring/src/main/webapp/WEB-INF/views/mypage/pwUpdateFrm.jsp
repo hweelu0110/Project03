@@ -117,7 +117,7 @@
 				}					
 			})	
 			
-			/* 회원가입 */	
+			/* 필수입력 체크 */	
 			$("#memberInfo .essential").on("change keyup paste", function() {
 				if ($(this).val() == "") {
 					$(this).addClass("notiTxt")

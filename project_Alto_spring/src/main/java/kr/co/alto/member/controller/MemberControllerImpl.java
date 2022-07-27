@@ -122,6 +122,11 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			return "redirect:/member/loginFrm.do";
 		}
 		
+		if (memberDTO.getDel_yn().equals("Y")) {
+			model.addAttribute("result", "delCheck");
+			return "redirect:/member/loginFrm.do";
+		}
+		
 		model.addAttribute("member",memberDTO);
 		
 		if (loginDTO.isUseCookie()) {
@@ -133,6 +138,8 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		if (httpSession.getAttribute("URL") == null) {
 			httpSession.setAttribute("URL", "/alto/main.do");
 		}
+		
+		
 		
 		return "main";
 	}

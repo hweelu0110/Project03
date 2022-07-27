@@ -17,6 +17,7 @@ public class MemberDTO {
 	private Date joinDate;
 	private int authkey;
 	private String memberId_yn;
+	private String del_yn;
 	
 	public MemberDTO() {}
 
@@ -106,6 +107,14 @@ public class MemberDTO {
 
 	public void setMemberId_yn(String memberId_yn) {
 		this.memberId_yn = memberId_yn;
+	}
+
+	public String getDel_yn() {
+		return del_yn;
+	}
+
+	public void setDel_yn(String del_yn) {
+		this.del_yn = del_yn;
 	}
 	
 }

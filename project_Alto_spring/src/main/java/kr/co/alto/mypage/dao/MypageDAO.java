@@ -10,5 +10,7 @@ public interface MypageDAO {
 	
 	public String pwCheck(String mem_id) throws DataAccessException;
 	public void psUpdate(String mem_id, String hashPw) throws DataAccessException;
+	
+	public void delMember(String mem_id) throws DataAccessException;
 
 }

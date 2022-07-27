@@ -119,5 +119,38 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		return resEnt;
 	}
 
+	@Override
+	@RequestMapping(value = "/delMember.do", method = RequestMethod.POST)
+	public ResponseEntity delMember(String mem_id, HttpServletRequest request, HttpSession session) throws Exception {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type","text/html; charset=utf-8");
+		
+		String message;
+		ResponseEntity resEnt = null;		
+		try {
+			
+			mypageService.delMember(mem_id);
+			session.invalidate();
+			
+			message = "<script>";
+			message += " alert('회원 탈퇴 완료');";
+			message += " location.href='"+request.getContextPath()+"/main.do';";
+			message += "</script>";
+			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/mypage/delMemFrm.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+			e.printStackTrace();
+		}
+				
+		return resEnt;
+	}
+
 		
 }

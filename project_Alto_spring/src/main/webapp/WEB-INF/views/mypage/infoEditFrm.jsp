@@ -72,7 +72,7 @@
 				</div>
 				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll(modMemberFrm)">수정하기</button> 
 				<button type="button" class="basicBtn02 size0" onclick="location.href='${path}/mypage/pwUpdateFrm.do'">비밀번호 변경하기</button>
-				<button type="button" class="basicBtn size0">회원탈퇴</button>				 
+				<button type="button" class="basicBtn size0" onclick="location.href='${path}/mypage/delMemFrm.do'">회원탈퇴</button>				 
 			</form>			
 		</div>
 	</section>

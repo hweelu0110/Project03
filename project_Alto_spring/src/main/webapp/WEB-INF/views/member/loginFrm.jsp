@@ -36,6 +36,15 @@
 				}
 			</script>
 		</c:when>
+		<c:when test="${param.result == 'delCheck' }">
+			<script type="text/javascript">
+				window.onload=function() {
+					loginFrm.mem_id.focus()
+					$("#login_error").css("visibility","visible")
+					document.getElementById('login_error').innerHTML = "<p>사용할 수 없는 아이디 입니다.<br/>다른 아이디로 로그인해주세요.</p>"
+				}
+			</script>
+		</c:when>
 	</c:choose>
 	<script type="text/javascript">
 		$(function () {
