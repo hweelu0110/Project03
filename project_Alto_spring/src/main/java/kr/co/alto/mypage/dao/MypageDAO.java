@@ -9,8 +9,10 @@ public interface MypageDAO {
 	public void modMemInfo(MemberDTO memberDTO) throws DataAccessException;
 	
 	public String pwCheck(String mem_id) throws DataAccessException;
-	public void psUpdate(String mem_id, String hashPw) throws DataAccessException;
+	public void pwUpdate(String mem_id, String hashPw) throws DataAccessException;
 	
 	public void delMember(String mem_id) throws DataAccessException;
+
+	public void updateImg(String mem_img, String mem_id) throws DataAccessException;
 
 }

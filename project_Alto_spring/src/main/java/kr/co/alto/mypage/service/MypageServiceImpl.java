@@ -16,8 +16,7 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public void modMemInfo(MemberDTO memberDTO) throws Exception {
-		mypageDAO.modMemInfo(memberDTO);
-		
+		mypageDAO.modMemInfo(memberDTO);		
 	}
 
 	@Override
@@ -27,11 +26,16 @@ public class MypageServiceImpl implements MypageService {
 
 	@Override
 	public void pwUpdate(String mem_id, String hashedPw) throws Exception {
-		mypageDAO.psUpdate(mem_id, hashedPw);		
+		mypageDAO.pwUpdate(mem_id, hashedPw);		
 	}
 
 	@Override
 	public void delMember(String mem_id) throws Exception {
 		mypageDAO.delMember(mem_id);
+	}
+
+	@Override
+	public void updateImg(String mem_img, String mem_id) throws Exception {
+		mypageDAO.updateImg(mem_img, mem_id);
 	}
 }

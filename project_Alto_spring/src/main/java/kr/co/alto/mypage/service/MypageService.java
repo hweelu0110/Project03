@@ -11,4 +11,6 @@ public interface MypageService {
 	
 	public void delMember(String mem_id) throws Exception;
 
+	public void updateImg(String mem_img, String mem_id) throws Exception;
+
 }

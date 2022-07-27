@@ -10,13 +10,61 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />
+	<script type="text/javascript">
+		function fn_imgEditPopup() {
+			confirmPopup($("#imgEdit_div"))
+		}
+		
+		function readURL(input, index) {
+			if (input.files && input.files[index]) {
+				let reader = new FileReader()
+				reader.onload = function(e) {
+					$("#mem_img").attr("src",e.target.result)
+				}
+				reader.readAsDataURL(input.files[index])
+			}
+		}
+		
+		function fn_delURL() {
+			$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
+			$("#mem_imgfile").val("")			
+		}
+		
+		
+		
+		$(function() {
+			
+			if($("#mem_imgfile").val() == "") {
+				$("#mem_imgBtn").attr("disabled")
+				$("#mem_imgBtn").removeClass("pointBtn")
+				$("#mem_imgBtn").addClass("basicBtn")
+			}else {
+				$("#mem_imgBtn").removeAttr("disabled")
+				$("#mem_imgBtn").addClass("pointBtn")
+				$("#mem_imgBtn").removeClass("basicBtn")
+			}
+			
+			
+			$("#imgEdit_div .closeBtn").click(function() {
+				$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
+				$("#mem_imgfile").val("")
+			})
+		})
+		
+	</script>
 </head>
 <body>
 	<section>
 		<div id="myInfo">
-			<div class="profile">
-				<img src="${path}/resources/img/profile_default.png" />
-				<a class="editBtn01" href="">편집</a>
+			<div class="profile">				
+				<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
+				<c:if test="${login.img == null}">
+					<img src="${path}/resources/img/profile_default.png" />
+				</c:if>
+				<c:if test="${login.img != null}">
+					<img src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+				</c:if>				
+				<a class="editBtn01" onclick="fn_imgEditPopup()">편집</a>
 				<h1>${login.mem_name}</h1>
 				<p>${login.mem_id}</p>
 				<a class="editBtn02" href="${path}/mypage/infoEditFrm.do">회원정보수정</a>
@@ -77,6 +125,23 @@
 			<div class="myLike">
 				<h3>관심 목록</h3>
 			</div>
+		</div>
+		
+		<div id="imgEdit_div" class="popup_div profile">
+			<h4>프로필 사진 변경</h4>
+			<button class="closeBtn">닫기</button>
+			<form action="${path}/mypage/updateImg.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
+				<c:if test="${login.img == null}">
+					<img id="mem_img" src="${path}/resources/img/profile_default.png" />
+				</c:if>
+				<c:if test="${login.img != null}">
+					<img id="mem_img" src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+				</c:if>
+				<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
+				<button type="submit" class="pointBtn">적용</button>
+				<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>
+			</form>
 		</div>
 	</section>
 </body>

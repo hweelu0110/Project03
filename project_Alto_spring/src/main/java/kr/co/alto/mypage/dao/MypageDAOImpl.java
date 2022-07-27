@@ -26,16 +26,23 @@ public class MypageDAOImpl implements MypageDAO {
 	}
 
 	@Override
-	public void psUpdate(String mem_id, String hashPw) throws DataAccessException {
+	public void pwUpdate(String mem_id, String hashPw) throws DataAccessException {
 		Map<String, Object> map = new HashMap<>();
 		map.put("mem_id", mem_id);
 		map.put("mem_pwd", hashPw);
-		sqlSession.update("mapper.member.pwUpdate", map);
-		
+		sqlSession.update("mapper.member.pwUpdate", map);		
 	}
 
 	@Override
 	public void delMember(String mem_id) throws DataAccessException {
 		sqlSession.update("mapper.member.delMember", mem_id);
+	}
+
+	@Override
+	public void updateImg(String mem_img, String mem_id) throws DataAccessException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("mem_img", mem_img);
+		map.put("mem_id", mem_id);
+		sqlSession.update("mapper.member.updateImg", map);
 	}
 }
