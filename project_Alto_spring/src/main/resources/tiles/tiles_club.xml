@@ -7,4 +7,8 @@
 	<definition name="/club/clubMain" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubMain.jsp" />		
 	</definition>
+	
+	<definition name="/club/clubSearchList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubSearchList.jsp" />		
+	</definition>
 </tiles-definitions>

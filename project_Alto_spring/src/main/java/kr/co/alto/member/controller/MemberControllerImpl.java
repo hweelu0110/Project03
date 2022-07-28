@@ -98,6 +98,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+		
 		if(null != inputFlashMap) {
 			model.addAttribute("msg",(String) inputFlashMap.get("msg"));
 		}
@@ -107,7 +108,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String loginPost(LoginDTO loginDTO, HttpServletRequest request, HttpSession httpSession, Model model) throws Exception {
+	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 		logger.info("loginDTO"+loginDTO.getMem_id());
 		MemberDTO memberDTO = memberService.login(loginDTO);
 				
@@ -138,9 +139,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		if (httpSession.getAttribute("URL") == null) {
 			httpSession.setAttribute("URL", "/alto/main.do");
 		}
-		
-		
-		
+				
 		return "main";
 	}
 

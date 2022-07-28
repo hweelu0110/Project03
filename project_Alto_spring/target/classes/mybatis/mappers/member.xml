@@ -93,4 +93,9 @@
 		UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = #{mem_id}
 	</update>
 	
+	<!-- 회원프로필 이미지 변경 -->
+	<update id="updateImg">
+		UPDATE ALTO_MEMBER SET IMG = #{mem_img} WHERE MEM_ID = #{mem_id}
+	</update>
+	
 </mapper>

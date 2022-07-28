@@ -19,7 +19,7 @@
 		<div id="cate_menu">
 			<ul>
 				<li>
-					<a href="clubSearchList.jsp">
+					<a href="${path}/club/clubSearchList.do">
 						<img src="../resources/img/hobby_img/h_001.png" />
 						<span class="hobby_name">창작</span>
 					</a>

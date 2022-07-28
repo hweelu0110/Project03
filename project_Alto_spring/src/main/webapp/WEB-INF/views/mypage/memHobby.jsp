@@ -62,7 +62,7 @@
 							<c:forEach var="hobby" items="${hobbyList }">
 								<li>
 									<img class="select" src="../resources/img/hobby_img/h_select.png" />
-									<img src="../resources/img/hobby_img/${hobby.hobby_code }.png" />
+									<img src="${path}/resources/img/hobby_img/${hobby.hobby_code }.png" />
 									<p class="hobby_name">${hobby.name }</p>
 								</li>								
 							</c:forEach>							
@@ -73,7 +73,5 @@
 			</form>
 		</div>
 	</section>
-	
-	<%@include file="../layout/common_popup.jsp" %>
 </body>
 </html>

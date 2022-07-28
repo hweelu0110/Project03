@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("utf-8");
+%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../layout/headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/list.css" /> 	
-	<link rel="stylesheet" href="../resources/css/club.css" /> 
-	<script src="../resources/js/search_tabmenu.js"></script>
+	<link rel="stylesheet" href="${path}/resources/css/common/list.css" /> 	
+	<link rel="stylesheet" href="${path}/resources/css/club/club.css" /> 
+	<script src="${path}/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$(".clubPopup").hide()
@@ -44,9 +48,7 @@
 		})
 	</script>
 </head>
-<body>
-	<%@include file="../layout/header.jsp" %>
-	
+<body>	
 	<!-- CONTENTS -->
 	<section>
 		<ul id="tab_menu">
@@ -400,7 +402,5 @@
 			<input type="submit" class="pointBtn size0" value="수정하기" />
 		</form>
 	</div>
-	<%@include file="../layout/common_popup.jsp" %>
-	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

@@ -14,7 +14,7 @@
 		<result property="main_name" column="B.NAME" />		
 		<result property="sub_code" column="HOBBY_SUB_CODE" />
 		<result property="sub_name" column="A.NAME" />
-	</resultMap>
+	</resultMap>	
 	
 	<select id="selectAllHobbyList" resultMap="hobbyResult">	
 		<![CDATA[
@@ -28,6 +28,26 @@
 			FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
 			WHERE A.HOBBY_CODE = B.HOBBY_CODE 
 			AND (A.HOBBY_CODE = #{code1} OR A.HOBBY_CODE = #{code2} OR A.HOBBY_CODE = #{code3} OR A.HOBBY_CODE = #{code4} OR A.HOBBY_CODE = #{code5})
+		]]>
+	</select>
+	
+	<!-- 내취미 대분류 목록 불러오기 -->
+	<select id="memMainHobbyList" parameterType="String" resultMap="hobbyResult">
+		<![CDATA[
+			SELECT DISTINCT A.HOBBY_CODE hobby_code, B.NAME name
+			FROM ALTO_M_HOBBY A, ALTO_HOBBY B 
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE 
+			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<!-- 내취미 소분류 목록 불러오기 -->
+	<select id="memSubHobbyList" parameterType="String"  resultMap="hobbyResult">
+		<![CDATA[
+			SELECT A.HOBBY_SUB_CODE hobby_code, B.NAME name 
+			FROM ALTO_M_HOBBY A, ALTO_HOBBY_SUB B 
+			WHERE A.HOBBY_SUB_CODE = B.HOBBY_SUB_CODE 
+			AND MEM_ID = #{mem_id}
 		]]>
 	</select>
 </mapper>

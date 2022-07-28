@@ -134,7 +134,7 @@ section { padding: 30px 30px 70px; }
     width: 14px;
     height: 13px;
     text-indent: -99999px;
-    background-image: url(../img/alto_common_icon.png);
+    background-image: url(../../img/alto_common_icon.png);
     background-size: 85px;
     background-position: -22px 0px;
     cursor: pointer;
@@ -163,7 +163,7 @@ div.info_div .p_color {
     right: 13px;
 	width: 40px;
 	height: 40px;
-	background-image: url(../img/open_btn.png);
+	background-image: url(../../img/open_btn.png);
 	background-repeat: no-repeat;
     background-size: 40px;
     cursor: pointer;
@@ -195,7 +195,7 @@ div.info_div .p_color {
 	height: 16px;
 	background-size: 120px;
 	background-position: -12px 0px;
-	background-image: url(../img/alto_common_icon.png);
+	background-image: url(../../img/alto_common_icon.png);
 	text-indent: -9999px;
 }
 .clubPopup .prevBtn {
@@ -205,7 +205,7 @@ div.info_div .p_color {
 	background-size: 120px;
 	background-position: 3px 0px;
 	background-repeat: no-repeat;
-	background-image: url(../img/alto_common_icon.png);
+	background-image: url(../../img/alto_common_icon.png);
 	text-indent: -9999px;	
 }
 
@@ -219,14 +219,14 @@ div.info_div .p_color {
     background-size: 230px;
     background-position: -65px -62px;
     background-repeat: no-repeat;
-    background-image: url(../img/alto_common_icon.png);
+    background-image: url(../../img/alto_common_icon.png);
 }
 .clubPopup form span.icon_mem { background-position: -100px -62px; }
 .clubPopup form span.icon_hobby {
 	clear: both;
 	background-size: 28px;
     background-position: 0;
-	background-image: url(../img/hobby_img/h_001.png);
+	background-image: url(../../img/hobby_img/h_001.png);
 }
 .clubPopup form p {
 	display: inline-block;
@@ -277,7 +277,7 @@ input.non_img {
 input.club_img {
 	height: 100px;
     margin-bottom: 10px;
-    background: url(../img/club_test.png) 100% 100% no-repeat;
+    background: url(../../img/club_test.png) 100% 100% no-repeat;
     text-indent: -9999px;
 }
 
