@@ -14,4 +14,12 @@
 			SELECT * FROM alto_area
 		]]>
 	</select>
+	
+	<select id="selectMyAreaList" parameterType="String" resultMap="areaResult">
+		<![CDATA[
+			SELECT a.AREA_CODE area_code, b.NAME name 
+			FROM ALTO_M_AREA a, ALTO_AREA b WHERE a.AREA_CODE = b.AREA_CODE 
+			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
 </mapper>

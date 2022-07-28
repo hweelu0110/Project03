@@ -14,17 +14,7 @@
 		<result property="main_name" column="B.NAME" />		
 		<result property="sub_code" column="HOBBY_SUB_CODE" />
 		<result property="sub_name" column="A.NAME" />
-	</resultMap>
-	
-	<resultMap type="hobbyDTO" id="memMhobbyResult">	
-		<result property="hobby_code" column="A.HOBBY_CODE" />		
-		<result property="name" column="B.NAME" />
-	</resultMap>
-	
-	<resultMap type="hobbyDTO" id="memShobbyResult">	
-		<result property="hobby_code" column="A.HOBBY_SUB_CODE" />		
-		<result property="name" column="B.NAME" />
-	</resultMap>
+	</resultMap>	
 	
 	<select id="selectAllHobbyList" resultMap="hobbyResult">	
 		<![CDATA[
@@ -52,9 +42,9 @@
 	</select>
 	
 	<!-- 내취미 소분류 목록 불러오기 -->
-	<select id="memSubHobbyList" parameterType="String"  resultMap="memShobbyResult">
+	<select id="memSubHobbyList" parameterType="String"  resultMap="hobbyResult">
 		<![CDATA[
-			SELECT A.HOBBY_SUB_CODE main_code, B.NAME sub_name 
+			SELECT A.HOBBY_SUB_CODE hobby_code, B.NAME name 
 			FROM ALTO_M_HOBBY A, ALTO_HOBBY_SUB B 
 			WHERE A.HOBBY_SUB_CODE = B.HOBBY_SUB_CODE 
 			AND MEM_ID = #{mem_id}

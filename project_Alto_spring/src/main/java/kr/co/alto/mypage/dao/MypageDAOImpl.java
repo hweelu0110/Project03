@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
 
@@ -21,6 +22,12 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<HobbyDTO> selectHobbyList(String mem_id) throws DataAccessException {
 		return sqlSession.selectList("mapper.hobby.memMainHobbyList", mem_id);
 	}
+	
+	@Override
+	public List<AreaDTO> selectMyAreaList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.area.selectMyAreaList", mem_id);
+	}
+
 	
 	@Override
 	public void modMemInfo(MemberDTO memberDTO) throws DataAccessException {
@@ -53,4 +60,5 @@ public class MypageDAOImpl implements MypageDAO {
 		sqlSession.update("mapper.member.updateImg", map);
 	}
 
+	
 }

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${mypageMap.hobbyList}" />
+<c:set var="areaList" value="${mypageMap.areaList}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -91,12 +92,21 @@
 			
 			<div class="area">
 				<h2>내 지역</h2>
-				<a class="editBtn02" href="${path}/mypage/memArea.do">편집</a>
-				<ul>
-					<li class="areaIcon">성동구</li>
-					<li class="areaIcon">성동구</li>
-					<li class="areaIcon">성동구</li>
-				</ul>
+				<c:if test="${not empty areaList}">
+					<a class="editBtn02" href="${path}/mypage/memArea.do">편집</a>
+					<ul>
+						<c:forEach var="area" items="${areaList}">
+							<li class="areaIcon">${area.name}</li>
+						</c:forEach>						
+					</ul>
+				</c:if>
+				<c:if test="${empty areaList}">
+					<ul>
+						<li class="noCnt">
+							<a href="${path}/mypage/memArea.do">지역 설정하기</a>
+						</li>
+					</ul>
+				</c:if>
 			</div>
 		</div>
 		

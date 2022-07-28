@@ -29,7 +29,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import kr.co.alto.common.base.BaseController;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.controller.MemberController;
@@ -60,8 +59,8 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		
-		List<HobbyDTO> hobbyList = mypageService.selectHobbyList(mem_id);
-		mypageMap.put("hobbyList", hobbyList);		
+		mypageMap = mypageService.selectMyList(mem_id);
+		
 		mav.addObject("mypageMap", mypageMap);
 		mav.setViewName(viewName);
 		

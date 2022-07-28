@@ -1,12 +1,15 @@
 package kr.co.alto.mypage.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
@@ -19,8 +22,16 @@ public class MypageServiceImpl implements MypageService {
 
 	
 	@Override
-	public List<HobbyDTO> selectHobbyList(String mem_id) throws Exception {
-		return mypageDAO.selectHobbyList(mem_id);
+	public Map<String, Object> selectMyList(String mem_id) throws Exception {
+		Map<String, Object> mypageMap = new HashMap<>();
+		
+		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
+		List<AreaDTO> areaList = mypageDAO.selectMyAreaList(mem_id);
+		
+		mypageMap.put("hobbyList", hobbyList);
+		mypageMap.put("areaList", areaList);
+		
+		return mypageMap;
 	}
 	
 	@Override
