@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="All" value="${hobbyList.AllhobbyList}" />
+<c:set var="My" value="${hobbyList.MyhobbyList}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -31,7 +33,9 @@
 			hobbyFrm.hobbyCodeList.value = codeList
 		}
 		
-		$(function() {			
+		$(function() {	
+			$("#hobby_list ul li.select").children(".select").css("display","block");
+			
 			$("#hobby_list ul li").click(function() {
 				
 				if($(this).hasClass("select")) {
@@ -45,9 +49,11 @@
 						confirmPopup($("#confirm_popup"),"관심 취미는 최대 5개 까지 선택 가능합니다.")
 					}
 				}				
-			})			
+			})
+			
 		})
 	</script>	
+	
 </head>
 <body>
 	
@@ -59,12 +65,29 @@
 				<div class="memSection memInfo">					
 					<div id="hobby_list">
 						<ul>
-							<c:forEach var="hobby" items="${hobbyList }">
-								<li>
-									<img class="select" src="../resources/img/hobby_img/h_select.png" />
-									<img src="${path}/resources/img/hobby_img/${hobby.hobby_code }.png" />
-									<p class="hobby_name">${hobby.name }</p>
-								</li>								
+							<c:forEach var="hobby" items="${All}">
+								<c:forEach var="myhobby" items="${My}">
+									<c:if test="${myhobby.hobby_code eq hobby.hobby_code}">
+										<c:set var="in" value="true" />
+									</c:if>									
+								</c:forEach>
+								<c:choose>
+									<c:when test="${in}">
+										<li class="select">	
+											<img class="select" src="../resources/img/hobby_img/h_select.png" />
+											<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+											<p class="hobby_name">${hobby.name}</p>
+										</li>
+										<c:set var="in" value="false" />
+									</c:when>
+									<c:otherwise>
+										<li>
+											<img class="select" src="../resources/img/hobby_img/h_select.png" />
+											<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+											<p class="hobby_name">${hobby.name}</p>
+										</li>
+									</c:otherwise>
+								</c:choose>														
 							</c:forEach>							
 						</ul>
 					</div>								
