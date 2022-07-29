@@ -2,9 +2,11 @@ package kr.co.alto.hobby.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.hobby.service.HobbyService;
+import kr.co.alto.member.dto.MemberDTO;
 
 
 @Controller("hobbyController")
@@ -26,9 +29,14 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 
 	@Override
 	@RequestMapping(value = "/mypage/memHobby.do", method = RequestMethod.GET)
-	public ModelAndView listHobbys(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listHobbys(HttpServletRequest request, HttpSession httpSession, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		Map<String, Object> hobbyList = new HashMap<>();	
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
+		hobbyList = hobbyService.listHobbys(mem_id);
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("hobbyList", hobbyList);
