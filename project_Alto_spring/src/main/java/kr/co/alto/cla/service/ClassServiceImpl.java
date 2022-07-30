@@ -19,8 +19,8 @@ public class ClassServiceImpl implements ClassService {
 	private ClassDAO classDAO;
 	
 	@Override
-	public List<ClassDTO> listClass(String sort) throws Exception {
-		List<ClassDTO> classList = classDAO.selectAllclassList(sort);
+	public List<ClassDTO> listClass(Map listMap) throws Exception {
+		List<ClassDTO> classList = classDAO.selectAllclassList(listMap);
 		return classList;
 	}
 

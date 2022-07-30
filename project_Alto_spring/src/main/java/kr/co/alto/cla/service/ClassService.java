@@ -7,6 +7,6 @@ import kr.co.alto.cla.dto.ClassDTO;
 
 public interface ClassService {
 
-	public List<ClassDTO> listClass(String sort) throws Exception;
+	public List<ClassDTO> listClass(Map listMap) throws Exception;
 	public String addNewArticle(Map classMap) throws Exception;
 }

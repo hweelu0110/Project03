@@ -61,7 +61,18 @@ public class ClassControllerImpl implements ClassController {
 	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
+		Map listMapBest = new HashMap<>();
+		listMapBest.put("sort", "stuU");
+		List<ClassDTO> classListBest = classService.listClass(listMapBest);
+		
+		Map listMapNew = new HashMap<>();
+		listMapBest.put("sort", "new");
+		List<ClassDTO> classListNew = classService.listClass(listMapNew);
+		
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("classListBest", classListBest);
+		mav.addObject("classListNew", classListNew);
+		
 		return mav;
 	}
 	
@@ -83,9 +94,22 @@ public class ClassControllerImpl implements ClassController {
 
 	@Override
 	@RequestMapping(value = "/class/listClass.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listClass(@RequestParam(value = "sort", required = false) String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listClass(@RequestParam(value = "sort", required = false) String sort, 
+								  @RequestParam(value = "hobbyC", required = false) String hobbyC, 
+								HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ClassDTO> classList = classService.listClass(sort);
+		
+		Map listMap = new HashMap<>();
+		
+		if(sort!=null) {
+			listMap.put("sort", sort);
+		}
+		
+		if(hobbyC!=null) {
+			listMap.put("hobbyC", hobbyC);
+		}
+		
+		List<ClassDTO> classList = classService.listClass(listMap);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("classList", classList);
 		return mav;

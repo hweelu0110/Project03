@@ -19,8 +19,8 @@ public class ClassDAOImpl implements ClassDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ClassDTO> selectAllclassList(String sort) throws DataAccessException {
-		List<ClassDTO> classlist = sqlSession.selectList("mapper.class.selectAllclassList", sort);
+	public List<ClassDTO> selectAllclassList(Map listMap) throws DataAccessException {
+		List<ClassDTO> classlist = sqlSession.selectList("mapper.class.selectAllclassList", listMap);
 		return classlist;
 	}
 

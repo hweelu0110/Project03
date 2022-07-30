@@ -29,6 +29,7 @@ public class ClassDTO {
 	private String className;
 	private String hobby_code;
 	private String hobby_sub_code;
+	private String hobby_name;
 	private String area_code;
 	private String area_name;
 	private String manager;
@@ -144,6 +145,12 @@ public class ClassDTO {
 	}
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
+	}
+	public String getHobby_name() {
+		return hobby_name;
+	}
+	public void setHobby_name(String hobby_name) {
+		this.hobby_name = hobby_name;
 	}
 	
 }
