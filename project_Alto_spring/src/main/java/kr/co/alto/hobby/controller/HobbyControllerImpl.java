@@ -47,12 +47,16 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 
 	@Override
 	@RequestMapping(value = "/mypage/memHobby_sub.do", method = RequestMethod.POST)
-	public ModelAndView listHobbySub(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listHobbySub(HttpServletRequest request, HttpSession httpSession, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		String hobbyCodeList = request.getParameter("hobbyCodeList");
 		String[] arrhcodelist = hobbyCodeList.split(",");
 		HashMap<String, String> codeList = new HashMap<String, String>();
+		Map<String, Object> hobbysublist = new HashMap<>();
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
 		
 		codeList.put("code1", arrhcodelist[0]);
 		codeList.put("code2", arrhcodelist[1]);
@@ -60,8 +64,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		codeList.put("code4", arrhcodelist[3]);
 		codeList.put("code5", arrhcodelist[4]);
 		
-		
-		List<HobbysubDTO> hobbysublist = hobbyService.listHobbysub(codeList);
+		hobbysublist = hobbyService.listHobbysub(codeList, mem_id);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("hobbysublist", hobbysublist);
 		return mav;

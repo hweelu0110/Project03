@@ -13,5 +13,5 @@ import kr.co.alto.hobby.dto.HobbysubDTO;
 public interface HobbyService {
 	public Map<String, Object> listHobbys(String mem_id) throws DataAccessException;
 
-	public List<HobbysubDTO> listHobbysub(HashMap<String, String> codeList) throws DataAccessException;
+	public Map<String, Object> listHobbysub(HashMap<String, String> codeList,String mem_id) throws DataAccessException;
 }

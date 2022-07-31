@@ -37,8 +37,14 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 
 	@Override
-	public List<HobbysubDTO> listHobbysub(HashMap<String, String> codeList) throws DataAccessException {
-		List<HobbysubDTO> hobbysubList = hobbyDAO.selectHobbysubList(codeList);
+	public Map<String, Object> listHobbysub(HashMap<String, String> codeList,String mem_id) throws DataAccessException {
+		Map<String, Object> hobbysubList = new HashMap<>();
+		
+		List<HobbysubDTO> chkHobbysubList = hobbyDAO.selectHobbysubList(codeList);
+		List<HobbyDTO> myHobbysubList = hobbyDAO.selectMyHobbysubList(mem_id);
+		
+		hobbysubList.put("chkHobbysubList", chkHobbysubList);
+		hobbysubList.put("myHobbysubList", myHobbysubList);
 		return hobbysubList;
 	}
 
