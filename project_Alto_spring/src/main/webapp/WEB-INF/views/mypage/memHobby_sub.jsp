@@ -13,7 +13,40 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">	
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />		
-	<script type="text/javascript">		
+	<script type="text/javascript">
+		function sendHobbyList() {
+			let mCnt = $("#hobby_list p.main_hobby").length			
+			let cnt = $("#hobby_list div.select").length
+			let main_codeList = Array(mCnt)
+			let sub_codeList = Array(cnt)
+										
+			for(let i=0; i<mCnt; i++) {
+				main_codeList[i] = " "
+			}
+			
+			for(i=0; i<mCnt; i++) {
+				let hobby_code = $("#hobby_list p.main_hobby:eq("+i+")").children("input").val()
+								
+				main_codeList[i] = hobby_code
+				
+				let sCnt = $("#hobby_list div.select."+hobby_code).length
+				alert(sCnt)
+				let sub_codeList[i] = Array(sCnt)
+			}
+			
+			for(i=0; i<cnt; i++) {
+				let subhobby = $("#hobby_list div.select:eq("+i+")")
+				let hobby_code = $("#hobby_list div.select:eq("+i+")").children("input").val()
+				alert(hobby_code)
+				
+				alert("선택 상세취미가 첫번째 메인취미?? "+subhobby.hasClass(main_codeList[i]))
+				if(subhobby.hasClass(main_codeList[i])) {
+					main_codeList[i] = 
+				}
+				sub_codeList[i] = hobby_code
+			}
+		}		
+	
 		$(function() {
 			$("#hobby_list div.sub_hobby").click(function() {	
 				
