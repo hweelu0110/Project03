@@ -2,6 +2,7 @@ package kr.co.alto.hobby.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,16 @@ public class HobbyDAOImpl implements HobbyDAO {
 	public List<HobbyDTO> selectMyHobbysubList(String mem_id) throws DataAccessException {
 		return sqlSession.selectList("mapper.hobby.memSubHobbyList", mem_id);
 	}
-	
+
+	@Override
+	public void delMemHobby(String mem_id) throws DataAccessException {
+		sqlSession.delete("mapper.hobby.delMemHobby", mem_id);
+	}
+
+	@Override
+	public void updateMemHobby(HashMap<String, Object> map) throws DataAccessException {
+		sqlSession.insert("mapper.hobby.updateMemHobby", map);		
+	}
 	
 
 }
