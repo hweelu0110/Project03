@@ -14,4 +14,6 @@ public interface HobbyService {
 	public Map<String, Object> listHobbys(String mem_id) throws DataAccessException;
 
 	public Map<String, Object> listHobbysub(HashMap<String, String> codeList,String mem_id) throws DataAccessException;
+	
+	public void memHobbyUpdate(String mem_id, HashMap<String, Object> memHobbyList) throws DataAccessException;
 }

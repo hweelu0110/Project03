@@ -50,4 +50,21 @@
 			AND MEM_ID = #{mem_id}
 		]]>
 	</select>
+	
+	<delete id="delMemHobby">
+		DELETE FROM ALTO_M_HOBBY WHERE MEM_ID = #{mem_id}
+	</delete>
+	
+	<insert id="updateMemHobby" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.hobbysubList != null">
+					<![CDATA[ 
+						INSERT INTO ALTO_M_HOBBY
+						VALUES(seq_Mhobby_code.nextval, #{mem_id}, #{hobby_code}, #{hobby_sub_code})
+					]]>					
+				</when>
+			</choose>
+		</foreach>	
+	</insert>
 </mapper>
