@@ -55,13 +55,13 @@ public class AreaControllerImpl extends MultiActionController implements AreaCon
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		String message;
-		ResponseEntity resEnt = null;
+		ResponseEntity<?> resEnt = null;
 		
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		String[] areacodeList = request.getParameterValues("area_code");
 		List<AreaDTO> areaList = new ArrayList<>();
-		Map memAreaMap = new HashMap<>();
+		Map<String, Object> memAreaMap = new HashMap<>();
 		
 		int count = areacodeList.length;		
 		

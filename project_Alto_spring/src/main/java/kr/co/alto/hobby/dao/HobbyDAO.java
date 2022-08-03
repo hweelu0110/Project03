@@ -20,5 +20,5 @@ public interface HobbyDAO {
 
 	public void delMemHobby(String mem_id) throws DataAccessException;
 
-	public void updateMemHobby(Map memHobbyMap) throws DataAccessException;
+	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException;
 }

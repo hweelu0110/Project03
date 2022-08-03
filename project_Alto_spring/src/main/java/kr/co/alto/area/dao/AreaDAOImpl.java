@@ -34,7 +34,7 @@ public class AreaDAOImpl implements AreaDAO {
 	}
 
 	@Override
-	public void updateMemArea(Map memAreaMap) throws DataAccessException {
+	public void updateMemArea(Map<String, Object> memAreaMap) throws DataAccessException {
 		sqlSession.insert("mapper.area.updateMemArea", memAreaMap);
 	}
 

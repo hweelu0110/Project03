@@ -48,7 +48,7 @@ public class HobbyDAOImpl implements HobbyDAO {
 	}
 
 	@Override
-	public void updateMemHobby(Map memHobbyMap) throws DataAccessException {
+	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException {
 		sqlSession.insert("mapper.hobby.updateMemHobby", memHobbyMap);		
 	}
 	

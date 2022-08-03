@@ -5,6 +5,10 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="allHobbyList" value="${clubSearchMap.allHobbyList}" />
+<c:set var="allAreaList" value="${clubSearchMap.allAreaList}" />
+<c:set var="myHobbyList" value="${clubSearchMap.myHobbyList}" />
+<c:set var="myAreaList" value="${clubSearchMap.myAreaList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +19,30 @@
 	<script src="${path}/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			let cateEle = $("#m_cate li.select")
+			let areaEle = $("#area_list li.select")
+			let selCate = $("#m_cate li.select").length
+			let selArea = $("#area_list li.select").length
+			
+			for (let i=0; i<selCate; i++) {
+				if ($("#tab_menu li:nth-child(1) span").text() === "전체 취미"){
+					$("#tab_menu li:nth-child(1)").html("")
+					$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>")
+				}else {
+					$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).find("p").text()+"</span>")
+				}
+			}
+			
+			for (let i=0; i<selArea; i++) {
+				if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역"){
+					$("#tab_menu li:nth-child(2)").html("")
+					$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(i).text()+"</span>")
+				}else {
+					$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
+				}
+			}
+				
+			
 			$(".clubPopup").hide()
 			
 			/* 클럽개설 버튼 팝업 */
@@ -59,67 +87,29 @@
 		<div id="tab_area">
 			<div id="m_cate">
 				<ul>
-					<li id="m_cate_all" class="all select">전체</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_001.png" />
-						<p class="hobby_name">창작</p>
-					</li>
-			        <li>
-						<img src="../resources/img/hobby_img/h_002.png" />
-						<p class="hobby_name">액티비티</p>
-			        </li>
-			        <li>
-						<img src="../resources/img/hobby_img/h_003.png" />
-						<p class="hobby_name">아웃도어</p>
-					</li>
-			        <li>
-						<img src="../resources/img/hobby_img/h_004.png" />
-						<p class="hobby_name">사진/영상</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_005.png" />
-						<p class="hobby_name">음악</p>	
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_006.png" />
-						<p class="hobby_name">게임</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_007.png" />
-						<p class="hobby_name">여행</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_008.png" />
-						<p class="hobby_name">요리</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_009.png" />
-						<p class="hobby_name">문화</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_010.png" />
-						<p class="hobby_name">봉사</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_011.png" />
-						<p class="hobby_name">직무/커리어</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_012.png" />
-						<p class="hobby_name">수집</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_013.png" />
-						<p class="hobby_name">반려동물</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_014.png" />
-						<p class="hobby_name">차/오토바이</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/h_015.png" />
-						<p class="hobby_name">자유주제</p>
-					</li>
+					<li id="m_cate_all" class="all">전체</li>
+					<c:forEach var="hobby" items="${allHobbyList}">
+						<c:forEach var="my" items="${myHobbyList}">
+							<c:if test="${hobby.hobby_code eq my.hobby_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<li class="select">
+									<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+									<p class="hobby_name">${hobby.name}</p>
+								</li>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<li>
+									<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+									<p class="hobby_name">${hobby.name}</p>
+								</li>
+							</c:otherwise>
+						</c:choose>												
+					</c:forEach>					
 				</ul>
 			</div>
 			<div id="s_cate">
@@ -129,33 +119,37 @@
 			</div>
 			<div id="area_list">
 				<ul>
-					<li class="online">온라인</li>
-					<li class="all select">전체</li>
-					<li>강남구</li>
-					<li>강동구</li>
-					<li>강북구</li>
-					<li>강서구</li>
-					<li>관악구</li>
-					<li>광진구</li>
-					<li>구로구</li>
-					<li>금천구</li>
-					<li>노원구</li>
-					<li>도봉구</li>
-					<li>동대문구</li>
-					<li>동작구</li>
-					<li>마포구</li>
-					<li>서대문구</li>
-					<li>서초구</li>
-					<li>성동구</li>
-					<li>성북구</li>
-					<li>송파구</li>
-					<li>양천구</li>
-					<li>영등포구</li>
-					<li>용산구</li>
-					<li>은평구</li>
-					<li>종로구</li>
-					<li>중구</li>
-					<li>중랑구</li>
+					<li class="all">전체</li>
+					<c:forEach var="area" items="${allAreaList}">
+						<c:forEach var="my" items="${myAreaList}">
+							<c:if test="${area.area_code eq my.area_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<c:choose>
+									<c:when test="${area.name == '온라인'}">
+										<li class="online select">${area.name}</li>
+									</c:when>	
+									<c:otherwise>
+										<li class="select">${area.name}</li>
+									</c:otherwise>	
+								</c:choose>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${area.name == '온라인'}">
+										<li class="online">${area.name}</li>
+									</c:when>	
+									<c:otherwise>
+										<li>${area.name}</li>
+									</c:otherwise>	
+								</c:choose>
+							</c:otherwise>
+						</c:choose>												
+					</c:forEach>
 				</ul>
 			</div>
 			<button type="button" id="opSearch_btn">선택 조건으로 검색</button>
@@ -279,12 +273,13 @@
 			</div>
 			
 		</div>
-		
-		<div class="info_div">
-			<p>원하는 모임을 찾지 못하셨나요?</p>
-			<span class="p_color">그럼 직접 만들어보세요!</span>
-		</div>
-		<div id="open_btn"></div>		
+		<c:if test="${not empty login}">
+			<div class="info_div">
+				<p>원하는 모임을 찾지 못하셨나요?</p>
+				<span class="p_color">그럼 직접 만들어보세요!</span>
+			</div>
+			<div id="open_btn"></div>	
+		</c:if>			
 	</section>
 		
 	<!-- 모임 개설 팝업 -->
@@ -293,66 +288,12 @@
 		<button type="button" class="closeBtn">닫기</button>
 		<div id="cateChoice">
 			<ul>
-				<li>
-					<img src="../resources/img/hobby_img/h_001.png" />
-					<p class="hobby_name">창작</p>
-				</li>
-		        <li>
-					<img src="../resources/img/hobby_img/h_002.png" />
-					<p class="hobby_name">액티비티</p>
-		        </li>
-		        <li>
-					<img src="../resources/img/hobby_img/h_003.png" />
-					<p class="hobby_name">아웃도어</p>
-				</li>
-		        <li>
-					<img src="../resources/img/hobby_img/h_004.png" />
-					<p class="hobby_name">사진/영상</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_005.png" />
-					<p class="hobby_name">음악</p>	
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_006.png" />
-					<p class="hobby_name">게임</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_007.png" />
-					<p class="hobby_name">여행</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_008.png" />
-					<p class="hobby_name">요리</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_009.png" />
-					<p class="hobby_name">문화</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_010.png" />
-					<p class="hobby_name">봉사</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_011.png" />
-					<p class="hobby_name">직무/커리어</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_012.png" />
-					<p class="hobby_name">수집</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_013.png" />
-					<p class="hobby_name">반려동물</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_014.png" />
-					<p class="hobby_name">차/오토바이</p>
-				</li>
-				<li>
-					<img src="../resources/img/hobby_img/h_015.png" />
-					<p class="hobby_name">자유주제</p>
-				</li>
+				<c:forEach var="hobby" items="${allHobbyList}">
+					<li>
+						<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+						<p class="hobby_name">${hobby.name}</p>
+					</li>				
+				</c:forEach>
 			</ul>
 		</div>
 	</div>
