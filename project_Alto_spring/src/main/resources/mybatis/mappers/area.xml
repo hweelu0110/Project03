@@ -22,4 +22,23 @@
 			AND MEM_ID = #{mem_id}
 		]]>
 	</select>
+	
+	<delete id="delMemArea">
+		DELETE FROM ALTO_M_AREA WHERE MEM_ID = #{mem_id}
+	</delete>
+	
+	<insert id="updateMemArea" parameterType="java.util.Map">
+		<selectKey keyProperty="m_area_Code" resultType="String" order="BEFORE">
+			<![CDATA[ 
+				SELECT seq_Marea_code.nextval AS M_AREA_CODE FROM SYS.DUAL
+			]]>
+		</selectKey>		 
+			 
+		<foreach collection="areaList" item="item" index="index" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			<![CDATA[
+				INTO ALTO_M_AREA (M_AREA_CODE, AREA_CODE, MEM_ID)
+				VALUES (#{m_area_Code}+#{index}, #{item.area_code}, #{mem_id})
+			]]>
+		</foreach>		
+	</insert>
 </mapper>

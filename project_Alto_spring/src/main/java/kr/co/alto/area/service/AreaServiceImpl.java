@@ -1,6 +1,8 @@
 package kr.co.alto.area.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -19,9 +21,22 @@ public class AreaServiceImpl implements AreaService {
 	private AreaDAO areaDAO;
 
 	@Override
-	public List<AreaDTO> listAreas() throws DataAccessException {
-		List<AreaDTO> areaList = areaDAO.selectAllAreaList();
+	public Map<String, Object> listAreas(String mem_id) throws DataAccessException {
+		Map<String, Object> areaList = new HashMap<>();
+		
+		List<AreaDTO> AllareaList = areaDAO.selectAllAreaList();
+		List<AreaDTO> MyareaList = areaDAO.selectMyAreaList(mem_id);
+		
+		areaList.put("AllareaList", AllareaList);
+		areaList.put("MyareaList", MyareaList);
+		
 		return areaList;
+	}
+
+	@Override
+	public void memAreaUpdate(String mem_id, Map memAreaMap) throws DataAccessException {
+		areaDAO.delMemArea(mem_id);		
+		areaDAO.updateMemArea(memAreaMap);
 	}
 
 }

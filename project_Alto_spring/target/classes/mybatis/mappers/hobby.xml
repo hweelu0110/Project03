@@ -55,16 +55,19 @@
 		DELETE FROM ALTO_M_HOBBY WHERE MEM_ID = #{mem_id}
 	</delete>
 	
-	<insert id="updateMemHobby" parameterType="java.util.List">
-		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
-			<choose>
-				<when test="item.hobbysubList != null">
-					<![CDATA[ 
-						INSERT INTO ALTO_M_HOBBY
-						VALUES(seq_Mhobby_code.nextval, #{mem_id}, #{hobby_code}, #{hobby_sub_code})
-					]]>					
-				</when>
-			</choose>
+	<insert id="updateMemHobby" parameterType="java.util.Map">
+		<selectKey keyProperty="m_hobby_Code" resultType="String" order="BEFORE">
+			<![CDATA[ 
+				SELECT seq_Mhobby_code.nextval AS M_HOBBY_CODE FROM SYS.DUAL
+			]]>
+		</selectKey>		 
+			 
+		<foreach collection="hobbysubList" item="item" index="index" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			<![CDATA[
+				INTO ALTO_M_HOBBY (M_HOBBY_CODE, MEM_ID, HOBBY_CODE, HOBBY_SUB_CODE)
+				VALUES (#{m_hobby_Code}+#{index}, #{mem_id}, #{item.hobby_code}, #{item.hobby_sub_code})
+			]]>
 		</foreach>	
 	</insert>
+	
 </mapper>

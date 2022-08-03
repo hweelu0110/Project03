@@ -49,13 +49,9 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 
 	@Override
-	public void memHobbyUpdate(String mem_id, HashMap<String, Object> memHobbyList) throws DataAccessException {
-		hobbyDAO.delMemHobby(mem_id);
-		
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("mem_id", mem_id);
-		map.put("memHobbyList",memHobbyList);
-		hobbyDAO.updateMemHobby(map);
+	public void memHobbyUpdate(String mem_id, Map memHobbyMap) throws DataAccessException {
+		hobbyDAO.delMemHobby(mem_id);		
+		hobbyDAO.updateMemHobby(memHobbyMap);
 		
 	}
 
