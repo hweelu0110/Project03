@@ -95,33 +95,62 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		String[] sub_codeList = request.getParameterValues("sub_code");
 		int mCnt = main_codeList.length;
 		int sCnt = sub_codeList.length;
-		
-		HashMap<String, Object> memHobbyList = new HashMap<>();
+		System.out.println("메인 개수 "+mCnt+" / 서브 개수 "+sCnt );
+		Map memHobbyMap = new HashMap<>();
 		List<HobbysubDTO> hobbysubList = new ArrayList<>();
 		if(sub_codeList != null && sCnt != 0) {
-			String main_code;
-			String sub_code;
+			String main_code = "";
+			String sub_code = "";
 			
-			for(int i=0; i<mCnt ; i++) {
-				String mCode = main_codeList[i].substring(6);
-				
-				for(int j=0; j<sCnt ; j++) {
-					String sCode = sub_codeList[j].substring(2,4);
-					main_code = main_codeList[i];
+			for(int i=0; i<sCnt ; i++) {
+				String sCode = sub_codeList[i].substring(2,4);				
+				sub_code = sub_codeList[i];
+				for(int j=0; j<mCnt; j++) {
+					String mCode = main_codeList[j].substring(6);
 					if(sCode.equals(mCode)) {
-						sub_code = sub_codeList[j];				
-							
-					}else {
-						sub_code = "";
+						main_code = main_codeList[j];						
 					}
 				}
+				HobbysubDTO hobbysubDTO = new HobbysubDTO();
+				hobbysubDTO.setHobby_code(main_code);
+				hobbysubDTO.setHobby_sub_code(sub_code);
+				System.out.println("저장확인?? " + hobbysubDTO.getHobby_code() +", " + hobbysubDTO.getHobby_sub_code());
+				hobbysubList.add(hobbysubDTO);
+				
 			}
-			memHobbyList.put("hobbysubList", hobbysubList);
+			
+			int count = 0;
+			for(int i=0; i<mCnt; i++) {
+				String mCode = main_codeList[i].substring(6);
+				main_code = main_codeList[i];
+				for(int j=0; j<sCnt; j++) {
+					String sCode = sub_codeList[j].substring(2,4);				
+					if(mCode.equals(sCode)) {
+						++count;
+						System.out.println(count);
+					}
+				}
+				
+				if(count == 0) {
+					HobbysubDTO hobbysubDTO = new HobbysubDTO();
+					hobbysubDTO.setHobby_code(main_code);
+					hobbysubDTO.setHobby_sub_code("");
+					System.out.println("저장확인?? " + hobbysubDTO.getHobby_code() +", " + hobbysubDTO.getHobby_sub_code());
+					hobbysubList.add(hobbysubDTO);					
+				}else {
+					count = 0;
+				}
+			}
+			
+			System.out.println(hobbysubList.size()); 
+			
+			memHobbyMap.put("hobbysubList", hobbysubList);
+			memHobbyMap.put("mem_id", mem_id);
 		}		
 		
 		try {
 			
-			hobbyService.memHobbyUpdate(mem_id, memHobbyList);
+			hobbyService.memHobbyUpdate(mem_id, memHobbyMap);
 				
 			message = "<script>";
 			message += " alert('내 취미 설정 완료.');";
