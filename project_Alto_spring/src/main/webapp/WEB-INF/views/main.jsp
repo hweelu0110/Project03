@@ -5,6 +5,8 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="hobbyList" value="${memInfoMap.hobbyList}" />
+<c:set var="areaList" value="${memInfoMap.areaList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,20 +83,28 @@
 				</ul>
 			</div>
 			<div>
-				<p class="sub_menu"><a href="">내정보수정</a></p>
+				<p class="sub_menu"><a href="${path}/mypage/myMain.do">내정보수정</a></p>
 				<h2 class="my_area">내 지역</h2>
 				<ul class="area_list">
-					<li>성동구</li>
-					<li>강남구</li>
-					<li>용산구</li>
+					<c:if test="${not empty areaList}">
+						<c:forEach var="area" items="${areaList}">
+							<li>${area.name}</li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty areaList}">
+						<li><a href="${path}/mypage/memArea.do">지역 설정하기</a></li>
+					</c:if>
 				</ul>
 				<h2 class="my_hobby">내 취미</h2>
 				<ul class="hobby_list">
-					<li><img src="resources/img/hobby_img/h_001.png"></li>
-					<li><img src="resources/img/hobby_img/h_002.png"></li>
-					<li><img src="resources/img/hobby_img/h_003.png"></li>
-					<li><img src="resources/img/hobby_img/h_004.png"></li>
-					<li><img src="resources/img/hobby_img/h_005.png"></li>
+					<c:if test="${not empty hobbyList}">
+						<c:forEach var="hobby" items="${hobbyList}">
+							<li><img src="resources/img/hobby_img/${hobby.hobby_code}.png"></li>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty hobbyList}">
+						<li><a href="${path}/mypage/memHobby.do">취미 설정하기</a></li>
+					</c:if>						
 				</ul>
 			</div>
 			<p class="mem_close">접기</p>

@@ -34,7 +34,7 @@ public class AreaServiceImpl implements AreaService {
 	}
 
 	@Override
-	public void memAreaUpdate(String mem_id, Map memAreaMap) throws DataAccessException {
+	public void memAreaUpdate(String mem_id, Map<String, Object> memAreaMap) throws DataAccessException {
 		areaDAO.delMemArea(mem_id);		
 		areaDAO.updateMemArea(memAreaMap);
 	}

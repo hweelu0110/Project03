@@ -49,7 +49,7 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 
 	@Override
-	public void memHobbyUpdate(String mem_id, Map memHobbyMap) throws DataAccessException {
+	public void memHobbyUpdate(String mem_id, Map<String, Object> memHobbyMap) throws DataAccessException {
 		hobbyDAO.delMemHobby(mem_id);		
 		hobbyDAO.updateMemHobby(memHobbyMap);
 		

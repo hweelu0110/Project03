@@ -14,5 +14,5 @@ public interface AreaDAO {
 
 	public void delMemArea(String mem_id) throws DataAccessException;
 
-	public void updateMemArea(Map memAreaMap) throws DataAccessException;
+	public void updateMemArea(Map<String, Object> memAreaMap) throws DataAccessException;
 }
