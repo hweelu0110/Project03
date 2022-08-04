@@ -15,4 +15,6 @@ public interface ClassController {
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView editClass(String class_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

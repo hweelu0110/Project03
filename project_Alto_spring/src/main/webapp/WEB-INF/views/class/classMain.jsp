@@ -48,9 +48,9 @@
 					</td>
 					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000013"><img alt="반려동물" src="../resources/img/hobby_img/hm000013.png"><br>반려동물</a>
 					</td>
-					<td><img alt="수집" src="../resources/img/hobby_img/hm000014.png"><br>수집</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000014"><img alt="수집" src="../resources/img/hobby_img/hm000014.png"><br>수집</a>
 					</td>
-					<td><img alt="자유주제" src="../resources/img/hobby_img/hm000015.png"><br>자유주제</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000015"><img alt="자유주제" src="../resources/img/hobby_img/hm000015.png"><br>자유주제</a>
 					</td>
 				</tr>
 				<tr>

@@ -59,4 +59,19 @@ public class ClassDAOImpl implements ClassDAO {
 		return sqlSession.selectOne("mapper.class.selectNewImageFileNO");
 	}
 
+	@Override
+	public ClassDTO selectClass(String class_code) throws DataAccessException {
+		System.out.println("DAO : "+class_code);
+		
+		return sqlSession.selectOne("mapper.class.selectClassVi", class_code);
+	}
+
+	@Override
+	public List<ImageDTO> selectImageFileList(String class_code) throws DataAccessException {
+
+		List<ImageDTO> imageFileList = sqlSession.selectList("mapper.class.selectImageFileListVi", class_code);
+		
+		return imageFileList;
+	}
+
 }

@@ -9,6 +9,7 @@
 		<result property="className" column="className" />
 		<result property="hobby_code" column="hobby_code" />
 		<result property="hobby_sub_code" column="hobby_sub_code" />
+		<result property="hobby_sub_code" column="hobby_sub_name" />
 		<result property="area_code" column="area_code" />
 		<result property="manager" column="manager" />
 		<result property="member_num" column="member_num" />
@@ -112,6 +113,25 @@
 			WHERE imageFileNO = #{imageFileNO}
 		]]>
 	</select>
+	
+	<select id="selectClassVi" resultType="classDTO" parameterType="String">
+		<![CDATA[
+			SELECT a.NAME AS area_name, h.NAME AS hobby_name, hs.NAME AS hobby_sub_name, c.*
+			FROM ALTO_CLASS c, ALTO_AREA a, ALTO_HOBBY h, ALTO_HOBBY_SUB hs
+			WHERE a.AREA_CODE = c.AREA_CODE
+			AND c.HOBBY_CODE = h.HOBBY_CODE
+			AND c.HOBBY_SUB_CODE  = hs.HOBBY_SUB_CODE 
+			AND CLASS_CODE = ${class_code}
+		]]>
+	</select>
 
+	<select id="selectImageFileListVi" resultMap="classImgResult" parameterType="String">
+		<![CDATA[
+			SELECT * FROM ALTO_CLASS_IMAGE
+			WHERE CLASS_CODE = #{class_code}	
+			ORDER BY IMAGEFILENO		
+		]]>
+	</select>
+	
 </mapper>
 

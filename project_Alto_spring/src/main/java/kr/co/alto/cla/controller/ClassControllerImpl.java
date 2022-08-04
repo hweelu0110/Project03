@@ -111,7 +111,15 @@ public class ClassControllerImpl implements ClassController {
 		
 		List<ClassDTO> classList = classService.listClass(listMap);
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		List<AreaDTO> areaList = areaService.listAreas();
+		mav.addObject("areaList", areaList);
+
+		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		mav.addObject("hobbyList", hobbyList);
+
 		mav.addObject("classList", classList);
+		mav.addObject("listMap", listMap);
 		return mav;
 	}
 
@@ -210,6 +218,32 @@ public class ClassControllerImpl implements ClassController {
 			}
 		}
 		return fileList;
+	}
+
+	@Override
+	@RequestMapping(value = "/class/editClass.do", method = RequestMethod.GET)
+	public ModelAndView editClass(@RequestParam("class_code") String class_code, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		
+		System.out.println("컨트롤러 : "+class_code);
+		Map<String, Object> classMap = classService.editClass(class_code);
+
+		ModelAndView mav = new ModelAndView();
+		
+		List<AreaDTO> areaList = areaService.listAreas();
+		mav.addObject("areaList", areaList);
+
+		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		mav.addObject("hobbyList", hobbyList);
+		
+		mav.setViewName(viewName);
+		mav.addObject("classMap", classMap);
+		
+		return mav;
 	}
 	
 	
