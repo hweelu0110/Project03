@@ -282,12 +282,35 @@ input.club_img {
 }
 
 /* 주제 선택 */
+#cateChoice p {
+	display: block;
+    padding: 0;
+    width: auto;
+    text-align: center;
+    font-size: 12px;
+}
 #cateChoice ul li { 
 	display: inline-block;
 	margin: 0 12px 10px;
 	cursor: pointer;
 }
 #cateChoice ul li img { width: 80px; }
+
+/* 주요 활동 지역 */
+#step3 #areaList {
+	margin-top: 20px;
+    padding: 10px 0;
+}
+#step3 #areaList li { 
+	display: inline-block; 
+	padding: 5px;
+    width: 60px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+#step3 #areaList li.online { display: block; margin-left: 7px; }
 
 /* 모임 채팅 */
 #clubChat { margin: 0 auto; width: fit-content; overflow: hidden; }

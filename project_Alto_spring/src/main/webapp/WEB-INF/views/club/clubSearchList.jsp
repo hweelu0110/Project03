@@ -18,31 +18,26 @@
 	<link rel="stylesheet" href="${path}/resources/css/club/club.css" /> 
 	<script src="${path}/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
+		function validateForm(obj) {
+			if(obj.mainArea.value == "") {
+				confirmPopup($("#confirm_popup"), "주요 활동 지역을 선택하세요.")
+				obj.mainArea.focus()
+				return false
+			}else if(obj.title.value == "") {
+				confirmPopup($("#confirm_popup"), "모임 이름을 입력하세요.")
+				obj.title.focus()
+				return false
+			}else if(obj.intro.value == "") {
+				confirmPopup($("#confirm_popup"), "모임 소개를 입력하세요.")
+				obj.intro.focus()
+				return false
+			}else {
+				obj.submit()
+				return true
+			}
+		}
+	
 		$(function() {
-			let cateEle = $("#m_cate li.select")
-			let areaEle = $("#area_list li.select")
-			let selCate = $("#m_cate li.select").length
-			let selArea = $("#area_list li.select").length
-			
-			for (let i=0; i<selCate; i++) {
-				if ($("#tab_menu li:nth-child(1) span").text() === "전체 취미"){
-					$("#tab_menu li:nth-child(1)").html("")
-					$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>")
-				}else {
-					$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).find("p").text()+"</span>")
-				}
-			}
-			
-			for (let i=0; i<selArea; i++) {
-				if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역"){
-					$("#tab_menu li:nth-child(2)").html("")
-					$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(i).text()+"</span>")
-				}else {
-					$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
-				}
-			}
-				
-			
 			$(".clubPopup").hide()
 			
 			/* 클럽개설 버튼 팝업 */
@@ -56,23 +51,33 @@
 			/* 클럽개설 1단계 popup */
 			$("#open_btn").click(function() {
 				confirmPopup($("#step1"))
-				//confirmPopup($("#login_popup"), "모임 개설은 로그인이 필요합니다.")
 			})
 			
 			/* 클럽개설 2단계 popup */
 			$("#step1 ul li").click(function() {
 				let hobbyImg = $(this).children('img').attr('src')
+				let hobbyCode = $(this).find("input").val()
 				$("#step2 .icon_hobby").css({
 					"background-image":"url("+hobbyImg+")"
 				})
+				$("#step2 #cate_m").attr("value",hobbyCode)
 				$("#step1").hide()
 				confirmPopup($("#step2"))
 			})
 			
 			/* 지역 검색 팝업 */
-			$("#step2 form input:nth-child(1)").click(function() {
-				$("#step3").show()
+			$("#step2 form #mainArea").click(function() {
+				confirmPopup($("#step3"))
 			})
+			
+			$("#step3 #areaList li").click(function() {
+				let areaName = $(this).text()
+				let areaCode = $(this).find("input").val()
+				$("#step3").hide()
+				$("#step2 form #mainArea").attr("value",areaName.trim())
+				$("#step2 form #area_code").attr("value",areaCode)
+			})
+			
 		})
 	</script>
 </head>
@@ -286,16 +291,19 @@
 	<div id="step1" class="clubPopup">
 		<h3>주제 선택</h3>
 		<button type="button" class="closeBtn">닫기</button>
-		<div id="cateChoice">
-			<ul>
-				<c:forEach var="hobby" items="${allHobbyList}">
-					<li>
-						<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
-						<p class="hobby_name">${hobby.name}</p>
-					</li>				
-				</c:forEach>
-			</ul>
-		</div>
+		<form name="clubHobbyFrm">
+			<div id="cateChoice">
+				<ul>
+					<c:forEach var="hobby" items="${allHobbyList}">
+						<li>
+							<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+							<p class="hobby_name">${hobby.name}</p>
+							<input type="hidden" value="${hobby.hobby_code}" />
+						</li>				
+					</c:forEach>
+				</ul>
+			</div>
+		</form>		
 	</div>
 	
 	<div id="step2" class="clubPopup">
@@ -304,12 +312,14 @@
 		<h3>모임 개설</h3>
 		<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
 			<span class="icon_area"></span>
-			<input type="text" class="size1" name="mainArea" value="" placeholder="주요활동 지역 찾기" /><br/>
+			<input type="text" class="size1" name="mainArea" id="mainArea" placeholder="주요활동 지역 찾기" autocomplete='off' /><br/>
+			<input type="hidden" name="area_code" id="area_code" />
 			<span class="icon_hobby"></span>
-			<input type="text" class="size1" name="clubName" value="" placeholder="모임 이름" /><br/>
-			<textarea name="clubCont" placeholder="모임 소개 또는 목표"></textarea><br/>
+			<input type="hidden" name="cate_m" id="cate_m" />
+			<input type="text" class="size1" name="title" value="" placeholder="모임 이름" autocomplete='off' /><br/>
+			<textarea name="intro" placeholder="모임 소개 또는 목표" autocomplete='off'></textarea><br/>
 			<span class="icon_mem"></span><p>모임 최대 인원</p>
-			<input type="text" class="size2" name="maxMam" value="200" /><br/>
+			<input type="text" class="size2" name="member_max" value="200" autocomplete='off' /><br/>
 			<input type="submit" class="pointBtn size0" value="모임 만들기" />
 		</form>
 	</div>
@@ -318,11 +328,28 @@
 	<div id="step3" class="clubPopup">
 		<button type="button" class="prevBtn">이전</button>
 		<button type="button" class="closeBtn">닫기</button>
-		<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
-			<input type="text" class="size1" name="mainArea" value="주요활동 지역 찾기" /><br/>				
-		</form>
-		<div id="resultList">
-			
+		<h3>주요활동 지역 선택</h3>
+		<div id="areaList">
+			<form name="clubAreaFrm">
+				<ul>
+					<c:forEach var="area" items="${allAreaList}">
+						<c:choose>
+							<c:when test="${area.name eq '온라인'}">
+								<li class="online">
+									${area.name}
+									<input type="hidden" value="${area.area_code}" />
+								</li>
+							</c:when>
+							<c:otherwise>
+								<li>
+									${area.name}
+									<input type="hidden" value="${area.area_code}" />
+								</li>
+							</c:otherwise>					
+						</c:choose>					
+					</c:forEach>
+				</ul>
+			</form>	
 		</div>
 	</div>
 	

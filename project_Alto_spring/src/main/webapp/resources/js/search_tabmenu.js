@@ -8,6 +8,31 @@
 	$("#s_cate").css("display","none")
 	$("#area_list").css("display","none")
 	
+	
+	let cateEle = $("#m_cate li.select")
+	let areaEle = $("#area_list li.select")
+	let selCate = $("#m_cate li.select").length
+	let selArea = $("#area_list li.select").length
+	
+	for (let i=0; i<selCate; i++) {
+		if ($("#tab_menu li:nth-child(1) span").text() === "전체 취미"){
+			$("#tab_menu li:nth-child(1)").html("")
+			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>")
+		}else {
+			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).find("p").text()+"</span>")
+		}
+	}
+	
+	for (let i=0; i<selArea; i++) {
+		if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역"){
+			$("#tab_menu li:nth-child(2)").html("")
+			$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(i).text()+"</span>")
+		}else {
+			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
+		}
+	}
+	
+	
 	/* tab메뉴 선택 시 - 영역 노출하기 */
 	/* 취미 탭메뉴 */
 	$("#tab_menu li:nth-child(1)").click(function() {
