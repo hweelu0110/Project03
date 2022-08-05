@@ -61,4 +61,14 @@ public class ClubServiceImpl implements ClubService {
 		return clubSearchMap;
 		
 	}
+
+	@Override
+	public void clubOpen(Map<String, Object> clubMap) throws DataAccessException {
+
+		String club_code = clubDAO.selectNewClubCode();
+		
+		clubMap.put("club_code", club_code);
+		
+		clubDAO.clubOpen(clubMap);
+	}
 }

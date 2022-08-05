@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.club">
+	<resultMap type="clubDTO" id="clubResult">		
+		<result property="club_code" column="club_code" />		
+		<result property="title" column="title" />
+		<result property="cate_m" column="cate_m" />
+		<result property="cate_s" column="cate_s" />
+		<result property="area_code" column="area_code" />
+		<result property="manager" column="manager" />
+		<result property="member_num" column="member_num" />
+		<result property="member_max" column="max" />
+		<result property="img" column="img" />
+		<result property="intro" column="intro" />
+		<result property="regidate" column="regidate" />
+		<result property="member_out" column="member_out" />
+	</resultMap>
+	
+	<insert id="clubOpen">
+		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
+		VALUES(#{club_code}, #{title}, #{cate_m}, #{cate_s}, #{area_code}, #{manager}, #{member_max} , #{intro})
+	</insert>
+	
+	<select id="selectNewClubCode" resultType="String">
+		<![CDATA[
+			SELECT nvl(MAX(club_code),0) + 1 FROM ALTO_CLUB
+		]]>
+	</select>
+</mapper>
