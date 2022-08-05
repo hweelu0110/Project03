@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +20,6 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
-import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
 
 @Controller("clubController")
@@ -28,8 +30,6 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Autowired
 	private ClubService clubService;
-	@Autowired
-	private HobbyService hobbyService;
 	@Autowired
 	private ClubDTO clubDTO;
 	
@@ -73,6 +73,38 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		}
 		
 		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/clubRegister.do", method = RequestMethod.POST)
+	public ResponseEntity clubRegister(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type","text/html; charset=utf-8");
+		
+		String message;
+		ResponseEntity resEnt = null;
+		
+		try {	
+						
+			
+			message = "<script>";
+			message += " alert('모임 개설 완료');";
+			message += " location.href='"+request.getContextPath()+"/club/clubInformation.do';";
+			message += "</script>";
+			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/club/clubSearchList.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+			e.printStackTrace();
+		}
+				
+		return resEnt;
 	}
 
 	

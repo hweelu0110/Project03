@@ -310,7 +310,7 @@
 		<button type="button" class="prevBtn">이전</button>
 		<button type="button" class="closeBtn">닫기</button>
 		<h3>모임 개설</h3>
-		<form action="" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
+		<form action="${path}/club/clubRegister.do" name="clubOpenFrm" method="post" onsubmit="return validateForm(this)">
 			<span class="icon_area"></span>
 			<input type="text" class="size1" name="mainArea" id="mainArea" placeholder="주요활동 지역 찾기" autocomplete='off' /><br/>
 			<input type="hidden" name="area_code" id="area_code" />
