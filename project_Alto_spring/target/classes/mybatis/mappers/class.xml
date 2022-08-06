@@ -146,9 +146,9 @@
 		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
 			<choose>
 				<when test="item.imageFileName != null">
-					UPDATE SELF_IMAGEFILE 
+					UPDATE ALTO_CLASS_IMAGE 
 					SET IMAGEFILENAME = #{item.imageFileName}
-					WHERE ARTICLENO = #{item.class_code}
+					WHERE class_code = #{item.class_code}
 					AND IMAGEFILENO = #{item.imageFileNO}
 				</when>
 			</choose>

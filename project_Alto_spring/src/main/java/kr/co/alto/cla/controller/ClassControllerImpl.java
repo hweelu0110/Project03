@@ -291,7 +291,8 @@ public class ClassControllerImpl implements ClassController {
 			}
 		}
 		
-		String class_code = (String)classMap.get("class_code");
+		String _class_code = (String)classMap.get("class_code");
+		String class_code = _class_code.trim();
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders reHttpHeaders = new HttpHeaders();
