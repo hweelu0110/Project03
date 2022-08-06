@@ -74,4 +74,29 @@ public class ClassDAOImpl implements ClassDAO {
 		return imageFileList;
 	}
 
+	@Override
+	public void updateClass(Map<String, Object> classMap) throws DataAccessException {
+		sqlSession.update("mapper.class.updateClass", classMap);
+	}
+
+	@Override
+	public void updateImageFile(Map<String, Object> classMap) throws DataAccessException {
+		
+		List<ImageDTO> imageFileList = (ArrayList)classMap.get("imageFileList");
+		String class_code = (String)classMap.get("class_code");
+		for(int i=imageFileList.size()-1; i>=0; i--) {
+			ImageDTO imageDTO = imageFileList.get(i);
+			String imageFileName = imageDTO.getImageFileName();
+			if(imageFileName == null) {
+				imageFileList.remove(i);
+			} else {
+				imageDTO.setClass_code(class_code);
+			}
+		}
+		
+		if(imageFileList!=null && imageFileList.size()!=0) {
+			sqlSession.update("mapper.class.updateImageFile", imageFileList);
+		}
+	}
+
 }

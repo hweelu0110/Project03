@@ -118,7 +118,7 @@
 </head>
 <body>
 	<div class="container my-3" id="classbody">
-	<form action="${contextPath }/class/addNewClass.do" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+	<form action="${contextPath }/class/modClass.do" name="class_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
 				<tr class="table-dark">
@@ -129,6 +129,7 @@
 				<tr>
 					<td width="10%"><b>클래스명 *</b></td>
 					<td colspan="2" width="40%">
+						<input type="hidden" name="class_code" value="${classIf.class_code}"  />
 						<input type="text" name="className" value="${classIf.className }" disabled/>
 					</td>
 					<td width="10%"><b>참여인원</b></td>
@@ -199,6 +200,15 @@
 					<input type="file" name="isfile3" accept="image/jpeg, image/png, image/jpg">
 					<input type="file" name="isfile4" accept="image/jpeg, image/png, image/jpg">
 					</td>
+					
+					<c:forEach var="item" items="${imageFileList}" varStatus="status" >
+						<input type="hidden"   name="oldFileName" value="${item.imageFileName }" />
+			 		    <input type="hidden"   name="imageFileNO" value="${item.imageFileNO }" />
+						<c:if test="${status.last eq true}">
+							<input type="hidden" name="pre_img_num"  value="${status.count }"/>	<!-- 기존의 이미지수 -->
+							<input type="hidden" name="added_img_num"  id="added_img_num"  value="${status.count }"/>	<!-- 수정시 새로 추가된 이미지수 -->
+						</c:if>
+					</c:forEach>
 				</tr>
 				<tr>
 					<td colspan="6" align="right">

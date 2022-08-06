@@ -128,10 +128,31 @@
 	<select id="selectImageFileListVi" resultMap="classImgResult" parameterType="String">
 		<![CDATA[
 			SELECT * FROM ALTO_CLASS_IMAGE
-			WHERE CLASS_CODE = #{class_code}	
+			WHERE CLASS_CODE = ${class_code}	
 			ORDER BY IMAGEFILENO		
 		]]>
 	</select>
 	
+	<update id="updateClass" parameterType="java.util.Map">
+		UPDATE ALTO_CLASS 
+		SET MEMBER_MAX = #{member_max}, PRICE = #{price}, STARTDATE = #{startdate}, ENDDATE = #{enddate}, INTRO = #{intro}, CURRICULUM = #{curriculum}, TEACHERINFO = #{teacherInfo}
+		<if test="imageFileName != '' and imageFileName != null">
+			, IMAGEFILENAME=#{imageFileName}
+		</if>
+		WHERE CLASS_CODE = #{class_code}
+	</update>
+	
+	<update id="updateImageFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.imageFileName != null">
+					UPDATE SELF_IMAGEFILE 
+					SET IMAGEFILENAME = #{item.imageFileName}
+					WHERE ARTICLENO = #{item.class_code}
+					AND IMAGEFILENO = #{item.imageFileNO}
+				</when>
+			</choose>
+		</foreach>
+	</update>
 </mapper>
 

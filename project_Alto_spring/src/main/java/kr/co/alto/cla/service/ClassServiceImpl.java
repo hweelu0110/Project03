@@ -52,4 +52,19 @@ public class ClassServiceImpl implements ClassService {
 		return classMap;
 	}
 
+	@Override
+	public void modClass(Map<String, Object> classMap) throws Exception {
+
+		classDAO.updateClass(classMap);
+		
+		List<ImageDTO> imageFileList = (List<ImageDTO>) classMap.get("imageFileList");
+		
+		if(imageFileList != null && imageFileList.size() != 0) {
+			int added_img_num = Integer.parseInt((String)classMap.get("added_img_num"));
+			int pre_img_num = Integer.parseInt((String)classMap.get("pre_img_num"));
+			
+			classDAO.updateImageFile(classMap);
+		}
+	}
+
 }

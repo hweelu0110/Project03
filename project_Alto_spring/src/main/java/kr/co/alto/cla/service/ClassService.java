@@ -10,4 +10,5 @@ public interface ClassService {
 	public List<ClassDTO> listClass(Map listMap) throws Exception;
 	public String addNewArticle(Map classMap) throws Exception;
 	public Map<String, Object> editClass(String class_code) throws Exception;
+	public void modClass(Map<String, Object> classMap) throws Exception;
 }
