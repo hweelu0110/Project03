@@ -22,6 +22,8 @@ public class ItemDTO {
 	private String item_code;
 	private String hobby_code;
 	private String hobby_sub_code;
+	private String hobby_name;
+	private String hobby_sub_name;
 	private String item_name;
 	private int item_count;
 	private int quantity;
@@ -90,6 +92,19 @@ public class ItemDTO {
 	public void setRegidate(Date regidate) {
 		this.regidate = regidate;
 	}
+	public String getHobby_name() {
+		return hobby_name;
+	}
+	public void setHobby_name(String hobby_name) {
+		this.hobby_name = hobby_name;
+	}
+	public String getHobby_sub_name() {
+		return hobby_sub_name;
+	}
+	public void setHobby_sub_name(String hobby_sub_name) {
+		this.hobby_sub_name = hobby_sub_name;
+	}
+	
 	
 	
 }

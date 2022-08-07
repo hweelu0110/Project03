@@ -60,4 +60,16 @@ public class ItemDAOImpl implements ItemDAO {
 		return sqlSession.selectOne("mapper.item.selectNewImageFileNO");
 	}
 
+	@Override
+	public ItemDTO selectItem(String item_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.item.selectItemVi", item_code);
+	}
+
+	@Override
+	public List<ImageDTO> selectImageFileList(String item_code) throws DataAccessException {
+
+		List<ImageDTO> imageFileList = sqlSession.selectList("mapper.item.selectImageFileListVi", item_code);
+		return imageFileList;
+	}
+
 }

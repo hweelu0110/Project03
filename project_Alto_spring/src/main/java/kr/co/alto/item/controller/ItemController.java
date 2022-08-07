@@ -14,4 +14,7 @@ public interface ItemController {
 	public ModelAndView listItem (String sort, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addNewItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView editItem(String item_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }

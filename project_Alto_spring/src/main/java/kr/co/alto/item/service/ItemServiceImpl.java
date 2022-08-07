@@ -1,5 +1,6 @@
 package kr.co.alto.item.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.alto.item.dao.ItemDAO;
+import kr.co.alto.item.dto.ImageDTO;
 import kr.co.alto.item.dto.ItemDTO;
 
 @Service("itemService")
@@ -30,6 +32,22 @@ public class ItemServiceImpl implements ItemService {
 		itemMap.put("item_code", item_code);
 		itemDAO.insertNewImage(itemMap);
 		return item_code;
+	}
+
+	@Override
+	public Map<String, Object> editItem(String item_code) throws Exception {
+
+		// 조회수를 갱신하기 전 먼저 글번호에 해당되는 글정보를 조회
+		ItemDTO itemDTO = itemDAO.selectItem(item_code);
+		
+		//이미지 부분 정보 요청
+		List<ImageDTO> imageFileList = itemDAO.selectImageFileList(item_code);		
+		
+		Map<String, Object> classMap = new HashMap<>();
+		classMap.put("itemDTO", itemDTO);
+		classMap.put("imageFileList", imageFileList);		
+
+		return classMap;
 	}
 
 }

@@ -8,6 +8,8 @@
 		<result property="item_code" column="item_code" />		
 		<result property="hobby_code" column="hobby_code" />
 		<result property="hobby_sub_code" column="hobby_sub_code" />
+		<result property="hobby_name" column="hobby_name" />
+		<result property="hobby_sub_name" column="hobby_sub_name" />
 		<result property="item_name" column="item_name" />
 		<result property="item_count" column="item_count" />
 		<result property="quantity" column="quantity" />
@@ -81,6 +83,24 @@
 			SELECT *
 			FROM alto_item_image
 			WHERE imageFileNO = #{imageFileNO}
+		]]>
+	</select>
+	
+		<select id="selectItemVi" resultType="itemDTO" parameterType="String">
+		<![CDATA[
+			SELECT h.NAME AS hobby_name, hs.NAME AS hobby_sub_name, i.*
+			FROM ALTO_ITEM i, ALTO_HOBBY h, ALTO_HOBBY_SUB hs
+			WHERE i.HOBBY_CODE = h.HOBBY_CODE
+			AND i.HOBBY_SUB_CODE  = hs.HOBBY_SUB_CODE 
+			AND item_code = ${item_code}
+		]]>
+	</select>
+
+	<select id="selectImageFileListVi" resultMap="ItemImgResult" parameterType="String">
+		<![CDATA[
+			SELECT * FROM ALTO_ITEM_IMAGE
+			WHERE item_code = ${item_code}	
+			ORDER BY IMAGEFILENO		
 		]]>
 	</select>
 

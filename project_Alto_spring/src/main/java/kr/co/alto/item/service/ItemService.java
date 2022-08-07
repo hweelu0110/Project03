@@ -10,4 +10,5 @@ public interface ItemService {
 
 	public List<ItemDTO> listItem(String sort) throws Exception;
 	public String addNewArticle(Map itemMap) throws Exception;
+	public Map<String, Object> editItem(String item_code) throws Exception;
 }

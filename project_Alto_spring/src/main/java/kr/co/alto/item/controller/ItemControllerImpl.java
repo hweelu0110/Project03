@@ -184,6 +184,33 @@ public class ItemControllerImpl implements ItemController {
 		}
 		return fileList;
 	}
+
+	@Override
+	@RequestMapping(value = "/item/editItem.do", method = RequestMethod.GET)
+	public ModelAndView editItem(@RequestParam("item_code") String item_code, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		
+		System.out.println("컨트롤러 : "+item_code);
+		Map<String, Object> itemMap = itemService.editItem(item_code);
+
+		ModelAndView mav = new ModelAndView();
+		
+		List<AreaDTO> areaList = areaService.listAreas();
+		mav.addObject("areaList", areaList);
+
+		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		mav.addObject("hobbyList", hobbyList);
+		
+		mav.setViewName(viewName);
+		mav.addObject("itemMap", itemMap);
+		
+		return mav;
+		
+	}
 	
 	
 }
