@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.alto.area.dao.AreaDAO;
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.club.dao.ClubDAO;
+import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
@@ -63,12 +64,12 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public void clubOpen(Map<String, Object> clubMap) throws DataAccessException {
+	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
 
 		String club_code = clubDAO.selectNewClubCode();
 		
-		clubMap.put("club_code", club_code);
+		clubDTO.setClub_code(club_code);
 		
-		clubDAO.clubOpen(clubMap);
+		clubDAO.clubOpen(clubDTO);
 	}
 }

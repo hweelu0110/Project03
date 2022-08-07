@@ -84,17 +84,14 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		
 		String message;
 		ResponseEntity resEnt = null;
-		Map<String, Object> clubMap = new HashMap<>();
 		
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String manager = memberDTO.getMem_id();
 		
-		clubDTO.setManager(manager);		
-		
-		clubMap.put("clubDTO", clubDTO);
+		clubDTO.setManager(manager);	
 		
 		try {	
-			clubService.clubOpen(clubMap);			
+			clubService.clubOpen(clubDTO);			
 			
 			message = "<script>";
 			message += " alert('모임 개설 완료');";

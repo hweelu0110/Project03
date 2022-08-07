@@ -18,9 +18,9 @@
 		<result property="member_out" column="member_out" />
 	</resultMap>
 	
-	<insert id="clubOpen">
-		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
-		VALUES(#{club_code}, #{title}, #{cate_m}, #{cate_s}, #{area_code}, #{manager}, #{member_max} , #{intro})
+	<insert id="clubOpen" parameterType="clubDTO">
+		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
+		VALUES(#{club_code}, #{title}, #{cate_m}, #{area_code}, #{manager}, #{member_max} , #{intro})
 	</insert>
 	
 	<select id="selectNewClubCode" resultType="String">
