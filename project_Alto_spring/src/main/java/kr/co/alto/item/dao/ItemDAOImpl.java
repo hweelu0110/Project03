@@ -72,4 +72,29 @@ public class ItemDAOImpl implements ItemDAO {
 		return imageFileList;
 	}
 
+	@Override
+	public void updateItem(Map<String, Object> itemMap) throws DataAccessException {
+		sqlSession.update("mapper.item.updateItem", itemMap);
+	}
+
+	@Override
+	public void updateImageFile(Map<String, Object> itemMap) throws DataAccessException {
+
+		List<ImageDTO> imageFileList = (ArrayList)itemMap.get("imageFileList");
+		String item_code = (String)itemMap.get("item_code");
+		for(int i=imageFileList.size()-1; i>=0; i--) {
+			ImageDTO imageDTO = imageFileList.get(i);
+			String imageFileName = imageDTO.getImageFileName();
+			if(imageFileName == null) {
+				imageFileList.remove(i);
+			} else {
+				imageDTO.setItem_code(item_code);
+			}
+		}
+		
+		if(imageFileList!=null && imageFileList.size()!=0) {
+			sqlSession.update("mapper.item.updateImageFile", imageFileList);
+		}
+	}
+
 }

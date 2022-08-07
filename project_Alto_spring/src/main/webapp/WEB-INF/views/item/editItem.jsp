@@ -77,7 +77,7 @@
 </head>
 <body>
 	<div class="container my-3" id="classbody">
-	<form action="${contextPath }/item/editItem.do" name="item_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
+	<form action="${contextPath }/item/modItem.do" name="item_fileForm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table class="table table-striped" style="border:none; margin-top: 150px">
 			<thead>
 				<tr class="table-dark">
@@ -88,8 +88,8 @@
 				<tr>
 					<td width="20%"><b>상품명 *</b></td>
 					<td colspan="2" width="40%">
-						<input type="hidden" name="class_code" value="${itemIf.item_code}"  />
-						<input type="text" name="className" value="${itemIf.item_name }" disabled/>
+						<input type="hidden" name="item_code" value="${itemIf.item_code}"  />
+						<input type="text" name="itemName" value="${itemIf.item_name }" disabled/>
 					</td>
 				</tr>
 				<tr>

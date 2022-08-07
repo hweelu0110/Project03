@@ -211,6 +211,128 @@ public class ItemControllerImpl implements ItemController {
 		return mav;
 		
 	}
+
+	@Override
+	@RequestMapping(value = "/item/modItem.do", method = RequestMethod.POST)
+	public ResponseEntity modItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception {
+
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> itemMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			if(name.equals("imageFileNO")) {
+				String[] values = multipartRequest.getParameterValues(name);
+				itemMap.put(name, values);
+			} else if (name.equals("oldFileName")) {
+				String[] values = multipartRequest.getParameterValues(name);
+				itemMap.put(name, values);
+			} else {
+				String values = multipartRequest.getParameter(name);
+				itemMap.put(name, values);
+			}
+		}
+		
+		List<String> fileList = uploadModImageFile(multipartRequest);
+		
+		int added_img_num = Integer.parseInt((String) itemMap.get("added_img_num"));
+		int pre_img_num = Integer.parseInt((String) itemMap.get("pre_img_num"));
+		List<ImageDTO> imageFileList = new ArrayList<ImageDTO>();
+		
+		System.out.println("added_img_num : " + added_img_num + " / pre_img_num : "+pre_img_num);
+		
+		if(fileList != null && fileList.size()!=0) {
+			String[] imageFileNO = (String[])itemMap.get("imageFileNO");
+			for(int i=0; i<added_img_num; i++) {
+				String fileName = fileList.get(i);
+				ImageDTO imageDTO = new ImageDTO();
+				if(i<pre_img_num) { 
+					imageDTO.setImageFileName(fileName);
+					imageDTO.setImageFileNO(Integer.parseInt(imageFileNO[i]));
+					imageFileList.add(imageDTO);
+					itemMap.put("imageFileList", imageFileList);
+				}
+			}
+		}
+		
+		String _item_code = (String)itemMap.get("item_code");
+		String item_code = _item_code.trim();
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders reHttpHeaders = new HttpHeaders();
+		reHttpHeaders.add("content-type", "text/html; charset=utf-8");
+		
+		
+		try {
+			itemService.modItem(itemMap);
+			
+			if(fileList != null && fileList.size() != 0) {
+				for(int i=0; i<fileList.size(); i++) {
+					String fileName = fileList.get(i);
+					if(i<pre_img_num) {
+						if(fileName != null) {
+							File srcFile = new File(CURR_IMAGE_PEPO_PATH+"\\"+"temp"+"\\"+fileName);
+							File destDir = new File(CURR_IMAGE_PEPO_PATH+"\\"+item_code);
+							FileUtils.moveFileToDirectory(srcFile, destDir, true);
+							
+							String[] oldName = (String[]) itemMap.get("oldFileName");
+							String oldFileName = oldName[i];
+							
+							File oldFile = new File(CURR_IMAGE_PEPO_PATH+"\\"+item_code+"\\"+oldFileName);
+							oldFile.delete();
+						}
+					}
+				}
+			}
+			message = "<script>";
+			message += " alert('글이 수정되었습니다.');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/item/listItem.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, reHttpHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해주세요');";
+			message += " location.href='"+multipartRequest.getContextPath()+"/item/listItem.do';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, reHttpHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
+	}
+
+	private List<String> uploadModImageFile(MultipartHttpServletRequest multipartRequest) throws Exception {
+
+		List<String> fileList = new ArrayList<>();
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFileName = mFile.getOriginalFilename();
+			if (originalFileName != "" && originalFileName != null) {
+				fileList.add(originalFileName);
+				
+				File file = new File(CURR_IMAGE_PEPO_PATH +"\\"+ fileName);
+				if (mFile.getSize() != 0) {
+					if (!file.exists()) {
+						file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리들 생성
+						mFile.transferTo(new File(CURR_IMAGE_PEPO_PATH +"\\"+ "temp" +"\\"+ originalFileName)); //임시로
+								//저장된 MultipartFile을 실제 파일로 전송
+					}
+				}
+			}
+			else {													//첨부한 이미지가 없었을 경우
+				fileList.add(null);
+			}
+		}
+		
+		return fileList;
+	}
 	
 	
 }

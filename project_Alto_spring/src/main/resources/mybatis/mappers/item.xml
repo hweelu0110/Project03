@@ -104,5 +104,27 @@
 		]]>
 	</select>
 
+	<update id="updateItem" parameterType="java.util.Map">
+		UPDATE ALTO_ITEM 
+		SET PRICE = #{price}, INTRO = #{intro}, QUANTITY = #{quantity}
+		<if test="imageFileName != '' and imageFileName != null">
+			, IMAGEFILENAME=#{imageFileName}
+		</if>
+		WHERE ITEM_CODE = #{item_code}
+	</update>
+	
+	<update id="updateImageFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.imageFileName != null">
+					UPDATE alto_item_image 
+					SET IMAGEFILENAME = #{item.imageFileName}
+					WHERE item_code = #{item.item_code}
+					AND IMAGEFILENO = #{item.imageFileNO}
+				</when>
+			</choose>
+		</foreach>
+	</update>
+	
 </mapper>
 

@@ -50,4 +50,19 @@ public class ItemServiceImpl implements ItemService {
 		return classMap;
 	}
 
+	@Override
+	public void modItem(Map<String, Object> itemMap) throws Exception {
+
+		itemDAO.updateItem(itemMap);
+		
+		List<ImageDTO> imageFileList = (List<ImageDTO>) itemMap.get("imageFileList");
+		
+		if(imageFileList != null && imageFileList.size() != 0) {
+			int added_img_num = Integer.parseInt((String)itemMap.get("added_img_num"));
+			int pre_img_num = Integer.parseInt((String)itemMap.get("pre_img_num"));
+			
+			itemDAO.updateImageFile(itemMap);
+		}
+	}
+
 }
