@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.co.alto.club.dto.ClubDTO;
+
 @Repository("clubDAO")
 public class ClubDAOImpl implements ClubDAO {
 	@Autowired
@@ -19,8 +21,8 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public void clubOpen(Map<String, Object> clubMap) throws DataAccessException {
-		sqlSession.insert("mapper.club.clubOpen", clubMap);
+	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
+		sqlSession.insert("mapper.club.clubOpen", clubDTO);
 		
 	}
 }
