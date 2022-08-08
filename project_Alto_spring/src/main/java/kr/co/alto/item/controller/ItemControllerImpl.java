@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.area.service.AreaService;
+import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.service.HobbyService;
@@ -59,9 +60,20 @@ public class ItemControllerImpl implements ItemController {
 	@Override
 	@RequestMapping(value = "/item/itemMain.do", method = RequestMethod.GET)
 	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
+String viewName = (String) request.getAttribute("viewName");
+		
+		Map listMapBest = new HashMap<>();
+		listMapBest.put("sort", "quantityS");
+		List<ItemDTO> itemListBest = itemService.listItem(listMapBest);
+		
+		Map listMapNew = new HashMap<>();
+		listMapBest.put("sort", "new");
+		List<ItemDTO> itemListNew = itemService.listItem(listMapNew);
 		
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("itemListBest", itemListBest);
+		mav.addObject("itemListNew", itemListNew);
+		
 		return mav;
 	}
 	
@@ -80,11 +92,36 @@ public class ItemControllerImpl implements ItemController {
 
 	@Override
 	@RequestMapping(value = "/item/listItem.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listItem(@RequestParam(value = "sort", required = false) String sort, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listItem(@RequestParam(value = "sort", required = false) String sort, 
+								@RequestParam(value = "hobbyC", required = false) String hobbyC,
+								HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		List<ItemDTO> itemList = itemService.listItem(sort);
+		
+		Map listMap = new HashMap<>();
+				
+				if(sort!=null) {
+					listMap.put("sort", sort);
+				}
+				
+				if(hobbyC!=null) {
+					if(hobbyC.equals("all")) {
+						listMap.put("hobbyC", "all");
+					} else {
+						listMap.put("hobbyC", hobbyC);
+					}
+				} else {
+					listMap.put("hobbyC", "all");
+				}
+		
+		List<ItemDTO> itemList = itemService.listItem(listMap);
 		ModelAndView mav = new ModelAndView(viewName);
+		
+
+		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		mav.addObject("hobbyList", hobbyList);
+
 		mav.addObject("itemList", itemList);
+		mav.addObject("listMap", listMap);
 		return mav;
 	}
 

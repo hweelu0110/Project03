@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!-- HEADER -->
 	<header>
 		<div>
@@ -7,8 +9,8 @@
 			<nav>
 				<ul id="main_menu">
 					<li><a href="../club/clubMain.jsp">모임</a></li>
-					<li><a href="../class/classMain.do">클래스</a></li>
-					<li><a href="../item/itemMain.jsp">취미용품</a></li>
+					<li><a href="${contextPath }/class/classMain.do">클래스</a></li>
+					<li><a href="${contextPath }/item/itemMain.do">취미용품</a></li>
 				</ul>
 			</nav>
 			<form action="allSearch.jsp" id="allSearch" name="allSearchForm" method="post">

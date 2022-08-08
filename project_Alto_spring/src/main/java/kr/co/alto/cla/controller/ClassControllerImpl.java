@@ -106,7 +106,13 @@ public class ClassControllerImpl implements ClassController {
 		}
 		
 		if(hobbyC!=null) {
-			listMap.put("hobbyC", hobbyC);
+			if(hobbyC.equals("all")) {
+				listMap.put("hobbyC", "all");
+			} else {
+				listMap.put("hobbyC", hobbyC);
+			}
+		} else {
+			listMap.put("hobbyC", "all");
 		}
 		
 		List<ClassDTO> classList = classService.listClass(listMap);

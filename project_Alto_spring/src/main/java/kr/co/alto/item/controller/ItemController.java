@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ItemController {
 	
 	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView listItem (String sort, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listItem (String sort, String hobbyC, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addNewItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	

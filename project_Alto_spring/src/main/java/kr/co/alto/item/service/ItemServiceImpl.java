@@ -21,8 +21,8 @@ public class ItemServiceImpl implements ItemService {
 	private ItemDAO itemDAO;
 	
 	@Override
-	public List<ItemDTO> listItem(String sort) throws Exception {
-		List<ItemDTO> itemList = itemDAO.selectAllitemList(sort);
+	public List<ItemDTO> listItem(Map listMap) throws Exception {
+		List<ItemDTO> itemList = itemDAO.selectAllitemList(listMap);
 		return itemList;
 	}
 

@@ -39,6 +39,13 @@
 			<div id="m_cate">
 				<ul>
 					<li id="m_cate_all" class="all select">전체</li>
+					<c:forEach items="${hobbyList }" var="hobby">
+						<li>
+							<img src="../resources/img/hobby_img/${hobby.hobby_code }.png" />
+							<p class="hobby_name">${hobby.name }</p>
+						</li>
+					</c:forEach>
+					<!-- <li id="m_cate_all" class="all select">전체</li>
 					<li>
 						<img src="../resources/img/hobby_img/hm000001.png" />
 						<p class="hobby_name">창작</p>
@@ -98,7 +105,7 @@
 					<li>
 						<img src="../resources/img/hobby_img/hm000015.png" />
 						<p class="hobby_name">자유주제</p>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div id="s_cate">
@@ -144,11 +151,10 @@
 			<div class="selectBox">Best순</div>
 			<div class="selectBox select_list">
 				<ul>
-					<li><a href="${contextPath }/class/listClass.do?sort=stuU">회원수 많은</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=stuD">회원수 적은</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=fast">최근 일정</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=new">신규</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=old">오래된</a></li>
+					<li><a href="${contextPath }/item/listItem.do??sort=new&hobbyC=${listMap.hobbyC }">최신순</a></li>
+					<li><a href="${contextPath }/item/listItem.do?sort=old&hobbyC=${listMap.hobbyC }">오래된순</a></li>
+					<li><a href="${contextPath }/item/listItem.do?sort=quantityL&hobbyC=${listMap.hobbyC }">재고순</a></li>
+					<li><a href="${contextPath }/item/listItem.do?sort=quantityS&hobbyC=${listMap.hobbyC }">품절임박순</a></li>
 				</ul>
 			</div>
 		</div>

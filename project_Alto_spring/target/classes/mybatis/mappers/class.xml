@@ -39,7 +39,11 @@
 		WHERE a.AREA_CODE = c.AREA_CODE
 		AND c.HOBBY_CODE = h.HOBBY_CODE
 		<if test=" hobbyC != null">
-			AND c.HOBBY_CODE = #{hobbyC}
+		 <if test=" hobbyC == 'all'">
+		 </if>
+		 <if test="hobbyC != 'all'">
+		 	AND c.HOBBY_CODE = #{hobbyC}
+		 </if>
 		</if>
 		<if test="sort == null">
 			order by class_code desc 

@@ -20,8 +20,8 @@ public class ItemDAOImpl implements ItemDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ItemDTO> selectAllitemList(String sort) throws DataAccessException {
-		List<ItemDTO> itemlist = sqlSession.selectList("mapper.item.selectAllitemList", sort);
+	public List<ItemDTO> selectAllitemList(Map listMap) throws DataAccessException {
+		List<ItemDTO> itemlist = sqlSession.selectList("mapper.item.selectAllitemList", listMap);
 		return itemlist;
 	}
 
