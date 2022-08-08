@@ -7,19 +7,31 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import kr.co.alto.board.dto.BoardDTO;
-import kr.co.alto.board.utils.PagingVO;
-
+import kr.co.alto.board.dto.FileDTO;
 public interface BoardDAO {
 	public List<BoardDTO> selectAllArticlesList() throws DataAccessException;
 	
-	public int insertNewArticle(Map noticeMap) throws DataAccessException;
-	
-	public void insertNewFile(Map noticeMap) throws DataAccessException;
-	// 게시물 총 갯수
-	public int countBoard();
+	public int insertNewArticle(Map articleMap) throws DataAccessException;
 
-	// 페이징 처리 게시글 조회
-	public List<BoardDTO> selectBoard(PagingVO vo);
+	public void insertNewFile(Map articleMap) throws DataAccessException;
+
+	public BoardDTO selectArticle(int notice_num) throws DataAccessException;
+
+	public List<FileDTO> selectFileList(int notice_num) throws DataAccessException;
+
+	public void updateArticle(Map<String, Object> articleMap) throws DataAccessException;
+
+	public void updateFile(Map<String, Object> articleMap) throws DataAccessException;
+
+	public void insertModNewFile(Map<String, Object> articleMap) throws DataAccessException;
+
+	public void deleteArticle(int notice_num) throws DataAccessException;
+
+	public void deleteModFile(FileDTO fileDTO) throws DataAccessException;
 	
-	
+	public void updateViewCount(int notice_num) throws DataAccessException;
+
+	public List<BoardDTO> selectAllArticlesList(Map<String, Integer> pagingMap)  throws DataAccessException;
+
+	public int selectTotArticles()  throws DataAccessException;
 }

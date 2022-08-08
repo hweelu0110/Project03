@@ -11,18 +11,66 @@
 		<result property="title" column="title" />
 		<result property="contents" column="contents" />
 		<result property="mem_id" column="mem_id" />
-		<result property="ofile" column="ofile" />
+		<result property="FileName" column="FileName" />
 		<result property="comment_num" column="comment_num" />
 		<result property="like_num" column="like_num" />
 		<result property="regidate" column="regidate" />
 		<result property="score" column="score" />
 	</resultMap>
 	
-	<select id="selectAllArticlesList" resultMap="articlesResult" > 
+	<resultMap type="fileDTO" id="fileResult">
+		<result property="FileNO" column="FileNO" />
+		<result property="FileName" column="FileName" />
+		<result property="notice_num" column="notice_num" />
+	</resultMap>
+	
+	<!-- 모든 글 조회 -->
+	<select id="selectAllArticlesList" resultMap="articlesResult" parameterType="java.util.Map" > 
 		<!-- 오라클의 계층형 SQL문 -->
 		<![CDATA[ 		
-			SELECT * FROM alto_club_notice ORDER BY regidate DESC
+			SELECT * from(
+					SELECT notice_num 
+						,club_code
+						,title
+						,mem_id 
+						,regidate
+						,score
+						,like_num
+						FROM (
+							SELECT notice_num
+									,club_code
+									,title
+									,mem_id
+									,regidate
+									,score
+									,like_num
+							FROM (
+									SELECT * FROM alto_club_notice 
+										WHERE notice_num IN (
+											SELECT notice_num 
+											FROM (
+												SELECT recNum, notice_num
+												from(
+													SELECT rowNum AS recNum, notice_num
+													FROM (
+														SELECT DISTINCT regidate FROM alto_club_notice 
+														ORDER BY regidate desc
+													)
+												)
+												WHERE recNum BETWEEN 1 AND 10
+												)
+										)
+							)
+							ORDER BY notice_num DESC			
+				)
+				)
 		 ]]>
+	</select>
+	
+	<select id="selectTotArticles" resultType="int">
+		<![CDATA[
+			SELECT count(DISTINCT notice_num) from alto_club_notice
+		]]>		
 	</select>
 	
 	<select id="selectNewArticleNO" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
@@ -32,10 +80,97 @@
 	</select>
 	
 	<insert id="insertNewArticle" parameterType="java.util.Map"> 	<!-- 글정보를 Map으로 전달함 -->
-		<![CDATA[ 		
-			INSERT INTO alto_club_notice (notice_num, title, contents, ofile, mem_id)
-			VALUES (#{notice_num}, #{title},#{contents}, null, #{mem_id})		
+		<![CDATA[ 	
+			INSERT INTO ALTO_CLUB_NOTICE (CLUB_CODE, NOTICE_NUM, CATEGORY, TITLE, CONTENTS, MEM_ID, FILENAME)
+			VALUES(#{CLUB_CODE}, #{NOTICE_NUM}, #{CATEGORY}, #{TITLE}, #{CONTENTS}, #{MEM_ID}, null)		
 		]]>
 	</insert>
+	
+	<select id="selectNewFileNO" resultType="int">
+		<![CDATA[	
+			SELECT nvl(MAX(FileNO),0) FROM alto_File
+		]]>	
+	</select>
+
+	<insert id="insertNewFile" parameterType="java.util.Map">
+		<!-- 한꺼번에 여러 개의 레코드 추가 -->
+		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			INTO alto_File(FileNO, FileName, notice_num, regDate)
+			VALUES (#{item.FileNO},#{item.FileName},#{item.notice_num},sysdate)
+		</foreach>
+	</insert>
+	
+	<select id="selectArticle" resultType="boardDTO" parameterType="int">
+		<![CDATA[
+			SELECT * FROM alto_club_notice
+			WHERE notice_num = #{notice_num}	
+		]]>
+	</select>
+	
+	<select id="selectFileList" resultMap="fileResult" parameterType="int">
+		<![CDATA[
+			SELECT * FROM alto_File
+			WHERE notice_num = #{notice_num}
+			ORDER BY FileNO 		
+		]]>
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updateArticle" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE alto_club_notice 
+				SET TITLE = #{title}
+					,contents = #{contents}
+				WHERE notice_num = #{notice_num}		
+		]]>
+	</update>
+	
+	<update id="updateFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.FileName != null">
+					UPDATE alto_File 
+						SET FILENAME = #{item.FileName}
+					WHERE 
+						notice_num = #{item.notice_num} 
+						AND FILENO = #{item.FileNO}							
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</foreach>
+	</update>
+	
+	<insert id="insertModNewFile" parameterType="java.util.Map">
+		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			INTO alto_File (FileNO, FileName, notice_num, regDate)
+			VALUES (#{item.FileNO},#{item.FileName},#{item.notice_num},sysdate)
+		</foreach>		
+	</insert>
+	
+	<delete id="deleteArticle" parameterType="int">
+		<![CDATA[
+			DELETE FROM alto_club_notice
+			WHERE notice_num	= #{notice_num}
+		]]>
+	</delete>
+	
+	<delete id="deleteModFile" parameterType="fileDTO">
+		DELETE FROM alto_File
+		WHERE notice_num = #{notice_num}
+		AND FILENO = #{FileNO}		
+	</delete>
+	
+	
+	<!-- 조회수 증가 -->
+	<update id="updateViewCount" parameterType="int">
+	<![CDATA[
+		UPDATE alto_club_notice
+		SET score = score + 1
+		WHERE notice_num = #{notice_num}
+	]]>
+	</update>
+	
+	
+	
 	
 </mapper>

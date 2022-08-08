@@ -19,7 +19,7 @@
 .clubcontent3 .edit {
 	width: 15px;
 	height: 15px;
-	margin-left: 480px;
+	margin-left: 460px;
 	position: absolute;
 	float: right;
 	cursor: pointer;
@@ -58,11 +58,12 @@
     width: 14px;
     height: 13px;
     text-indent: -99999px;
-    background-image: url(../img/alto_common_icon.png);
+    background-image: url(../../img/alto_common_icon.png);
     background-size: 85px;
     background-position: -22px 0px;
     cursor: pointer;
 }
+
 
 .hobby_icon {
 	float: left;

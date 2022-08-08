@@ -15,7 +15,7 @@
 	<script src="../resources/ckeditor/ckeditor.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
-		function validateForm() {
+		function validateForm(form) {
 			if($("#title2").val() == ""){
 		        alert("제목을 입력하세요.");
 		        $("#title2").focus();
@@ -31,11 +31,12 @@
 		        alert("내용을 입력해주세요.");
 		        $("#content").focus();
 		        return false;
+
 		      }
 		}
 		
 		function backToList(obj) {
-			obj.action = "${contextPath}/club_notice/Noticelist.do"
+			obj.action = "${contextPath}/club_board/listArticles.do"
 			obj.submit()
 		}
 		
@@ -80,12 +81,12 @@
 <body>
 	<section>
 	<h2>게시판 등록</h2>
-	<form  name="Noticeregistration" method="post" action="${contextPath}/club_notice/addNewNotice.do" enctype="multipart/form-data"  onsubmit="return validateForm()">
-		<table>
+	<form  name="articleForm" method="post" action="${contextPath}/club_board/addNewArticle.do" enctype="multipart/form-data"  onsubmit="return validateForm(this)">
+		<table style="border-bottom: none;">
 			<tr>
-				<td width=200 style="word-break:break-all">작성자</td>
+				<td width=200 style="word-break:break-all;" >작성자</td>
 				<td>
-					<input type="text" class="title2" style="width: 150px" id="name" value="" />
+					<input type="text" class="title2" style="width: 150px;" id="name" value="${login.mem_id }" disabled/>
 				</td>
 			</tr>
 			<tr>

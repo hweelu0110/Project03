@@ -11,5 +11,7 @@
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="HobbysubDTO" />
 		<typeAlias type="kr.co.alto.board.dto.BoardDTO" alias="boardDTO"/>
 		<typeAlias type="kr.co.alto.board.dto.FileDTO" alias="fileDTO"/>
+		<typeAlias type="kr.co.alto.album.dto.AlbumDTO" alias="albumDTO"/>
+		<typeAlias type="kr.co.alto.album.dto.ImageDTO" alias="imageDTO"/>
 	</typeAliases>	
 </configuration>

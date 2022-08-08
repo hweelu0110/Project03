@@ -1,5 +1,5 @@
 package kr.co.alto.board.dto;
-
+ 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -12,32 +12,31 @@ import java.sql.Date;
 	,notice_num number(10) 
  */
 public class FileDTO {
-	private int noticeFileNO;
-	private String noticeFileName;
+	private int FileNO;
+	private String FileName;
 	private Date regDate;
 	private int notice_num;
-	public int getNoticeFileNO() {
-		return noticeFileNO;
+	public int getFileNO() {
+		return FileNO;
 	}
-	public void setNoticeFileNO(int noticeFileNO) {
-		this.noticeFileNO = noticeFileNO;
+	public void setFileNO(int fileNO) {
+		FileNO = fileNO;
 	}
-	public String getNoticeFileName() {
-		if (noticeFileName != null && noticeFileName.length() != 0) {
+	public String getFileName() {
+		if (FileName != null && FileName.length() != 0) {
 			try {
-				noticeFileName = URLDecoder.decode(noticeFileName, "UTF-8");
+				FileName = URLDecoder.decode(FileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		return noticeFileName;
+		return FileName;
 	}
-	public void setNoticeFileName(String noticeFileName) {
-		if (noticeFileName != null && noticeFileName.length() != 0) {
+	public void setFileName(String fileName) {
+		if(FileName != null && FileName.length() != 0) {
 			try {
-				this.noticeFileName = URLEncoder.encode(noticeFileName, "UTF-8");
+				this.FileName = URLEncoder.encode(FileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -56,6 +55,8 @@ public class FileDTO {
 	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
 	}
+	
+	
 	
 	
 }
