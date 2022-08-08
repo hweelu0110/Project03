@@ -10,5 +10,6 @@
 		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="HobbyDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="HobbysubDTO" />
 		<typeAlias type="kr.co.alto.club.dto.ClubDTO" alias="ClubDTO" />
+		<typeAlias type="kr.co.alto.club.dto.ClubListDTO" alias="ClubListDTO" />
 	</typeAliases>	
 </configuration>

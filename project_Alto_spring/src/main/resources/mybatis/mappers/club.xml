@@ -18,6 +18,16 @@
 		<result property="member_out" column="member_out" />
 	</resultMap>
 	
+	<resultMap type="clubListDTO" id="clubListResult">
+		<result property="club_code" column="CLUB_CODE" />
+		<result property="title" column="TITLE" />
+		<result property="cate_m" column="CATE_M" />
+		<result property="cate_s" column="CATE_S" />
+		<result property="area_name" column="NAME" />
+		<result property="member_num" column="MEMBER_NUM" />
+		<result property="img" column="IMG" />
+	</resultMap>
+	
 	<insert id="clubOpen" parameterType="clubDTO">
 		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
 		VALUES(#{club_code}, #{title}, #{cate_m}, #{area_code}, #{manager}, #{member_max} , #{intro})
@@ -26,6 +36,30 @@
 	<select id="selectNewClubCode" resultType="String">
 		<![CDATA[
 			SELECT nvl(MAX(club_code),0) + 1 FROM ALTO_CLUB
+		]]>
+	</select>
+	
+	<!-- BEST 모임 목록 -->
+	<select id="selectBestClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+					ORDER BY MEMBER_OUT ASC, REGIDATE ASC
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
 		]]>
 	</select>
 </mapper>

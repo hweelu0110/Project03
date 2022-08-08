@@ -1,6 +1,5 @@
 package kr.co.alto.club.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import kr.co.alto.area.dao.AreaDAO;
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.club.dao.ClubDAO;
 import kr.co.alto.club.dto.ClubDTO;
+import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
@@ -37,7 +37,10 @@ public class ClubServiceImpl implements ClubService {
 		Map<String, Object> clubMainMap = new HashMap<>();
 		
 		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
+		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
+		System.out.println(bestClubList.get(0).getArea_name());
 		
+		clubMainMap.put("bestClubList", bestClubList);
 		clubMainMap.put("AllHobbyList", AllHobbyList);
 		
 		return clubMainMap;

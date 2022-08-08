@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 
@@ -22,7 +23,6 @@ public class HobbyDAOImpl implements HobbyDAO {
 	@Override
 	public List<HobbyDTO> selectAllHobbyList() throws DataAccessException {
 		List<HobbyDTO> hobbyList = sqlSession.selectList("mapper.hobby.selectAllHobbyList");
-
 		return hobbyList;
 	}
 
@@ -51,6 +51,5 @@ public class HobbyDAOImpl implements HobbyDAO {
 	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException {
 		sqlSession.insert("mapper.hobby.updateMemHobby", memHobbyMap);		
 	}
-	
 
 }
