@@ -6,6 +6,8 @@
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${clubMainMap.AllHobbyList}"/>
+<c:set var="bestList" value="${clubMainMap.bestClubList}"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,70 +37,18 @@
 			
 		    <div class="swiper mySwiper2">
 		      <div class="swiper-wrapper">
-	        	<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-		        <div class="swiper-slide">
-		        	<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-		        </div>
-		        <div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-		        <div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="area">성동구</span>
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-					<p class="club_name">미니어처의 세계</p>
-					<span class="memNum">50명</span>
-					<span class="like_icon">관심</span>
-				</div>
+		      
+		      	<c:forEach var="best" items="${bestList}">
+		      		<div class="swiper-slide">
+						<img class="club_img" src="${path}/resources/img/club_test.png" />
+						<span class="area">${best.area_name}</span>
+						<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${best.cate_m}.png" /></span>
+						<p class="club_name">${best.title}</p>
+						<span class="memNum">${best.member_num}명</span>
+						<span class="like_icon">관심</span>
+					</div>
+		      	</c:forEach>
+	        	
 		      </div>
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>

@@ -1,5 +1,6 @@
 package kr.co.alto.club.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import kr.co.alto.club.dto.ClubDTO;
+import kr.co.alto.club.dto.ClubListDTO;
 
 @Repository("clubDAO")
 public class ClubDAOImpl implements ClubDAO {
@@ -22,7 +24,11 @@ public class ClubDAOImpl implements ClubDAO {
 
 	@Override
 	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
-		sqlSession.insert("mapper.club.clubOpen", clubDTO);
-		
+		sqlSession.insert("mapper.club.clubOpen", clubDTO);		
+	}
+
+	@Override
+	public List<ClubListDTO> selectBestClubList() throws DataAccessException {
+		return sqlSession.selectList("mapper.club.selectBestClubList");
 	}
 }
