@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.member">
+<<<<<<< HEAD
 	<resultMap type="memberDTO" id="memResult">		
 		<result property="mem_id" column="MEM_ID" />		
 		<result property="mem_pwd" column="MEM_PWD" />
@@ -71,4 +72,116 @@
 			SELECT COUNT(*) FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
 		]]>
 	</select>
+=======
+	<resultMap type="memberDTO" id="memResult">		<!-- SQL문 실행 결과 레코드들을 typeAlias에서 지저한 memberDTO빈에 저장 -->
+		<result property="id" column="id" />		<!-- 레코드 컬럼이름에 대해 memberDTO의 같은 속성에 값을 설정 -->
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="joinDate" column="joinDate" />
+	</resultMap>
+	<!-- 지정한 컬럼 이름을 key, 값을 value로 저장 -->
+	<!-- <resultMap type="java.util.HashMap" id="memResult">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd" />
+		<result property="name" column="name" />
+		<result property="email" column="email" />
+		<result property="joinDate" column="joinDate" />
+	</resultMap> -->
+															<!-- resultMap: 반환되는 레코드 memResult에 저장 -->
+	<select id="selectAllMemberList" resultMap="memResult">	<!-- id: dao에서 해당 SQL호출 시 사용 -->
+		<![CDATA[
+			SELECT * FROM T_MEMBER ORDER BY JOINDATE DESC
+		]]>
+	</select>
+	
+	<!-- resultType : sql문 조회 결과 이름을 호출한 메서드로 반환 -->
+	<select id="selectName" resultType="String">
+		<![CDATA[
+			SELECT name FROM T_MEMBER WHERE ID = 'lee'
+		]]>
+	</select>
+	
+	<select id="selectPwd" resultType="String">
+		<![CDATA[
+			SELECT pwd FROM T_MEMBER WHERE ID = 'lee'
+		]]>
+	</select>
+	
+	<!-- resultType : 조회된 한개의 레코드 memberDTO에 저장 -->
+	<!-- parameterType : MemberDAO에서 SQL문 호출시 전달되는 매개변수 타입 -->
+	<select id="selectMemberById" resultType="memberDTO" parameterType="String">
+		<![CDATA[
+			SELECT * FROM T_MEMBER WHERE ID = #{id}
+		]]>
+	</select>
+	
+	<select id="selectMemberByPwd" resultMap="memResult" parameterType="int">
+		<![CDATA[
+			SELECT * FROM T_MEMBER WHERE pwd = #{pwd}
+		]]>
+	</select>
+	
+	<select id="searchMember" parameterType="memberDTO" resultMap="memResult">
+		<![CDATA[
+			SELECT * FROM T_MEMBER
+		]]>
+		<where>
+			<if test="name != '' and name != null">
+				name = #{name}
+			</if>
+			<if test="email != '' and email != null">
+				and email = #{email}
+			</if>
+		</where>
+			order by joinDate desc
+	</select>
+	
+	<select id="searchMember2" parameterType="memberDTO" resultMap="memResult">
+		<![CDATA[
+			SELECT * FROM T_MEMBER
+		]]>
+		<where>
+			<choose>
+				<when test="name != '' and name != null and email != '' and email != null">
+					name = #{name} and email = #{email}
+				</when>
+				<when test="name != '' and name != null">
+					name = #{name}
+				</when>
+				<when test="email != '' and email != null">
+					email = #{email}
+				</when>
+			</choose>
+		</where>
+			order by joinDate desc
+	</select>
+	
+	<insert id="insertMember" parameterType="memberDTO">
+		<![CDATA[
+			INSERT INTO T_MEMBER (id, pwd, name, email) 
+			VALUES (#{id},#{pwd},#{name},#{email})
+		]]>		
+	</insert>
+	
+	<insert id="insertMember2" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO T_MEMBER (id, pwd, name, email) 
+			VALUES (#{id},#{pwd},#{name},#{email})
+		]]>		
+	</insert>
+	
+	<update id="updateMember" parameterType="memberDTO">
+		<![CDATA[
+			UPDATE T_MEMBER SET pwd = #{pwd}, name = #{name}, email = #{email} 
+			WHERE id = #{id}
+		]]>	
+	</update>
+	
+	<delete id="deleteMember" parameterType="String">
+		<![CDATA[
+			DELETE FROM T_MEMBER WHERE id = #{id}
+		]]>
+	</delete>
+>>>>>>> refs/remotes/origin/woosb
 </mapper>

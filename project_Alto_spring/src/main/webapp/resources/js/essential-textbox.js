@@ -7,6 +7,7 @@ function checkAll() {
 	let ch_name = checkName(memberFrm.mem_name.value)
 	let ch_birth = checkBirth(memberFrm.birth.value)
 	let ch_gen = checkGender()
+<<<<<<< HEAD
 	let ch_mail = checkUserMail(memberFrm._mem_id.value)	
 	
 	let vali = ch_mail && ch_pass && ch_name && ch_birth && ch_gen			
@@ -84,6 +85,70 @@ function checkPass(pwd1, pwd2) {
 		nextEle.style.display = "block"
 		nextEle.style.color = "#00c7ae"
 		memberFrm.mem_pwd_2.style.borderColor = "#00c7ae" 
+=======
+	let ch_mail = checkUserMail(memberFrm.email.value)	
+	
+	let vali = ch_mail && ch_pass && ch_name && ch_birth && ch_gen			
+	
+	if (!vali) {			
+		return false
+	}
+	alert("입력완료!")
+	return true	
+}
+	
+function checkExistData(element, value) {
+	if(value == "") {
+		element.className += " notiTxt"
+		let nextEle = element.nextElementSibling
+		nextEle.textContent = "필수 입력입니다."
+		nextEle.style.display = "block"
+		return false
+	}
+	return true
+}
+
+function checkUserMail(email) {
+	if (!checkExistData(memberFrm.email, email))
+		return false
+	
+	let emailRegExp = /^[A-Za-z0-9_]+[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/
+	if (!emailRegExp.test(email)) {
+		memberFrm.email.className += " notiTxt"
+		let nextEle = memberFrm.email.nextElementSibling
+		nextEle.textContent = "올바른 이메일이 아닙니다."
+		nextEle.style.display = "block"
+		
+		memberFrm.email.value=""
+		memberFrm.email.focus()
+		return false
+	}
+	return true
+}
+
+function checkPass(pwd1, pwd2) {
+	if (!checkExistData(memberFrm.mem_pwd, pwd1) && !checkExistData(memberFrm.mem_pwd_2, pwd2))
+		return false
+	
+	let password1RegExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,12}$/        
+		
+	if (!password1RegExp.test(pwd1)) {  
+		memberFrm.mem_pwd.className += " notiTxt"
+		let nextEle = memberFrm.mem_pwd.nextElementSibling
+		nextEle.textContent = "영문 대소문자와 숫자 조합, 8~12자"
+		nextEle.style.display = "block"          
+		         
+		memberFrm.mem_pwd.value = ""  
+		memberFrm.mem_pwd_2.value = ""           
+		memberFrm.mem_pwd.focus()            
+		return false     
+	}        
+	
+	if (pwd1 != pwd2) {  
+		nextEle = memberFrm.mem_pwd_2.nextElementSibling
+		nextEle.textContent = "패스워드가 일치하지 않습니다."
+		nextEle.style.display = "block"
+>>>>>>> refs/remotes/origin/woosb
 		                    
 		memberFrm.mem_pwd_2.value = ""            
 		memberFrm.mem_pwd_2.focus()           
@@ -148,6 +213,7 @@ function checkGender() {
 	$("#member_div .essential").on("change keyup paste", function() {
 		if ($(this).val() == "") {
 			$(this).addClass("notiTxt")
+<<<<<<< HEAD
 			$(this).next("span.noti2").text("필수 입력입니다.")			
 			$(this).next("span.noti2").css("display","block")
 			$(this).css("border-color", "#F3BE34")	
@@ -191,6 +257,32 @@ function checkGender() {
 			$("#gender").attr("value","W")
 		}
 		
+=======
+			$(this).next("span.noti2").css("display","block")
+		}else {
+			$(this).removeClass("notiTxt")
+			$(this).next("span.noti2").css("display","none")
+		}
+	})
+							
+	/* birth - datepicker */	
+	$("#datepicker").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		minDate: '-70y',
+		yearRange: 'c-70:c+0',
+		dateFormat: 'yy-mm-dd',
+		showMonthAfterYear: true,
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월']
+	})
+	
+	/* gender select */
+	$(".gender_div span").click(function() {
+		$(this).addClass("select")
+		$(this).siblings().removeClass("select")
+		$(".gender_div").next("span.noti2").css("display","none")
+>>>>>>> refs/remotes/origin/woosb
 	})
 			
 })

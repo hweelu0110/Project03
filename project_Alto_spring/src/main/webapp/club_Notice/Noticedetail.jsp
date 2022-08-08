@@ -17,6 +17,7 @@
 	<form method="post"  onsubmit="return validateForm()">
 		<table>
 			<tr>
+<<<<<<< HEAD
 				<td>작성자</td>
 				<td>
 					<input type="text" class="title2" style="width: 150px" id="name" />
@@ -85,6 +86,51 @@
 				</div>
 				
 			</div>
+=======
+				<td width=200 style="word-break:break-all">작성자</td>
+				<td>홍길동</td>
+			</tr>
+			<tr>
+				<td width=200 style="word-break:break-all">제목</td>
+				<td>모임제목</td>
+			</tr>
+			<tr>
+				<td>내용</td>
+				<td height="100px">모임은 즐거워요</td>
+			</tr>
+			<tr>
+				<td>파일 첨부</td>
+				<td>
+					<div class="input-file"  >
+  					<input type="text"  style="width: 70%">
+  					<label>다운로드</label>
+					</div>
+
+				</td>
+			</tr>
+		</table>
+		
+		<div class="commetimg">
+			<a>
+				<img alt="" src="../resources/img/heart.png" style="width:10px; height: 10px;">
+				<a>좋아요</a>
+				<a class="like">2</a>
+		
+				<img alt="" src="../resources/img/review.png" style="width:10px; height: 10px;">
+				<a>댓글</a>
+				<a>4</a>
+		    </a>	
+		</div>
+			<div class="comment">
+				<h3>댓글</h3>
+				<textarea class="comment2"  aplaceholder="댓글을 남겨보세요" ></textarea>
+			</div>
+				<div class="comment3">
+					<button class="btn03">등록</button>
+				</div>
+				
+		
+>>>>>>> refs/remotes/origin/woosb
 			
 			<table>
 			<tr>

@@ -150,6 +150,7 @@ INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','스티커/굿즈');
 INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','출판물');
 INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','기타');
 
+<<<<<<< HEAD
 SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
 WHERE A.HOBBY_CODE = B.HOBBY_CODE 
 AND (A.HOBBY_CODE ='hm000001' OR A.HOBBY_CODE ='hm000002' OR A.HOBBY_CODE ='hm000003' OR A.HOBBY_CODE ='' OR A.HOBBY_CODE =''); 
@@ -229,6 +230,72 @@ CREATE TABLE alto_member_auth(
 	mem_id	 varchar2(100) NOT NULL,
 	authkey  varchar2(50)
 );
+=======
+-- 지역
+DROP TABLE alto_area CASCADE CONSTRAINT;
+CREATE TABLE alto_area(
+	area_code	char(8) NOT NULL,
+	name		varchar2(20) NOT NULL,
+	PRIMARY KEY (area_code)
+);
+
+SELECT * FROM alto_area;
+-- 지역 정보 추가
+INSERT INTO ALTO_AREA VALUES ('area0001','온라인');
+INSERT INTO ALTO_AREA VALUES ('area0002','강남구');
+INSERT INTO ALTO_AREA VALUES ('area0003','강동구');
+INSERT INTO ALTO_AREA VALUES ('area0004','강북구');
+INSERT INTO ALTO_AREA VALUES ('area0005','강서구');
+
+INSERT INTO ALTO_AREA VALUES ('area0006','관악구');
+INSERT INTO ALTO_AREA VALUES ('area0007','광진구');
+INSERT INTO ALTO_AREA VALUES ('area0008','구로구');
+INSERT INTO ALTO_AREA VALUES ('area0009','금천구');
+INSERT INTO ALTO_AREA VALUES ('area0010','노원구');
+
+INSERT INTO ALTO_AREA VALUES ('area0011','도봉구');
+INSERT INTO ALTO_AREA VALUES ('area0012','동대문구');
+INSERT INTO ALTO_AREA VALUES ('area0013','동작구');
+INSERT INTO ALTO_AREA VALUES ('area0014','마포구');
+INSERT INTO ALTO_AREA VALUES ('area0015','서대문구');
+
+INSERT INTO ALTO_AREA VALUES ('area0016','서초구');
+INSERT INTO ALTO_AREA VALUES ('area0017','성동구');
+INSERT INTO ALTO_AREA VALUES ('area0018','성북구');
+INSERT INTO ALTO_AREA VALUES ('area0019','송파구');
+INSERT INTO ALTO_AREA VALUES ('area0020','양천구');
+
+INSERT INTO ALTO_AREA VALUES ('area0021','영등포구');
+INSERT INTO ALTO_AREA VALUES ('area0022','용산구');
+INSERT INTO ALTO_AREA VALUES ('area0023','은평구');
+INSERT INTO ALTO_AREA VALUES ('area0024','종로구');
+INSERT INTO ALTO_AREA VALUES ('area0025','중구');
+INSERT INTO ALTO_AREA VALUES ('area0026','중랑구');
+
+-- 회원
+DROP TABLE alto_member CASCADE CONSTRAINT;
+CREATE TABLE alto_member(
+	mem_id	 varchar2(100) NOT NULL,
+	mem_pwd	 varchar2(20) NOT NULL,
+	mem_name varchar2(20) NOT NULL,
+	gender	 char(1) 	 NOT NULL,
+	birth	 DATE 		 NOT NULL,
+	email	 varchar2(100) NOT NULL,
+	phone	 char(11) NOT NULL,
+	img		 varchar2(500) DEFAULT '기본이미지url',
+	mem_open char(1) DEFAULT 'Y' NOT NULL,
+	joindate DATE DEFAULT sysdate NOT NULL,
+	authkey	 NUMBER DEFAULT 0 NOT NULL,
+	PRIMARY KEY (mem_id)
+);
+
+-- 인증키 테이블
+CREATE TABLE alto_member_auth(
+	email	 varchar2(100) NOT NULL,
+	authkey  varchar2(50)
+);
+
+>>>>>>> refs/remotes/origin/woosb
 
 -- 관심취미 대분류 최대 5개 / 소분류 (대분류 당)최대 5개
 DROP TABLE alto_m_hobby CASCADE CONSTRAINT;

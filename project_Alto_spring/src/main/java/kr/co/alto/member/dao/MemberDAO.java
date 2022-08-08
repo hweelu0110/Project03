@@ -1,5 +1,6 @@
 package kr.co.alto.member.dao;
 
+<<<<<<< HEAD
 
 import java.util.Date;
 
@@ -23,4 +24,17 @@ public interface MemberDAO {
 	
 	public int findPwCheck(MemberDTO memberDTO) throws DataAccessException;
 	public int findPw(String mem_pwd, String mem_id) throws DataAccessException;
+=======
+import java.util.List;
+
+import org.springframework.dao.DataAccessException;
+
+import kr.co.alto.member.dto.MemberDTO;
+
+
+public interface MemberDAO {
+	public List<MemberDTO> selectAllMemberList() throws DataAccessException;
+	public int insertMember(MemberDTO memberDTO) throws DataAccessException;
+	public int deleteMember(String id) throws DataAccessException;
+>>>>>>> refs/remotes/origin/woosb
 }

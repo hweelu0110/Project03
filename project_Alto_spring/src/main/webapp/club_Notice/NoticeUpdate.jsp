@@ -17,7 +17,11 @@
 	<form>
 		<table>
 			<tr>
+<<<<<<< HEAD
 				<td>작성자</td>
+=======
+				<td width=200 style="word-break:break-all">작성자</td>
+>>>>>>> refs/remotes/origin/woosb
 				<td>
 					<input type="text" class="title2" style="width: 150px" id="name" />
 				</td>

@@ -80,6 +80,10 @@
 	</section>
 	
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> refs/remotes/origin/woosb
 	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

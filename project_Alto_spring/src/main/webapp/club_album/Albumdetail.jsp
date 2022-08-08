@@ -21,6 +21,7 @@
 	<form>
 		<table>
 			<tr>
+<<<<<<< HEAD
 				<td>작성자</td>
 				<td>
 					<input type="text" class="title2" style="width: 150px" id="name" />
@@ -78,6 +79,54 @@
 				<td colspan="4" align="center">
 					<button type="button" class="btn02" onclick="location.href='Albumlist.jsp'">목록보기</button>
 					<button type="button" class="btn02" onclick="location.href='Albumupdate.jsp'">수정하기</button>
+=======
+				<td width=200 style="word-break:break-all">작성자</td>
+				<td>홍길동</td>
+			</tr>
+			<tr>
+				<td>제목</td>
+				<td>모임제목</td>
+			</tr>
+			
+			<tr>
+				<td>내용</td>
+				<td>
+					<div class="img">
+						<img alt="" src="../resources/img/image.jpg" style="width:500px; height: 500px;"><br/>
+						<img alt="" src="../resources/img/image.jpg" style="width:500px; height: 500px;"><br/>
+						<img alt="" src="../resources/img/image.jpg" style="width:500px; height: 500px;">
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+		<div class="commetimg">
+			<a>
+				<img alt="" src="../resources/img/heart.png" style="width:10px; height: 10px;">
+				<a>좋아요</a>
+				<a class="like">2</a>
+		
+				<img alt="" src="../resources/img/review.png" style="width:10px; height: 10px;">
+				<a>댓글</a>
+				<a>4</a>
+		    </a>	
+		</div>
+			<div class="comment">
+				<h3>댓글</h3>
+				<textarea class="comment2"  aplaceholder="댓글을 남겨보세요" ></textarea>
+			</div>
+				<div class="comment3">
+					<button class="btn03">등록</button>
+				</div>
+				
+		
+			
+			<table>
+			<tr>
+				<td colspan="4" align="center">
+					<button type="button" class="btn02" onclick="location.href='Noticelist.jsp'">목록보기</button>
+					<button type="button" class="btn02" onclick="location.href='NoticeUpdate.jsp'">수정하기</button>
+>>>>>>> refs/remotes/origin/woosb
 					<button type="button" class="btn01">삭제</button>
 				</td>
 			</tr>

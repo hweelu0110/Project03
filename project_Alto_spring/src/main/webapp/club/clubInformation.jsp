@@ -6,7 +6,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%@include file="../layout/headinfo.jsp" %>
+<<<<<<< HEAD
 	<link rel="stylesheet" href="../resources/css/clubInformation.css" /> 
+=======
+	<link rel="stylesheet" href="../resources/css/clubInfo.css" /> 
+>>>>>>> refs/remotes/origin/woosb
 </head>
 <body>
 
@@ -63,7 +67,7 @@
 			
 			<div class="right">
 				<div id="schedual_member">
-					<h2>일정 멤버 (14명)</h2>
+					<h2>모임 멤버 (14명)</h2>
 					<ul>
 						<li>
 							<img src="../resources/img/user_test.png" />
@@ -82,6 +86,10 @@
 			
 	</section>
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> refs/remotes/origin/woosb
 	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>
