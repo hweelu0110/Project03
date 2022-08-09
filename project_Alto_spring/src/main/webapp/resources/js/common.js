@@ -16,6 +16,7 @@ function confirmPopup(popup, txt) {
 }
 
 
+
 $(function () {
 	$(".popup_div").hide()
 		
@@ -28,7 +29,5 @@ $(function () {
 		$(this).parent("div").hide()
 	})
 	
-	$(".like_icon").click(function() {
-		confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
-	})
+	
 })

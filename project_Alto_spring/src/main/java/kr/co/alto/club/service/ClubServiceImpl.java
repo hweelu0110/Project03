@@ -37,9 +37,11 @@ public class ClubServiceImpl implements ClubService {
 		Map<String, Object> clubMainMap = new HashMap<>();
 		
 		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
-		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
-		System.out.println(bestClubList.get(0).getArea_name());
 		
+		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
+		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
+		
+		clubMainMap.put("newClubList", newClubList);
 		clubMainMap.put("bestClubList", bestClubList);
 		clubMainMap.put("AllHobbyList", AllHobbyList);
 		
