@@ -62,105 +62,17 @@
 				<h2>BEST</h2>
 				<div class="swiper mySwiper4">
 			      <div class="swiper-wrapper product">
-		        	<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">성동구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계 미니어처의 세계 미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
+		        	<c:forEach var="itemListBest" items="${itemListBest }">
+				      	<div class="swiper-slide">
+							<img class="class_img" src="${contextPath}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
+							<span class="like_icon">관심</span>
+							<div>
+								<p class="class_name">${itemListBest.item_name }</p>
+								<p class="hobby_name">${itemListBest.hobby_name }</p>
+								<p class="class_price">${itemListBest.price }원</p>				
+							</div>
 						</div>
-					</div>
-			        <div class="swiper-slide">
-			        	<img class="class_img" src="../resources/img/class_test.jpg" />
-			        	<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">쉽고 정확한 조색을 위한 CMYK 푸드 컬러 차트</p>
-							<p class="hobby_name">창작</p>
-							<p class="class_price">1,100원</p>											
-						</div>
-			        </div>
-			        <div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area area_online">온라인</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>						
-						</div>
-					</div>
-			        <div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>					
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>					
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<span class="area">중구</span>	
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
+				    </c:forEach>
 					</div>
 			      </div>
 			      <div class="swiper-button-next"></div>
@@ -172,96 +84,17 @@
 				<h2>NEW</h2>
 				<div class="swiper mySwiper4">
 			      <div class="swiper-wrapper product">
-		        	<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계 미니어처의 세계 미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
+			      	<c:forEach var="itemListNew" items="${itemListNew }">
+				      	<div class="swiper-slide">
+							<img class="class_img" src="${contextPath}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
+							<span class="like_icon">관심</span>
+							<div>
+								<p class="class_name">${itemListNew.item_name }</p>
+								<p class="hobby_name">${itemListNew.hobby_name }</p>
+								<p class="class_price">${itemListNew.price }원</p>				
+							</div>
 						</div>
-					</div>
-			        <div class="swiper-slide">
-			        	<img class="class_img" src="../resources/img/class_test.jpg" />
-			        	<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">쉽고 정확한 조색을 위한 CMYK 푸드 컬러 차트</p>
-							<p class="hobby_name">창작</p>
-							<p class="class_price">1,100원</p>											
-						</div>
-			        </div>
-			        <div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>						
-						</div>
-					</div>
-			        <div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>					
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>					
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img class="class_img" src="../resources/img/class_test.jpg" />
-						<span class="like_icon">관심</span>
-						<div>
-							<p class="class_name">미니어처의 세계</p>
-							<p class="hobby_name">요리</p>
-							<p class="class_price">11,000원</p>				
-						</div>
-					</div>
+				    </c:forEach>
 			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>

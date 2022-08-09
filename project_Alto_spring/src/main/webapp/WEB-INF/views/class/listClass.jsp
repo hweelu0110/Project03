@@ -180,7 +180,7 @@
 						<c:when test="${!empty classList }">
 							<c:forEach var="classList" items="${classList }">
 								<li>
-									<img class="class_products_img" src="../resources/img/club_test.png" />
+									<img class="class_products_img" src="${contextPath}/download.do?imgName=${classList.imgName}&class_code=${classList.class_code}">
 									<span class="area">${classList.area_name }</span>
 									<span class="hobby_icon"><img src="../resources/img/hobby_img/${classList.hobby_code }.png" /></span>
 									<p class="club_name">${classList.className }</p>

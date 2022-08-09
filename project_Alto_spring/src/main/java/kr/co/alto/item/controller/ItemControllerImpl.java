@@ -60,7 +60,7 @@ public class ItemControllerImpl implements ItemController {
 	@Override
 	@RequestMapping(value = "/item/itemMain.do", method = RequestMethod.GET)
 	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
-String viewName = (String) request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		
 		Map listMapBest = new HashMap<>();
 		listMapBest.put("sort", "quantityS");

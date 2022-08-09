@@ -64,7 +64,7 @@
 			      <div class="swiper-wrapper product">
 				      <c:forEach var="classListBest" items="${classListBest }">
 				      	<div class="swiper-slide">
-							<img class="class_img" src="../resources/img/class_test.jpg" />
+							<img class="class_img" src="${contextPath}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
 							<span class="like_icon">관심</span>
 							<span class="area">${classListBest.area_name }</span>	
 							<div>
@@ -86,7 +86,7 @@
 			      <div class="swiper-wrapper product">
 				      <c:forEach var="classListNew" items="${classListNew }">
 				      	<div class="swiper-slide">
-							<img class="class_img" src="../resources/img/class_test.jpg" />
+							<img class="class_img" src="${contextPath}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
 							<span class="like_icon">관심</span>
 							<span class="area">${classListNew.area_name }</span>	
 							<div>

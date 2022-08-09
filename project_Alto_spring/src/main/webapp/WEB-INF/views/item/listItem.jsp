@@ -174,7 +174,7 @@
 						<c:when test="${!empty itemList }">
 							<c:forEach var="itemList" items="${itemList }">
 								<li>
-									<img class="class_products_img" src="../resources/img/club_test.png" />
+									<img class="class_products_img" src="${contextPath}/download.do?imgName=${itemList.imgName}&item_code=${itemList.item_code}" />
 									<span class="hobby_icon"><img src="../resources/img/hobby_img/${itemList.hobby_code }.png" /></span>
 									<p class="club_name">${itemList.item_name }</p>
 									<span class="memNum" style="font-size: 11px">${itemList.quantity }  개</span>
