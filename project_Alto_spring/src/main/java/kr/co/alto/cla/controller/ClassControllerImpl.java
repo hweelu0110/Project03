@@ -154,14 +154,19 @@ public class ClassControllerImpl implements ClassController {
 		List<String> fileList = upload(multipartRequest);
 		
 		List<ImageDTO> imageFileList = new ArrayList<ImageDTO>();
+		
+		
 		if(fileList!= null && fileList.size()!=0) {
 			for(String fileName : fileList) {
 				ImageDTO imageDTO = new ImageDTO();
 				imageDTO.setImageFileName(fileName);
 				imageFileList.add(imageDTO);
+				System.out.println(fileName);
 			}
 			classMap.put("imageFileList", imageFileList);
 		}
+		
+		classMap.put("isfile1", fileList.get(0));
 		
 		String message;
 		ResponseEntity resEnt=null;
