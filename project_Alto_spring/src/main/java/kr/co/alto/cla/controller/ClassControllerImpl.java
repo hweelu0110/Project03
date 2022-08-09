@@ -161,7 +161,6 @@ public class ClassControllerImpl implements ClassController {
 				ImageDTO imageDTO = new ImageDTO();
 				imageDTO.setImageFileName(fileName);
 				imageFileList.add(imageDTO);
-				System.out.println(fileName);
 			}
 			classMap.put("imageFileList", imageFileList);
 		}

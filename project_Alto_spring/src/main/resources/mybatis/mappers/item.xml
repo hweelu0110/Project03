@@ -60,7 +60,7 @@
 		<![CDATA[
 			INSERT INTO EZEN.ALTO_ITEM
 			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY)
-			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , null, #{intro}, 0 , #{quantity})
+			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity})
 		]]>      
 	</insert>
 

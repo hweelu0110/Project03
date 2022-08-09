@@ -158,6 +158,7 @@ public class ItemControllerImpl implements ItemController {
 			}
 			itemMap.put("imageFileList", imageFileList);
 		}
+		itemMap.put("isfile5", fileList.get(0));
 		
 		String message;
 		ResponseEntity resEnt=null;
