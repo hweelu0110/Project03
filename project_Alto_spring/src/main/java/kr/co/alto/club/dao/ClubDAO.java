@@ -12,6 +12,8 @@ public interface ClubDAO {
 	
 	String selectNewClubCode() throws DataAccessException;
 	void clubOpen(ClubDTO clubDTO) throws DataAccessException;
+	
 	List<ClubListDTO> selectBestClubList() throws DataAccessException;
+	List<ClubListDTO> selectNewClubList() throws DataAccessException;
 
 }

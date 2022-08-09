@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="${path}/resources/css/common/list.css" /> 	
 	<link rel="stylesheet" href="${path}/resources/css/club/club.css" /> 
 	<script src="${path}/resources/js/search_tabmenu.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		function validateForm(obj) {
 			if(obj.mainArea.value == "") {
 				confirmPopup($("#confirm_popup"), "주요 활동 지역을 선택하세요.")
