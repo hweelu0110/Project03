@@ -223,5 +223,13 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 			
 			return mem_img;
 		}
+
+	@Override
+	@RequestMapping(value = "/likeAdd.do", method = RequestMethod.GET)
+	@ResponseBody
+	public void insertLike(String codeNum, String codeType, String mem_id, HttpServletRequest request)
+			throws Exception {
+		mypageService.insertLike(codeNum, codeType, mem_id);
+	}
 		
 }

@@ -14,9 +14,7 @@
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />		
-	<script type="text/javascript">
-	
-	
+	<script type="text/javascript">	
 		function checkPass(pwd1, pwd2) {
 			if (!checkExistData(pwUpdateFrm.mem_pwd1, pwd1) && !checkExistData(pwUpdateFrm.mem_pwd2, pwd2))
 				return false

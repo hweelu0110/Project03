@@ -15,7 +15,14 @@
 	<!-- 로그인 알림 팝업 -->
 	<div id="login_popup" class="popup_div">
 		<p></p>
-		<button type="button" class="pointBtn" onclick="${path}/member/loginFrm.do">로그인</button>
+		<button type="button" class="pointBtn" onclick="location.href='${path}/member/loginFrm.do'">로그인</button>
+		<button type="button" class="basicBtn closeBtn">닫기</button>
+	</div>
+	
+	<!-- 관심목록 알림 팝업 -->
+	<div id="like_popup" class="popup_div">
+		<p></p>
+		<button type="button" class="pointBtn" onclick="location.href='${path}/mypage/likeList.do'">관심목록 보기</button>
 		<button type="button" class="basicBtn closeBtn">닫기</button>
 	</div>
 	

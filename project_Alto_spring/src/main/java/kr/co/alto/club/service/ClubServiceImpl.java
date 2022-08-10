@@ -18,6 +18,7 @@ import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
+import kr.co.alto.mypage.dto.likeDTO;
 
 @Service("clubService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -33,13 +34,18 @@ public class ClubServiceImpl implements ClubService {
 	private MypageDAO mypageDAO;
 
 	@Override
-	public Map<String, Object> clubMainList() throws DataAccessException {
+	public Map<String, Object> clubMainList(String mem_id) throws DataAccessException {
 		Map<String, Object> clubMainMap = new HashMap<>();
 		
 		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
 		
 		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
 		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
+		
+		if (mem_id != "") {
+			List<likeDTO> likeList = mypageDAO.selectLikeList(mem_id);
+		}		
+		
 		
 		clubMainMap.put("newClubList", newClubList);
 		clubMainMap.put("bestClubList", bestClubList);
