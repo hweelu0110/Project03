@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
+import kr.co.alto.mypage.dto.likeDTO;
 
 @Repository("mypageDAO")
 public class MypageDAOImpl implements MypageDAO {
@@ -58,6 +59,19 @@ public class MypageDAOImpl implements MypageDAO {
 		map.put("mem_img", mem_img);
 		map.put("mem_id", mem_id);
 		sqlSession.update("mapper.member.updateImg", map);
+	}
+
+	@Override
+	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeNumMap", codeNumMap);
+		map.put("mem_id", mem_id);
+		sqlSession.update("mapper.member.insertLike", map);		
+	}
+
+	@Override
+	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.member.selectLikeList", mem_id);
 	}
 
 	

@@ -59,5 +59,25 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.updateImg(mem_img, mem_id);
 	}
 
+	@Override
+	public void insertLike(String codeNum, String codeType, String mem_id) throws Exception {
+		Map<String, String> codeNumMap = new HashMap<>();
+		
+		codeNumMap.put("club_code", "");
+		codeNumMap.put("class_code", "");
+		codeNumMap.put("item_code", "");
+		
+		if (codeType == "club_code") {
+			codeNumMap.put("club_code", codeNum);
+		}else if (codeType == "class_code") {
+			codeNumMap.put("class_code", codeNum);
+		}else if (codeType == "item_code") {
+			codeNumMap.put("item_code", codeNum);
+		}
+		
+		mypageDAO.insertLike(codeNumMap, mem_id);
+		
+	}
+
 	
 }

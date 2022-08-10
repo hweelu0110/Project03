@@ -19,13 +19,38 @@
 	<script type="text/javascript">
 		$(function () {
 			$(".like_icon").click(function() {
+				let selectItem = $(this)
+				let codeNum, codeType
+				let mem_id = '${login.mem_id}'
+				
 				if ('${login}' != ''){
-					alert('${login}')
-					alert("로그인 상태")
-					confirmPopup($("#confirm_popup"), "관심목록에 추가되었습니다.")
+					alert(mem_id)
+					if ($(this).siblings('#club_code').val() != null) {
+						codeNum = $(this).siblings('#club_code').val()
+						codeType = 'club_code'
+					}else if ($(this).siblings('#class_code').val() != null) {
+						codeNum = $(this).siblings('#class_code').val()
+						codeType = 'class_code'
+					}else if ($(this).siblings('#item_code').val() != null) {
+						codeNum = $(this).siblings('#item_code').val()
+						codeType = 'item_code'
+					}
+					
+					$.ajax({
+						url: "${path}/mypage/likeAdd.do",
+						type: "Get",
+						data: {codeNum: codeNum, codeType: codeType, mem_id: '${login.mem_id}'},
+						dataType: "text",
+						success: function(data) {
+							confirmPopup($("#like_popup"), "관심 목록 추가 완료!")
+						},
+						error: function(data) {
+							alert("오류가 발생했습니다. 다시 시도해 주세요.")
+						}
+						
+					})
+					
 				}else {
-					alert('${login}')
-				 	alert("비로그인 상태")
 					confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
 				}	
 				
@@ -41,7 +66,7 @@
 				<c:forEach var="hobby" items="${hobbyList}">
 					<li>
 						<a href="">
-							<img src="../resources/img/hobby_img/${hobby.hobby_code}.png" />
+							<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
 							<span class="hobby_name">${hobby.name}</span>
 						</a>
 					</li>				
@@ -63,6 +88,7 @@
 						<p class="club_name">${best.title}</p>
 						<span class="memNum">${best.member_num}명</span>
 						<span class="like_icon">관심</span>
+						<input type="hidden" name="club_code" id="club_code" value="${best.club_code}" />
 					</div>
 		      	</c:forEach>
 	        	
@@ -103,6 +129,7 @@
 							<span class="memNum">${brandnew.member_num}명</span>
 							<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
 						</div>
+						<input type="hidden" name="club_code" id="club_code" value="${brandnew.club_code}" />
 					</div>					
 		      	</c:forEach>	
 		      	        	

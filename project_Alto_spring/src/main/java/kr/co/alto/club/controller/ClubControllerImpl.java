@@ -40,17 +40,17 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
+		Map<String, Object> clubMainMap = new HashMap<>();
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
-		if(memberDTO != null) {			
-			mav.setViewName("redirect:/club/clubSearchList.do");
-		} else {
-			Map<String, Object> clubMainMap = new HashMap<>();
-			
-			clubMainMap = clubService.clubMainList();
-			
-			mav.addObject("clubMainMap", clubMainMap);
-			mav.setViewName(viewName);
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
 		}
+		
+		clubMainMap = clubService.clubMainList(mem_id);
+		
+		mav.addObject("clubMainMap", clubMainMap);
+		mav.setViewName(viewName);
 		
 		return mav;
 	}

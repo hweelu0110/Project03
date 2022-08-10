@@ -17,6 +17,13 @@
 		<result property="memberId_yn" column="MEMBER_ID_YN" />
 		<result property="del_yn" column="DEL_YN" />
 	</resultMap>
+	
+	<resultMap type="likeDTO" id="likeResult">
+		<result property="like_code" column="LIKE_CODE" />
+		<result property="club_code" column="CLUB_CODE" />
+		<result property="class_code" column="CLASS_CODE" />
+		<result property="item_code" column="ITEM_CODE" />
+	</resultMap>
 
 	
 	<!-- 회원가입 -->
@@ -97,5 +104,22 @@
 	<update id="updateImg">
 		UPDATE ALTO_MEMBER SET IMG = #{mem_img} WHERE MEM_ID = #{mem_id}
 	</update>
+	
+	<!-- 관심 목록 추가 -->
+	<insert id="insertLike" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO ALTO_LIKE(LIKE_CODE, MEM_ID, CLUB_CODE, CLASS_CODE, ITEM_CODE)
+			VALUES(seq_like_code.nextval, #{mem_id}, #{club_code}, #{class_code}, #{item_code})
+		]]>
+	</insert>
+	
+	<!-- 관심 목록 가져오기 -->
+	<select id="selectLikeList" resultMap="likeResult">
+		<![CDATA[
+			SELECT LIKE_CODE, CLUB_CODE, CLASS_CODE, ITEM_CODE 
+			FROM ALTO_LIKE
+			WHERE MEM_ID = #{mem_id}
+		]]>
+	</select>
 	
 </mapper>

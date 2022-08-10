@@ -21,4 +21,6 @@ public interface MypageController {
 	public ResponseEntity delMember(String mem_id, HttpServletRequest request, HttpSession session) throws Exception;
 	
 	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session, String mem_id) throws Exception;
+	
+	public void insertLike(String codeNum, String codeType, String mem_id, HttpServletRequest request) throws Exception; 
 }
