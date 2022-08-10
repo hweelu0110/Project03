@@ -228,7 +228,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	@RequestMapping(value = "/likeAdd.do", method = RequestMethod.GET)
 	@ResponseBody
 	public void insertLike(String codeNum, String codeType, String mem_id, HttpServletRequest request)
-			throws Exception {
+			throws Exception {		
 		mypageService.insertLike(codeNum, codeType, mem_id);
 	}
 		

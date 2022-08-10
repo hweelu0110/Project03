@@ -67,11 +67,11 @@ public class MypageServiceImpl implements MypageService {
 		codeNumMap.put("class_code", "");
 		codeNumMap.put("item_code", "");
 		
-		if (codeType == "club_code") {
+		if (codeType.equals("club_code")) {
 			codeNumMap.put("club_code", codeNum);
-		}else if (codeType == "class_code") {
+		}else if (codeType.equals("class_code")) {
 			codeNumMap.put("class_code", codeNum);
-		}else if (codeType == "item_code") {
+		}else if (codeType.equals("item_code")) {
 			codeNumMap.put("item_code", codeNum);
 		}
 		
