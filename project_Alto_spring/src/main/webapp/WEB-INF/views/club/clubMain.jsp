@@ -40,7 +40,21 @@
 					
 					if ($(this).hasClass("select")){
 						$(this).removeClass("select")
-						alert("관심 목록 해제 처리!")
+						
+						$.ajax({
+							url: "${path}/mypage/likeDel.do",
+							type: "Get",
+							data: {codeNum: codeNum, codeType: codeType, mem_id: mem_id},
+							dataType: "text",
+							success: function(data) {
+								confirmPopup($("#like_popup"), "관심 해제 완료!")
+							},
+							error: function(data) {
+								alert("오류가 발생했습니다. 다시 시도해 주세요.")
+							}
+							
+						})	
+						
 					} else {
 						$(this).addClass("select")
 						

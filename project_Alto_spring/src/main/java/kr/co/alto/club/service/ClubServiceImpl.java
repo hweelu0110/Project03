@@ -47,8 +47,6 @@ public class ClubServiceImpl implements ClubService {
 		if (!mem_id.equals("")) {
 			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
 			
-			System.out.println(memlikeList.get(0).getClub_code());
-			System.out.println(memlikeList.get(1).getClub_code());
 			clubMainMap.put("memlikeList", memlikeList);
 		}		
 				

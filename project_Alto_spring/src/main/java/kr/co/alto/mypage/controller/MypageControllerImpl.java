@@ -231,5 +231,13 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 			throws Exception {		
 		mypageService.insertLike(codeNum, codeType, mem_id);
 	}
+
+	@Override
+	@RequestMapping(value = "/likeDel.do", method = RequestMethod.GET)
+	@ResponseBody
+	public void deletLike(String codeNum, String codeType, String mem_id, HttpServletRequest request) 
+			throws Exception {
+		mypageService.deletLike(codeNum, codeType, mem_id);		
+	}
 		
 }

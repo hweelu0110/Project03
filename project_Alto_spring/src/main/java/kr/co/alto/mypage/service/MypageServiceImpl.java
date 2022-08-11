@@ -79,5 +79,24 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 
+	@Override
+	public void deletLike(String codeNum, String codeType, String mem_id) throws Exception {
+		Map<String, String> codeNumMap = new HashMap<>();
+		
+		codeNumMap.put("club_code", "");
+		codeNumMap.put("class_code", "");
+		codeNumMap.put("item_code", "");
+		
+		if (codeType.equals("club_code")) {
+			codeNumMap.put("club_code", codeNum);
+		}else if (codeType.equals("class_code")) {
+			codeNumMap.put("class_code", codeNum);
+		}else if (codeType.equals("item_code")) {
+			codeNumMap.put("item_code", codeNum);
+		}
+		
+		mypageDAO.deletLike(codeNumMap, mem_id);
+	}
+
 	
 }

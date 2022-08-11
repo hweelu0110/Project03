@@ -32,6 +32,7 @@
 		VALUES(#{mem_id}, #{mem_pwd}, #{mem_name}, #{gender}, #{birth}, #{memberId_yn})
 	</insert>
 	
+	<!-- id(이메일) 중복 검사 -->
 	<select id="idCnt" parameterType="String" resultType="String">
 		<![CDATA[
 			SELECT DECODE(COUNT(*), 1, 'true', 0, 'false') 
@@ -39,16 +40,19 @@
 		]]>
 	</select>
 	
+	<!-- 회원 인증 키 등록 -->
 	<insert id="createAuthKey">
 		INSERT INTO ALTO_MEMBER_AUTH VALUES(#{memberEmail}, #{authKey})
 	</insert>
 	
+	<!-- 회원 이메일 인증 처리 -->
 	<update id="memberAuth">
 		<![CDATA[
 			UPDATE ALTO_MEMBER SET AUTHKEY = 1 
 			WHERE (SELECT COUNT(*) FROM ALTO_MEMBER_AUTH WHERE MEM_ID = #{memberEmail} AND AUTHKEY = #{authKey}) > 0
 		]]>
 	</update>
+	
 															
 	<!-- 로그인 -->
 	<select id="login" resultMap="memResult">
@@ -112,6 +116,12 @@
 			VALUES(seq_like_code.nextval, #{mem_id}, #{codeNumMap.club_code}, #{codeNumMap.class_code}, #{codeNumMap.item_code})
 		]]>
 	</insert>
+	
+	<!-- 관심 목록 제거 -->
+	<delete id="deletLike" parameterType="java.util.HashMap">
+		DELETE FROM ALTO_LIKE WHERE MEM_ID = #{mem_id} 
+		AND (CLUB_CODE = #{codeNumMap.club_code} OR CLASS_CODE = #{codeNumMap.class_code} OR ITEM_CODE = #{codeNumMap.item_code})
+	</delete>
 	
 	<!-- 관심 목록 가져오기 -->
 	<select id="selectLikeList" parameterType="String" resultMap="likeResult">

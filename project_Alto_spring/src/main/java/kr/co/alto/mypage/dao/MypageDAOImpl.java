@@ -60,6 +60,11 @@ public class MypageDAOImpl implements MypageDAO {
 		map.put("mem_id", mem_id);
 		sqlSession.update("mapper.member.updateImg", map);
 	}
+	
+	@Override
+	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.member.selectLikeList", mem_id);
+	}
 
 	@Override
 	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException {
@@ -67,11 +72,14 @@ public class MypageDAOImpl implements MypageDAO {
 		map.put("codeNumMap", codeNumMap);
 		map.put("mem_id", mem_id);
 		sqlSession.update("mapper.member.insertLike", map);		
-	}
+	}	
 
 	@Override
-	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
-		return sqlSession.selectList("mapper.member.selectLikeList", mem_id);
+	public void deletLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException {
+		Map<String, Object> map = new HashMap<>();
+		map.put("codeNumMap", codeNumMap);
+		map.put("mem_id", mem_id);
+		sqlSession.update("mapper.member.deletLike", map);
 	}
 
 	
