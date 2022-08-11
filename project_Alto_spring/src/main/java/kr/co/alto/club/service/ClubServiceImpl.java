@@ -42,11 +42,14 @@ public class ClubServiceImpl implements ClubService {
 		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
 		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
 		
-		if (mem_id != "") {
-			List<likeDTO> likeList = mypageDAO.selectLikeList(mem_id);
+		System.out.println(mem_id);
+		
+		if (!mem_id.equals("")) {
+			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+			
+			clubMainMap.put("memlikeList", memlikeList);
 		}		
-		
-		
+				
 		clubMainMap.put("newClubList", newClubList);
 		clubMainMap.put("bestClubList", bestClubList);
 		clubMainMap.put("AllHobbyList", AllHobbyList);

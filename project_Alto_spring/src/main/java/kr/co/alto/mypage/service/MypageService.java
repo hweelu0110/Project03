@@ -18,5 +18,6 @@ public interface MypageService {
 	public Map<String, Object> selectMyList(String mem_id) throws Exception;
 
 	public void insertLike(String codeNum, String codeType, String mem_id) throws Exception;
+	public void deletLike(String codeNum, String codeType, String mem_id) throws Exception;
 
 }

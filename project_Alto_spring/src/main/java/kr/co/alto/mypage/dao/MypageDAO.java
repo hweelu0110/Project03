@@ -24,8 +24,9 @@ public interface MypageDAO {
 	public List<HobbyDTO> selectHobbyList(String mem_id) throws DataAccessException;
 	public List<AreaDTO> selectMyAreaList(String mem_id) throws DataAccessException;
 
-	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
-
 	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException;
+	
+	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
+	public void deletLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
 
 }

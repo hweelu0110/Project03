@@ -8,6 +8,7 @@
 <c:set var="hobbyList" value="${clubMainMap.AllHobbyList}"/>
 <c:set var="bestList" value="${clubMainMap.bestClubList}"/>
 <c:set var="newList" value="${clubMainMap.newClubList}" />
+<c:set var="likeList" value="${clubMainMap.memlikeList}" />
 
 <!DOCTYPE html>
 <html>
@@ -36,19 +37,43 @@
 						codeType = 'item_code'
 					}
 					
-					$.ajax({
-						url: "${path}/mypage/likeAdd.do",
-						type: "Get",
-						data: {codeNum: codeNum, codeType: codeType, mem_id: '${login.mem_id}'},
-						dataType: "text",
-						success: function(data) {
-							confirmPopup($("#like_popup"), "관심 목록 추가 완료!")
-						},
-						error: function(data) {
-							alert("오류가 발생했습니다. 다시 시도해 주세요.")
-						}
+					
+					if ($(this).hasClass("select")){
+						$(this).removeClass("select")
 						
-					})
+						$.ajax({
+							url: "${path}/mypage/likeDel.do",
+							type: "Get",
+							data: {codeNum: codeNum, codeType: codeType, mem_id: mem_id},
+							dataType: "text",
+							success: function(data) {
+								confirmPopup($("#like_popup"), "관심 해제 완료!")
+							},
+							error: function(data) {
+								alert("오류가 발생했습니다. 다시 시도해 주세요.")
+							}
+							
+						})	
+						
+					} else {
+						$(this).addClass("select")
+						
+						$.ajax({
+							url: "${path}/mypage/likeAdd.do",
+							type: "Get",
+							data: {codeNum: codeNum, codeType: codeType, mem_id: mem_id},
+							dataType: "text",
+							success: function(data) {
+								confirmPopup($("#like_popup"), "관심 목록 추가 완료!")
+							},
+							error: function(data) {
+								alert("오류가 발생했습니다. 다시 시도해 주세요.")
+							}
+							
+						})
+					}
+					
+					
 					
 				}else {
 					confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
@@ -87,7 +112,22 @@
 						<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${best.cate_m}.png" /></span>
 						<p class="club_name">${best.title}</p>
 						<span class="memNum">${best.member_num}명</span>
-						<span class="like_icon">관심</span>
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.club_code eq best.club_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
 						<input type="hidden" name="club_code" id="club_code" value="${best.club_code}" />
 					</div>
 		      	</c:forEach>
@@ -121,7 +161,22 @@
 		      	<c:forEach var="brandnew" items="${newList}">		      		
 		      		<div class="swiper-slide">
 						<img class="club_img" src="${path}/resources/img/club_test.png" />
-						<span class="like_icon">관심</span>
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.club_code eq brandnew.club_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
 						<span class="area">${brandnew.area_name}</span>
 						<div class="club_info">
 							<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${brandnew.cate_m}.png" /></span>
