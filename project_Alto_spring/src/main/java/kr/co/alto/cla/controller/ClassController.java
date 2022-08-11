@@ -18,4 +18,6 @@ public interface ClassController {
 	
 	public ModelAndView editClass(String class_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity modClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
+	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
