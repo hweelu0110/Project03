@@ -37,7 +37,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if(httpSession.getAttribute("login") == null) {
 			logger.info("current user is not logged");
 			saveDestination(request);
-			response.sendRedirect("/member/errorLogin.do");
+			response.sendRedirect("http://localhost:8080/alto/member/errorLogin.do");
 			return false;
 		}
 		return true;

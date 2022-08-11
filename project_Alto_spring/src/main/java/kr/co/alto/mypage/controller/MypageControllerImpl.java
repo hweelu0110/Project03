@@ -201,28 +201,46 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	}
 	
 	private String upload(MultipartHttpServletRequest multipartRequest) throws ServletException, IOException {
-			String mem_img = "";
-			Iterator<String> fileNames = multipartRequest.getFileNames();
-			while(fileNames.hasNext()) {
-				String fileName = fileNames.next();
-				MultipartFile mFile = multipartRequest.getFile(fileName);
-				String originalFileName = mFile.getOriginalFilename();
-				
-				if (originalFileName != "" && originalFileName != null) {
-					mem_img = originalFileName;
-					File file = new File(MEM_IMG_PATH+"\\"+fileName);
-					if (mFile.getSize() != 0) {
-						if(!file.exists()) {
-							file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리 생성
-							mFile.transferTo(new File(MEM_IMG_PATH +"\\"+originalFileName ));
-									//저장된 MultipartFile을 실제 파일로 전송
-						}
+		String mem_img = "";
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFileName = mFile.getOriginalFilename();
+			
+			if (originalFileName != "" && originalFileName != null) {
+				mem_img = originalFileName;
+				File file = new File(MEM_IMG_PATH+"\\"+fileName);
+				if (mFile.getSize() != 0) {
+					if(!file.exists()) {
+						file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리 생성
+						mFile.transferTo(new File(MEM_IMG_PATH +"\\"+originalFileName ));
+								//저장된 MultipartFile을 실제 파일로 전송
 					}
 				}
 			}
-			
-			return mem_img;
 		}
+		
+		return mem_img;
+	}
+	
+	@Override
+	@RequestMapping(value = "/mylikeList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mylikeList(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> mylikeMap = new HashMap<>();
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
+		mylikeMap = mypageService.selectLikeList(mem_id);
+		
+		mav.addObject("mylikeMap", mylikeMap);
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
 
 	@Override
 	@RequestMapping(value = "/likeAdd.do", method = RequestMethod.GET)
@@ -239,5 +257,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 			throws Exception {
 		mypageService.deletLike(codeNum, codeType, mem_id);		
 	}
+
+	
 		
 }

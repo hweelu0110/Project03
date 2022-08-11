@@ -13,9 +13,9 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/common/list.css" /> 	
+	<meta name="viewport" content="width=device-width, inital-scale=1.0">		
 	<link rel="stylesheet" href="${path}/resources/css/club/club.css" /> 
+	<link rel="stylesheet" href="${path}/resources/css/common/list.css" /> 
 	<script src="${path}/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">	
 		function validateForm(obj) {
@@ -176,7 +176,7 @@
 		
 		<div id="search_result">
 			<h2>검색 결과</h2>
-			<div class="searchList">
+			<div class="normalList">
 				<ul class="club">
 					<li>
 						<img class="club_img" src="../resources/img/club_test.png" />

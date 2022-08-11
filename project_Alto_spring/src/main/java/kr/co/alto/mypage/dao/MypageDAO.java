@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
@@ -28,5 +29,7 @@ public interface MypageDAO {
 	
 	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
 	public void deletLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
+
+	public List<ClubListDTO> selectLikeClubList(String mem_id) throws DataAccessException;
 
 }

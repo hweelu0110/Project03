@@ -1,58 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="hobbyList" value="${mypageMap.hobbyList}" />
-<c:set var="areaList" value="${mypageMap.areaList}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="hobbyList" value="${mylikeMap.hobbyList}" />
+<c:set var="areaList" value="${mylikeMap.areaList}" />
+<c:set var="likeList" value="${mylikeMap.memlikeList}" />
+<c:set var="clubList" value="${mylikeMap.clubList}" />
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />
+	<meta name="viewport" content="width=device-width, inital-scale=1.0">
+	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />	
+	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
 	<script type="text/javascript">
-		function fn_imgEditPopup() {
-			confirmPopup($("#imgEdit_div"))
-		}
-		
-		function readURL(input, index) {
-			if (input.files && input.files[index]) {
-				let reader = new FileReader()
-				reader.onload = function(e) {
-					$("#mem_img").attr("src",e.target.result)
-				}
-				reader.readAsDataURL(input.files[index])
-			}
-		}
-		
-		function fn_delURL() {
-			$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
-			$("#mem_imgfile").val("")			
-		}	
-		
-		$(function() {
-			
-			if($("#mem_imgfile").val() == "") {
-				$("#mem_imgBtn").attr("disabled")
-				$("#mem_imgBtn").removeClass("pointBtn")
-				$("#mem_imgBtn").addClass("basicBtn")
-			}else {
-				$("#mem_imgBtn").removeAttr("disabled")
-				$("#mem_imgBtn").addClass("pointBtn")
-				$("#mem_imgBtn").removeClass("basicBtn")
-			}			
-			
-			$("#imgEdit_div .closeBtn").click(function() {
-				$("#mem_img").attr("src","${path}/resources/img/profile_default.png")
-				$("#mem_imgfile").val("")
-			})
-		})
 		
 	</script>
 </head>
 <body>
+	<!-- CONTENTS -->
 	<section>
 		<div id="myInfo">
 			<div class="profile">				
@@ -128,23 +97,46 @@
 				<li><a href="">후기 관리</a></li>
 				<li><a href="">문의 내역</a></li>
 			</ul>
-		</div>
+		</div>		
 		
 		<div id="myPageCont">
-			<div class="myClub">
-				<h3>활동중인 모임</h3>
-				<p>아직 모임 활동을 하지 않았습니다. 모임을 찾으러 가자! <a href="">모임검색하기</a></p>				
-			</div>
+			<ul id="tab_menu">
+				<li class="select">모임</li>
+				<li>클래스</li>
+				<li>취미용품</li>
+			</ul>
 			
-			<div class="myClass">
-				<h3>수강중인 클래스</h3>
-				<p>아직 클래스 정보가 없습니다. 클래스를 찾아볼까요? <a href="">클래스검색하기</a></p>
-			</div>
+			<div>
+				<div class="normalList">
+					<ul class="club">
+						<c:if test="${not empty clubList}">
+							
+							<c:forEach var="club" items="${clubList}">
+								<li>
+									<img class="club_img" src="${path}/resources/img/club_test.png" />
+									<span class="area">${club.area_name}</span>
+									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${club.cate_m}.png" /></span>
+									<p class="club_name">${club.title}</p>
+									<span class="memNum">${club.member_num}명</span>
+									<p class="club_schedule">
+										<span class="s_icon"></span><span>6/11(토)</span>
+										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+									</p>
+									<span class="like_icon select">관심</span>
+								</li>	
+							</c:forEach>	
+							
+						</c:if>
+						<c:if test="${empty clubList}">
+							<li>관심 모임이 없습니다.</li>
+						</c:if>										
+					</ul>
+				</div>
 			
-			<div class="myLike">
-				<h3>관심 목록</h3>
-			</div>
 		</div>
+			
+		</div>
+		
 		
 		<div id="imgEdit_div" class="popup_div profile">
 			<h4>프로필 사진 변경</h4>
@@ -161,7 +153,7 @@
 				<button type="submit" class="pointBtn">적용</button>
 				<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>
 			</form>
-		</div>
+		</div>		
 	</section>
 </body>
 </html>

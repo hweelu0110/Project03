@@ -91,9 +91,7 @@
 	<beans:bean id="authInterceptor" class="kr.co.alto.common.interceptor.AuthInterceptor"/>
 	<mvc:interceptors>
 		<mvc:interceptor>		
-			<mvc:mapping path="/board/writeView" />
-			<mvc:mapping path="/board/updateView" />
-			<mvc:mapping path="/board/delete"/>			
+			<mvc:mapping path="/mypage/**" />		
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>	
 	</mvc:interceptors>
@@ -107,7 +105,6 @@
 	    <mvc:mapping path="/*/*/*.do"/>
 	    <exclude-mapping path="/resources/**"/>
 	    <exclude-mapping path="/member/**"/>
-	    <exclude-mapping path="/reply/**" />
 	    <beans:ref bean="uRlInterceptor"/>
 	  </mvc:interceptor>
 	</mvc:interceptors>

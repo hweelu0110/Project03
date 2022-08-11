@@ -10,9 +10,11 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
+import kr.co.alto.mypage.dto.likeDTO;
 
 @Service("mypageService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -58,6 +60,31 @@ public class MypageServiceImpl implements MypageService {
 	public void updateImg(String mem_img, String mem_id) throws Exception {
 		mypageDAO.updateImg(mem_img, mem_id);
 	}
+	
+	@Override
+	public Map<String, Object> selectLikeList(String mem_id) throws Exception {
+		Map<String, Object> mylikeMap = new HashMap<>();
+		
+		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
+		List<AreaDTO> areaList = mypageDAO.selectMyAreaList(mem_id);
+		
+		mylikeMap.put("hobbyList", hobbyList);
+		mylikeMap.put("areaList", areaList);
+		
+		List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+		List<ClubListDTO> clubList = mypageDAO.selectLikeClubList(mem_id);				
+		//List<ClassListDTO> classList = mypageDAO.selectLikeClassList(mem_id);	
+		//List<ItemListDTO> itemList = mypageDAO.selectLikeItemList(mem_id);	
+		
+		mylikeMap.put("memlikeList", memlikeList);
+		System.out.println("memlikeList ?? : " + memlikeList.get(0).getClass_code());
+		System.out.println("clubList ?? : " + clubList.get(0).getClub_code());
+		mylikeMap.put("clubList", clubList);
+		//mylikeMap.put("classList", classList);
+		//mylikeMap.put("itemList", itemList);
+		
+		return mylikeMap;	
+	}
 
 	@Override
 	public void insertLike(String codeNum, String codeType, String mem_id) throws Exception {
@@ -97,6 +124,5 @@ public class MypageServiceImpl implements MypageService {
 		
 		mypageDAO.deletLike(codeNumMap, mem_id);
 	}
-
 	
 }

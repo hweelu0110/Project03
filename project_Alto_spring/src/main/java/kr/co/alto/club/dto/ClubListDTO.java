@@ -10,7 +10,6 @@ public class ClubListDTO {
 	private String area_name;
 	private String member_num;
 	private String img;
-	private String like_yn;
 	private Date schedule;
 	private String place;
 	
@@ -71,15 +70,7 @@ public class ClubListDTO {
 	public void setImg(String img) {
 		this.img = img;
 	}
-
-	public String getLike_yn() {
-		return like_yn;
-	}
-
-	public void setLike_yn(String like_yn) {
-		this.like_yn = like_yn;
-	}
-
+	
 	public Date getSchedule() {
 		return schedule;
 	}

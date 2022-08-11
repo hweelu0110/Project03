@@ -1,5 +1,6 @@
 @charset "UTF-8";
 section { padding: 30px 30px 70px; }
+#main_menu li:nth-child(1) { color: #00c7ae; }
 
 /* 선택 항목 표시 */
 .select { font-weight: bold; color: #00c7ae; }
@@ -93,52 +94,7 @@ section { padding: 30px 30px 70px; }
 }
 
 #search_result { margin-top: 40px; margin-bottom: 80px; }
-#search_result div.searchList { padding-left: 50px; }
-#search_result ul li { 
-	position: relative;
-	width: 250px; 
-	margin-bottom: 30px; 
-	margin-right: 30px;
-	text-align: left;
-	display: inline-block;
-}
-#search_result ul li .area {
-	position: absolute;
-    top: 5px;
-    left: 5px;    
-    padding: 3px;
-    font-size: 10px;
-    font-weight: 700;
-    background: #fff;
-    color: #00c7ae;
-}
-#search_result ul li .hobby_icon {
-	float: left;
-    width: 25px;
-}
-#search_result ul li .club_name {
-	width: 220px;
-    height: 35px;
-    margin-left: 30px;
-    font-size: 13px;
-    font-weight: 700;
-}
-#search_result ul li .memNum {
-	margin-left: 30px;
-    font-size: 12px;
-}
-#search_result ul li .like_icon {
-	position: absolute;
-	top: 3px;
-    right: 3px;
-    width: 14px;
-    height: 13px;
-    text-indent: -99999px;
-    background-image: url(../../img/alto_common_icon.png);
-    background-size: 85px;
-    background-position: -22px 0px;
-    cursor: pointer;
-}
+#search_result div.normalList { padding-left: 50px; }
 
 /* 모임 개설하기 버튼, 팝업 div */
 div.info_div {
