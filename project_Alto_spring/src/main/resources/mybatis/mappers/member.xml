@@ -73,6 +73,7 @@
 		]]>
 	</select>
 	
+	
 	<!-- 비밀번호 찾기 -->
 	<update id="findPw">
 		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
@@ -84,30 +85,34 @@
 		]]>
 	</select>
 	
+	<!-- 비밀번호 체크 -->
+	<select id="pwCheck" resultType="String">
+		SELECT MEM_PWD FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pwUpdate">
+		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
 	<!-- 회원정보 수정 -->
 	<update id="modMemInfo" parameterType="memberDTO">
 		UPDATE ALTO_MEMBER SET MEM_NAME = #{mem_name}, GENDER = #{gender}, BIRTH = #{birth}, phone = #{phone}, MEM_OPEN = #{mem_open}
 		WHERE MEM_ID = #{mem_id}
 	</update>
 	
-	<!-- 비밀번호 변경 -->
-	<select id="pwCheck" resultType="String">
-		SELECT MEM_PWD FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
-	</select>
-	
-	<update id="pwUpdate">
-		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	<!-- 회원프로필 이미지 변경 -->
+	<update id="updateImg">
+		UPDATE ALTO_MEMBER SET IMG = #{mem_img} WHERE MEM_ID = #{mem_id}
 	</update>
+		
 	
 	<!-- 회원 탈퇴 처리 -->
 	<update id="delMember">
 		UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = #{mem_id}
 	</update>
 	
-	<!-- 회원프로필 이미지 변경 -->
-	<update id="updateImg">
-		UPDATE ALTO_MEMBER SET IMG = #{mem_img} WHERE MEM_ID = #{mem_id}
-	</update>
+	
 	
 	<!-- 관심 목록 추가 -->
 	<insert id="insertLike" parameterType="java.util.HashMap">
@@ -123,7 +128,7 @@
 		AND (CLUB_CODE = #{codeNumMap.club_code} OR CLASS_CODE = #{codeNumMap.class_code} OR ITEM_CODE = #{codeNumMap.item_code})
 	</delete>
 	
-	<!-- 관심 목록 가져오기 -->
+	<!-- 관심코드 목록 가져오기 -->
 	<select id="selectLikeList" parameterType="String" resultMap="likeResult">
 		<![CDATA[
 			SELECT LIKE_CODE, CLUB_CODE, CLASS_CODE, ITEM_CODE 

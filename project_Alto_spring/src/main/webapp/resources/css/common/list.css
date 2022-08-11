@@ -130,7 +130,7 @@
     background-position: -22px 0px;   
     cursor: pointer;  
 }
-.swiper-slide .like_icon.select {
+.swiper-slide .like_icon.select, .normalList .like_icon.select {
 	background-position: -36px 0px;
 }
 
@@ -239,8 +239,52 @@
 
 #sec_07 { margin-bottom: 100px; }
 
-
-
+/* 검색 목록 & 마이페이지 모임 리스트 */
+.normalList ul li { 
+	position: relative;
+	width: 250px; 
+	margin-bottom: 30px; 
+	margin-right: 30px;
+	text-align: left;
+	display: inline-block;
+}
+.normalList ul li .area {
+	position: absolute;
+    top: 5px;
+    left: 5px;    
+    padding: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    background: #fff;
+    color: #00c7ae;
+}
+.normalList ul li .hobby_icon {
+	float: left;
+    width: 25px;
+}
+.normalList ul li .club_name {
+	width: 220px;
+    height: 35px;
+    margin-left: 30px;
+    font-size: 13px;
+    font-weight: 700;
+}
+.normalList ul li .memNum {
+	margin-left: 30px;
+    font-size: 12px;
+}
+.normalList ul li .like_icon {
+	position: absolute;
+	top: 3px;
+    right: 3px;
+    width: 14px;
+    height: 13px;
+    text-indent: -99999px;
+    background-image: url(../../img/alto_common_icon.png);
+    background-size: 85px;
+    background-position: -22px 0px;
+    cursor: pointer;
+}
 
 
 

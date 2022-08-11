@@ -32,4 +32,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/delMemFrm.jsp" />		
 	</definition>
 	
+	<definition name="/mypage/mylikeList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mylikeList.jsp" />		
+	</definition>
+	
 </tiles-definitions>

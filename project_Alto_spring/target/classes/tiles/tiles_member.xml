@@ -19,6 +19,10 @@
 	<definition name="/member/registerEmail" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/member/registerEmail.jsp" />		
 	</definition>
+	
+	<definition name="/member/errorLogin" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/errorLogin.jsp" />		
+	</definition>
 		
 	
 	<definition name="/member/loginFrm" extends="tiles-layout">

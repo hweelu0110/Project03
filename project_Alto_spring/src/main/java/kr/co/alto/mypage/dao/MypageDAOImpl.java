@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
@@ -80,6 +81,11 @@ public class MypageDAOImpl implements MypageDAO {
 		map.put("codeNumMap", codeNumMap);
 		map.put("mem_id", mem_id);
 		sqlSession.update("mapper.member.deletLike", map);
+	}
+
+	@Override
+	public List<ClubListDTO> selectLikeClubList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.club.selectLikeClubList", mem_id);
 	}
 
 	

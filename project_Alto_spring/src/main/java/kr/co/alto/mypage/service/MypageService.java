@@ -16,8 +16,9 @@ public interface MypageService {
 	public void updateImg(String mem_img, String mem_id) throws Exception;
 
 	public Map<String, Object> selectMyList(String mem_id) throws Exception;
-
+	
+	public Map<String, Object> selectLikeList(String mem_id) throws Exception;
+	
 	public void insertLike(String codeNum, String codeType, String mem_id) throws Exception;
 	public void deletLike(String codeNum, String codeType, String mem_id) throws Exception;
-
 }
