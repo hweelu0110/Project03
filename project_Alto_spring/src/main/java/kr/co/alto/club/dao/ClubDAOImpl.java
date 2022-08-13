@@ -36,4 +36,9 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<ClubListDTO> selectNewClubList() throws DataAccessException {
 		return sqlSession.selectList("mapper.club.selectNewClubList");
 	}
+
+	@Override
+	public List<ClubListDTO> selectPeoClubList() throws DataAccessException {
+		return sqlSession.selectList("mapper.club.selectPeoClubList");
+	}
 }

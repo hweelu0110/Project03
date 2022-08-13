@@ -133,12 +133,12 @@
 		<div id="myPageCont">
 			<div class="myClub">
 				<h3>활동중인 모임</h3>
-				<p>아직 모임 활동을 하지 않았습니다. 모임을 찾으러 가자! <a href="">모임검색하기</a></p>				
+				<p class="noCnt">아직 모임 활동을 하지 않았습니다. 모임을 찾으러 가자! <br/><a href="${path}/club/clubSearchList.do">모임검색하기</a></p>				
 			</div>
 			
 			<div class="myClass">
 				<h3>수강중인 클래스</h3>
-				<p>아직 클래스 정보가 없습니다. 클래스를 찾아볼까요? <a href="">클래스검색하기</a></p>
+				<p class="noCnt">아직 클래스 정보가 없습니다. 클래스를 찾아볼까요? <br/><a href="${path}/club/classSearchList.do">클래스검색하기</a></p>
 			</div>
 			
 			<div class="myLike">

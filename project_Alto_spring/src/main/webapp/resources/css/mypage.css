@@ -146,6 +146,20 @@ h1,h2,h3,h4 {
 	margin-right: 10px;
 }
 
+#myPageCont div p.noCnt { 
+	margin-bottom: 20px;
+	padding: 30px;
+	background: #F8F8F8; 
+	text-align: center; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#myPageCont div p.noCnt a { 
+	color: #00c7ae;
+	font-size: 13px; 
+	font-weight: 700;
+	text-decoration: underline;
+}
+
 
 /* mypage - member Info edit */
 #memberInfo {

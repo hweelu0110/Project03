@@ -101,4 +101,28 @@
 			WHERE A.AREA_CODE = B.AREA_CODE
 		]]>
 	</select>
+	
+	<!-- 사람 많은 모임 -->
+	<select id="selectPeoClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					ORDER BY MEMBER_NUM DESC
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+			ORDER BY member_num DESC
+		]]>
+	</select>
 </mapper>
