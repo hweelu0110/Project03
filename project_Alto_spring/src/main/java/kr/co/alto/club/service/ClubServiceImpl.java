@@ -41,6 +41,7 @@ public class ClubServiceImpl implements ClubService {
 		
 		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
 		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
+		List<ClubListDTO> peoClubList = clubDAO.selectPeoClubList();
 		
 		System.out.println(mem_id);
 		
@@ -49,7 +50,8 @@ public class ClubServiceImpl implements ClubService {
 			
 			clubMainMap.put("memlikeList", memlikeList);
 		}		
-				
+		
+		clubMainMap.put("peoClubList", peoClubList);
 		clubMainMap.put("newClubList", newClubList);
 		clubMainMap.put("bestClubList", bestClubList);
 		clubMainMap.put("AllHobbyList", AllHobbyList);

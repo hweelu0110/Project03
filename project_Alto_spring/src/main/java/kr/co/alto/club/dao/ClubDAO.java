@@ -15,5 +15,6 @@ public interface ClubDAO {
 	
 	List<ClubListDTO> selectBestClubList() throws DataAccessException;
 	List<ClubListDTO> selectNewClubList() throws DataAccessException;
+	List<ClubListDTO> selectPeoClubList() throws DataAccessException;
 
 }
