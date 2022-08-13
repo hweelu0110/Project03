@@ -97,21 +97,32 @@ public class ClassControllerImpl implements ClassController {
 	@RequestMapping(value = "/class/listClass.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listClass(@RequestParam(value = "sort", required = false) String sort, 
 								  @RequestParam(value = "hobbyC", required = false) String hobbyC, 
+								  @RequestParam(value = "hobbyCodeList", required = false) String hobbyCodeList, 
+								  @RequestParam(value = "areaCodeList", required = false) String areaCodeList, 
 								HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		Map listMap = new HashMap<>();
+		
+		System.out.println("취미리스트 : "+hobbyCodeList);
+		System.out.println("지역리스트 : "+areaCodeList);
+		
+		if(hobbyCodeList != null && hobbyCodeList != "") {
+			String[] hobbySearchList = hobbyCodeList.split(",");
+			listMap.put("hobbySearchList", hobbySearchList);
+		}
+		
+		if(areaCodeList != null && areaCodeList != "") {
+			String[] areaSearchList = areaCodeList.split(",");
+			listMap.put("areaSearchList", areaSearchList);
+		}
 		
 		if(sort!=null) {
 			listMap.put("sort", sort);
 		}
 		
 		if(hobbyC!=null) {
-			if(hobbyC.equals("all")) {
-				listMap.put("hobbyC", "all");
-			} else {
-				listMap.put("hobbyC", hobbyC);
-			}
+			listMap.put("hobbyC", hobbyC);
 		} else {
 			listMap.put("hobbyC", "all");
 		}
@@ -391,8 +402,8 @@ public class ClassControllerImpl implements ClassController {
 		
 		System.out.println("취미리스트 : "+hobbyCodeList);
 		System.out.println("지역리스트 : "+areaCodeList);
-//		String[] arrhcodelist = hobbyCodeList.split(",");
-//		HashMap<String, String> codeList = new HashMap<String, String>();
+		String[] arrhcodelist = hobbyCodeList.split(",");
+		HashMap<String, String> codeList = new HashMap<String, String>();
 //		
 //		codeList.put("code1", arrhcodelist[0]);
 //		codeList.put("code2", arrhcodelist[1]);

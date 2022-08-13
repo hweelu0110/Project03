@@ -38,13 +38,29 @@
 		FROM ALTO_CLASS c, ALTO_AREA a, ALTO_HOBBY h
 		WHERE a.AREA_CODE = c.AREA_CODE
 		AND c.HOBBY_CODE = h.HOBBY_CODE
+		
 		<if test=" hobbyC != null">
-		 <if test=" hobbyC == 'all'">
-		 </if>
-		 <if test="hobbyC != 'all'">
-		 	AND c.HOBBY_CODE = #{hobbyC}
-		 </if>
+			 <if test=" hobbyC == 'all'">
+			 </if>
+			 <if test="hobbyC != 'all'">
+			 	AND c.HOBBY_CODE = #{hobbyC}
+			 </if>
 		</if>
+		
+		<if test=" hobbySearchList != null">
+			 AND c.HOBBY_CODE IN 
+			 <foreach item="item" index="index" collection="hobbySearchList" open="(" separator="," close=")">
+			 	#{item}
+			 </foreach>
+		</if>
+		
+		<if test=" areaSearchList != null">
+			 AND c.AREA_CODE IN 
+			 <foreach item="item" index="index" collection="areaSearchList" open="(" separator="," close=")">
+			 	#{item}
+			 </foreach>
+		</if>
+		
 		<if test="sort == null">
 			order by class_code desc 
 		</if>

@@ -27,41 +27,39 @@
 		
 		function sendSearchList() {
 			
-			//취미
 			let h_cnt = $("#m_cate ul li.select").length
-			
 			let hobbycodeList = Array(h_cnt)
+			let a_cnt = $("#area_list ul li.select").length
+			let areaCodeList = Array(a_cnt)
 			
-			for(let i=0; i<h_cnt; i++) {
+			//취미
+/* 			for(let i=0; i<h_cnt; i++) {
 				hobbycodeList[i] = " "
-			}
+			} */
 			
 			for(i=0; i<h_cnt; i++) {
 				let hobby_code = $("#m_cate ul li.select:eq("+i+")").children("img:eq(0)").attr("src")
-				
+					
 				console.log(hobby_code)
-			
-				hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
-				hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
-				hobbycodeList[i] = hobby_code
+				if(hobby_code !== undefined){
+					hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
+					hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
+					hobbycodeList[i] = hobby_code
+				}
 			}
 			searchList.hobbyCodeList.value = hobbycodeList
 			
 			
 			//지역
-			let a_cnt = $("#area_list ul li.select").length
-			
-			let areaCodeList = Array(a_cnt)
-			
 			for(let i=0; i<a_cnt; i++) {
 				areaCodeList[i] = " "
 			}
 			
 			for(i=0; i<a_cnt; i++) {
 				let area_code = $("#area_list ul li.select:eq("+i+")").find('input[type=hidden]').val()
-				
+					
 				console.log(area_code)
-				
+					
 				areaCodeList[i] = area_code
 			}
 			searchList.areaCodeList.value = areaCodeList
@@ -79,7 +77,7 @@
 		</ul>
 		
 		<div id="tab_area">
-		<form method="post" action="${contextPath}/class/searchList.do" name="searchList"  onclick="return sendSearchList()" >
+		<form method="post" action="${contextPath}/class/listClass.do" name="searchList"  onclick="return sendSearchList()" >
 			<input type="hidden" name="hobbyCodeList" />
 			<input type="hidden" name="areaCodeList" />
 			<div id="m_cate">
