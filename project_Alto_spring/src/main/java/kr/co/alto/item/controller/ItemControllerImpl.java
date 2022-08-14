@@ -92,26 +92,32 @@ public class ItemControllerImpl implements ItemController {
 
 	@Override
 	@RequestMapping(value = "/item/listItem.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listItem(@RequestParam(value = "sort", required = false) String sort, 
+	public ModelAndView listItem(@RequestParam(value = "hobbyCodeList", required = false) String hobbyCodeList,
+								@RequestParam(value = "sort", required = false) String sort, 
 								@RequestParam(value = "hobbyC", required = false) String hobbyC,
 								HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		Map listMap = new HashMap<>();
-				
-				if(sort!=null) {
-					listMap.put("sort", sort);
+
+		Enumeration enu = request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			if(name.equals("hobbyCodeList")) {
+				if(hobbyCodeList != null && hobbyCodeList != "") {
+					String[] hobbySearchList = hobbyCodeList.split(",");
+					listMap.put("hobbySearchList", hobbySearchList);
 				}
-				
-				if(hobbyC!=null) {
-					if(hobbyC.equals("all")) {
-						listMap.put("hobbyC", "all");
-					} else {
-						listMap.put("hobbyC", hobbyC);
-					}
-				} else {
-					listMap.put("hobbyC", "all");
-				}
+			} else {
+				String values = request.getParameter(name);
+				listMap.put(name, values);
+			}
+		}
+		
+		if(hobbyC == null) {
+			listMap.put("hobbyC", "all");
+		}
 		
 		List<ItemDTO> itemList = itemService.listItem(listMap);
 		ModelAndView mav = new ModelAndView(viewName);

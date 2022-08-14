@@ -13,8 +13,8 @@
 					<li><a href="${contextPath }/item/itemMain.do">취미용품</a></li>
 				</ul>
 			</nav>
-			<form action="allSearch.jsp" id="allSearch" name="allSearchForm" method="post">
-				<input type="text" id="allSearch_keyword" name="keyword" value="취미용품을 검색해보세요!" />
+			<form action="${contextPath }/item/listItem.do" id="allSearch" name="allSearchForm">
+				<input type="text" id="allSearch_keyword" name="keyword" placeholder="취미용품을 검색해보세요!"/>
 				<input type="submit" id="search_btn" value="검색" />
 			</form> 
 			<ul id="sub_menu">

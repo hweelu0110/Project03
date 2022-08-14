@@ -36,6 +36,18 @@
 		 <if test="hobbyC != 'all'">
 		 	AND i.HOBBY_CODE = #{hobbyC}
 		 </if>
+		 
+		 <if test=" hobbySearchList != null">
+			 AND i.HOBBY_CODE IN 
+			 <foreach item="item" index="index" collection="hobbySearchList" open="(" separator="," close=")">
+			 	#{item}
+			 </foreach>
+		</if>
+		 
+		 <if test=" keyword != null">
+			 AND (i.item_name LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%')
+		</if>
+		 
 		</if>
 		<if test="sort == null">
 			order by item_code desc 

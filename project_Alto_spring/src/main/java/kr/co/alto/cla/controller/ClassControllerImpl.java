@@ -113,7 +113,7 @@ public class ClassControllerImpl implements ClassController {
 					String[] hobbySearchList = hobbyCodeList.split(",");
 					listMap.put("hobbySearchList", hobbySearchList);
 				}
-			} else if(name.equals("hobbyCodeList")) {
+			} else if(name.equals("areaCodeList")) {
 				if(areaCodeList != null && areaCodeList != "") {
 					String[] areaSearchList = areaCodeList.split(",");
 					listMap.put("areaSearchList", areaSearchList);

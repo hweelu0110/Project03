@@ -24,6 +24,26 @@
 				location.href = '${contextPath}/item/itemform.do'
 			})
 		})
+		
+		
+		function sendSearchList() {
+			
+			let h_cnt = $("#m_cate ul li.select").length
+			let hobbycodeList = Array(h_cnt)
+			
+			for(i=0; i<h_cnt; i++) {
+				let hobby_code = $("#m_cate ul li.select:eq("+i+")").children("img:eq(0)").attr("src")
+					
+				console.log(hobby_code)
+				if(hobby_code !== undefined){
+					hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
+					hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
+					hobbycodeList[i] = hobby_code
+				}
+			}
+			searchList.hobbyCodeList.value = hobbycodeList
+		}
+		
 	</script>
 </head>
 <body>
@@ -32,10 +52,11 @@
 	<section>
 		<ul id="tab_menu">
 			<li><span>전체 취미</span></li>
-			<li><span>전체 지역</span></li>
 		</ul>
 		
 		<div id="tab_area">
+		<form action="${contextPath}/item/listItem.do" name="searchList"  onclick="return sendSearchList()" >
+			<input type="hidden" name="hobbyCodeList" />
 			<div id="m_cate">
 				<ul>
 					<li id="m_cate_all" class="all select">전체</li>
@@ -45,106 +66,10 @@
 							<p class="hobby_name">${hobby.name }</p>
 						</li>
 					</c:forEach>
-					<!-- <li id="m_cate_all" class="all select">전체</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000001.png" />
-						<p class="hobby_name">창작</p>
-					</li>
-			        <li>
-						<img src="../resources/img/hobby_img/hm000002.png" />
-						<p class="hobby_name">액티비티</p>
-			        </li>
-			        <li>
-						<img src="../resources/img/hobby_img/hm000003.png" />
-						<p class="hobby_name">아웃도어</p>
-					</li>
-			        <li>
-						<img src="../resources/img/hobby_img/hm000004.png" />
-						<p class="hobby_name">사진/영상</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000005.png" />
-						<p class="hobby_name">음악</p>	
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000006.png" />
-						<p class="hobby_name">게임</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000007.png" />
-						<p class="hobby_name">여행</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000008.png" />
-						<p class="hobby_name">요리</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000009.png" />
-						<p class="hobby_name">문화</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000010.png" />
-						<p class="hobby_name">봉사</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000011.png" />
-						<p class="hobby_name">직무/커리어</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000012.png" />
-						<p class="hobby_name">수집</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000013.png" />
-						<p class="hobby_name">반려동물</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000014.png" />
-						<p class="hobby_name">차/오토바이</p>
-					</li>
-					<li>
-						<img src="../resources/img/hobby_img/hm000015.png" />
-						<p class="hobby_name">자유주제</p>
-					</li> -->
 				</ul>
 			</div>
-			<div id="s_cate">
-				<ul>
-					<li class="all select">전체</li>
-				</ul>
-			</div>
-			<div id="area_list">
-				<ul>
-					<li class="online">온라인</li>
-					<li class="all select">전체</li>
-					<li>강남구</li>
-					<li>강동구</li>
-					<li>강북구</li>
-					<li>강서구</li>
-					<li>관악구</li>
-					<li>광진구</li>
-					<li>구로구</li>
-					<li>금천구</li>
-					<li>노원구</li>
-					<li>도봉구</li>
-					<li>동대문구</li>
-					<li>동작구</li>
-					<li>마포구</li>
-					<li>서대문구</li>
-					<li>서초구</li>
-					<li>성동구</li>
-					<li>성북구</li>
-					<li>송파구</li>
-					<li>양천구</li>
-					<li>영등포구</li>
-					<li>용산구</li>
-					<li>은평구</li>
-					<li>종로구</li>
-					<li>중구</li>
-					<li>중랑구</li>
-				</ul>
-			</div>
-			<button type="button" id="opSearch_btn">선택 조건으로 검색</button>
+			<button type="submit" id="opSearch_btn">선택 조건으로 검색</button>
+		</form>
 		</div>
 		
 		<div id="selectBoxArea">
