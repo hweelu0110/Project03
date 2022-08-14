@@ -104,26 +104,27 @@ public class ClassControllerImpl implements ClassController {
 		
 		Map listMap = new HashMap<>();
 		
-		System.out.println("취미리스트 : "+hobbyCodeList);
-		System.out.println("지역리스트 : "+areaCodeList);
+		Enumeration enu = request.getParameterNames();
 		
-		if(hobbyCodeList != null && hobbyCodeList != "") {
-			String[] hobbySearchList = hobbyCodeList.split(",");
-			listMap.put("hobbySearchList", hobbySearchList);
+		while(enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			if(name.equals("hobbyCodeList")) {
+				if(hobbyCodeList != null && hobbyCodeList != "") {
+					String[] hobbySearchList = hobbyCodeList.split(",");
+					listMap.put("hobbySearchList", hobbySearchList);
+				}
+			} else if(name.equals("hobbyCodeList")) {
+				if(areaCodeList != null && areaCodeList != "") {
+					String[] areaSearchList = areaCodeList.split(",");
+					listMap.put("areaSearchList", areaSearchList);
+				}
+			} else {
+				String values = request.getParameter(name);
+				listMap.put(name, values);
+			}
 		}
 		
-		if(areaCodeList != null && areaCodeList != "") {
-			String[] areaSearchList = areaCodeList.split(",");
-			listMap.put("areaSearchList", areaSearchList);
-		}
-		
-		if(sort!=null) {
-			listMap.put("sort", sort);
-		}
-		
-		if(hobbyC!=null) {
-			listMap.put("hobbyC", hobbyC);
-		} else {
+		if(hobbyC == null) {
 			listMap.put("hobbyC", "all");
 		}
 		

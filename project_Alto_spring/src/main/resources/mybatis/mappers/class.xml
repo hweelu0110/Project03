@@ -61,6 +61,10 @@
 			 </foreach>
 		</if>
 		
+		<if test=" keyword != null">
+			 AND (c.CLASSNAME LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%' OR a.NAME LIKE '%' || #{keyword} || '%')
+		</if>
+		
 		<if test="sort == null">
 			order by class_code desc 
 		</if>

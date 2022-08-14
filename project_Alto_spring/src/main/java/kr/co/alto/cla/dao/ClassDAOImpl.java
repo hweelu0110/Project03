@@ -20,6 +20,9 @@ public class ClassDAOImpl implements ClassDAO {
 	
 	@Override
 	public List<ClassDTO> selectAllclassList(Map listMap) throws DataAccessException {
+		System.out.println("=============");
+		System.out.println(listMap);
+		System.out.println("=============");
 		List<ClassDTO> classlist = sqlSession.selectList("mapper.class.selectAllclassList", listMap);
 		return classlist;
 	}

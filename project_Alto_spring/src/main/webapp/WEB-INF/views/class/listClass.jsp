@@ -77,7 +77,7 @@
 		</ul>
 		
 		<div id="tab_area">
-		<form method="post" action="${contextPath}/class/listClass.do" name="searchList"  onclick="return sendSearchList()" >
+		<form action="${contextPath}/class/listClass.do" name="searchList"  onclick="return sendSearchList()" >
 			<input type="hidden" name="hobbyCodeList" />
 			<input type="hidden" name="areaCodeList" />
 			<div id="m_cate">
@@ -117,11 +117,11 @@
 			<div class="selectBox">Best순</div>
 			<div class="selectBox select_list">
 				<ul>
-					<li><a href="${contextPath }/class/listClass.do?sort=stuU&hobbyC=${listMap.hobbyC }">회원수 많은</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=stuD&hobbyC=${listMap.hobbyC }">회원수 적은</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=fast&hobbyC=${listMap.hobbyC }">최근 일정</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=new&hobbyC=${listMap.hobbyC }">신규</a></li>
-					<li><a href="${contextPath }/class/listClass.do?sort=old&hobbyC=${listMap.hobbyC }">오래된</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=stuU&hobbyC=${listMap.hobbyC }&keyword=${listMap.keyword }">회원수 많은</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=stuD&hobbyC=${listMap.hobbyC }&keyword=${listMap.keyword }">회원수 적은</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=fast&hobbyC=${listMap.hobbyC }&keyword=${listMap.keyword }">최근 일정</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=new&hobbyC=${listMap.hobbyC }&keyword=${listMap.keyword }">신규</a></li>
+					<li><a href="${contextPath }/class/listClass.do?sort=old&hobbyC=${listMap.hobbyC }&keyword=${listMap.keyword }">오래된</a></li>
 				</ul>
 			</div>
 		</div>
