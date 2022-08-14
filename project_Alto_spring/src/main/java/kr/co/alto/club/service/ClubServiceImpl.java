@@ -39,22 +39,29 @@ public class ClubServiceImpl implements ClubService {
 		
 		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
 		
-		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
-		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
-		List<ClubListDTO> peoClubList = clubDAO.selectPeoClubList();
-		
-		System.out.println(mem_id);
-		
 		if (!mem_id.equals("")) {
 			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
 			
 			clubMainMap.put("memlikeList", memlikeList);
-		}		
+		}
 		
-		clubMainMap.put("peoClubList", peoClubList);
-		clubMainMap.put("newClubList", newClubList);
-		clubMainMap.put("bestClubList", bestClubList);
+		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
+		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
+		List<ClubListDTO> peoClubList = clubDAO.selectPeoClubList();
+		
+		List<HashMap<String, Object>> topHobby = clubDAO.selectTopHobby();	
+		
+		for (int i=0; i<topHobby.size(); i++) {
+			String hobby_code = (String) topHobby.get(i).get("CATE_M");
+			List<ClubListDTO> topHobbyList = clubDAO.selectTopHobbyList(hobby_code);
+			clubMainMap.put("topHobbyList"+i, topHobbyList);
+		}
+		
+		clubMainMap.put("topHobby", topHobby);
 		clubMainMap.put("AllHobbyList", AllHobbyList);
+		clubMainMap.put("bestClubList", bestClubList);
+		clubMainMap.put("newClubList", newClubList);
+		clubMainMap.put("peoClubList", peoClubList);
 		
 		return clubMainMap;
 	}

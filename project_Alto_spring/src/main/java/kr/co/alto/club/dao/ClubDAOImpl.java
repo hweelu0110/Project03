@@ -1,7 +1,7 @@
 package kr.co.alto.club.dao;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,5 +40,15 @@ public class ClubDAOImpl implements ClubDAO {
 	@Override
 	public List<ClubListDTO> selectPeoClubList() throws DataAccessException {
 		return sqlSession.selectList("mapper.club.selectPeoClubList");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> selectTopHobby() throws DataAccessException {
+		return sqlSession.selectList("mapper.club.topHobby");
+	}
+
+	@Override
+	public List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException {
+		return sqlSession.selectList("mapper.club.topHobbyList", hobby_code);
 	}
 }

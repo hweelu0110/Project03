@@ -102,6 +102,42 @@
 		]]>
 	</select>
 	
+	<!-- 인기취미 순위 -->
+	<select id="topHobby" resultType="hashmap">
+		SELECT CATE_M, B.name
+		FROM (
+			SELECT CATE_M, COUNT(CATE_M) AS num
+			FROM ALTO_CLUB
+			GROUP BY CATE_M 
+			ORDER BY num DESC 
+		) A, alto_hobby B
+		WHERE A.cate_M = B.hobby_code 
+		AND rowNum BETWEEN 1 AND 3
+	</select>
+	
+	<select id="topHobbyList" parameterType="String" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					WHERE CATE_M = #{hobby_code}
+					ORDER BY REGIDATE DESC   
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+		]]>
+	</select>
+	
 	<!-- 사람 많은 모임 -->
 	<select id="selectPeoClubList" resultType="clubListDTO">
 		<![CDATA[
