@@ -1,7 +1,7 @@
 package kr.co.alto.club.dao;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -16,5 +16,7 @@ public interface ClubDAO {
 	List<ClubListDTO> selectBestClubList() throws DataAccessException;
 	List<ClubListDTO> selectNewClubList() throws DataAccessException;
 	List<ClubListDTO> selectPeoClubList() throws DataAccessException;
+	List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
+	List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
 
 }
