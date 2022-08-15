@@ -161,4 +161,19 @@
 			ORDER BY member_num DESC
 		]]>
 	</select>
+	
+	<select id="selectHobClubList" parameterType="String" resultType="clubListDTO">
+		SELECT A.CLUB_CODE club_code, 
+		       A.TITLE title, 
+		       A.CATE_M cate_m, 
+		       A.CATE_S cate_s, 
+		       B.NAME area_name, 
+		       A.MEMBER_NUM member_num, 
+		       A.IMG img
+		FROM ALTO_CLUB A, ALTO_AREA B
+		WHERE A.AREA_CODE = B.AREA_CODE
+		AND TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+		AND CATE_M = #{hobby_code}
+		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
+	</select>
 </mapper>

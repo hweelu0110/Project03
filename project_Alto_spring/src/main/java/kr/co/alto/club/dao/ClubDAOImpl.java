@@ -51,4 +51,9 @@ public class ClubDAOImpl implements ClubDAO {
 	public List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException {
 		return sqlSession.selectList("mapper.club.topHobbyList", hobby_code);
 	}
+
+	@Override
+	public List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException {
+		return sqlSession.selectList("mapper.club.selectHobClubList", hobby_code);
+	}
 }

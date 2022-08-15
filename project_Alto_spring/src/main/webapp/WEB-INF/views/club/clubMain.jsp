@@ -35,6 +35,7 @@
 						codeNum = $(this).siblings('#class_code').val()
 						codeType = 'class_code'
 					}else if ($(this).siblings('#item_code').val() != null) {
+						
 						codeNum = $(this).siblings('#item_code').val()
 						codeType = 'item_code'
 					}
@@ -109,7 +110,7 @@
 			<ul>
 				<c:forEach var="hobby" items="${hobbyList}">
 					<li>
-						<a href="">
+						<a href="${path}/club/clubSearchList.do?hobby_code=${hobby.hobby_code}">
 							<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
 							<span class="hobby_name">${hobby.name}</span>
 						</a>
