@@ -18,5 +18,7 @@ public interface ClubDAO {
 	List<ClubListDTO> selectPeoClubList() throws DataAccessException;
 	List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
 	List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
+	
+	List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;
 
 }

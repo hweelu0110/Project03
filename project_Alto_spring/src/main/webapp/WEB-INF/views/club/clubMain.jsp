@@ -35,6 +35,7 @@
 						codeNum = $(this).siblings('#class_code').val()
 						codeType = 'class_code'
 					}else if ($(this).siblings('#item_code').val() != null) {
+						
 						codeNum = $(this).siblings('#item_code').val()
 						codeType = 'item_code'
 					}
@@ -73,15 +74,32 @@
 							}
 							
 						})
-					}
-					
-					
-					
+					}					
 				}else {
 					confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
-				}	
-				
+				}					
 			})
+			
+			$("#pop_list .swiper.list1").css("display","none")
+			$("#pop_list .swiper.list2").css("display","none")
+			$("#pop_hobby ul li").css("cursor","pointer")
+			
+			$("#pop_hobby ul li:nth-child(1)").click(function() {
+				$("#pop_list .swiper.list0").css("display","block")
+				$("#pop_list .swiper.list1").css("display","none")
+				$("#pop_list .swiper.list2").css("display","none")
+			})
+			$("#pop_hobby ul li:nth-child(2)").click(function() {
+				$("#pop_list .swiper.list1").css("display","block")
+				$("#pop_list .swiper.list0").css("display","none")
+				$("#pop_list .swiper.list2").css("display","none")
+			})
+			$("#pop_hobby ul li:nth-child(3)").click(function() {
+				$("#pop_list .swiper.list2").css("display","block")
+				$("#pop_list .swiper.list0").css("display","none")
+				$("#pop_list .swiper.list1").css("display","none")
+			})
+			
 		})
 	</script>
 </head>
@@ -92,7 +110,7 @@
 			<ul>
 				<c:forEach var="hobby" items="${hobbyList}">
 					<li>
-						<a href="">
+						<a href="${path}/club/clubSearchList.do?hobby_code=${hobby.hobby_code}">
 							<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
 							<span class="hobby_name">${hobby.name}</span>
 						</a>
@@ -224,43 +242,119 @@
 			</ul>
 			
 			<div id="pop_list">
-				<div class="swiper mySwiper6">
-			      <div class="swiper-wrapper club">
-			      
-					<c:forEach var="top" items="${clubMainMap.topHobbyList0}">		      		
-		      		<div class="swiper-slide">
-						<img class="club_img" src="${path}/resources/img/club_test.png" />
-						
-						<c:forEach var="like" items="${likeList}">
-							<c:if test="${like.club_code eq top.club_code}">
-								<c:set var="in" value="true" />
-							</c:if>
-						</c:forEach>
-						<c:choose>
-							<c:when test="${in}">
-								<span class="like_icon select">관심</span>
-								<c:set var="in" value="false" />
-							</c:when>
-							<c:otherwise>
-								<span class="like_icon">관심</span>
-							</c:otherwise>
-						</c:choose>
-						
-						<span class="area">${top.area_name}</span>
-						<div class="club_info">
-							<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
-							<p class="club_name">${top.title}</p>
-							<span class="memNum">${top.member_num}명</span>
-							<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-						</div>
-						<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
-					</div>					
-		      	</c:forEach>
-			        
+				<div class="swiper mySwiper6 list0">
+			      <div class="swiper-wrapper club">		   
+			         				      		
+		      		<c:forEach var="top" items="${clubMainMap.topHobbyList0}">		      		
+			      		<div class="swiper-slide">
+							<img class="club_img" src="${path}/resources/img/club_test.png" />
+							
+							<c:forEach var="like" items="${likeList}">
+								<c:if test="${like.club_code eq top.club_code}">
+									<c:set var="in" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${in}">
+									<span class="like_icon select">관심</span>
+									<c:set var="in" value="false" />
+								</c:when>
+								<c:otherwise>
+									<span class="like_icon">관심</span>
+								</c:otherwise>
+							</c:choose>
+							
+							<span class="area">${top.area_name}</span>
+							<div class="club_info">
+								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
+								<p class="club_name">${top.title}</p>
+								<span class="memNum">${top.member_num}명</span>
+								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							</div>
+							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
+						</div>					
+			      	</c:forEach>
+			      	
+			      </div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-button-prev"></div>
+			    </div>	
+			    
+			    <div class="swiper mySwiper6 list1">
+			      <div class="swiper-wrapper club">		   
+			         				      		
+		      		<c:forEach var="top" items="${clubMainMap.topHobbyList1}">		      		
+			      		<div class="swiper-slide">
+							<img class="club_img" src="${path}/resources/img/club_test.png" />
+							
+							<c:forEach var="like" items="${likeList}">
+								<c:if test="${like.club_code eq top.club_code}">
+									<c:set var="in" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${in}">
+									<span class="like_icon select">관심</span>
+									<c:set var="in" value="false" />
+								</c:when>
+								<c:otherwise>
+									<span class="like_icon">관심</span>
+								</c:otherwise>
+							</c:choose>
+							
+							<span class="area">${top.area_name}</span>
+							<div class="club_info">
+								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
+								<p class="club_name">${top.title}</p>
+								<span class="memNum">${top.member_num}명</span>
+								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							</div>
+							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
+						</div>					
+			      	</c:forEach>
+			      	
 			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
 			    </div>
+			    
+			    <div class="swiper mySwiper6 list2">
+			      <div class="swiper-wrapper club">		   
+			         				      		
+		      		<c:forEach var="top" items="${clubMainMap.topHobbyList2}">		      		
+			      		<div class="swiper-slide">
+							<img class="club_img" src="${path}/resources/img/club_test.png" />
+							
+							<c:forEach var="like" items="${likeList}">
+								<c:if test="${like.club_code eq top.club_code}">
+									<c:set var="in" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${in}">
+									<span class="like_icon select">관심</span>
+									<c:set var="in" value="false" />
+								</c:when>
+								<c:otherwise>
+									<span class="like_icon">관심</span>
+								</c:otherwise>
+							</c:choose>
+							
+							<span class="area">${top.area_name}</span>
+							<div class="club_info">
+								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
+								<p class="club_name">${top.title}</p>
+								<span class="memNum">${top.member_num}명</span>
+								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							</div>
+							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
+						</div>					
+			      	</c:forEach>
+			      	
+			      </div>
+			      <div class="swiper-button-next"></div>
+			      <div class="swiper-button-prev"></div>
+			    </div>		
 				
 				<!-- Initialize Swiper -->
 			    <script>

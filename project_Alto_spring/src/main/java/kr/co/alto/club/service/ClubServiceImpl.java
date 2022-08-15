@@ -32,6 +32,16 @@ public class ClubServiceImpl implements ClubService {
 	private AreaDAO areaDAO;
 	@Autowired
 	private MypageDAO mypageDAO;
+	
+	@Override
+	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
+
+		String club_code = clubDAO.selectNewClubCode();
+		
+		clubDTO.setClub_code(club_code);
+		
+		clubDAO.clubOpen(clubDTO);
+	}
 
 	@Override
 	public Map<String, Object> clubMainList(String mem_id) throws DataAccessException {
@@ -85,14 +95,22 @@ public class ClubServiceImpl implements ClubService {
 		return clubSearchMap;
 		
 	}
-
+	
 	@Override
-	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
-
-		String club_code = clubDAO.selectNewClubCode();
+	public Map<String, Object> selectHobClubList(String hobby_code) throws DataAccessException {
+		Map<String, Object> clubSearchMap = new HashMap<>();
 		
-		clubDTO.setClub_code(club_code);
+		List<HobbyDTO> allHobbyList = hobbyDAO.selectAllHobbyList();
+		List<AreaDTO> allAreaList = areaDAO.selectAllAreaList();
 		
-		clubDAO.clubOpen(clubDTO);
+		List<ClubListDTO> hobClubList = clubDAO.selectHobClubList(hobby_code);
+		
+		
+		clubSearchMap.put("allHobbyList", allHobbyList);
+		clubSearchMap.put("allAreaList", allAreaList);
+		clubSearchMap.put("hobClubList", hobClubList);
+		
+		return clubSearchMap;
 	}
+	
 }

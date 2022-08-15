@@ -21,6 +21,7 @@
 	display: inline-block; 
 	margin-right: 16px;
 	text-align: center; 
+	cursor: pointer;
 }
 #pop_hobby ul li img { width: 60px; }
 #pop_hobby ul li .rank_info {
@@ -33,4 +34,5 @@
     color: #34343c;
     font-family: 'Jua', sans-serif;
 }
-.mySwiper6 { width: 730px; margin-bottom: 40px; }
+#pop_list { float:right; width: 680px; }
+.mySwiper6 { width: 680px; margin-bottom: 40px; }

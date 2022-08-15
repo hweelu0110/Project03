@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.club.dto.ClubDTO;
@@ -57,10 +58,17 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Override
 	@RequestMapping(value = "/clubSearchList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView clubSearhList(HttpServletRequest request, HttpSession httpSession) throws Exception {
+	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> clubSearchMap = new HashMap<>();
+		
+		if(hobby_code != null) {
+			System.out.println("hobby_code ?? " + hobby_code);
+			clubSearchMap = clubService.selectHobClubList(hobby_code);
+			
+			mav.addObject("clubSearchMap", clubSearchMap);
+		}
 		
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		if(memberDTO != null) {
@@ -68,11 +76,10 @@ public class ClubControllerImpl extends BaseController implements ClubController
 			clubSearchMap = clubService.clubSearchList(mem_id);
 			
 			mav.addObject("clubSearchMap", clubSearchMap);
-			mav.setViewName(viewName);
-		} else {
-			mav.setViewName("redirect:/club/clubMain.do");
+			
 		}
 		
+		mav.setViewName(viewName);
 		return mav;
 	}
 
