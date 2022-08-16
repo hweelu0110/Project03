@@ -29,15 +29,14 @@
 				$.ajax({
 					url: "${path}/club/selectSubHobby.do",
 					type:"post",
+					dataType:"json",
 					data: {hobby_code: _hobby_code},
 					success: function(data, textStatus) {
-						alert("success?" + data.hobbySubList.length)
 						if(data.hobbySubList.length > 0) {
-							$.each(data.hobbySubList, function(index, value) {
+							$.each(data.hobbySubList, function(index, item) {										
 								$("#s_cate ul").append("<li class="+
-										value.main_code+
-										">"+value.get(0)+"</li>")
-							
+										item.MAIN_CODE+
+										">"+item.SUB_NAME+"</li>")
 							})
 						}
 					},
@@ -47,6 +46,42 @@
 				})
 			}
 			
+			$("#m_cate ul li").click(function() {
+				alert($(this).hasClass("select"))
+				if ($(this).hasClass("select")) {
+					$.ajax({
+						url: "${path}/club/selectSubHobby.do",
+						type:"post",
+						dataType:"json",
+						data: {hobby_code: _hobby_code},
+						success: function(data, textStatus) {
+							if(data.hobbySubList.length > 0) {
+								$.each(data.hobbySubList, function(index, item) {										
+									$("#s_cate ul").append("<li class="+
+											item.MAIN_CODE+
+											">"+item.SUB_NAME+"</li>")
+								})
+							}
+						},
+						error: function(data, textStatus) {
+							alert("오류가 발생하였습니다. 다시 시도해주세요.")
+						}
+					})
+				} else {
+					let hobby_code = $(this).children("img").attr("src")
+					
+					hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
+					hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
+					let subCode = $("#s_cate ul li."+hobby_code).length
+					alert(hobby_code+" 이친구는? "+ subCode)
+					alert($("#s_cate ul li."+hobby_code+":nth-child(1)").text())
+					if (subCode > 0){
+						for(let i=0; i<subCode; i++) {							
+							$("#s_cate ul li."+hobby_code+".eq("+i+")").css("display","none")
+						}
+					}
+				}				
+			})
 			
 		})
 	</script>
