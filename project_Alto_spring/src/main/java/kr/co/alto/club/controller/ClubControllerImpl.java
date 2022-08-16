@@ -1,6 +1,7 @@
 package kr.co.alto.club.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
+import kr.co.alto.hobby.dto.HobbysubDTO;
+import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
 
 @Controller("clubController")
@@ -32,6 +35,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Autowired
 	private ClubService clubService;
+	@Autowired
+	private HobbyService hobbyService;
 	@Autowired
 	private ClubDTO clubDTO;
 	
@@ -64,9 +69,9 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
 		if(hobby_code != null) {
-			System.out.println("hobby_code ?? " + hobby_code);
 			clubSearchMap = clubService.selectHobClubList(hobby_code);
 			
+			mav.addObject("hobby_code", hobby_code);
 			mav.addObject("clubSearchMap", clubSearchMap);
 		}
 		
@@ -81,6 +86,20 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		
 		mav.setViewName(viewName);
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/selectSubHobby.do", method = RequestMethod.POST)
+	public ResponseEntity<Object> selectSubHobby(@RequestParam("hobby_code")String hobby_code, HttpServletRequest request) throws Exception {
+		System.out.println("clubController : " + hobby_code);
+		
+		Map<String, Object> map = new HashMap<>();
+		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
+		map.put("hobbySubList", hobbySubList);
+		
+		ResponseEntity<Object> resEntity = new ResponseEntity<Object>(map, HttpStatus.OK);
+		
+		return resEntity;
 	}
 
 	@Override
@@ -119,6 +138,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		return resEnt;
 	}
+
+	
 
 	
 

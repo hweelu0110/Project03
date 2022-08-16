@@ -70,4 +70,14 @@
 		</foreach>	
 	</insert>
 	
+	<!-- 탭메뉴 선택 소분류목록 불러오기 -->
+	<select id="selectSubHobbyList" parameterType="String"  resultMap="hobbysubResult">
+		<![CDATA[
+			SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name
+			FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE
+			AND A.HOBBY_CODE = #{hobby_code}
+		]]>
+	</select>
+	
 </mapper>
