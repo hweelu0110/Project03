@@ -25,7 +25,7 @@ public class HobbyDAOImpl implements HobbyDAO {
 		List<HobbyDTO> hobbyList = sqlSession.selectList("mapper.hobby.selectAllHobbyList");
 		return hobbyList;
 	}
-
+	
 	@Override
 	public List<HobbysubDTO> selectHobbysubList(HashMap<String, String> codeList) throws DataAccessException {
 		List<HobbysubDTO> hobbysubList = sqlSession.selectList("mapper.hobby.selectHobbysubList", codeList);
@@ -50,6 +50,11 @@ public class HobbyDAOImpl implements HobbyDAO {
 	@Override
 	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException {
 		sqlSession.insert("mapper.hobby.updateMemHobby", memHobbyMap);		
+	}
+
+	@Override
+	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException {
+		return sqlSession.selectList("mapper.hobby.selectSubHobbyList", hobby_code);
 	}
 
 }

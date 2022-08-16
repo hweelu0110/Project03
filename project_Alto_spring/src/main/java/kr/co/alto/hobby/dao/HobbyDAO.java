@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 
@@ -21,5 +20,7 @@ public interface HobbyDAO {
 
 	public void delMemHobby(String mem_id) throws DataAccessException;
 	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException;
+	
+	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException;
 	
 }

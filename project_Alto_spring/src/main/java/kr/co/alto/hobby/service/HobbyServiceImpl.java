@@ -55,4 +55,9 @@ public class HobbyServiceImpl implements HobbyService {
 		
 	}
 
+	@Override
+	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException {
+		return hobbyDAO.selectSubHobbyList(hobby_code);
+	}
+
 }
