@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.area">
+	<resultMap type="areaDTO" id="areaResult">		
+		<result property="area_code" column="area_code" />		
+		<result property="name" column="name" />
+	</resultMap>	
+	
+	<select id="selectAllAreaList" resultMap="areaResult">	
+		<![CDATA[
+			SELECT * FROM alto_area
+		]]>
+	</select>
+	
+	<select id="selectMyAreaList" parameterType="String" resultMap="areaResult">
+		<![CDATA[
+			SELECT a.AREA_CODE area_code, b.NAME name 
+			FROM ALTO_M_AREA a, ALTO_AREA b WHERE a.AREA_CODE = b.AREA_CODE 
+			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<delete id="delMemArea">
+		DELETE FROM ALTO_M_AREA WHERE MEM_ID = #{mem_id}
+	</delete>
+	
+	<insert id="updateMemArea" parameterType="java.util.Map">
+		<selectKey keyProperty="m_area_Code" resultType="String" order="BEFORE">
+			<![CDATA[ 
+				SELECT seq_Marea_code.nextval AS M_AREA_CODE FROM SYS.DUAL
+			]]>
+		</selectKey>		 
+			 
+		<foreach collection="areaList" item="item" index="index" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			<![CDATA[
+				INTO ALTO_M_AREA (M_AREA_CODE, AREA_CODE, MEM_ID)
+				VALUES (#{m_area_Code}+#{index}, #{item.area_code}, #{mem_id})
+			]]>
+		</foreach>		
+	</insert>
+</mapper>

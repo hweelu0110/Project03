@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name="/mypage/myMain" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/myMain.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/memArea" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memArea.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/memHobby" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memHobby.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/memHobby_sub" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/memHobby_sub.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/infoEditFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/infoEditFrm.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/pwUpdateFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/pwUpdateFrm.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/delMemFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/delMemFrm.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/mylikeList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mylikeList.jsp" />		
+	</definition>
+	
+</tiles-definitions>
