@@ -8,12 +8,13 @@
 		<result property="hobby_code" column="hobby_code" />		
 		<result property="name" column="name" />
 	</resultMap>
+	
 	<resultMap type="java.util.HashMap" id="hobbysubResult">	
 		<result property="main_code" column="A.HOBBY_CODE" />	
 		<result property="main_name" column="B.NAME" />		
 		<result property="sub_code" column="HOBBY_SUB_CODE" />
 		<result property="sub_name" column="A.NAME" />
-	</resultMap>
+	</resultMap>	
 	
 	<select id="selectAllHobbyList" resultMap="hobbyResult">	
 		<![CDATA[
@@ -40,4 +41,53 @@
 			AND A.HOBBY_CODE = #{main_code}
 		]]>
 	</select>
+	<!-- 내취미 대분류 목록 불러오기 -->
+	<select id="memMainHobbyList" parameterType="String" resultMap="hobbyResult">
+		<![CDATA[
+			SELECT DISTINCT A.HOBBY_CODE hobby_code, B.NAME name
+			FROM ALTO_M_HOBBY A, ALTO_HOBBY B 
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE 
+			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<!-- 내취미 소분류 목록 불러오기 -->
+	<select id="memSubHobbyList" parameterType="String"  resultMap="hobbyResult">
+		<![CDATA[
+			SELECT A.HOBBY_SUB_CODE hobby_code, B.NAME name 
+			FROM ALTO_M_HOBBY A, ALTO_HOBBY_SUB B 
+			WHERE A.HOBBY_SUB_CODE = B.HOBBY_SUB_CODE 
+			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<delete id="delMemHobby">
+		DELETE FROM ALTO_M_HOBBY WHERE MEM_ID = #{mem_id}
+	</delete>
+	
+	<insert id="updateMemHobby" parameterType="java.util.Map">
+		<selectKey keyProperty="m_hobby_Code" resultType="String" order="BEFORE">
+			<![CDATA[ 
+				SELECT seq_Mhobby_code.nextval AS M_HOBBY_CODE FROM SYS.DUAL
+			]]>
+		</selectKey>		 
+			 
+		<foreach collection="hobbysubList" item="item" index="index" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			<![CDATA[
+				INTO ALTO_M_HOBBY (M_HOBBY_CODE, MEM_ID, HOBBY_CODE, HOBBY_SUB_CODE)
+				VALUES (#{m_hobby_Code}+#{index}, #{mem_id}, #{item.hobby_code}, #{item.hobby_sub_code})
+			]]>
+		</foreach>	
+	</insert>
+	
+	<!-- 탭메뉴 선택 소분류목록 불러오기 -->
+	<select id="selectSubHobbyList" parameterType="String"  resultMap="hobbysubResult">
+		<![CDATA[
+			SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name
+			FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE
+			AND A.HOBBY_CODE = #{hobby_code}
+		]]>
+	</select>
+	
 </mapper>

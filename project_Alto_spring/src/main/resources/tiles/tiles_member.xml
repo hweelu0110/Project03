@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name="/member/joinTerms" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinTerms.jsp" />		
+	</definition>
+	
+	<definition name="/member/joinFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/registerAuth" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/registerAuth.jsp" />		
+	</definition>
+	
+	<definition name="/member/registerEmail" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/registerEmail.jsp" />		
+	</definition>
+	
+	<definition name="/member/errorLogin" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/errorLogin.jsp" />		
+	</definition>
+		
+	
+	<definition name="/member/loginFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/loginFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/findPwFrm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwFrm.jsp" />		
+	</definition>
+	
+	<definition name="/member/findPw" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPw.jsp" />		
+	</definition>
+</tiles-definitions>

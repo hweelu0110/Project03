@@ -17,13 +17,15 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 		<beans:property name="order" value="2" />
-	</beans:bean>
-		
-	<context:component-scan base-package="kr.co.alto" />
+	</beans:bean> -->
+	
+	<!-- 애너테이션 적용할 패키지 설정 -->
+	<context:component-scan base-package="kr.co.alto" />		
+	
 	
 	<!-- Tiles ViewResolver 사용 화면 표시 -->
 	<beans:bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
@@ -54,7 +56,7 @@
 		<beans:property name="host" value="smtp.gmail.com" />
 		<beans:property name="port" value="587" /><!-- 465 or 25 -->
 		<beans:property name="username" value="projectalto03" />
-		<beans:property name="password" value="alto0824" />
+		<beans:property name="password" value="qeskdopkvbajykqe" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 		<beans:property name="javaMailProperties">
 			<beans:props>
@@ -62,7 +64,8 @@
 				<beans:prop key="mail.smtp.auth">true</beans:prop>
 				<beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
 				<beans:prop key="mail.debug">true</beans:prop>
-		
+				<beans:prop key="mail.smtp.ssl.trust">smtp.gmail.com</beans:prop>
+				<beans:prop key="mail.smtp.ssl.protocols">TLSv1.2</beans:prop>
 			</beans:props>
 		</beans:property>
 	</beans:bean>
@@ -71,8 +74,49 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*/*.do"/> <!-- 모든 요청에 대해 인터셉트 수행 -->
-			<beans:bean class="kr.co.alto.interceptor.ViewNameInterceptor" />
+			<mvc:mapping path="/*/*/*.do"/>
+			<beans:bean class="kr.co.alto.common.interceptor.ViewNameInterceptor" />
 		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<beans:bean id="loginInterceptor" class="kr.co.alto.common.interceptor.LoginInterceptor"/>
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <mvc:mapping path="/member/login.do"/>
+	        <beans:ref bean="loginInterceptor"/>
+	    </mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 비회원 접근 제한 처리 -->
+	<beans:bean id="authInterceptor" class="kr.co.alto.common.interceptor.AuthInterceptor"/>
+	<mvc:interceptors>
+		<mvc:interceptor>		
+			<mvc:mapping path="/mypage/**" />		
+			<beans:ref bean="authInterceptor" />
+		</mvc:interceptor>	
+	</mvc:interceptors>
+	
+	<!-- 이전 URL 저장 제외 처리 -->
+	<beans:bean id="uRlInterceptor" class="kr.co.alto.common.interceptor.URIInterceptor" />
+	<mvc:interceptors>
+	  <mvc:interceptor>
+		<mvc:mapping path="/*.do"/>
+	    <mvc:mapping path="/*/*.do"/>
+	    <mvc:mapping path="/*/*/*.do"/>
+	    <exclude-mapping path="/resources/**"/>
+	    <exclude-mapping path="/member/**"/>
+	    <beans:ref bean="uRlInterceptor"/>
+	  </mvc:interceptor>
+	</mvc:interceptors>
+	
+	<beans:bean id="autoLoginInterceptor" class="kr.co.alto.common.interceptor.AutoLoginInterceptor" />
+	<mvc:interceptors>
+	 <mvc:interceptor>
+	 	<mvc:mapping path="/*.do"/>
+	    <mvc:mapping path="/*/*.do"/>
+	    <mvc:mapping path="/*/*/*.do"/>
+	 	<beans:ref bean="autoLoginInterceptor"/>
+	 </mvc:interceptor>
 	</mvc:interceptors>
 	
 </beans:beans>

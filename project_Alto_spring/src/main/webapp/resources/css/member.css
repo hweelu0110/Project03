@@ -1,7 +1,14 @@
 @charset "UTF-8";
+section { 
+	max-width: 100%;
+    border-top: 1px solid #f2f2f2;
+	background-color: #f8f8f8; 
+	overflow: hidden; 
+}
+
 #member_div {
 	width: 640px;
-    margin: 30px auto;
+    margin: 70px auto;
     padding: 20px;
     background: #e4e4e4;
 }
@@ -71,6 +78,11 @@
     width: 362px;
 }
 .info_div .float_right { width: 70px; padding-top: 10px; }
+.duplBtn {
+	display: inline-block;
+    font-size: 12px;
+    padding: 8px 10px;
+}
 .gender_div {
     display: inline-block;
     width: 73px;
@@ -106,6 +118,10 @@
 }
 #area_list ul li.select { background: #F3BE34; }
 #area_list ul li label { cursor: pointer; }
+#area_list .form-check-input:checked {
+	background-color: #00c7ae;
+    border-color: #00c7ae;
+}
 
 /* 관심취미 */
 #hobby_list { text-align: center; }
@@ -150,23 +166,82 @@
     font-weight: 700;
 }
 
-#member_div .popup_div {
-	padding: 20px;
-    width: 370px;
-    text-align: left;
+/* 로그인 */
+#login_div {
+	width: 380px;
+    margin: 70px auto;
+    padding: 20px;
+    font-size: 12px;
+}
+
+#login_div form input:nth-child(3) { margin-bottom: 10px; }
+#login_div form button { margin-top: 10px; }
+#login_div form a {
+	display: inline-block;
+    margin-top: 10px;
+    color: #777;
     font-size: 11px;
-    display: none;
+    font-weight: 700;
 }
-.popup_div h4 {
+#login_div form a:hover { color: #34343c; }
+#login_div form .float_right { float: right; }
+#login_div .form-check { padding-left: 0; }
+#login_div.form-switch .form-check-input {
+	margin: 2px 5px 2px 3px;
+    width: 2.5em;
+    height: 1.4em;
+}
+#login_div.form-switch .form-check-input:checked,
+#memberInfo.form-switch .form-check-input:checked { background-color: #00c7ae; }
+
+#login_error {
+	margin: 10px 0 0;
+    padding: 10px;
+    background: #fff;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 700;
+    color: #00c7ae;
+    visibility: hidden;	
+}
+
+/* 메일 전송 알림 */
+#regiCont {
+	width: 500px;
+    margin: 70px auto;
+    padding: 30px;
+    overflow: hidden;
+    background: #f4f4f4;		    
+    font-family: 'Noto Sans KR', sans-serif;
+}
+#regiCont div {
+	margin: 10px;
+    padding: 30px;
+    font-size: 12px;
+    text-align: center;
+    background: #fff;
+    border-radius: 3px;
+}
+#regiCont div .memName {
 	font-size: 15px;
-    margin-bottom: 10px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
 }
-.popup_div .btn_area button { width: 48%; }
-.popup_div .noti1 { margin-bottom: 20px; }
+#regiCont div .memEmail {
+	margin: 10px;
+    padding: 5px 10px;
+    text-align: center;
+    color: #494c57;
+    font-size: 20px;
+    font-weight: 700;
+    background: #F3BE34;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+#regiCont div button { margin: 10px 5px 0 0; }
 
 
 /* input Style */
-input[type=text], input[type=password] { padding: 8px 15px; margin: 10px 0 0; }
+input[type=text], input[type=password] { padding: 8px 15px; margin: 10px 0 0; background: #fff; }
 input[type=text].size1 { width: 410px; }
 input[type=text].size2 { width: 260px; }
 input[type=text].size3 { width: 215px; }

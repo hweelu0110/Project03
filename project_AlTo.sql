@@ -1,4 +1,4 @@
--- Ãë¹Ì
+-- ì·¨ë¯¸
 DROP TABLE alto_hobby CASCADE CONSTRAINT;
 CREATE TABLE alto_hobby(
 	hobby_code	char(8) NOT NULL,
@@ -6,26 +6,26 @@ CREATE TABLE alto_hobby(
 	PRIMARY KEY (hobby_code)
 );
 
--- Ãë¹Ì Á¤º¸ Ãß°¡
-INSERT INTO alto_hobby VALUES ('hm000001','Ã¢ÀÛ');
-INSERT INTO alto_hobby VALUES ('hm000002','¾×Æ¼ºñÆ¼');
-INSERT INTO alto_hobby VALUES ('hm000003','¾Æ¿ôµµ¾î');
-INSERT INTO alto_hobby VALUES ('hm000004','¿ä¸®');
-INSERT INTO alto_hobby VALUES ('hm000005','°ÔÀÓ');
-INSERT INTO alto_hobby VALUES ('hm000006','À½¾Ç');
-INSERT INTO alto_hobby VALUES ('hm000007','¹®È­');
-INSERT INTO alto_hobby VALUES ('hm000008','¿©Çà');
-INSERT INTO alto_hobby VALUES ('hm000009','ºÀ»ç');
-INSERT INTO alto_hobby VALUES ('hm000010','»çÁø/¿µ»ó');
-INSERT INTO alto_hobby VALUES ('hm000011','Á÷¹«/Ä¿¸®¾î');
-INSERT INTO alto_hobby VALUES ('hm000012','Â÷/¿ÀÅä¹ÙÀÌ');
-INSERT INTO alto_hobby VALUES ('hm000013','¹Ý·Áµ¿¹°');
-INSERT INTO alto_hobby VALUES ('hm000014','¼öÁý');
-INSERT INTO alto_hobby VALUES ('hm000015','ÀÚÀ¯ÁÖÁ¦');
+-- ì·¨ë¯¸ ì •ë³´ ì¶”ê°€
+INSERT INTO alto_hobby VALUES ('hm000001','ì°½ìž‘');
+INSERT INTO alto_hobby VALUES ('hm000002','ì•¡í‹°ë¹„í‹°');
+INSERT INTO alto_hobby VALUES ('hm000003','ì•„ì›ƒë„ì–´');
+INSERT INTO alto_hobby VALUES ('hm000004','ìš”ë¦¬');
+INSERT INTO alto_hobby VALUES ('hm000005','ê²Œìž„');
+INSERT INTO alto_hobby VALUES ('hm000006','ìŒì•…');
+INSERT INTO alto_hobby VALUES ('hm000007','ë¬¸í™”');
+INSERT INTO alto_hobby VALUES ('hm000008','ì—¬í–‰');
+INSERT INTO alto_hobby VALUES ('hm000009','ë´‰ì‚¬');
+INSERT INTO alto_hobby VALUES ('hm000010','ì‚¬ì§„/ì˜ìƒ');
+INSERT INTO alto_hobby VALUES ('hm000011','ì§ë¬´/ì»¤ë¦¬ì–´');
+INSERT INTO alto_hobby VALUES ('hm000012','ì°¨/ì˜¤í† ë°”ì´');
+INSERT INTO alto_hobby VALUES ('hm000013','ë°˜ë ¤ë™ë¬¼');
+INSERT INTO alto_hobby VALUES ('hm000014','ìˆ˜ì§‘');
+INSERT INTO alto_hobby VALUES ('hm000015','ìžìœ ì£¼ì œ');
 
 SELECT * FROM alto_hobby
 
--- ¼ÒºÐ·ù Ãë¹Ì
+-- ì†Œë¶„ë¥˜ ì·¨ë¯¸
 DROP TABLE alto_hobby_sub CASCADE CONSTRAINT;
 CREATE TABLE alto_hobby_sub(
 	hobby_sub_code	char(8) NOT NULL,
@@ -37,120 +37,124 @@ CREATE TABLE alto_hobby_sub(
 ALTER TABLE alto_hobby_sub ADD CONSTRAINT hobby_sub_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
 
--- ¼ÒºÐ·ù Ãë¹Ì Á¤º¸ Ãß°¡
-INSERT INTO alto_hobby_sub VALUES ('hs010001','hm000001','µå·ÎÀ×');
-INSERT INTO alto_hobby_sub VALUES ('hs010002','hm000001','ÇÃ¶ó¿ö¾ÆÆ®');
-INSERT INTO alto_hobby_sub VALUES ('hs010003','hm000001','Ä¶¸®±×¶óÇÇ');
-INSERT INTO alto_hobby_sub VALUES ('hs010004','hm000001','¶ß°³/ÀÚ¼ö');
-INSERT INTO alto_hobby_sub VALUES ('hs010005','hm000001','µµ¿¹');
-INSERT INTO alto_hobby_sub VALUES ('hs010006','hm000001','Äµµé/µðÇ»Àú');
-INSERT INTO alto_hobby_sub VALUES ('hs010007','hm000001','ºñ´©/È­ÀåÇ°');
-INSERT INTO alto_hobby_sub VALUES ('hs010008','hm000001','¸ñ°ø/¶óÅº');
-INSERT INTO alto_hobby_sub VALUES ('hs010009','hm000001','°¡Á×°ø¿¹');
-INSERT INTO alto_hobby_sub VALUES ('hs010010','hm000001','¾Ç¼¼»ç¸®/·¹Áø');
-INSERT INTO alto_hobby_sub VALUES ('hs010011','hm000001','¸ÞÀÌÅ©¾÷/³×ÀÏ');
-INSERT INTO alto_hobby_sub VALUES ('hs010012','hm000001','Å°´úÆ®/ÇÁ¶ó¸ðµ¨');
-INSERT INTO alto_hobby_sub VALUES ('hs010013','hm000001','±âÅ¸');
+-- ì†Œë¶„ë¥˜ ì·¨ë¯¸ ì •ë³´ ì¶”ê°€
+INSERT INTO alto_hobby_sub VALUES ('hs010001','hm000001','ë“œë¡œìž‰');
+INSERT INTO alto_hobby_sub VALUES ('hs010002','hm000001','í”Œë¼ì›Œì•„íŠ¸');
+INSERT INTO alto_hobby_sub VALUES ('hs010003','hm000001','ìº˜ë¦¬ê·¸ë¼í”¼');
+INSERT INTO alto_hobby_sub VALUES ('hs010004','hm000001','ëœ¨ê°œ/ìžìˆ˜');
+INSERT INTO alto_hobby_sub VALUES ('hs010005','hm000001','ë„ì˜ˆ');
+INSERT INTO alto_hobby_sub VALUES ('hs010006','hm000001','ìº”ë“¤/ë””í“¨ì €');
+INSERT INTO alto_hobby_sub VALUES ('hs010007','hm000001','ë¹„ëˆ„/í™”ìž¥í’ˆ');
+INSERT INTO alto_hobby_sub VALUES ('hs010008','hm000001','ëª©ê³µ/ë¼íƒ„');
+INSERT INTO alto_hobby_sub VALUES ('hs010009','hm000001','ê°€ì£½ê³µì˜ˆ');
+INSERT INTO alto_hobby_sub VALUES ('hs010010','hm000001','ì•…ì„¸ì‚¬ë¦¬/ë ˆì§„');
+INSERT INTO alto_hobby_sub VALUES ('hs010011','hm000001','ë©”ì´í¬ì—…/ë„¤ì¼');
+INSERT INTO alto_hobby_sub VALUES ('hs010012','hm000001','í‚¤ëœíŠ¸/í”„ë¼ëª¨ë¸');
+INSERT INTO alto_hobby_sub VALUES ('hs010013','hm000001','ê¸°íƒ€');
 
-INSERT INTO alto_hobby_sub VALUES ('hs020001','hm000002','Çï½º/PT/GX');
-INSERT INTO alto_hobby_sub VALUES ('hs020002','hm000002','¿ä°¡/ÇÊ¶óÅ×½º');
-INSERT INTO alto_hobby_sub VALUES ('hs020003','hm000002','·¯´×');
-INSERT INTO alto_hobby_sub VALUES ('hs020004','hm000002','ÀÚÀü°Å');
-INSERT INTO alto_hobby_sub VALUES ('hs020005','hm000002','´í½º/¹«¿ë');
-INSERT INTO alto_hobby_sub VALUES ('hs020006','hm000002','Å¬¶óÀÌ¹Ö');
-INSERT INTO alto_hobby_sub VALUES ('hs020007','hm000002','½ºÄí¹ö´ÙÀÌºù/¼ö¿µ');
-INSERT INTO alto_hobby_sub VALUES ('hs020008','hm000002','½ºÅ°/º¸µå');
-INSERT INTO alto_hobby_sub VALUES ('hs020009','hm000002','¾ß¿Ü½ºÆ÷Ã÷');
-INSERT INTO alto_hobby_sub VALUES ('hs020010','hm000002','±¸±â½ºÆ÷Ã÷');
-INSERT INTO alto_hobby_sub VALUES ('hs020011','hm000002','½Ç³»½ºÆ÷Ã÷');
+INSERT INTO alto_hobby_sub VALUES ('hs020001','hm000002','í—¬ìŠ¤/PT/GX');
+INSERT INTO alto_hobby_sub VALUES ('hs020002','hm000002','ìš”ê°€/í•„ë¼í…ŒìŠ¤');
+INSERT INTO alto_hobby_sub VALUES ('hs020003','hm000002','ëŸ¬ë‹');
+INSERT INTO alto_hobby_sub VALUES ('hs020004','hm000002','ìžì „ê±°');
+INSERT INTO alto_hobby_sub VALUES ('hs020005','hm000002','ëŒ„ìŠ¤/ë¬´ìš©');
+INSERT INTO alto_hobby_sub VALUES ('hs020006','hm000002','í´ë¼ì´ë°');
+INSERT INTO alto_hobby_sub VALUES ('hs020007','hm000002','ìŠ¤ì¿ ë²„ë‹¤ì´ë¹™/ìˆ˜ì˜');
+INSERT INTO alto_hobby_sub VALUES ('hs020008','hm000002','ìŠ¤í‚¤/ë³´ë“œ');
+INSERT INTO alto_hobby_sub VALUES ('hs020009','hm000002','ì•¼ì™¸ìŠ¤í¬ì¸ ');
+INSERT INTO alto_hobby_sub VALUES ('hs020010','hm000002','êµ¬ê¸°ìŠ¤í¬ì¸ ');
+INSERT INTO alto_hobby_sub VALUES ('hs020011','hm000002','ì‹¤ë‚´ìŠ¤í¬ì¸ ');
 
-INSERT INTO alto_hobby_sub VALUES ('hs030001','hm000003','µî»ê');
-INSERT INTO alto_hobby_sub VALUES ('hs030002','hm000003','Ä·ÇÎ/¹éÆÐÅ·');
-INSERT INTO alto_hobby_sub VALUES ('hs030003','hm000003','³¬½Ã');
-INSERT INTO alto_hobby_sub VALUES ('hs030004','hm000003','Æ®·¡Å·');
+INSERT INTO alto_hobby_sub VALUES ('hs030001','hm000003','ë“±ì‚°');
+INSERT INTO alto_hobby_sub VALUES ('hs030002','hm000003','ìº í•‘/ë°±íŒ¨í‚¹');
+INSERT INTO alto_hobby_sub VALUES ('hs030003','hm000003','ë‚šì‹œ');
+INSERT INTO alto_hobby_sub VALUES ('hs030004','hm000003','íŠ¸ëž˜í‚¹');
 
-INSERT INTO alto_hobby_sub VALUES ('hs040001','hm000004','³ª¶óº°');
-INSERT INTO alto_hobby_sub VALUES ('hs040002','hm000004','º£ÀÌÅ·');
-INSERT INTO alto_hobby_sub VALUES ('hs040003','hm000004','¿ÍÀÎ');
-INSERT INTO alto_hobby_sub VALUES ('hs040004','hm000004','Ä¿ÇÇ/Æ¼');
-INSERT INTO alto_hobby_sub VALUES ('hs040005','hm000004','ÁÖ·ù');
-INSERT INTO alto_hobby_sub VALUES ('hs040006','hm000004','ÆêÇªµå');
+INSERT INTO alto_hobby_sub VALUES ('hs040001','hm000004','ë‚˜ë¼ë³„');
+INSERT INTO alto_hobby_sub VALUES ('hs040002','hm000004','ë² ì´í‚¹');
+INSERT INTO alto_hobby_sub VALUES ('hs040003','hm000004','ì™€ì¸');
+INSERT INTO alto_hobby_sub VALUES ('hs040004','hm000004','ì»¤í”¼/í‹°');
+INSERT INTO alto_hobby_sub VALUES ('hs040005','hm000004','ì£¼ë¥˜');
+INSERT INTO alto_hobby_sub VALUES ('hs040006','hm000004','íŽ«í‘¸ë“œ');
 
-INSERT INTO alto_hobby_sub VALUES ('hs050001','hm000005','¿Â¶óÀÎ°ÔÀÓ');
-INSERT INTO alto_hobby_sub VALUES ('hs050002','hm000005','º¸µå°ÔÀÓ');
+INSERT INTO alto_hobby_sub VALUES ('hs050001','hm000005','ì˜¨ë¼ì¸ê²Œìž„');
+INSERT INTO alto_hobby_sub VALUES ('hs050002','hm000005','ë³´ë“œê²Œìž„');
 
-INSERT INTO alto_hobby_sub VALUES ('hs060001','hm000006','º¸ÄÃ');
-INSERT INTO alto_hobby_sub VALUES ('hs060002','hm000006','±âÅ¸');
-INSERT INTO alto_hobby_sub VALUES ('hs060003','hm000006','µå·³');
-INSERT INTO alto_hobby_sub VALUES ('hs060004','hm000006','ÇÇ¾Æ³ë');
-INSERT INTO alto_hobby_sub VALUES ('hs060005','hm000006','±×¿Ü ¾Ç±â¿¬ÁÖ');
-INSERT INTO alto_hobby_sub VALUES ('hs060006','hm000006','¹êµå/ÇÕÁÖ');
-INSERT INTO alto_hobby_sub VALUES ('hs060007','hm000006','ÀÛ»ç/ÀÛ°î');
-INSERT INTO alto_hobby_sub VALUES ('hs060008','hm000006','Å¬·¡½Ä');
-INSERT INTO alto_hobby_sub VALUES ('hs060009','hm000006','ÀçÁî');
-INSERT INTO alto_hobby_sub VALUES ('hs060010','hm000006','·¦/ÈüÇÕ/DJ');
-INSERT INTO alto_hobby_sub VALUES ('hs060011','hm000006','±×¿Ü Àå¸£');
+INSERT INTO alto_hobby_sub VALUES ('hs060001','hm000006','ë³´ì»¬');
+INSERT INTO alto_hobby_sub VALUES ('hs060002','hm000006','ê¸°íƒ€');
+INSERT INTO alto_hobby_sub VALUES ('hs060003','hm000006','ë“œëŸ¼');
+INSERT INTO alto_hobby_sub VALUES ('hs060004','hm000006','í”¼ì•„ë…¸');
+INSERT INTO alto_hobby_sub VALUES ('hs060005','hm000006','ê·¸ì™¸ ì•…ê¸°ì—°ì£¼');
+INSERT INTO alto_hobby_sub VALUES ('hs060006','hm000006','ë°´ë“œ/í•©ì£¼');
+INSERT INTO alto_hobby_sub VALUES ('hs060007','hm000006','ìž‘ì‚¬/ìž‘ê³¡');
+INSERT INTO alto_hobby_sub VALUES ('hs060008','hm000006','í´ëž˜ì‹');
+INSERT INTO alto_hobby_sub VALUES ('hs060009','hm000006','ìž¬ì¦ˆ');
+INSERT INTO alto_hobby_sub VALUES ('hs060010','hm000006','ëž©/íž™í•©/DJ');
+INSERT INTO alto_hobby_sub VALUES ('hs060011','hm000006','ê·¸ì™¸ ìž¥ë¥´');
 
-INSERT INTO alto_hobby_sub VALUES ('hs070001','hm000007','°ø¿¬');
-INSERT INTO alto_hobby_sub VALUES ('hs070002','hm000007','Àü½Ã');
-INSERT INTO alto_hobby_sub VALUES ('hs070003','hm000007','¿µÈ­');
-INSERT INTO alto_hobby_sub VALUES ('hs070004','hm000007','µµ¼­');
-INSERT INTO alto_hobby_sub VALUES ('hs070005','hm000007','ÆÄÆ¼/Æä½ºÆ¼¹ú');
-INSERT INTO alto_hobby_sub VALUES ('hs070006','hm000007','¿¬±Ø/°ø¿¬Á¦ÀÛ');
+INSERT INTO alto_hobby_sub VALUES ('hs070001','hm000007','ê³µì—°');
+INSERT INTO alto_hobby_sub VALUES ('hs070002','hm000007','ì „ì‹œ');
+INSERT INTO alto_hobby_sub VALUES ('hs070003','hm000007','ì˜í™”');
+INSERT INTO alto_hobby_sub VALUES ('hs070004','hm000007','ë„ì„œ');
+INSERT INTO alto_hobby_sub VALUES ('hs070005','hm000007','íŒŒí‹°/íŽ˜ìŠ¤í‹°ë²Œ');
+INSERT INTO alto_hobby_sub VALUES ('hs070006','hm000007','ì—°ê·¹/ê³µì—°ì œìž‘');
 
-INSERT INTO alto_hobby_sub VALUES ('hs080001','hm000008','±¹³»');
-INSERT INTO alto_hobby_sub VALUES ('hs080002','hm000008','ÇØ¿Ü');
-INSERT INTO alto_hobby_sub VALUES ('hs080003','hm000008','¸ÀÁý/¸í¼Ò');
-INSERT INTO alto_hobby_sub VALUES ('hs080004','hm000008','ÆÐÅ°Áö');
-INSERT INTO alto_hobby_sub VALUES ('hs080005','hm000008','Á¤º¸°øÀ¯');
+INSERT INTO alto_hobby_sub VALUES ('hs080001','hm000008','êµ­ë‚´');
+INSERT INTO alto_hobby_sub VALUES ('hs080002','hm000008','í•´ì™¸');
+INSERT INTO alto_hobby_sub VALUES ('hs080003','hm000008','ë§›ì§‘/ëª…ì†Œ');
+INSERT INTO alto_hobby_sub VALUES ('hs080004','hm000008','íŒ¨í‚¤ì§€');
+INSERT INTO alto_hobby_sub VALUES ('hs080005','hm000008','ì •ë³´ê³µìœ ');
 
-INSERT INTO alto_hobby_sub VALUES ('hs090001','hm000009','¾ç·Î¿ø');
-INSERT INTO alto_hobby_sub VALUES ('hs090002','hm000009','º¸À°¿ø');
-INSERT INTO alto_hobby_sub VALUES ('hs090003','hm000009','È¯°æ');
-INSERT INTO alto_hobby_sub VALUES ('hs090004','hm000009','»çÈ¸');
-INSERT INTO alto_hobby_sub VALUES ('hs090005','hm000009','Àç´É±âºÎ');
-INSERT INTO alto_hobby_sub VALUES ('hs090006','hm000009','À¯±âµ¿¹°º¸È£');
+INSERT INTO alto_hobby_sub VALUES ('hs090001','hm000009','ì–‘ë¡œì›');
+INSERT INTO alto_hobby_sub VALUES ('hs090002','hm000009','ë³´ìœ¡ì›');
+INSERT INTO alto_hobby_sub VALUES ('hs090003','hm000009','í™˜ê²½');
+INSERT INTO alto_hobby_sub VALUES ('hs090004','hm000009','ì‚¬íšŒ');
+INSERT INTO alto_hobby_sub VALUES ('hs090005','hm000009','ìž¬ëŠ¥ê¸°ë¶€');
+INSERT INTO alto_hobby_sub VALUES ('hs090006','hm000009','ìœ ê¸°ë™ë¬¼ë³´í˜¸');
 
 INSERT INTO alto_hobby_sub VALUES ('hs100001','hm000010','DSLR');
-INSERT INTO alto_hobby_sub VALUES ('hs100002','hm000010','ÇÊ¸§Ä«¸Þ¶ó');
-INSERT INTO alto_hobby_sub VALUES ('hs100003','hm000010','µðÁöÅÐÄ«¸Þ¶ó');
-INSERT INTO alto_hobby_sub VALUES ('hs100004','hm000010','¿µ»óÁ¦ÀÛ');
+INSERT INTO alto_hobby_sub VALUES ('hs100002','hm000010','í•„ë¦„ì¹´ë©”ë¼');
+INSERT INTO alto_hobby_sub VALUES ('hs100003','hm000010','ë””ì§€í„¸ì¹´ë©”ë¼');
+INSERT INTO alto_hobby_sub VALUES ('hs100004','hm000010','ì˜ìƒì œìž‘');
 
-INSERT INTO alto_hobby_sub VALUES ('hs110001','hm000011','Á÷±º¸ðÀÓ');
-INSERT INTO alto_hobby_sub VALUES ('hs110002','hm000011','½ºÇÇÄ¡/¹ß¼º');
-INSERT INTO alto_hobby_sub VALUES ('hs110003','hm000011','½ÃÇè/ÀÚ°ÝÁõ');
-INSERT INTO alto_hobby_sub VALUES ('hs110004','hm000011','Ãë¾÷½ºÅÍµð');
-INSERT INTO alto_hobby_sub VALUES ('hs110005','hm000011','¾îÇÐ½ºÅÍµð');
-INSERT INTO alto_hobby_sub VALUES ('hs110006','hm000011','±âÅ¸');
+INSERT INTO alto_hobby_sub VALUES ('hs110001','hm000011','ì§êµ°ëª¨ìž„');
+INSERT INTO alto_hobby_sub VALUES ('hs110002','hm000011','ìŠ¤í”¼ì¹˜/ë°œì„±');
+INSERT INTO alto_hobby_sub VALUES ('hs110003','hm000011','ì‹œí—˜/ìžê²©ì¦');
+INSERT INTO alto_hobby_sub VALUES ('hs110004','hm000011','ì·¨ì—…ìŠ¤í„°ë””');
+INSERT INTO alto_hobby_sub VALUES ('hs110005','hm000011','ì–´í•™ìŠ¤í„°ë””');
+INSERT INTO alto_hobby_sub VALUES ('hs110006','hm000011','ê¸°íƒ€');
 
-INSERT INTO alto_hobby_sub VALUES ('hs120001','hm000012','Çö´ë');
-INSERT INTO alto_hobby_sub VALUES ('hs120002','hm000012','±â¾Æ');
-INSERT INTO alto_hobby_sub VALUES ('hs120003','hm000012','¸£³ë');
+INSERT INTO alto_hobby_sub VALUES ('hs120001','hm000012','í˜„ëŒ€');
+INSERT INTO alto_hobby_sub VALUES ('hs120002','hm000012','ê¸°ì•„');
+INSERT INTO alto_hobby_sub VALUES ('hs120003','hm000012','ë¥´ë…¸');
 INSERT INTO alto_hobby_sub VALUES ('hs120004','hm000012','GM');
-INSERT INTO alto_hobby_sub VALUES ('hs120005','hm000012','½Ö¿ë');
-INSERT INTO alto_hobby_sub VALUES ('hs120006','hm000012','ÀÏº»Â÷');
-INSERT INTO alto_hobby_sub VALUES ('hs120007','hm000012','¹Ì±¹Â÷');
-INSERT INTO alto_hobby_sub VALUES ('hs120008','hm000012','À¯·´Â÷');
-INSERT INTO alto_hobby_sub VALUES ('hs120009','hm000012','¹ÙÀÌÅ©');
+INSERT INTO alto_hobby_sub VALUES ('hs120005','hm000012','ìŒìš©');
+INSERT INTO alto_hobby_sub VALUES ('hs120006','hm000012','ì¼ë³¸ì°¨');
+INSERT INTO alto_hobby_sub VALUES ('hs120007','hm000012','ë¯¸êµ­ì°¨');
+INSERT INTO alto_hobby_sub VALUES ('hs120008','hm000012','ìœ ëŸ½ì°¨');
+INSERT INTO alto_hobby_sub VALUES ('hs120009','hm000012','ë°”ì´í¬');
 
-INSERT INTO alto_hobby_sub VALUES ('hs130001','hm000013','°­¾ÆÁö');
-INSERT INTO alto_hobby_sub VALUES ('hs130002','hm000013','°í¾çÀÌ');
-INSERT INTO alto_hobby_sub VALUES ('hs130003','hm000013','¹°°í±â');
-INSERT INTO alto_hobby_sub VALUES ('hs130004','hm000013','Á¶·ù');
-INSERT INTO alto_hobby_sub VALUES ('hs130005','hm000013','ÆÄÃæ·ù');
-INSERT INTO alto_hobby_sub VALUES ('hs130006','hm000013','Æ÷À¯·ù');
-INSERT INTO alto_hobby_sub VALUES ('hs130007','hm000013','±âÅ¸');
+INSERT INTO alto_hobby_sub VALUES ('hs130001','hm000013','ê°•ì•„ì§€');
+INSERT INTO alto_hobby_sub VALUES ('hs130002','hm000013','ê³ ì–‘ì´');
+INSERT INTO alto_hobby_sub VALUES ('hs130003','hm000013','ë¬¼ê³ ê¸°');
+INSERT INTO alto_hobby_sub VALUES ('hs130004','hm000013','ì¡°ë¥˜');
+INSERT INTO alto_hobby_sub VALUES ('hs130005','hm000013','íŒŒì¶©ë¥˜');
+INSERT INTO alto_hobby_sub VALUES ('hs130006','hm000013','í¬ìœ ë¥˜');
+INSERT INTO alto_hobby_sub VALUES ('hs130007','hm000013','ê¸°íƒ€');
 
-INSERT INTO alto_hobby_sub VALUES ('hs140001','hm000014','µ¿Àü/È­Æó');
-INSERT INTO alto_hobby_sub VALUES ('hs140002','hm000014','¿ìÇ¥');
-INSERT INTO alto_hobby_sub VALUES ('hs140003','hm000014','ÇÇ±Ô¾î/Àå³­°¨');
+INSERT INTO alto_hobby_sub VALUES ('hs140001','hm000014','ë™ì „/í™”í');
+INSERT INTO alto_hobby_sub VALUES ('hs140002','hm000014','ìš°í‘œ');
+INSERT INTO alto_hobby_sub VALUES ('hs140003','hm000014','í”¼ê·œì–´/ìž¥ë‚œê°');
 INSERT INTO alto_hobby_sub VALUES ('hs140004','hm000014','DP/LP');
-INSERT INTO alto_hobby_sub VALUES ('hs140005','hm000014','¿îµ¿È­');
-INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','½ºÆ¼Ä¿/±ÂÁî');
-INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','ÃâÆÇ¹°');
-INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','±âÅ¸');
+INSERT INTO alto_hobby_sub VALUES ('hs140005','hm000014','ìš´ë™í™”');
+INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','ìŠ¤í‹°ì»¤/êµ¿ì¦ˆ');
+INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','ì¶œíŒë¬¼');
+INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','ê¸°íƒ€');
 
--- Áö¿ª
+SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
+WHERE A.HOBBY_CODE = B.HOBBY_CODE 
+AND (A.HOBBY_CODE ='hm000001' OR A.HOBBY_CODE ='hm000002' OR A.HOBBY_CODE ='hm000003' OR A.HOBBY_CODE ='' OR A.HOBBY_CODE =''); 
+
+-- ì§€ì—­
 DROP TABLE alto_area CASCADE CONSTRAINT;
 CREATE TABLE alto_area(
 	area_code	char(8) NOT NULL,
@@ -159,63 +163,78 @@ CREATE TABLE alto_area(
 );
 
 SELECT * FROM alto_area;
--- Áö¿ª Á¤º¸ Ãß°¡
-INSERT INTO ALTO_AREA VALUES ('area0001','¿Â¶óÀÎ');
-INSERT INTO ALTO_AREA VALUES ('area0002','°­³²±¸');
-INSERT INTO ALTO_AREA VALUES ('area0003','°­µ¿±¸');
-INSERT INTO ALTO_AREA VALUES ('area0004','°­ºÏ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0005','°­¼­±¸');
+-- ì§€ì—­ ì •ë³´ ì¶”ê°€
+INSERT INTO ALTO_AREA VALUES ('area0001','ì˜¨ë¼ì¸');
+INSERT INTO ALTO_AREA VALUES ('area0002','ê°•ë‚¨êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0003','ê°•ë™êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0004','ê°•ë¶êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0005','ê°•ì„œêµ¬');
 
-INSERT INTO ALTO_AREA VALUES ('area0006','°ü¾Ç±¸');
-INSERT INTO ALTO_AREA VALUES ('area0007','±¤Áø±¸');
-INSERT INTO ALTO_AREA VALUES ('area0008','±¸·Î±¸');
-INSERT INTO ALTO_AREA VALUES ('area0009','±ÝÃµ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0010','³ë¿ø±¸');
+INSERT INTO ALTO_AREA VALUES ('area0006','ê´€ì•…êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0007','ê´‘ì§„êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0008','êµ¬ë¡œêµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0009','ê¸ˆì²œêµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0010','ë…¸ì›êµ¬');
 
-INSERT INTO ALTO_AREA VALUES ('area0011','µµºÀ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0012','µ¿´ë¹®±¸');
-INSERT INTO ALTO_AREA VALUES ('area0013','µ¿ÀÛ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0014','¸¶Æ÷±¸');
-INSERT INTO ALTO_AREA VALUES ('area0015','¼­´ë¹®±¸');
+INSERT INTO ALTO_AREA VALUES ('area0011','ë„ë´‰êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0012','ë™ëŒ€ë¬¸êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0013','ë™ìž‘êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0014','ë§ˆí¬êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0015','ì„œëŒ€ë¬¸êµ¬');
 
-INSERT INTO ALTO_AREA VALUES ('area0016','¼­ÃÊ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0017','¼ºµ¿±¸');
-INSERT INTO ALTO_AREA VALUES ('area0018','¼ººÏ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0019','¼ÛÆÄ±¸');
-INSERT INTO ALTO_AREA VALUES ('area0020','¾çÃµ±¸');
+INSERT INTO ALTO_AREA VALUES ('area0016','ì„œì´ˆêµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0017','ì„±ë™êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0018','ì„±ë¶êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0019','ì†¡íŒŒêµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0020','ì–‘ì²œêµ¬');
 
-INSERT INTO ALTO_AREA VALUES ('area0021','¿µµîÆ÷±¸');
-INSERT INTO ALTO_AREA VALUES ('area0022','¿ë»ê±¸');
-INSERT INTO ALTO_AREA VALUES ('area0023','ÀºÆò±¸');
-INSERT INTO ALTO_AREA VALUES ('area0024','Á¾·Î±¸');
-INSERT INTO ALTO_AREA VALUES ('area0025','Áß±¸');
-INSERT INTO ALTO_AREA VALUES ('area0026','Áß¶û±¸');
+INSERT INTO ALTO_AREA VALUES ('area0021','ì˜ë“±í¬êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0022','ìš©ì‚°êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0023','ì€í‰êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0024','ì¢…ë¡œêµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0025','ì¤‘êµ¬');
+INSERT INTO ALTO_AREA VALUES ('area0026','ì¤‘ëž‘êµ¬');
 
--- È¸¿ø
+-- íšŒì›
 DROP TABLE alto_member CASCADE CONSTRAINT;
 CREATE TABLE alto_member(
 	mem_id	 varchar2(100) NOT NULL,
-	mem_pwd	 varchar2(20) NOT NULL,
+	mem_pwd	 varchar2(100) NOT NULL,
 	mem_name varchar2(20) NOT NULL,
 	gender	 char(1) 	 NOT NULL,
 	birth	 DATE 		 NOT NULL,
-	email	 varchar2(100) NOT NULL,
-	phone	 char(11) NOT NULL,
-	img		 varchar2(500) DEFAULT '±âº»ÀÌ¹ÌÁöurl',
+	phone	 char(11),
+	img	 varchar2(500),
 	mem_open char(1) DEFAULT 'Y' NOT NULL,
 	joindate DATE DEFAULT sysdate NOT NULL,
 	authkey	 NUMBER DEFAULT 0 NOT NULL,
+	member_id_yn varchar2(20),
+	session_key varchar2(50) DEFAULT 'none',
+	session_limit timestamp,
+	del_yn   char(1) DEFAULT 'N' NOT NULL,
 	PRIMARY KEY (mem_id)
 );
 
--- ÀÎÁõÅ° Å×ÀÌºí
+INSERT INTO ALTO_MEMBER
+(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH)
+VALUES('test@gmail.com', '1234qwer', 'ê¹€ì‹œí—˜', 'M', '1999-01-01');
+
+DELETE FROM ALTO_MEMBER
+WHERE MEM_ID='hweelu0110@gmail.com';
+
+SELECT * FROM ALTO_MEMBER WHERE MEM_ID = 'hweelu0110@gmail.com';
+
+UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = 'hweelu0110@gmail.com'
+
+
+-- ì¸ì¦í‚¤ í…Œì´ë¸”
+DROP TABLE ALTO_MEMBER_AUTH CASCADE CONSTRAINT;
 CREATE TABLE alto_member_auth(
-	email	 varchar2(100) NOT NULL,
+	mem_id	 varchar2(100) NOT NULL,
 	authkey  varchar2(50)
 );
 
-
--- °ü½ÉÃë¹Ì ´ëºÐ·ù ÃÖ´ë 5°³ / ¼ÒºÐ·ù (´ëºÐ·ù ´ç)ÃÖ´ë 5°³
+-- ê´€ì‹¬ì·¨ë¯¸ ëŒ€ë¶„ë¥˜ ìµœëŒ€ 5ê°œ / ì†Œë¶„ë¥˜ (ëŒ€ë¶„ë¥˜ ë‹¹)ìµœëŒ€ 5ê°œ
 DROP TABLE alto_m_hobby CASCADE CONSTRAINT;
 CREATE TABLE alto_m_hobby(
 	m_hobby_code 	char(8) NOT NULL,
@@ -234,7 +253,7 @@ REFERENCES alto_hobby (hobby_code);
 ALTER TABLE alto_m_hobby ADD CONSTRAINT m_hobby_sub_fk FOREIGN KEY (hobby_sub_code)
 REFERENCES alto_hobby_sub (hobby_sub_code);
 
--- È°µ¿Áö¿ª ÃÖ´ë 3°³
+-- í™œë™ì§€ì—­ ìµœëŒ€ 3ê°œ
 DROP TABLE alto_m_area CASCADE CONSTRAINT;
 CREATE TABLE alto_m_area(
 	m_area_code char(8) NOT NULL,
@@ -249,7 +268,7 @@ REFERENCES alto_area (area_code);
 ALTER TABLE alto_m_area ADD CONSTRAINT m_area_member_fk FOREIGN KEY (mem_id)
 REFERENCES alto_member (mem_id);
 
--- ¸ðÀÓ
+-- ëª¨ìž„
 DROP TABLE alto_club CASCADE CONSTRAINT;
 CREATE TABLE alto_club(
 	club_code	char(8) NOT NULL,
@@ -260,7 +279,7 @@ CREATE TABLE alto_club(
 	manager	 	varchar2(100) NOT NULL,
 	member_num	number DEFAULT 1 NOT NULL,
 	member_max	number DEFAULT 200 NOT NULL,
-	img 		varchar2(500) DEFAULT '±âº»ÀÌ¹ÌÁöurl',
+	img 		varchar2(500) DEFAULT 'ê¸°ë³¸ì´ë¯¸ì§€url',
 	intro 		varchar2(1000) NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,
 	member_out 	number DEFAULT 0 NOT NULL,
@@ -279,7 +298,7 @@ REFERENCES alto_area (area_code);
 ALTER TABLE alto_club ADD CONSTRAINT club_member_fk FOREIGN KEY (manager)
 REFERENCES alto_member (mem_id);
 
--- °¡ÀÔ
+-- ê°€ìž…
 DROP TABLE alto_join CASCADE CONSTRAINT;
 CREATE TABLE alto_join(
 	join_code	char(8) NOT NULL,

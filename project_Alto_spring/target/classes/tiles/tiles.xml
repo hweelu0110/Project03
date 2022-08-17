@@ -4,14 +4,13 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-	<!-- baseLayout : 공통 레이아웃의 뷰 이름 지정 
-		 template : 전체 레이아웃을 정하는 jsp 위치 지정-->
 	<definition name="tiles-layout" template="/WEB-INF/views/layout/layout.jsp">
 		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
 		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		
 		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
 		<put-attribute name="body" value="" />		
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
 	</definition>
 	
 	<definition name="tiles-layout-class" template="/WEB-INF/views/layout/layout.jsp">
