@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<definition name="tiles-layout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
+		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		
+		<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
+		<put-attribute name="body" value="" />		
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
+	</definition>
+	
+	<definition name="tiles-layout-class" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
+		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		
+		<put-attribute name="header" value="/WEB-INF/views/layout/header-class.jsp" />
+		<put-attribute name="body" value="" />		
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<definition name="tiles-layout-item" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
+		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		
+		<put-attribute name="header" value="/WEB-INF/views/layout/header-item.jsp" />
+		<put-attribute name="body" value="" />		
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+	</definition>
+	
+	<!-- 메인 -->
+	<definition name="main" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />		
+	</definition>
+	
+
+	<definition name="/member/memArea" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memArea.jsp" />		
+	</definition>
+	
+	<definition name="/member/memHobby" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memHobby.jsp" />		
+	</definition>
+	
+	<definition name="/member/memHobby_sub" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/memHobby_sub.jsp" />		
+	</definition>
+	
+	
+	<!-- 클래스 -->
+	<definition name="/class/classMain" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/classMain.jsp" />		
+	</definition>
+	
+	<definition name="/class/classform" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/classform.jsp" />		
+	</definition>
+	
+	<definition name="/class/listClass" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/listClass.jsp" />		
+	</definition>
+	
+	<definition name="/class/editClass" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/editClass.jsp" />		
+	</definition>
+	
+	<definition name="/class/searchList" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/searchList.jsp" />		
+	</definition>
+	
+	
+	
+	<!-- 취미용품 -->
+	<definition name="/item/itemMain" extends="tiles-layout-item">
+		<put-attribute name="body" value="/WEB-INF/views/item/itemMain.jsp" />		
+	</definition>
+	
+	<definition name="/item/itemform" extends="tiles-layout-item">
+		<put-attribute name="body" value="/WEB-INF/views/item/itemform.jsp" />		
+	</definition>
+	
+	<definition name="/item/listItem" extends="tiles-layout-item">
+		<put-attribute name="body" value="/WEB-INF/views/item/listItem.jsp" />		
+	</definition>
+	
+	<definition name="/item/editItem" extends="tiles-layout-item">
+		<put-attribute name="body" value="/WEB-INF/views/item/editItem.jsp" />		
+	</definition>
+	
+</tiles-definitions>

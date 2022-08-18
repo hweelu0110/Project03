@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.club">
+	<resultMap type="clubDTO" id="clubResult">		
+		<result property="club_code" column="club_code" />		
+		<result property="title" column="title" />
+		<result property="cate_m" column="cate_m" />
+		<result property="cate_s" column="cate_s" />
+		<result property="area_code" column="area_code" />
+		<result property="manager" column="manager" />
+		<result property="member_num" column="member_num" />
+		<result property="member_max" column="max" />
+		<result property="img" column="img" />
+		<result property="intro" column="intro" />
+		<result property="regidate" column="regidate" />
+		<result property="member_out" column="member_out" />
+	</resultMap>
+	
+	<resultMap type="clubListDTO" id="clubListResult">
+		<result property="club_code" column="CLUB_CODE" />
+		<result property="title" column="TITLE" />
+		<result property="cate_m" column="CATE_M" />
+		<result property="cate_s" column="CATE_S" />
+		<result property="area_name" column="NAME" />
+		<result property="member_num" column="MEMBER_NUM" />
+		<result property="img" column="IMG" />
+	</resultMap>
+	
+	<!-- 모임 등록하기 -->
+	<insert id="clubOpen" parameterType="clubDTO">
+		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
+		VALUES(#{club_code}, #{title}, #{cate_m}, #{area_code}, #{manager}, #{member_max} , #{intro})
+	</insert>
+	
+	<select id="selectNewClubCode" resultType="String">
+		<![CDATA[
+			SELECT nvl(MAX(club_code),0) + 1 FROM ALTO_CLUB
+		]]>
+	</select>
+	
+	<!-- 관심 모임 목록 -->
+	<select id="selectLikeClubList" resultType="clubListDTO">
+		SELECT A.CLUB_CODE CLUB_CODE, 
+			   B.TITLE title, 
+		       B.CATE_M cate_m, 
+		       B.CATE_S cate_s, 
+		       C.NAME area_name, 
+		       B.MEMBER_NUM member_num, 
+		       B.IMG img
+		FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
+		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+		AND A.MEM_ID = #{mem_id}
+	</select>
+	
+	
+	<!-- BEST 모임 목록 -->
+	<select id="selectBestClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+					ORDER BY MEMBER_OUT ASC, REGIDATE ASC
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+		]]>
+	</select>
+	
+	<!-- 새로생긴 모임 목록 -->
+	<select id="selectNewClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cates, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					ORDER BY REGIDATE DESC
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+		]]>
+	</select>
+	
+	<!-- 인기취미 순위 -->
+	<select id="topHobby" resultType="hashmap">
+		SELECT CATE_M, B.name
+		FROM (
+			SELECT CATE_M, COUNT(CATE_M) AS num
+			FROM ALTO_CLUB
+			GROUP BY CATE_M 
+			ORDER BY num DESC 
+		) A, alto_hobby B
+		WHERE A.cate_M = B.hobby_code 
+		AND rowNum BETWEEN 1 AND 3
+	</select>
+	
+	<select id="topHobbyList" parameterType="String" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					WHERE CATE_M = #{hobby_code}
+					ORDER BY REGIDATE DESC   
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+		]]>
+	</select>
+	
+	<!-- 사람 많은 모임 -->
+	<select id="selectPeoClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       A.CATE_S cate_s, 
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM (
+				SELECT rowNum, A.*
+				FROM (
+					SELECT *
+					FROM ALTO_CLUB
+					ORDER BY MEMBER_NUM DESC
+				) A
+				WHERE rowNum BETWEEN 1 AND 8
+			) A, ALTO_AREA B
+			WHERE A.AREA_CODE = B.AREA_CODE
+			ORDER BY member_num DESC
+		]]>
+	</select>
+	
+	<select id="selectHobClubList" parameterType="String" resultType="clubListDTO">
+		SELECT A.CLUB_CODE club_code, 
+		       A.TITLE title, 
+		       A.CATE_M cate_m, 
+		       A.CATE_S cate_s, 
+		       B.NAME area_name, 
+		       A.MEMBER_NUM member_num, 
+		       A.IMG img
+		FROM ALTO_CLUB A, ALTO_AREA B
+		WHERE A.AREA_CODE = B.AREA_CODE
+		AND TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+		AND CATE_M = #{hobby_code}
+		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
+	</select>
+</mapper>

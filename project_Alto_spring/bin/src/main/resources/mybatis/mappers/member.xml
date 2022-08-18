@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<resultMap type="memberDTO" id="memResult">		
+		<result property="mem_id" column="MEM_ID" />		
+		<result property="mem_pwd" column="MEM_PWD" />
+		<result property="mem_name" column="MEM_NAME" />
+		<result property="gender" column="GENDER" />
+		<result property="birth" column="BIRTH" />
+		<result property="phone" column="PHONE" />
+		<result property="img" column="IMG" />
+		<result property="mem_open" column="MEM_OPEN" />
+		<result property="joinDate" column="JOINDATE" />
+		<result property="memberId_yn" column="MEMBER_ID_YN" />
+		<result property="del_yn" column="DEL_YN" />
+	</resultMap>
+	
+	<resultMap type="likeDTO" id="likeResult">
+		<result property="like_code" column="LIKE_CODE" />
+		<result property="club_code" column="CLUB_CODE" />
+		<result property="class_code" column="CLASS_CODE" />
+		<result property="item_code" column="ITEM_CODE" />
+	</resultMap>
+
+	
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO ALTO_MEMBER(MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH, MEMBER_ID_YN)
+		VALUES(#{mem_id}, #{mem_pwd}, #{mem_name}, #{gender}, #{birth}, #{memberId_yn})
+	</insert>
+	
+	<!-- id(이메일) 중복 검사 -->
+	<select id="idCnt" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT DECODE(COUNT(*), 1, 'true', 0, 'false') 
+			FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<!-- 회원 인증 키 등록 -->
+	<insert id="createAuthKey">
+		INSERT INTO ALTO_MEMBER_AUTH VALUES(#{memberEmail}, #{authKey})
+	</insert>
+	
+	<!-- 회원 이메일 인증 처리 -->
+	<update id="memberAuth">
+		<![CDATA[
+			UPDATE ALTO_MEMBER SET AUTHKEY = 1 
+			WHERE (SELECT COUNT(*) FROM ALTO_MEMBER_AUTH WHERE MEM_ID = #{memberEmail} AND AUTHKEY = #{authKey}) > 0
+		]]>
+	</update>
+	
+															
+	<!-- 로그인 -->
+	<select id="login" resultMap="memResult">
+		<![CDATA[
+			SELECT * FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
+		]]>
+	</select>	
+	
+	<!-- 자동로그인 -->
+	<update id="keepLogin">
+		UPDATE ALTO_MEMBER SET SESSION_KEY = #{sessionId}, SESSION_LIMIT = #{sessionLimit}
+		WHERE mem_id = #{mem_id}
+	</update>
+	
+	<select id="checkSessionKey" resultMap="memResult">
+		<![CDATA[
+			SELECT * FROM ALTO_MEMBER WHERE SESSION_KEY = #{value} 
+		]]>
+	</select>
+	
+	
+	<!-- 비밀번호 찾기 -->
+	<update id="findPw">
+		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<select id="findPwCheck" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}	
+		]]>
+	</select>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="pwCheck" resultType="String">
+		SELECT MEM_PWD FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="pwUpdate">
+		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<!-- 회원정보 수정 -->
+	<update id="modMemInfo" parameterType="memberDTO">
+		UPDATE ALTO_MEMBER SET MEM_NAME = #{mem_name}, GENDER = #{gender}, BIRTH = #{birth}, phone = #{phone}, MEM_OPEN = #{mem_open}
+		WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	<!-- 회원프로필 이미지 변경 -->
+	<update id="updateImg">
+		UPDATE ALTO_MEMBER SET IMG = #{mem_img} WHERE MEM_ID = #{mem_id}
+	</update>
+		
+	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="delMember">
+		UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = #{mem_id}
+	</update>
+	
+	
+	
+	<!-- 관심 목록 추가 -->
+	<insert id="insertLike" parameterType="java.util.HashMap">
+		<![CDATA[
+			INSERT INTO ALTO_LIKE(LIKE_CODE, MEM_ID, CLUB_CODE, CLASS_CODE, ITEM_CODE)
+			VALUES(seq_like_code.nextval, #{mem_id}, #{codeNumMap.club_code}, #{codeNumMap.class_code}, #{codeNumMap.item_code})
+		]]>
+	</insert>
+	
+	<!-- 관심 목록 제거 -->
+	<delete id="deletLike" parameterType="java.util.HashMap">
+		DELETE FROM ALTO_LIKE WHERE MEM_ID = #{mem_id} 
+		AND (CLUB_CODE = #{codeNumMap.club_code} OR CLASS_CODE = #{codeNumMap.class_code} OR ITEM_CODE = #{codeNumMap.item_code})
+	</delete>
+	
+	<!-- 관심코드 목록 가져오기 -->
+	<select id="selectLikeList" parameterType="String" resultMap="likeResult">
+		<![CDATA[
+			SELECT LIKE_CODE, CLUB_CODE, CLASS_CODE, ITEM_CODE 
+			FROM ALTO_LIKE
+			WHERE MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+</mapper>

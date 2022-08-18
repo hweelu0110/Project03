@@ -17,16 +17,16 @@
 				<c:if test="${not empty login}"> 
 					<ul id="main_menu">
 						<li><a href="${path}/club/clubSearchList.do">모임</a></li>
-						<li><a href="${path}/class/classSearchList.do">클래스</a></li>
-						<li><a href="${path}/item/itemSearchList.do">취미용품</a></li>
+						<li><a href="${path }/class/classMain.do">클래스</a></li>
+						<li><a href="${path }/item/itemMain.do">취미용품</a></li>
 					</ul>
 				</c:if>
 				
 				<c:if test="${empty login}">
 					<ul id="main_menu">
 						<li><a href="${path}/club/clubMain.do">모임</a></li>
-						<li><a href="${path}/class/classMain.do">클래스</a></li>
-						<li><a href="${path}/item/itemMain.do">취미용품</a></li>
+						<li><a href="${path }/class/classMain.do">클래스</a></li>
+						<li><a href="${path }/item/itemMain.do">취미용품</a></li>
 					</ul>
 				</c:if>	
 			</nav>

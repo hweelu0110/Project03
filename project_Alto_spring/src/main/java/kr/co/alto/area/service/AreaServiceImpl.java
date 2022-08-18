@@ -39,4 +39,9 @@ public class AreaServiceImpl implements AreaService {
 		areaDAO.updateMemArea(memAreaMap);
 	}
 
+	@Override
+	public List<AreaDTO> listAreas() throws DataAccessException {
+		List<AreaDTO> areaList = areaDAO.selectAllAreaList();
+		return areaList;
+	}
 }
