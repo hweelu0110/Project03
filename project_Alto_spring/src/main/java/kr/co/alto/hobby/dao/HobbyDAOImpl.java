@@ -32,6 +32,15 @@ public class HobbyDAOImpl implements HobbyDAO {
 		return hobbysubList;
 	}
 
+	/*
+	 * 셀렉트문용 리스트
+	 */
+	@Override
+	public List<HobbysubDTO> selectHobbysubList2(String main_code) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList2 = sqlSession.selectList("mapper.hobby.selectHobbysubList2", main_code);
+		return hobbysubList2;
+	}
+	
 	@Override
 	public List<HobbyDTO> selectMyHobbyList(String mem_id) throws DataAccessException {
 		return sqlSession.selectList("mapper.hobby.memMainHobbyList", mem_id);

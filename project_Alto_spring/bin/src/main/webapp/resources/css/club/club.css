@@ -1,0 +1,412 @@
+@charset "UTF-8";
+section { padding: 30px 30px 70px; }
+#main_menu li:nth-child(1) { color: #00c7ae; }
+
+/* 선택 항목 표시 */
+.select { font-weight: bold; color: #00c7ae; }
+#tab_menu li.select { border: 2px solid #00c7ae; }
+#m_cate ul li.select img { border: 2px solid #00c7ae; }
+
+#tab_menu { margin-top: 10px; }
+#tab_menu li { 
+	display: inline;
+    padding: 5px;
+    background: #F8F8F8;
+    border: 2px solid #494c57;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#tab_area { 
+	position: absolute;
+	width: 700px;
+	height: 245px;
+    top: 66px; 
+	z-index: 2;
+	font-size: 11px;
+	overflow: hidden;	
+}
+
+#m_cate {
+	float: left;
+	width: 345px; 
+	padding: 28px 10px 5px;
+	background-color: #F8F8F8; 
+    border: 1px solid #494c57;   
+}
+#m_cate ul li { 
+	width: 60px;
+	margin-bottom: 5px;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+}
+#m_cate ul li.all { 
+	position:absolute; 	
+	top: 8px; 
+	left: 17px; 
+	width: fit-content;
+	text-align: left; 
+}
+#m_cate ul li img { width: 47px; }
+
+#s_cate {
+	padding: 10px;
+    width: 100px;
+    height: 245px;
+    float: left;
+    background-color: #F8F8F8; 
+	border: 1px solid #494c57; 
+	border-left: none;
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+}
+#s_cate::-webkit-scrollbar{
+	display: none;
+}
+
+#area_list {
+	padding: 10px;
+    width: 123px;
+    height: 245px;
+    float: left;
+    background-color: #F8F8F8; 
+	border: 1px solid #494c57; 
+	overflow-y: scroll;
+	-ms-overflow-style: none;
+}
+#area_list::-webkit-scrollbar{ display: none; }
+#area_list li { cursor: pointer; }
+#area_list li.online { margin-bottom: 10px; }
+
+
+#opSearch_btn {
+	position: absolute;
+	top: 211px;
+	padding: 7px;
+	margin-left: 10px;
+	background: #f3be34;
+	font-size: 12px;	
+	font-weight: 700;
+	border: 1px solid #494c57;
+}
+
+#search_result { margin-top: 40px; margin-bottom: 80px; }
+#search_result div.normalList { padding-left: 50px; }
+
+/* 모임 개설하기 버튼, 팝업 div */
+div.info_div {
+	position: absolute;
+	bottom: 8%;
+    right: -73px;
+	padding: 20px;
+    text-align: center;
+    width: 220px;
+    font-size: 11px;
+    background-color: #fff;
+    border: 1px solid #494c57;
+    display: none;
+}
+div.info_div .p_color {
+	font-weight: 700;
+	color: #F3BE34;
+}
+#open_btn {
+	position: absolute;
+	bottom: 3%;
+    right: 13px;
+	width: 40px;
+	height: 40px;
+	background-image: url(../../img/open_btn.png);
+	background-repeat: no-repeat;
+    background-size: 40px;
+    cursor: pointer;
+}
+
+/* 모임개설 popup style */
+.clubPopup {
+	position: relative;
+	padding: 20px;
+    width: 370px;
+    text-align: center;
+    border: 1px solid #cdcdcd;
+    border-radius: 12px;
+    background: #fff;
+    z-index: 1;
+}
+.clubPopup h3 {
+	margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* popup button Style */
+.clubPopup button { position: absolute; top: 20px; }
+.clubPopup .closeBtn {
+	right: 10px;
+	width: 16px;
+	height: 16px;
+	background-size: 120px;
+	background-position: -12px 0px;
+	background-image: url(../../img/alto_common_icon.png);
+	text-indent: -9999px;
+}
+.clubPopup .prevBtn {
+	left: 10px;
+	width: 16px;
+	height: 16px;
+	background-size: 120px;
+	background-position: 3px 0px;
+	background-repeat: no-repeat;
+	background-image: url(../../img/alto_common_icon.png);
+	text-indent: -9999px;	
+}
+
+/* form Style */
+.clubPopup form span {
+	float: left;
+	width: 30px;
+    height: 28px;
+    margin-bottom: 10px;
+    display: inline-block;
+    background-size: 230px;
+    background-position: -65px -62px;
+    background-repeat: no-repeat;
+    background-image: url(../../img/alto_common_icon.png);
+}
+.clubPopup form span.icon_mem { background-position: -100px -62px; }
+.clubPopup form span.icon_hobby {
+	clear: both;
+	background-size: 28px;
+    background-position: 0;
+	background-image: url(../../img/hobby_img/h_001.png);
+}
+.clubPopup form p {
+	display: inline-block;
+    padding: 6px;
+    width: 250px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+}
+.clubPopup p.club_since {
+	text-align: left;
+    color: #777;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.clubPopup form label {
+	float: left;
+    width: 93px;
+    padding: 6px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* input Style */
+.clubPopup textarea { width: 100%; height: 150px; }
+
+input[type=text].size1 { width: 287px; float: right; }
+input[type=text].size2 { width: 40px; float: right; }
+input[type=text].size3 { width: 200px; float: right; }
+
+#step3 input[type=text].size1 {
+	position: absolute;
+    top: 13px;
+    left: 40px;
+}
+
+/* 모임 편집 - 모임 사진 없을 때 */
+input.non_img {
+	height: 100px;
+    margin-bottom: 10px;
+    color: #777;
+    border: 2px solid #F3BE34;
+    border-radius: 10px;
+}
+/* 모임 편집 - 모임 사진 있을 때 */
+input.club_img {
+	height: 100px;
+    margin-bottom: 10px;
+    background: url(../../img/club_test.png) 100% 100% no-repeat;
+    text-indent: -9999px;
+}
+
+/* 주제 선택 */
+#cateChoice p {
+	display: block;
+    padding: 0;
+    width: auto;
+    text-align: center;
+    font-size: 12px;
+}
+#cateChoice ul li { 
+	display: inline-block;
+	margin: 0 12px 10px;
+	cursor: pointer;
+}
+#cateChoice ul li img { width: 80px; }
+
+/* 주요 활동 지역 */
+#step3 #areaList {
+	margin-top: 20px;
+    padding: 10px 0;
+}
+#step3 #areaList li { 
+	display: inline-block; 
+	padding: 5px;
+    width: 60px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+#step3 #areaList li.online { display: block; margin-left: 7px; }
+
+/* 모임 채팅 */
+#clubChat { margin: 0 auto; width: fit-content; overflow: hidden; }
+#clubChat>div {
+	float: left; 
+	background: #F8F8F8;
+    border: 1px solid #494c57;
+}
+#clubChatWindow {
+	width: 500px;
+    height: 500px;
+    padding: 10px;
+    margin-right: 20px;    
+}
+#clubChatWindow input {
+	width: 85%;
+	margin-top: 10px;
+    background: #fff;
+}
+
+#chatView {
+	height: 390px;
+    padding: 0 10px;
+    background: #494c57;
+    border-radius: 12px;
+    overflow-y: scroll;
+}
+#chatView p { margin-bottom: 5px; }
+
+#chatView .noti {
+	margin: 10px auto;
+	padding: 3px 10px;
+	font-size: 10px;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 6px;
+}
+#chatView .date {
+	width: 200px;        
+    background: #777;  
+    color: #fff;
+}
+#chatView .mem {
+	width: 290px;
+    background: #F3BE34;    
+    color: #494c57;    
+}
+
+#chatView .reciveMsg {
+	width: fit-content;
+    padding: 0 20px 0 40px;
+}
+#chatView .sendMsg {
+	width: fit-content;
+    float: right;
+    padding-left: 55px;
+}
+
+#chatView .reciveMsg img { 
+	position: absolute; 
+	top: 0px;
+	left: 0px;
+	width: 40px;
+}
+#chatView .reciveMsg .msgUser {
+    font-weight: bold;
+    color: #e4e4e4;
+}
+
+#chatView .reciveMsg p,#chatView .sendMsg p {
+	width: fit-content;
+	padding: 3px 10px;
+	border-radius: 8px;
+}
+#chatView .reciveMsg p { background: #777; }
+#chatView .sendMsg p { background: #fff; }
+
+#chatView .reciveMsg .msgTime {
+	position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #34343c;
+}
+
+#chatView .sendMsg .msgTime {
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 10px;
+    font-weight: bold;
+    color: #34343c;
+}
+
+/* 일정 멤버 목록 */
+#schedual_member { width: 200px; padding: 20px; }
+#schedual_member ul li { position: relative; cursor: pointer; }
+#schedual_member ul li img { width: 40px; vertical-align: middle; }
+#schedual_member ul li span {	
+    position: absolute;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#schedual_member ul li span.memName { 
+	width: 76px; 
+	height: 32px;
+	overflow: hidden;
+}
+#schedual_member ul li span.manager { 
+	right: 0; 
+	font-size: 10px;
+	font-weight: bold;
+	color: #777;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

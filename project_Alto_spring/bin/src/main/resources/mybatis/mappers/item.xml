@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.item">
+	<resultMap type="itemDTO" id="itemResult">		
+		<result property="item_code" column="item_code" />		
+		<result property="hobby_code" column="hobby_code" />
+		<result property="hobby_sub_code" column="hobby_sub_code" />
+		<result property="hobby_name" column="hobby_name" />
+		<result property="hobby_sub_name" column="hobby_sub_name" />
+		<result property="item_name" column="item_name" />
+		<result property="item_count" column="item_count" />
+		<result property="quantity" column="quantity" />
+		<result property="price" column="price" />
+		<result property="imgName" column="imgName" />
+		<result property="intro" column="intro" />
+		<result property="regidate" column="regidate" />
+	</resultMap>
+	
+	<resultMap id="ItemImgResult" type="itemImageDTO">
+	  <result property="imageFileNO" column="imageFileNO" />
+	  <result property="item_code" column="item_code" />
+	  <result property="imageFileName" column="imageFileName" />
+ 	</resultMap>
+	
+	<!-- 전체 조회 -->
+	<select id="selectAllitemList" parameterType="java.util.Map" resultMap="itemResult">
+		SELECT h.NAME AS hobby_name, i.*
+		FROM ALTO_ITEM i, ALTO_HOBBY h
+		WHERE i.HOBBY_CODE = h.HOBBY_CODE
+		<if test=" hobbyC != null">
+		 <if test=" hobbyC == 'all'">
+		 </if>
+		 <if test="hobbyC != 'all'">
+		 	AND i.HOBBY_CODE = #{hobbyC}
+		 </if>
+		 
+		 <if test=" hobbySearchList != null">
+			 AND i.HOBBY_CODE IN 
+			 <foreach item="item" index="index" collection="hobbySearchList" open="(" separator="," close=")">
+			 	#{item}
+			 </foreach>
+		</if>
+		 
+		 <if test=" keyword != null">
+			 AND (i.item_name LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%')
+		</if>
+		 
+		</if>
+		<if test="sort == null">
+			order by item_code desc 
+		</if>
+		<if test="sort == 'new'">
+			order by item_code desc 
+		</if>
+		<if test="sort == 'old'">
+			order by item_code asc 
+		</if>
+		<if test="sort == 'quantityL'">
+			order by quantity desc
+		</if>
+		<if test="sort == 'quantityS'">
+			order by quantity asc
+		</if>
+	</select>
+
+	<!-- 새글 쓰기 -->
+	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/26) -->
+	<insert id="insertNewItem"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO EZEN.ALTO_ITEM
+			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY)
+			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity})
+		]]>      
+	</insert>
+
+	<!-- 새글 이미지 -->
+	<insert id="insertNewImage"  parameterType="java.util.Map">
+    	<foreach item="item"  collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL" >
+      		INTO alto_item_image(imageFileNO, imageFileName, item_code)
+     		VALUES (#{item.imageFileNO}, #{item.imageFileName}, #{item.item_code})
+    	</foreach>
+ 	</insert>
+  
+  	<select id="selectNewitem_codeN" resultType="int">
+		<![CDATA[ 
+			SELECT nvl(max(item_code),0)+1
+			FROM ALTO_ITEM
+		]]>
+	</select>
+  
+	<select id="selectNewitem_code" parameterType="int" resultType="String">
+		<![CDATA[ 
+			SELECT LPAD(#{item_codeN}, 6, 0) FROM DUAL
+		]]>
+	</select>
+	
+	<select id="selectNewImageFileNO" resultType="int">
+    	<![CDATA[
+      		SELECT nvl(max(imageFileNO),0) from alto_item_image		
+    	]]>
+	</select>
+	
+	<select id="selectItem" resultType="itemDTO" parameterType="int">
+		<![CDATA[ 
+			SELECT *
+			FROM alto_item
+			WHERE imageFileNO = #{imageFileNO}
+		]]>
+	</select>
+	
+	<select id="selectImageFileList" resultMap="ItemImgResult" parameterType="int">
+		<![CDATA[ 
+			SELECT *
+			FROM alto_item_image
+			WHERE imageFileNO = #{imageFileNO}
+		]]>
+	</select>
+	
+		<select id="selectItemVi" resultType="itemDTO" parameterType="String">
+		<![CDATA[
+			SELECT h.NAME AS hobby_name, hs.NAME AS hobby_sub_name, i.*
+			FROM ALTO_ITEM i, ALTO_HOBBY h, ALTO_HOBBY_SUB hs
+			WHERE i.HOBBY_CODE = h.HOBBY_CODE
+			AND i.HOBBY_SUB_CODE  = hs.HOBBY_SUB_CODE 
+			AND item_code = ${item_code}
+		]]>
+	</select>
+
+	<select id="selectImageFileListVi" resultMap="ItemImgResult" parameterType="String">
+		<![CDATA[
+			SELECT * FROM ALTO_ITEM_IMAGE
+			WHERE item_code = ${item_code}	
+			ORDER BY IMAGEFILENO		
+		]]>
+	</select>
+
+	<update id="updateItem" parameterType="java.util.Map">
+		UPDATE ALTO_ITEM 
+		SET PRICE = #{price}, INTRO = #{intro}, QUANTITY = #{quantity}
+		<if test="imageFileName != '' and imageFileName != null">
+			, IMAGEFILENAME=#{imageFileName}
+		</if>
+		WHERE ITEM_CODE = #{item_code}
+	</update>
+	
+	<update id="updateImageFile" parameterType="java.util.List">
+		<foreach collection="list" item="item" separator=";" open="DECLARE BEGIN" close="; END;">
+			<choose>
+				<when test="item.imageFileName != null">
+					UPDATE alto_item_image 
+					SET IMAGEFILENAME = #{item.imageFileName}
+					WHERE item_code = #{item.item_code}
+					AND IMAGEFILENO = #{item.imageFileNO}
+				</when>
+			</choose>
+		</foreach>
+	</update>
+	
+</mapper>
+

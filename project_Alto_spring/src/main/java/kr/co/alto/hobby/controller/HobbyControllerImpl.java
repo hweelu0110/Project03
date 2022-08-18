@@ -16,6 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -73,6 +75,25 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		return mav;
 	}
 
+	
+	
+	@RequestMapping(value="/select/hobbysub.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<HobbysubDTO>> ajaxhobbysub(String main_code) throws Exception {
+		
+		System.out.println(main_code+"테스트");
+		ResponseEntity<List<HobbysubDTO>> entity = null;
+		try{
+			List<HobbysubDTO> list= hobbyService.listHobbysub2(main_code);
+			entity = new ResponseEntity<List<HobbysubDTO>>(list, HttpStatus.OK);
+			System.out.println(entity+"테스트");
+		}catch(Exception e){
+			e.printStackTrace();	
+		}
+		
+		return entity;
+		
+	}
 
 	@Override
 	@RequestMapping(value = "/mypage/memHobbyUpdate.do", method = RequestMethod.POST)
