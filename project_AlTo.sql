@@ -1,4 +1,9 @@
--- 취미
+-- (v) --------------------------------------
+-- 표시부분만 추가하시면 됩니다
+-- (v) --------------------------------------
+
+
+-- (v) 취미 테이블 -------------------------------------------
 DROP TABLE alto_hobby CASCADE CONSTRAINT;
 CREATE TABLE alto_hobby(
 	hobby_code	char(8) NOT NULL,
@@ -6,7 +11,7 @@ CREATE TABLE alto_hobby(
 	PRIMARY KEY (hobby_code)
 );
 
--- 취미 정보 추가
+-- (v) 취미 정보 추가 ----------------------------------------
 INSERT INTO alto_hobby VALUES ('hm000001','창작');
 INSERT INTO alto_hobby VALUES ('hm000002','액티비티');
 INSERT INTO alto_hobby VALUES ('hm000003','아웃도어');
@@ -22,10 +27,11 @@ INSERT INTO alto_hobby VALUES ('hm000012','차/오토바이');
 INSERT INTO alto_hobby VALUES ('hm000013','반려동물');
 INSERT INTO alto_hobby VALUES ('hm000014','수집');
 INSERT INTO alto_hobby VALUES ('hm000015','자유주제');
+-- (v) -----------------------------------------------------
 
 SELECT * FROM alto_hobby
 
--- 소분류 취미
+-- (v) 소분류 취미  -----------------------------------------
 DROP TABLE alto_hobby_sub CASCADE CONSTRAINT;
 CREATE TABLE alto_hobby_sub(
 	hobby_sub_code	char(8) NOT NULL,
@@ -36,8 +42,9 @@ CREATE TABLE alto_hobby_sub(
 
 ALTER TABLE alto_hobby_sub ADD CONSTRAINT hobby_sub_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
+-- (v) ------------------------------------------------------
 
--- 소분류 취미 정보 추가
+-- (v) 소분류 취미 정보 추가 ----------------------------------
 INSERT INTO alto_hobby_sub VALUES ('hs010001','hm000001','드로잉');
 INSERT INTO alto_hobby_sub VALUES ('hs010002','hm000001','플라워아트');
 INSERT INTO alto_hobby_sub VALUES ('hs010003','hm000001','캘리그라피');
@@ -149,7 +156,10 @@ INSERT INTO alto_hobby_sub VALUES ('hs140005','hm000014','운동화');
 INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','스티커/굿즈');
 INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','출판물');
 INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','기타');
+-- (v) --------------------------------------------------------
 
+
+-- 내 취미정보 수정 - 선택한 대분류에 대한 소분류 목록 가져오기
 SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
 WHERE A.HOBBY_CODE = B.HOBBY_CODE 
 AND (A.HOBBY_CODE ='hm000001' OR A.HOBBY_CODE ='hm000002' OR A.HOBBY_CODE ='hm000003' OR A.HOBBY_CODE ='' OR A.HOBBY_CODE =''); 
@@ -160,16 +170,19 @@ FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
 WHERE A.HOBBY_CODE = B.HOBBY_CODE
 AND A.HOBBY_CODE = 'hm000001'
 
--- 지역
+
+-- (v) 지역 테이블  --------------------------------------------
 DROP TABLE alto_area CASCADE CONSTRAINT;
 CREATE TABLE alto_area(
 	area_code	char(8) NOT NULL,
 	name		varchar2(20) NOT NULL,
 	PRIMARY KEY (area_code)
 );
+-- (v) --------------------------------------------------------
 
 SELECT * FROM alto_area;
--- 지역 정보 추가
+
+-- (v) 지역 정보 추가  -----------------------------------------
 INSERT INTO ALTO_AREA VALUES ('area0001','온라인');
 INSERT INTO ALTO_AREA VALUES ('area0002','강남구');
 INSERT INTO ALTO_AREA VALUES ('area0003','강동구');
@@ -200,8 +213,9 @@ INSERT INTO ALTO_AREA VALUES ('area0023','은평구');
 INSERT INTO ALTO_AREA VALUES ('area0024','종로구');
 INSERT INTO ALTO_AREA VALUES ('area0025','중구');
 INSERT INTO ALTO_AREA VALUES ('area0026','중랑구');
+-- (v) ---------------------------------------------------------
 
--- 회원
+-- (v) 회원 테이블  ---------------------------------------------
 DROP TABLE alto_member CASCADE CONSTRAINT;
 CREATE TABLE alto_member(
 	mem_id	 varchar2(100) NOT NULL,
@@ -220,6 +234,8 @@ CREATE TABLE alto_member(
 	del_yn   char(1) DEFAULT 'N' NOT NULL,
 	PRIMARY KEY (mem_id)
 );
+-- (v) ---------------------------------------------------------
+
 
 INSERT INTO ALTO_MEMBER
 (MEM_ID, MEM_PWD, MEM_NAME, GENDER, BIRTH)
@@ -235,14 +251,16 @@ WHERE MEM_ID = 'hweelu0110@gmail.com';
 
 UPDATE ALTO_MEMBER SET DEL_YN = 'N' WHERE MEM_ID = 'hweelu0110@gmail.com'
 
--- 인증키 테이블
+
+-- (v) 인증키 테이블  --------------------------------------------
 DROP TABLE ALTO_MEMBER_AUTH CASCADE CONSTRAINT;
 CREATE TABLE alto_member_auth(
 	mem_id	 varchar2(100) NOT NULL,
 	authkey  varchar2(50)
 );
 
--- 관심취미 대분류 최대 5개 / 소분류 (대분류 당)최대 5개
+-- (v) 내취미 테이블   --------------------------------------------
+-- (대분류 최대 5개 / 소분류 (대분류 당)최대 5개)
 DROP TABLE alto_m_hobby CASCADE CONSTRAINT;
 CREATE TABLE alto_m_hobby(
 	m_hobby_code 	char(8) NOT NULL,
@@ -260,11 +278,14 @@ REFERENCES alto_hobby (hobby_code);
 
 ALTER TABLE alto_m_hobby ADD CONSTRAINT m_hobby_sub_fk FOREIGN KEY (hobby_sub_code)
 REFERENCES alto_hobby_sub (hobby_sub_code);
+-- (v) --------------------------------------------------------------
+
 
 SELECT * FROM ALTO_M_HOBBY;
 SELECT * FROM sys.dual;
 
--- 일련번호 시퀀스 객체 생성
+
+-- (v) 관심취미코드(m_hobby_code)  일련번호 시퀀스 객체 생성 ------------
 DROP SEQUENCE seq_Mhobby_code;
 CREATE SEQUENCE seq_Mhobby_code
 INCREMENT BY 1				
@@ -274,6 +295,8 @@ NOMAXVALUE
 NOCYCLE 					
 nocache						
 ;	
+-- (v) ----------------------------------------------------------------
+
 
 INSERT INTO ALTO_M_HOBBY
 VALUES(seq_Mhobby_code.nextval, 'hweelu0110@gmail.com', 'hm000001', 'hs010001');
@@ -299,7 +322,9 @@ AND MEM_ID = 'hweelu0110@gmail.com';
 -- 내취미정보 지우기
 DELETE FROM ALTO_M_HOBBY WHERE MEM_ID = 'hweelu0110@gmail.com'
 
--- 활동지역 최대 3개
+
+-- (v) 활동지역 테이블 ------------------------------------------------ 
+-- (최대 3개)
 DROP TABLE alto_m_area CASCADE CONSTRAINT;
 CREATE TABLE alto_m_area(
 	m_area_code char(8) NOT NULL,
@@ -314,7 +339,7 @@ REFERENCES alto_area (area_code);
 ALTER TABLE alto_m_area ADD CONSTRAINT m_area_member_fk FOREIGN KEY (mem_id)
 REFERENCES alto_member (mem_id);
 
--- 일련번호 시퀀스 객체 생성
+-- (v) 활동지역코드(m_area_code) 일련번호 시퀀스 객체 생성 --------------
 DROP SEQUENCE seq_Marea_code;
 CREATE SEQUENCE seq_Marea_code
 INCREMENT BY 1				
@@ -324,6 +349,8 @@ NOMAXVALUE
 NOCYCLE 					
 nocache						
 ;	
+-- (v) ----------------------------------------------------------------
+
 
 SELECT * FROM alto_m_area;
 INSERT INTO ALTO_M_AREA
@@ -335,7 +362,8 @@ VALUES(seq_Marea_code.nextval, 'area0020', 'hweelu0110@gmail.com');
 SELECT a.AREA_CODE area_code, b.NAME name FROM ALTO_M_AREA a, ALTO_AREA b WHERE a.AREA_CODE = b.AREA_CODE 
 AND MEM_ID = 'hweelu0110@gmail.com';
 
--- 모임
+
+-- (v) 모임 테이블 -----------------------------------------------------
 DROP TABLE alto_club CASCADE CONSTRAINT;
 CREATE TABLE alto_club(
 	club_code	char(8) NOT NULL,
@@ -364,18 +392,23 @@ REFERENCES alto_area (area_code);
 
 ALTER TABLE alto_club ADD CONSTRAINT club_member_fk FOREIGN KEY (manager)
 REFERENCES alto_member (mem_id);
+-- (v) -----------------------------------------------------------------
+
 
 SELECT * FROM ALTO_CLUB
 
--- 일련번호 시퀀스 객체 생성
+
+-- 모임코드(club_code) 일련번호 시퀀스 객체 생성 --------------------------
 DROP SEQUENCE seq_club_code;
 CREATE SEQUENCE seq_club_code
-INCREMENT BY 1				-- 1씩 증가
-START WITH 1				-- 시작값 1
-MINVALUE 1					-- 최소값 1
-NOMAXVALUE					-- 최대값 무한대 
-NOCYCLE 					-- 순환하지 않음
-nocache						-- 캐시 안 함
+INCREMENT BY 1				
+START WITH 1				
+MINVALUE 1					
+NOMAXVALUE					 
+NOCYCLE 					
+nocache						
+-- (v) ------------------------------------------------------------------
+
 
 -- 모임코드 생성
 SELECT nvl(MAX(CLUB_CODE),0) + 1
@@ -388,7 +421,8 @@ VALUES(seq_club_code.nextval, '테스트모임', 'hm000001', 'hs010001', 'area00
 
 DELETE FROM ALTO_CLUB WHERE CLUB_CODE = 'c001'
 
--- 모임 더미데이터
+
+-- (v) 모임 더미데이터 ----------------------------------------------------
 INSERT INTO ALTO_CLUB
 (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
 VALUES(seq_club_code.nextval, '그림그리기 베스트 모임', 'hm000001', 'hs010001', 'area0002', 'hweelu0110@gmail.com', 31 , 200 , '그림그리기 베스트 모임, 테스트모임 소개글 입니다.','2022-05-01');
@@ -422,7 +456,6 @@ INSERT INTO ALTO_CLUB
 VALUES(seq_club_code.nextval, '캠핑 베스트 모임', 'hm000003', 'hs030002', 'area0010', 'master', 110 , 200 , '추가 베스트 모임, 테스트모임 소개글 입니다.','2022-04-01', 21);
 
 
-
 INSERT INTO ALTO_CLUB
 (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
 VALUES(seq_club_code.nextval, '필라테스 신규 모임', 'hm000002', 'hs020002', 'area0003', 'master', 10 , 200 , '필라테스 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
@@ -447,6 +480,7 @@ VALUES(seq_club_code.nextval, '클래식 신규 모임', 'hm000006', 'hs060008',
 INSERT INTO ALTO_CLUB
 (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
 VALUES(seq_club_code.nextval, '커피 신규 모임', 'hm000004', 'hs040004', 'area0006', 'master', 5 , 200 , '커피 신규 모임, 테스트모임 소개글 입니다.','2022-08-06');
+-- (v) -------------------------------------------------------------------
 
 
 -- BEST 모임 목록 8건 조회
@@ -524,9 +558,6 @@ FROM (
 WHERE A.AREA_CODE = B.AREA_CODE
 ;
 
-
-
-
 -- 가입자 많은 모임
 SELECT A.CLUB_CODE club_code, 
        A.TITLE title, 
@@ -566,7 +597,8 @@ AND TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
 AND CATE_M = 'hm000002'
 ORDER BY MEMBER_OUT ASC, REGIDATE DESC
 
--- 관심
+
+-- (v) 관심 테이블 --------------------------------------------------------
 DROP TABLE alto_like CASCADE CONSTRAINT;
 CREATE TABLE alto_like(
 	like_code	char(8) NOT NULL,
@@ -586,16 +618,18 @@ REFERENCES alto_class (class_code);
 ALTER TABLE alto_like ADD CONSTRAINT like_item_fk FOREIGN KEY (item_code)
 REFERENCES alto_item (item_code);
 
--- 일련번호 시퀀스 객체 생성
+-- (v) 관심코드(like_code) 일련번호 시퀀스 객체 생성 --------------------------
 DROP SEQUENCE seq_like_code;
 CREATE SEQUENCE seq_like_code
-INCREMENT BY 1				-- 1씩 증가
-START WITH 1				-- 시작값 1
-MINVALUE 1					-- 최소값 1
-NOMAXVALUE					-- 최대값 무한대 
-NOCYCLE 					-- 순환하지 않음
-nocache						-- 캐시 안 함
+INCREMENT BY 1				
+START WITH 1				
+MINVALUE 1					
+NOMAXVALUE					 
+NOCYCLE 					
+nocache						
 ;
+-- (v) -----------------------------------------------------------------------
+
 
 SELECT * FROM ALTO_LIKE;
 
@@ -628,7 +662,7 @@ AND A.MEM_ID = 'hweelu0110@gmail.com'
 
 
 
--- 
+-- 미작업
 -- 가입
 DROP TABLE alto_join CASCADE CONSTRAINT;
 CREATE TABLE alto_join(
