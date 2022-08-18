@@ -154,6 +154,12 @@ SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NA
 WHERE A.HOBBY_CODE = B.HOBBY_CODE 
 AND (A.HOBBY_CODE ='hm000001' OR A.HOBBY_CODE ='hm000002' OR A.HOBBY_CODE ='hm000003' OR A.HOBBY_CODE ='' OR A.HOBBY_CODE =''); 
 
+-- 탭메뉴 서브메뉴 불러오기
+SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name
+FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
+WHERE A.HOBBY_CODE = B.HOBBY_CODE
+AND A.HOBBY_CODE = 'hm000001'
+
 -- 지역
 DROP TABLE alto_area CASCADE CONSTRAINT;
 CREATE TABLE alto_area(
@@ -204,7 +210,7 @@ CREATE TABLE alto_member(
 	gender	 char(1) 	 NOT NULL,
 	birth	 DATE 		 NOT NULL,
 	phone	 char(11),
-	img	 varchar2(500),
+	img		 varchar2(500),
 	mem_open char(1) DEFAULT 'Y' NOT NULL,
 	joindate DATE DEFAULT sysdate NOT NULL,
 	authkey	 NUMBER DEFAULT 0 NOT NULL,
@@ -220,12 +226,14 @@ INSERT INTO ALTO_MEMBER
 VALUES('test@gmail.com', '1234qwer', '김시험', 'M', '1999-01-01');
 
 DELETE FROM ALTO_MEMBER
-WHERE MEM_ID='hweelu0110@gmail.com';
+WHERE MEM_ID='hweelu@gmail.com';
 
 SELECT * FROM ALTO_MEMBER WHERE MEM_ID = 'hweelu0110@gmail.com';
 
-UPDATE ALTO_MEMBER SET DEL_YN = 'Y' WHERE MEM_ID = 'hweelu0110@gmail.com'
+UPDATE ALTO_MEMBER SET MEM_NAME = '김이름', GENDER = 'M', BIRTH = '1988-01-11', phone = '010', MEM_OPEN = 'N'
+WHERE MEM_ID = 'hweelu0110@gmail.com';
 
+UPDATE ALTO_MEMBER SET DEL_YN = 'N' WHERE MEM_ID = 'hweelu0110@gmail.com'
 
 -- 인증키 테이블
 DROP TABLE ALTO_MEMBER_AUTH CASCADE CONSTRAINT;
@@ -253,6 +261,44 @@ REFERENCES alto_hobby (hobby_code);
 ALTER TABLE alto_m_hobby ADD CONSTRAINT m_hobby_sub_fk FOREIGN KEY (hobby_sub_code)
 REFERENCES alto_hobby_sub (hobby_sub_code);
 
+SELECT * FROM ALTO_M_HOBBY;
+SELECT * FROM sys.dual;
+
+-- 일련번호 시퀀스 객체 생성
+DROP SEQUENCE seq_Mhobby_code;
+CREATE SEQUENCE seq_Mhobby_code
+INCREMENT BY 1				
+START WITH 1				
+MINVALUE 1					
+NOMAXVALUE					 
+NOCYCLE 					
+nocache						
+;	
+
+INSERT INTO ALTO_M_HOBBY
+VALUES(seq_Mhobby_code.nextval, 'hweelu0110@gmail.com', 'hm000001', 'hs010001');
+INSERT INTO ALTO_M_HOBBY
+VALUES(seq_Mhobby_code.nextval, 'hweelu0110@gmail.com', 'hm000001', 'hs010004');
+INSERT INTO ALTO_M_HOBBY
+VALUES(seq_Mhobby_code.nextval, 'hweelu0110@gmail.com', 'hm000002', '');
+INSERT INTO ALTO_M_HOBBY
+VALUES(seq_Mhobby_code.nextval, 'hweelu0110@gmail.com', 'hm000007', '');
+
+-- 내취미 대분류 목록 불러오기
+SELECT DISTINCT A.HOBBY_CODE hobby_code, B.NAME name
+			FROM ALTO_M_HOBBY A, ALTO_HOBBY B 
+			WHERE A.HOBBY_CODE = B.HOBBY_CODE  
+AND MEM_ID = 'hweelu0110@gmail.com';
+
+-- 내취미 소분류 목록 불러오기
+SELECT A.HOBBY_SUB_CODE main_code, B.NAME sub_name 
+FROM ALTO_M_HOBBY A, ALTO_HOBBY_SUB B 
+WHERE A.HOBBY_SUB_CODE = B.HOBBY_SUB_CODE 
+AND MEM_ID = 'hweelu0110@gmail.com';
+
+-- 내취미정보 지우기
+DELETE FROM ALTO_M_HOBBY WHERE MEM_ID = 'hweelu0110@gmail.com'
+
 -- 활동지역 최대 3개
 DROP TABLE alto_m_area CASCADE CONSTRAINT;
 CREATE TABLE alto_m_area(
@@ -268,6 +314,27 @@ REFERENCES alto_area (area_code);
 ALTER TABLE alto_m_area ADD CONSTRAINT m_area_member_fk FOREIGN KEY (mem_id)
 REFERENCES alto_member (mem_id);
 
+-- 일련번호 시퀀스 객체 생성
+DROP SEQUENCE seq_Marea_code;
+CREATE SEQUENCE seq_Marea_code
+INCREMENT BY 1				
+START WITH 1				
+MINVALUE 1					
+NOMAXVALUE					 
+NOCYCLE 					
+nocache						
+;	
+
+SELECT * FROM alto_m_area;
+INSERT INTO ALTO_M_AREA
+VALUES(seq_Marea_code.nextval, 'area0017', 'hweelu0110@gmail.com');
+INSERT INTO ALTO_M_AREA
+VALUES(seq_Marea_code.nextval, 'area0020', 'hweelu0110@gmail.com');
+
+-- 내지역 목록 불러오기
+SELECT a.AREA_CODE area_code, b.NAME name FROM ALTO_M_AREA a, ALTO_AREA b WHERE a.AREA_CODE = b.AREA_CODE 
+AND MEM_ID = 'hweelu0110@gmail.com';
+
 -- 모임
 DROP TABLE alto_club CASCADE CONSTRAINT;
 CREATE TABLE alto_club(
@@ -279,7 +346,7 @@ CREATE TABLE alto_club(
 	manager	 	varchar2(100) NOT NULL,
 	member_num	number DEFAULT 1 NOT NULL,
 	member_max	number DEFAULT 200 NOT NULL,
-	img 		varchar2(500) DEFAULT '기본이미지url',
+	img 		varchar2(500) DEFAULT 'noImg',
 	intro 		varchar2(1000) NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,
 	member_out 	number DEFAULT 0 NOT NULL,
@@ -298,6 +365,270 @@ REFERENCES alto_area (area_code);
 ALTER TABLE alto_club ADD CONSTRAINT club_member_fk FOREIGN KEY (manager)
 REFERENCES alto_member (mem_id);
 
+SELECT * FROM ALTO_CLUB
+
+-- 일련번호 시퀀스 객체 생성
+DROP SEQUENCE seq_club_code;
+CREATE SEQUENCE seq_club_code
+INCREMENT BY 1				-- 1씩 증가
+START WITH 1				-- 시작값 1
+MINVALUE 1					-- 최소값 1
+NOMAXVALUE					-- 최대값 무한대 
+NOCYCLE 					-- 순환하지 않음
+nocache						-- 캐시 안 함
+
+-- 모임코드 생성
+SELECT nvl(MAX(CLUB_CODE),0) + 1
+FROM ALTO_CLUB
+
+-- 모임 개설 하기
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
+VALUES(seq_club_code.nextval, '테스트모임', 'hm000001', 'hs010001', 'area0002', 'hweelu0110@gmail.com', 200 , '테스트모임 소개글 입니다.');
+
+DELETE FROM ALTO_CLUB WHERE CLUB_CODE = 'c001'
+
+-- 모임 더미데이터
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '그림그리기 베스트 모임', 'hm000001', 'hs010001', 'area0002', 'hweelu0110@gmail.com', 31 , 200 , '그림그리기 베스트 모임, 테스트모임 소개글 입니다.','2022-05-01');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '헬스클럽 베스트 모임', 'hm000002', 'hs020001', 'area0002', 'master', 33 , 200 , '헬스클럽 베스트 모임, 테스트모임 소개글 입니다.','2022-04-11');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '뜨개클럽 베스트', 'hm000001', 'hs010004', 'area0017', 'hweelu0110@gmail.com', 35 , 200 , '뜨개클럽 베스트, 테스트모임 소개글 입니다.','2022-04-30');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '디지털드로잉 베스트 모임', 'hm000001', 'hs010001', 'area0005', 'master', 100 , 200 , '디지털드로잉 베스트 모임, 테스트모임 소개글 입니다.','2022-05-05');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '프랑스요리 베스트 모임', 'hm000004', 'hs040001', 'area0011', 'master', 90 , 200 , '프랑스요리 베스트 모임, 테스트모임 소개글 입니다.','2022-05-02');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '보컬 베스트 모임', 'hm000006', 'hs060001', 'area0018', 'master', 40 , 200 , '보컬 베스트 모임, 테스트모임 소개글 입니다.','2022-04-20');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '국내 여행 베스트 모임', 'hm000008', 'hs080001', 'area0025', 'master', 99 , 200 , '국내 여행 베스트 모임, 테스트모임 소개글 입니다.','2022-04-10');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '영상제작 베스트 모임', 'hm000010', 'hs100004', 'area0020', 'master', 110 , 200 , '영상제작 베스트 모임, 테스트모임 소개글 입니다.','2022-04-01');
+
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE, MEMBER_OUT)
+VALUES(seq_club_code.nextval, '러닝 베스트 모임', 'hm000002', 'hs020003', 'area0019', 'master', 99 , 200 , '추가 베스트 모임, 테스트모임 소개글 입니다.','2022-04-02', 20);
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, INTRO, REGIDATE, MEMBER_OUT)
+VALUES(seq_club_code.nextval, '캠핑 베스트 모임', 'hm000003', 'hs030002', 'area0010', 'master', 110 , 200 , '추가 베스트 모임, 테스트모임 소개글 입니다.','2022-04-01', 21);
+
+
+
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '필라테스 신규 모임', 'hm000002', 'hs020002', 'area0003', 'master', 10 , 200 , '필라테스 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '애견 신규 모임', 'hm000013', 'hs130001', 'area0006', 'master', 5 , 200 , '애견 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '애묘 신규 모임', 'hm000013', 'hs130002', 'area0011', 'master', 3 , 200 , '애묘 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '재능기부 신규 모임', 'hm000009', 'hs090005', 'area0001', 'master', 15 , 200 , '재능기부 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '맛집탐방 신규 모임', 'hm000008', 'hs080003', 'area0003', 'master', 9 , 200 , '맛집탐방 신규 모임, 테스트모임 소개글 입니다.','2022-08-01');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '영화감상 신규 모임', 'hm000007', 'hs070003', 'area0006', 'master', 7 , 200 , '영화감상 신규 모임, 테스트모임 소개글 입니다.','2022-08-07');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '클래식 신규 모임', 'hm000006', 'hs060008', 'area0003', 'master', 3 , 200 , '클래식 신규 모임, 테스트모임 소개글 입니다.','2022-08-02');
+INSERT INTO ALTO_CLUB
+(CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_NUM,  MEMBER_MAX, INTRO, REGIDATE)
+VALUES(seq_club_code.nextval, '커피 신규 모임', 'hm000004', 'hs040004', 'area0006', 'master', 5 , 200 , '커피 신규 모임, 테스트모임 소개글 입니다.','2022-08-06');
+
+
+-- BEST 모임 목록 8건 조회
+SELECT A.CLUB_CODE club_code, 
+       A.TITLE title, 
+       A.CATE_M cate_m, 
+       A.CATE_S cate_s, 
+       B.NAME area_name, 
+       A.MEMBER_NUM member_num, 
+       A.IMG img
+FROM (
+	SELECT rowNum, A.*
+	FROM (
+		SELECT *
+		FROM ALTO_CLUB
+		WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+		ORDER BY MEMBER_OUT ASC, REGIDATE ASC
+	) A
+	WHERE rowNum BETWEEN 1 AND 8
+) A, ALTO_AREA B
+WHERE A.AREA_CODE = B.AREA_CODE
+
+;  
+
+-- 새로생긴 모임 8건 조회
+SELECT A.CLUB_CODE club_code, 
+       A.TITLE title, 
+       A.CATE_M cate_m, 
+       A.CATE_S cate_s, 
+       B.NAME area_name, 
+       A.MEMBER_NUM member_num, 
+       A.IMG img
+FROM (
+	SELECT rowNum, A.*
+	FROM (
+		SELECT *
+		FROM ALTO_CLUB
+		ORDER BY REGIDATE DESC
+	) A
+	WHERE rowNum BETWEEN 1 AND 8
+) A, ALTO_AREA B
+WHERE A.AREA_CODE = B.AREA_CODE
+;
+
+-- 인기취미 순위
+SELECT CATE_M, B.name
+FROM (
+	SELECT CATE_M, COUNT(CATE_M) AS num
+	FROM ALTO_CLUB
+	GROUP BY CATE_M 
+	ORDER BY num DESC 
+) A, alto_hobby B
+WHERE A.cate_M = B.hobby_code 
+AND rowNum BETWEEN 1 AND 3
+;
+
+-- 인기취미 모임
+SELECT A.CLUB_CODE club_code, 
+       A.TITLE title, 
+       A.CATE_M cate_m, 
+       A.CATE_S cate_s, 
+       B.NAME area_name, 
+       A.MEMBER_NUM member_num, 
+       A.IMG img
+FROM (
+	SELECT rowNum, A.*
+	FROM (
+		SELECT *
+		FROM ALTO_CLUB
+		WHERE CATE_M = 'hm000002'
+		ORDER BY REGIDATE DESC   
+	) A
+	WHERE rowNum BETWEEN 1 AND 8
+) A, ALTO_AREA B
+WHERE A.AREA_CODE = B.AREA_CODE
+;
+
+
+
+
+-- 가입자 많은 모임
+SELECT A.CLUB_CODE club_code, 
+       A.TITLE title, 
+       A.CATE_M cate_m, 
+       A.CATE_S cate_s, 
+       B.NAME area_name, 
+       A.MEMBER_NUM member_num, 
+       A.IMG img
+FROM (
+	SELECT rowNum, A.*
+	FROM (
+		SELECT *
+		FROM ALTO_CLUB
+		ORDER BY MEMBER_NUM DESC
+	) A
+	WHERE rowNum BETWEEN 1 AND 8
+) A, ALTO_AREA B
+WHERE A.AREA_CODE = B.AREA_CODE
+ORDER BY member_num DESC 
+ ;
+
+-- 일정 빠른 모임
+
+
+-- 모임 검색 목록
+-- 모임메인에서 카테고리 선택 시 
+SELECT A.CLUB_CODE club_code, 
+       A.TITLE title, 
+       A.CATE_M cate_m, 
+       A.CATE_S cate_s, 
+       B.NAME area_name, 
+       A.MEMBER_NUM member_num, 
+       A.IMG img
+FROM ALTO_CLUB A, ALTO_AREA B
+WHERE A.AREA_CODE = B.AREA_CODE
+AND TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+AND CATE_M = 'hm000002'
+ORDER BY MEMBER_OUT ASC, REGIDATE DESC
+
+-- 관심
+DROP TABLE alto_like CASCADE CONSTRAINT;
+CREATE TABLE alto_like(
+	like_code	char(8) NOT NULL,
+	mem_id	 	varchar2(100) NOT NULL,
+	club_code	char(8),
+	class_code	char(8),
+	item_code	char(10),
+	PRIMARY KEY (like_code)
+);
+
+ALTER TABLE alto_like ADD CONSTRAINT like_club_fk FOREIGN KEY (club_code)
+REFERENCES alto_club (club_code);
+
+ALTER TABLE alto_like ADD CONSTRAINT like_class_fk FOREIGN KEY (class_code)
+REFERENCES alto_class (class_code);
+
+ALTER TABLE alto_like ADD CONSTRAINT like_item_fk FOREIGN KEY (item_code)
+REFERENCES alto_item (item_code);
+
+-- 일련번호 시퀀스 객체 생성
+DROP SEQUENCE seq_like_code;
+CREATE SEQUENCE seq_like_code
+INCREMENT BY 1				-- 1씩 증가
+START WITH 1				-- 시작값 1
+MINVALUE 1					-- 최소값 1
+NOMAXVALUE					-- 최대값 무한대 
+NOCYCLE 					-- 순환하지 않음
+nocache						-- 캐시 안 함
+;
+
+SELECT * FROM ALTO_LIKE;
+
+-- 관심 추가
+INSERT INTO ALTO_LIKE
+(LIKE_CODE, MEM_ID, CLUB_CODE, CLASS_CODE, ITEM_CODE)
+VALUES(seq_like_code.nextval, 'hweelu0110@gmail.com', '1', '', '');
+
+-- 관심 제거
+DELETE FROM ALTO_LIKE WHERE MEM_ID = 'hweelu0110@gmail.com' 
+AND (CLUB_CODE = '1' OR CLASS_CODE = '' OR ITEM_CODE = '');
+ 
+-- 회원 관심 목록코드 가져오기
+SELECT LIKE_CODE, CLUB_CODE, CLASS_CODE, ITEM_CODE 
+FROM ALTO_LIKE
+WHERE MEM_ID = 'hweelu0110@gmail.com'
+
+-- 마이페이지 - 관심 '모임' 목록 가져오기
+SELECT A.CLUB_CODE CLUB_CODE, 
+	   B.TITLE title, 
+       B.CATE_M cate_m, 
+       B.CATE_S cate_s, 
+       C.NAME area_name, 
+       B.MEMBER_NUM member_num, 
+       B.IMG img
+FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
+WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+AND A.MEM_ID = 'hweelu0110@gmail.com'
+
+
+
+
+-- 
 -- 가입
 DROP TABLE alto_join CASCADE CONSTRAINT;
 CREATE TABLE alto_join(
@@ -315,4 +646,5 @@ REFERENCES alto_member (mem_id);
 
 ALTER TABLE alto_join ADD CONSTRAINT join_club_fk FOREIGN KEY (club_code)
 REFERENCES alto_club (club_code);
+
 
