@@ -19,6 +19,7 @@
 		<put-attribute name="header" value="/WEB-INF/views/layout/header-class.jsp" />
 		<put-attribute name="body" value="" />		
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
 	</definition>
 	
 	<definition name="tiles-layout-item" template="/WEB-INF/views/layout/layout.jsp">
@@ -27,6 +28,7 @@
 		<put-attribute name="header" value="/WEB-INF/views/layout/header-item.jsp" />
 		<put-attribute name="body" value="" />		
 		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
 	</definition>
 	
 	<!-- 메인 -->
