@@ -1,5 +1,8 @@
 package kr.co.alto.hobby.dto;
 
+import org.springframework.stereotype.Component;
+
+@Component("hobbysubDTO")
 public class HobbysubDTO {
 	private String hobby_sub_code;
 	private String hobby_code;

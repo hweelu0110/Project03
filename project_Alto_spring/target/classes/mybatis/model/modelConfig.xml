@@ -6,6 +6,13 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="kr.co.alto.member.dto.MemberDTO" alias="memberDTO" />
+		<typeAlias type="kr.co.alto.area.dto.AreaDTO" alias="AreaDTO" />
+		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="HobbyDTO" />
+		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="HobbysubDTO" />
+		<typeAlias type="kr.co.alto.cla.dto.ClassDTO" alias="classDTO" />
+		<typeAlias type="kr.co.alto.cla.dto.ImageDTO" alias="classImageDTO" />
+		<typeAlias type="kr.co.alto.item.dto.ItemDTO" alias="itemDTO" />
+		<typeAlias type="kr.co.alto.item.dto.ImageDTO" alias="itemImageDTO" />
 		<typeAlias type="kr.co.alto.area.dto.AreaDTO" alias="areaDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="hobbyDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="hobbysubDTO" />

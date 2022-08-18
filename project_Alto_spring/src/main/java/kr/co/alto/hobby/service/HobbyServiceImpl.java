@@ -49,6 +49,11 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 
 	@Override
+	public List<HobbysubDTO> listHobbysub2(String main_code) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList2 = hobbyDAO.selectHobbysubList2(main_code);
+		return hobbysubList2;
+	}
+	
 	public void memHobbyUpdate(String mem_id, Map<String, Object> memHobbyMap) throws DataAccessException {
 		hobbyDAO.delMemHobby(mem_id);		
 		hobbyDAO.updateMemHobby(memHobbyMap);
@@ -58,6 +63,18 @@ public class HobbyServiceImpl implements HobbyService {
 	@Override
 	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException {
 		return hobbyDAO.selectSubHobbyList(hobby_code);
+	}
+	
+	@Override
+	public List<HobbyDTO> listHobbys() throws DataAccessException {
+		List<HobbyDTO> hobbyList = hobbyDAO.selectAllHobbyList();
+		return hobbyList;
+	}
+
+	@Override
+	public List<HobbysubDTO> listHobbysub(HashMap<String, String> codeList) throws DataAccessException {
+		List<HobbysubDTO> hobbysubList = hobbyDAO.selectHobbysubList(codeList);
+		return hobbysubList;
 	}
 
 }
