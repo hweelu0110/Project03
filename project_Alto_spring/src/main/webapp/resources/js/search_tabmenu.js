@@ -30,8 +30,7 @@
 		}else {
 			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
 		}
-	}
-	
+	}	
 	
 	/* tab메뉴 선택 시 - 영역 노출하기 */
 	/* 취미 탭메뉴 */
@@ -114,8 +113,10 @@
 		}
 	})
 	
+			
+	
 	/* 서브카테고리 선택 */
-	$("#s_cate ul li").click(function() {
+	$(document).on("click","#s_cate ul li", function() {
 		$(this).toggleClass("select")
 		
 		if ($("#s_cate ul").find("li").hasClass('select')) {
@@ -185,7 +186,8 @@
 		$(this).siblings().removeClass("select")
 		$("#tab_menu li:nth-child(2)").html("<span>온라인</span>")
 					
-	})
+	})	
+	
 	
 	/* select 정렬선택 */
 	$("#selectBoxArea div").filter(":first").click(function() {

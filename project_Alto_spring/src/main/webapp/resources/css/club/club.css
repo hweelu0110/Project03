@@ -21,13 +21,14 @@ section { padding: 30px 30px 70px; }
 
 #tab_area { 
 	position: absolute;
-	width: 700px;
+	width: 713px;
 	height: 245px;
     top: 66px; 
 	z-index: 2;
 	font-size: 11px;
 	overflow: hidden;	
 }
+#tab_area li { cursor: pointer; }
 
 #m_cate {
 	float: left;
@@ -40,8 +41,7 @@ section { padding: 30px 30px 70px; }
 	width: 60px;
 	margin-bottom: 5px;
 	text-align: center;
-	display: inline-block;
-	cursor: pointer;
+	display: inline-block;	
 }
 #m_cate ul li.all { 
 	position:absolute; 	
@@ -54,8 +54,8 @@ section { padding: 30px 30px 70px; }
 
 #s_cate {
 	padding: 10px;
-    width: 100px;
-    height: 245px;
+    width: 115px;
+    height: 240px;
     float: left;
     background-color: #F8F8F8; 
 	border: 1px solid #494c57; 
@@ -70,7 +70,7 @@ section { padding: 30px 30px 70px; }
 #area_list {
 	padding: 10px;
     width: 123px;
-    height: 245px;
+    height: 240px;
     float: left;
     background-color: #F8F8F8; 
 	border: 1px solid #494c57; 
@@ -78,13 +78,12 @@ section { padding: 30px 30px 70px; }
 	-ms-overflow-style: none;
 }
 #area_list::-webkit-scrollbar{ display: none; }
-#area_list li { cursor: pointer; }
 #area_list li.online { margin-bottom: 10px; }
 
 
 #opSearch_btn {
 	position: absolute;
-	top: 211px;
+	top: 207px;
 	padding: 7px;
 	margin-left: 10px;
 	background: #f3be34;

@@ -20,7 +20,8 @@
 	<script src="${path}/resources/js/search_tabmenu.js"></script>
 	<script src="${path}/resources/js/club_open.js"></script>
 	<script type="text/javascript">	
-		$(function() {
+		$(function() {			
+			/* 모임 메인에서 카테고리 선택 진입 시 */
 			let text = $("#tab_menu li:nth-child(1) span").text().trim()
 			$("#tab_menu li:nth-child(1) span").text(text)
 			
@@ -46,14 +47,19 @@
 				})
 			}
 			
+			/* 메인카테고리 선택 시 - 해당 소분류 취미 목록 불러오기 */
 			$("#m_cate ul li").click(function() {
-				alert($(this).hasClass("select"))
+				let hobby_code = $(this).children("img").attr("src")
+				
+				hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
+				hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
+				
 				if ($(this).hasClass("select")) {
 					$.ajax({
 						url: "${path}/club/selectSubHobby.do",
 						type:"post",
 						dataType:"json",
-						data: {hobby_code: _hobby_code},
+						data: {hobby_code: hobby_code},
 						success: function(data, textStatus) {
 							if(data.hobbySubList.length > 0) {
 								$.each(data.hobbySubList, function(index, item) {										
@@ -68,21 +74,13 @@
 						}
 					})
 				} else {
-					let hobby_code = $(this).children("img").attr("src")
 					
-					hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
-					hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
-					let subCode = $("#s_cate ul li."+hobby_code).length
-					alert(hobby_code+" 이친구는? "+ subCode)
-					alert($("#s_cate ul li."+hobby_code+":nth-child(1)").text())
+					let subCode = $("#s_cate ul li").length
 					if (subCode > 0){
-						for(let i=0; i<subCode; i++) {							
-							$("#s_cate ul li."+hobby_code+".eq("+i+")").css("display","none")
-						}
+						$("#s_cate ul li").remove('.'+hobby_code)						
 					}
 				}				
 			})
-			
 		})
 	</script>
 </head>
