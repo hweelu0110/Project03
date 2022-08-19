@@ -681,4 +681,88 @@ REFERENCES alto_member (mem_id);
 ALTER TABLE alto_join ADD CONSTRAINT join_club_fk FOREIGN KEY (club_code)
 REFERENCES alto_club (club_code);
 
+--게시판
+DROP TABLE alto_club_notice CASCADE CONSTRAINTS;
+CREATE TABLE alto_club_notice(
+	club_code char(8) NOT NULL
+	,notice_num NUMBER NOT NULL PRIMARY key
+	,category varchar2(10) NOT NULL
+	,title varchar2(200) NOT NULL
+	,contents varchar2(2000) NOT NULL
+	,mem_id varchar2(100) NOT NULL
+	,FileName varchar2(200) 
+	,comment_num NUMBER DEFAULT 0
+	,like_num NUMBER DEFAULT 0
+	,regidate DATE DEFAULT sysdate NOT NULL
+	,score NUMBER DEFAULT 0
+	,CONSTRAINT alto_club_notice_fk FOREIGN KEY (club_code) REFERENCES alto_club (club_code)
+	,CONSTRAINT alto_club_notice_member_fk FOREIGN KEY (mem_id) REFERENCES alto_member(mem_id)
+);
+
+-- 다중 파일 업로드
+DROP TABLE alto_File CASCADE CONSTRAINTS;
+
+CREATE TABLE alto_File(
+	FileNO number(10) PRIMARY KEY
+	,FileName varchar2(50)
+	,regDate DATE DEFAULT sysdate 
+	,notice_num  number(10) 
+	,CONSTRAINT FK_notice_num FOREIGN key(notice_num) REFERENCES alto_club_notice (notice_num) ON DELETE CASCADE
+);
+
+-- 일련번호형 시퀀스(Sequence) 객체 생성
+-- 순차적으로 증가하는 순번을 반환하는 데이터베이스 객체임.
+DROP SEQUENCE seq_notice_num;
+CREATE SEQUENCE seq_notice_num
+INCREMENT BY 1					-- 1씩 증가
+START WITH 1					-- 시작값 1
+MINVALUE 1						-- 최소값 1
+nomaxvalue						-- 최대값은 무한대
+nocycle							-- 순환하지 않음
+nocache							-- 캐시 안 함
+;
+
+-- 사진첩
+DROP TABLE alto_club_album CASCADE CONSTRAINT;
+CREATE TABLE alto_club_album(
+	club_code CHAR(8) NOT NULL
+	,album_num NUMBER NOT NULL PRIMARY key
+	,title VARCHAR2(200) NOT NULL
+	,contents VARCHAR2(2000) NOT NULL
+	,mem_id VARCHAR2(100) NOT NULL
+	,imageFileName VARCHAR2(200) NOT NULL
+	,comment_num NUMBER DEFAULT 0
+	,like_num NUMBER DEFAULT 0
+	,regidate DATE DEFAULT sysdate NOT NULL
+	,score NUMBER DEFAULT 0
+	,CONSTRAINT alto_club_album_fk FOREIGN KEY (club_code)
+	REFERENCES alto_club(club_code)
+	,CONSTRAINT alto_club_album_member_fk FOREIGN KEY (mem_id)
+	REFERENCES alto_member(mem_id)
+); 
+
+-- 일련번호형 시퀀스(Sequence) 객체 생성
+-- 순차적으로 증가하는 순번을 반환하는 데이터베이스 객체임.
+DROP SEQUENCE seq_album_num;
+CREATE SEQUENCE seq_album_num
+INCREMENT BY 1					-- 1씩 증가
+START WITH 1					-- 시작값 1
+MINVALUE 1						-- 최소값 1
+nomaxvalue						-- 최대값은 무한대
+nocycle							-- 순환하지 않음
+nocache							-- 캐시 안 함
+;
+
+-- 다중 파일 업로드
+DROP TABLE alto_imageFile CASCADE CONSTRAINTS;
+
+CREATE TABLE alto_imageFile(
+	imageFileNO number(10) PRIMARY KEY
+	,imageFileName varchar2(50)
+	,regDate DATE DEFAULT sysdate 
+	,album_num  number(10) 
+);
+
+ALTER TABLE alto_imageFile ADD CONSTRAINT FK_album_num  
+FOREIGN key(album_num) REFERENCES alto_club_album (album_num) ON DELETE CASCADE;
 
