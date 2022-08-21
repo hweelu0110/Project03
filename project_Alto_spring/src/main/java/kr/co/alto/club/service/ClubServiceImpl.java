@@ -17,6 +17,7 @@ import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
 import kr.co.alto.mypage.dto.likeDTO;
 
@@ -85,12 +86,16 @@ public class ClubServiceImpl implements ClubService {
 		
 		List<HobbyDTO> myHobbyList = mypageDAO.selectHobbyList(mem_id);
 		List<AreaDTO> myAreaList = mypageDAO.selectMyAreaList(mem_id);
+		List<HobbyDTO> mySubHobbyList = hobbyDAO.selectMyHobbysubList(mem_id);
+		List<HobbysubDTO> mySubHobbyAllList = hobbyDAO.selectMyHobbysubAllList(mem_id);
 		
 		
 		clubSearchMap.put("allHobbyList", allHobbyList);
 		clubSearchMap.put("allAreaList", allAreaList);
 		clubSearchMap.put("myHobbyList", myHobbyList);
 		clubSearchMap.put("myAreaList", myAreaList);
+		clubSearchMap.put("mySubHobbyList", mySubHobbyList);
+		clubSearchMap.put("mySubHobbyAllList", mySubHobbyAllList);
 		
 		return clubSearchMap;
 		
