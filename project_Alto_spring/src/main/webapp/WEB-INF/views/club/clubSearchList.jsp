@@ -8,6 +8,8 @@
 <c:set var="allHobbyList" value="${clubSearchMap.allHobbyList}" />
 <c:set var="allAreaList" value="${clubSearchMap.allAreaList}" />
 <c:set var="myHobbyList" value="${clubSearchMap.myHobbyList}" />
+<c:set var="mySubHobbyList" value="${clubSearchMap.mySubHobbyList}" />
+<c:set var="mySubAllList" value="${clubSearchMap.mySubHobbyAllList}"/>
 <c:set var="myAreaList" value="${clubSearchMap.myAreaList}" />
 <c:set var="hobClubList" value="${clubSearchMap.hobClubList}" />
 <!DOCTYPE html>
@@ -126,6 +128,26 @@
 			<div id="s_cate">
 				<ul>
 					<li class="all select">전체</li>
+					<c:forEach var="suball" items="${mySubAllList}">
+						<c:forEach var="mysub" items="${mySubHobbyList}">
+							<c:if test="${suball.SUB_CODE eq mysub.hobby_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<li class="${suball.MAIN_CODE} select">
+									${suball.SUB_NAME}
+								</li>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<li class="${suball.MAIN_CODE}">
+									${suball.SUB_NAME}
+								</li>
+							</c:otherwise>
+						</c:choose>												
+					</c:forEach>
 				</ul>
 			</div>
 			<div id="area_list">

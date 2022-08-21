@@ -19,10 +19,12 @@ public interface HobbyDAO {
 
 	public List<HobbyDTO> selectMyHobbyList(String mem_id) throws DataAccessException;
 	public List<HobbyDTO> selectMyHobbysubList(String mem_id) throws DataAccessException;
+	public List<HobbysubDTO> selectMyHobbysubAllList(String mem_id) throws DataAccessException;
 
 	public void delMemHobby(String mem_id) throws DataAccessException;
 	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException;
 	
 	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException;
+	
 	
 }
