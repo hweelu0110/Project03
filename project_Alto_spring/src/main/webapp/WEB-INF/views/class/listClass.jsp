@@ -7,9 +7,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<link rel="stylesheet" href="${contextPath }/resources/css/list.css" /> 	
-	<link rel="stylesheet" href="${contextPath }/resources/css/club.css" /> 
-	<link href="${contextPath }/resources/css/class_main_sl.css?after_new" rel="stylesheet" />
+	<link rel="stylesheet" href="${contextPath }/resources/css/class/list.css" /> 	
+	<link rel="stylesheet" href="${contextPath }/resources/css/class/club.css" /> 
+	<link href="${contextPath }/resources/css/class/class_main_sl.css" rel="stylesheet" />
 	<script src="${contextPath }/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
