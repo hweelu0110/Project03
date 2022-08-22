@@ -51,6 +51,7 @@ h6 {
 
 h1,h2,h3,h4,h5,h6 { font-weight: 700; font-size: 1.5em; }
 a:hover { color: #F3BE34; }
+a.pointBtn:hover { color: #000; }
 
 li { list-style: none; }
 
@@ -85,6 +86,7 @@ button {
 	font-weight: bold;
 	background: #F3BE34;
     border-radius: 3px;
+    cursor: pointer; 
 }
 .basicBtn {
 	padding: 8px 15px;
@@ -92,6 +94,7 @@ button {
     font-weight: bold;
     background: #e4e4e4;
     border-radius: 3px;
+    cursor: pointer;
 }
 .basicBtn02 {
 	padding: 8px 15px;
@@ -99,6 +102,7 @@ button {
     font-weight: bold;
     background: #494C57;
     border-radius: 3px;
+    cursor: pointer;
 }
 button.size0 { width: 100%; }
 

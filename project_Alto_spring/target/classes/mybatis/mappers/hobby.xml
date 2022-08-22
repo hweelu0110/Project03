@@ -22,6 +22,7 @@
 		]]>
 	</select>
 	
+	<!-- 내 취미 수정 시 선택 취미 소분류 목록가져오기 -->
 	<select id="selectHobbysubList" parameterType="java.util.HashMap" resultMap="hobbysubResult">	
 		<![CDATA[
 			SELECT A.HOBBY_CODE main_code, B.NAME main_name, HOBBY_SUB_CODE sub_code, A.NAME sub_name 
@@ -58,6 +59,20 @@
 			FROM ALTO_M_HOBBY A, ALTO_HOBBY_SUB B 
 			WHERE A.HOBBY_SUB_CODE = B.HOBBY_SUB_CODE 
 			AND MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<!-- 내취미 소분류(전체)목록 불러오기 -->
+	<select id="memSubHobbyAllList" parameterType="String"  resultMap="hobbysubResult">
+		<![CDATA[
+			SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name 
+			FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B
+			WHERE A.HOBBY_CODE IN (
+									SELECT DISTINCT HOBBY_CODE hobby_code
+									FROM ALTO_M_HOBBY 
+									WHERE MEM_ID = #{mem_id}
+								)
+			AND A.HOBBY_CODE = B.HOBBY_CODE 
 		]]>
 	</select>
 	
