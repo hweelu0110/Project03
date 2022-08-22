@@ -234,7 +234,8 @@
 		    </script>
 		</div>
 		
-		<div id="sec_member">
+		<c:if test="${not empty login}">
+			<div id="sec_member">
 			<h2>추천 모임</h2>
 			<div class="swiper mySwiper4">
 		      <div class="swiper-wrapper club">
@@ -472,6 +473,8 @@
 			    </script>			
 			</div>				
 		</div>
+		</c:if>
+		
 		
 		<div id="sec_02">
 			<h2>BEST 모임</h2>
