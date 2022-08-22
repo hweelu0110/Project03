@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../resources/css/list.css" />
-<link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
+<link href="${contextPath}/resources/css/class_main_style.css?after" rel="stylesheet" />
 <title>ALTO - 클래스 메인</title>
 <script type="text/javascript">
 		

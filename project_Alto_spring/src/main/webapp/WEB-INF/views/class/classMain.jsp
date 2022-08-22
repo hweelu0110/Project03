@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../resources/css/list.css" />
-<link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
+<link rel="stylesheet" href="${contextPath }/resources/css/list.css" />
+<link href="${contextPath }/resources/css/class_main_style.css?after" rel="stylesheet" />
 <title>ALTO - 클래스 메인</title>
 <script type="text/javascript">
 		
@@ -20,37 +20,37 @@
 			<table id="class_cate_Se">
 				<tr>　　</tr>
 				<tr align="center">
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000001"><img alt="창작" src="../resources/img/hobby_img/hm000001.png"><br>창작</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000001"><img alt="창작" src="${contextPath }/resources/img/hobby_img/hm000001.png"><br>창작</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000002"><img alt="액티비티" src="../resources/img/hobby_img/hm000002.png"><br>액티비티</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000002"><img alt="액티비티" src="${contextPath }/resources/img/hobby_img/hm000002.png"><br>액티비티</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000003"><img alt="아웃도어" src="../resources/img/hobby_img/hm000003.png"><br>아웃도어</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000003"><img alt="아웃도어" src="${contextPath }/resources/img/hobby_img/hm000003.png"><br>아웃도어</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000004"><img alt="요리" src="../resources/img/hobby_img/hm000004.png"><br>요리</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000004"><img alt="요리" src="${contextPath }/resources/img/hobby_img/hm000004.png"><br>요리</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000005"><img alt="게임" src="../resources/img/hobby_img/hm000005.png"><br>게임</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000005"><img alt="게임" src="${contextPath }/resources/img/hobby_img/hm000005.png"><br>게임</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000006"><img alt="음악" src="../resources/img/hobby_img/hm000006.png"><br>음악</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000006"><img alt="음악" src="${contextPath }/resources/img/hobby_img/hm000006.png"><br>음악</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000007"><img alt="문화" src="../resources/img/hobby_img/hm000007.png"><br>문화</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000007"><img alt="문화" src="${contextPath }/resources/img/hobby_img/hm000007.png"><br>문화</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000008"><img alt="여행" src="../resources/img/hobby_img/hm000008.png"><br>여행</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000008"><img alt="여행" src="${contextPath }/resources/img/hobby_img/hm000008.png"><br>여행</a>
 					</td>
 				</tr>
 				<tr align="center">
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000009"><img alt="봉사" src="../resources/img/hobby_img/hm000009.png"><br>봉사</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000009"><img alt="봉사" src="${contextPath }/resources/img/hobby_img/hm000009.png"><br>봉사</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000010"><img alt="사진/영상" src="../resources/img/hobby_img/hm000010.png"><br>사진/영상</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000010"><img alt="사진/영상" src="${contextPath }/resources/img/hobby_img/hm000010.png"><br>사진/영상</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000011"><img alt="직무/커리어" src="../resources/img/hobby_img/hm000011.png"><br>직무/커리어</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000011"><img alt="직무/커리어" src="${contextPath }/resources/img/hobby_img/hm000011.png"><br>직무/커리어</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000012"><img alt="차오토바이" src="../resources/img/hobby_img/hm000012.png"><br>차/오토바이</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000012"><img alt="차오토바이" src="${contextPath }/resources/img/hobby_img/hm000012.png"><br>차/오토바이</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000013"><img alt="반려동물" src="../resources/img/hobby_img/hm000013.png"><br>반려동물</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000013"><img alt="반려동물" src="${contextPath }/resources/img/hobby_img/hm000013.png"><br>반려동물</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000014"><img alt="수집" src="../resources/img/hobby_img/hm000014.png"><br>수집</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000014"><img alt="수집" src="${contextPath }/resources/img/hobby_img/hm000014.png"><br>수집</a>
 					</td>
-					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000015"><img alt="자유주제" src="../resources/img/hobby_img/hm000015.png"><br>자유주제</a>
+					<td><a href="${contextPath }/class/listClass.do?hobbyC=hm000015"><img alt="자유주제" src="${contextPath }/resources/img/hobby_img/hm000015.png"><br>자유주제</a>
 					</td>
 				</tr>
 				<tr>

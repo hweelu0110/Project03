@@ -9,8 +9,8 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<link rel="stylesheet" href="../resources/css/list.css" /> 	
 	<link rel="stylesheet" href="../resources/css/club.css" /> 
-	<link href="../resources/css/class_main_sl.css?after_new" rel="stylesheet" />
-	<script src="../resources/js/search_tabmenu.js"></script>
+	<link href="${contextPath}/resources/css/class_main_sl.css?after_new" rel="stylesheet" />
+	<script src="${contextPath}/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			/* 클럽개설 버튼 팝업 */

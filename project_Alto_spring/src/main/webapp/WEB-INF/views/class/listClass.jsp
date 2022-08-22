@@ -7,10 +7,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<link rel="stylesheet" href="../resources/css/list.css" /> 	
-	<link rel="stylesheet" href="../resources/css/club.css" /> 
-	<link href="../resources/css/class_main_sl.css?after_new" rel="stylesheet" />
-	<script src="../resources/js/search_tabmenu.js"></script>
+	<link rel="stylesheet" href="${contextPath }/resources/css/list.css" /> 	
+	<link rel="stylesheet" href="${contextPath }/resources/css/club.css" /> 
+	<link href="${contextPath }/resources/css/class_main_sl.css?after_new" rel="stylesheet" />
+	<script src="${contextPath }/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			/* 클럽개설 버튼 팝업 */
@@ -85,7 +85,7 @@
 					<li id="m_cate_all" class="all select">전체</li>
 					<c:forEach items="${hobbyList }" var="hobby">
 						<li>
-							<img src="../resources/img/hobby_img/${hobby.hobby_code }.png" />
+							<img src="${contextPath }/resources/img/hobby_img/${hobby.hobby_code }.png" />
 							<p class="hobby_name">${hobby.name }</p>
 						</li>
 					</c:forEach>
@@ -143,7 +143,7 @@
 								<li>
 									<img class="class_products_img" src="${contextPath}/download.do?imgName=${classList.imgName}&class_code=${classList.class_code}">
 									<span class="area">${classList.area_name }</span>
-									<span class="hobby_icon"><img src="../resources/img/hobby_img/${classList.hobby_code }.png" /></span>
+									<span class="hobby_icon"><img src="${contextPath }/resources/img/hobby_img/${classList.hobby_code }.png" /></span>
 									<p class="club_name">${classList.className }</p>
 									<span class="memNum" style="font-size: 11px">${classList.member_max }  명</span>
 									<p class="club_schedule">
