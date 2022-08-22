@@ -233,11 +233,13 @@
 			<h2>인기취미 모임</h2>
 			<ul>
 				<c:forEach var="top" items="${topHobby}" varStatus="sts">
-					<li>
-						<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
-						<span class="rank_info">${sts.count}</span>
-						<p class="hobby_name">${top.NAME}</p>
-					</li>
+					<c:if test="${sts.count < 4}">
+						<li>
+							<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
+							<span class="rank_info">${sts.count}</span>
+							<p class="hobby_name">${top.NAME}</p>
+						</li>
+					</c:if>					
 				</c:forEach>
 			</ul>
 			

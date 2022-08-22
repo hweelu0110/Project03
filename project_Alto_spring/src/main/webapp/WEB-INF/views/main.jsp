@@ -7,6 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <c:set var="hobbyList" value="${memInfoMap.hobbyList}" />
 <c:set var="areaList" value="${memInfoMap.areaList}" />
+<c:set var="topHobby" value="${mainListMap.topHobby}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -116,105 +117,24 @@
 	<section>				
 		<div id="sec_01">
 			<h2>지금 가장 '핫'한 취미</h2>
-			
 			<div class="swiper mySwiper">
 		      <div class="swiper-wrapper">
-	        	<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_001.png" />
-						<span class="rank_info">1</span>
-						<span class="hobby_name">창작</span>
-					</a>
-				</div>
-		        <div class="swiper-slide">
-		        	<a href="">
-						<img src="resources/img/hobby_img/h_002.png" />
-						<span class="rank_info">2</span>
-						<span class="hobby_name">액티비티</span>
-					</a>
-		        </div>
-		        <div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_003.png" />
-						<span class="rank_info">3</span>
-						<span class="hobby_name">아웃도어</span>
-					</a>
-				</div>
-		        <div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_004.png" />
-						<span class="rank_info">4</span>
-						<span class="hobby_name">사진/영상</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_005.png" />
-						<span class="rank_info">5</span>
-						<span class="hobby_name">음악</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_006.png" />
-						<span class="hobby_name">게임</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_007.png" />
-						<span class="hobby_name">여행</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_008.png" />
-						<span class="hobby_name">요리</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_009.png" />
-						<span class="hobby_name">문화</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_010.png" />
-						<span class="hobby_name">봉사</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_011.png" />
-						<span class="hobby_name">직무/커리어</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_012.png" />
-						<span class="hobby_name">수집</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_013.png" />
-						<span class="hobby_name">반려동물</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_014.png" />
-						<span class="hobby_name">차/오토바이</span>
-					</a>
-				</div>
-				<div class="swiper-slide">
-					<a href="">
-						<img src="resources/img/hobby_img/h_015.png" />
-						<span class="hobby_name">자유주제</span>
-					</a>
-				</div>
+		      
+		      	<c:forEach var="top" items="${topHobby}" varStatus="sts">
+		      		<div class="swiper-slide">
+						<a href="${path}/club/clubSearchList.do?hobby_code=${top.CATE_M}">
+							<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
+							<c:if test="${sts.count < 6}">
+								<span class="rank_info">${sts.count}</span>
+							</c:if>
+							
+							<span class="hobby_name">${top.NAME}</span>
+						</a>
+					</div>
+		      	</c:forEach>
+	        	
 		      </div>
+		      
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
 	    	</div>
@@ -234,6 +154,7 @@
 		    </script>
 		</div>
 		
+		<!-- 회원인 경우에만 노출 -->
 		<c:if test="${not empty login}">
 			<div id="sec_member">
 			<h2>추천 모임</h2>

@@ -104,15 +104,18 @@
 	
 	<!-- 인기취미 순위 -->
 	<select id="topHobby" resultType="hashmap">
-		SELECT CATE_M, B.name
+		SELECT CATE_M, name
 		FROM (
-			SELECT CATE_M, COUNT(CATE_M) AS num
-			FROM ALTO_CLUB
-			GROUP BY CATE_M 
-			ORDER BY num DESC 
-		) A, alto_hobby B
-		WHERE A.cate_M = B.hobby_code 
-		AND rowNum BETWEEN 1 AND 3
+			SELECT a.hobby_code CATE_M, num, B.name
+			FROM (
+				SELECT HOBBY_CODE, COUNT(B.HOBBY_CODE) AS num  
+				FROM ALTO_CLUB A RIGHT JOIN ALTO_HOBBY B 
+				ON A.CATE_M = B.HOBBY_CODE 
+				GROUP BY B.HOBBY_CODE 
+			) A, alto_hobby B
+			WHERE A.HOBBY_CODE = B.hobby_code
+			ORDER BY num DESC, a.hobby_code
+		)
 	</select>
 	
 	<select id="topHobbyList" parameterType="String" resultType="clubListDTO">
