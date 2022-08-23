@@ -67,7 +67,7 @@ public class ClassControllerImpl implements ClassController {
 		List<ClassDTO> classListBest = classService.listClass(listMapBest);
 		
 		Map listMapNew = new HashMap<>();
-		listMapBest.put("sort", "new");
+		listMapNew.put("sort", "new");
 		List<ClassDTO> classListNew = classService.listClass(listMapNew);
 		
 		ModelAndView mav = new ModelAndView(viewName);

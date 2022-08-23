@@ -67,7 +67,7 @@ public class ItemControllerImpl implements ItemController {
 		List<ItemDTO> itemListBest = itemService.listItem(listMapBest);
 		
 		Map listMapNew = new HashMap<>();
-		listMapBest.put("sort", "new");
+		listMapNew.put("sort", "new");
 		List<ItemDTO> itemListNew = itemService.listItem(listMapNew);
 		
 		ModelAndView mav = new ModelAndView(viewName);
