@@ -107,6 +107,7 @@
 	    <mvc:mapping path="/*/*/*.do"/>
 	    <exclude-mapping path="/resources/**"/>
 	    <exclude-mapping path="/member/**"/>
+	    <exclude-mapping path="/download.do"/>
 	    <beans:ref bean="uRlInterceptor"/>
 	  </mvc:interceptor>
 	</mvc:interceptors>
