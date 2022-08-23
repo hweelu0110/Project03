@@ -1,18 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../layout/headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/clubInformation.css" /> 
+	<link rel="stylesheet" href="${path}/resources/css/club/clubInformation.css" />		
+	<script type="text/javascript">
+	function fn_articleForm(login,articleForm,loginFrm) {
+		if (login != '' && login != 'false') {
+			location.href = articleForm
+		}
+		else {
+			alert("로그인 후 글쓰기가 가능합니다.")
+			location.href=loginFrm+'?action=/club_board/articleForm.do';
+		}
+	}
+	</script>
 </head>
 <body>
-
-	<%@include file="../layout/header.jsp" %>
-	<%@include file="../layout/clubheader.jsp" %>
-	
 	<section>
 		<div>
 			<div class="left">
@@ -57,7 +71,8 @@
 				</div>
 				
 				<input class="schedulebtn" type="button" value="일정 추가하기" onclick="location.href='Schedule.jsp'" /><br/>
-				<input class="joinbtn" type="button" value="가입하기" onclick="location.href='clubJoin.jsp'" />
+				<a href="javascript:fn_articleForm('${login}', '${path}/club/clubjoin.do',
+													'${path}/member/loginFrm.do')" ><input class="joinbtn" type="button" value="가입하기"/></a>
 				
 			</div>
 			
@@ -82,6 +97,5 @@
 			
 	</section>
 	
-	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

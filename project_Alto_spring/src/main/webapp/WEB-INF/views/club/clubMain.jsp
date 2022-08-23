@@ -20,14 +20,15 @@
 	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />
 	<link rel="stylesheet" href="${path}/resources/css/club/clubMain.css" /> 
 	<script type="text/javascript">
-		$(function () {
+		$(function () {		
+			
+			/* 좋아요 처리 */
 			$(".like_icon").click(function() {
 				let selectItem = $(this)
 				let codeNum, codeType
 				let mem_id = '${login.mem_id}'
 				
 				if ('${login}' != ''){
-					alert(mem_id)
 					if ($(this).siblings('#club_code').val() != null) {
 						codeNum = $(this).siblings('#club_code').val()
 						codeType = 'club_code'
@@ -80,6 +81,7 @@
 				}					
 			})
 			
+			// 인기취미모임 
 			$("#pop_list .swiper.list1").css("display","none")
 			$("#pop_list .swiper.list2").css("display","none")
 			$("#pop_hobby ul li").css("cursor","pointer")
