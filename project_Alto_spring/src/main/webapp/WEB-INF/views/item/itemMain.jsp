@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../resources/css/list.css" />
-<link href="../resources/css/class_main_style.css?after" rel="stylesheet" />
+<link rel="stylesheet" href="${contextPath}/resources/css/class/list.css" />
+<link href="${contextPath}/resources/css/class/class_main_style.css?after" rel="stylesheet" />
 <title>ALTO - 클래스 메인</title>
 <script type="text/javascript">
 		
@@ -74,10 +74,9 @@
 						</div>
 				    </c:forEach>
 					</div>
-			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
-			    </div>
+				</div>
 			</div>
 			
 			<div id="sec_04">
@@ -97,8 +96,9 @@
 				    </c:forEach>
 			      </div>
 			      <div class="swiper-button-next"></div>
-			      <div class="swiper-button-prev"></div>
-			    </div>
+			  	  <div class="swiper-button-prev"></div>
+			 </div>
+			    
 			    <!-- Initialize Swiper -->
 			    <script>
 			      var swiper = new Swiper(".mySwiper4", {
@@ -113,7 +113,7 @@
 			        },
 			      });
 			    </script>
-			</div>	
+			    </div>
 
 	</section>
 </body>

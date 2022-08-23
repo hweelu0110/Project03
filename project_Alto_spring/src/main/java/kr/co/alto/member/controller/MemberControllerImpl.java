@@ -129,6 +129,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		}
 		
 		model.addAttribute("member",memberDTO);
+		httpSession.setAttribute("mem_name_s", memberDTO.getMem_name());
 		
 		if (loginDTO.isUseCookie()) {
 			int amount = 60*60*24*7;
@@ -153,6 +154,7 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 		if(obj != null) {
 			memberDTO = (MemberDTO) obj;
 			session.removeAttribute("login");
+			session.removeAttribute("mem_name_s");
 			session.invalidate();
 			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
 			if(loginCookie != null) {

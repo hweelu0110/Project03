@@ -16,6 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.club.dao.ClubDAO;
 import kr.co.alto.club.dto.ClubListDTO;
+import kr.co.alto.cla.dto.ClassDTO;
+import kr.co.alto.cla.service.ClassService;
+import kr.co.alto.item.dto.ItemDTO;
+import kr.co.alto.item.service.ItemService;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
 import kr.co.alto.mypage.dto.likeDTO;
@@ -30,7 +34,11 @@ public class MainController {
 	private ClubDAO clubDAO;
 	@Autowired
 	private MypageDAO mypageDAO;
-
+	
+	@Autowired
+	private ClassService classService;	
+	@Autowired
+	private ItemService itemService;
 	
 	@RequestMapping(value = "/main.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView altoMain(HttpServletRequest request, HttpSession httpSession, HttpServletResponse response) throws Exception {
@@ -58,6 +66,29 @@ public class MainController {
 		mainListMap.put("newClubList", newClubList);
 		
 		mav.addObject("mainListMap", mainListMap);		
+		
+		Map listMapClassBest = new HashMap<>();
+		listMapClassBest.put("sort", "stuU");
+		List<ClassDTO> classListBest = classService.listClass(listMapClassBest);
+		
+		Map listMapClassNew = new HashMap<>();
+		listMapClassNew.put("sort", "new");
+		List<ClassDTO> classListNew = classService.listClass(listMapClassNew);
+		
+		mav.addObject("classListBest", classListBest);
+		mav.addObject("classListNew", classListNew);
+		
+		Map listMapItemBest = new HashMap<>();
+		listMapItemBest.put("sort", "quantityS");
+		List<ItemDTO> itemListBest = itemService.listItem(listMapItemBest);
+		
+		Map listMapItemNew = new HashMap<>();
+		listMapItemNew.put("sort", "new");
+		List<ItemDTO> itemListNew = itemService.listItem(listMapItemNew);
+		
+		mav.addObject("itemListBest", itemListBest);
+		mav.addObject("itemListNew", itemListNew);
+	
 		mav.setViewName("main");
 		
 		return mav;
