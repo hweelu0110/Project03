@@ -91,7 +91,9 @@
 	<beans:bean id="authInterceptor" class="kr.co.alto.common.interceptor.AuthInterceptor"/>
 	<mvc:interceptors>
 		<mvc:interceptor>		
-			<mvc:mapping path="/mypage/**" />		
+			<mvc:mapping path="/mypage/**" />
+			<mvc:mapping path="/class/classform.do" />
+			<mvc:mapping path="/item/itemform.do" />				
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>	
 	</mvc:interceptors>
