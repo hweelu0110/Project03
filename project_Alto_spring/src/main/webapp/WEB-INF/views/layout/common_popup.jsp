@@ -22,7 +22,7 @@
 	<!-- 관심목록 알림 팝업 -->
 	<div id="like_popup" class="popup_div">
 		<p></p>
-		<button type="button" class="pointBtn" onclick="location.href='${path}/mypage/likeList.do'">관심목록 보기</button>
+		<button type="button" class="pointBtn" onclick="location.href='${path}/mypage/mylikeList.do'">관심목록 보기</button>
 		<button type="button" class="basicBtn closeBtn">닫기</button>
 	</div>
 	

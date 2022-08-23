@@ -5,8 +5,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="../layout/headinfo.jsp" %>
-	<link rel="stylesheet" href="../resources/css/schedule.css" />
+	<link rel="stylesheet" href="${contextPath}/resources/club/schedule.css" />
+
 	<script type="text/javascript">
 		function validateForm() {
 			if($("#title2").val() == ""){
@@ -24,8 +24,6 @@
 
 </head>
 <body>
-<%@include file="../layout/header.jsp" %>
-<%@include file="../layout/clubheader.jsp" %>
 	<section>
 	<h2>모임 가입</h2>
 	<form method="post"  onsubmit="return validateForm()">
@@ -67,6 +65,6 @@
 		
 	</form>
 	</section>
-<%@include file="../layout/footer.jsp" %>
+
 </body>
 </html>

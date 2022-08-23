@@ -20,14 +20,15 @@
 	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />
 	<link rel="stylesheet" href="${path}/resources/css/club/clubMain.css" /> 
 	<script type="text/javascript">
-		$(function () {
+		$(function () {		
+			
+			/* 좋아요 처리 */
 			$(".like_icon").click(function() {
 				let selectItem = $(this)
 				let codeNum, codeType
 				let mem_id = '${login.mem_id}'
 				
 				if ('${login}' != ''){
-					alert(mem_id)
 					if ($(this).siblings('#club_code').val() != null) {
 						codeNum = $(this).siblings('#club_code').val()
 						codeType = 'club_code'
@@ -80,6 +81,7 @@
 				}					
 			})
 			
+			// 인기취미모임 
 			$("#pop_list .swiper.list1").css("display","none")
 			$("#pop_list .swiper.list2").css("display","none")
 			$("#pop_hobby ul li").css("cursor","pointer")
@@ -233,11 +235,13 @@
 			<h2>인기취미 모임</h2>
 			<ul>
 				<c:forEach var="top" items="${topHobby}" varStatus="sts">
-					<li>
-						<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
-						<span class="rank_info">${sts.count}</span>
-						<p class="hobby_name">${top.NAME}</p>
-					</li>
+					<c:if test="${sts.count < 4}">
+						<li>
+							<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
+							<span class="rank_info">${sts.count}</span>
+							<p class="hobby_name">${top.NAME}</p>
+						</li>
+					</c:if>					
 				</c:forEach>
 			</ul>
 			
