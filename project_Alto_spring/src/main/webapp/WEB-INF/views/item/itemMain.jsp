@@ -74,10 +74,9 @@
 						</div>
 				    </c:forEach>
 					</div>
-			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
-			    </div>
+				</div>
 			</div>
 			
 			<div id="sec_04">
@@ -97,8 +96,9 @@
 				    </c:forEach>
 			      </div>
 			      <div class="swiper-button-next"></div>
-			      <div class="swiper-button-prev"></div>
-			    </div>
+			  	  <div class="swiper-button-prev"></div>
+			 </div>
+			    
 			    <!-- Initialize Swiper -->
 			    <script>
 			      var swiper = new Swiper(".mySwiper4", {
@@ -113,7 +113,7 @@
 			        },
 			      });
 			    </script>
-			</div>	
+			    </div>
 
 	</section>
 </body>
