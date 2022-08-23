@@ -19,7 +19,7 @@
 .clubcontent3 .edit {
 	width: 15px;
 	height: 15px;
-	margin-left: 480px;
+	margin-left: 460px;
 	position: absolute;
 	float: right;
 	cursor: pointer;
@@ -58,11 +58,12 @@
     width: 14px;
     height: 13px;
     text-indent: -99999px;
-    background-image: url(../img/alto_common_icon.png);
+    background-image: url(../../img/alto_common_icon.png);
     background-size: 85px;
     background-position: -22px 0px;
     cursor: pointer;
 }
+
 
 .hobby_icon {
 	float: left;
@@ -70,14 +71,14 @@
 }
 
 .clubcontent5 {background-color: #F3BE34; width: 50px; height: 50px; float: left; margin-top: 10px; margin-left: 5px;}
-.clubcontent6 {background-color: #EAEAEA; width: 300px; height: 50px;float: right; margin-top: 10px; margin-right: 330px;}
+.clubcontent6 {background-color: #EAEAEA; width: 300px; height: 50px;float: right; margin-top: 10px; margin-right: 600px;}
 .clubcontent6 .gps {width: 20px; height: 20px; margin-top:3px; margin-left: 20px;}
 .clubcontent6 .span1 {margin-left: 10px; text-align: left;}
 .clubcontent6 .span2 {margin-left: 10px;}
 .edit {width: 15px; height: 15px; cursor: pointer; margin-left: 70px; margin-bottom: 10px; }
 .member ul li img { width: 40px; vertical-align: middle; }
 .member ul li {display: inline;}
-.member{margin-top: 10px;}
+.member{margin-top: 70px;}
 .member .plus { width: 25px; margin-left: 5px;}
 .schedulebtn {width: 365px; height: 40px; border-radius: 4px; margin-top: 10px; margin-left: 5px; background-color: #EAEAEA; }
 .joinbtn {width: 600px; height: 40px; border-radius: 4px; background-color: #F3BE34; margin-bottom: 70px; margin-top: 20px; margin-left: 5px;  }
