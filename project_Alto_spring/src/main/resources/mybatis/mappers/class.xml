@@ -86,12 +86,11 @@
 	</select>
 
 	<!-- 새글 쓰기 -->
-	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/24) -->
 	<insert id="insertNewClass"  parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO EZEN.ALTO_CLASS
 			(CLASS_CODE, className, HOBBY_CODE, HOBBY_SUB_CODE, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, PRICE, IMGNAME, INTRO, REGIDATE, STARTDATE, ENDDATE, CURRICULUM, TEACHERINFO)
-			VALUES(#{class_code}, #{className}, #{cate_m}, #{cate_s}, #{area_code}, 'test', '0' , #{member_max}, #{price}, #{isfile1}, #{intro}, sysdate , #{startdate}, #{enddate}, #{curriculum}, #{teacherInfo})
+			VALUES(#{class_code}, #{className}, #{cate_m}, #{cate_s}, #{area_code}, #{manager}, '0' , #{member_max}, #{price}, #{isfile1}, #{intro}, sysdate , #{startdate}, #{enddate}, #{curriculum}, #{teacherInfo})
 		]]>      
 	</insert>
 
