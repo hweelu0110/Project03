@@ -13,25 +13,25 @@
 	let areaEle = $("#area_list li.select")
 	let selCate = $("#m_cate li.select").length
 	let selArea = $("#area_list li.select").length
-	
+		
 	for (let i=0; i<selCate; i++) {
-		if ($("#tab_menu li:nth-child(1) span").text("전체 취미") || $("#tab_menu li:nth-child(1) span").text("")){
+		if ($("#tab_menu li:nth-child(1) span").text() == "전체 취미"){
 			$("#tab_menu li:nth-child(1)").html("")
 			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>")
+			
 		}else {
-			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).find("p").text().trim()+"</span>")
+			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).text()+"</span>")
 		}
-	}
+	}	
 	
 	for (let i=0; i<selArea; i++) {
-		if ($("#tab_menu li:nth-child(2) span").text() === "전체 지역"){
+		if ($("#tab_menu li:nth-child(2) span").text() == "전체 지역"){
 			$("#tab_menu li:nth-child(2)").html("")
 			$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(i).text()+"</span>")
 		}else {
 			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
 		}
-	}
-	
+	}	
 	
 	/* tab메뉴 선택 시 - 영역 노출하기 */
 	/* 취미 탭메뉴 */
@@ -114,8 +114,10 @@
 		}
 	})
 	
+			
+	
 	/* 서브카테고리 선택 */
-	$("#s_cate ul li").click(function() {
+	$(document).on("click","#s_cate ul li", function() {
 		$(this).toggleClass("select")
 		
 		if ($("#s_cate ul").find("li").hasClass('select')) {
@@ -185,7 +187,8 @@
 		$(this).siblings().removeClass("select")
 		$("#tab_menu li:nth-child(2)").html("<span>온라인</span>")
 					
-	})
+	})	
+	
 	
 	/* select 정렬선택 */
 	$("#selectBoxArea div").filter(":first").click(function() {

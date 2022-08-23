@@ -1,6 +1,5 @@
 @charset "UTF-8";
 section { padding: 30px 30px 70px; }
-#main_menu li:nth-child(1) { color: #00c7ae; }
 
 /* 선택 항목 표시 */
 .select { font-weight: bold; color: #00c7ae; }
@@ -21,14 +20,13 @@ section { padding: 30px 30px 70px; }
 
 #tab_area { 
 	position: absolute;
-	width: 713px;
+	width: 700px;
 	height: 245px;
     top: 66px; 
 	z-index: 2;
 	font-size: 11px;
 	overflow: hidden;	
 }
-#tab_area li { cursor: pointer; }
 
 #m_cate {
 	float: left;
@@ -41,7 +39,8 @@ section { padding: 30px 30px 70px; }
 	width: 60px;
 	margin-bottom: 5px;
 	text-align: center;
-	display: inline-block;	
+	display: inline-block;
+	cursor: pointer;
 }
 #m_cate ul li.all { 
 	position:absolute; 	
@@ -54,8 +53,8 @@ section { padding: 30px 30px 70px; }
 
 #s_cate {
 	padding: 10px;
-    width: 115px;
-    height: 240px;
+    width: 100px;
+    height: 245px;
     float: left;
     background-color: #F8F8F8; 
 	border: 1px solid #494c57; 
@@ -70,7 +69,7 @@ section { padding: 30px 30px 70px; }
 #area_list {
 	padding: 10px;
     width: 123px;
-    height: 240px;
+    height: 245px;
     float: left;
     background-color: #F8F8F8; 
 	border: 1px solid #494c57; 
@@ -78,12 +77,13 @@ section { padding: 30px 30px 70px; }
 	-ms-overflow-style: none;
 }
 #area_list::-webkit-scrollbar{ display: none; }
+#area_list li { cursor: pointer; }
 #area_list li.online { margin-bottom: 10px; }
 
 
 #opSearch_btn {
 	position: absolute;
-	top: 207px;
+	top: 211px;
 	padding: 7px;
 	margin-left: 10px;
 	background: #f3be34;
@@ -93,7 +93,52 @@ section { padding: 30px 30px 70px; }
 }
 
 #search_result { margin-top: 40px; margin-bottom: 80px; }
-#search_result div.normalList { padding-left: 50px; }
+#search_result div.searchList { padding-left: 50px; }
+#search_result ul li { 
+	position: relative;
+	width: 250px; 
+	margin-bottom: 30px; 
+	margin-right: 30px;
+	text-align: left;
+	display: inline-block;
+}
+#search_result ul li .area {
+	position: absolute;
+    top: 5px;
+    left: 5px;    
+    padding: 3px;
+    font-size: 10px;
+    font-weight: 700;
+    background: #fff;
+    color: #00c7ae;
+}
+#search_result ul li .hobby_icon {
+	float: left;
+    width: 25px;
+}
+#search_result ul li .club_name {
+	width: 220px;
+    height: 35px;
+    margin-left: 30px;
+    font-size: 13px;
+    font-weight: 700;
+}
+#search_result ul li .memNum {
+	margin-left: 30px;
+    font-size: 12px;
+}
+#search_result ul li .like_icon {
+	position: absolute;
+	top: 3px;
+    right: 3px;
+    width: 14px;
+    height: 13px;
+    text-indent: -99999px;
+    background-image: url(../img/alto_common_icon.png);
+    background-size: 85px;
+    background-position: -22px 0px;
+    cursor: pointer;
+}
 
 /* 모임 개설하기 버튼, 팝업 div */
 div.info_div {
@@ -150,7 +195,7 @@ div.info_div .p_color {
 	height: 16px;
 	background-size: 120px;
 	background-position: -12px 0px;
-	background-image: url(../../img/alto_common_icon.png);
+	background-image: url(../img/alto_common_icon.png);
 	text-indent: -9999px;
 }
 .clubPopup .prevBtn {
@@ -160,7 +205,7 @@ div.info_div .p_color {
 	background-size: 120px;
 	background-position: 3px 0px;
 	background-repeat: no-repeat;
-	background-image: url(../../img/alto_common_icon.png);
+	background-image: url(../img/alto_common_icon.png);
 	text-indent: -9999px;	
 }
 
@@ -174,7 +219,7 @@ div.info_div .p_color {
     background-size: 230px;
     background-position: -65px -62px;
     background-repeat: no-repeat;
-    background-image: url(../../img/alto_common_icon.png);
+    background-image: url(../img/alto_common_icon.png);
 }
 .clubPopup form span.icon_mem { background-position: -100px -62px; }
 .clubPopup form span.icon_hobby {
@@ -232,40 +277,17 @@ input.non_img {
 input.club_img {
 	height: 100px;
     margin-bottom: 10px;
-    background: url(../../img/club_test.png) 100% 100% no-repeat;
+    background: url(../img/club_test.png) 100% 100% no-repeat;
     text-indent: -9999px;
 }
 
 /* 주제 선택 */
-#cateChoice p {
-	display: block;
-    padding: 0;
-    width: auto;
-    text-align: center;
-    font-size: 12px;
-}
 #cateChoice ul li { 
 	display: inline-block;
 	margin: 0 12px 10px;
 	cursor: pointer;
 }
 #cateChoice ul li img { width: 80px; }
-
-/* 주요 활동 지역 */
-#step3 #areaList {
-	margin-top: 20px;
-    padding: 10px 0;
-}
-#step3 #areaList li { 
-	display: inline-block; 
-	padding: 5px;
-    width: 60px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 700;
-    cursor: pointer;
-}
-#step3 #areaList li.online { display: block; margin-left: 7px; }
 
 /* 모임 채팅 */
 #clubChat { margin: 0 auto; width: fit-content; overflow: hidden; }
@@ -382,30 +404,4 @@ input.club_img {
 	font-weight: bold;
 	color: #777;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

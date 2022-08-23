@@ -13,8 +13,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="../resources/css/class_main_style.css" rel="stylesheet" />
-	<link href="../resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link href="${contextPath }/resources/css/class/class_main_style.css" rel="stylesheet" />
+	<link href="${contextPath }/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<title>ALTO - 클래스 수정</title>
 	<script>
@@ -140,7 +140,7 @@
 				<tr>
 					<td width="10%"><b>개설자 *</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="manager" placeholder="개설자 아이디 자동반영" disabled />
+						<input type="text" name="manager" value="${mem_name_s }" disabled="disabled" />
 					</td>
 					<td width="10%"><b>참여금액</b></td>
 					<td colspan="2" width="40%">
