@@ -68,7 +68,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	}
 	
 	@Override
-	@RequestMapping(value = "/infoEditFrm.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/infoEditFrm.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView infoEditFrm(HttpServletRequest request, HttpSession httpSession) throws Exception {
 		logger.info("MemberInfo");
 		ModelAndView mav = new ModelAndView();
@@ -77,8 +77,8 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		
-		Map<String, Object> memInfo = mypageService.selectMemInfo(mem_id);
-		System.out.println("confrim !" + memInfo);
+		List<MemberDTO> memInfo = mypageService.selectMemInfo(mem_id);
+		
 		mav.addObject("memInfo", memInfo);
 		mav.setViewName(viewName);
 		
@@ -96,6 +96,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		ResponseEntity resEnt = null;
 		
 		try {
+			
 			
 			mypageService.modMemInfo(memberDTO);			
 			

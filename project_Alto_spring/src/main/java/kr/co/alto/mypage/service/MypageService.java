@@ -1,12 +1,13 @@
 package kr.co.alto.mypage.service;
 
+import java.util.List;
 import java.util.Map;
 
 import kr.co.alto.member.dto.MemberDTO;
 
 public interface MypageService {
 	
-	public Map<String, Object> selectMemInfo(String mem_id) throws Exception;
+	public List<MemberDTO> selectMemInfo(String mem_id) throws Exception;
 	public void modMemInfo(MemberDTO memberDTO) throws Exception;
 	
 	public String pwCheck(String mem_id) throws Exception;

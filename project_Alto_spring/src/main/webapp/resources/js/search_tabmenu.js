@@ -14,16 +14,15 @@
 	let selCate = $("#m_cate li.select").length
 	let selArea = $("#area_list li.select").length
 		
-	for (let i=0; i<selCate; i++) {
+	for (let i=0; i<selArea; i++) {
 		if ($("#tab_menu li:nth-child(1) span").text() == "전체 취미"){
 			$("#tab_menu li:nth-child(1)").html("")
-			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>")
-			
+			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>");
 		}else {
-			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.eq(i).text()+"</span>")
+			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.find("p").eq(i).text()+"</span>")
 		}
-	}	
-	
+	}
+		
 	for (let i=0; i<selArea; i++) {
 		if ($("#tab_menu li:nth-child(2) span").text() == "전체 지역"){
 			$("#tab_menu li:nth-child(2)").html("")

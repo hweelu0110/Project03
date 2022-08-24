@@ -32,8 +32,8 @@ public class MypageDAOImpl implements MypageDAO {
 
 
 	@Override
-	public Map<String, Object> selectMemInfo(String mem_id) throws DataAccessException {
-		return (Map<String, Object>) sqlSession.selectList("mapper.member.selectMemInfo", mem_id);
+	public List<MemberDTO> selectMemInfo(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.member.selectMemInfo", mem_id);
 	}
 	
 	@Override
