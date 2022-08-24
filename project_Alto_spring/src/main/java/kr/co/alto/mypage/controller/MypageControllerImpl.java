@@ -68,10 +68,27 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	}
 	
 	@Override
+	@RequestMapping(value = "/infoEditFrm.do", method = RequestMethod.POST)
+	public ModelAndView infoEditFrm(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		logger.info("MemberInfo");
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+				
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
+		Map<String, Object> memInfo = mypageService.selectMemInfo(mem_id);
+		System.out.println("confrim !" + memInfo);
+		mav.addObject("memInfo", memInfo);
+		mav.setViewName(viewName);
+		
+		return mav;
+	}
+	
+	@Override
 	@RequestMapping(value = "/modMemberInfo.do", method = RequestMethod.POST)
 	public ResponseEntity modMemInfo(MemberDTO memberDTO, HttpServletRequest request) throws Exception {
 		logger.info("modMemberInfo");
-		System.out.println(memberDTO.getMem_id());
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type","text/html; charset=utf-8");
 		

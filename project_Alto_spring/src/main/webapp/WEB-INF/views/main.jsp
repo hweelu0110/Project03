@@ -120,7 +120,7 @@
 			
 			$("#member_section .mem_close").click(function() {
 				$("#member_section").slideToggle();
-				$("#quick_btn").css("display","block")
+				$("#quick_btn").css("display","inline-block")
 			})
 			$("#quick_btn").click(function() {
 				$("#member_section").slideToggle();
@@ -141,8 +141,7 @@
 	</div>
 	
 	<c:if test="${not empty login}">
-		<!-- Login Main Contents -->
-		<div id="quick_btn">퀵메뉴 열기</div>
+		<!-- Login Main Contents -->		
 		<div id="member_section">
 			<div>
 				<h2>모임 바로가기</h2>
@@ -655,14 +654,14 @@
 			</li>
 			<li>
 				<a href="">
-					<img src="resources/img/hobby_img/hm000004.png">
+					<img src="resources/img/hobby_img/hm000010.png">
 					<span class="club_name">사진의 고수</span>
 					<span class="club_schd"></span>
 				</a>
 			</li>
 			<li class="select">
 				<a href="">
-					<img src="resources/img/hobby_img/hm000005.png">
+					<img src="resources/img/hobby_img/hm000006.png">
 					<span class="club_name">보컬 트레이닝</span>
 					<span class="club_schd"></span>
 				</a>

@@ -15,7 +15,8 @@
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
 	<script src="${path}/resources/js/essential-textbox.js"></script>	
-	<script type="text/javascript">
+	<script type="text/javascript">		
+	
 		$(function() {
 			if($("#gender").val() == 'M') {
 				$(".gender_div span:nth-child(1)").addClass("select")
@@ -70,7 +71,7 @@
 					<input class="form-check-input" type="checkbox" name="_mem_open" id="_mem_open"/>
 					<label class="form-check-label" for="_mem_open">정보 공개 여부</label><br/>					
 				</div>
-				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll(modMemberFrm)">수정하기</button> 
+				<button type="submit" class="pointBtn size0" onclick="return checkinfo(modMemberFrm)">수정하기</button> 
 				<button type="button" class="basicBtn02 size0" onclick="location.href='${path}/mypage/pwUpdateFrm.do'">비밀번호 변경하기</button>
 				<button type="button" class="basicBtn size0" onclick="location.href='${path}/mypage/delMemFrm.do'">회원탈퇴</button>				 
 			</form>			

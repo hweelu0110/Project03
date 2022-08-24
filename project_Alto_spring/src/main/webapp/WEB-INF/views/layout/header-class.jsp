@@ -8,7 +8,7 @@
 			<h1 id="logo"><a href="../main.do">AlTo Alone Together</a></h1>
 			<nav>
 				<ul id="main_menu">
-					<li><a href="${path }/club/clubMain.jsp">모임</a></li>
+					<li><a href="${path }/club/clubMain.do">모임</a></li>
 					<li><a href="${path }/class/classMain.do">클래스</a></li>
 					<li><a href="${path }/item/itemMain.do">취미용품</a></li>
 				</ul>
