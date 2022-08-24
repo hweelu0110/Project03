@@ -12,7 +12,8 @@ import kr.co.alto.member.dto.MemberDTO;
 public interface MypageController {
 	
 	public ModelAndView mypageMain(HttpServletRequest request, HttpSession httpSession) throws Exception;
-
+	
+	public ModelAndView infoEditFrm(HttpServletRequest request, HttpSession httpSession) throws Exception;
 	public ResponseEntity modMemInfo(MemberDTO memberDTO, HttpServletRequest request) throws Exception;
 	
 	public int pwCheck(MemberDTO memberDTO) throws Exception;
@@ -26,4 +27,6 @@ public interface MypageController {
 	
 	public void insertLike(String codeNum, String codeType, String mem_id, HttpServletRequest request) throws Exception; 
 	public void deletLike(String codeNum, String codeType, String mem_id, HttpServletRequest request) throws Exception;
+
+	
 }

@@ -12,7 +12,8 @@ import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
 
 public interface MypageDAO {
-
+	
+	public Map<String, Object> selectMemInfo(String mem_id) throws DataAccessException;
 	public void modMemInfo(MemberDTO memberDTO) throws DataAccessException;
 	
 	public String pwCheck(String mem_id) throws DataAccessException;
@@ -32,5 +33,7 @@ public interface MypageDAO {
 	
 	public void insertLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
 	public void deletLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
+
+	
 
 }

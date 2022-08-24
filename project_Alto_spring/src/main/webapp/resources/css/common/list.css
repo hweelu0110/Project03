@@ -137,6 +137,7 @@
 /* 인기 클래스 - 클래스, 취미용품 일반 리스트 */
 .product .swiper-slide img {
 	margin-bottom: 8rem;
+	height: 148px;
 }
 .product .swiper-slide div { 
 	position: absolute;

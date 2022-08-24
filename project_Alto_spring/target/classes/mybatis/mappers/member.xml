@@ -95,6 +95,11 @@
 		UPDATE ALTO_MEMBER SET MEM_PWD = #{mem_pwd} WHERE MEM_ID = #{mem_id}
 	</update>
 	
+	<!-- 회원정보 불러오기 -->
+	<select id="selectMemInfo" parameterType="String" resultMap="memResult">
+		SELECT MEM_NAME, GENDER, BIRTH, PHONE, MEM_OPEN FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
+	</select>
+	
 	<!-- 회원정보 수정 -->
 	<update id="modMemInfo" parameterType="memberDTO">
 		UPDATE ALTO_MEMBER SET MEM_NAME = #{mem_name}, GENDER = #{gender}, BIRTH = #{birth}, phone = #{phone}, MEM_OPEN = #{mem_open}

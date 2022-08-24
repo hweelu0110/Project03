@@ -34,8 +34,9 @@
 				<input type="text" id="allSearch_keyword" name="keyword" placeholder="취미를 검색해보세요!" />
 				<input type="submit" id="search_btn" value="검색" />
 			</form> 
-			<c:if test="${not empty login}"> 
+			<c:if test="${not empty login}">
 				<ul id="sub_menu">
+					<li id="quick_btn">퀵메뉴</li>
 					<li><a href="${path}/member/logout.do">로그아웃</a></li>
 					<li><a href="${path}/mypage/myMain.do">마이페이지</a></li>
 					<li><a href="${path}/faq/faqMain.do">FAQ</a></li>

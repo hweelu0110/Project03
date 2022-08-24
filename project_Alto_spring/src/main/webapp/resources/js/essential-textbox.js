@@ -2,6 +2,24 @@
  * 필수입력 textbox
  */
  /* joinFrm Validation */
+ function checkinfo(obj) {
+	let ch_name = checkName(obj.mem_name.value)
+	let ch_birth = checkBirth(obj.birth.value)
+	let ch_gen = checkGender()	
+	
+	alert(ch_name)
+	let vali = ch_name && ch_birth && ch_gen			
+	
+	if (!vali) {			
+		return false
+	}			
+	
+	if (confirm("정보를 수정하시겠습니까?")) {
+		obj.submit()
+		return false
+	}
+	
+}
 function checkAll(obj) {
 	let ch_pass = checkPass(memberFrm.mem_pwd.value, memberFrm.mem_pwd_2.value)
 	let ch_name = checkName(memberFrm.mem_name.value)

@@ -38,6 +38,7 @@ public class ClubServiceImpl implements ClubService {
 	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
 
 		String club_code = clubDAO.selectNewClubCode();
+		System.out.println("new club_code: "+ club_code);
 		
 		clubDTO.setClub_code(club_code);
 		
