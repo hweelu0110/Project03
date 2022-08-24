@@ -37,7 +37,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public Map<String, Object> selectMemInfo(String mem_id) throws Exception {
+	public List<MemberDTO> selectMemInfo(String mem_id) throws Exception {
 		return mypageDAO.selectMemInfo(mem_id);
 	}
 	
