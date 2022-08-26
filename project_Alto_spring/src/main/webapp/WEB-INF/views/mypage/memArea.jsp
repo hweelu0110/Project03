@@ -16,9 +16,15 @@
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />	
 	<script src="${path}/resources/js/essential-textbox.js"></script>	
 	<script type="text/javascript">
-		
-		$(function() {
+		function check() {
+			if($("#area_list li.select").length == 0) {
+				alert("지역을 선택해주세요")
+				return false
+			}
 			
+		}
+		
+		$(function() {			
 			$("#area_list ul li").click(function() {
 				if ($(this).siblings(".select").length < 3) {
 					$(this).toggleClass("select")
@@ -75,7 +81,7 @@
 	<section>
 		<div id="member_div" class="member_info">
 			<h2>내 지역 설정</h2>
-			<form method="post" action="${path}/mypage/memAreaUpdate.do">
+			<form id="memArea" method="post" action="${path}/mypage/memAreaUpdate.do">
 				<div class="memSection memInfo form-check">					
 					<div id="area_list">
 						<ul>
@@ -108,7 +114,7 @@
 						</ul>
 					</div>								
 				</div>
-				<button type="submit" class="pointBtn size0">선택 완료</button>		
+				<button type="submit" class="pointBtn size0" onclick="return check()">선택 완료</button>		
 			</form>
 		</div>
 	</section>
