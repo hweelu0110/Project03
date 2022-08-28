@@ -20,7 +20,7 @@
 			location.href = articleForm
 		}
 		else {
-			alert("로그인 후 글쓰기가 가능합니다.")
+			alert("로그인 후 가입이 가능합니다.")
 			location.href=loginFrm+'?action=/club_board/articleForm.do';
 		}
 	}
