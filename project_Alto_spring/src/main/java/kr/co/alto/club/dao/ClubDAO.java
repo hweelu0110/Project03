@@ -10,6 +10,8 @@ import kr.co.alto.club.dto.ClubListDTO;
 
 public interface ClubDAO {
 	
+	ClubDTO selectClubInfo(String club_code) throws DataAccessException;
+	
 	String selectNewClubCode() throws DataAccessException;
 	void clubOpen(ClubDTO clubDTO) throws DataAccessException;
 	
@@ -19,6 +21,6 @@ public interface ClubDAO {
 	List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
 	List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
 	
-	List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;
+	List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;	
 
 }

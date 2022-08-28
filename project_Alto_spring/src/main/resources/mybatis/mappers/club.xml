@@ -40,6 +40,15 @@
 		]]>
 	</select>
 	
+	<!-- 모임 정보 가져오기 모임메인(information) -->
+	<select id="selectClubInfo" parameterType="String" resultType="clubDTO">
+		<![CDATA[
+			SELECT *
+			FROM ALTO_CLUB
+			WHERE CLUB_CODE = ${club_code}
+		]]>
+	</select>
+	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
 		SELECT A.CLUB_CODE CLUB_CODE, 

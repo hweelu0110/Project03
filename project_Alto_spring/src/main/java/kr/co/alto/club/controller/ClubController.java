@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 
 public interface ClubController {
+	
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView clubMain(HttpServletRequest request, HttpSession httpSession) throws Exception;
 	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception;
