@@ -391,7 +391,9 @@
 		      
 	        	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
-						<img class="club_img" src="${path}/resources/img/club_test.png" />
+		      			<a href="${path}/club/clubInformation.do?club_code=${best.club_code}">
+		      				<img class="club_img" src="${path}/resources/img/club_test.png" />
+		      			</a>						
 						<span class="area">${best.area_name}</span>
 						<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${best.cate_m}.png" /></span>
 						<p class="club_name">${best.title}</p>
@@ -502,7 +504,9 @@
 		      
 	        	<c:forEach var="brandnew" items="${newList}">		      		
 		      		<div class="swiper-slide">
-						<img class="club_img" src="${path}/resources/img/club_test.png" />
+						<a href="${path}/club/clubInformation.do?club_code=${brandnew.club_code}">
+		      				<img class="club_img" src="${path}/resources/img/club_test.png" />
+		      			</a>
 						
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.club_code eq brandnew.club_code}">
