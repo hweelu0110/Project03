@@ -118,5 +118,10 @@ public class ClubServiceImpl implements ClubService {
 		
 		return clubSearchMap;
 	}
+
+	@Override
+	public ClubDTO selectClubInfo(String club_code) throws DataAccessException {
+		return clubDAO.selectClubInfo(club_code);
+	}
 	
 }
