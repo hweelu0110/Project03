@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -12,7 +12,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>일정등록</title>
-	<link rel="stylesheet" href="../resources/css/schedule.css" />
+	<link rel="stylesheet" href="${path}/resources/css/club/schedule.css" />
 	<script type="text/javascript">
 		function validateForm() {
 			if($("#title2").val() == ""){
@@ -73,7 +73,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<button type="reset" class="btn01" onclick="location.href='clubInformation.jsp'">취소</button>
+					<button type="reset" class="btn01" onclick="location.href='${paht}/club/clubInformation.do'">취소</button>
 					<button type="submit" class="btn02">등록하기</button>
 				</td>
 			</tr>	
