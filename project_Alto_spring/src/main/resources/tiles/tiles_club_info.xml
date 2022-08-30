@@ -16,7 +16,7 @@
 	<definition name="/club/clubInformation" extends="clublayout">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubInformation.jsp" />
 	</definition>
-	
+		
 	<definition name="/club_board/listArticles" extends="clublayout">
 		<put-attribute name="body" value="/WEB-INF/views/club_board/listArticles.jsp" />
 	</definition>
@@ -44,6 +44,14 @@
 	
 	<definition name="/club/clubJoin" extends="clublayout">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubJoin.jsp" />
+	</definition>
+	
+	<definition name="/club/clubChat" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubChat.jsp" />
+	</definition>
+	
+	<definition name="/club/Schedule" extends="clublayout">
+		<put-attribute name="body" value="/WEB-INF/views/club/Schedule.jsp" />
 	</definition>
 
 </tiles-definitions>

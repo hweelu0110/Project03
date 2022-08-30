@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, inital-scale=1.0">
-	<%@include file="../layout/headinfo.jsp" %>		 
-	<link rel="stylesheet" href="../resources/css/club.css" />
+	<meta name="viewport" content="width=device-width, inital-scale=1.0">	 
+	<link rel="stylesheet" href="${path}/resources/css/club/club.css" />
 	<script type="text/javascript">		
 	$(function() {
 		/* 멤버리스트 마우스 오버효과 */
@@ -20,7 +25,6 @@
 	</script>
 </head> 
 <body>
-	<%@include file="../layout/header.jsp" %>
 	
 	<section>
 		<!-- 채팅 접근 권한 알림 팝업 -->
@@ -74,6 +78,5 @@
 				
 	</section>
 	
-	<%@include file="../layout/footer.jsp" %>
 </body>
 </html>

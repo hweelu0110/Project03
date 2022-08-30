@@ -1,11 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${contextPath}/resources/club/schedule.css" />
+	<link rel="stylesheet" href="${path}/resources/club/schedule.css" />
 
 	<script type="text/javascript">
 		function validateForm() {
@@ -48,15 +54,15 @@
 				</td>
 			</tr>
 			<tr>
-					<td>가입인사</td>
-					<td>
-						<input type="text" id="joincontent" class="title2" style="width: 70%" placeholder="가입인사를 작성해주세요.">
-					</td>
+				<td>가입인사</td>
+				<td>
+					<input type="text" id="joincontent" class="title2" style="width: 70%" placeholder="가입인사를 작성해주세요.">
+				</td>
 			</tr>
 			
 			<tr>
 				<td colspan="2" align="center">
-					<button type="reset" class="btn01" onclick="location.href='clubInformation.jsp'">취소</button>
+					<button type="reset" class="btn01" onclick="location.href='clubInformation.do'">취소</button>
 					<button type="submit" class="btn02">등록하기</button>
 				</td>
 			</tr>	

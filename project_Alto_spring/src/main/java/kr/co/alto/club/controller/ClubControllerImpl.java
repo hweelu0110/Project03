@@ -153,8 +153,4 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		return resEnt;
 	}
 
-	
-
-	
-
 }

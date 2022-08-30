@@ -78,8 +78,8 @@
 					</ul>
 				</div>
 				
-				<input class="schedulebtn" type="button" value="일정 추가하기" onclick="location.href='Schedule.jsp'" /><br/>
-				<a href="javascript:fn_articleForm('${login}', '${path}/club/clubjoin.do',
+				<input class="schedulebtn" type="button" value="일정 추가하기" onclick="location.href='${path}/club/Schedule.do'" /><br/>
+				<a href="javascript:fn_articleForm('${login}', '${path}/club/clubJoin.do',
 													'${path}/member/loginFrm.do')" ><input class="joinbtn" type="button" value="가입하기"/></a>
 				
 			</div>
