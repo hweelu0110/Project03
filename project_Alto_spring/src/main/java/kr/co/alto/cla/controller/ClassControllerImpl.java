@@ -419,4 +419,16 @@ public class ClassControllerImpl implements ClassController {
 	}
 	
 	
+
+
+
+	@RequestMapping(value = "/class/ex.do", method = RequestMethod.GET)
+	public ModelAndView ex(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+
+		ModelAndView mav = new ModelAndView(viewName);
+
+		return mav;
+	}
+
 }
