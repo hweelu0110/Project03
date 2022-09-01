@@ -1,9 +1,6 @@
 package kr.co.alto.cla.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -34,11 +31,11 @@ import kr.co.alto.area.service.AreaService;
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.cla.dto.ImageDTO;
 import kr.co.alto.cla.service.ClassService;
-import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
-import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
+import kr.co.alto.mypage.dto.likeDTO;
+import kr.co.alto.mypage.service.MypageService;
 
 @Controller("classController")
 public class ClassControllerImpl implements ClassController {
@@ -51,6 +48,9 @@ public class ClassControllerImpl implements ClassController {
 	
 	@Autowired
 	private ClassService classService;
+	
+	@Autowired
+	private MypageService mypageService;
 	
 	@Autowired
 	private ClassDTO classDTO;
@@ -110,7 +110,7 @@ public class ClassControllerImpl implements ClassController {
 								  @RequestParam(value = "hobbyC", required = false) String hobbyC, 
 								  @RequestParam(value = "hobbyCodeList", required = false) String hobbyCodeList, 
 								  @RequestParam(value = "areaCodeList", required = false) String areaCodeList, 
-								HttpServletRequest request, HttpServletResponse response) throws Exception {
+								HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		Map listMap = new HashMap<>();
@@ -148,6 +148,17 @@ public class ClassControllerImpl implements ClassController {
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
 		mav.addObject("hobbyList", hobbyList);
 
+		//로그인상태인 경우 좋아요 목록 가져오기
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		if (memberDTO != null) {
+			String mem_id = memberDTO.getMem_id();
+			List<likeDTO> memlikeList = new ArrayList<>();
+			memlikeList = mypageService.selectLikeList(mem_id);
+			
+			mav.addObject("memlikeList", memlikeList);
+		}	
+		
+		
 		mav.addObject("classList", classList);
 		mav.addObject("listMap", listMap);
 		return mav;

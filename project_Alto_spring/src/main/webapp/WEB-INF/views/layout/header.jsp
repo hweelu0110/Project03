@@ -13,22 +13,12 @@
 	<header>
 		<div>
 			<h1 id="logo"><a href="${path}/main.do">AlTo Alone Together</a></h1>
-			<nav>
-				<c:if test="${not empty login}"> 
-					<ul id="main_menu">
-						<li><a href="${path}/club/clubSearchList.do">모임</a></li>
-						<li><a href="${path }/class/classMain.do">클래스</a></li>
-						<li><a href="${path }/item/itemMain.do">취미용품</a></li>
-					</ul>
-				</c:if>
-				
-				<c:if test="${empty login}">
-					<ul id="main_menu">
-						<li><a href="${path}/club/clubMain.do">모임</a></li>
-						<li><a href="${path }/class/classMain.do">클래스</a></li>
-						<li><a href="${path }/item/itemMain.do">취미용품</a></li>
-					</ul>
-				</c:if>	
+			<nav>				
+				<ul id="main_menu">
+					<li><a href="${path}/club/clubMain.do">모임</a></li>
+					<li><a href="${path }/class/classMain.do">클래스</a></li>
+					<li><a href="${path }/item/itemMain.do">취미용품</a></li>
+				</ul>
 			</nav>
 			<form action="allSearch.jsp" id="allSearch" name="allSearchForm" method="post">
 				<input type="text" id="allSearch_keyword" name="keyword" placeholder="취미를 검색해보세요!" />

@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${itemMainMap.AllHobbyList}"/>
+<c:set var="likeList" value="${itemMainMap.memlikeList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,12 +42,29 @@
 	        	<c:forEach var="itemListBest" items="${itemListBest }">
 			      	<div class="swiper-slide">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
-						<span class="like_icon">관심</span>
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.item_code eq itemListBest.item_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
 						<div>
 							<p class="class_name">${itemListBest.item_name }</p>
 							<p class="hobby_name">${itemListBest.hobby_name }</p>
 							<p class="class_price">${itemListBest.price }원</p>				
 						</div>
+						
+						<input type="hidden" name="item_code" id="item_code" value="${itemListBest.item_code}" />
 					</div>
 			    </c:forEach>
 				</div>
@@ -62,12 +80,29 @@
 		      	<c:forEach var="itemListNew" items="${itemListNew }">
 			      	<div class="swiper-slide">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
-						<span class="like_icon">관심</span>
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.item_code eq itemListNew.item_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
 						<div>
 							<p class="class_name">${itemListNew.item_name }</p>
 							<p class="hobby_name">${itemListNew.hobby_name }</p>
 							<p class="class_price">${itemListNew.price }원</p>				
 						</div>
+						
+						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
 					</div>
 			    </c:forEach>
 		      </div>

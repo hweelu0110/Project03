@@ -252,7 +252,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		
-		mylikeMap = mypageService.selectLikeList(mem_id);
+		mylikeMap = mypageService.selectAllLikeList(mem_id);
 		
 		mav.addObject("mylikeMap", mylikeMap);
 		mav.setViewName(viewName);
@@ -263,16 +263,22 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 	@Override
 	@RequestMapping(value = "/likeAdd.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void insertLike(String codeNum, String codeType, String mem_id, HttpServletRequest request)
-			throws Exception {		
+	public void insertLike(String codeNum, String codeType, HttpServletRequest request, HttpSession httpSession)
+			throws Exception {	
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
 		mypageService.insertLike(codeNum, codeType, mem_id);
 	}
 
 	@Override
 	@RequestMapping(value = "/likeDel.do", method = RequestMethod.GET)
 	@ResponseBody
-	public void deletLike(String codeNum, String codeType, String mem_id, HttpServletRequest request) 
+	public void deletLike(String codeNum, String codeType, HttpServletRequest request, HttpSession httpSession) 
 			throws Exception {
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
 		mypageService.deletLike(codeNum, codeType, mem_id);		
 	}
 

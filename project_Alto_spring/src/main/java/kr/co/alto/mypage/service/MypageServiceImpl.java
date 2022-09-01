@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -67,7 +68,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public Map<String, Object> selectLikeList(String mem_id) throws Exception {
+	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
+		return mypageDAO.selectLikeList(mem_id);
+	}
+	
+	@Override
+	public Map<String, Object> selectAllLikeList(String mem_id) throws Exception {
 		Map<String, Object> mylikeMap = new HashMap<>();
 		
 		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
@@ -82,8 +88,6 @@ public class MypageServiceImpl implements MypageService {
 		//List<ItemListDTO> itemList = mypageDAO.selectLikeItemList(mem_id);	
 		
 		mylikeMap.put("memlikeList", memlikeList);
-		System.out.println("memlikeList ?? : " + memlikeList.get(0).getClass_code());
-		System.out.println("clubList ?? : " + clubList.get(0).getClub_code());
 		mylikeMap.put("clubList", clubList);
 		//mylikeMap.put("classList", classList);
 		//mylikeMap.put("itemList", itemList);
