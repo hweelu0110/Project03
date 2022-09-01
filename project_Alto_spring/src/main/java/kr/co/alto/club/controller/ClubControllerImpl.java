@@ -77,44 +77,26 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Override
 	@RequestMapping(value = "/clubSearchList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception {
+	public ModelAndView clubSearhList(@RequestParam(value="hobbyC", required = false) String hobbyC, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
-		if(hobby_code != null) {
-			clubSearchMap = clubService.selectHobClubList(hobby_code);
+		if(hobbyC != null) {
+			clubSearchMap = clubService.selectHobClubList(hobbyC);
 			
-			mav.addObject("hobby_code", hobby_code);
+			mav.addObject("hobbyC", hobbyC);
+			mav.addObject("clubSearchMap", clubSearchMap);
+		}else {
+			clubSearchMap = clubService.clubSearchList();
+			
 			mav.addObject("clubSearchMap", clubSearchMap);
 		}
-		
-		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
-		if(memberDTO != null) {
-			String mem_id = memberDTO.getMem_id();
-			clubSearchMap = clubService.clubSearchList(mem_id);
-			
-			mav.addObject("clubSearchMap", clubSearchMap);
-			
-		}
-		
+						
 		mav.setViewName(viewName);
 		return mav;
 	}
 	
-	@Override
-	@RequestMapping(value = "/selectSubHobby.do", method = RequestMethod.POST)
-	public ResponseEntity<Object> selectSubHobby(@RequestParam("hobby_code")String hobby_code, HttpServletRequest request) throws Exception {
-		System.out.println("clubController : " + hobby_code);
-		
-		Map<String, Object> map = new HashMap<>();
-		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
-		map.put("hobbySubList", hobbySubList);
-		
-		ResponseEntity<Object> resEntity = new ResponseEntity<Object>(map, HttpStatus.OK);
-		
-		return resEntity;
-	}
 
 	@Override
 	@RequestMapping(value = "/clubRegister.do", method = RequestMethod.POST)

@@ -38,6 +38,7 @@ import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.item.dto.ImageDTO;
 import kr.co.alto.item.dto.ItemDTO;
 import kr.co.alto.item.service.ItemService;
+import kr.co.alto.member.dto.MemberDTO;
 
 @Controller("itemController")
 public class ItemControllerImpl implements ItemController {
@@ -59,8 +60,17 @@ public class ItemControllerImpl implements ItemController {
 	
 	@Override
 	@RequestMapping(value = "/item/itemMain.do", method = RequestMethod.GET)
-	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView itemMain(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		
+		Map<String, Object> itemMainMap = new HashMap<>();
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		itemMainMap = itemService.itemMainMap(mem_id);
 		
 		Map listMapBest = new HashMap<>();
 		listMapBest.put("sort", "quantityS");
@@ -73,6 +83,7 @@ public class ItemControllerImpl implements ItemController {
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("itemListBest", itemListBest);
 		mav.addObject("itemListNew", itemListNew);
+		mav.addObject("itemMainMap", itemMainMap);
 		
 		return mav;
 	}

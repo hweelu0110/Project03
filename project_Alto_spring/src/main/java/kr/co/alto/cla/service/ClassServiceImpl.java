@@ -12,6 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.co.alto.cla.dao.ClassDAO;
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.cla.dto.ImageDTO;
+import kr.co.alto.hobby.dao.HobbyDAO;
+import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.mypage.dao.MypageDAO;
+import kr.co.alto.mypage.dto.likeDTO;
 
 @Service("classService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -19,6 +23,10 @@ public class ClassServiceImpl implements ClassService {
 
 	@Autowired
 	private ClassDAO classDAO;
+	@Autowired
+	private HobbyDAO hobbyDAO;
+	@Autowired
+	private MypageDAO mypageDAO;
 	
 	@Override
 	public List<ClassDTO> listClass(Map listMap) throws Exception {
@@ -65,6 +73,23 @@ public class ClassServiceImpl implements ClassService {
 			
 			classDAO.updateImageFile(classMap);
 		}
+	}
+
+	@Override
+	public Map<String, Object> classMainList(String mem_id) throws Exception {
+		Map<String, Object> classMainMap = new HashMap<>();
+		
+		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
+		
+		if (!mem_id.equals("")) {
+			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+			
+			classMainMap.put("memlikeList", memlikeList);
+		}
+		
+		classMainMap.put("AllHobbyList", AllHobbyList);
+		
+		return classMainMap;
 	}
 
 }

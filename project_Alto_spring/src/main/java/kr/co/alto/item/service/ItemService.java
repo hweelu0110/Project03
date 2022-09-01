@@ -13,4 +13,6 @@ public interface ItemService {
 	
 	public Map<String, Object> editItem(String item_code) throws Exception;
 	public void modItem(Map<String, Object> itemMap) throws Exception;
+	
+	public Map<String, Object> itemMainMap(String mem_id) throws Exception;
 }

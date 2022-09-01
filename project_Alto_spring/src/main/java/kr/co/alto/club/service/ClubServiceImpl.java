@@ -79,24 +79,14 @@ public class ClubServiceImpl implements ClubService {
 	}
 	
 	@Override
-	public Map<String, Object> clubSearchList(String mem_id) throws DataAccessException {
+	public Map<String, Object> clubSearchList() throws DataAccessException {
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
 		List<HobbyDTO> allHobbyList = hobbyDAO.selectAllHobbyList();
-		List<AreaDTO> allAreaList = areaDAO.selectAllAreaList();
-		
-		List<HobbyDTO> myHobbyList = mypageDAO.selectHobbyList(mem_id);
-		List<AreaDTO> myAreaList = mypageDAO.selectMyAreaList(mem_id);
-		List<HobbyDTO> mySubHobbyList = hobbyDAO.selectMyHobbysubList(mem_id);
-		List<HobbysubDTO> mySubHobbyAllList = hobbyDAO.selectMyHobbysubAllList(mem_id);
-		
+		List<AreaDTO> allAreaList = areaDAO.selectAllAreaList();				
 		
 		clubSearchMap.put("allHobbyList", allHobbyList);
 		clubSearchMap.put("allAreaList", allAreaList);
-		clubSearchMap.put("myHobbyList", myHobbyList);
-		clubSearchMap.put("myAreaList", myAreaList);
-		clubSearchMap.put("mySubHobbyList", mySubHobbyList);
-		clubSearchMap.put("mySubHobbyAllList", mySubHobbyAllList);
 		
 		return clubSearchMap;
 		

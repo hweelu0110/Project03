@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.alto.hobby.dao.HobbyDAO;
+import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.item.dao.ItemDAO;
 import kr.co.alto.item.dto.ImageDTO;
 import kr.co.alto.item.dto.ItemDTO;
+import kr.co.alto.mypage.dao.MypageDAO;
+import kr.co.alto.mypage.dto.likeDTO;
 
 @Service("itemService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -19,6 +23,10 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private ItemDAO itemDAO;
+	@Autowired
+	private HobbyDAO hobbyDAO;
+	@Autowired
+	private MypageDAO mypageDAO;
 	
 	@Override
 	public List<ItemDTO> listItem(Map listMap) throws Exception {
@@ -63,6 +71,23 @@ public class ItemServiceImpl implements ItemService {
 			
 			itemDAO.updateImageFile(itemMap);
 		}
+	}
+
+	@Override
+	public Map<String, Object> itemMainMap(String mem_id) throws Exception {
+		Map<String, Object> itemMainMap = new HashMap<>();
+		
+		List<HobbyDTO> AllHobbyList = hobbyDAO.selectAllHobbyList();
+		
+		if (!mem_id.equals("")) {
+			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+			
+			itemMainMap.put("memlikeList", memlikeList);
+		}
+		
+		itemMainMap.put("AllHobbyList", AllHobbyList);
+		
+		return itemMainMap;
 	}
 
 }

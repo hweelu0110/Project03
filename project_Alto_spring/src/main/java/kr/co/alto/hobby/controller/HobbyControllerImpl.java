@@ -94,6 +94,20 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		return entity;
 		
 	}
+	
+
+	@Override
+	@RequestMapping(value = "/hobby/selectSubHobby.do", method = RequestMethod.POST)
+	public ResponseEntity<Object> selectSubHobby(@RequestParam("hobbyC")String hobbyC, HttpServletRequest request) throws Exception {
+				
+		Map<String, Object> map = new HashMap<>();
+		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobbyC);
+		map.put("hobbySubList", hobbySubList);
+		
+		ResponseEntity<Object> resEntity = new ResponseEntity<Object>(map, HttpStatus.OK);
+		
+		return resEntity;
+	}
 
 	@Override
 	@RequestMapping(value = "/mypage/memHobbyUpdate.do", method = RequestMethod.POST)
