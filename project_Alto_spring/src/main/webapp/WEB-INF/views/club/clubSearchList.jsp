@@ -5,6 +5,7 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="likeList" value="${memlikeList}" />
 <c:set var="allHobbyList" value="${clubSearchMap.allHobbyList}" />
 <c:set var="allAreaList" value="${clubSearchMap.allAreaList}" />
 <c:set var="hobClubList" value="${clubSearchMap.hobClubList}" />
@@ -139,7 +140,23 @@
 								<span class="s_icon"></span><span>6/11(토)</span>
 								<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
 							</p>
-							<span class="like_icon">관심</span>
+							
+							<c:forEach var="like" items="${likeList}">
+								<c:if test="${like.club_code eq club.club_code}">
+									<c:set var="in" value="true" />
+								</c:if>
+							</c:forEach>
+							<c:choose>
+								<c:when test="${in}">
+									<span class="like_icon select">관심</span>
+									<c:set var="in" value="false" />
+								</c:when>
+								<c:otherwise>
+									<span class="like_icon">관심</span>
+								</c:otherwise>
+							</c:choose>
+							
+							<input type="hidden" name="club_code" id="club_code" value="${club.club_code}" />
 						</li>
 					</c:forEach>
 					

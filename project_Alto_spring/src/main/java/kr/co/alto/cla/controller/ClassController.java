@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 public interface ClassController {
 	
 	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
-	public ModelAndView listClass (String hobbyCodeList, String areaCodeList, String sort, String hobbyC, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView listClass (String hobbyCodeList, String areaCodeList, String sort, String hobbyC, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity addNewClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;

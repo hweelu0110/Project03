@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -444,42 +445,79 @@
 			
 			<div class="swiper mySwiper3">
 		      <div class="swiper-wrapper product">
-				      <c:forEach var="classListBest" items="${classListBest }">
-				      	<div class="swiper-slide">
-							<img class="class_img" src="${path}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
-							<span class="like_icon">관심</span>
-							<span class="area">${classListBest.area_name }</span>	
-							<div>
-								<p class="class_name">${classListBest.className }</p>
-								<p class="hobby_name">${classListBest.hobby_name }</p>
-								<p class="class_price">${classListBest.price }원</p>				
-							</div>
+			      <c:forEach var="classListBest" items="${classListBest }">
+			      	<div class="swiper-slide">
+						<img class="class_img" src="${path}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.class_code eq classListBest.class_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
+						<span class="area">${classListBest.area_name }</span>	
+						<div>
+							<p class="class_name">${classListBest.className }</p>
+							<p class="hobby_name">${classListBest.hobby_name }</p>
+							<p class="class_price"><fmt:formatNumber value="${classListBest.price }" pattern="#,###원" /></p>				
 						</div>
-				      </c:forEach>
-			      </div>
-			      <div class="swiper-button-next"></div>
-			      <div class="swiper-button-prev"></div>
-			    </div>
+						
+						<input type="hidden" name="class_code" id="class_code" value="${classListBest.class_code}" />
+					</div>
+			      </c:forEach>    
+			      
+		      </div>
+		      
+		      <div class="swiper-button-next"></div>
+		      <div class="swiper-button-prev"></div>
+		 </div>
 		</div>
 		
 		<div id="sec_04">
 			<h2>지금 가장 잘 나가는 취미용품</h2>
 			<div class="swiper mySwiper6">
 		      <div class="swiper-wrapper product">
-			      	<c:forEach var="itemListNew" items="${itemListNew }">
-				      	<div class="swiper-slide">
-							<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
-							<span class="like_icon">관심</span>
-							<div>
-								<p class="class_name">${itemListNew.item_name }</p>
-								<p class="hobby_name">${itemListNew.hobby_name }</p>
-								<p class="class_price">${itemListNew.price }원</p>				
-							</div>
+		      	<c:forEach var="itemListNew" items="${itemListNew }">
+			      	<div class="swiper-slide">
+						<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.item_code eq itemListNew.item_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+
+						<div>
+							<p class="class_name">${itemListNew.item_name }</p>
+							<p class="hobby_name">${itemListNew.hobby_name }</p>
+							<p class="class_price"><fmt:formatNumber value="${itemListNew.price }" pattern="#,###원" /></p>				
 						</div>
-				    </c:forEach>
-			      </div>
-			      <div class="swiper-button-next"></div>
-			  	  <div class="swiper-button-prev"></div>
+						
+						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
+					</div>
+			    </c:forEach>		    
+			    
+		      </div>
+		      <div class="swiper-button-next"></div>
+		  	  <div class="swiper-button-prev"></div>
 			 </div>
 		     <!-- Initialize Swiper -->
 		    <script>
@@ -559,22 +597,40 @@
 			<h2>취미용품 신상</h2>
 			<div class="swiper mySwiper3">
 		      <div class="swiper-wrapper product">
-			      	<c:forEach var="itemListNew" items="${itemListNew }">
-				      	<div class="swiper-slide">
-							<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
-							<span class="like_icon">관심</span>
-							<div>
-								<p class="class_name">${itemListNew.item_name }</p>
-								<p class="hobby_name">${itemListNew.hobby_name }</p>
-								<p class="class_price">${itemListNew.price }원</p>				
-							</div>
+		      	<c:forEach var="itemListNew" items="${itemListNew }">
+			      	<div class="swiper-slide">
+						<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.item_code eq itemListNew.item_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+						
+						<div>
+							<p class="class_name">${itemListNew.item_name }</p>
+							<p class="hobby_name">${itemListNew.hobby_name }</p>
+							<p class="class_price"><fmt:formatNumber value="${itemListNew.price }" pattern="#,###원" /></p>				
 						</div>
-				    </c:forEach>
-			      </div>
-			      <div class="swiper-button-next"></div>
-			  	  <div class="swiper-button-prev"></div>
-			 </div>
-		     <!-- Initialize Swiper -->
+						
+						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
+					</div>
+			    </c:forEach>
+			    
+		      </div>
+		      <div class="swiper-button-next"></div>
+		  	  <div class="swiper-button-prev"></div>
+			</div>
+		    <!-- Initialize Swiper -->
 		    <script>
 		      var swiper = new Swiper(".mySwiper3", {
 		        slidesPerView: 8,
@@ -594,22 +650,40 @@
 			<h2>신규 클래스</h2>
 			<div class="swiper mySwiper3">
 		      <div class="swiper-wrapper product">
-				      <c:forEach var="classListNew" items="${classListNew }">
-				      	<div class="swiper-slide">
-							<img class="class_img" src="${path}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
-							<span class="like_icon">관심</span>
-							<span class="area">${classListNew.area_name }</span>	
-							<div>
-								<p class="class_name">${classListNew.className }</p>
-								<p class="hobby_name">${classListNew.hobby_name }</p>
-								<p class="class_price">${classListNew.price }원</p>				
-							</div>
+			      <c:forEach var="classListNew" items="${classListNew }">
+			      	<div class="swiper-slide">
+						<img class="class_img" src="${path}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
+						
+						<c:forEach var="like" items="${likeList}">
+							<c:if test="${like.class_code eq classListNew.class_code}">
+								<c:set var="in" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test="${in}">
+								<span class="like_icon select">관심</span>
+								<c:set var="in" value="false" />
+							</c:when>
+							<c:otherwise>
+								<span class="like_icon">관심</span>
+							</c:otherwise>
+						</c:choose>
+							
+						<span class="area">${classListNew.area_name }</span>	
+						<div>
+							<p class="class_name">${classListNew.className }</p>
+							<p class="hobby_name">${classListNew.hobby_name }</p>
+							<p class="class_price"><fmt:formatNumber value="${classListNew.price }" pattern="\#,###원" /></p>				
 						</div>
-				      </c:forEach>
-			      </div>
-			      <div class="swiper-button-next"></div>
-			      <div class="swiper-button-prev"></div>
-			    </div>
+						
+						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
+					</div>
+			      </c:forEach>      
+			      
+		      </div>
+		      <div class="swiper-button-next"></div>
+		      <div class="swiper-button-prev"></div>
+		   </div>
 			
 			<!-- Initialize Swiper -->
 		    <script>

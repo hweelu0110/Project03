@@ -15,8 +15,6 @@ function confirmPopup(popup, txt) {
 	popup.show()			
 }
 
-
-
 $(function () {
 	$(".popup_div").hide()
 		
@@ -29,5 +27,63 @@ $(function () {
 		$(this).parent("div").hide()
 	})
 	
+	
+	/* 좋아요 처리 */
+	$(".like_icon").click(function() {
+		let selectItem = $(this)
+		let codeNum, codeType
+		
+		if ('${login}' != ''){
+			if ($(this).siblings('#club_code').val() != null) {
+				codeNum = $(this).siblings('#club_code').val()
+				codeType = 'club_code'
+			}else if ($(this).siblings('#class_code').val() != null) {
+				codeNum = $(this).siblings('#class_code').val()
+				codeType = 'class_code'
+			}else if ($(this).siblings('#item_code').val() != null) {
+				
+				codeNum = $(this).siblings('#item_code').val()
+				codeType = 'item_code'
+			}
+			
+			
+			if ($(this).hasClass("select")){
+				$(this).removeClass("select")
+				
+				$.ajax({
+					url: "http://localhost:8080/alto/mypage/likeDel.do",
+					type: "Get",
+					data: {codeNum: codeNum, codeType: codeType},
+					dataType: "text",
+					success: function(data) {
+						confirmPopup($("#like_popup"), "관심 해제 완료!")
+					},
+					error: function(data) {
+						alert("오류가 발생했습니다. 다시 시도해 주세요.")
+					}
+					
+				})	
+				
+			} else {
+				$(this).addClass("select")
+				
+				$.ajax({
+					url: "http://localhost:8080/alto/mypage/likeAdd.do",
+					type: "Get",
+					data: {codeNum: codeNum, codeType: codeType},
+					dataType: "text",
+					success: function(data) {
+						confirmPopup($("#like_popup"), "관심 목록 추가 완료!")
+					},
+					error: function(data) {
+						alert("오류가 발생했습니다. 다시 시도해 주세요.")
+					}
+					
+				})
+			}					
+		}else {
+			confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
+		}					
+	})
 	
 })
