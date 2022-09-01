@@ -11,13 +11,6 @@
 <head>
 </head>
 <body>
-
-	<div id="title">
-		<h2>
-			<a>모임 이름</a>
-		</h2>
-		
-	</div>
 	<div id="menu1">
 		<ul>
 			<li><a href="${path}/club/clubInformation.do">정보</a></li>
@@ -25,7 +18,6 @@
 			<li><a href="${path}/club/Albumlist.do">사진첩</a></li>
 			<li><a href="${path}/club/clubChat.do">채팅</a></li>
 		</ul>
-	</div>
-	
+	</div>	
 </body>
 </html>

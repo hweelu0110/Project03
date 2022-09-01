@@ -37,6 +37,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
+	public List<MemberDTO> selectMemInfo(String mem_id) throws Exception {
+		return mypageDAO.selectMemInfo(mem_id);
+	}
+	
+	@Override
 	public void modMemInfo(MemberDTO memberDTO) throws Exception {
 		mypageDAO.modMemInfo(memberDTO);		
 	}
@@ -124,5 +129,7 @@ public class MypageServiceImpl implements MypageService {
 		
 		mypageDAO.deletLike(codeNumMap, mem_id);
 	}
+
+	
 	
 }

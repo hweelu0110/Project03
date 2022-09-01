@@ -14,6 +14,14 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">	
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />		
 	<script type="text/javascript">
+		function check() {
+			if($("#hobby_list div.select").length == 0) {
+				alert("소분류 취미를 선택해주세요")
+				return false
+			}
+			
+		}
+		
 		$(function() {
 			$("#hobby_list div.sub_hobby").click(function() {	
 				
@@ -116,7 +124,7 @@
 						</c:forEach>
 					</div>								
 				</div>
-				<button type="submit" class="pointBtn size0">다음</button>		
+				<button type="submit" class="pointBtn size0" onclick="return check()">다음</button>		
 			</form>
 		</div>
 	</section>

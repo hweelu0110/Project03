@@ -20,7 +20,7 @@
 			location.href = articleForm
 		}
 		else {
-			alert("로그인 후 글쓰기가 가능합니다.")
+			alert("로그인 후 가입이 가능합니다.")
 			location.href=loginFrm+'?action=/club_board/articleForm.do';
 		}
 	}
@@ -28,22 +28,30 @@
 </head>
 <body>
 	<section>
+		<%-- <div id="menu1">
+			<ul>
+				<li><a href="${path}/club/clubInformation.do?club_code=${clubInfo.club_code}">정보</a></li>
+				<li><a href="${path}/club/Noticelist.do?club_code=${clubInfo.club_code}">게시판</a></li>
+				<li><a href="${path}/club/Albumlist.do?club_code=${clubInfo.club_code}">사진첩</a></li>
+				<li><a href="${path}/club/clubChat.do?club_code=${clubInfo.club_code}">채팅</a></li>
+			</ul>
+		</div> --%>
 		<div>
 			<div class="left">
 				<div class="clubcontent2">
-					<img src="../resources/img/clubinformation_test.png">
+					<img src="${path}/resources/img/clubinformation_test.png">
 					<span class="like_icon">관심</span>
 				</div>
 				
 				<div class="clubcontent3">
-					<span class="hobby_icon"><img src="../resources/img/hobby_img/h_002.png" /></span>
-					<h3>모임제목</h3>	
-					<img class="edit" src="../resources/img/edit.png"><br /><br/>
-					<p>동해부터 제주도, 해외투어까지 다함께 즐길 수 있는 친목 모임입니다.</p>
+					<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${clubInfo.cate_m}.png" /></span>
+					<h3>${clubInfo.title}</h3>	
+					<img class="edit" src="${path}/resources/img/edit.png"><br /><br/>
+					<p>${clubInfo.intro}</p>
 				</div><br/>
 				
 				<div class="clubcontent4">
-					<img class="calendar" src="../resources/img/calendar.png">
+					<img class="calendar" src="${path}/resources/img/calendar.png">
 					<h3>모임일정</h3>
 				</div>
 				
@@ -55,8 +63,8 @@
 						<span class="span1">다이빙 번개</span>&nbsp;
 						<span class="span1">14명 참여중...</span><br/>
 						<span class="span2">오후 7:30</span>&nbsp;
-						<img class="gps" src="../resources/img/gps.png">스쿠버 다이빙
-						<img class="edit" src="../resources/img/edit.png">
+						<img class="gps" src="${path}/resources/img/gps.png">스쿠버 다이빙
+						<img class="edit" src="${path}/resources/img/edit.png">
 					</div>
 				</section>
 			
@@ -70,8 +78,8 @@
 					</ul>
 				</div>
 				
-				<input class="schedulebtn" type="button" value="일정 추가하기" onclick="location.href='Schedule.jsp'" /><br/>
-				<a href="javascript:fn_articleForm('${login}', '${path}/club/clubjoin.do',
+				<input class="schedulebtn" type="button" value="일정 추가하기" onclick="location.href='${path}/club/Schedule.do'" /><br/>
+				<a href="javascript:fn_articleForm('${login}', '${path}/club/clubJoin.do',
 													'${path}/member/loginFrm.do')" ><input class="joinbtn" type="button" value="가입하기"/></a>
 				
 			</div>

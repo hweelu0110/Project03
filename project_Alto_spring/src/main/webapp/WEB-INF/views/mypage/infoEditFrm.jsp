@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="Info" value="${memInfo}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -15,7 +16,8 @@
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
 	<script src="${path}/resources/js/essential-textbox.js"></script>	
-	<script type="text/javascript">
+	<script type="text/javascript">		
+	
 		$(function() {
 			if($("#gender").val() == 'M') {
 				$(".gender_div span:nth-child(1)").addClass("select")
@@ -48,13 +50,13 @@
 		<div id="memberInfo" class="form-check form-switch">
 			<a href="${path}/mypage/myMain.do" class="backBtn">back</a>
 			<h2>회원정보수정</h2>
-			<form name="modMemberFrm" method="post" action="${path}/mypage/modMemberInfo.do">
+			<form name="memberFrm" method="post" action="${path}/mypage/modMemberInfo.do">
 				<input type="hidden" name="mem_id" value="${login.mem_id}" />
 				<input type="hidden" name="memberId_yn" value="${login.memberId_yn}" />
 				<div class="memSection">
 					<div class="info_div">
 						<div class="align_div float_left">
-							<input type="text" name="mem_name" class="essential" placeholder="이름" value="${login.mem_name}" />
+							<input type="text" name="mem_name" class="essential" placeholder="이름" value="${Info[0].mem_name}" />
 							<span class="noti2">필수 입력입니다.</span>
 						</div>
 						<div class="align_div float_right">
@@ -70,7 +72,7 @@
 					<input class="form-check-input" type="checkbox" name="_mem_open" id="_mem_open"/>
 					<label class="form-check-label" for="_mem_open">정보 공개 여부</label><br/>					
 				</div>
-				<button id="joinBtn" type="submit" class="pointBtn size0" onclick="return checkAll(modMemberFrm)">수정하기</button> 
+				<button type="submit" class="pointBtn size0" onclick="return checkinfo(memberFrm)">수정하기</button> 
 				<button type="button" class="basicBtn02 size0" onclick="location.href='${path}/mypage/pwUpdateFrm.do'">비밀번호 변경하기</button>
 				<button type="button" class="basicBtn size0" onclick="location.href='${path}/mypage/delMemFrm.do'">회원탈퇴</button>				 
 			</form>			

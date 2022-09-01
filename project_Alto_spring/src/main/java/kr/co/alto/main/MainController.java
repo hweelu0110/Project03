@@ -50,11 +50,10 @@ public class MainController {
 		if(memberDTO != null) {
 			String mem_id = memberDTO.getMem_id();
 			
-			memInfoMap = mypageService.selectMyList(mem_id);
-			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+			memInfoMap = mypageService.selectMyList(mem_id);			
+			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);	
 			
-			memInfoMap.put("memlikeList", memlikeList);
-			
+			memInfoMap.put("memlikeList", memlikeList);			
 			mav.addObject("memInfoMap", memInfoMap);			
 		}
 		

@@ -2,6 +2,23 @@
  * 필수입력 textbox
  */
  /* joinFrm Validation */
+function checkinfo(obj) {
+	let ch_name = checkName(obj.mem_name.value)
+	let ch_birth = checkBirth(obj.birth.value)
+	
+	let vali = ch_name && ch_birth			
+
+	if (!vali) {			
+		return false
+	}			
+	
+	if (confirm("정보를 수정하시겠습니까?")) {
+		obj.submit()
+		return false
+	}
+	
+}
+
 function checkAll(obj) {
 	let ch_pass = checkPass(memberFrm.mem_pwd.value, memberFrm.mem_pwd_2.value)
 	let ch_name = checkName(memberFrm.mem_name.value)
@@ -9,7 +26,7 @@ function checkAll(obj) {
 	let ch_gen = checkGender()
 	let ch_mail = checkUserMail(memberFrm._mem_id.value)	
 	
-	let vali = ch_mail && ch_pass && ch_name && ch_birth && ch_gen			
+	let vali = ch_mail && ch_pass && ch_name && ch_birth && ch_gen	
 	
 	if (!vali) {			
 		return false
@@ -146,6 +163,21 @@ function checkGender() {
 	
 	/* 회원가입 */	
 	$("#member_div .essential").on("change keyup paste", function() {
+		if ($(this).val() == "") {
+			$(this).addClass("notiTxt")
+			$(this).next("span.noti2").text("필수 입력입니다.")			
+			$(this).next("span.noti2").css("display","block")
+			$(this).css("border-color", "#F3BE34")	
+			$(this).next("span.noti2").css("color","#F3BE34")
+		}else {
+			$(this).removeClass("notiTxt")
+			$(this).css("border-color", "#e4e4e4")
+			$(this).next("span.noti2").css("display","none")
+		}
+	})
+	
+	/* 회원정보 수정 */	
+	$("#memberInfo .essential").on("change keyup paste", function() {
 		if ($(this).val() == "") {
 			$(this).addClass("notiTxt")
 			$(this).next("span.noti2").text("필수 입력입니다.")			

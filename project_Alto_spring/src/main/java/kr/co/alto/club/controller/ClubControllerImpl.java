@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -39,6 +40,19 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	private HobbyService hobbyService;
 	@Autowired
 	private ClubDTO clubDTO;
+	
+	@RequestMapping(value = "/clubInformation.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();		
+		String viewName = (String)request.getAttribute("viewName");
+		
+		ClubDTO clubInfo = clubService.selectClubInfo(club_code);
+		
+		mav.addObject("clubInfo", clubInfo);
+		mav.setViewName(viewName);
+		
+		return mav;
+	}	
 	
 	@Override
 	@RequestMapping(value = "/clubMain.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -138,9 +152,5 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		return resEnt;
 	}
-
-	
-
-	
 
 }

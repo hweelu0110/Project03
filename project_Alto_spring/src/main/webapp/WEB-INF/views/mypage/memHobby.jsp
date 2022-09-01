@@ -14,13 +14,20 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">	
 	<link rel="stylesheet" href="${path}/resources/css/member.css" />		
 	<script type="text/javascript">
+		function check() {
+			if ($("#hobby_list ul li.select").length == 0) {
+				alert("취미를 선택해 주세요.")
+				return false
+			}	
+		}
+		
 		function sendHobbyList() {
 			let cnt = $("#hobby_list ul li.select").length
 			let codeList = Array(5)
 			
 			for(let i=0; i<5; i++) {
 				codeList[i] = " "
-			}
+			}			
 			
 			for(i=0; i<cnt; i++) {
 				let hobby_code = $("#hobby_list ul li.select:eq("+i+")").children("img:eq(1)").attr("src")
@@ -92,7 +99,7 @@
 						</ul>
 					</div>								
 				</div>
-				<button type="submit" class="pointBtn size0" >다음</button>		
+				<button type="submit" class="pointBtn size0" onclick="return check()">다음</button>		
 			</form>
 		</div>
 	</section>

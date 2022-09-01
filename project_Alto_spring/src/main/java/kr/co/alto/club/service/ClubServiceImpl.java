@@ -38,6 +38,7 @@ public class ClubServiceImpl implements ClubService {
 	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
 
 		String club_code = clubDAO.selectNewClubCode();
+		System.out.println("new club_code: "+ club_code);
 		
 		clubDTO.setClub_code(club_code);
 		
@@ -116,6 +117,11 @@ public class ClubServiceImpl implements ClubService {
 		clubSearchMap.put("hobClubList", hobClubList);
 		
 		return clubSearchMap;
+	}
+
+	@Override
+	public ClubDTO selectClubInfo(String club_code) throws DataAccessException {
+		return clubDAO.selectClubInfo(club_code);
 	}
 	
 }
