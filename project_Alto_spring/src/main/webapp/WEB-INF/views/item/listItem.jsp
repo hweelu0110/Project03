@@ -59,7 +59,7 @@
 			<input type="hidden" name="hobbyCodeList" />
 			<div id="m_cate">
 				<ul>
-					<li id="m_cate_all" class="all select">전체</li>
+					<li id="m_cate_all" class="all">전체</li>
 					<c:forEach items="${hobbyList }" var="hobby">
 						<li>
 							<img src="../resources/img/hobby_img/${hobby.hobby_code }.png" />

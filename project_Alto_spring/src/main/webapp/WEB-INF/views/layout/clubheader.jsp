@@ -13,10 +13,10 @@
 <body>
 	<div id="menu1">
 		<ul>
-			<li><a href="${path}/club/clubInformation.do">정보</a></li>
-			<li><a href="${path}/club/Noticelist.do">게시판</a></li>
-			<li><a href="${path}/club/Albumlist.do">사진첩</a></li>
-			<li><a href="${path}/club/clubChat.do">채팅</a></li>
+			<li><a href="${path}/club/clubInformation.do?club_code=${clubInfo.club_code}">정보</a></li>
+			<li><a href="${path}/club/Noticelist.do?club_code=${clubInfo.club_code}">게시판</a></li>
+			<li><a href="${path}/club/Albumlist.do?club_code=${clubInfo.club_code}">사진첩</a></li>
+			<li><a href="${path}/club/clubChat.do?club_code=${clubInfo.club_code}">채팅</a></li>
 		</ul>
 	</div>	
 </body>

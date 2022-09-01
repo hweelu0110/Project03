@@ -14,7 +14,7 @@
 	let selCate = $("#m_cate li.select").length
 	let selArea = $("#area_list li.select").length
 		
-	for (let i=0; i<selArea; i++) {
+	for (let i=0; i<selCate; i++) {
 		if ($("#tab_menu li:nth-child(1) span").text() == "전체 취미"){
 			$("#tab_menu li:nth-child(1)").html("")
 			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(i).text()+"</span>");
@@ -30,7 +30,49 @@
 		}else {
 			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
 		}
-	}	
+	}
+	
+	if ($("#area_list ul li.all").nextAll().hasClass('select')) {
+		$("#area_list ul li.all").removeClass("select")
+		$("#area_list ul li.online").removeClass("select")
+	}else {
+		$("#area_list ul li.all").addClass("select")
+	}
+	
+	/* 메인카테고리 선택 시 - 해당 소분류 취미 목록 불러오기 */
+	$("#m_cate ul li").click(function() {
+		let _hobbyC = $(this).children("img").attr("src")
+		
+		_hobbyC = _hobbyC.substring(0, _hobbyC.lastIndexOf("."))
+		_hobbyC = _hobbyC.substring((_hobbyC.lastIndexOf("/")+1), _hobbyC.length)
+		
+		if (!$(this).hasClass("select")) {
+			$.ajax({
+				url: "http://localhost:8080/alto/hobby/selectSubHobby.do",
+				type:"post",
+				dataType:"json",
+				data: {hobbyC: _hobbyC},
+				success: function(data, textStatus) {
+					if(data.hobbySubList.length > 0) {
+						$.each(data.hobbySubList, function(index, item) {										
+							$("#s_cate ul").append("<li class="+
+									item.MAIN_CODE+
+									">"+item.SUB_NAME+"</li>")
+						})
+					}
+				},
+				error: function(data, textStatus) {
+					alert("오류가 발생하였습니다. 다시 시도해주세요.")
+				}
+			})
+		} else {
+			
+			let subCode = $("#s_cate ul li").length
+			if (subCode > 0){
+				$("#s_cate ul li").remove('.'+_hobbyC)						
+			}
+		}				
+	})	
 	
 	/* tab메뉴 선택 시 - 영역 노출하기 */
 	/* 취미 탭메뉴 */

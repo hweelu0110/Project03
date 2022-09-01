@@ -241,6 +241,7 @@
 #sec_07 { margin-bottom: 100px; }
 
 /* 검색 목록 & 마이페이지 모임 리스트 */
+.normalList .noList { text-align: center; }
 .normalList ul li { 
 	position: relative;
 	width: 250px; 
@@ -248,6 +249,9 @@
 	margin-right: 30px;
 	text-align: left;
 	display: inline-block;
+}
+.normalList ul li .club_img {
+	margin-bottom: 10px;
 }
 .normalList ul li .area {
 	position: absolute;
@@ -264,16 +268,21 @@
     width: 25px;
 }
 .normalList ul li .club_name {
-	width: 220px;
+	float: left;
+	width: 190px;
     height: 35px;
-    margin-left: 30px;
+    margin-left: 5px;
     font-size: 13px;
     font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 .normalList ul li .memNum {
-	margin-left: 30px;
-    font-size: 12px;
+	float: right;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
 }
+.normalList ul li .club_schedule { clear: both; }
 .normalList ul li .like_icon {
 	position: absolute;
 	top: 3px;

@@ -38,6 +38,7 @@ import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.hobby.service.HobbyService;
+import kr.co.alto.member.dto.MemberDTO;
 
 @Controller("classController")
 public class ClassControllerImpl implements ClassController {
@@ -59,9 +60,18 @@ public class ClassControllerImpl implements ClassController {
 	
 	@Override
 	@RequestMapping(value = "/class/classMain.do", method = RequestMethod.GET)
-	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView classMain(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
+		Map<String, Object> classMainMap = new HashMap<>();
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		classMainMap = classService.classMainList(mem_id);
+	
 		Map listMapBest = new HashMap<>();
 		listMapBest.put("sort", "stuU");
 		List<ClassDTO> classListBest = classService.listClass(listMapBest);
@@ -73,6 +83,7 @@ public class ClassControllerImpl implements ClassController {
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("classListBest", classListBest);
 		mav.addObject("classListNew", classListNew);
+		mav.addObject("classMainMap", classMainMap);
 		
 		return mav;
 	}

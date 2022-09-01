@@ -7,10 +7,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="allHobbyList" value="${clubSearchMap.allHobbyList}" />
 <c:set var="allAreaList" value="${clubSearchMap.allAreaList}" />
-<c:set var="myHobbyList" value="${clubSearchMap.myHobbyList}" />
-<c:set var="mySubHobbyList" value="${clubSearchMap.mySubHobbyList}" />
-<c:set var="mySubAllList" value="${clubSearchMap.mySubHobbyAllList}"/>
-<c:set var="myAreaList" value="${clubSearchMap.myAreaList}" />
 <c:set var="hobClubList" value="${clubSearchMap.hobClubList}" />
 <!DOCTYPE html>
 <html>
@@ -26,14 +22,14 @@
 			/* 모임 메인에서 카테고리 선택 진입 시 */
 			let text = $("#tab_menu li:nth-child(1) span").text().trim()
 			$("#tab_menu li:nth-child(1) span").text(text)
-			
-			let _hobby_code = '${hobby_code}'
-			if (_hobby_code != "" || _hobby_code != null) {
+						
+			let _hobbyC = '${hobbyC}'
+			if (_hobbyC != "" || _hobbyC != null) {
 				$.ajax({
-					url: "${path}/club/selectSubHobby.do",
+					url: "http://localhost:8080/alto/hobby/selectSubHobby.do",
 					type:"post",
 					dataType:"json",
-					data: {hobby_code: _hobby_code},
+					data: {hobbyC: _hobbyC},
 					success: function(data, textStatus) {
 						if(data.hobbySubList.length > 0) {
 							$.each(data.hobbySubList, function(index, item) {										
@@ -47,42 +43,8 @@
 						alert("오류가 발생하였습니다. 다시 시도해주세요.")
 					}
 				})
-			}
+			}			
 			
-			/* 메인카테고리 선택 시 - 해당 소분류 취미 목록 불러오기 */
-			$("#m_cate ul li").click(function() {
-				let hobby_code = $(this).children("img").attr("src")
-				
-				hobby_code = hobby_code.substring(0, hobby_code.lastIndexOf("."))
-				hobby_code = hobby_code.substring((hobby_code.lastIndexOf("/")+1), hobby_code.length)
-				
-				if ($(this).hasClass("select")) {
-					$.ajax({
-						url: "${path}/club/selectSubHobby.do",
-						type:"post",
-						dataType:"json",
-						data: {hobby_code: hobby_code},
-						success: function(data, textStatus) {
-							if(data.hobbySubList.length > 0) {
-								$.each(data.hobbySubList, function(index, item) {										
-									$("#s_cate ul").append("<li class="+
-											item.MAIN_CODE+
-											">"+item.SUB_NAME+"</li>")
-								})
-							}
-						},
-						error: function(data, textStatus) {
-							alert("오류가 발생하였습니다. 다시 시도해주세요.")
-						}
-					})
-				} else {
-					
-					let subCode = $("#s_cate ul li").length
-					if (subCode > 0){
-						$("#s_cate ul li").remove('.'+hobby_code)						
-					}
-				}				
-			})
 		})
 	</script>
 </head>
@@ -98,13 +60,8 @@
 			<div id="m_cate">
 				<ul>
 					<li id="m_cate_all" class="all">전체</li>
-					<c:forEach var="hobby" items="${allHobbyList}">
-						<c:forEach var="my" items="${myHobbyList}">
-							<c:if test="${hobby.hobby_code eq my.hobby_code}">
-								<c:set var="in" value="true" />
-							</c:if>
-						</c:forEach>
-						<c:if test="${hobby.hobby_code eq hobby_code}">
+					<c:forEach var="hobby" items="${allHobbyList}">						
+						<c:if test="${hobby.hobby_code eq hobbyC}">
 							<c:set var="in" value="true" />
 						</c:if>
 						<c:choose>
@@ -127,61 +84,21 @@
 			</div>
 			<div id="s_cate">
 				<ul>
-					<li class="all select">전체</li>
-					<c:forEach var="suball" items="${mySubAllList}">
-						<c:forEach var="mysub" items="${mySubHobbyList}">
-							<c:if test="${suball.SUB_CODE eq mysub.hobby_code}">
-								<c:set var="in" value="true" />
-							</c:if>
-						</c:forEach>
-						<c:choose>
-							<c:when test="${in}">
-								<li class="${suball.MAIN_CODE} select">
-									${suball.SUB_NAME}
-								</li>
-								<c:set var="in" value="false" />
-							</c:when>
-							<c:otherwise>
-								<li class="${suball.MAIN_CODE}">
-									${suball.SUB_NAME}
-								</li>
-							</c:otherwise>
-						</c:choose>												
-					</c:forEach>
+					<li class="all select">전체</li>					
 				</ul>
 			</div>
 			<div id="area_list">
 				<ul>
 					<li class="all">전체</li>
-					<c:forEach var="area" items="${allAreaList}">
-						<c:forEach var="my" items="${myAreaList}">
-							<c:if test="${area.area_code eq my.area_code}">
-								<c:set var="in" value="true" />
-							</c:if>
-						</c:forEach>
+					<c:forEach var="area" items="${allAreaList}">						
 						<c:choose>
-							<c:when test="${in}">
-								<c:choose>
-									<c:when test="${area.name == '온라인'}">
-										<li class="online select">${area.name}</li>
-									</c:when>	
-									<c:otherwise>
-										<li class="select">${area.name}</li>
-									</c:otherwise>	
-								</c:choose>
-								<c:set var="in" value="false" />
-							</c:when>
+							<c:when test="${area.name == '온라인'}">
+								<li class="online">${area.name}</li>
+							</c:when>	
 							<c:otherwise>
-								<c:choose>
-									<c:when test="${area.name == '온라인'}">
-										<li class="online">${area.name}</li>
-									</c:when>	
-									<c:otherwise>
-										<li>${area.name}</li>
-									</c:otherwise>	
-								</c:choose>
-							</c:otherwise>
-						</c:choose>												
+								<li>${area.name}</li>
+							</c:otherwise>	
+						</c:choose>											
 					</c:forEach>
 				</ul>
 			</div>
@@ -205,6 +122,9 @@
 		<div id="search_result">
 			<h2>검색 결과</h2>
 			<div class="normalList">
+				<c:if test="${empty hobClubList}">
+					<h3 class="noList">검색 조건과 일치하는 모임이 없습니다.</h3>				
+				</c:if>
 				<ul class="club">
 					<c:forEach var="club" items="${hobClubList}">
 						<li>

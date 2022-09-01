@@ -21,6 +21,8 @@
 	<link rel="stylesheet" href="${path}/resources/css/club/clubMain.css" /> 
 	<script type="text/javascript">
 		$(function () {		
+			$("#main_menu li").css("color","#000");
+			$("#main_menu li:nth-child(1)").css("color","#00c7ae");
 			
 			/* 좋아요 처리 */
 			$(".like_icon").click(function() {
@@ -112,7 +114,7 @@
 			<ul>
 				<c:forEach var="hobby" items="${hobbyList}">
 					<li>
-						<a href="${path}/club/clubSearchList.do?hobby_code=${hobby.hobby_code}">
+						<a href="${path}/club/clubSearchList.do?hobbyC=${hobby.hobby_code}">
 							<img src="${path}/resources/img/hobby_img/${hobby.hobby_code}.png" />
 							<span class="hobby_name">${hobby.name}</span>
 						</a>
