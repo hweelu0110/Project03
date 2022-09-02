@@ -19,21 +19,13 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	
-	@Override
-	public List<BoardDTO> listArticles() throws Exception {
-		List<BoardDTO> ariclesList = boardDAO.selectAllArticlesList();
-		return ariclesList;
-	}
 
 	@Override
 	public int addNewArticle(Map articleMap) throws Exception {
 		// dao 호출
 		int notice_num = boardDAO.insertNewArticle(articleMap);		//글 정보를 저장한 후 글번호를 가져옴.
 		articleMap.put("notice_num", notice_num);						//글번호를 articleMap에 저장한 후 
-		
-		int club_code = boardDAO.insertNewArticle(articleMap);
-		articleMap.put("club_code", club_code);
-		
+				
 		boardDAO.insertNewFile(articleMap);						//이미지 정보를 저장함
 		
 		return notice_num;
@@ -122,13 +114,15 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public Map<String, Integer> listArticles(Map<String, Integer> pagingMap) throws Exception {
-		Map articlesMap = new HashMap<>();
+	public Map<String, Object> listArticles(Map<String, Object> pagingMap) throws Exception {
+		Map<String, Object> articlesMap = new HashMap<>();
 		
-		List<BoardDTO> ariclesList = boardDAO.selectAllArticlesList(pagingMap);
-		int totArtices = boardDAO.selectTotArticles();
+		List<BoardDTO> articlesList = boardDAO.selectAllArticlesList(pagingMap);
 		
-		articlesMap.put("ariclesList", ariclesList);
+		String club_code = (String) pagingMap.get("club_code");
+		int totArtices = boardDAO.selectTotArticles(club_code);
+		
+		articlesMap.put("articlesList", articlesList);
 		articlesMap.put("totArtices", totArtices);
 			
 		return articlesMap;

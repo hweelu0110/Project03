@@ -8,9 +8,8 @@ import kr.co.alto.board.dto.FileDTO;
 
 
 public interface BoardService {
-	public List<BoardDTO> listArticles() throws Exception;
 	
-	public Map<String, Integer> listArticles(Map<String, Integer> pagingMap) throws Exception;
+	public Map<String, Object> listArticles(Map<String, Object> pagingMap) throws Exception;
 	
 	public int addNewArticle(Map articleMap) throws Exception;
 	

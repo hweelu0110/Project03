@@ -267,6 +267,9 @@ input.club_img {
 }
 #step3 #areaList li.online { display: block; margin-left: 7px; }
 
+
+
+
 /* 모임 채팅 */
 #clubChat { margin: 0 auto; width: fit-content; overflow: hidden; }
 #clubChat>div {
