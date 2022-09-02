@@ -12,4 +12,6 @@ public interface ClassService {
 	public Map<String, Object> editClass(String class_code) throws Exception;
 	public void modClass(Map<String, Object> classMap) throws Exception;
 	public Map classDetail(String class_code) throws Exception;
+	
+	public Map<String, Object> classMainList(String mem_id) throws Exception;
 }

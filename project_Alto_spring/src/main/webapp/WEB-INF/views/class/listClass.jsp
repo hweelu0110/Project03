@@ -13,6 +13,8 @@
 	<script src="${contextPath }/resources/js/search_tabmenu.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			$("#main_menu li:nth-child(2)").css("color","#00c7ae");
+						
 			/* 클럽개설 버튼 팝업 */
 			$("#open_btn").mouseover(function() {
 				$("div.info_div").show()
@@ -77,40 +79,52 @@
 		</ul>
 		
 		<div id="tab_area">
-		<form action="${contextPath}/class/listClass.do" name="searchList"  onclick="return sendSearchList()" >
-			<input type="hidden" name="hobbyCodeList" />
-			<input type="hidden" name="areaCodeList" />
-			<div id="m_cate">
-				<ul>
-					<li id="m_cate_all" class="all select">전체</li>
-					<c:forEach items="${hobbyList }" var="hobby">
-						<li>
-							<img src="${contextPath }/resources/img/hobby_img/${hobby.hobby_code }.png" />
-							<p class="hobby_name">${hobby.name }</p>
-						</li>
-					</c:forEach>
-				</ul>
-			</div>
-			<%-- 
-			<div id="s_cate">
-				<ul>
-					<li class="all select">전체</li>
-				</ul>
-			</div>
-			 --%>
-			<div id="area_list">
-				<ul>
-					<li class="all select">전체</li>
-					<c:forEach items="${areaList }" var="areaList">
-						 <li>
-						 <input type="hidden" value="${areaList.area_code }">
-						 ${areaList.name }
-						 </li>
-					</c:forEach>
-				</ul>
-			</div>
-			<button type="submit" id="opSearch_btn">선택 조건으로 검색</button>
-		</form>
+			<form action="${contextPath}/class/listClass.do" name="searchList"  onclick="return sendSearchList()" >
+				<input type="hidden" name="hobbyCodeList" />
+				<input type="hidden" name="areaCodeList" />
+				<div id="m_cate">
+					<ul>
+						<li id="m_cate_all" class="all">전체</li>
+						<c:forEach items="${hobbyList }" var="hobby">
+							<c:if test="${hobby.hobby_code eq hobbyC}">
+								<c:set var="in" value="true" />
+							</c:if>
+							<c:choose>
+								<c:when test="${in}">
+									<li class="select">
+										<img src="${contextPath}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+										<p class="hobby_name">${hobby.name}</p>
+									</li>
+									<c:set var="in" value="false" />
+								</c:when>
+								<c:otherwise>
+									<li>
+										<img src="${contextPath}/resources/img/hobby_img/${hobby.hobby_code}.png" />
+										<p class="hobby_name">${hobby.name}</p>
+									</li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</ul>
+				</div>
+				<div id="s_cate">
+					<ul>
+						<li class="all select">전체</li>
+					</ul>
+				</div>
+				<div id="area_list">
+					<ul>
+						<li class="all">전체</li>
+						<c:forEach items="${areaList }" var="areaList">
+							 <li>
+							 <input type="hidden" value="${areaList.area_code }">
+							 ${areaList.name }
+							 </li>
+						</c:forEach>
+					</ul>
+				</div>
+				<button type="submit" id="opSearch_btn">선택 조건으로 검색</button>
+			</form>
 		</div>
 		
 		<div id="selectBoxArea">

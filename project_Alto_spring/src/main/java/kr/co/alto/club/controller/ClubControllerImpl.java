@@ -1,5 +1,6 @@
 package kr.co.alto.club.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,9 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
-import kr.co.alto.hobby.dto.HobbysubDTO;
-import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
+import kr.co.alto.mypage.dto.likeDTO;
+import kr.co.alto.mypage.service.MypageService;
 
 @Controller("clubController")
 @RequestMapping("/club")
@@ -37,7 +38,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	@Autowired
 	private ClubService clubService;
 	@Autowired
-	private HobbyService hobbyService;
+	private MypageService mypageService;
 	@Autowired
 	private ClubDTO clubDTO;
 	
@@ -77,44 +78,36 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Override
 	@RequestMapping(value = "/clubSearchList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception {
+	public ModelAndView clubSearhList(@RequestParam(value="hobbyC", required = false) String hobbyC, HttpServletRequest request, HttpSession httpSession) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
-		if(hobby_code != null) {
-			clubSearchMap = clubService.selectHobClubList(hobby_code);
-			
-			mav.addObject("hobby_code", hobby_code);
-			mav.addObject("clubSearchMap", clubSearchMap);
-		}
-		
+		//로그인 상태인 경우 관심목록 가져오기
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
-		if(memberDTO != null) {
+		if (memberDTO != null) {
 			String mem_id = memberDTO.getMem_id();
-			clubSearchMap = clubService.clubSearchList(mem_id);
+			List<likeDTO> memlikeList = new ArrayList<>();
+			memlikeList = mypageService.selectLikeList(mem_id);
+			
+			mav.addObject("memlikeList", memlikeList);
+		}		
+		
+		if(hobbyC != null) {
+			clubSearchMap = clubService.selectHobClubList(hobbyC);
+			
+			mav.addObject("hobbyC", hobbyC);
+			mav.addObject("clubSearchMap", clubSearchMap);
+		}else {
+			clubSearchMap = clubService.clubSearchList();
 			
 			mav.addObject("clubSearchMap", clubSearchMap);
-			
 		}
-		
+						
 		mav.setViewName(viewName);
 		return mav;
 	}
 	
-	@Override
-	@RequestMapping(value = "/selectSubHobby.do", method = RequestMethod.POST)
-	public ResponseEntity<Object> selectSubHobby(@RequestParam("hobby_code")String hobby_code, HttpServletRequest request) throws Exception {
-		System.out.println("clubController : " + hobby_code);
-		
-		Map<String, Object> map = new HashMap<>();
-		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
-		map.put("hobbySubList", hobbySubList);
-		
-		ResponseEntity<Object> resEntity = new ResponseEntity<Object>(map, HttpStatus.OK);
-		
-		return resEntity;
-	}
 
 	@Override
 	@RequestMapping(value = "/clubRegister.do", method = RequestMethod.POST)
