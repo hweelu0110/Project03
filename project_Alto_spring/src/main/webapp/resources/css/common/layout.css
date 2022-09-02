@@ -1,5 +1,5 @@
 @charset "UTF-8";
-h2 { font-family: 'Noto Sans KR', sans-serif; margin-bottom: 25px; }
+h2, h3 { font-family: 'Noto Sans KR', sans-serif; margin-bottom: 25px; }
 header {
 	width: 100%;
 	float: left;
@@ -147,6 +147,7 @@ section div { position: relative; }
 
 /* 소모임 메뉴 */
 #title { text-align: center; }
+#clubMenu { margin-bottom: 10px; }
 #clubMenu ul {
 	width: 1000px;
 	margin: 0 auto;
@@ -162,10 +163,48 @@ section div { position: relative; }
 	background: #EAEAEA;
 	font-weight: bolder;
 }
-#clubMenu ul li a { display: block; }
-#clubMenu ul li a:hover{
+#clubMenu ul li a { 
+	display: block; 
+	font-size: 13px; 
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight: 700;
+}
+
+/* 소모임 타이틀 */
+#clubTit .edit {
+	width: 15px;
+	height: 15px;
+	margin-left: 460px;
+	position: absolute;
+	float: right;
+	cursor: pointer;
+	float:left
+}
+#clubTit img { float: left; width: 25px; }
+#clubTit h2 { 
+	line-height: 24px;
+	margin: 0 0 0 32px;
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight: 700;
+}
+#clubCont { width: 900px; margin: 10px auto 50px; }
+
+/* pagination style */
+#paging { 
+	margin: 30px 0 10px;
+	text-align: center;
+	font-size: 12px; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#paging a {
+	padding: 3px 8px;
+	border: 1px solid #fff;
+}
+#paging a:hover { color: #000; border: 1px solid #EAEAEA; }
+#paging a.select:hover { border: 1px solid #fff; }
+#paging .select {
+	font-weight: 700;
 	background: #F3BE34;
-	color: #fff
 }
 
 

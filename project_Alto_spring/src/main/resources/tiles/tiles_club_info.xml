@@ -24,7 +24,7 @@
 	</definition>
 	
 	<definition name="/club_board/viewArticle" extends="tiles-layout">
-		<put-attribute name="body" value="WEB-INF/views/club_board/viewArticle.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/club_board/viewArticle.jsp" />
 	</definition>
 	
 	<!-- 소모임 사진첩 -->

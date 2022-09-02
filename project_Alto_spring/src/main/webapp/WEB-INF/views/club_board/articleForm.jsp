@@ -84,15 +84,9 @@
 	<form  name="articleForm" method="post" action="${contextPath}/club_board/addNewArticle.do" enctype="multipart/form-data"  onsubmit="return validateForm(this)">
 		<input type="hidden" name="club_code" value="${param.club_code}" />
 		<input type="hidden" name="mem_id" value="${login.mem_id}" />
-		<table style="border-bottom: none;">
+		<table style="border-bottom: none;">			
 			<tr>
-				<td width=200 style="word-break:break-all;" >작성자</td>
-				<td>
-					<input type="text" style="width: 150px;" name="name" value="${login.mem_name }" disabled/>
-				</td>
-			</tr>
-			<tr>
-				<td>제목</td>
+				<td width=200 style="word-break:break-all;" >제목</td>
 				<td>
 					<input type="text" name="title" style="width: 70%" placeholder="제목을 입력해주세요." />
 					<select name="category">

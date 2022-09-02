@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+#clubMenu ul li:nth-child(2) { border-bottom: 3px solid #F3BE34; }
+
+h3 { padding-top :20px; }
+
+.align_right { text-align: right; }
+.searchField { margin-bottom: 10px; }
+
+.noList {
+	margin: 130px; 
+	text-align: center; 
+	font-size: 15px;
+	font-weight: 700;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+table {
+	width: 100%;
+	font-size: 12px;
+	border: none;
+	border-top: 2px solid #494C57;
+}	
+table th, td { height: 40px; }
+table a:hover { color: #000; }
+
+#clubBoard { text-align: center; }
+
+#clubBoard thead { border-bottom: 1px solid #eee; }
+#clubBoard tbody td { border-bottom: 1px solid #eee; }
+#clubBoard tbody .title { text-align: left; }
+ 
+#clubView { margin-bottom: 30px; }
+#clubView th { font-size: 15px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; }
+#clubView thead { border-bottom: 1px solid #eee; }
+#clubView thead th, #clubView thead td { padding-left: 10px; }
+#clubView tbody td .regidate { color: #494C57; font-size: 10px; }
+#clubView tbody td.contents { padding: 30px; border-bottom: 1px solid #eee; }
