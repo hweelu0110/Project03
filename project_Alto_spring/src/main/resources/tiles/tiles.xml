@@ -57,7 +57,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/class/searchList.jsp" />		
 	</definition>
 		
-	<definition name="/class/ex" extends="tiles-layout-class">
+	<definition name="/class/classDetail" extends="tiles-layout-class">
 		<put-attribute name="body" value="/WEB-INF/views/class/class_detail.jsp" />		
 	</definition>
 	

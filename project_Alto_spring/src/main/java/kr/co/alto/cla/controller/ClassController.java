@@ -20,4 +20,5 @@ public interface ClassController {
 	public ResponseEntity modClass(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView classDetail(String class_code,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

@@ -64,6 +64,7 @@
 			      <div class="swiper-wrapper product">
 				      <c:forEach var="classListBest" items="${classListBest }">
 				      	<div class="swiper-slide">
+				      		<a href="${contextPath}/class/classDetail.do?class_code=${classListBest.class_code}">
 							<img class="class_img" src="${contextPath}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
 							<span class="like_icon">관심</span>
 							<span class="area">${classListBest.area_name }</span>	
@@ -72,6 +73,7 @@
 								<p class="hobby_name">${classListBest.hobby_name }</p>
 								<p class="class_price">${classListBest.price }원</p>				
 							</div>
+							</a>
 						</div>
 				      </c:forEach>
 			      </div>
@@ -86,6 +88,7 @@
 			      <div class="swiper-wrapper product">
 				      <c:forEach var="classListNew" items="${classListNew }">
 				      	<div class="swiper-slide">
+				      		<a href="${contextPath}/class/classDetail.do?class_code=${classListNew.class_code}">
 							<img class="class_img" src="${contextPath}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
 							<span class="like_icon">관심</span>
 							<span class="area">${classListNew.area_name }</span>	
@@ -94,6 +97,7 @@
 								<p class="hobby_name">${classListNew.hobby_name }</p>
 								<p class="class_price">${classListNew.price }원</p>				
 							</div>
+							</a>
 						</div>
 				      </c:forEach>
 			      </div>

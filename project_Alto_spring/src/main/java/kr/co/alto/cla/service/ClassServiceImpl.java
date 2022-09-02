@@ -66,5 +66,15 @@ public class ClassServiceImpl implements ClassService {
 			classDAO.updateImageFile(classMap);
 		}
 	}
+	
+	@Override
+	public Map classDetail(String class_code) throws Exception {
+		Map classMap = new HashMap();
+		ClassDTO classDTO = classDAO.selectClass(class_code);
+		classMap.put("classDTO", classDTO);
+		List<ImageDTO> imageList = classDAO.selectImageFileList(class_code);
+		classMap.put("imageList", imageList);
+		return classMap;
+	}
 
 }

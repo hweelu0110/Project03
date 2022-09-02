@@ -141,6 +141,7 @@
 						<c:when test="${!empty classList }">
 							<c:forEach var="classList" items="${classList }">
 								<li>
+									<a href="${contextPath}/class/classDetail.do?class_code=${classList.class_code}">
 									<img class="class_products_img" src="${contextPath}/download.do?imgName=${classList.imgName}&class_code=${classList.class_code}">
 									<span class="area">${classList.area_name }</span>
 									<span class="hobby_icon"><img src="${contextPath }/resources/img/hobby_img/${classList.hobby_code }.png" /></span>
@@ -150,6 +151,7 @@
 										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
 									</p>
 									<span class="like_icon">관심</span>
+									</a>
 								</li>
 							</c:forEach>
 						</c:when>

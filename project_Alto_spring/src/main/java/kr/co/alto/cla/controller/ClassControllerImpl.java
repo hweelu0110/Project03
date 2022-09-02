@@ -418,17 +418,18 @@ public class ClassControllerImpl implements ClassController {
 		return mav;
 	}
 	
-	
 
-
-
-	@RequestMapping(value = "/class/ex.do", method = RequestMethod.GET)
-	public ModelAndView ex(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-
+	@Override
+	@RequestMapping(value="/class/classDetail.do", method = RequestMethod.GET)
+	public ModelAndView classDetail(@RequestParam("class_code") String class_code, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String viewName=(String)request.getAttribute("viewName");
+		
+		Map classMap = classService.classDetail(class_code);
+		
 		ModelAndView mav = new ModelAndView(viewName);
-
+		mav.addObject("classMap", classMap);
 		return mav;
 	}
-
 }
