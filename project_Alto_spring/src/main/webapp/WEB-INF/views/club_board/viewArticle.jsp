@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="article" value="${articleMap.article }" />
 <c:set var="FileList" value="${articleMap.FileList }" />
+<c:set var="club_code" value="${articleMap.article.club_code}"/>
+<c:set var="cate" value="${param.cate}" />
+<c:set var="tit" value="${param.tit}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -14,7 +17,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="${contextPath}/resources/css/club/schedule.css" />
+	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
 	<style type="text/css">
 		.tr_modEable {
 			visibility: hidden;
@@ -25,7 +28,7 @@
 	</style>
 	<script type="text/javascript">
 		function backToList(obj) {
-			obj.action = "${contextPath}/board/listArticles.do"
+			obj.action = "${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
 			obj.submit()
 		}
 		
@@ -131,90 +134,89 @@
 </head>
 <body>
 	<section>
-	<h2>게시판</h2>
-	<form action="#" name="frmArticle" method="post" enctype="multipart/form-data">
-		<table>
-			<tr>
-				<td>작성자</td>
-				<td>
-					<input type="text" class="title2" style="width: 150px" id="name" />
-				</td>
-			</tr>
-			<tr>
-				<td>제목</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td>
-					<textarea id="content" style="width: 70%; height: 100px;"></textarea>
-				</td>
-			</tr>
-					<tr>
-				<td>파일 첨부</td>
-				<td>
-					<div class="input-file"  >
-  					<input type="text"  style="width: 70%">
-  					<label>다운로드</label>
-					</div>
-
-				</td>
-			</tr>
-			
-			
-		</table>
+		<div id="clubMenu">
+			<ul>
+				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
+				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
+				<li><a href="${path}/club/clubChat.do?club_code=${club_code}&cate=${cate}&tit=${tit}">채팅</a></li>
+			</ul>
+		</div>
+		<div id="clubTit">
+			<img src="${path}/resources/img/hobby_img/${cate}.png" />
+			<h2>${tit}</h2>
+		</div>
 		
-		<div>
-				<a>
-					<img alt="" src="image/heart.png" style="width:10px; height: 10px;">
-					<a>좋아요</a>
-					<a></a>
-				</a>
-					<img alt="" src="image/review.png" style="width:10px; height: 10px;">
-					<a>댓글</a>
-					<a></a>
+		<div id="clubCont">
+			<h3>게시판</h3>
+			
+			<form action="#" name="frmArticle" method="post" enctype="multipart/form-data">
+				<table id="clubView">
+					<thead>
+						<tr>
+							<th colspan="5">${article.title}</th>
+						</tr>					
+						<tr>
+							<td width="*">
+								작성자 ${article.mem_id} 
+								<span class="regidate">${article.regidate}</span>
+							</td>
+							<td width="8%">조회수</td>
+							<td width="8%">${article.score}</td>
+							<td width="8%">좋아요</td>
+							<td width="8%">${article.like_num}</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td colspan="5" class="contents">
+								${article.contents}
+							</td>
+						</tr>
+						
+						<c:if test="${not empty FileList}">
+							<tr>
+								<td>파일 첨부</td>
+								<td>
+									<div class="input-file"  >
+					  					<input type="text" style="width: 70%">
+					  					<label>다운로드</label>
+									</div>
+				
+								</td>
+							</tr>	
+						</c:if>
+					</tbody>				
+							
+				</table>
+				
+								
+				<div>
+					<div>
+						<textarea rows="" cols="" placeholder="댓글을 남겨보세요"></textarea>
+					</div>
 					
-			</div>
-			<div>
-				<div>
-					<h3>댓글</h3>
-				</div>
-			</div>
-			<div>
-				<div>
-					<strong>댓글을 입력하세요</strong>
-					<em></em>
-					<textarea rows="" cols="" placeholder="댓글을 남겨보세요">
-					
-					</textarea>
-				</div>
-				<div>
-					<a role="button">취소</a>
-					<a role="button">등록</a>
+					<div>
+						<a role="button">취소</a>
+						<a role="button">등록</a>
+					</div>				
 				</div>
 				
-			</div>
-			
-			<table>
-			
-			<tr id="tr_btn_modify">
-				<td colspan="2" align="center">
+				<div id="tr_btn_modify">
 					<input type="button" class="btn02" value="수정등록" onclick="fn_modify_article(frmArticle)" />
 					<input type="button" class="btn01" value="취소" onclick="backToList(frmArticle)" />
-				</td>
-			</tr>
-			
-			<tr id="tr_btn">
-				<td colspan="2" align="center">
-					<c:if test="${login.mem_id == article.mem_id }">	<!-- 로그인 ID가 작성자 ID와 같은 경우 -->
-						<input type="button" class="btn02" value="수정하기" onclick="fn_enable()" />
-						<input type="button" class="btn01" value="삭제하기" onclick="fn_remove_article('${contextPath}/club_board/removeArticle.do', ${article.articleNO})" />
+				</div>
+				
+				<div id="tr_btn" class="align_right">
+					<c:if test="${login.mem_name == article.mem_id }">	
+						<input type="button" class="basicBtn" value="수정하기" onclick="fn_enable()" />
+						<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_board/removeArticle.do', ${article.notice_num})" />
 					</c:if>
-					<input type="button" class="btn01" value="목록보기" onclick="backToList(frmArticle)" />
-					
-				</td>
-			</tr>
-		</table>
-	</form>
+					<input type="button" class="basicBtn02" value="목록보기" onclick="backToList(frmArticle)" />
+				</div>
+			</form>
+		</div>		
+		
 	</section>
 </body>
 </html>

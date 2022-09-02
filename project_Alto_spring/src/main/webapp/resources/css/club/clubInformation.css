@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+#clubMenu ul li:nth-child(1) { border-bottom: 3px solid #F3BE34; }
+
 .clubcontent2 {
 	margin-top:20px;
 	margin-bottom:20px;
@@ -15,17 +17,6 @@
 	float: left;
 	margin-left: 15px;
 }
-
-.clubcontent3 .edit {
-	width: 15px;
-	height: 15px;
-	margin-left: 460px;
-	position: absolute;
-	float: right;
-	cursor: pointer;
-	float:left
-}
-
 .clubcontent3 p {
 	margin-left: 10px;
 	float:left
@@ -65,11 +56,6 @@
 }
 
 
-.hobby_icon {
-	float: left;
-    width: 25px;
-}
-
 .clubcontent5 {background-color: #F3BE34; width: 50px; height: 50px; float: left; margin-top: 10px; margin-left: 5px;}
 .clubcontent6 {background-color: #EAEAEA; width: 300px; height: 50px;float: right; margin-top: 10px; margin-right: 600px;}
 .clubcontent6 .gps {width: 20px; height: 20px; margin-top:3px; margin-left: 20px;}
@@ -104,7 +90,7 @@
 	font-weight: bold;
 	color: #777;
 }
-#schedual_member h2 {
+#schedual_member h3 {
 	margin-left: 10px;
 	margin-top:10px;
 }

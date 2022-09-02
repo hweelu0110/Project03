@@ -59,7 +59,7 @@
 											ORDER BY regidate desc
 										)
 									)
-									WHERE recNum BETWEEN 1 AND 10
+									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10+1 AND (#{section}-1)*100 + #{pageNum}*10
 								)
 							)
 							AND A.mem_id = B.mem_id
@@ -103,7 +103,7 @@
 	
 	<select id="selectArticle" resultType="boardDTO" parameterType="int">
 		<![CDATA[
-			SELECT A.notice_num, A.club_code, A.title, A.regidate, A.score, A.like_num, B.MEM_NAME mem_id  
+			SELECT A.notice_num, A.club_code, A.title, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_id  
 			FROM alto_club_notice A, ALTO_MEMBER B
 			WHERE notice_num = #{notice_num} AND A.mem_id = B.mem_id	
 		]]>

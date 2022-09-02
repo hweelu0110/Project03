@@ -63,7 +63,7 @@ public class BoardControllerImpl implements BoardController {
 		Map<String , Object> pagingMap = new HashMap<>();
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
-		pagingMap.put("club_code", club_code);
+		pagingMap.put("club_code", club_code); 
 				
 		Map<String, Object> articlesMap = boardService.listArticles(pagingMap);
 		

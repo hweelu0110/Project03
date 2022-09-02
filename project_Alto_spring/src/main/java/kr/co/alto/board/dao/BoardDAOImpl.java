@@ -124,7 +124,6 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public List<BoardDTO> selectAllArticlesList(Map<String, Object> pagingMap) throws DataAccessException {
-		System.out.println("DAO : " + pagingMap.get("club_code"));
 		List<BoardDTO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList", pagingMap);
 		return articlesList;
 	}

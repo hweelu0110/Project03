@@ -107,7 +107,7 @@ public class BoardServiceImpl implements BoardService {
 		List<FileDTO> FileList = boardDAO.selectFileList(notice_num);
 		
 		Map<String, Object> articleMap = new HashMap<>();
-		articleMap.put("board", boardDTO);
+		articleMap.put("article", boardDTO);
 		articleMap.put("FileList", FileList);
 		
 		return articleMap;
