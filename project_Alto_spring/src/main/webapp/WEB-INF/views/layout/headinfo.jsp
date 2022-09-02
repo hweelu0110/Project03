@@ -17,7 +17,6 @@
 	<link rel="stylesheet" href="${path}/resources/css/common/reset.css" />
 	<link rel="stylesheet" href="${path}/resources/css/common/common.css" />
 	<link rel="stylesheet" href="${path}/resources/css/common/layout.css" />
-	<link rel="stylesheet" href="${path}/resources/css/club/clubheader.css" />
 	
 	<script src="${path}/resources/js/common.js"></script>	
 

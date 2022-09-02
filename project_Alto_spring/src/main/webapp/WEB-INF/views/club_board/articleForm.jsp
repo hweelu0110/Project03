@@ -82,18 +82,20 @@
 	<section>
 	<h2>게시판 등록</h2>
 	<form  name="articleForm" method="post" action="${contextPath}/club_board/addNewArticle.do" enctype="multipart/form-data"  onsubmit="return validateForm(this)">
+		<input type="hidden" name="club_code" value="${param.club_code}" />
+		<input type="hidden" name="mem_id" value="${login.mem_id}" />
 		<table style="border-bottom: none;">
 			<tr>
 				<td width=200 style="word-break:break-all;" >작성자</td>
 				<td>
-					<input type="text" class="title2" style="width: 150px;" id="name" value="${login.mem_id }" disabled/>
+					<input type="text" style="width: 150px;" name="name" value="${login.mem_name }" disabled/>
 				</td>
 			</tr>
 			<tr>
 				<td>제목</td>
 				<td>
-					<input type="text" id="title2" class="title2" style="width: 70%" placeholder="제목을 입력해주세요." />
-					<select id="searchField">
+					<input type="text" name="title" style="width: 70%" placeholder="제목을 입력해주세요." />
+					<select name="category">
 							<option value="">카테고리</option>
 							<option value="content">자유글</option>
 							<option value="review">정모후기</option>
@@ -105,7 +107,7 @@
 			<tr>
 				<td>내용</td>
 				<td>
-					<textarea id="content" style="width: 70%; height: 100px;"></textarea>
+					<textarea name="contents" style="width: 70%; height: 100px;"></textarea>
 					<script>CKEDITOR.replace('content');</script>
 
 				</td>
@@ -116,21 +118,21 @@
 					<div class="input-file"  >
   					<input type="text" readonly="readonly" class="file-name" />
 					  <label for="upload01" class="file-label">찾아보기</label>
-					  <input type="file" name="" id="upload01" class="file-upload" />
+					  <input type="file" name="upload01" id="upload01" class="file-upload" />
 					</div>
 					<div class="input-file"  >
   					<input type="text" readonly="readonly" class="file-name" />
 					  <label for="upload02" class="file-label">찾아보기</label>
-					  <input type="file" name="" id="upload02" class="file-upload" />
+					  <input type="file" name="upload02" id="upload02" class="file-upload" />
 					</div>
 					<div class="input-file"  >
   					<input type="text" readonly="readonly" class="file-name" />
 					  <label for="upload03" class="file-label">찾아보기</label>
-					  <input type="file" name="" id="upload03" class="file-upload" />
+					  <input type="file" name="upload03" id="upload03" class="file-upload" />
 					</div>
 					
 					<div class="input-file"  >
-  					<p>- 파일 확장자가 zip,pdf,hwp,doc,docx,txt,xls,xlsx,ppt,pptx,jpg,jpeg,gif,png,egg,dwg,max,psd,ai인파일만 업로드하실 수 있습니다.</p>
+  					<p>- 파일 확장자가 zip, pdf, hwp, doc, docx, txt, xls, xlsx, ppt, pptx, jpg, jpeg, gif, png, egg, dwg, max, psd, ai인파일만 업로드하실 수 있습니다.</p>
 					<p>(파일명은 특수문자 *,#, $ 등 & 공백 사용금지!)</p>
 					<p>- 파일 업로드 시, 첨부파일 1개당 200MB 까지 가능합니다.</p>
 					</div>

@@ -48,30 +48,29 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@RequestMapping(value = "/club_board/listArticles.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		
 		//section값과 pageNum값을 구함
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
+		String club_code = request.getParameter("club_code");
 		
 		//최초 요청시 section값과 pageNum값이 없으면 각각 1로 초기화함
 		int section = Integer.parseInt(((_section == null) ? "1" : _section));
 		int pageNum = Integer.parseInt(((_pageNum == null) ? "1" : _pageNum));
 		
-		Map<String , Integer> pagingMap = new HashMap<>();
+		Map<String , Object> pagingMap = new HashMap<>();
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
-		
-		String viewName = (String) request.getAttribute("viewName");
-		
-		//List<BoardDTO> articlesList = boardService.listArticles();
-		Map<String, Integer> articlesMap = boardService.listArticles(pagingMap);
+		pagingMap.put("club_code", club_code);
+				
+		Map<String, Object> articlesMap = boardService.listArticles(pagingMap);
 		
 		articlesMap.put("section", section);
 		articlesMap.put("pageNum", pageNum);
+		articlesMap.put("club_code", club_code);		
 		
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		//mav.addObject("articlesList", articlesList);
 		mav.addObject("articlesMap", articlesMap);
 		
 		return mav;
@@ -84,6 +83,7 @@ public class BoardControllerImpl implements BoardController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+	
 	// 글추가
 	@Override
 	@RequestMapping(value = "/club_board/addNewArticle.do", method = RequestMethod.POST)
@@ -96,12 +96,14 @@ public class BoardControllerImpl implements BoardController {
 		//글정보 저장하기 위한 Map 생성
 		Map articleMap = new HashMap();
 		Enumeration enun = multipartRequest.getParameterNames();
+		
 		//새글쓰기창에서 전송된 글 정보를 Map에 key/value로 저장함
 		while(enun.hasMoreElements()) {
 			String name = (String) enun.nextElement();
 			String value = multipartRequest.getParameter(name);
 			articleMap.put(name, value);
-	}
+		}
+		
 		//로그인 시 세션에 저장된 회원정보에서 아이디(글쓴이)를 Map에 저장
 		HttpSession session = multipartRequest.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
@@ -132,7 +134,6 @@ public class BoardControllerImpl implements BoardController {
 			try {
 					
 				int notice_num = boardService.addNewArticle(articleMap);		//articleMap을 서비스 클래스로 전달함
-				int club_code = boardService.addNewArticle(articleMap);
 				
 				if (FileList != null && FileList.size() != 0) {
 					//첨부한 이미지들을 for문을 이용해 업로드함
@@ -147,7 +148,7 @@ public class BoardControllerImpl implements BoardController {
 					
 				message = "<script>";
 				message += " alert('새글을 추가했습니다.');";
-				message += " location.href='"+multipartRequest.getContextPath()+"/club_board/listArticles.do';";
+				message += " location.href='"+multipartRequest.getContextPath()+"/club_board/listArticles.do?club_code="+articleMap.get("club_code")+"';";
 				message += "</script>";
 					
 				// 새 글을 추가한 후 메시지를 전달함

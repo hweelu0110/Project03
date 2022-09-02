@@ -15,7 +15,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<%@include file="/WEB-INF/views/layout/headinfo.jsp" %>
 	<link rel="stylesheet" href="${contextPath}/resources/css/albumlayout.css" />
 	<link rel="stylesheet" href="${contextPath}/resources/css/club/schedule.css" />
 	<script type="text/javascript">
@@ -32,6 +31,15 @@
 </head>
 <body>
 	<section>
+		<div id="clubMenu">
+			<ul>
+				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}">게시판</a></li>
+				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}">사진첩</a></li>
+				<li><a href="${path}/club/clubChat.do?club_code=${club_code}">채팅</a></li>
+			</ul>
+		</div>
+		
 		<h2>사진첩</h2>
 			<div class="div1">
 				<c:choose>

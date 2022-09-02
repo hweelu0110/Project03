@@ -45,7 +45,7 @@
 		<![CDATA[
 			SELECT *
 			FROM ALTO_CLUB
-			WHERE CLUB_CODE = ${club_code}
+			WHERE CLUB_CODE = #{club_code}
 		]]>
 	</select>
 	

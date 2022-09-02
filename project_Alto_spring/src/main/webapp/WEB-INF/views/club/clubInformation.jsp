@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="club_code" value="${clubInfo.club_code}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -28,14 +29,15 @@
 </head>
 <body>
 	<section>
-		<%-- <div id="menu1">
+		<div id="clubMenu">
 			<ul>
-				<li><a href="${path}/club/clubInformation.do?club_code=${clubInfo.club_code}">정보</a></li>
-				<li><a href="${path}/club/Noticelist.do?club_code=${clubInfo.club_code}">게시판</a></li>
-				<li><a href="${path}/club/Albumlist.do?club_code=${clubInfo.club_code}">사진첩</a></li>
-				<li><a href="${path}/club/clubChat.do?club_code=${clubInfo.club_code}">채팅</a></li>
+				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}">게시판</a></li>
+				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}">사진첩</a></li>
+				<li><a href="${path}/club/clubChat.do?club_code=${club_code}">채팅</a></li>
 			</ul>
-		</div> --%>
+		</div>	
+			
 		<div>
 			<div class="left">
 				<div class="clubcontent2">

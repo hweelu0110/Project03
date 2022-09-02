@@ -15,27 +15,16 @@ import kr.co.alto.board.dto.FileDTO;
 public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	@Override
-	public List<BoardDTO> selectAllArticlesList() throws DataAccessException {
-		List<BoardDTO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList");
-		return articlesList;
-	}
-	
+		
 	// 글정보를 게시판 테이블에 추가한 후 글 번호를 반환함
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 		int notice_num  = selectNewArticleNO();
 		articleMap.put("notice_num", notice_num);
-		
-		int club_code = Integer.parseInt(selectNewClubCode());
-		articleMap.put("club_code", club_code);
-		
+				
 		sqlSession.insert("mapper.board.insertNewArticle", articleMap);	
 		return notice_num;
 		
-	}
-	private String selectNewClubCode() {
-		return sqlSession.selectOne("mapper.board.selectNewClubCode");
 	}
 
 	private int selectNewArticleNO() {
@@ -134,14 +123,15 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> selectAllArticlesList(Map<String, Integer> pagingMap) throws DataAccessException {
+	public List<BoardDTO> selectAllArticlesList(Map<String, Object> pagingMap) throws DataAccessException {
+		System.out.println("DAO : " + pagingMap.get("club_code"));
 		List<BoardDTO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList", pagingMap);
 		return articlesList;
 	}
 
 	@Override
-	public int selectTotArticles() throws DataAccessException {
-		int totArticles = sqlSession.selectOne("mapper.board.selectTotArticles");
+	public int selectTotArticles(String club_code) throws DataAccessException {		
+		int totArticles = sqlSession.selectOne("mapper.board.selectTotArticles", club_code);
 		return totArticles;
 	}
 
