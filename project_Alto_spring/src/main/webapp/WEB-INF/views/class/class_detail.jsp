@@ -15,6 +15,8 @@
 %>  
 <html>
 <head>
+	<link href="${contextPath}/resources/css/class/class_main_style.css" rel="stylesheet" />
+	<link href="${contextPath}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="${contextPath }/resources/css/class/class_detail.css" /> 
 	<style>
 	#layer {
@@ -137,14 +139,12 @@
 					</tr>
 				</tbody>
 			</table>
-			<ul>
-				<li><a class="buy" href="javascript:fn_order_each_goods('$goods.goods_id }','$goods.goods_title }','$goods.goods_sales_price}','$goods.goods_fileName}');">구매하기 </a></li>
-				<li><a class="cart" href="javascript:add_cart('$goods.goods_id }')">장바구니</a></li>
-				
-				<li><a class="wish" href="#">위시리스트</a></li>
-			</ul>
+			<div align="right" style="margin-top: 10px">
+			<button type="submit" class="btn btn-warning">구매하기 </button>
+			<button type="reset" class="btn secondary">장바구니</button>
+			</div>
 		</div>
-		<div class="clear"></div>
+		<div class="clear" ></div>
 		<!-- 내용 들어 가는 곳 -->
 		<div id="container">
 			<ul class="tabs">

@@ -20,7 +20,7 @@ hgroup h4 {
 	margin: 5px 0px;
 }
 hgroup h3 {
-	color: rgb(0, 153, 255); font-size: 1em;
+	color: #FFCC00; font-size: 1.2em;
 }
 hgroup h4 {
 	font-size: 0.8em; font-weight: normal;
@@ -109,10 +109,10 @@ hgroup h4 {
 	margin: 40px auto; width: 100%;
 }
 ul.tabs {
-	list-style: none; margin: 0px; padding: 0px; width: 100%; height: 32px; border-bottom-color: rgb(255, 0, 0); border-bottom-width: 1px; border-bottom-style: solid; float: left;
+	list-style: none; margin: 0px; padding: 0px; width: 100%; height: 32px; border-bottom-color: rgb(255, 255, 0); border-bottom-width: 1px; border-bottom-style: solid; float: left;
 }
 ul.tabs li {
-	border-width: 1px; border-style: solid; border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(255, 0, 0); margin: 0px 1px; padding: 0px; border-image: none; height: 31px; line-height: 31px; overflow: hidden; float: left; border-top-left-radius: 7px; border-top-right-radius: 7px; background-color: rgb(245, 245, 245);
+	border-width: 1px; border-style: solid; border-color: rgb(153, 153, 153) rgb(153, 153, 153) rgb(255, 255, 0); margin: 0px 1px; padding: 0px; border-image: none; height: 31px; line-height: 31px; overflow: hidden; float: left; border-top-left-radius: 7px; border-top-right-radius: 7px; background-color: rgb(245, 245, 245);
 }
 ul.tabs li a {
 	padding: 0px 20px; color: rgb(0, 0, 0); font-size: 12px; font-weight: bold; text-decoration: none; display: block;
@@ -121,7 +121,7 @@ ul.tabs li a:hover {
 	background-color: rgb(202, 228, 255);
 }
 ul.tabs li.active {
-	background: rgb(255, 255, 255); border-color: rgb(255, 0, 0) rgb(255, 0, 0) rgb(255, 255, 255); border-bottom-width: 2px; border-bottom-style: solid;
+	background: rgb(255, 204, 000); border-color: rgb(255, 204, 000) rgb(255, 204, 000) rgb(255, 255, 255); border-bottom-width: 2px; border-bottom-style: solid;
 }
 ul.tabs li.active a:hover {
 	background: rgb(255, 255, 255); border-color: rgb(255, 0, 0) rgb(255, 0, 0) rgb(255, 255, 255); border-bottom-width: 2px; border-bottom-style: solid;
