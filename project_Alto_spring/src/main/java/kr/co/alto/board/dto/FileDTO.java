@@ -12,31 +12,32 @@ import java.sql.Date;
 	,notice_num number(10) 
  */
 public class FileDTO {
-	private int FileNO;
-	private String FileName;
+	private int fileNO;
+	private String fileName;
 	private Date regDate;
 	private int notice_num;
+	
 	public int getFileNO() {
-		return FileNO;
+		return fileNO;
 	}
 	public void setFileNO(int fileNO) {
-		FileNO = fileNO;
+		this.fileNO = fileNO;
 	}
 	public String getFileName() {
-		if (FileName != null && FileName.length() != 0) {
+		if (fileName != null && fileName.length() != 0) {
 			try {
-				FileName = URLDecoder.decode(FileName, "UTF-8");
+				fileName = URLDecoder.decode(fileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return FileName;
+		return fileName;
 	}
 	public void setFileName(String fileName) {
-		if(FileName != null && FileName.length() != 0) {
+		if(fileName != null && fileName.length() != 0) {
 			try {
-				this.FileName = URLEncoder.encode(FileName, "UTF-8");
+				this.fileName = URLEncoder.encode(fileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

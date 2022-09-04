@@ -35,18 +35,18 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public void insertNewFile(Map articleMap) throws DataAccessException {
-		List<FileDTO> FileList = (List<FileDTO>) articleMap.get("FileList");
+		List<FileDTO> fileList = (List<FileDTO>) articleMap.get("fileList");
 		int notice_num = (Integer) articleMap.get("notice_num");
 		
-		int FileNO = selectNewFileNO();
+		int fileNO = selectNewFileNO();
 		
-		if(FileList != null && FileList.size() != 0 ) {
-			for(FileDTO fileDTO : FileList) {
-				fileDTO.setFileNO(++FileNO);
+		if(fileList != null && fileList.size() != 0 ) {
+			for(FileDTO fileDTO : fileList) {
+				fileDTO.setFileNO(++fileNO);
 				fileDTO.setNotice_num(notice_num);
 			}
 			
-			sqlSession.insert("mapper.board.insertNewFile", FileList);
+			sqlSession.insert("mapper.board.insertNewFile", fileList);
 		}
 		
 	}
@@ -60,9 +60,9 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	@Override
 	public List<FileDTO> selectFileList(int notice_num) throws DataAccessException {
-		List<FileDTO> FileList = sqlSession.selectList("mapper.board.selectFileList", notice_num);
+		List<FileDTO> fileList = sqlSession.selectList("mapper.board.selectFileList", notice_num);
 		
-		return FileList;
+		return fileList;
 	}
 	@Override
 	public void updateArticle(Map<String, Object> articleMap) throws DataAccessException {

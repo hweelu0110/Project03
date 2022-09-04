@@ -104,11 +104,11 @@ public class BoardServiceImpl implements BoardService {
 			boardDTO = boardDAO.selectArticle(notice_num);	
 		}
 		
-		List<FileDTO> FileList = boardDAO.selectFileList(notice_num);
+		List<FileDTO> fileList = boardDAO.selectFileList(notice_num);
 		
 		Map<String, Object> articleMap = new HashMap<>();
 		articleMap.put("article", boardDTO);
-		articleMap.put("FileList", FileList);
+		articleMap.put("fileList", fileList);
 		
 		return articleMap;
 	}
