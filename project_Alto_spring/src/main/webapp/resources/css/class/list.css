@@ -286,3 +286,9 @@
     cursor: pointer;
 }
 
+.class_products_img {
+	display: flex;
+	justify-content: center;
+	width: 230px;
+	height: 250px;
+}

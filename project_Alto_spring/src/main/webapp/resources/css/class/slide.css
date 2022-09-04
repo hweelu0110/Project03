@@ -60,7 +60,8 @@
   right: 10px;
 }
 
-/* 각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용 */
+/* 
+각 슬라이드가 변경되는 것을 시각적으로 확인하기 쉽도록 각 슬라이드별 색상 적용
 .slide_item:nth-child(1) {
   background-color: darkgoldenrod;
 }
@@ -76,7 +77,8 @@
 .slide_item:nth-child(5) {
   background-color: cornflowerblue;
 }
-
+ */
+ 
 /* 페이지네이션 스타일 */
 ul,
 li {

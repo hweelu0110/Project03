@@ -103,8 +103,7 @@
 					<tr class="dot_line">
 						<td class="fixed">수강료</td>
 						<td class="active"><span >
-						   <fmt:formatNumber  value="${classDTO.price}" type="number" var="class_price" />
-					         ${classDTO.price}
+						   <fmt:formatNumber  value="${classDTO.price}" pattern="#,###" /> 원
 					       </span></td>
 					</tr>
 					<tr>
