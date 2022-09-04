@@ -92,8 +92,8 @@ public class BoardControllerImpl implements BoardController {
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		
-		String cate = multipartRequest.getParameter("section");
-		String tit = multipartRequest.getParameter("pageNum");
+		String cate = multipartRequest.getParameter("cate");
+		String tit = multipartRequest.getParameter("tit");
 		String fileName = null;
 		
 		//글정보 저장하기 위한 Map 생성
