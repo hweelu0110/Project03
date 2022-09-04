@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="article" value="${articleMap.article }" />
-<c:set var="FileList" value="${articleMap.FileList }" />
+<c:set var="fileList" value="${articleMap.fileList }" />
 <c:set var="club_code" value="${articleMap.article.club_code}"/>
 <c:set var="cate" value="${param.cate}" />
 <c:set var="tit" value="${param.tit}" />
@@ -158,7 +158,7 @@
 						</tr>					
 						<tr>
 							<td width="*">
-								작성자 ${article.mem_id} 
+								작성자 ${article.mem_name} 
 								<span class="regidate">${article.regidate}</span>
 							</td>
 							<td width="8%">조회수</td>
@@ -174,15 +174,16 @@
 							</td>
 						</tr>
 						
-						<c:if test="${not empty FileList}">
+						<c:if test="${not empty fileList}">
 							<tr>
 								<td>파일 첨부</td>
 								<td>
-									<div class="input-file"  >
-					  					<input type="text" style="width: 70%">
-					  					<label>다운로드</label>
-									</div>
-				
+									<c:forEach var="file" items="${fileList}">
+										<div class="input-file">
+					  						<input type="text" readonly="readonly" class="file-name" value="${file.fileName}" />
+										  	<label for="upload01" class="file-label">다운로드</label>
+										</div>
+									</c:forEach>				
 								</td>
 							</tr>	
 						</c:if>
@@ -208,7 +209,7 @@
 				</div>
 				
 				<div id="tr_btn" class="align_right">
-					<c:if test="${login.mem_name == article.mem_id }">	
+					<c:if test="${login.mem_id == article.mem_id }">	
 						<input type="button" class="basicBtn" value="수정하기" onclick="fn_enable()" />
 						<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_board/removeArticle.do', ${article.notice_num})" />
 					</c:if>

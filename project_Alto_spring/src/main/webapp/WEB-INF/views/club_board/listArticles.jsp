@@ -80,7 +80,7 @@
 								<tr>
 									<td>${articleNum.count }</td>
 									<td class="title"><a href="${path}/club_board/viewArticle.do?notice_num=${article.notice_num}&cate=${cate}&tit=${tit}">${article.title }</a></td>
-									<td>${article.mem_id }</td>
+									<td>${article.mem_name }</td>
 									<td>${article.score }</td>
 									<td>${article.regidate }</td>
 									<td>${article.like_num}</td>							
