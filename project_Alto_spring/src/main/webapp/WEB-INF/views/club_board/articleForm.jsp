@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
 	<script src="${path}/resources/ckeditor/ckeditor.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
 		function validateForm(form) {
 			if($("#title").val() == ""){
 		        alert("제목을 입력하세요.")
@@ -30,9 +30,9 @@
 		        return false
 		      }
 
-			if($("#contents").val() == ""){
+			if(CKEDITOR.instances.contents.getData() == ""){
 		        alert("내용을 입력해주세요.")
-		        $("#content").focus()
+		        $("#contents").focus()
 		        return false
 		      }
 		}
@@ -96,13 +96,13 @@
 		</div>
 		
 		<div id="clubCont">
-			<h2>게시판 등록</h2>
+			<h3>게시글 등록</h3>
 			
 			<form name="articleFrm" method="post" action="${path}/club_board/addNewArticle.do?cate=${cate}&tit=${tit}" enctype="multipart/form-data"  onsubmit="return validateForm(this)">
 				<input type="hidden" name="club_code" value="${param.club_code}" />
 				<input type="hidden" name="mem_id" value="${login.mem_id}" />
 				
-				<table style="border-bottom: none;">			
+				<table id="boardFrm" style="border-bottom: none;">			
 					<tr>
 						<th>제목</th>
 						<td>
@@ -120,8 +120,8 @@
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="contents" id="contents"  style="width: 70%; height: 100px;"></textarea>
-							<script>CKEDITOR.replace('content');</script>		
+							<textarea name="contents" id="contents" rows="20" cols="30"></textarea>
+							<script>CKEDITOR.replace('contents')</script>
 						</td>
 					</tr>
 					
@@ -145,9 +145,9 @@
 							</div>
 							
 							<div class="input-file">
-			  					<p>- 파일 확장자가 zip, pdf, hwp, doc, docx, txt, xls, xlsx, ppt, pptx, jpg, jpeg, gif, png, egg, dwg, max, psd, ai인파일만 업로드하실 수 있습니다.</p>
-								<p>(파일명은 특수문자 *,#, $ 등 & 공백 사용금지!)</p>
-								<p>- 파일 업로드 시, 첨부파일 1개당 200MB 까지 가능합니다.</p>
+			  					<p>- 파일 확장자가 zip, pdf, hwp, doc, docx, txt, xls, xlsx, ppt, pptx, jpg, jpeg, gif, png, egg, dwg, max, psd, ai 인 파일만 업로드 하실 수 있습니다.</p>
+								<p>  (파일명은 특수문자 *, #, $, &, 공백 사용이 오류가 발생할 수 있습니다.)</p>
+								<p>- 첨부파일 1개당 최대 200MB 까지 업로드 가능합니다.</p>
 							</div>
 							
 						</td>

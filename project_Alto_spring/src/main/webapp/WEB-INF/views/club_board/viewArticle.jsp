@@ -54,7 +54,7 @@
 		
 		//수정등록 버튼 클릭시 컨트롤러에게 수정 데이터를 전송 
 		function fn_modify_article(obj) {
-			obj.action = "${contextPath}/club_board/modArticle.do"
+			obj.action = "${path}/club_board/modArticle.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
 			obj.submit()
 		}
 		
@@ -102,17 +102,17 @@
 			form.submit()									//서버에 요청함
 		}
 		
-		function fn_removeModImage(_FileNO, _notice_num, _FileName, rowNum) {
+		function fn_removeModImage(_fileNO, _notice_num, _fileName, rowNum) {
 			alert(rowNum)
 			$.ajax({
 				type: "post",
-				url: "${contextPath}/club_board/removeModFile.do",
+				url: "${path}/club_board/removeModFile.do?club_code=${club_code}&cate=${cate}&tit=${tit}",
 				dataType: "text",
-				data: {imageFileNO: _imageFileNO, articleNO: _articleNO, imageFileName: _imageFileName},
+				data: {fileNO: _fileNO, notice_num: _notice_num, fileName: _fileName},
 				success: function(result, textStatus) {
 					if (result == 'success') {
 						alert("이미지를 삭제했습니다.")
-						location.href="${contextPath}/club_board/viewArticle.do?removeCompleted=true&notice_num=" + _notice_num;
+						location.href="${path}/club_board/viewArticle.do?removeCompleted=true&notice_num=" + _notice_num;
 						$('#tr_'+rowNum).remove()
 						$('#tr_sub' +rowNum).remove()
 					}
@@ -154,13 +154,11 @@
 				<table id="clubView">
 					<thead>
 						<tr>
-							<th colspan="5">${article.title}</th>
+							<th colspan="6">${article.title}</th>
 						</tr>					
 						<tr>
-							<td width="*">
-								작성자 ${article.mem_name} 
-								<span class="regidate">${article.regidate}</span>
-							</td>
+							<td width="10%" align="right">작성자 ${article.mem_name}</td>
+							<td width="*"><span class="regidate">${article.regidate}</span></td>
 							<td width="8%">조회수</td>
 							<td width="8%">${article.score}</td>
 							<td width="8%">좋아요</td>
@@ -169,15 +167,15 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="5" class="contents">
+							<td colspan="6" class="contents">
 								${article.contents}
 							</td>
 						</tr>
 						
 						<c:if test="${not empty fileList}">
 							<tr>
-								<td>파일 첨부</td>
-								<td>
+								<th class="tit01">첨부파일</th>
+								<td class="cont01" colspan="5">
 									<c:forEach var="file" items="${fileList}">
 										<div class="input-file">
 					  						<input type="text" readonly="readonly" class="file-name" value="${file.fileName}" />
@@ -189,12 +187,11 @@
 						</c:if>
 					</tbody>				
 							
-				</table>
-				
+				</table>				
 								
 				<div>
 					<div>
-						<textarea rows="" cols="" placeholder="댓글을 남겨보세요"></textarea>
+						<textarea placeholder="댓글을 남겨보세요"></textarea>
 					</div>
 					
 					<div>
