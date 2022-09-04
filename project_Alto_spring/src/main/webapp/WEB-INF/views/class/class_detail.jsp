@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="classDTO"  value="${classMap.classDTO}"  />
-<c:set var="imageList"  value="${classMap.imageList }"  />
+<c:set var="imageList"  value="${classMap.imageFileList }"  />
 <%
      //치환 변수 선언
       //pageContext.setAttribute("crcn", "\r\n"); //개행문자

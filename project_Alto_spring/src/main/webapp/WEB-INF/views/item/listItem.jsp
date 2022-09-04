@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />  
 <!DOCTYPE html>
 <html>
@@ -99,14 +100,16 @@
 						<c:when test="${!empty itemList }">
 							<c:forEach var="itemList" items="${itemList }">
 								<li>
+									<a href="${contextPath}/item/itemDetail.do?item_code=${itemList.item_code}">
 									<img class="class_products_img" src="${contextPath}/download.do?imgName=${itemList.imgName}&item_code=${itemList.item_code}" />
 									<span class="hobby_icon"><img src="../resources/img/hobby_img/${itemList.hobby_code }.png" /></span>
 									<p class="club_name">${itemList.item_name }</p>
 									<span class="memNum" style="font-size: 11px">${itemList.quantity }  개</span>
 									<p class="club_schedule">
-										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+										<span class="s_icon2"></span><span><fmt:formatNumber value="${itemList.price}" pattern="#,###" /> 원</span>
 									</p>
 									<span class="like_icon">관심</span>
+									</a>
 								</li>
 							</c:forEach>
 						</c:when>

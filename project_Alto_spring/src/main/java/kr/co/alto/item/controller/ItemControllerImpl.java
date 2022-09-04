@@ -250,7 +250,7 @@ public class ItemControllerImpl implements ItemController {
 		HttpSession session = request.getSession();
 		
 		System.out.println("컨트롤러 : "+item_code);
-		Map<String, Object> itemMap = itemService.editItem(item_code);
+		Map<String, Object> itemMap = itemService.itemDetail(item_code);
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -387,6 +387,21 @@ public class ItemControllerImpl implements ItemController {
 		}
 		
 		return fileList;
+	}
+
+	
+	@Override
+	@RequestMapping(value="/item/itemDetail.do", method = RequestMethod.GET)
+	public ModelAndView itemDetail(String item_code, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String viewName=(String)request.getAttribute("viewName");
+		
+		Map itemMap = itemService.itemDetail(item_code);
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("itemMap", itemMap);
+		return mav;
 	}
 	
 	

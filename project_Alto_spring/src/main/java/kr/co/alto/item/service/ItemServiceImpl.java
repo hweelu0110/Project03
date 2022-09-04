@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.item.dao.ItemDAO;
@@ -43,12 +44,10 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Map<String, Object> editItem(String item_code) throws Exception {
+	public Map<String, Object> itemDetail(String item_code) throws Exception {
 
-		// 조회수를 갱신하기 전 먼저 글번호에 해당되는 글정보를 조회
 		ItemDTO itemDTO = itemDAO.selectItem(item_code);
 		
-		//이미지 부분 정보 요청
 		List<ImageDTO> imageFileList = itemDAO.selectImageFileList(item_code);		
 		
 		Map<String, Object> classMap = new HashMap<>();

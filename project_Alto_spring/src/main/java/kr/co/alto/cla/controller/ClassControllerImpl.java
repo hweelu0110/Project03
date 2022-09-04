@@ -275,7 +275,7 @@ public class ClassControllerImpl implements ClassController {
 		HttpSession session = request.getSession();
 		
 		System.out.println("컨트롤러 : "+class_code);
-		Map<String, Object> classMap = classService.editClass(class_code);
+		Map<String, Object> classMap = classService.classDetail(class_code);
 
 		ModelAndView mav = new ModelAndView();
 		

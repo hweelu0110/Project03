@@ -18,4 +18,6 @@ public interface ItemController {
 	
 	public ModelAndView editItem(String item_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity modItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+
+	public ModelAndView itemDetail(String item_code,HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
