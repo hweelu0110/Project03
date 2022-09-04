@@ -17,6 +17,7 @@
 <head>
 	<link href="${contextPath}/resources/css/class/class_main_style.css" rel="stylesheet" />
 	<link href="${contextPath}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${contextPath }/resources/css/class/slide.css" />
 	<link rel="stylesheet" href="${contextPath }/resources/css/class/class_detail.css" /> 
 	<style>
 	#layer {
@@ -78,7 +79,16 @@
 		</hgroup>
 		<div id="goods_image">
 			<figure>
-				<img src="${contextPath}/download.do?imgName=${classDTO.imgName}&class_code=${classDTO.class_code}">
+				<%-- <img src="${contextPath}/download.do?imgName=${classDTO.imgName}&class_code=${classDTO.class_code}"> --%>
+				<div class="slide slide_wrap">
+					<c:forEach var="img" items="${imageList}">
+			     	 <div class="slide_item"><img src="${contextPath}/download.do?imgName=${img.imageFileName}&class_code=${img.class_code}"></div>
+			      	</c:forEach>
+			      <div class="slide_prev_button slide_button">◀</div>
+			      <div class="slide_next_button slide_button">▶</div>
+			      <ul class="slide_pagination"></ul>
+			    </div>
+			    <script src="${contextPath }/resources/js/slide.js"></script>
 			</figure>
 		</div>
 		<div id="detail_table">
