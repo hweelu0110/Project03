@@ -18,6 +18,7 @@ public interface BoardDAO {
 	public BoardDTO selectArticle(int notice_num) throws DataAccessException;
 	
 	public List<FileDTO> selectFileList(int notice_num) throws DataAccessException;
+	public FileDTO selectFileInfo(int fileNo) throws DataAccessException;
 
 	public void updateArticle(Map<String, Object> articleMap) throws DataAccessException;
 	public void updateFile(Map<String, Object> articleMap) throws DataAccessException;
@@ -28,5 +29,6 @@ public interface BoardDAO {
 	public void deleteModFile(FileDTO fileDTO) throws DataAccessException;
 	
 	public void updateViewCount(int notice_num) throws DataAccessException;
+	
 
 }

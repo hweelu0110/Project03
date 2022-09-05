@@ -1,8 +1,11 @@
 package kr.co.alto.board.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -21,6 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +43,7 @@ import kr.co.alto.member.dto.MemberDTO;
 @Controller
 public class BoardControllerImpl implements BoardController {
 	//이미지 저장위치
-	private static String ARTICLE_IMAGE_REPO = "C:\\workspace-spring\\imageRepo";
+	private static String ARTICLE_FILE_REPO = "C:\\workspace-spring\\fileRepo";
 	@Autowired
 	private BoardService boardService;
 	@Autowired
@@ -140,8 +144,8 @@ public class BoardControllerImpl implements BoardController {
 				//첨부한 이미지들을 for문을 이용해 업로드함
 				for (FileDTO fileDTO : fileList) {
 					fileName = fileDTO.getFileName();
-					File srcFile = new File(ARTICLE_IMAGE_REPO +"\\temp\\"+ fileName);
-					File destFile = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num);
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
+					File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
 					FileUtils.moveFileToDirectory(srcFile, destFile, true);
 				}
 			}
@@ -159,7 +163,7 @@ public class BoardControllerImpl implements BoardController {
 				//오류 발생시 temp폴더의 이미지들 모두 삭제
 				for (FileDTO fileDTO : fileList) {
 					fileName = fileDTO.getFileName();
-					File srcFile = new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ fileName);
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
 					srcFile.delete();
 				}
 			}
@@ -189,11 +193,11 @@ public class BoardControllerImpl implements BoardController {
 			
 			if (originalFilename != "" && originalFilename != null) {
 				fileList.add(originalFilename);		
-				File file = new File(ARTICLE_IMAGE_REPO +"\\"+ fileName);
+				File file = new File(ARTICLE_FILE_REPO +"\\"+ fileName);
 				if (mFile.getSize() != 0) {
 					if (!file.exists()) {
 						file.getParentFile().mkdirs();		
-						mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ originalFilename));
+						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ originalFilename));
 					}
 				}
 			}
@@ -227,6 +231,45 @@ public class BoardControllerImpl implements BoardController {
 		mav.addObject("articleMap", articleMap);
 		
 		return mav;
+	}
+	
+	// 첨부파일 다운로드
+	@Override
+	@RequestMapping(value = "/club_board/filedownload.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public void downloadFile(@RequestParam("fileNo") int fileNo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		FileDTO fileInfo = boardService.selectFile(fileNo);
+		
+		int notice_num = (int) fileInfo.getNotice_num();
+		String fileName = (String) fileInfo.getFileName();
+		
+		System.out.println("Controller ? "+ notice_num + fileName);
+		
+		File downloadFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ fileName);
+		
+		byte fileByte[] = FileUtils.readFileToByteArray(downloadFile);
+				
+		response.setContentType("application/octet-stream");
+		response.setContentLength(fileByte.length);
+		
+		response.setHeader("Content-Disposition", "attachment;fileName=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setHeader("Pragma", "no-cache;");
+        response.setHeader("Expires", "-1;");
+		
+        try (FileInputStream fis = new FileInputStream(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ fileName); 
+        		OutputStream out = response.getOutputStream();) {
+            // saveFileName을 파라미터로 넣어 inputStream 객체를 만들고 
+            // response에서 파일을 내보낼 OutputStream을 가져와서  
+            int readCount = 0;
+            byte[] buffer = new byte[1024];
+            // 파일 읽을 만큼 크기의 buffer를 생성한 후 
+            while ((readCount = fis.read(buffer)) != -1) {
+                out.write(buffer, 0, readCount);
+                // outputStream에 씌워준다
+            }
+        } catch (Exception ex) {
+            throw new RuntimeException("file Load Error");
+        }	
 	}
 	
 	@Override
@@ -276,7 +319,7 @@ public class BoardControllerImpl implements BoardController {
 				FileDTO fileDTO = new FileDTO();
 				if (i < pre_img_num) {				//기존의 이미지를 수정해서 첨부한 이미지들
 					fileDTO.setFileName(fileName);
-					fileDTO.setFileNO(Integer.parseInt(FileNO[i]));
+					fileDTO.setFileNo(Integer.parseInt(FileNO[i]));
 					FileList.add(fileDTO);
 					articleMap.put("FileList", FileList);
 				}
@@ -305,21 +348,21 @@ public class BoardControllerImpl implements BoardController {
 					
 					if (i < pre_img_num) {
 						if (fileName != null) {
-							File srcFile = new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ fileName);
-							File destFile = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num);
+							File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
+							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
 							FileUtils.moveFileToDirectory(srcFile, destFile, true);
 							
 							String[] oldName = (String[]) articleMap.get("oldFileName");
 							String oldFileName = oldName[i];
 							
-							File oldFile = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num +"\\"+ oldFileName);
+							File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ oldFileName);
 							oldFile.delete();		
 						}
 					}
 					else {
 						if (fileName != null) {
-							File srcFile = new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ fileName);
-							File destFile = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num);
+							File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
+							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
 							FileUtils.moveFileToDirectory(srcFile, destFile, true);						
 						}
 					}
@@ -339,7 +382,7 @@ public class BoardControllerImpl implements BoardController {
 			if (fileList != null && fileList.size() != 0) {
 				//오류 발생시 temp폴더의 이미지들 모두 삭제
 				for (int i=0; i<fileList.size(); i++) {
-					File srcFile = new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ fileList.get(i));
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileList.get(i));
 					srcFile.delete();
 				}
 			}
@@ -369,11 +412,11 @@ public class BoardControllerImpl implements BoardController {
 			if (originalFileName != "" && originalFileName != null) {
 				fileList.add(originalFileName);
 				
-				File file = new File(ARTICLE_IMAGE_REPO +"\\"+ fileName);
+				File file = new File(ARTICLE_FILE_REPO +"\\"+ fileName);
 				if (mFile.getSize() != 0) {
 					if (!file.exists()) {
 						file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리들 생성
-						mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+ "temp" +"\\"+ originalFileName)); //임시로
+						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ originalFileName)); //임시로
 								//저장된 MultipartFile을 실제 파일로 전송
 					}
 				}
@@ -403,7 +446,7 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			boardService.removeArticle(notice_num);			//글번호 전달해서 글 삭제함
 			
-			File destDir = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num);
+			File destDir = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
 			FileUtils.deleteDirectory(destDir);				//첨부된 이미지 파일이 저장된 폴더도 삭제함
 			
 			message = "<script>";
@@ -425,6 +468,7 @@ public class BoardControllerImpl implements BoardController {
 				
 		return resEnt;
 	}
+	
 	@Override
 	@RequestMapping(value = "/club_board/removeModImage.do", method = RequestMethod.POST)
 	public void removeModFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -441,15 +485,16 @@ public class BoardControllerImpl implements BoardController {
 		
 		FileDTO fileDTO = new FileDTO();
 		fileDTO.setNotice_num(Integer.parseInt(notice_num));
-		fileDTO.setFileNO(Integer.parseInt(FileNO));
+		fileDTO.setFileNo(Integer.parseInt(FileNO));
 		
 		boardService.removeModFile(fileDTO);
 		
-		File oldFile = new File(ARTICLE_IMAGE_REPO +"\\"+ notice_num +"\\"+ FileName);
+		File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ FileName);
 		oldFile.delete();
 		
 		writer.print("success");
 		
 	}
+
 	
 }
