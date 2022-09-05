@@ -32,6 +32,19 @@
 			obj.submit()
 		}
 		
+		function downloadFile(fileNo){
+		    $.ajax({
+		        method:"GET",
+		        url : "${path}/club_board/filedownload.do?fileNo="+fileNo,
+		        success : function(data) {
+		           
+		        },
+		        error:function(request,status){
+		            alert("오류가 발생했습니다.");
+		        }
+		    });
+		}
+		
 		//수정하기 클릭시 텍스트 박스를 활성화시킴
 		function fn_enable() {
 			document.getElementById("i_title").disabled=false
@@ -179,7 +192,7 @@
 									<c:forEach var="file" items="${fileList}">
 										<div class="input-file">
 					  						<input type="text" readonly="readonly" class="file-name" value="${file.fileName}" />
-										  	<label for="upload01" class="file-label">다운로드</label>
+										  	<button type="button" class="file-label" onclick="downloadFile(${file.fileNo})">다운로드</button>
 										</div>
 									</c:forEach>				
 								</td>

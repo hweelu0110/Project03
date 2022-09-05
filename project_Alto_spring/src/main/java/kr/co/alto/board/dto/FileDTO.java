@@ -12,17 +12,19 @@ import java.sql.Date;
 	,notice_num number(10) 
  */
 public class FileDTO {
-	private int fileNO;
+	private int fileNo;
 	private String fileName;
 	private Date regDate;
 	private int notice_num;
 	
-	public int getFileNO() {
-		return fileNO;
+	public int getFileNo() {
+		return fileNo;
 	}
-	public void setFileNO(int fileNO) {
-		this.fileNO = fileNO;
+	
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
 	}
+	
 	public String getFileName() {
 		if (fileName != null && fileName.length() != 0) {
 			try {
@@ -34,6 +36,7 @@ public class FileDTO {
 		}
 		return fileName;
 	}
+	
 	public void setFileName(String fileName) {
 		if(fileName != null && fileName.length() != 0) {
 			try {
@@ -44,20 +47,21 @@ public class FileDTO {
 			}
 		}
 	}
+	
 	public Date getRegDate() {
 		return regDate;
 	}
+	
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 	public int getNotice_num() {
 		return notice_num;
 	}
+	
 	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
 	}
-	
-	
-	
 	
 }

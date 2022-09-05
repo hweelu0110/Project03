@@ -19,6 +19,20 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	
+	@Override
+	public Map<String, Object> listArticles(Map<String, Object> pagingMap) throws Exception {
+		Map<String, Object> articlesMap = new HashMap<>();
+		
+		List<BoardDTO> articlesList = boardDAO.selectAllArticlesList(pagingMap);
+		
+		String club_code = (String) pagingMap.get("club_code");
+		int totArtices = boardDAO.selectTotArticles(club_code);
+		
+		articlesMap.put("articlesList", articlesList);
+		articlesMap.put("totArtices", totArtices);
+			
+		return articlesMap;
+	}
 
 	@Override
 	public int addNewArticle(Map articleMap) throws Exception {
@@ -30,32 +44,44 @@ public class BoardServiceImpl implements BoardService {
 		
 		return notice_num;
 	
-	}
+	}	
 
 	@Override
-	public Map<String, Object> viewArticle(int notice_num) throws Exception {
-		
-		Map<String, Object> articleMap = new HashMap<>();
+	public Map<String, Object> viewArticle(Map<String, Object> viewMap) throws Exception {
+		int notice_num = (int) viewMap.get("notice_num");
+		String mem_id = (String) viewMap.get("mem_id");
 		
 		BoardDTO boardDTO = boardDAO.selectArticle(notice_num);
 		
-		//이미지 부분 정보 요청
-		List<FileDTO> FileList = boardDAO.selectFileList(notice_num);
+		String writerId = boardDTO.getMem_id();
+		if (mem_id == null || !(mem_id.equals(writerId))) {
+			//조회수 1 증가
+			boardDAO.updateViewCount(notice_num);
+			boardDTO = boardDAO.selectArticle(notice_num);	
+		}
 		
-		articleMap.put("board", boardDTO);
-		articleMap.put("FileList", FileList);
+		List<FileDTO> fileList = boardDAO.selectFileList(notice_num);
+		
+		Map<String, Object> articleMap = new HashMap<>();
+		articleMap.put("article", boardDTO);
+		articleMap.put("fileList", fileList);
 		
 		return articleMap;
+	}
+	
+	@Override
+	public FileDTO selectFile(int fileNo) {
+		return boardDAO.selectFileInfo(fileNo);
 	}
 
 	@Override
 	public void modArticle(Map<String, Object> articleMap) throws Exception {
 		boardDAO.updateArticle(articleMap);
 		
-		List<FileDTO> FileList = (List<FileDTO>) articleMap.get("FileList");
+		List<FileDTO> fileList = (List<FileDTO>) articleMap.get("fileList");
 		List<FileDTO> modAddFileList = (List<FileDTO>) articleMap.get("modAddFileList");
 		
-		if (FileList != null && FileList.size() != 0) {
+		if (fileList != null && fileList.size() != 0) {
 			int added_img_num = Integer.parseInt((String)articleMap.get("added_img_num"));
 			int pre_img_num = Integer.parseInt((String)articleMap.get("pre_img_num"));
 			
@@ -71,61 +97,16 @@ public class BoardServiceImpl implements BoardService {
 		else if (modAddFileList != null && modAddFileList.size() != 0) {													
 			boardDAO.insertModNewFile(articleMap);
 		}
-	}
-		
-	
+	}	
 
 	@Override
 	public void removeArticle(int notice_num) throws Exception {
-		boardDAO.deleteArticle(notice_num);
-		
+		boardDAO.deleteArticle(notice_num);		
 	}
 
 	@Override
 	public void removeModFile(FileDTO fileDTO) throws Exception {
-		boardDAO.deleteModFile(fileDTO);
-		
-	}
-
-	@Override
-	public Map<String, Object> viewArticle(Map<String, Object> viewMap) throws Exception {
-		int notice_num = (int) viewMap.get("notice_num");
-		String mem_id = (String) viewMap.get("mem_id");
-		
-		//조회수를 갱신하기 전 먼저 글번호에 해당되는 글번호를 조회
-		BoardDTO boardDTO = boardDAO.selectArticle(notice_num);
-		
-		//비로그인 상태와
-		//로그인한 아이디와 게시글의 글쓴이 아이디를 비교함
-		String writerId = boardDTO.getMem_id();
-		if (mem_id == null || !(mem_id.equals(writerId))) {
-			//조회수 1 증가시킴
-			boardDAO.updateViewCount(notice_num);
-			boardDTO = boardDAO.selectArticle(notice_num);	
-		}
-		
-		List<FileDTO> fileList = boardDAO.selectFileList(notice_num);
-		
-		Map<String, Object> articleMap = new HashMap<>();
-		articleMap.put("article", boardDTO);
-		articleMap.put("fileList", fileList);
-		
-		return articleMap;
-	}
-
-	@Override
-	public Map<String, Object> listArticles(Map<String, Object> pagingMap) throws Exception {
-		Map<String, Object> articlesMap = new HashMap<>();
-		
-		List<BoardDTO> articlesList = boardDAO.selectAllArticlesList(pagingMap);
-		
-		String club_code = (String) pagingMap.get("club_code");
-		int totArtices = boardDAO.selectTotArticles(club_code);
-		
-		articlesMap.put("articlesList", articlesList);
-		articlesMap.put("totArtices", totArtices);
-			
-		return articlesMap;
+		boardDAO.deleteModFile(fileDTO);		
 	}
 
 }

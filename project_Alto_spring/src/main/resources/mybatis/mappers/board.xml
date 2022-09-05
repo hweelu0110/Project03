@@ -20,7 +20,7 @@
 	</resultMap>
 	
 	<resultMap type="fileDTO" id="fileResult">
-		<result property="fileNO" column="fileNO" />
+		<result property="fileNo" column="fileNo" />
 		<result property="fileName" column="fileName" />
 		<result property="notice_num" column="notice_num" />
 	</resultMap>
@@ -75,7 +75,7 @@
 		WHERE CLUB_CODE = ${club_code}	
 	</select>
 	
-	<select id="selectNewArticleNO" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
+	<select id="selectNewArticleNo" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
 		<![CDATA[ 	
 			SELECT nvl(MAX(notice_num),0) + 1 FROM alto_club_notice
 		]]>
@@ -88,9 +88,9 @@
 		]]>
 	</insert>
 	
-	<select id="selectNewFileNO" resultType="int">
+	<select id="selectNewFileNo" resultType="int">
 		<![CDATA[	
-			SELECT nvl(MAX(FileNO),0) FROM ALTO_FILE
+			SELECT nvl(MAX(FileNo),0) FROM ALTO_FILE
 		]]>	
 	</select>
 
@@ -98,13 +98,13 @@
 		<!-- 한꺼번에 여러 개의 레코드 추가 -->
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
 			INTO ALTO_FILE(FILENO, FILENAME, NOTICE_NUM, REGDATE)
-			VALUES (#{item.fileNO}, #{item.fileName}, #{item.notice_num}, sysdate)
+			VALUES (#{item.fileNo}, #{item.fileName}, #{item.notice_num}, sysdate)
 		</foreach>
 	</insert>
 	
 	<select id="selectArticle" resultType="boardDTO" parameterType="int">
 		<![CDATA[
-			SELECT A.notice_num,A.mem_id, A.club_code, A.title, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name  
+			SELECT A.notice_num, A.mem_id, A.club_code, A.title, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name  
 			FROM alto_club_notice A, ALTO_MEMBER B
 			WHERE notice_num = #{notice_num} AND A.mem_id = B.mem_id	
 		]]>
@@ -115,6 +115,13 @@
 			SELECT * FROM alto_File
 			WHERE notice_num = #{notice_num}
 			ORDER BY FILENO 		
+		]]>
+	</select>
+	
+	<select id="selectFileInfo" parameterType="int" resultMap="fileResult">
+		<![CDATA[
+			SELECT * FROM alto_File
+			WHERE fileNo = #{fileNo}		
 		]]>
 	</select>
 	
@@ -136,7 +143,7 @@
 						SET FILENAME = #{item.fileName}
 					WHERE 
 						notice_num = #{item.notice_num} 
-						AND FILENO = #{item.fileNO}							
+						AND FILENO = #{item.fileNo}							
 				</when>
 				<otherwise></otherwise>
 			</choose>
@@ -145,8 +152,8 @@
 	
 	<insert id="insertModNewFile" parameterType="java.util.Map">
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_File (FileNO, FileName, notice_num, regDate)
-			VALUES (#{item.FileNO},#{item.FileName},#{item.notice_num},sysdate)
+			INTO alto_File (FileNo, FileName, notice_num, regDate)
+			VALUES (#{item.FileNo},#{item.FileName},#{item.notice_num},sysdate)
 		</foreach>		
 	</insert>
 	
@@ -160,7 +167,7 @@
 	<delete id="deleteModFile" parameterType="fileDTO">
 		DELETE FROM alto_File
 		WHERE notice_num = #{notice_num}
-		AND FILENO = #{FileNO}		
+		AND FILENO = #{FileNo}		
 	</delete>
 	
 	

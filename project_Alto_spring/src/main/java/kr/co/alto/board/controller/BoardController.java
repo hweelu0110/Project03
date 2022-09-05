@@ -15,6 +15,9 @@ public interface BoardController {
 	
 	public ModelAndView viewArticle(@RequestParam("notice_num") int notice_num, HttpServletRequest request, 
 									HttpServletResponse response) throws Exception;
+	
+	public void downloadFile(@RequestParam("fileNo") int fileNo, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
 			throws Exception;
 	public ResponseEntity removeArticle(@RequestParam("notice_num") int notice_num, HttpServletRequest request, HttpServletResponse response) 
