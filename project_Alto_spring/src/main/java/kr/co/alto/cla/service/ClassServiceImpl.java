@@ -43,14 +43,9 @@ public class ClassServiceImpl implements ClassService {
 	}
 
 	@Override
-	public Map<String, Object> editClass(String class_code) throws Exception {
-		
-		System.out.println("서비스 : "+class_code);
-		
-		// 조회수를 갱신하기 전 먼저 글번호에 해당되는 글정보를 조회
+	public Map<String, Object> classDetail(String class_code) throws Exception {
+
 		ClassDTO classDTO = classDAO.selectClass(class_code);
-		
-		//이미지 부분 정보 요청
 		List<ImageDTO> imageFileList = classDAO.selectImageFileList(class_code);		
 		
 		Map<String, Object> classMap = new HashMap<>();
@@ -74,7 +69,7 @@ public class ClassServiceImpl implements ClassService {
 			classDAO.updateImageFile(classMap);
 		}
 	}
-
+	
 	@Override
 	public Map<String, Object> classMainList(String mem_id) throws Exception {
 		Map<String, Object> classMainMap = new HashMap<>();

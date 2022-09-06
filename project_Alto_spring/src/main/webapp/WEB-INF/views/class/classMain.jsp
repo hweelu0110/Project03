@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>      
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${classMainMap.AllHobbyList}"/>
 <c:set var="likeList" value="${classMainMap.memlikeList}" />
@@ -41,6 +42,7 @@
 		      <div class="swiper-wrapper product">
 			      <c:forEach var="classListBest" items="${classListBest }">
 			      	<div class="swiper-slide">
+						<a href="${contextPath}/class/classDetail.do?class_code=${classListBest.class_code}">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -62,11 +64,12 @@
 						<div>
 							<p class="class_name">${classListBest.className }</p>
 							<p class="hobby_name">${classListBest.hobby_name }</p>
-							<p class="class_price">${classListBest.price }원</p>				
+							<p class="class_price"><fmt:formatNumber value="${classListBest.price}" pattern="#,###" /> 원</p>				
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListBest.class_code}" />
 					</div>
+					</a>
 			      </c:forEach>
 		      </div>
 		      <div class="swiper-button-next"></div>
@@ -80,6 +83,7 @@
 		      <div class="swiper-wrapper product">
 			      <c:forEach var="classListNew" items="${classListNew }">
 			      	<div class="swiper-slide">
+						<a href="${contextPath}/class/classDetail.do?class_code=${classListNew.class_code}">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -101,11 +105,12 @@
 						<div>
 							<p class="class_name">${classListNew.className }</p>
 							<p class="hobby_name">${classListNew.hobby_name }</p>
-							<p class="class_price">${classListNew.price }원</p>				
+							<p class="class_price"><fmt:formatNumber value="${classListNew.price}" pattern="#,###" />원</p>				
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
 					</div>
+					</a>
 			      </c:forEach>
 		      </div>
 		      <div class="swiper-button-next"></div>

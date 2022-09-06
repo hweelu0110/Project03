@@ -56,6 +56,10 @@
 	<definition name="/class/searchList" extends="tiles-layout-class">
 		<put-attribute name="body" value="/WEB-INF/views/class/searchList.jsp" />		
 	</definition>
+		
+	<definition name="/class/classDetail" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/class/class_detail.jsp" />		
+	</definition>
 	
 	
 	
@@ -74,6 +78,10 @@
 	
 	<definition name="/item/editItem" extends="tiles-layout-item">
 		<put-attribute name="body" value="/WEB-INF/views/item/editItem.jsp" />		
+	</definition>
+	
+	<definition name="/item/itemDetail" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/item/item_detail.jsp" />		
 	</definition>
 	
 </tiles-definitions>

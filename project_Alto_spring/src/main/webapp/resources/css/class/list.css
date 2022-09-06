@@ -77,10 +77,9 @@
 #sec_02,#sec_03,#sec_04,#sec_05,#sec_06 { margin-bottom: 70px; }
 /* BEST 모임 swiper */
 .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 150px;
+  height: 150px;
+  object-fit: fill;
 }
 
 .swiper-slide span,.swiper-slide p { position: absolute; }
@@ -286,3 +285,9 @@
     cursor: pointer;
 }
 
+.class_products_img {
+	display: flex;
+	justify-content: center;
+	width: 230px;
+	height: 250px;
+}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${itemMainMap.AllHobbyList}"/>
 <c:set var="likeList" value="${itemMainMap.memlikeList}" />
@@ -41,6 +42,7 @@
 		      <div class="swiper-wrapper product">
 	        	<c:forEach var="itemListBest" items="${itemListBest }">
 			      	<div class="swiper-slide">
+				      	<a href="${contextPath}/item/itemDetail.do?item_code=${itemListBest.item_code}">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -61,10 +63,11 @@
 						<div>
 							<p class="class_name">${itemListBest.item_name }</p>
 							<p class="hobby_name">${itemListBest.hobby_name }</p>
-							<p class="class_price">${itemListBest.price }원</p>				
+							<p class="class_price"><fmt:formatNumber value="${itemListBest.price}" pattern="#,###" />원</p>				
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListBest.item_code}" />
+					</a>
 					</div>
 			    </c:forEach>
 				</div>
@@ -79,6 +82,7 @@
 		      <div class="swiper-wrapper product">
 		      	<c:forEach var="itemListNew" items="${itemListNew }">
 			      	<div class="swiper-slide">
+			      		<a href="${contextPath}/item/itemDetail.do?item_code=${itemListNew.item_code}">
 						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -99,10 +103,11 @@
 						<div>
 							<p class="class_name">${itemListNew.item_name }</p>
 							<p class="hobby_name">${itemListNew.hobby_name }</p>
-							<p class="class_price">${itemListNew.price }원</p>				
+							<p class="class_price"><fmt:formatNumber value="${itemListNew.price}" pattern="#,###" />원</p>				
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
+					</a>
 					</div>
 			    </c:forEach>
 		      </div>

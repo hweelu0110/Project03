@@ -275,7 +275,7 @@ public class ClassControllerImpl implements ClassController {
 		HttpSession session = request.getSession();
 		
 		System.out.println("컨트롤러 : "+class_code);
-		Map<String, Object> classMap = classService.editClass(class_code);
+		Map<String, Object> classMap = classService.classDetail(class_code);
 
 		ModelAndView mav = new ModelAndView();
 		
@@ -440,5 +440,18 @@ public class ClassControllerImpl implements ClassController {
 		return mav;
 	}
 	
-	
+
+	@Override
+	@RequestMapping(value="/class/classDetail.do", method = RequestMethod.GET)
+	public ModelAndView classDetail(@RequestParam("class_code") String class_code, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String viewName=(String)request.getAttribute("viewName");
+		
+		Map classMap = classService.classDetail(class_code);
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("classMap", classMap);
+		return mav;
+	}
 }
