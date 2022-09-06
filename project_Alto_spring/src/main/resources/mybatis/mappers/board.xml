@@ -104,7 +104,7 @@
 	
 	<select id="selectArticle" resultType="boardDTO" parameterType="int">
 		<![CDATA[
-			SELECT A.notice_num, A.mem_id, A.club_code, A.title, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name  
+			SELECT A.notice_num, A.mem_id, A.club_code, A.title, A.category, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name  
 			FROM alto_club_notice A, ALTO_MEMBER B
 			WHERE notice_num = #{notice_num} AND A.mem_id = B.mem_id	
 		]]>
@@ -129,9 +129,8 @@
 	<update id="updateArticle" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE alto_club_notice 
-				SET TITLE = #{title}
-					,contents = #{contents}
-				WHERE notice_num = #{notice_num}		
+			SET title = #{title}, contents = #{contents}
+			WHERE notice_num = #{notice_num}		
 		]]>
 	</update>
 	
@@ -152,8 +151,8 @@
 	
 	<insert id="insertModNewFile" parameterType="java.util.Map">
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_File (FileNo, FileName, notice_num, regDate)
-			VALUES (#{item.FileNo},#{item.FileName},#{item.notice_num},sysdate)
+			INTO ALTO_FILE(FILENO, FILENAME, NOTICE_NUM, REGDATE)
+			VALUES (#{item.fileNo}, #{item.fileName}, #{item.notice_num}, sysdate)
 		</foreach>		
 	</insert>
 	
@@ -167,9 +166,8 @@
 	<delete id="deleteModFile" parameterType="fileDTO">
 		DELETE FROM alto_File
 		WHERE notice_num = #{notice_num}
-		AND FILENO = #{FileNo}		
-	</delete>
-	
+		AND FILENO = #{fileNo}		
+	</delete>	
 	
 	<!-- 조회수 증가 -->
 	<update id="updateViewCount" parameterType="int">

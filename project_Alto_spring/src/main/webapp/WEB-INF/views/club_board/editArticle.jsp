@@ -39,6 +39,28 @@
 			obj.submit()
 		}
 		
+		function fn_removeModFile(_fileNo, _notice_num, _fileName, rowNum) {
+			$.ajax({
+				type: "post",
+				url: "${path}/club_board/removeModFile.do",
+				data : {fileNo: _fileNo, notice_num: _notice_num, fileName: _fileName},
+				success: function(result, textStatus) {
+					if(result == 'success') {
+						alert("이미지를 삭제했습니다.")
+						location.href="${path}/club_board/viewArticle.do?removeCompleted=true&notice_num=${article.notice_num}&club_code=${club_code}&cate=${cate}&tit=${tit}"						
+					}else {
+						alert("다시 시도해 주세요.")
+					}
+				},
+				error: function(result, textStatus) {
+					alert("에러가 발생했습니다.")
+				},
+				complete: function(result, textStatus) {
+					
+				}					
+			})
+		}
+		
 		(function($){
 			  
 			  var $fileBox = null;
@@ -96,10 +118,20 @@
 			<h3>게시글 수정</h3>
 			
 			<form action="#" name="frmArticle" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="notice_num" id="notice_num" value="${article.notice_num}"/>
 				<table id="clubView">
 					<thead>
 						<tr>
-							<th colspan="6">${article.title}</th>
+							<th colspan="6">
+								<input type="text" name="title" id="title" style="width: 70%" value="${article.title}" placeholder="제목을 입력해주세요." />
+								<select name="category" id="category">
+									<option value="">카테고리</option>
+									<option value="content">자유글</option>
+									<option value="review">정모후기</option>
+									<option value="signup">가입인사</option>
+									<option value="notice">공지사항</option>
+								</select>
+							</th>
 						</tr>					
 						<tr>
 							<td width="10%" align="right">작성자 ${article.mem_name}</td>
@@ -124,9 +156,13 @@
 								<c:set var="cnt" value="0" />
 								<c:forEach var="file" items="${fileList}" varStatus="status">
 									<div class="input-file">
+										<input type="hidden" name="oldFileName" value="${file.fileName}" />
+										<input type="hidden" name="fileNo" value="${file.fileNo}" />
 				  						<input type="text" readonly="readonly" class="file-name" value="${file.fileName}" />
-				  						<label for="upload0${status.count}" class="file-label">찾아보기</label>
+				  						<label for="upload0${status.count}" class="file-label">파일수정</label>
 				  						<input type="file" name="file${status.count}" id="upload0${status.count}" class="file-upload" />
+				  						<input type="button" value="삭제" class="file-label"
+									   onclick="fn_removeModFile(${file.fileNo}, ${file.notice_num}, '${file.fileName}', ${status.count})" />
 									</div>
 									<c:set var="cnt" value="${status.count}" />
 								</c:forEach>
