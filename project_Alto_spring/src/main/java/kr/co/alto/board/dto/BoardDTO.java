@@ -25,6 +25,7 @@ public class BoardDTO {
 	private String title;
 	private String contents;
 	private String mem_id;
+	private String mem_name;
 	private String FileName;
 	private int comment_num;
 	private int like_num;
@@ -97,6 +98,14 @@ public class BoardDTO {
 
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
+	}
+	
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
 
 	public String getFileName() {

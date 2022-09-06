@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="club_code" value="${clubInfo.club_code}" />
+<c:set var="cate" value="${clubInfo.cate_m}" />
+<c:set var="tit" value="${clubInfo.title}" />
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -28,27 +31,31 @@
 </head>
 <body>
 	<section>
-		<%-- <div id="menu1">
+		<div id="clubMenu">
 			<ul>
-				<li><a href="${path}/club/clubInformation.do?club_code=${clubInfo.club_code}">정보</a></li>
-				<li><a href="${path}/club/Noticelist.do?club_code=${clubInfo.club_code}">게시판</a></li>
-				<li><a href="${path}/club/Albumlist.do?club_code=${clubInfo.club_code}">사진첩</a></li>
-				<li><a href="${path}/club/clubChat.do?club_code=${clubInfo.club_code}">채팅</a></li>
+				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
+				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
+				<li><a href="${path}/club/clubChat.do?club_code=${club_code}&cate=${cate}&tit=${tit}">채팅</a></li>
 			</ul>
-		</div> --%>
+		</div>		
+			
 		<div>
 			<div class="left">
+				<div id="clubTit">
+					<img class="edit" src="${path}/resources/img/edit.png">
+					<img src="${path}/resources/img/hobby_img/${cate}.png" />
+					<h2>${tit}</h2>
+				</div>	
+				
 				<div class="clubcontent2">
 					<img src="${path}/resources/img/clubinformation_test.png">
 					<span class="like_icon">관심</span>
 				</div>
 				
-				<div class="clubcontent3">
-					<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${clubInfo.cate_m}.png" /></span>
-					<h3>${clubInfo.title}</h3>	
-					<img class="edit" src="${path}/resources/img/edit.png"><br /><br/>
+				<div class="clubcontent3">					
 					<p>${clubInfo.intro}</p>
-				</div><br/>
+				</div>
 				
 				<div class="clubcontent4">
 					<img class="calendar" src="${path}/resources/img/calendar.png">
@@ -86,7 +93,7 @@
 			
 			<div class="right">
 				<div id="schedual_member">
-					<h2>일정 멤버 (14명)</h2>
+					<h3>일정 멤버 (14명)</h3>
 					<ul>
 						<li>
 							<img src="../resources/img/user_test.png" />

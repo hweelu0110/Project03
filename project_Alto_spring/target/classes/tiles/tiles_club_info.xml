@@ -3,55 +3,50 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
        
-<tiles-definitions>
-	<definition name="clublayout" template="/WEB-INF/views/club_layout/layout.jsp">
-		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
-		<put-attribute name="headinfo" value="/WEB-INF/views/club_layout/headinfo.jsp" />		
-		<put-attribute name="header" value="/WEB-INF/views/club_layout/header.jsp" />
-		<put-attribute name="clubheader" value="/WEB-INF/views/club_layout/clubheader.jsp" />
-		<put-attribute name="body" value="" />		
-		<put-attribute name="footer" value="/WEB-INF/views/club_layout/footer.jsp" />
-	</definition>
-	
-	<definition name="/club/clubInformation" extends="clublayout">
+<tiles-definitions>	
+	<!-- 소모임 메인 -->
+	<definition name="/club/clubInformation" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubInformation.jsp" />
 	</definition>
-		
-	<definition name="/club_board/listArticles" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club_board/listArticles.jsp" />
-	</definition>
 	
-	<definition name="/club_board/articleForm" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club_board/articleForm.jsp" />
-	</definition>
-	
-	<definition name="/club_board/viewArticle" extends="clublayout">
-		<put-attribute name="body" value="WEB-INF/views/club_board/viewArticle.jsp" />
-	</definition>
-	
-	
-	<definition name="/club_album/Albumlist" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumlist.jsp" />
-	</definition>
-	
-	<definition name="/club_album/Albumregistration" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumregistration.jsp" />
-	</definition>
-	
-	<definition name="/club_album/Albumdetail" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumdetail.jsp" />
-	</definition>
-	
-	<definition name="/club/clubJoin" extends="clublayout">
+	<!-- 소모임 가입하기 -->
+	<definition name="/club/clubJoin" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubJoin.jsp" />
 	</definition>
 	
-	<definition name="/club/clubChat" extends="clublayout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubChat.jsp" />
+	<!-- 소모임 게시판 -->	
+	<definition name="/club_board/listArticles" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_board/listArticles.jsp" />
 	</definition>
 	
-	<definition name="/club/Schedule" extends="clublayout">
+	<definition name="/club_board/articleForm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_board/articleForm.jsp" />
+	</definition>
+	
+	<definition name="/club_board/viewArticle" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_board/viewArticle.jsp" />
+	</definition>
+	
+	<!-- 소모임 사진첩 -->
+	<definition name="/club_album/Albumlist" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumlist.jsp" />
+	</definition>
+	
+	<definition name="/club_album/Albumregistration" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumregistration.jsp" />
+	</definition>
+	
+	<definition name="/club_album/Albumdetail" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumdetail.jsp" />
+	</definition>
+		
+	<!-- 소모임 일정 -->
+	<definition name="/club/Schedule" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club/Schedule.jsp" />
+	</definition>	
+	
+	<definition name="/club/clubChat" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubChat.jsp" />
 	</definition>
 
 </tiles-definitions>

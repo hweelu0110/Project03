@@ -12,51 +12,56 @@ import java.sql.Date;
 	,notice_num number(10) 
  */
 public class FileDTO {
-	private int FileNO;
-	private String FileName;
+	private int fileNo;
+	private String fileName;
 	private Date regDate;
 	private int notice_num;
-	public int getFileNO() {
-		return FileNO;
+	
+	public int getFileNo() {
+		return fileNo;
 	}
-	public void setFileNO(int fileNO) {
-		FileNO = fileNO;
+	
+	public void setFileNo(int fileNo) {
+		this.fileNo = fileNo;
 	}
+	
 	public String getFileName() {
-		if (FileName != null && FileName.length() != 0) {
+		if (fileName != null && fileName.length() != 0) {
 			try {
-				FileName = URLDecoder.decode(FileName, "UTF-8");
+				fileName = URLDecoder.decode(fileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		return FileName;
+		return fileName;
 	}
+	
 	public void setFileName(String fileName) {
-		if(FileName != null && FileName.length() != 0) {
+		if(fileName != null && fileName.length() != 0) {
 			try {
-				this.FileName = URLEncoder.encode(FileName, "UTF-8");
+				this.fileName = URLEncoder.encode(fileName, "UTF-8");
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
+	
 	public Date getRegDate() {
 		return regDate;
 	}
+	
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 	public int getNotice_num() {
 		return notice_num;
 	}
+	
 	public void setNotice_num(int notice_num) {
 		this.notice_num = notice_num;
 	}
-	
-	
-	
 	
 }

@@ -1,17 +1,13 @@
 @charset "UTF-8";
-h2 { font-family: 'Noto Sans KR', sans-serif; margin-bottom: 25px; }
+h2, h3 { font-family: 'Noto Sans KR', sans-serif; margin-bottom: 25px; }
 header {
 	width: 100%;
 	float: left;
 	padding: 30px 30px 10px 30px;	
 }
-header div {
-	margin: auto;
-	width: 1000px;
-}
-header li a {
-	font-family: 'Noto Sans KR', sans-serif;
-}
+header div { margin: auto; width: 1000px; }
+header li a { font-family: 'Noto Sans KR', sans-serif; }
+
 
 #logo a {
 	background-image: url(../../img/alto_logo.png);
@@ -24,6 +20,7 @@ header li a {
 	cursor: pointer;
 }
 
+
 nav {
 	float: left;
 	margin: 10px;
@@ -34,6 +31,7 @@ nav #main_menu li {
     font-size: 1.2rem;
     font-weight: 700;    
 }
+
 
 #allSearch { 
 	float: left; 
@@ -58,6 +56,7 @@ nav #main_menu li {
     cursor: pointer;
 }
 
+
 #sub_menu { float: right; margin-top: 10px; }
 #sub_menu li {
 	display: inline;
@@ -65,6 +64,7 @@ nav #main_menu li {
     font-weight: 700;
     margin-left: 5px;
 }
+
 
 section { 
 	position: relative;
@@ -74,6 +74,7 @@ section {
     min-width: 960px;
 }
 section div { position: relative; }
+
 
 #ban_area {
 	width: 100%;
@@ -125,6 +126,7 @@ section div { position: relative; }
     text-align: right;
 }
 
+
 /* 목록 정렬 select style */
 #selectBoxArea {
 	position: absolute;
@@ -141,6 +143,70 @@ section div { position: relative; }
     cursor: pointer;
 }
 .select_list { display: none; }
+
+
+/* 소모임 메뉴 */
+#title { text-align: center; }
+#clubMenu { margin-bottom: 10px; }
+#clubMenu ul {
+	width: 1000px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+#clubMenu ul li {
+	width: 25%;
+	float: left;
+	height: 40px;
+	list-style: none;
+	line-height: 40px;
+	text-align: center;
+	background: #EAEAEA;
+	font-weight: bolder;
+}
+#clubMenu ul li a { 
+	display: block; 
+	font-size: 13px; 
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight: 700;
+}
+
+/* 소모임 타이틀 */
+#clubTit .edit {
+	width: 15px;
+	height: 15px;
+	margin-left: 460px;
+	position: absolute;
+	float: right;
+	cursor: pointer;
+	float:left
+}
+#clubTit img { float: left; width: 25px; }
+#clubTit h2 { 
+	line-height: 24px;
+	margin: 0 0 0 32px;
+	font-family: 'Noto Sans KR', sans-serif; 
+	font-weight: 700;
+}
+#clubCont { width: 900px; margin: 10px auto 50px; }
+
+/* pagination style */
+#paging { 
+	margin: 30px 0 10px;
+	text-align: center;
+	font-size: 12px; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+#paging a {
+	padding: 3px 8px;
+	border: 1px solid #fff;
+}
+#paging a:hover { color: #000; border: 1px solid #EAEAEA; }
+#paging a.select:hover { border: 1px solid #fff; }
+#paging .select {
+	font-weight: 700;
+	background: #F3BE34;
+}
+
 
 footer { 
 	clear: both;

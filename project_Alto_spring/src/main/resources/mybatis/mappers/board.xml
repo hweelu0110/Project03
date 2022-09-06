@@ -11,6 +11,7 @@
 		<result property="title" column="title" />
 		<result property="contents" column="contents" />
 		<result property="mem_id" column="mem_id" />
+		<result property="mem_name" column="mem_name" />
 		<result property="FileName" column="FileName" />
 		<result property="comment_num" column="comment_num" />
 		<result property="like_num" column="like_num" />
@@ -19,97 +20,93 @@
 	</resultMap>
 	
 	<resultMap type="fileDTO" id="fileResult">
-		<result property="FileNO" column="FileNO" />
-		<result property="FileName" column="FileName" />
+		<result property="fileNo" column="fileNo" />
+		<result property="fileName" column="fileName" />
 		<result property="notice_num" column="notice_num" />
 	</resultMap>
 	
 	<!-- 모든 글 조회 -->
 	<select id="selectAllArticlesList" resultMap="articlesResult" parameterType="java.util.Map" > 
 		<!-- 오라클의 계층형 SQL문 -->
-		<![CDATA[ 		
-			SELECT * from(
-					SELECT notice_num 
-						,club_code
-						,title
-						,mem_id 
-						,regidate
-						,score
-						,like_num
-						FROM (
-							SELECT notice_num
-									,club_code
-									,title
-									,mem_id
-									,regidate
-									,score
-									,like_num
-							FROM (
-									SELECT * FROM alto_club_notice 
-										WHERE notice_num IN (
-											SELECT notice_num 
-											FROM (
-												SELECT recNum, notice_num
-												from(
-													SELECT rowNum AS recNum, notice_num
-													FROM (
-														SELECT DISTINCT regidate FROM alto_club_notice 
-														ORDER BY regidate desc
-													)
-												)
-												WHERE recNum BETWEEN 1 AND 10
-												)
+		<![CDATA[			
+			SELECT notice_num 
+				  ,club_code
+				  ,title
+				  ,mem_name 
+				  ,regidate
+				  ,score
+				  ,like_num
+			FROM (
+					SELECT notice_num
+						   ,club_code
+						   ,title
+						   ,mem_name
+						   ,regidate
+						   ,score
+						   ,like_num
+					FROM (
+							SELECT A.notice_num, A.club_code, A.title, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name 
+							FROM alto_club_notice A, ALTO_MEMBER B
+							WHERE notice_num IN (
+								SELECT notice_num 
+								FROM (
+									SELECT recNum, notice_num
+									FROM (
+										SELECT rowNum recNum, notice_num
+										FROM (
+											SELECT * 
+											FROM alto_club_notice  
+											WHERE club_code = ${club_code}
+											ORDER BY regidate desc
 										)
+									)
+									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10+1 AND (#{section}-1)*100 + #{pageNum}*10
+								)
 							)
-							ORDER BY notice_num DESC			
-				)
-				)
+							AND A.mem_id = B.mem_id
+					)
+					ORDER BY notice_num DESC			
+			)
 		 ]]>
 	</select>
 	
-	<select id="selectTotArticles" resultType="int">
-		<![CDATA[
-			SELECT count(DISTINCT notice_num) from alto_club_notice
-		]]>		
+	<select id="selectTotArticles" resultType="int" parameterType="String">
+		SELECT count(notice_num) FROM ALTO_CLUB_NOTICE 
+		WHERE CLUB_CODE = ${club_code}	
 	</select>
 	
-	<select id="selectNewArticleNO" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
+	<select id="selectNewArticleNo" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
 		<![CDATA[ 	
 			SELECT nvl(MAX(notice_num),0) + 1 FROM alto_club_notice
 		]]>
-	</select>
-	
-	<select id="selectNewClubCode" resultType="String">
-		<![CDATA[
-			SELECT nvl(MAX(club_code),0) + 1 FROM ALTO_CLUB
-		]]>
-	</select>
+	</select>	
 	
 	<insert id="insertNewArticle" parameterType="java.util.Map"> 	<!-- 글정보를 Map으로 전달함 -->
 		<![CDATA[ 	
 			INSERT INTO ALTO_CLUB_NOTICE (CLUB_CODE, NOTICE_NUM, CATEGORY, TITLE, CONTENTS, MEM_ID, FILENAME)
-			VALUES(#{CLUB_CODE}, #{NOTICE_NUM}, #{CATEGORY}, #{TITLE}, #{CONTENTS}, #{MEM_ID}, null)		
+			VALUES(#{club_code}, #{notice_num}, #{category}, #{title}, #{contents}, #{mem_id}, null)		
 		]]>
 	</insert>
 	
-	<select id="selectNewFileNO" resultType="int">
+	<select id="selectNewFileNo" resultType="int">
 		<![CDATA[	
-			SELECT nvl(MAX(FileNO),0) FROM alto_File
+			SELECT nvl(MAX(FileNo),0) FROM ALTO_FILE
 		]]>	
 	</select>
 
 	<insert id="insertNewFile" parameterType="java.util.Map">
 		<!-- 한꺼번에 여러 개의 레코드 추가 -->
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_File(FileNO, FileName, notice_num, regDate)
-			VALUES (#{item.FileNO},#{item.FileName},#{item.notice_num},sysdate)
+			INTO ALTO_FILE(FILENO, FILENAME, NOTICE_NUM, REGDATE)
+			VALUES (#{item.fileNo}, #{item.fileName}, #{item.notice_num}, sysdate)
 		</foreach>
 	</insert>
 	
 	<select id="selectArticle" resultType="boardDTO" parameterType="int">
 		<![CDATA[
-			SELECT * FROM alto_club_notice
-			WHERE notice_num = #{notice_num}	
+			SELECT A.notice_num, A.mem_id, A.club_code, A.title, A.contents, A.regidate, A.score, A.like_num, B.MEM_NAME mem_name  
+			FROM alto_club_notice A, ALTO_MEMBER B
+			WHERE notice_num = #{notice_num} AND A.mem_id = B.mem_id	
 		]]>
 	</select>
 	
@@ -117,7 +114,14 @@
 		<![CDATA[
 			SELECT * FROM alto_File
 			WHERE notice_num = #{notice_num}
-			ORDER BY FileNO 		
+			ORDER BY FILENO 		
+		]]>
+	</select>
+	
+	<select id="selectFileInfo" parameterType="int" resultMap="fileResult">
+		<![CDATA[
+			SELECT * FROM alto_File
+			WHERE fileNo = #{fileNo}		
 		]]>
 	</select>
 	
@@ -136,10 +140,10 @@
 			<choose>
 				<when test="item.FileName != null">
 					UPDATE alto_File 
-						SET FILENAME = #{item.FileName}
+						SET FILENAME = #{item.fileName}
 					WHERE 
 						notice_num = #{item.notice_num} 
-						AND FILENO = #{item.FileNO}							
+						AND FILENO = #{item.fileNo}							
 				</when>
 				<otherwise></otherwise>
 			</choose>
@@ -148,35 +152,32 @@
 	
 	<insert id="insertModNewFile" parameterType="java.util.Map">
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_File (FileNO, FileName, notice_num, regDate)
-			VALUES (#{item.FileNO},#{item.FileName},#{item.notice_num},sysdate)
+			INTO alto_File (FileNo, FileName, notice_num, regDate)
+			VALUES (#{item.FileNo},#{item.FileName},#{item.notice_num},sysdate)
 		</foreach>		
 	</insert>
 	
 	<delete id="deleteArticle" parameterType="int">
 		<![CDATA[
 			DELETE FROM alto_club_notice
-			WHERE notice_num	= #{notice_num}
+			WHERE notice_num = #{notice_num}
 		]]>
 	</delete>
 	
 	<delete id="deleteModFile" parameterType="fileDTO">
 		DELETE FROM alto_File
 		WHERE notice_num = #{notice_num}
-		AND FILENO = #{FileNO}		
+		AND FILENO = #{FileNo}		
 	</delete>
 	
 	
 	<!-- 조회수 증가 -->
 	<update id="updateViewCount" parameterType="int">
-	<![CDATA[
-		UPDATE alto_club_notice
-		SET score = score + 1
-		WHERE notice_num = #{notice_num}
-	]]>
-	</update>
-	
-	
-	
+		<![CDATA[
+			UPDATE alto_club_notice
+			SET score = score + 1
+			WHERE notice_num = #{notice_num}
+		]]>
+	</update>	
 	
 </mapper>

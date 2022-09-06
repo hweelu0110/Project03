@@ -15,66 +15,59 @@ import kr.co.alto.board.dto.FileDTO;
 public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	@Override
-	public List<BoardDTO> selectAllArticlesList() throws DataAccessException {
-		List<BoardDTO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList");
-		return articlesList;
-	}
-	
+		
 	// 글정보를 게시판 테이블에 추가한 후 글 번호를 반환함
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
-		int notice_num  = selectNewArticleNO();
-		articleMap.put("notice_num", notice_num);
+		int notice_num  = selectNewArticleNo();
 		
-		int club_code = Integer.parseInt(selectNewClubCode());
-		articleMap.put("club_code", club_code);
-		
+		articleMap.put("notice_num", notice_num);				
 		sqlSession.insert("mapper.board.insertNewArticle", articleMap);	
-		return notice_num;
 		
-	}
-	private String selectNewClubCode() {
-		return sqlSession.selectOne("mapper.board.selectNewClubCode");
+		return notice_num;		
 	}
 
-	private int selectNewArticleNO() {
-		return sqlSession.selectOne("mapper.board.selectNewArticleNO");
-	}
-	
-	
+	private int selectNewArticleNo() {
+		return sqlSession.selectOne("mapper.board.selectNewArticleNo");
+	}	
 
 	@Override
 	public void insertNewFile(Map articleMap) throws DataAccessException {
-		List<FileDTO> FileList = (List<FileDTO>) articleMap.get("FileList");
+		List<FileDTO> fileList = (List<FileDTO>) articleMap.get("fileList");
 		int notice_num = (Integer) articleMap.get("notice_num");
 		
-		int FileNO = selectNewFileNO();
+		int fileNo = selectNewFileNo();
 		
-		if(FileList != null && FileList.size() != 0 ) {
-			for(FileDTO fileDTO : FileList) {
-				fileDTO.setFileNO(++FileNO);
+		if(fileList != null && fileList.size() != 0 ) {
+			for(FileDTO fileDTO : fileList) {
+				fileDTO.setFileNo(++fileNo);
 				fileDTO.setNotice_num(notice_num);
 			}
 			
-			sqlSession.insert("mapper.board.insertNewFile", FileList);
-		}
-		
+			sqlSession.insert("mapper.board.insertNewFile", fileList);
+		}		
 	}
-	private int selectNewFileNO() {
-		return sqlSession.selectOne("mapper.board.selectNewFileNO");
+	
+	private int selectNewFileNo() {
+		return sqlSession.selectOne("mapper.board.selectNewFileNo");
 	}
 
 	@Override
 	public BoardDTO selectArticle(int notice_num) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectArticle", notice_num);
 	}
+	
 	@Override
 	public List<FileDTO> selectFileList(int notice_num) throws DataAccessException {
-		List<FileDTO> FileList = sqlSession.selectList("mapper.board.selectFileList", notice_num);
-		
-		return FileList;
+		List<FileDTO> fileList = sqlSession.selectList("mapper.board.selectFileList", notice_num);
+		return fileList;
 	}
+	
+	@Override
+	public FileDTO selectFileInfo(int fileNo) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectFileInfo", fileNo);
+	}
+	
 	@Override
 	public void updateArticle(Map<String, Object> articleMap) throws DataAccessException {
 		sqlSession.update("mapper.board.updateArticle", articleMap);
@@ -82,22 +75,22 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	@Override
 	public void updateFile(Map<String, Object> articleMap) throws DataAccessException {
-		List<FileDTO> FileList = (List<FileDTO>) articleMap.get("FileList");
+		List<FileDTO> fileList = (List<FileDTO>) articleMap.get("fileList");
 		int notice_num = Integer.parseInt((String)articleMap.get("notice_num"));
 		
-		for (int i = FileList.size()-1; i>=0; i--) {
-			FileDTO fileDTO = FileList.get(i);
-			String FileName = fileDTO.getFileName();
-			if (FileName == null) {		//기존 이미지를 수정하지 않는 경우는 수정할 필요없음
-				FileList.remove(i);
+		for (int i = fileList.size()-1; i>=0; i--) {
+			FileDTO fileDTO = fileList.get(i);
+			String fileName = fileDTO.getFileName();
+			if (fileName == null) {		//기존 이미지를 수정하지 않는 경우는 수정할 필요없음
+				fileList.remove(i);
 			} 
 			else {
 				fileDTO.setNotice_num(notice_num);
 			}
 		}
 		
-		if (FileList != null && FileList.size() != 0) {
-			sqlSession.update("mapper.board.updateFile", FileList);		//수정한 이미지만 갱신함
+		if (fileList != null && fileList.size() != 0) {
+			sqlSession.update("mapper.board.updateFile", fileList);		//수정한 이미지만 갱신함
 		}
 		
 	}
@@ -106,11 +99,11 @@ public class BoardDAOImpl implements BoardDAO {
 		List<FileDTO> modAddFileList = (List<FileDTO>) articleMap.get("modAddFileList");
 		int notice_num = Integer.parseInt((String)articleMap.get("notice_num"));
 		
-		int FileNO = selectNewFileNO();
+		int fileNo = selectNewFileNo();
 		
 		for (FileDTO fileDTO : modAddFileList) {
 			fileDTO.setNotice_num(notice_num);
-			fileDTO.setFileNO(++FileNO);
+			fileDTO.setFileNo(++fileNo);
 		}
 		
 		sqlSession.insert("mapper.board.insertModNewFile", modAddFileList);
@@ -134,17 +127,15 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardDTO> selectAllArticlesList(Map<String, Integer> pagingMap) throws DataAccessException {
+	public List<BoardDTO> selectAllArticlesList(Map<String, Object> pagingMap) throws DataAccessException {
 		List<BoardDTO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList", pagingMap);
 		return articlesList;
 	}
 
 	@Override
-	public int selectTotArticles() throws DataAccessException {
-		int totArticles = sqlSession.selectOne("mapper.board.selectTotArticles");
+	public int selectTotArticles(String club_code) throws DataAccessException {		
+		int totArticles = sqlSession.selectOne("mapper.board.selectTotArticles", club_code);
 		return totArticles;
 	}
-
-	
 	
 }
