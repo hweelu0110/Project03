@@ -20,6 +20,7 @@
 	<link href="${contextPath}/resources/css/bootstrap/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="${contextPath }/resources/css/class/slide.css" />
 	<link rel="stylesheet" href="${contextPath }/resources/css/class/class_detail.css" /> 
+	<link rel="stylesheet" href="${contextPath }/resources/css/class/review.css" /> 
 	<style>
 	#layer {
 		z-index: 2;
@@ -150,7 +151,7 @@
 		<div id="container">
 			<ul class="tabs">
 				<li><a href="#tab1">제품 소개</a></li>
-				<li><a href="#tab2">Q&A</a></li>
+				<li><a href="#tab2">자주 묻는 질문</a></li>
 				<li><a href="#tab3">리뷰</a></li>
 			</ul>
 			<div class="tab_container">
@@ -159,7 +160,7 @@
 					<p>${itemDTO.intro}</p>
 				</div>
 				<div class="tab_content" id="tab2">
-					<h4>Q&A</h4>
+					<h4>자주 묻는 질문</h4>
 					 <div class="writer">환불 정책</div>
 					 <p>제품에 이상이 있거나 내용과 상이한 제품이 배송된 경우 전액 반품이 이루어지며,</p>
 					 <p>아직 배송이 이루어지지 않은 경우 전액 환불 가능합니다.</p>
@@ -175,6 +176,36 @@
 				</div>
 				<div class="tab_content" id="tab3">
 					<h4>리뷰</h4>
+					<div class="wrap">
+					    <form name="reviewform" class="reviewform" method="post" action="/save">
+					        <input type="hidden" name="rate" id="rate" value="0"/>
+					        <p class="title_star">별점과 리뷰를 남겨주세요.</p>
+					 
+					        <div class="review_rating">
+					            <div class="warning_msg">별점을 선택해 주세요.</div>
+					            <div class="rating">
+					                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
+					                <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
+					                <label for="rating1"></label>
+					                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
+					                <label for="rating2"></label>
+					                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
+					                <label for="rating3"></label>
+					                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
+					                <label for="rating4"></label>
+					                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
+					                <label for="rating5"></label>
+					            </div>
+					        </div>
+					        <div class="review_contents">
+					            <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
+					            <textarea rows="10" class="review_textarea"></textarea>
+					        </div>   
+					        <div class="cmd">
+					            <input type="button" name="save" id="save" value="등록">
+					        </div>
+					    </form>
+					</div>
 				</div>
 			</div>
 		</div>
