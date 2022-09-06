@@ -43,7 +43,7 @@
 		</div>			
 		
 		<div id="clubCont">
-			<h3>게시판</h3>
+			<h3>게시판 목록</h3>
 			
 			<c:choose>
 				<c:when test="${ empty articlesList }">		<!-- 게시물이 없을 때 -->

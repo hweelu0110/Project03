@@ -18,10 +18,13 @@ public interface BoardController {
 	
 	public void downloadFile(@RequestParam("fileNo") int fileNo, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	public ModelAndView editArticle(@RequestParam("notice_num") int notice_num, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
+			
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) 
 			throws Exception;
 	public ResponseEntity removeArticle(@RequestParam("notice_num") int notice_num, HttpServletRequest request, HttpServletResponse response) 
 			throws Exception;
 	public void removeModFile(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	}
+}
