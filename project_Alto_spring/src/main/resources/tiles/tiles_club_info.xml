@@ -27,6 +27,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/club_board/viewArticle.jsp" />
 	</definition>
 	
+	<definition name="/club_board/editArticle" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_board/editArticle.jsp" />
+	</definition>
+	
 	<!-- 소모임 사진첩 -->
 	<definition name="/club_album/Albumlist" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumlist.jsp" />

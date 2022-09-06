@@ -269,6 +269,33 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	@Override
+	@RequestMapping(value = "/club_board/editArticle.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView editArticle(@RequestParam("notice_num") int notice_num, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
+		
+		String mem_id= null;
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		Map<String, Object> viewMap = new HashMap<>();
+		viewMap.put("notice_num", notice_num);
+		viewMap.put("mem_id", mem_id);
+				
+		Map<String, Object> articleMap = boardService.viewArticle(viewMap);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("articleMap", articleMap);
+		
+		return mav;
+	}
+	
+	@Override
 	@RequestMapping(value = "/club_board/modArticle.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
