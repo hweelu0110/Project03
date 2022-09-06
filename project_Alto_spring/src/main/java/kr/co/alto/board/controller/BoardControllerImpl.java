@@ -42,7 +42,7 @@ import kr.co.alto.member.dto.MemberDTO;
 
 @Controller
 public class BoardControllerImpl implements BoardController {
-	//이미지 저장위치
+	//첨부파일 저장위치
 	private static String ARTICLE_FILE_REPO = "C:\\workspace-spring\\fileRepo";
 	@Autowired
 	private BoardService boardService;
@@ -251,25 +251,21 @@ public class BoardControllerImpl implements BoardController {
 		response.setContentType("application/octet-stream");
 		response.setContentLength(fileByte.length);
 		
-		response.setHeader("Content-Disposition", "attachment;fileName=\"" + URLEncoder.encode(fileName, "UTF-8") + "\";");
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setHeader("Pragma", "no-cache;");
-        response.setHeader("Expires", "-1;");
+		response.setHeader("Cache-Control", "no-cache;");
+		response.addHeader("Content-Disposition", "attachment; fileName=" + fileName);
+		response.addHeader("Content-Transfer-Encoding", "binary");
 		
-        try (FileInputStream fis = new FileInputStream(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ fileName); 
-        		OutputStream out = response.getOutputStream();) {
-            // saveFileName을 파라미터로 넣어 inputStream 객체를 만들고 
-            // response에서 파일을 내보낼 OutputStream을 가져와서  
-            int readCount = 0;
-            byte[] buffer = new byte[1024];
-            // 파일 읽을 만큼 크기의 buffer를 생성한 후 
-            while ((readCount = fis.read(buffer)) != -1) {
-                out.write(buffer, 0, readCount);
-                // outputStream에 씌워준다
-            }
-        } catch (Exception ex) {
-            throw new RuntimeException("file Load Error");
-        }	
+		OutputStream out = response.getOutputStream();
+		
+		FileInputStream in = new FileInputStream(downloadFile);
+		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1) break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
 	}
 	
 	@Override
@@ -437,6 +433,10 @@ public class BoardControllerImpl implements BoardController {
 			throws Exception {
 		response.setContentType("text/html; charset=utf-8");
 		
+		String club_code = request.getParameter("club_code");
+		String cate = request.getParameter("cate");
+		String tit = request.getParameter("tit");
+		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");	
 		
@@ -451,7 +451,7 @@ public class BoardControllerImpl implements BoardController {
 			
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='"+request.getContextPath()+"/club_board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/club_board/listArticles.do?club_code="+club_code+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";
 			
 			// 글 삭제 후 메시지를 전달함
