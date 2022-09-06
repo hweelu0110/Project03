@@ -302,13 +302,16 @@ public class BoardControllerImpl implements BoardController {
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		
+		String cate = multipartRequest.getParameter("cate");
+		String tit = multipartRequest.getParameter("tit");
+		
 		Map<String, Object> articleMap = new HashMap<>();
 		
 		Enumeration enu = multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			
-			if (name.equals("FileNO")) {
+			if (name.equals("fileNo")) {
 				String[] values = multipartRequest.getParameterValues(name);
 				articleMap.put(name, values);
 			}
@@ -323,28 +326,35 @@ public class BoardControllerImpl implements BoardController {
 		}
 		
 		//수정한 이미지 파일을 업로드함
-		List<String> fileList = uploadModFile(multipartRequest);
+		List<String> fileNameList = uploadModFile(multipartRequest);
 		
-		//수정시 새로 추가된 이미지 수
-		int added_img_num = Integer.parseInt((String)articleMap.get("added_img_num"));
+		//수정시 새로 추가된 파일 수
+		int add_file_num = fileNameList.size();
 		
-		//기존 이미지 수
-		int pre_img_num = Integer.parseInt((String)articleMap.get("pre_img_num"));
+		String[] oldName = (String[]) articleMap.get("oldFileName");
+		//기존 파일 수
+		int pre_file_num = oldName.length;
 		
-		List<FileDTO> FileList = new ArrayList<>();
+		System.out.println("수정시 추가된 파일 수 : " + add_file_num);
+		System.out.println("기존 파일 수 : " + pre_file_num);
+		
+		articleMap.put("add_file_num", add_file_num);
+		articleMap.put("pre_file_num", pre_file_num);
+		
+		List<FileDTO> fileList = new ArrayList<>();
 		List<FileDTO> modAddFileList = new ArrayList<>();
 		
-		if (fileList != null && fileList.size() != 0) {
-			String[] FileNO = (String[]) articleMap.get("FileNO");
+		if (fileNameList != null && fileNameList.size() != 0) {
+			String[] fileNo = (String[]) articleMap.get("fileNo");
 			
-			for (int i=0; i < added_img_num; i++) {
-				String fileName = fileList.get(i);
+			for (int i=0; i < add_file_num; i++) {
+				String fileName = fileNameList.get(i);
 				FileDTO fileDTO = new FileDTO();
-				if (i < pre_img_num) {				//기존의 이미지를 수정해서 첨부한 이미지들
+				if (i < pre_file_num) {				//기존의 이미지를 수정해서 첨부한 이미지들
 					fileDTO.setFileName(fileName);
-					fileDTO.setFileNo(Integer.parseInt(FileNO[i]));
-					FileList.add(fileDTO);
-					articleMap.put("FileList", FileList);
+					fileDTO.setFileNo(Integer.parseInt(fileNo[i]));
+					fileList.add(fileDTO);
+					articleMap.put("fileList", fileList);
 				}
 				else {								//새로 추가한 이미지들
 					fileDTO.setFileName(fileName);
@@ -361,21 +371,19 @@ public class BoardControllerImpl implements BoardController {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");		
 		
-		
 		try {
 			boardService.modArticle(articleMap);
 			
 			if (fileList != null && fileList.size() != 0) {
 				for (int i=0; i<fileList.size(); i++) {
-					String fileName = fileList.get(i);
+					String fileName = fileNameList.get(i);
 					
-					if (i < pre_img_num) {
+					if (i < pre_file_num) {
 						if (fileName != null) {
-							File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
+							File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
 							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
-							FileUtils.moveFileToDirectory(srcFile, destFile, true);
+							FileUtils.moveFileToDirectory(srcFile, destFile, true);							
 							
-							String[] oldName = (String[]) articleMap.get("oldFileName");
 							String oldFileName = oldName[i];
 							
 							File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ oldFileName);
@@ -384,7 +392,7 @@ public class BoardControllerImpl implements BoardController {
 					}
 					else {
 						if (fileName != null) {
-							File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
+							File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
 							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
 							FileUtils.moveFileToDirectory(srcFile, destFile, true);						
 						}
@@ -395,7 +403,7 @@ public class BoardControllerImpl implements BoardController {
 			
 			message = "<script>";
 			message += " alert('글을 수정했습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/viewArticle.do?notice_num="+notice_num+"';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/viewArticle.do?notice_num="+notice_num+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";
 			
 			// 새 글을 추가한 후 메시지를 전달함
@@ -405,14 +413,14 @@ public class BoardControllerImpl implements BoardController {
 			if (fileList != null && fileList.size() != 0) {
 				//오류 발생시 temp폴더의 이미지들 모두 삭제
 				for (int i=0; i<fileList.size(); i++) {
-					File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileList.get(i));
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileList.get(i));
 					srcFile.delete();
 				}
 			}
 			
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/viewArticle.do?notice_num="+notice_num+"';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/viewArticle.do?notice_num="+notice_num+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			
@@ -438,14 +446,13 @@ public class BoardControllerImpl implements BoardController {
 				File file = new File(ARTICLE_FILE_REPO +"\\"+ fileName);
 				if (mFile.getSize() != 0) {
 					if (!file.exists()) {
-						file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리들 생성
-						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ originalFileName)); //임시로
-								//저장된 MultipartFile을 실제 파일로 전송
+						file.getParentFile().mkdirs();		
+						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\temp\\"+ originalFileName)); 
 					}
 				}
 				
 			}
-			else {													//첨부한 이미지가 없었을 경우
+			else {													//첨부한 파일이 없었을 경우
 				fileList.add(null);
 			}
 		}
@@ -486,7 +493,7 @@ public class BoardControllerImpl implements BoardController {
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('글을 삭제하는 중 오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='"+request.getContextPath()+"/club_board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/club_board/listArticles.do?club_code="+club_code+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			
@@ -497,26 +504,26 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	@Override
-	@RequestMapping(value = "/club_board/removeModImage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/club_board/removeModFile.do", method = RequestMethod.POST)
 	public void removeModFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter writer = response.getWriter();
 		
-		String FileNO = request.getParameter("FileNO");
-		String FileName = request.getParameter("FileName");
+		String fileNo = request.getParameter("fileNo");
+		String fileName = request.getParameter("fileName");
 		String notice_num = request.getParameter("notice_num");
 		
-		System.out.println("FileNO= " + FileNO);
+		System.out.println("fileNo= " + fileNo);
 		System.out.println("notice_num= " + notice_num);
 		
 		FileDTO fileDTO = new FileDTO();
 		fileDTO.setNotice_num(Integer.parseInt(notice_num));
-		fileDTO.setFileNo(Integer.parseInt(FileNO));
+		fileDTO.setFileNo(Integer.parseInt(fileNo));
 		
 		boardService.removeModFile(fileDTO);
 		
-		File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ FileName);
+		File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ fileName);
 		oldFile.delete();
 		
 		writer.print("success");

@@ -74,7 +74,7 @@
 				<table id="clubView">
 					<thead>
 						<tr>
-							<th colspan="6">${article.title}</th>
+							<th colspan="6">${article.title} <span>${article.category}</span></th>
 						</tr>					
 						<tr>
 							<td width="10%" align="right">작성자 ${article.mem_name}</td>
