@@ -32,24 +32,8 @@
 			obj.submit()
 		}
 		
-		function downloadFile(fileNo){
-		    $.ajax({
-		        method:"GET",
-		        url : "${path}/club_board/filedownload.do?fileNo="+fileNo,
-		        success : function(data) {
-		           
-		        },
-		        error:function(request,status){
-		            alert("오류가 발생했습니다.");
-		        }
-		    });
-		}
-		
 		//수정하기 클릭시 텍스트 박스를 활성화시킴
 		function fn_enable() {
-			document.getElementById("i_title").disabled=false
-			document.getElementById("i_content").disabled=false
-			
 			document.getElementById("tr_btn_modify").style.display="block"
 			document.getElementById("tr_btn").style.display = "none"
 			$(".tr_modEable").css("visibility", "visible")
@@ -192,7 +176,7 @@
 									<c:forEach var="file" items="${fileList}">
 										<div class="input-file">
 					  						<input type="text" readonly="readonly" class="file-name" value="${file.fileName}" />
-										  	<button type="button" class="file-label" onclick="downloadFile(${file.fileNo})">다운로드</button>
+					  						<a class="file-label" href="${path}/club_board/filedownload.do?fileNo=${file.fileNo}">다운로드</a>
 										</div>
 									</c:forEach>				
 								</td>
@@ -221,7 +205,7 @@
 				<div id="tr_btn" class="align_right">
 					<c:if test="${login.mem_id == article.mem_id }">	
 						<input type="button" class="basicBtn" value="수정하기" onclick="fn_enable()" />
-						<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_board/removeArticle.do', ${article.notice_num})" />
+						<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_board/removeArticle.do?club_code=${club_code}&cate=${cate}&tit=${tit}', ${article.notice_num})" />
 					</c:if>
 					<input type="button" class="basicBtn02" value="목록보기" onclick="backToList(frmArticle)" />
 				</div>
