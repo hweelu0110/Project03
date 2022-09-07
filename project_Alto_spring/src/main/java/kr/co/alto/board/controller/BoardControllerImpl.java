@@ -335,9 +335,6 @@ public class BoardControllerImpl implements BoardController {
 		//기존 파일 수
 		int pre_file_num = oldName.length;
 		
-		System.out.println("수정시 추가된 파일 수 : " + add_file_num);
-		System.out.println("기존 파일 수 : " + pre_file_num);
-		
 		articleMap.put("add_file_num", add_file_num);
 		articleMap.put("pre_file_num", pre_file_num);
 		
@@ -350,13 +347,14 @@ public class BoardControllerImpl implements BoardController {
 			for (int i=0; i < add_file_num; i++) {
 				String fileName = fileNameList.get(i);
 				FileDTO fileDTO = new FileDTO();
-				if (i < pre_file_num) {				//기존의 이미지를 수정해서 첨부한 이미지들
+				
+				if (i < pre_file_num && fileName != null) {				//기존의 이미지를 수정해서 첨부한 이미지들
 					fileDTO.setFileName(fileName);
 					fileDTO.setFileNo(Integer.parseInt(fileNo[i]));
 					fileList.add(fileDTO);
 					articleMap.put("fileList", fileList);
 				}
-				else {								//새로 추가한 이미지들
+				else if (fileName != null) {								//새로 추가한 이미지들
 					fileDTO.setFileName(fileName);
 					modAddFileList.add(fileDTO);				
 					articleMap.put("modAddFileList",modAddFileList);
@@ -374,30 +372,26 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			boardService.modArticle(articleMap);
 			
-			if (fileList != null && fileList.size() != 0) {
-				for (int i=0; i<fileList.size(); i++) {
+			if (fileNameList != null && fileNameList.size() != 0) {
+				for (int i=0; i<fileNameList.size(); i++) {
 					String fileName = fileNameList.get(i);
+					System.out.println("fileName ["+i+"] "+fileName);
 					
-					if (i < pre_file_num) {
-						if (fileName != null) {
-							File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
-							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
-							FileUtils.moveFileToDirectory(srcFile, destFile, true);							
-							
-							String oldFileName = oldName[i];
-							
-							File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ oldFileName);
-							oldFile.delete();		
-						}
+					if (i < pre_file_num && fileName != null) {
+						File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
+						File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
+						FileUtils.moveFileToDirectory(srcFile, destFile, true);							
+						
+						String oldFileName = oldName[i];
+						
+						File oldFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num +"\\"+ oldFileName);
+						oldFile.delete();	
 					}
-					else {
-						if (fileName != null) {
-							File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
-							File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
-							FileUtils.moveFileToDirectory(srcFile, destFile, true);						
-						}
-					}
-					
+					else if (fileName != null) {
+						File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
+						File destFile = new File(ARTICLE_FILE_REPO +"\\"+ notice_num);
+						FileUtils.moveFileToDirectory(srcFile, destFile, true);			
+					}					
 				}
 			}
 			
@@ -410,10 +404,10 @@ public class BoardControllerImpl implements BoardController {
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);		
 			
 		} catch (Exception e) {
-			if (fileList != null && fileList.size() != 0) {
+			if (fileNameList != null && fileNameList.size() != 0) {
 				//오류 발생시 temp폴더의 이미지들 모두 삭제
-				for (int i=0; i<fileList.size(); i++) {
-					File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileList.get(i));
+				for (int i=0; i<fileNameList.size(); i++) {
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileNameList.get(i));
 					srcFile.delete();
 				}
 			}

@@ -74,7 +74,15 @@
 				<table id="clubView">
 					<thead>
 						<tr>
-							<th colspan="6">${article.title} <span>${article.category}</span></th>
+							<th colspan="6">
+								${article.title} 
+								<span class="category">
+									<c:if test="${article.category eq 'content'}">자유글</c:if>
+									<c:if test="${article.category eq 'review'}">정모후기</c:if>
+									<c:if test="${article.category eq 'signup'}">가입인사</c:if>
+									<c:if test="${article.category eq 'notice'}">공지사항</c:if>
+								</span>
+							</th>
 						</tr>					
 						<tr>
 							<td width="10%" align="right">작성자 ${article.mem_name}</td>

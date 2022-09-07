@@ -32,6 +32,13 @@ table a:hover { color: #000; }
  
 #clubView { margin-bottom: 30px; }
 #clubView th { font-size: 15px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; }
+#clubView th .category {
+	margin-left: 10px;
+    color: #BDBDBD;
+    font-size: 10px;
+    font-weight: 100;
+    vertical-align: top;
+}
 #clubView thead { border-bottom: 1px solid #eee; }
 #clubView thead th, #clubView thead td { padding-left: 10px; }
 #clubView thead td .regidate { color: #494C57; font-size: 10px; }
