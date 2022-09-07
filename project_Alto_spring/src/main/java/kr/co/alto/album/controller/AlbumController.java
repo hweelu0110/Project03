@@ -10,10 +10,12 @@ import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface AlbumController {
-	public ModelAndView Albumlist(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView albumList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity addNewAlbum(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView Albumdetail(@RequestParam("album_num") int album_num, HttpServletRequest request,
+	public void albumImage(@RequestParam("album_num") int album_num, @RequestParam("imageFileName") String imageFileName, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView albumDetail(@RequestParam("album_num") int album_num, HttpServletRequest request,
 									HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity modAlbum(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;

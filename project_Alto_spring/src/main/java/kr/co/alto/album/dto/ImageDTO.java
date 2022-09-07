@@ -12,17 +12,19 @@ import java.sql.Date;
 	,album_num  number(10) 
  */
 public class ImageDTO {
-	private int imageFileNO;
+	private int imageFileNo;
 	private String imageFileName;
 	private Date regDate;
 	private int album_num;
 	
-	public int getImageFileNO() {
-		return imageFileNO;
+	public int getImageFileNo() {
+		return imageFileNo;
 	}
-	public void setImageFileNO(int imageFileNO) {
-		this.imageFileNO = imageFileNO;
+	
+	public void setImageFileNo(int imageFileNo) {
+		this.imageFileNo = imageFileNo;
 	}
+	
 	public String getImageFileName() {
 		if (imageFileName != null && imageFileName.length() != 0) {
 			try {
@@ -35,6 +37,7 @@ public class ImageDTO {
 		}
 		return imageFileName;
 	}
+	
 	public void setImageFileName(String imageFileName) {
 		if(imageFileName != null && imageFileName.length() != 0) {
 			try {
@@ -46,15 +49,19 @@ public class ImageDTO {
 			
 		}
 	}
+	
 	public Date getRegDate() {
 		return regDate;
 	}
+	
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
 	public int getAlbum_num() {
 		return album_num;
 	}
+	
 	public void setAlbum_num(int album_num) {
 		this.album_num = album_num;
 	}

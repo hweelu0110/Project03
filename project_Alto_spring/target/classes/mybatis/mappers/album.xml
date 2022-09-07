@@ -10,6 +10,7 @@
 		<result property="title" column="title"/>
 		<result property="contents" column="contents"/>
 		<result property="mem_id" column="mem_id"/>
+		<result property="mem_name" column="mem_name" />
 		<result property="imageFileName" column="imageFileName"/>
 		<result property="comment_num" column="comment_num"/>
 		<result property="like_num" column="like_num"/>
@@ -18,49 +19,53 @@
 	</resultMap>
 	
 	<resultMap type="imageDTO" id="imgResult">
-		<result property="imageFileNO" column="imageFileNO" />
+		<result property="imageFileNo" column="imageFileNo" />
 		<result property="imageFileName" column="imageFileName" />
 		<result property="album_num" column="album_num" />
 	</resultMap>
 	
 	<select id="selectAllAlbumList" resultMap="albumResult" parameterType="java.util.Map">
 		<![CDATA[ 		
-			SELECT * from(
-					SELECT album_num 
-						,club_code
-						,title
-						,mem_id 
-						,regidate
-						,score
-						,like_num
-						FROM (
-							SELECT album_num
-									,club_code
-									,title
-									,mem_id
-									,regidate
-									,score
-									,like_num
-							FROM (
-									SELECT * FROM alto_club_album 
-										WHERE album_num IN (
-											SELECT album_num 
-											FROM (
-												SELECT recNum, album_num
-												from(
-													SELECT rowNum AS recNum, album_num
-													FROM (
-														SELECT DISTINCT regidate FROM alto_club_album 
-														ORDER BY regidate desc
-													)
-												)
-												WHERE recNum BETWEEN 1 AND 10
-												)
+			SELECT album_num 
+				  ,club_code
+				  ,title
+				  ,imageFileName
+				  ,mem_name 
+				  ,regidate
+				  ,score
+				  ,like_num
+			FROM (
+					SELECT album_num
+						   ,club_code
+						   ,title
+						   ,imageFileName
+						   ,mem_name
+						   ,regidate
+						   ,score
+						   ,like_num
+					FROM (
+							SELECT A.album_num, A.club_code, A.title, A.regidate, A.score, A.like_num, A.imageFileName, B.MEM_NAME mem_name 
+							FROM alto_club_album A, ALTO_MEMBER B
+							WHERE album_num IN (
+								SELECT album_num 
+								FROM (
+									SELECT recNum, album_num
+									FROM (
+										SELECT rowNum recNum, album_num
+										FROM (
+											SELECT * 
+											FROM alto_club_album  
+											WHERE club_code = ${club_code}
+											ORDER BY regidate desc
 										)
+									)
+									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10+1 AND (#{section}-1)*100 + #{pageNum}*10
+								)
 							)
-							ORDER BY album_num DESC			
-				)
-				)
+							AND A.mem_id = B.mem_id
+					)
+					ORDER BY album_num DESC			
+			)
 		 ]]>
 	</select>
 	
@@ -70,21 +75,20 @@
 		]]>		
 	</select>
 	
-	<select id="selectNewAlbumNO" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
+	<select id="selectNewAlbumNo" resultType="int"> 	<!-- 추가하는 새글에 대한 글번호 가져옴 -->
 		<![CDATA[ 	
 			SELECT nvl(MAX(album_num),0) + 1 FROM alto_club_album
 		]]>
 	</select>
 	
 	<insert id="insertNewAlbum" parameterType="java.util.Map"> 	<!-- 글정보를 Map으로 전달함 -->
-		<![CDATA[ 	
-		
+		<![CDATA[ 		
 			INSERT INTO ALTO_CLUB_ALBUM(club_code, ALBUM_NUM, TITLE, CONTENTS, MEM_ID, IMAGEFILENAME)
-			VALUES (#{club_code}, #{ALBUM_NUM}, #{TITLE}, #{CONTENTS}, #{MEM_ID}, #{IMAGEFILENAME})	
+			VALUES (#{club_code}, #{album_num}, #{title}, #{contents}, #{mem_id}, #{imageFileName})	
 		]]>
 	</insert>
 	
-	<select id="selectNewImageFileNO" resultType="int">
+	<select id="selectNewImageFileNo" resultType="int">
 		<![CDATA[	
 			SELECT nvl(MAX(imageFileNO),0) FROM alto_imageFile
 		]]>	
@@ -93,8 +97,8 @@
 	<insert id="insertNewImage" parameterType="java.util.Map">
 		<!-- 한꺼번에 여러 개의 레코드 추가 -->
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_imageFile(imageFileNO, imageFileName, album_num, regDate)
-			VALUES (#{item.imageFileNO},#{item.imageFileName},#{item.album_num},sysdate)
+			INTO alto_imageFile(imageFileNo, imageFileName, album_num, regDate)
+			VALUES (#{item.imageFileNo}, #{item.imageFileName}, #{item.album_num}, sysdate)
 		</foreach>
 	</insert>
 	
@@ -117,8 +121,8 @@
 	<update id="updateAlbum" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE alto_club_album 
-				SET TITLE = #{title}
-				WHERE album_num = #{album_num}		
+			SET TITLE = #{title}
+			WHERE album_num = #{album_num}		
 		]]>
 	</update>
 	
@@ -129,8 +133,8 @@
 					UPDATE alto_imageFile 
 						SET IMAGEFILENAME = #{item.imageFileName}
 					WHERE 
-						album_num = #{item.album_num } 
-						AND IMAGEFILENO = #{item.imageFileNO}							
+						album_num = #{item.album_num} 
+						AND IMAGEFILENO = #{item.imageFileNo}							
 				</when>
 				<otherwise></otherwise>
 			</choose>
@@ -139,8 +143,8 @@
 	
 	<insert id="insertModNewImage" parameterType="java.util.Map">
 		<foreach collection="list" item="item" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
-			INTO alto_imageFile (imageFileNO, imageFileName, album_num, regDate)
-			VALUES (#{item.imageFileNO},#{item.imageFileName},#{item.album_num},sysdate)
+			INTO alto_imageFile (imageFileNo, imageFileName, album_num, regDate)
+			VALUES (#{item.imageFileNo}, #{item.imageFileName}, #{item.album_num}, sysdate)
 		</foreach>		
 	</insert>
 	
@@ -154,7 +158,7 @@
 	<delete id="deleteModImage" parameterType="imageDTO">
 		DELETE FROM alto_imageFile
 		WHERE album_num = #{album_num}
-		AND IMAGEFILENO = #{imageFileNO}		
+		AND IMAGEFILENO = #{imageFileNo}		
 	</delete>
 	
 	<!-- 조회수 증가 -->

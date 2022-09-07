@@ -73,6 +73,7 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("mapper.board.updateArticle", articleMap);
 		
 	}
+	
 	@Override
 	public void updateFile(Map<String, Object> articleMap) throws DataAccessException {
 		List<FileDTO> fileList = (List<FileDTO>) articleMap.get("fileList");
@@ -94,6 +95,7 @@ public class BoardDAOImpl implements BoardDAO {
 		}
 		
 	}
+	
 	@Override
 	public void insertModNewFile(Map<String, Object> articleMap) throws DataAccessException {
 		List<FileDTO> modAddFileList = (List<FileDTO>) articleMap.get("modAddFileList");
@@ -106,24 +108,22 @@ public class BoardDAOImpl implements BoardDAO {
 			fileDTO.setFileNo(++fileNo);
 		}
 		
-		sqlSession.insert("mapper.board.insertModNewFile", modAddFileList);
-				
+		sqlSession.insert("mapper.board.insertModNewFile", modAddFileList);		
 	}
+	
 	@Override
 	public void deleteArticle(int notice_num) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteArticle", notice_num);
-		
+		sqlSession.delete("mapper.board.deleteArticle", notice_num);		
 	}
+	
 	@Override
 	public void deleteModFile(FileDTO fileDTO) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteModFile", fileDTO);
-		
+		sqlSession.delete("mapper.board.deleteModFile", fileDTO);		
 	}
 
 	@Override
 	public void updateViewCount(int notice_num) throws DataAccessException {
-		sqlSession.update("mapper.board.updateViewCount", notice_num);
-		
+		sqlSession.update("mapper.board.updateViewCount", notice_num);		
 	}
 
 	@Override

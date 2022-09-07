@@ -163,14 +163,14 @@ public class BoardControllerImpl implements BoardController {
 				//오류 발생시 temp폴더의 이미지들 모두 삭제
 				for (FileDTO fileDTO : fileList) {
 					fileName = fileDTO.getFileName();
-					File srcFile = new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ fileName);
+					File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);
 					srcFile.delete();
 				}
 			}
 				
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/articleForm.do';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/club_board/articleForm.do?club_code="+articleMap.get("club_code")+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 				
