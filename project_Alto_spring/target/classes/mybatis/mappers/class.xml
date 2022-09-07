@@ -31,6 +31,16 @@
 	  <result property="class_code" column="class_code" />
 	  <result property="imageFileName" column="imageFileName" />
  	</resultMap>
+ 	
+ 	<resultMap id="classReviewResult" type="classReviewDTO">
+	  <result property="cmt_num" column="cmt_num" />
+	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_star" column="cmt_star" />
+	  <result property="cmt_content" column="cmt_content" />
+	  <result property="cmt_class" column="cmt_class" />
+	  <result property="cmt_regdate" column="cmt_regdate" />
+ 	</resultMap>
+ 	
 	
 	<!-- 전체 조회 -->
 	<select id="selectAllclassList" parameterType="java.util.Map" resultMap="classResult">
@@ -177,5 +187,15 @@
 			</choose>
 		</foreach>
 	</update>
+	
+	
+	
+	<!-- 리뷰 -->
+	<select id="selectAllreviewList" resultMap="classReviewResult" parameterType="String">
+		SELECT c.CLASSNAME, cr.*
+		FROM ALTO_CLASS_REVIEW cr, ALTO_CLASS c
+		WHERE c.CLASS_CODE = cr.CMT_CLASS
+		AND c.CLASS_CODE = ${class_code}
+	</select>
 </mapper>
 

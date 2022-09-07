@@ -46,11 +46,13 @@ public class ClassServiceImpl implements ClassService {
 	public Map<String, Object> classDetail(String class_code) throws Exception {
 
 		ClassDTO classDTO = classDAO.selectClass(class_code);
-		List<ImageDTO> imageFileList = classDAO.selectImageFileList(class_code);		
+		List<ImageDTO> imageFileList = classDAO.selectImageFileList(class_code);
+		List reviewList = classDAO.selectReviewList(class_code);
 		
 		Map<String, Object> classMap = new HashMap<>();
 		classMap.put("classDTO", classDTO);
-		classMap.put("imageFileList", imageFileList);		
+		classMap.put("imageFileList", imageFileList);	
+		classMap.put("reviewList", reviewList);
 
 		return classMap;
 	}

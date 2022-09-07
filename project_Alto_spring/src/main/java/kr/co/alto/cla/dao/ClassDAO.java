@@ -17,4 +17,5 @@ public interface ClassDAO {
 	public List<ImageDTO> selectImageFileList(String class_code) throws DataAccessException;
 	public void updateClass(Map<String, Object> classMap) throws DataAccessException;
 	public void updateImageFile(Map<String, Object> classMap) throws DataAccessException;
+	public List selectReviewList(String class_code) throws DataAccessException;
 }

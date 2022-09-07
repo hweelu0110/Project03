@@ -12,6 +12,7 @@
 		
 		<typeAlias type="kr.co.alto.cla.dto.ClassDTO" alias="classDTO" />
 		<typeAlias type="kr.co.alto.cla.dto.ImageDTO" alias="classImageDTO" />
+		<typeAlias type="kr.co.alto.cla.dto.ReviewDTO" alias="classReviewDTO" />
 		<typeAlias type="kr.co.alto.item.dto.ItemDTO" alias="itemDTO" />
 		<typeAlias type="kr.co.alto.item.dto.ImageDTO" alias="itemImageDTO" />
 		

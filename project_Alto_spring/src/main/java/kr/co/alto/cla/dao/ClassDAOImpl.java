@@ -102,4 +102,10 @@ public class ClassDAOImpl implements ClassDAO {
 		}
 	}
 
+	@Override
+	public List selectReviewList(String class_code) throws DataAccessException {
+		List reviewList = sqlSession.selectList("mapper.class.selectAllreviewList", class_code);
+		return reviewList;
+	}
+
 }
