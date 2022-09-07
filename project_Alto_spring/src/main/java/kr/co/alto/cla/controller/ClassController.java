@@ -22,4 +22,6 @@ public interface ClassController {
 
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView classDetail(String class_code,HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ResponseEntity reviewAdd(HttpServletRequest request, HttpServletResponse response,  HttpSession httpSession) throws Exception;
 }

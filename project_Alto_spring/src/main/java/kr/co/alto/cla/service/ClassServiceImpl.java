@@ -89,4 +89,10 @@ public class ClassServiceImpl implements ClassService {
 		return classMainMap;
 	}
 
+	@Override
+	public int addClassReview(Map reviewMap) throws Exception {
+		int reviewNew = classDAO.insertNewClassreview(reviewMap);
+		return reviewNew;
+	}
+
 }

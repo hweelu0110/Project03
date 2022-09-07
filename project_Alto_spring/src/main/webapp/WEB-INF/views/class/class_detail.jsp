@@ -208,24 +208,25 @@
 				<div class="tab_content" id="tab6">
 					<h4>리뷰</h4>
 					<div class="wrap">
-					    <form class="mb-3" name="myform" id="myform" method="post">
+					    <form class="mb-3" name="myform" id="myform" method="post" action="${contextPath}/class/reviewAdd.do">
 							<fieldset>
 								<span class="text-bold">별점을 선택해주세요</span>
-								<input type="radio" name="reviewStar" value="5" id="rate1"><label
+								<input type="radio" name="CMT_STAR" value="5" id="rate1"><label
 									for="rate1">★</label>
-								<input type="radio" name="reviewStar" value="4" id="rate2"><label
+								<input type="radio" name="CMT_STAR" value="4" id="rate2"><label
 									for="rate2">★</label>
-								<input type="radio" name="reviewStar" value="3" id="rate3"><label
+								<input type="radio" name="CMT_STAR" value="3" id="rate3"><label
 									for="rate3">★</label>
-								<input type="radio" name="reviewStar" value="2" id="rate4"><label
+								<input type="radio" name="CMT_STAR" value="2" id="rate4"><label
 									for="rate4">★</label>
-								<input type="radio" name="reviewStar" value="1" id="rate5"><label
+								<input type="radio" name="CMT_STAR" value="1" id="rate5"><label
 									for="rate5">★</label>
 							</fieldset>
 							<div>
-								<textarea class="col-auto form-control" type="text" id="reviewContents"
+								<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT"
 										  placeholder="좋은 수강평을 남겨주시면 큰 힘이 됩니다!"></textarea>
 							</div>
+							<input type="hidden" name="cmt_class" value="${classDTO.class_code}">
 							<div align="right">
 							<button type="submit" class="btn btn-warning">리뷰 등록</button>
 							</div>
@@ -243,7 +244,26 @@
 	 						<tr>
 	 							<td width="10%">${cmt.cmt_writer }</td>
 								<td width="60%">${cmt.cmt_content }</td>
-								<td width="20%">${cmt.cmt_star }</td>
+								<td width="20%">
+									<c:if test="${cmt.cmt_star == 5 }">
+										★★★★★
+									</c:if>
+									<c:if test="${cmt.cmt_star == 4 }">
+										★★★★☆
+									</c:if>
+									<c:if test="${cmt.cmt_star == 3 }">
+										★★★☆☆
+									</c:if>
+									<c:if test="${cmt.cmt_star == 2 }">
+										★★☆☆☆
+									</c:if>
+									<c:if test="${cmt.cmt_star == 1 }">
+										★☆☆☆☆
+									</c:if>
+									<c:if test="${cmt.cmt_star == 0 }">
+										☆☆☆☆☆
+									</c:if>
+								</td>
 								<td width="10%">${cmt.cmt_regdate }</td>
 							</tr>
  						</c:forEach>

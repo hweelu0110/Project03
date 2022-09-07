@@ -108,4 +108,20 @@ public class ClassDAOImpl implements ClassDAO {
 		return reviewList;
 	}
 
+	@Override
+	public int insertNewClassreview(Map reviewMap) throws DataAccessException {
+		int classReviewNum = selectNewClass_reviewN();
+		reviewMap.put("CMT_NUM", classReviewNum);
+		System.out.println("=============");
+		System.out.println(reviewMap);
+		System.out.println("=============");
+		sqlSession.insert("mapper.class.insertNewClassReview", reviewMap);
+		return classReviewNum;
+	}
+
+	private int selectNewClass_reviewN() {
+		int selectNewClass_reviewN = sqlSession.selectOne("mapper.class.selectNewClass_reviewN");
+		return selectNewClass_reviewN;
+	}
+
 }

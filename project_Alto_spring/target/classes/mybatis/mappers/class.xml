@@ -197,5 +197,21 @@
 		WHERE c.CLASS_CODE = cr.CMT_CLASS
 		AND c.CLASS_CODE = ${class_code}
 	</select>
+	
+	<select id="selectNewClass_reviewN" resultType="int">
+		<![CDATA[ 
+			SELECT nvl(max(cmt_num),0)+1
+			FROM ALTO_CLASS_REVIEW
+		]]>
+	</select>
+	
+	<insert id="insertNewClassReview"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO ALTO_CLASS_REVIEW
+			(CMT_NUM, CMT_WRITER, CMT_STAR, CMT_CONTENT, CMT_CLASS)
+			VALUES(#{CMT_NUM}, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
+		]]>      
+	</insert>
+	
 </mapper>
 
