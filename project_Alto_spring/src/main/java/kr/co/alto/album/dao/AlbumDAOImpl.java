@@ -15,35 +15,29 @@ import kr.co.alto.album.dto.ImageDTO;
 public class AlbumDAOImpl implements AlbumDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	@Override
-	public List<AlbumDTO> selectAllAlbumList() throws DataAccessException {
-		List<AlbumDTO> albumList = sqlSession.selectList("mapper.album.selectAllAlbumList");
-		return albumList;
-	}
 	
-	// 기게시글 번호의 MAX값 + 1 구함
-	private int selectNewAlbumNO() {
-		return sqlSession.selectOne("mapper.album.selectNewAlbumNO");
-	}
-
 	@Override
 	public int insertNewAlbum(Map albumMap) throws DataAccessException {
-		int album_num = selectNewAlbumNO();
+		int album_num = selectNewAlbumNo();
 		albumMap.put("album_num", album_num);
 		
 		sqlSession.insert("mapper.album.insertNewAlbum", albumMap);
 		return album_num;
 	}
-
+	
+	private int selectNewAlbumNo() {
+		return sqlSession.selectOne("mapper.album.selectNewAlbumNo");
+	}
+	
 	@Override
 	public void insertNewImage(Map albumMap) throws DataAccessException {
 		List<ImageDTO> imageFileList = (List<ImageDTO>) albumMap.get("imageFileList");
 		int album_num = (Integer)albumMap.get("album_num");
-		int imageFileNO = selectNewImageFileNO();
+		int imageFileNo = selectNewImageFileNo();
 		
 		if(imageFileList != null && imageFileList.size() != 0) {
 			for (ImageDTO imageDTO : imageFileList) {
-				imageDTO.setImageFileNO(++imageFileNO);
+				imageDTO.setImageFileNo(++imageFileNo);
 				imageDTO.setAlbum_num(album_num);
 			}
 			
@@ -52,26 +46,25 @@ public class AlbumDAOImpl implements AlbumDAO {
 		}
 		
 	}
-
-	private int selectNewImageFileNO() {
-		return sqlSession.selectOne("mapper.album.selectNewImageFileNO");
+	
+	private int selectNewImageFileNo() {
+		return sqlSession.selectOne("mapper.album.selectNewImageFileNo");
 	}
-
+	
 	@Override
 	public AlbumDTO selectAlbum(int album_num) throws DataAccessException {
 		return sqlSession.selectOne("mapper.album.selectAlbum", album_num);
 	}
-
+	
 	@Override
 	public List<ImageDTO> selectImageFileList(int album_num) throws DataAccessException {
 		List<ImageDTO> imageFileList = sqlSession.selectList("mapper.album.selectImageFileList", album_num);
 		return imageFileList;
-	}
-
+	}	
+	
 	@Override
 	public void updateAlbum(Map<String, Object> albumMap) throws DataAccessException {
-		sqlSession.update("mapper.album.updateAlbum", albumMap);
-		
+		sqlSession.update("mapper.album.updateAlbum", albumMap);		
 	}
 	
 	//기존이미지 수정
@@ -103,11 +96,11 @@ public class AlbumDAOImpl implements AlbumDAO {
 		List<ImageDTO> modAddImageFileList = (List<ImageDTO>) albumMap.get("modAddImageFileList");
 		int album_num = Integer.parseInt((String)albumMap.get("album_num"));
 		
-		int imageFileNO = selectNewImageFileNO();
+		int imageFileNo = selectNewImageFileNo();
 		
 		for (ImageDTO imageDTO : modAddImageFileList) {
 			imageDTO.setAlbum_num(album_num);
-			imageDTO.setImageFileNO(++imageFileNO);
+			imageDTO.setImageFileNo(++imageFileNo);
 		}
 		
 		sqlSession.insert("mapper.album.insertModNewImage", modAddImageFileList);
@@ -133,7 +126,7 @@ public class AlbumDAOImpl implements AlbumDAO {
 	}
 
 	@Override
-	public List<AlbumDTO> selectAllAlbumList(Map<String, Integer> pagingMap) throws DataAccessException {
+	public List<AlbumDTO> selectAllAlbumList(Map<String, Object> pagingMap) throws DataAccessException {
 		List<AlbumDTO> albumList = sqlSession.selectList("mapper.album.selectAllAlbumList", pagingMap);
 		return albumList;
 	}
@@ -142,8 +135,6 @@ public class AlbumDAOImpl implements AlbumDAO {
 	public int selectTotAlbum() throws DataAccessException {
 		int totArticles = sqlSession.selectOne("mapper.album.selectTotAlbum");
 		return totArticles;
-	}
-
-	
+	}	
 	
 }

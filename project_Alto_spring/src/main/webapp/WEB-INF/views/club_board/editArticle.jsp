@@ -47,7 +47,7 @@
 				success: function(result, textStatus) {
 					if(result == 'success') {
 						alert("이미지를 삭제했습니다.")
-						location.href="${path}/club_board/viewArticle.do?removeCompleted=true&notice_num=${article.notice_num}&club_code=${club_code}&cate=${cate}&tit=${tit}"						
+						location.href="${path}/club_board/editArticle.do?removeCompleted=true&notice_num=${article.notice_num}&club_code=${club_code}&cate=${cate}&tit=${tit}"						
 					}else {
 						alert("다시 시도해 주세요.")
 					}
@@ -95,7 +95,11 @@
 			    })
 			  }
 			  
-			})(jQuery);
+		})(jQuery);
+		
+		$(function() {
+			$("#category").val('${article.category}')
+		})	
 	</script>
 	
 </head>
@@ -105,7 +109,7 @@
 			<ul>
 				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
 				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
-				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
+				<li><a href="${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
 				<li><a href="${path}/club/clubChat.do?club_code=${club_code}&cate=${cate}&tit=${tit}">채팅</a></li>
 			</ul>
 		</div>
@@ -119,10 +123,11 @@
 			
 			<form action="#" name="frmArticle" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="notice_num" id="notice_num" value="${article.notice_num}"/>
-				<table id="clubView">
+				<table id="boardFrm">
 					<thead>
 						<tr>
-							<th colspan="6">
+							<th>제목</th>
+							<td>
 								<input type="text" name="title" id="title" style="width: 70%" value="${article.title}" placeholder="제목을 입력해주세요." />
 								<select name="category" id="category">
 									<option value="">카테고리</option>
@@ -131,28 +136,21 @@
 									<option value="signup">가입인사</option>
 									<option value="notice">공지사항</option>
 								</select>
-							</th>
-						</tr>					
-						<tr>
-							<td width="10%" align="right">작성자 ${article.mem_name}</td>
-							<td width="*"><span class="regidate">${article.regidate}</span></td>
-							<td width="8%">조회수</td>
-							<td width="8%">${article.score}</td>
-							<td width="8%">좋아요</td>
-							<td width="8%">${article.like_num}</td>
+							</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td colspan="6" class="contents">
+							<th>내용</th>
+							<td>
 								<textarea name="contents" id="contents" rows="20" cols="30">${article.contents}</textarea>
 								<script>CKEDITOR.replace('contents')</script>								
 							</td>
 						</tr>
 						
 						<tr>
-							<th class="tit01">첨부파일</th>
-							<td class="cont01" colspan="5">
+							<th>첨부파일</th>
+							<td colspan="5">
 								<c:set var="cnt" value="0" />
 								<c:forEach var="file" items="${fileList}" varStatus="status">
 									<div class="input-file">
@@ -185,18 +183,7 @@
 						</tr>
 					</tbody>				
 							
-				</table>				
-								
-				<div>
-					<div>
-						<textarea placeholder="댓글을 남겨보세요"></textarea>
-					</div>
-					
-					<div>
-						<a role="button">취소</a>
-						<a role="button">등록</a>
-					</div>				
-				</div>
+				</table>
 				
 				<div id="tr_btn" class="align_right">
 					<input type="button" class="pointBtn" value="수정등록" onclick="fn_modify_article(frmArticle)" />

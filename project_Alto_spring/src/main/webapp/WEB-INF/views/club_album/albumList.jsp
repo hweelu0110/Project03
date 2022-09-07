@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="articlesList" value="${articlesMap.articlesList}" />
-<c:set var="totArtices" value="${articlesMap.totArtices }" />
-<c:set var="section" value="${articlesMap.section }" />
-<c:set var="pageNum" value="${articlesMap.pageNum }" />
-<c:set var="club_code" value="${articlesMap.club_code }"/>
+<c:set var="albumList" value="${albumsMap.albumList }" />
+<c:set var="totArtices" value="${albumsMap.totArtices }" />
+<c:set var="section" value="${albumsMap.section }" />
+<c:set var="pageNum" value="${albumsMap.pageNum }" />
+<c:set var="club_code" value="${albumsMap.club_code}" />
 <c:set var="cate" value="${param.cate}" />
 <c:set var="tit" value="${param.tit}" />
 <%
@@ -18,13 +18,9 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="${path}/resources/css/club/album.css" />
 	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
-		$("select[name=searchField]").change(function() {
-			console.log($(this).val());
-			console.log($("select[name=searchField] option:selected").text());
-		})
 	</script>
 </head>
 <body>
@@ -39,55 +35,38 @@
 		</div>
 		<div id="clubTit">
 			<img src="${path}/resources/img/hobby_img/${cate}.png" />
-			<h2>${tit}</h2>
-		</div>			
+			<h3>${tit}</h3>
+		</div>
 		
 		<div id="clubCont">
-			<h3>게시판 목록</h3>
-			
+			<h3>사진첩 목록</h3>
 			<c:choose>
-				<c:when test="${ empty articlesList }">		<!-- 게시물이 없을 때 -->
+				<c:when test="${ empty albumList }">		<!-- 게시물이 없을 때 -->
 					<p class="noList">등록된 게시물이 없습니다!</p>
 				</c:when>
-				
-				<c:when test="${!empty articlesList }">
-					<p class="align_right">
-						<select class="searchField" name="searchField">
-							<option value="all">전체보기</option>
-							<option value="content">자유글</option>
-							<option value="review">정모후기</option>
-							<option value="signup">가입인사</option>
-							<option value="notice">공지사항</option>
-						</select>
-					</p>
-				
-					<!-- 게시물 목록 테이블 -->
-					<table id="clubBoard">
-						<!-- 컬럼이름 -->
-						<thead>
-							<tr>
-								<th width="5%">번호</th>
-								<th width="*">제목</th>
-								<th width="10%">작성자</th>
-								<th width="8%">조회수</th>
-								<th width="10%">작성일</th>
-								<th width="8%">좋아요</th>
-							</tr>
-						</thead>
-						
-						<tbody>
-							<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
-								<tr>
-									<td>${articleNum.count }</td>
-									<td class="title"><a href="${path}/club_board/viewArticle.do?notice_num=${article.notice_num}&cate=${cate}&tit=${tit}">${article.title }</a></td>
-									<td>${article.mem_name }</td>
-									<td>${article.score }</td>
-									<td>${article.regidate }</td>
-									<td>${article.like_num}</td>							
-								</tr>
-							</c:forEach>
-						</tbody>					
-					</table>
+				<c:when test="${!empty albumList }">
+					<c:forEach var="album" items="${albumList }" varStatus="albumNum">
+						<ul>
+							<li class="image">
+								<a href="${path}/club_album/Albumdetail.do?album_num=${album.album_num}">
+									<img src="${path}/club_album/albumImage.do?album_num=${album.album_num}&imageFileName=${album.imageFileName}" width="200" height="200">
+								</a>
+								<dl>
+									<dt>
+										<a>제목</a>
+										<span>${album.title }</span>
+									</dt>
+									<dd>
+										<span>${album.mem_id }</span>
+									</dd>
+									<dd>
+										<span>${album.regidate }</span>
+										<span>조회수&nbsp;${album.score }</span>
+									</dd>
+								</dl>
+							</li>
+						</ul>
+					</c:forEach>
 					
 					<div id="paging">
 						<c:if test="${totArtices != null }">						
@@ -139,12 +118,12 @@
 			<!-- 글쓰기 버튼 -->
 			<c:if test="${not empty login}">
 				<p class="align_right">
-					<button class="pointBtn" type="button" onclick="location.href='${path}/club_board/articleForm.do?club_code=${club_code}&cate=${cate}&tit=${tit}'">글쓰기</button>
+					<button class="pointBtn" type="button" onclick="location.href='${path}/club_album/albumForm.do?club_code=${club_code}&cate=${cate}&tit=${tit}'">사진등록</button>
 				</p>
 			</c:if>
-		</div>
-		
-		
-	</section>		
+		</div>					
+
+	</section>
+	
 </body>
 </html>
