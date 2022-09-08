@@ -18,14 +18,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
-	<style type="text/css">
-		.tr_modEable {
-			visibility: hidden;
-		}
-		#tr_btn_modify {
-			display: none;
-		}
-	</style>
 	<script type="text/javascript">
 		function backToList(obj) {
 			obj.action = "${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}"

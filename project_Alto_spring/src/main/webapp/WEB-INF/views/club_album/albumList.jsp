@@ -19,7 +19,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="${path}/resources/css/club/album.css" />
-	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
 	<script type="text/javascript">
 	</script>
 </head>
@@ -35,7 +34,7 @@
 		</div>
 		<div id="clubTit">
 			<img src="${path}/resources/img/hobby_img/${cate}.png" />
-			<h3>${tit}</h3>
+			<h2>${tit}</h2>
 		</div>
 		
 		<div id="clubCont">
@@ -44,29 +43,29 @@
 				<c:when test="${ empty albumList }">		<!-- 게시물이 없을 때 -->
 					<p class="noList">등록된 게시물이 없습니다!</p>
 				</c:when>
+				
 				<c:when test="${!empty albumList }">
-					<c:forEach var="album" items="${albumList }" varStatus="albumNum">
-						<ul>
-							<li class="image">
-								<a href="${path}/club_album/Albumdetail.do?album_num=${album.album_num}">
-									<img src="${path}/club_album/albumImage.do?album_num=${album.album_num}&imageFileName=${album.imageFileName}" width="200" height="200">
+					<ul id="clubAlbum">
+						<c:forEach var="album" items="${albumList }" varStatus="albumNum">
+							<li>
+								<a href="${path}/club_album/albumDetail.do?album_num=${album.album_num}&cate=${cate}&tit=${tit}">
+									<img src="${path}/club_album/albumImage.do?album_num=${album.album_num}&imageFileName=${album.imageFileName}">
 								</a>
+								
 								<dl>
-									<dt>
-										<a>제목</a>
-										<span>${album.title }</span>
-									</dt>
+									<dt><a href="${path}/club_album/albumDetail.do?album_num=${album.album_num}&cate=${cate}&tit=${tit}">${album.title}</a></dt>
 									<dd>
-										<span>${album.mem_id }</span>
+										<span>${album.mem_name}</span>
 									</dd>
 									<dd>
-										<span>${album.regidate }</span>
+										<span>${album.regidate}</span>
 										<span>조회수&nbsp;${album.score }</span>
 									</dd>
 								</dl>
+								
 							</li>
-						</ul>
-					</c:forEach>
+						</c:forEach>
+					</ul>
 					
 					<div id="paging">
 						<c:if test="${totArtices != null }">						
@@ -74,11 +73,11 @@
 								<c:when test="${totArtices > 100 }">				
 									<c:forEach var="page" begin="1" end="10" step="1">
 										<c:if test="${section > 1 && page == 1 }">
-											<a href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section-1}&pageNum=${section-1}*10 + 1&cate=${cate}&tit=${tit}">&nbsp;이전</a>
+											<a href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section-1}&pageNum=${section-1}*10 + 1&cate=${cate}&tit=${tit}">&nbsp;이전</a>
 										</c:if>
-											<a href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${section*10 + page }</a>
+											<a href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${section*10 + page }</a>
 										<c:if test="${page == 10 }">
-											<a href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section-1}&pageNum=${section*10 + 1}&cate=${cate}&tit=${tit}">&nbsp;다음</a>
+											<a href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section-1}&pageNum=${section*10 + 1}&cate=${cate}&tit=${tit}">&nbsp;다음</a>
 										</c:if>	
 									</c:forEach>					
 								</c:when>
@@ -87,23 +86,23 @@
 									<c:forEach var="page" begin="1" end="10" step="1">
 										<c:choose >								
 											<c:when test="${page == pageNum}">
-												<a class="select" href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
+												<a class="select" href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
 											</c:when>
 											<c:otherwise>
-												<a href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
+												<a href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 								</c:when>
 								
 								<c:when test="${totArtices < 100 }">														
-									<c:forEach var="page" begin="1" end="${totArtices/10 + 1 }">
+									<c:forEach var="page" begin="1" end="${totArtices/20 + 1 }">
 										<c:choose >								
 											<c:when test="${page == pageNum}">
-												<a class="select" href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
+												<a class="select" href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
 											</c:when>
 											<c:otherwise>
-												<a href="${path}/club_board/listArticles.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
+												<a href="${path}/club_album/albumList.do?club_code=${club_code}&section=${section}&pageNum=${page}&cate=${cate}&tit=${tit}">${page}</a>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
