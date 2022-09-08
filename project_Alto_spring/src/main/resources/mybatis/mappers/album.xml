@@ -59,7 +59,7 @@
 											ORDER BY regidate desc
 										)
 									)
-									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10+1 AND (#{section}-1)*100 + #{pageNum}*10
+									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*20+1 AND (#{section}-1)*100 + #{pageNum}*20
 								)
 							)
 							AND A.mem_id = B.mem_id
@@ -104,8 +104,8 @@
 	
 	<select id="selectAlbum" resultType="albumDTO" parameterType="int">
 		<![CDATA[
-			SELECT * FROM alto_club_album
-			WHERE album_num = #{album_num}	
+			SELECT A.*, B.MEM_NAME mem_name FROM alto_club_album A, ALTO_MEMBER B
+			WHERE album_num = #{album_num} AND A.mem_id = B.mem_id
 		]]>
 	</select>
 	
@@ -121,7 +121,7 @@
 	<update id="updateAlbum" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE alto_club_album 
-			SET TITLE = #{title}
+			SET TITLE = #{title}, CONTENTS = #{contents}, IMAGEFILENAME = #{imageFileName}
 			WHERE album_num = #{album_num}		
 		]]>
 	</update>

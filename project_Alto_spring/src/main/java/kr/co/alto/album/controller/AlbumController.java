@@ -15,8 +15,8 @@ public interface AlbumController {
 	
 	public void albumImage(@RequestParam("album_num") int album_num, @RequestParam("imageFileName") String imageFileName, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView albumDetail(@RequestParam("album_num") int album_num, HttpServletRequest request,
-									HttpServletResponse response) throws Exception;
+	public ModelAndView albumDetail(@RequestParam("album_num") int album_num, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView editAlbum(@RequestParam("album_num") int album_num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity modAlbum(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	

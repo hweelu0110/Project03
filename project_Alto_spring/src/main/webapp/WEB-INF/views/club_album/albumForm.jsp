@@ -14,7 +14,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
+	<link rel="stylesheet" href="${path}/resources/css/club/album.css" />
 	<script src="${path}/resources/ckeditor/ckeditor.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -70,8 +70,6 @@
 			  }
 			  
 			})(jQuery);
-		
-	 
 	</script>
 </head>
 <body>
@@ -90,13 +88,13 @@
 		</div>
 		
 		<div id="clubCont">
-			<h3>이미지 등록</h3>
+			<h3>사진첩 등록</h3>
 			
 			<form name="albumFrm" method="post" action="${path}/club_album/addNewAlbum.do?cate=${cate}&tit=${tit}" enctype="multipart/form-data" onsubmit="return validateForm()">
 				<input type="hidden" name="club_code" value="${param.club_code}" />
 				<input type="hidden" name="mem_id" value="${login.mem_id}" />
 				
-				<table>					
+				<table id="boardFrm">					
 					<tr>
 						<th>제목</th>
 						<td>
@@ -113,7 +111,7 @@
 					</tr>
 					
 					<tr>
-						<td>이미지 첨부</td>
+						<th>이미지 첨부</th>
 						<td>
 							<div class="input-file">
 		  						<input type="text" readonly="readonly" class="file-name" />

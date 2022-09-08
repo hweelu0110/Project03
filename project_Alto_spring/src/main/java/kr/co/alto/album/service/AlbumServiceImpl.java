@@ -51,14 +51,11 @@ public class AlbumServiceImpl implements AlbumService {
 		int album_num = (int) viewMap.get("album_num");
 		String mem_id = (String) viewMap.get("mem_id");
 		
-		//조회수를 갱신하기 전 먼저 글번호에 해당되는 글번호를 조회
 		AlbumDTO albumDTO = albumDAO.selectAlbum(album_num);
 		
-		//비로그인 상태와
-		//로그인한 아이디와 게시글의 글쓴이 아이디를 비교함
 		String writerId = albumDTO.getMem_id();
 		if (mem_id == null || !(mem_id.equals(writerId))) {
-			//조회수 1 증가시킴
+			//조회수 1 증가
 			albumDAO.updateViewCount(album_num);
 			albumDTO = albumDAO.selectAlbum(album_num);	
 		}
@@ -80,7 +77,7 @@ public class AlbumServiceImpl implements AlbumService {
 		List<ImageDTO> modAddImageFileList = (List<ImageDTO>) albumMap.get("modAddImageFileList");
 		
 		if (imageFileList != null && imageFileList.size() != 0) {
-			int added_img_num = Integer.parseInt((String)albumMap.get("added_img_num"));
+			int added_img_num = Integer.parseInt((String)albumMap.get("add_img_num"));
 			int pre_img_num = Integer.parseInt((String)albumMap.get("pre_img_num"));
 			
 			if (pre_img_num < added_img_num) {				//기존 이미지도 수정하고 새 이미지도 추가한 경우

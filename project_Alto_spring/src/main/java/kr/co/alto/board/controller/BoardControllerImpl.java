@@ -375,7 +375,6 @@ public class BoardControllerImpl implements BoardController {
 			if (fileNameList != null && fileNameList.size() != 0) {
 				for (int i=0; i<fileNameList.size(); i++) {
 					String fileName = fileNameList.get(i);
-					System.out.println("fileName ["+i+"] "+fileName);
 					
 					if (i < pre_file_num && fileName != null) {
 						File srcFile = new File(ARTICLE_FILE_REPO +"\\temp\\"+ fileName);

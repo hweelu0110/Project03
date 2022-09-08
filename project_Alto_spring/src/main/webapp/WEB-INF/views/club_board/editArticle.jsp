@@ -19,14 +19,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
 	<script src="${path}/resources/ckeditor/ckeditor.js"></script>
-	<style type="text/css">
-		.tr_modEable {
-			visibility: hidden;
-		}
-		#tr_btn_modify {
-			display: none;
-		}
-	</style>
 	<script type="text/javascript">
 		function backToList(obj) {
 			obj.action = "${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
@@ -46,7 +38,7 @@
 				data : {fileNo: _fileNo, notice_num: _notice_num, fileName: _fileName},
 				success: function(result, textStatus) {
 					if(result == 'success') {
-						alert("이미지를 삭제했습니다.")
+						alert("첨부파일을 삭제했습니다.")
 						location.href="${path}/club_board/editArticle.do?removeCompleted=true&notice_num=${article.notice_num}&club_code=${club_code}&cate=${cate}&tit=${tit}"						
 					}else {
 						alert("다시 시도해 주세요.")

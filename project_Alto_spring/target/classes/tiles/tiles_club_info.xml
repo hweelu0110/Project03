@@ -43,6 +43,10 @@
 	<definition name="/club_album/albumDetail" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/club_album/albumDetail.jsp" />
 	</definition>
+	
+	<definition name="/club_album/editAlbum" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/editAlbum.jsp" />
+	</definition>
 		
 	<!-- 소모임 일정 -->
 	<definition name="/club/Schedule" extends="tiles-layout">

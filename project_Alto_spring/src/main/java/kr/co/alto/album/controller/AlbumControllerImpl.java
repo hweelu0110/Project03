@@ -196,36 +196,62 @@ public class AlbumControllerImpl implements AlbumController {
 	}
 	
 	// 첨부파일 다운로드
-		@Override
-		@RequestMapping(value = "/club_album/albumImage.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public void albumImage(@RequestParam("album_num") int album_num,
-				    	       @RequestParam("imageFileName") String imageFileName, HttpServletRequest request, HttpServletResponse response) throws Exception {
-			
-			OutputStream out = response.getOutputStream();
-			
-			String downFile = ALBUM_IMAGE_REPO + "\\"+album_num+"\\"+ imageFileName;
-			//다운로드될 파일 객체 생성
-			File file = new File(downFile);
-			
-			response.setHeader("Cache-Control", "no-cache");
-			//헤더에 파일이름 설정
-			response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
-			
-			FileInputStream in = new FileInputStream(file);
-			byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
-			while(true) {
-				int count = in.read(buffer);
-				if(count == -1) break;
-				out.write(buffer, 0, count);
-			}
-			in.close();
-			out.close();
-		}
+	@Override
+	@RequestMapping(value = "/club_album/albumImage.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public void albumImage(@RequestParam("album_num") int album_num,
+			    	       @RequestParam("imageFileName") String imageFileName, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		OutputStream out = response.getOutputStream();
+		
+		String downFile = ALBUM_IMAGE_REPO + "\\"+album_num+"\\"+ imageFileName;
+		//다운로드될 파일 객체 생성
+		File file = new File(downFile);
+		
+		response.setHeader("Cache-Control", "no-cache");
+		//헤더에 파일이름 설정
+		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
+		
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1) break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
+	}		
 
 	@Override
 	@RequestMapping(value = "/club_album/albumDetail.do", method = RequestMethod.GET)
 	public ModelAndView albumDetail(@RequestParam("album_num") int album_num, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("login");
+		
+		String mem_id= null;
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		Map<String, Object> viewMap = new HashMap<>();
+		viewMap.put("album_num", album_num);
+		viewMap.put("mem_id", mem_id);
+				
+		Map<String, Object> albumMap = albumService.albumDetail(viewMap);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("albumMap", albumMap);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/club_album/editAlbum.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView editAlbum(@RequestParam("album_num") int album_num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
@@ -257,6 +283,9 @@ public class AlbumControllerImpl implements AlbumController {
 			throws Exception {
 		multipartRequest.setCharacterEncoding("UTF-8");
 		
+		String cate = multipartRequest.getParameter("cate");
+		String tit = multipartRequest.getParameter("tit");
+		
 		Map<String, Object> albumMap = new HashMap<>();
 		
 		Enumeration enu = multipartRequest.getParameterNames();
@@ -277,14 +306,29 @@ public class AlbumControllerImpl implements AlbumController {
 			}
 		}
 		
+		String[] oldName = (String[]) albumMap.get("oldFileName");
+		
 		//수정한 이미지 파일을 업로드함
 		List<String> fileList = uploadModImageFile(multipartRequest);
+		String imageFileName = "";
+		if (fileList.get(0) != null) {
+			imageFileName = fileList.get(0);
+		} else {
+			imageFileName = oldName[0];
+		}
+		albumMap.put("imageFileName", imageFileName);		
 		
 		//수정시 새로 추가된 이미지 수
-		int added_img_num = Integer.parseInt((String)albumMap.get("added_img_num"));
+		int add_img_num = fileList.size();
+		
 		
 		//기존 이미지 수
-		int pre_img_num = Integer.parseInt((String)albumMap.get("pre_img_num"));
+		int pre_img_num = oldName.length;
+		
+		albumMap.put("add_file_num", add_img_num);
+		albumMap.put("pre_file_num", pre_img_num);
+		
+		System.out.println("새로추가 ? "+ add_img_num + "기존 ? " + pre_img_num);
 		
 		List<ImageDTO> imageFileList = new ArrayList<>();
 		List<ImageDTO> modAddImageFileList = new ArrayList<>();
@@ -292,19 +336,20 @@ public class AlbumControllerImpl implements AlbumController {
 		if (fileList != null && fileList.size() != 0) {
 			String[] imageFileNo = (String[]) albumMap.get("imageFileNo");
 			
-			for (int i=0; i < added_img_num; i++) {
+			for (int i=0; i < add_img_num; i++) {
 				String fileName = fileList.get(i);
 				ImageDTO imageDTO = new ImageDTO();
-				if (i < pre_img_num) {				//기존의 이미지를 수정해서 첨부한 이미지들
+				
+				if (i < pre_img_num && fileName != null) {				//기존의 이미지를 수정해서 첨부한 이미지들
 					imageDTO.setImageFileName(fileName);
 					imageDTO.setImageFileNo(Integer.parseInt(imageFileNo[i]));
 					imageFileList.add(imageDTO);
 					albumMap.put("imageFileList", imageFileList);
 				}
-				else {								//새로 추가한 이미지들
+				else if (fileName != null) {								//새로 추가한 이미지들
 					imageDTO.setImageFileName(fileName);
 					modAddImageFileList.add(imageDTO);				// ??
-					albumMap.put("modAddImageFileList",modAddImageFileList);
+					albumMap.put("modAddImageFileList", modAddImageFileList);
 				}
 			}
 			
@@ -323,32 +368,28 @@ public class AlbumControllerImpl implements AlbumController {
 				for (int i=0; i<fileList.size(); i++) {
 					String fileName = fileList.get(i);
 					
-					if (i < pre_img_num) {
-						if (fileName != null) {
-							File srcFile = new File(ALBUM_IMAGE_REPO +"\\temp\\"+ fileName);
-							File destFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num);
-							FileUtils.moveFileToDirectory(srcFile, destFile, true);
-							
-							String[] oldName = (String[]) albumMap.get("oldFileName");
-							String oldFileName = oldName[i];
-							
-							File oldFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num +"\\"+ oldFileName);
-							oldFile.delete();		
-						}
+					if (i < pre_img_num && fileName != null) {
+						File srcFile = new File(ALBUM_IMAGE_REPO +"\\temp\\"+ fileName);
+						File destFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num);
+						FileUtils.moveFileToDirectory(srcFile, destFile, true);							
+						
+						String oldFileName = oldName[i];
+						
+						File oldFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num +"\\"+ oldFileName);
+						oldFile.delete();
 					}
-					else {
-						if (fileName != null) {
-							File srcFile = new File(ALBUM_IMAGE_REPO +"\\temp\\"+ fileName);
-							File destFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num);
-							FileUtils.moveFileToDirectory(srcFile, destFile, true);						
-						}
+					else if (fileName != null) {
+						File srcFile = new File(ALBUM_IMAGE_REPO +"\\temp\\"+ fileName);
+						File destFile = new File(ALBUM_IMAGE_REPO +"\\"+ album_num);
+						FileUtils.moveFileToDirectory(srcFile, destFile, true);	
 					}
 					
 				}
 			}
 			message = "<script>";
 			message += " alert('글을 수정했습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/club_album/albumDetail.do?album_num="+album_num+"';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/club_album/albumDetail.do?album_num="+album_num+"&cate="+cate+"&tit="+tit+"';";
+					
 			message += "</script>";
 			
 			// 새 글을 추가한 후 메시지를 전달함
@@ -364,7 +405,7 @@ public class AlbumControllerImpl implements AlbumController {
 			
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/club_album/albumDetail.do?album_num="+album_num+"';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/club_album/albumDetail.do?album_num="+album_num+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			
@@ -373,43 +414,47 @@ public class AlbumControllerImpl implements AlbumController {
 		}
 		return resEnt;
 	}
-		//수정시 다중 이미지 업로드하기
-		private List<String> uploadModImageFile(MultipartHttpServletRequest multipartRequest) throws Exception, IOException {
-			List<String> fileList = new ArrayList<>();
-			Iterator<String> fileNames = multipartRequest.getFileNames();
+	
+	//수정시 다중 이미지 업로드하기
+	private List<String> uploadModImageFile(MultipartHttpServletRequest multipartRequest) throws Exception, IOException {
+		List<String> fileList = new ArrayList<>();
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
 			
-			while(fileNames.hasNext()) {
-				String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFileName = mFile.getOriginalFilename();
+			if (originalFileName != "" && originalFileName != null) {
+				fileList.add(originalFileName);
 				
-				MultipartFile mFile = multipartRequest.getFile(fileName);
-				String originalFileName = mFile.getOriginalFilename();
-				if (originalFileName != "" && originalFileName != null) {
-					fileList.add(originalFileName);
-					
-					File file = new File(ALBUM_IMAGE_REPO +"\\"+ fileName);
-					if (mFile.getSize() != 0) {
-						if (!file.exists()) {
-							file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리들 생성
-							mFile.transferTo(new File(ALBUM_IMAGE_REPO +"\\"+ "temp" +"\\"+ originalFileName)); //임시로
-									//저장된 MultipartFile을 실제 파일로 전송
-						}
+				File file = new File(ALBUM_IMAGE_REPO +"\\"+ fileName);
+				if (mFile.getSize() != 0) {
+					if (!file.exists()) {
+						file.getParentFile().mkdirs();		
+						mFile.transferTo(new File(ALBUM_IMAGE_REPO +"\\temp\\"+ originalFileName)); 
 					}
-					
 				}
-				else {													//첨부한 이미지가 없었을 경우
-					fileList.add(null);
-				}
+				
 			}
-			
-			return fileList;
+			else {													
+				fileList.add(null);
+			}
 		}
+		
+		return fileList;
+	}
 
 	@Override
-	@RequestMapping(value = "/club_album/removeArticle.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/club_album/removeAlbum.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity removeAlbum(@RequestParam("album_num") int album_num, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=utf-8");
+		
+		String club_code = request.getParameter("club_code");
+		String cate = request.getParameter("cate");
+		String tit = request.getParameter("tit");
 		
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");	
@@ -425,14 +470,14 @@ public class AlbumControllerImpl implements AlbumController {
 			
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='"+request.getContextPath()+"/club_album/Albumlist.do';";
+			message += " location.href='"+request.getContextPath()+"/club_album/albumList.do?club_code="+club_code+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";
 			// 글 삭제 후 메시지를 전달함
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);					
 		} catch (Exception e) {
 			message = "<script>";
 			message += " alert('글을 삭제하는 중 오류가 발생했습니다. 다시 시도해 주세요.');";
-			message += " location.href='"+request.getContextPath()+"/club_album/Albumlist.do';";
+			message += " location.href='"+request.getContextPath()+"/club_album/Albumlist.do?club_code="+club_code+"&cate="+cate+"&tit="+tit+"';";
 			message += "</script>";			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			
