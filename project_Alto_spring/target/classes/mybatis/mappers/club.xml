@@ -8,7 +8,9 @@
 		<result property="title" column="title" />
 		<result property="cate_m" column="cate_m" />
 		<result property="cate_s" column="cate_s" />
+		<result property="cate_s_name" column="cate_s_name" />
 		<result property="area_code" column="area_code" />
+		<result property="area_name" column="area_name" />
 		<result property="manager" column="manager" />
 		<result property="member_num" column="member_num" />
 		<result property="member_max" column="max" />
@@ -28,6 +30,18 @@
 		<result property="img" column="IMG" />
 	</resultMap>
 	
+	<resultMap type="joinDTO" id="clubMemberResult">
+		<result property="join_code" column="JOIN_CODE" />
+		<result property="mem_id" column="MEM_ID" />
+		<result property="club_code" column="CLUB_CODE" />
+		<result property="manager" column="MANAGER" />
+		<result property="bookmark" column="BOOKMARK" />
+		<result property="regidate" column="REGIDATE" />
+		<result property="img" column="IMG" />
+		<result property="name" column="NAME" />
+		<result property="img" column="IMG" />
+	</resultMap>
+	
 	<!-- 모임 등록하기 -->
 	<insert id="clubOpen" parameterType="clubDTO">
 		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
@@ -38,14 +52,38 @@
 		<![CDATA[
 			SELECT nvl(MAX(club_code),0) + 1 FROM ALTO_CLUB
 		]]>
-	</select>
+	</select>	
 	
 	<!-- 모임 정보 가져오기 모임메인(information) -->
 	<select id="selectClubInfo" parameterType="String" resultType="clubDTO">
 		<![CDATA[
-			SELECT *
-			FROM ALTO_CLUB
-			WHERE CLUB_CODE = #{club_code}
+			SELECT A.*, B.NAME cate_s_name, C.NAME area_name
+			FROM ALTO_CLUB A, ALTO_HOBBY_SUB B, ALTO_AREA C
+			WHERE CLUB_CODE = #{club_code} AND A.CATE_S = B.HOBBY_SUB_CODE AND A.AREA_CODE = C.AREA_CODE
+		]]>
+	</select>
+	
+	<select id="selectNewJoinCode" resultType="String">
+		<![CDATA[
+			SELECT nvl(MAX(JOIN_CODE),0) + 1 FROM ALTO_JOIN
+		]]>
+	</select>
+	
+	<!-- 모임 가입하기 -->
+	<insert id="clubJoin" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE, MANAGER)
+			VALUES(#{join_code}, #{mem_id}, #{club_code}, #{manager})	
+		]]>
+	</insert>
+	
+	<!-- 모임 회원 목록 가져오기 -->
+	<select id="selectClubMemberList" parameterType="String" resultType="joinDTO">
+		<![CDATA[
+			SELECT A.*, B.IMG img, B.MEM_NAME name
+			FROM ALTO_JOIN A, ALTO_MEMBER B
+			WHERE CLUB_CODE = ${club_code} AND A.MEM_ID = B.MEM_ID 
+			ORDER BY REGIDATE
 		]]>
 	</select>
 	
@@ -61,8 +99,7 @@
 		FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
 		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
 		AND A.MEM_ID = #{mem_id}
-	</select>
-	
+	</select>	
 	
 	<!-- BEST 모임 목록 -->
 	<select id="selectBestClubList" resultType="clubListDTO">

@@ -10,7 +10,9 @@ public class ClubDTO {
 	private String title;
 	private String cate_m;
 	private String cate_s;
+	private String cate_s_name;
 	private String area_code;
+	private String area_name;
 	private String manager;
 	private String member_num;
 	private String member_max;
@@ -52,6 +54,14 @@ public class ClubDTO {
 	public void setCate_s(String cate_s) {
 		this.cate_s = cate_s;
 	}
+	
+	public String getCate_s_name() {
+		return cate_s_name;
+	}
+
+	public void setCate_s_name(String cate_s_name) {
+		this.cate_s_name = cate_s_name;
+	}
 
 	public String getArea_code() {
 		return area_code;
@@ -59,6 +69,14 @@ public class ClubDTO {
 
 	public void setArea_code(String area_code) {
 		this.area_code = area_code;
+	}
+	
+	public String getArea_name() {
+		return area_name;
+	}
+
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
 	}
 
 	public String getManager() {
