@@ -129,7 +129,7 @@
 				<ul class="club">
 					<c:forEach var="club" items="${hobClubList}">
 						<li>
-							<a href="${path}/club/clubInformation.do?club_code=${club.club_code}">
+							<a href="${path}/club/clubInfo.do?club_code=${club.club_code}">
 								<img class="club_img" src="${path}/resources/img/club_test.png" />
 							</a>
 							<span class="area">${club.area_name}</span>

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+#clubMenu ul li:nth-child(1) { border-bottom: 3px solid #F3BE34; }
+
+.left { overflow: hidden; float: left; width: 70%; }
+.right { overflow: hidden; float: right; }
+
+.clubImg {
+	margin: 20px 0;
+	width: 600px;
+}
+.like_icon {
+	position: absolute;
+	display: block;
+	top: 3px;
+    right: 3px;
+    width: 14px;
+    height: 13px;
+    text-indent: -99999px;
+    background-image: url(../../img/alto_common_icon.png);
+    background-size: 85px;
+    background-position: -22px 0px;   
+    cursor: pointer;  
+}
+
+.clubIntro { width: 600px; }
+.clubIntro p { margin-left: 10px; }
+
+.schTit {
+	width: 600px;
+	padding-left: 30px;
+	margin-top: 20px;
+	background-image: url(../../img/calendar.png);
+	background-size: 20px;
+    background-repeat: no-repeat;
+}
+
+.schDate {
+	float: left;
+	height: 50px;
+	width: 50px;
+	background-color: #F3BE34;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.schInfo { 
+	float: left;
+    margin: 0 0 0 10px;
+	width: 300px;
+	height: 50px;
+	background-color: #EAEAEA;
+}
+.schInfo .gps { width: 20px; height: 20px; margin-top:3px; margin-left: 20px; }
+.schInfo .span1 { margin-left: 10px; text-align: left; }
+.schInfo .span2 { margin-left: 10px; }
+
+.basicBtn02 { width: 360px; }
+
+.edit { 
+	margin: 0 0 10px 70px;
+	width: 15px; 
+	height: 15px; 
+	cursor: pointer;
+}
+
+.member { clear: both; margin-bottom: 20px; }
+.member ul li img { width: 40px; vertical-align: middle; }
+.member ul li { display: inline; }
+.member .plus { width: 25px; margin-left: 5px; }
+
+#schedual_member { width: 300px; float: right; border: 1px solid; margin-top: 20px; }
+#schedual_member ul li { position: relative; cursor: pointer; margin-left: 10px; }
+#schedual_member ul li img { width: 40px; vertical-align: middle; }
+#schedual_member ul li span {	
+    position: absolute;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+#schedual_member ul li span.memName { 
+	width: 76px; 
+	height: 32px;
+	overflow: hidden;
+}
+#schedual_member ul li span.manager { 
+	margin-right: 30px;
+	right: 0; 
+	font-size: 10px;
+	font-weight: bold;
+	color: #777;
+}
+#schedual_member h3 {
+	margin-left: 10px;
+	margin-top:10px;
+}
+
+/* 가입하기 팝업 */
+#popupJoin { overflow: hidden; width: 500px; }
+#popupJoin img { width: 40px; margin: 10px; }
+#title { text-align: left; }
+#joinBtn { position: inherit; }
+
+

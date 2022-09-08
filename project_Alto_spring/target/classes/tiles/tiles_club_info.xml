@@ -5,14 +5,9 @@
        
 <tiles-definitions>	
 	<!-- 소모임 메인 -->
-	<definition name="/club/clubInformation" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubInformation.jsp" />
-	</definition>
-	
-	<!-- 소모임 가입하기 -->
-	<definition name="/club/clubJoin" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubJoin.jsp" />
-	</definition>
+	<definition name="/club/clubInfo" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubInfo.jsp" />
+	</definition>	
 	
 	<!-- 소모임 게시판 -->	
 	<definition name="/club_board/listArticles" extends="tiles-layout">
