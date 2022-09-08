@@ -124,4 +124,10 @@ public class ClassDAOImpl implements ClassDAO {
 		return selectNewClass_reviewN;
 	}
 
+	@Override
+	public int deleteClassReview(String cmt_num) throws DataAccessException {
+		int deleteClassReview = sqlSession.delete("mapper.class.deleteClassReview", cmt_num);
+		return deleteClassReview;
+	}
+
 }

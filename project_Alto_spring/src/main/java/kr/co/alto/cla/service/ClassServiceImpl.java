@@ -95,4 +95,10 @@ public class ClassServiceImpl implements ClassService {
 		return reviewNew;
 	}
 
+	@Override
+	public int removeClassReview(String cmt_num) throws Exception {
+		int reviewDel = classDAO.deleteClassReview(cmt_num);
+		return reviewDel;
+	}
+
 }

@@ -213,5 +213,9 @@
 		]]>      
 	</insert>
 	
+	<delete id="deleteClassReview">
+		DELETE FROM EZEN.ALTO_CLASS_REVIEW
+		WHERE CMT_NUM = #{cmt_num}
+	</delete>
 </mapper>
 

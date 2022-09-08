@@ -276,7 +276,7 @@
 										<td width="10%">${cmt.cmt_regdate }</td>
 										<td width="10%">
 											<c:if test="${cmt.cmt_writer == mem_name_s}">
-												<a href="${contextPath}/class/reviewRemove.do?cmt_num=${cmt.cmt_num}">삭제</a>
+												<a href="${contextPath}/class/classReviewRemove.do?class_code=${classDTO.class_code}&cmt_num=${cmt.cmt_num}">삭제</a>
 											</c:if>
 										</td>
 									</tr>

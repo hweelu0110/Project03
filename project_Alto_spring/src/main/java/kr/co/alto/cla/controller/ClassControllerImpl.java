@@ -504,4 +504,36 @@ public class ClassControllerImpl implements ClassController {
 		}
 		return resEnt;
 	}
+
+	@Override
+	@RequestMapping(value="/class/classReviewRemove.do", method = RequestMethod.GET)
+	public ResponseEntity classReviewRemove(@RequestParam("class_code") String class_code, 
+											@RequestParam("cmt_num") String cmt_num, 
+											HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+		try {
+			int reviewNew = classService.removeClassReview(cmt_num);
+			
+			message = "<script>";
+			message += " alert('리뷰를 삭제했습니다.');";
+			message += " location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    
+		}catch(Exception e) {
+			
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
+			message +=" location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
 }

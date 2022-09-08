@@ -14,4 +14,5 @@ public interface ClassService {
 	
 	public Map<String, Object> classMainList(String mem_id) throws Exception;
 	public int addClassReview(Map reviewMap) throws Exception;
+	public int removeClassReview(String cmt_num) throws Exception;
 }
