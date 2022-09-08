@@ -222,51 +222,74 @@
 								<input type="radio" name="CMT_STAR" value="1" id="rate5"><label
 									for="rate5">★</label>
 							</fieldset>
-							<div>
-								<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT"
-										  placeholder="좋은 수강평을 남겨주시면 큰 힘이 됩니다!"></textarea>
-							</div>
-							<input type="hidden" name="cmt_class" value="${classDTO.class_code}">
-							<div align="right">
-							<button type="submit" class="btn btn-warning">리뷰 등록</button>
-							</div>
-						</form>	
+							<c:if test="${not empty mem_name_s }">
+								<div>
+									<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT" placeholder="좋은 수강평을 남겨주시면 큰 힘이 됩니다!"></textarea>						
+								</div>
+								<input type="hidden" name="cmt_class" value="${classDTO.class_code}">
+								<div align="right">
+								<button type="submit" class="btn btn-warning">리뷰 등록</button>
+								</div>
+							</c:if>
+							<c:if test="${empty mem_name_s }">
+								<div>
+									<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT" readonly="readonly">로그인 후 리뷰 작성이 가능합니다.</textarea>						
+								</div>
+							</c:if>
+						</form>
 					</div>
 					
 					<table id="review_table">
 						<tr>
 							<td width="10%">작성자</td>
-							<td width="60%">내용</td>
+							<td width="50%">내용</td>
 							<td width="20%">별점</td>
 							<td width="10%">작성일</td>
+							<td width="10%">비고</td>
  						</tr>
- 						<c:forEach var="cmt" items="${reviewList }">
-	 						<tr>
-	 							<td width="10%">${cmt.cmt_writer }</td>
-								<td width="60%">${cmt.cmt_content }</td>
-								<td width="20%">
-									<c:if test="${cmt.cmt_star == 5 }">
-										★★★★★
-									</c:if>
-									<c:if test="${cmt.cmt_star == 4 }">
-										★★★★☆
-									</c:if>
-									<c:if test="${cmt.cmt_star == 3 }">
-										★★★☆☆
-									</c:if>
-									<c:if test="${cmt.cmt_star == 2 }">
-										★★☆☆☆
-									</c:if>
-									<c:if test="${cmt.cmt_star == 1 }">
-										★☆☆☆☆
-									</c:if>
-									<c:if test="${cmt.cmt_star == 0 }">
-										☆☆☆☆☆
-									</c:if>
-								</td>
-								<td width="10%">${cmt.cmt_regdate }</td>
-							</tr>
- 						</c:forEach>
+ 						<c:choose>
+ 							<c:when test="${not empty reviewList }">
+		 						<c:forEach var="cmt" items="${reviewList }">
+			 						<tr>
+			 							<td width="10%">${cmt.cmt_writer }</td>
+										<td width="50%">${cmt.cmt_content }</td>
+										<td width="20%">
+											<c:if test="${cmt.cmt_star == 5 }">
+												★★★★★
+											</c:if>
+											<c:if test="${cmt.cmt_star == 4 }">
+												★★★★☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 3 }">
+												★★★☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 2 }">
+												★★☆☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 1 }">
+												★☆☆☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 0 }">
+												☆☆☆☆☆
+											</c:if>
+										</td>
+										<td width="10%">${cmt.cmt_regdate }</td>
+										<td width="10%">
+											<c:if test="${cmt.cmt_writer == mem_name_s}">
+												<a href="${contextPath}/class/reviewRemove.do?cmt_num=${cmt.cmt_num}">삭제</a>
+											</c:if>
+										</td>
+									</tr>
+		 						</c:forEach>
+ 							</c:when>
+ 							<c:when test="${empty reviewList }">
+	 							<tr>
+	 								<td colspan="4">
+	 									등록된 리뷰가 없습니다.
+	 								</td>
+	 							</tr>
+ 							</c:when>
+ 						</c:choose>
 					</table>
 				</div>
 			</div>
