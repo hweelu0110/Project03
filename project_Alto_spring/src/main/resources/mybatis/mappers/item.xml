@@ -25,6 +25,16 @@
 	  <result property="imageFileName" column="imageFileName" />
  	</resultMap>
 	
+	<resultMap id="itemReviewResult" type="itemReviewDTO">
+	  <result property="cmt_num" column="cmt_num" />
+	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_star" column="cmt_star" />
+	  <result property="cmt_content" column="cmt_content" />
+	  <result property="cmt_item" column="cmt_item" />
+	  <result property="cmt_regdate" column="cmt_regdate" />
+ 	</resultMap>
+	
+	
 	<!-- 전체 조회 -->
 	<select id="selectAllitemList" parameterType="java.util.Map" resultMap="itemResult">
 		SELECT h.NAME AS hobby_name, i.*
@@ -159,5 +169,33 @@
 		</foreach>
 	</update>
 	
+	
+	<!-- 리뷰 -->
+	<select id="selectAllreviewList" resultMap="itemReviewResult" parameterType="String">
+		SELECT c.CLASSNAME, cr.*
+		FROM ALTO_ITEM_REVIEW cr, ALTO_CLASS c
+		WHERE c.CLASS_CODE = cr.CMT_ITEM
+		AND c.CLASS_CODE = ${class_code}
+	</select>
+	
+	<select id="selectNewItem_reviewN" resultType="int">
+		<![CDATA[ 
+			SELECT nvl(max(cmt_num),0)+1
+			FROM ALTO_ITEM_REVIEW
+		]]>
+	</select>
+	
+	<insert id="insertNewItemReview"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO ALTO_ITEM_REVIEW
+			(CMT_NUM, CMT_WRITER, CMT_STAR, CMT_CONTENT, CMT_ITEM)
+			VALUES(#{CMT_NUM}, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
+		]]>      
+	</insert>
+	
+	<delete id="deleteItemReview">
+		DELETE FROM EZEN.ALTO_ITEM_REVIEW
+		WHERE CMT_NUM = #{cmt_num}
+	</delete>
 </mapper>
 

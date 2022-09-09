@@ -97,4 +97,10 @@ public class ItemDAOImpl implements ItemDAO {
 		}
 	}
 
+	@Override
+	public List selectReviewList(String item_code) throws DataAccessException {
+		List reviewList = sqlSession.selectList("mapper.item.selectAllreviewList", item_code);
+		return reviewList;
+	}
+
 }

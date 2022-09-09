@@ -19,5 +19,6 @@ public interface ItemDAO {
 	
 	public void updateItem(Map<String, Object> itemMap) throws DataAccessException;
 	public void updateImageFile(Map<String, Object> itemMap) throws DataAccessException;
+	public List selectReviewList(String item_code) throws DataAccessException;
 	
 }
