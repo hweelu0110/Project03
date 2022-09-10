@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="mapper.cart">
+ 	<resultMap type="cartDTO" id="cartResult">
+ 		<result property="cart_num" column="cart_num" />		
+		<result property="mem_id" column="mem_id" />
+		<result property="goods_type" column="goods_type" />
+		<result property="goods_code" column="goods_code" />
+		<result property="quantity" column="quantity" />
+		<result property="className" column="className" />
+		<result property="item_name" column="item_name" />
+		<result property="price" column="price" />
+ 	</resultMap>
+	
+	<select id="selectClassCart" resultMap="cartResult">
+		SELECT ca.*, cl.CLASSNAME, cl.PRICE
+		FROM ALTO_CART ca, ALTO_CLASS cl
+		WHERE ca.GOODS_CODE = cl.CLASS_CODE 
+		AND MEM_ID = #{mem_id}
+		AND GOODS_TYPE = 'class'
+	</select>
+	
+	<select id="selectItemCart" resultMap="cartResult">
+		SELECT ca.*, i.ITEM_NAME, i.PRICE
+		FROM ALTO_CART ca, ALTO_ITEM i
+		WHERE ca.GOODS_CODE = i.ITEM_CODE 
+		AND MEM_ID = #{mem_id}
+		AND GOODS_TYPE = 'item'
+	</select>
+</mapper>

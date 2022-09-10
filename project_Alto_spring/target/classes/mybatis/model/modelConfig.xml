@@ -17,6 +17,8 @@
 		<typeAlias type="kr.co.alto.item.dto.ImageDTO" alias="itemImageDTO" />
 		<typeAlias type="kr.co.alto.item.dto.ReviewDTO" alias="itemReviewDTO" />
 		
+		<typeAlias type="kr.co.alto.cart.dto.CartDTO" alias="cartDTO" />
+		
 		<typeAlias type="kr.co.alto.area.dto.AreaDTO" alias="areaDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbyDTO" alias="hobbyDTO" />
 		<typeAlias type="kr.co.alto.hobby.dto.HobbysubDTO" alias="hobbysubDTO" />

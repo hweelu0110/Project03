@@ -105,6 +105,7 @@
 			</figure>
 		</div>
 		<div id="detail_table">
+			<form action="${contextPath }/mypage/cartClass.do" method="post">
 			<table>
 				<tbody>
 					<tr>
@@ -150,21 +151,24 @@
 					<tr>
 						<td class="fixed">신청 인원</td>
 						<td class="fixed">
-				      <select style="width: 60px;" id="order_goods_qty">
-					      <option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+				      <select style="width: 60px;" name="quantity">
+					      <option value="1">1인</option>
+								<option value="2">2인</option>
+								<option value="3">3인</option>
+								<option value="4">4인</option>
+								<option value="5">5인</option>
 				     </select>
 						 </td>
 					</tr>
 				</tbody>
 			</table>
+			<input type="hidden" name="goods_type" value="class">
+			<input type="hidden" name="goods_code" value="${classDTO.class_code }">
 			<div align="right" style="margin-top: 10px">
 			<button type="submit" class="btn btn-warning">구매하기 </button>
-			<button type="reset" class="btn secondary">장바구니</button>
+			<button type="submit" class="btn secondary">장바구니</button>
 			</div>
+			</form>
 		</div>
 		<div class="clear" ></div>
 		<!-- 내용 들어 가는 곳 -->
