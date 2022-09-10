@@ -536,4 +536,49 @@ public class ClassControllerImpl implements ClassController {
 		}
 		return resEnt;
 	}
+
+	/*
+	 * @Override
+	 * 
+	 * @RequestMapping(value = "/mypage/cartClass.do", method =
+	 * {RequestMethod.POST,RequestMethod.GET}) public ResponseEntity
+	 * cartClass(HttpServletRequest request, HttpServletResponse response) throws
+	 * Exception {
+	 * 
+	 * request.setCharacterEncoding("utf-8");
+	 * 
+	 * Map cartMap = new HashMap();
+	 * 
+	 * Enumeration enu=request.getParameterNames(); while(enu.hasMoreElements()){
+	 * String name=(String)enu.nextElement(); String
+	 * value=request.getParameter(name); cartMap.put(name,value); }
+	 * 
+	 * HttpSession session = request.getSession(); String mem_id = (String)
+	 * session.getAttribute("mem_name_s"); cartMap.put("mem_id", mem_id);
+	 * 
+	 * 
+	 * String message; ResponseEntity resEnt=null; HttpHeaders responseHeaders = new
+	 * HttpHeaders(); responseHeaders.add("Content-Type",
+	 * "text/html; charset=utf-8");
+	 * 
+	 * try { int addClassCart = classService.addClassCart(cartMap);
+	 * 
+	 * String class_code = (String) cartMap.get("class_code");
+	 * 
+	 * message = "<script>"; message +=
+	 * " var con_test = confirm('장바구니로 이동하시겠습니까?');"; message +=
+	 * " if(con_test == true){ location.href='"+request.getContextPath()
+	 * +"/mypage/carClass.do'; }"; message +=
+	 * " else { location.href='"+request.getContextPath()+
+	 * "/class/classDetail.do?class_code="+class_code+"'; }"; message
+	 * +=" </script>"; resEnt = new ResponseEntity(message, responseHeaders,
+	 * HttpStatus.CREATED);
+	 * 
+	 * }catch(Exception e) {
+	 * 
+	 * message = " <script>"; message +=" alert('오류가 발생했습니다. 다시 시도해주세요');"; message
+	 * +=" location.href='"+request.getContextPath()+"/class/listClass.do'; ";
+	 * message +=" </script>"; resEnt = new ResponseEntity(message, responseHeaders,
+	 * HttpStatus.CREATED); e.printStackTrace(); } return resEnt; }
+	 */
 }

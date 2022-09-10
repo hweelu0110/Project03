@@ -112,16 +112,9 @@
     	</foreach>
  	</insert>
   
-  	<select id="selectNewclass_codeN" resultType="int">
+	<select id="selectNewclass_code" resultType="String">
 		<![CDATA[ 
-			SELECT nvl(max(class_code),0)+1
-			FROM ALTO_CLASS
-		]]>
-	</select>
-  
-	<select id="selectNewclass_code" parameterType="int" resultType="String">
-		<![CDATA[ 
-			SELECT LPAD(#{class_codeN}, 6, 0) FROM DUAL
+			SELECT LPAD(seq_class.NEXTVAL, 6, 0) FROM DUAL
 		]]>
 	</select>
 	
@@ -198,18 +191,11 @@
 		AND c.CLASS_CODE = ${class_code}
 	</select>
 	
-	<select id="selectNewClass_reviewN" resultType="int">
-		<![CDATA[ 
-			SELECT nvl(max(cmt_num),0)+1
-			FROM ALTO_CLASS_REVIEW
-		]]>
-	</select>
-	
 	<insert id="insertNewClassReview"  parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO ALTO_CLASS_REVIEW
 			(CMT_NUM, CMT_WRITER, CMT_STAR, CMT_CONTENT, CMT_CLASS)
-			VALUES(#{CMT_NUM}, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
+			VALUES(seq_class_review.NEXTVAL, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
 		]]>      
 	</insert>
 	

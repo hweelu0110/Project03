@@ -31,19 +31,12 @@ public class ClassDAOImpl implements ClassDAO {
 	public String insertNewClass(Map classMap) throws DataAccessException {
 		String class_code = selectNewClass_code();
 		classMap.put("class_code", class_code);
-		System.out.println("=============");
-		System.out.println(classMap);
-		System.out.println("=============");
 		sqlSession.insert("mapper.class.insertNewClass", classMap);
 		return class_code;
 	}
 
 	private String selectNewClass_code() {
-		int class_codeN = sqlSession.selectOne("mapper.class.selectNewclass_codeN");
-		String class_code = sqlSession.selectOne("mapper.class.selectNewclass_code", class_codeN);
-		System.out.println(class_codeN);
-		System.out.println(class_code);
-		return class_code;
+		return sqlSession.selectOne("mapper.class.selectNewclass_code");
 	}
 
 	@Override
@@ -64,8 +57,6 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Override
 	public ClassDTO selectClass(String class_code) throws DataAccessException {
-		System.out.println("DAO : "+class_code);
-		
 		return sqlSession.selectOne("mapper.class.selectClassVi", class_code);
 	}
 
@@ -110,18 +101,8 @@ public class ClassDAOImpl implements ClassDAO {
 
 	@Override
 	public int insertNewClassreview(Map reviewMap) throws DataAccessException {
-		int classReviewNum = selectNewClass_reviewN();
-		reviewMap.put("CMT_NUM", classReviewNum);
-		System.out.println("=============");
-		System.out.println(reviewMap);
-		System.out.println("=============");
-		sqlSession.insert("mapper.class.insertNewClassReview", reviewMap);
-		return classReviewNum;
-	}
-
-	private int selectNewClass_reviewN() {
-		int selectNewClass_reviewN = sqlSession.selectOne("mapper.class.selectNewClass_reviewN");
-		return selectNewClass_reviewN;
+		int classReview = sqlSession.insert("mapper.class.insertNewClassReview", reviewMap);
+		return classReview;
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package kr.co.alto.cla.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
 /*
 cmt_num			number			PRIMARY KEY,
 cmt_writer		varchar2(100)	NOT NULL,
@@ -10,6 +12,7 @@ cmt_content		varchar2(4000)	NOT NULL,
 cmt_class		char(8)			NOT NULL,
 cmt_regdate		DATE			DEFAULT sysdate NOT NULL
 */
+@Component("reviewDTO")
 public class ReviewDTO {
 
 	public String cmt_num;
