@@ -146,6 +146,7 @@
 			<div align="right" style="margin-top: 10px">
 			<button type="submit" class="btn btn-warning">구매하기 </button>
 			<button type="reset" class="btn secondary">장바구니</button>
+			</div>
 		</div>
 		<div class="clear"></div>
 		<!-- 내용 들어 가는 곳 -->
@@ -263,7 +264,6 @@
 					</table>
 				</div>
 			</div>
-		</div>
-	</section>		
-</body>
+		</section>		
+	</body>
 </html>
