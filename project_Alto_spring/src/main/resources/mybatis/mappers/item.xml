@@ -189,7 +189,7 @@
 		<![CDATA[
 			INSERT INTO ALTO_ITEM_REVIEW
 			(CMT_NUM, CMT_WRITER, CMT_STAR, CMT_CONTENT, CMT_ITEM)
-			VALUES(#{CMT_NUM}, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
+			VALUES(#{CMT_NUM}, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_item})
 		]]>      
 	</insert>
 	

@@ -90,4 +90,15 @@ public class ItemServiceImpl implements ItemService {
 		return itemMainMap;
 	}
 
+	@Override
+	public int addItemReview(Map reviewMap) throws Exception {
+		int reviewNew = itemDAO.insertNewItemreview(reviewMap);
+		return reviewNew;
+	}
+
+	@Override
+	public int removeItemReview(String cmt_num) throws Exception {
+		int reviewDel = itemDAO.deleteItemReview(cmt_num);
+		return reviewDel;
+	}
 }

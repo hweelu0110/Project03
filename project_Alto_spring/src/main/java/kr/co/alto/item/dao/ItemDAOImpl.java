@@ -103,4 +103,25 @@ public class ItemDAOImpl implements ItemDAO {
 		return reviewList;
 	}
 
+	@Override
+	public int insertNewItemreview(Map reviewMap) throws DataAccessException {
+		int itemReviewNum = selectNewItem_reviewN();
+		reviewMap.put("CMT_NUM", itemReviewNum);
+		System.out.println("=============");
+		System.out.println(reviewMap);
+		System.out.println("=============");
+		sqlSession.insert("mapper.item.insertNewItemReview", reviewMap);
+		return itemReviewNum;
+	}
+
+	private int selectNewItem_reviewN() {
+		int selectNewItem_reviewN = sqlSession.selectOne("mapper.item.selectNewItem_reviewN");
+		return selectNewItem_reviewN;
+	}
+
+	@Override
+	public int deleteItemReview(String cmt_num) throws DataAccessException {
+		int deleteItemReview = sqlSession.delete("mapper.item.deleteItemReview", cmt_num);
+		return deleteItemReview;
+	}
 }
