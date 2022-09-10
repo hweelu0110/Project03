@@ -171,21 +171,20 @@ section div { position: relative; }
 }
 
 /* 소모임 타이틀 */
-#clubTit .edit {
-	width: 15px;
-	height: 15px;
-	margin-left: 460px;
-	position: absolute;
-	float: right;
-	cursor: pointer;
-	float:left
-}
+#clubTit { overflow: hidden; }
 #clubTit img { float: left; width: 25px; }
 #clubTit h2 { 
+	float: left;
 	line-height: 24px;
-	margin: 0 0 0 32px;
+	margin: 0 0 0 10px;
 	font-family: 'Noto Sans KR', sans-serif; 
 	font-weight: 700;
+}
+#clubTit .edit {
+	margin: 5px;
+	width: 15px;
+	height: 15px;	
+	cursor: pointer;
 }
 #clubCont { width: 900px; margin: 10px auto 50px; }
 

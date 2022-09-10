@@ -82,10 +82,10 @@ public class BoardServiceImpl implements BoardService {
 		List<FileDTO> modAddFileList = (List<FileDTO>) articleMap.get("modAddFileList");
 		
 		if (fileList != null && fileList.size() != 0) {
-			int added_img_num = Integer.parseInt((String)articleMap.get("added_img_num"));
-			int pre_img_num = Integer.parseInt((String)articleMap.get("pre_img_num"));
+			int add_file_num = (int) articleMap.get("add_file_num");
+			int pre_file_num = (int) articleMap.get("pre_file_num");
 			
-			if (pre_img_num < added_img_num) {				//기존 이미지도 수정하고 새 이미지도 추가한 경우
+			if (pre_file_num < add_file_num) {				//기존 이미지도 수정하고 새 이미지도 추가한 경우
 				boardDAO.updateFile(articleMap);		//기존 이미지 수정
 				boardDAO.insertModNewFile(articleMap);		//새 이미지 추가
 			}

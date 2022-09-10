@@ -1,6 +1,8 @@
 package kr.co.alto.club.controller;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.alto.board.dto.FileDTO;
+import kr.co.alto.board.service.BoardService;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
@@ -41,19 +48,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	private MypageService mypageService;
 	@Autowired
 	private ClubDTO clubDTO;
-	
-	@RequestMapping(value = "/clubInformation.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();		
-		String viewName = (String)request.getAttribute("viewName");
-		
-		ClubDTO clubInfo = clubService.selectClubInfo(club_code);
-		
-		mav.addObject("clubInfo", clubInfo);
-		mav.setViewName(viewName);
-		
-		return mav;
-	}	
+	@Autowired
+	private BoardService boardService;
 	
 	@Override
 	@RequestMapping(value = "/clubMain.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -106,8 +102,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 						
 		mav.setViewName(viewName);
 		return mav;
-	}
-	
+	}	
 
 	@Override
 	@RequestMapping(value = "/clubRegister.do", method = RequestMethod.POST)
@@ -144,6 +139,83 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		}
 				
 		return resEnt;
+	}	
+	
+	@RequestMapping(value = "/clubInfo.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();		
+		String viewName = (String)request.getAttribute("viewName");
+		
+		Map<String, Object> clubInfoMap = new HashMap<>();
+		
+		clubInfoMap = clubService.selectClubInfo(club_code);		
+		
+		mav.addObject("clubInfoMap", clubInfoMap);
+		mav.setViewName(viewName);
+		
+		return mav;
 	}
+	
+	@Override
+	@RequestMapping(value = "/clubJoin.do", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity clubJoin(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		String club_code = request.getParameter("club_code");
+		
+		Map articleMap = new HashMap();
+		Map<String, Object> joinMap = new HashMap<>();
+		Enumeration enun = request.getParameterNames();
+		
+		while(enun.hasMoreElements()) {
+			String name = (String) enun.nextElement();
+			String value = request.getParameter(name);
+			articleMap.put(name, value);
+		}
+		
+		//로그인 시 세션에 저장된 회원정보에서 아이디(글쓴이)를 Map에 저장
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		articleMap.put("mem_id", mem_id);
+		joinMap.put("mem_id", mem_id);
+		joinMap.put("club_code", club_code);
+		joinMap.put("manager", articleMap.get("manager"));
+				
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+			
+		String message;
+		ResponseEntity resEnt = null;
+				
+		try {
+				
+			boardService.addNewArticle(articleMap);		//articleMap을 서비스 클래스로 전달함
+			clubService.clubJoin(joinMap); 					//가입정보 전달하기
+							
+			message = "<script>";
+			message += " alert('가입 완료!');";
+			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";
+				
+			// 새 글을 추가한 후 메시지를 전달함
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				
+		} catch (Exception e) {
+							
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				
+			e.printStackTrace();
+		}		
+					
+		return resEnt;
+	}
+	
 
 }

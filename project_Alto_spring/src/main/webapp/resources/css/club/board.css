@@ -29,9 +29,25 @@ table a:hover { color: #000; }
 #clubBoard thead { border-bottom: 1px solid #eee; }
 #clubBoard tbody td { border-bottom: 1px solid #eee; }
 #clubBoard tbody .title { text-align: left; }
+#clubBoard tbody .title a {
+	display: block;
+	overflow: hidden;
+    width: 520px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
  
 #clubView { margin-bottom: 30px; }
 #clubView th { font-size: 15px; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; }
+#clubView th .category {
+	margin-left: 10px;
+    color: #BDBDBD;
+    font-size: 10px;
+    font-weight: 100;
+    vertical-align: top;
+}
 #clubView thead { border-bottom: 1px solid #eee; }
 #clubView thead th, #clubView thead td { padding-left: 10px; }
 #clubView thead td .regidate { color: #494C57; font-size: 10px; }
@@ -41,40 +57,43 @@ table a:hover { color: #000; }
 
 .input-file { display: inline-block; }
 .input-file [type="file"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0 none;
+  	position: absolute;
+  	width: 1px;
+  	height: 1px;
+  	padding: 0;
+  	margin: -1px;
+  	overflow: hidden;
+  	clip: rect(0, 0, 0, 0);
+  	border: 0 none;
 }
 .input-file .file-label {
-  display: inline-block;
-  min-width: 53px;
-  height: 27px;
-  line-height: 24px;
-  padding: 0 10px;
-  border-radius: 2px;
-  font-size: 13px;
-  background-color: #BDBDBD;
-  color: #fff;
-  text-align: center;
+	display: inline-block;
+	padding: 0 10px;
+  	min-width: 53px;
+  	height: 27px;
+  	line-height: 26px;  	
+  	color: #fff;
+  	font-size: 12px;
+  	font-weight: 700;  	
+  	text-align: center;
+  	vertical-align: top;
+  	border-radius: 2px;
+  	background-color: #BDBDBD;
 }
 .input-file .file-name {
-  width: 400px;
-  background: #f5f5f5;
-  height: 27px;
-  line-height: 26px;
-  text-indent: 5px;
-  border: 1px solid #bbb;
+  	width: 400px;
+  	background: #f5f5f5;
+  	height: 27px;
+  	line-height: 26px;
+  	text-indent: 5px;
+  	border: 1px solid #bbb;
 }
 .input-file p {
 	color: #494C57;
 	font-size: 10px; 
 }
 
+#boardFrm { margin-bottom: 20px; }
 #boardFrm tr { border-bottom: 1px solid #eee; }
 #boardFrm th { 
 	width: 100px;

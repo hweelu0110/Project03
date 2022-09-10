@@ -23,6 +23,7 @@
 		
 		<typeAlias type="kr.co.alto.club.dto.ClubDTO" alias="clubDTO" />
 		<typeAlias type="kr.co.alto.club.dto.ClubListDTO" alias="clubListDTO" />
+		<typeAlias type="kr.co.alto.club.dto.JoinDTO" alias="joinDTO" />
 		<typeAlias type="kr.co.alto.mypage.dto.likeDTO" alias="likeDTO"/>
 		
 		<typeAlias type="kr.co.alto.board.dto.BoardDTO" alias="boardDTO"/>

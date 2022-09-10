@@ -14,31 +14,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
+	<link rel="stylesheet" href="${path}/resources/css/club/album.css" />
 	<script src="${path}/resources/ckeditor/ckeditor.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script type="text/javascript">	
-		function validateForm(form) {
+	<script type="text/javascript">
+		function validateForm() {
 			if($("#title").val() == ""){
-		        alert("제목을 입력하세요.")
-		        $("#title").focus()
-		        return false
+		        alert("제목을 입력하세요.");
+		        $("#title").focus();
+		        return false;
 		      }
-			
-			if($("#category").val() == ""){
-		        alert("카테고리를 선택해주세요.")
-		        return false
-		      }
-
-			if(CKEDITOR.instances.contents.getData() == ""){
-		        alert("내용을 입력해주세요.")
-		        $("#contents").focus()
-		        return false
+			if($("#upload01").val() == ""){
+		        alert("사진을 첨부해주세요.");
+		        $("#upload01").focus();
+		        return false;
 		      }
 		}
-		
 		function backToList(obj) {
-			obj.action = "${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
+			obj.action = "${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
 			obj.submit()
 		}
 		
@@ -79,7 +72,6 @@
 			})(jQuery);
 	</script>
 </head>
-
 <body>
 	<section>
 		<div id="clubMenu">
@@ -96,37 +88,30 @@
 		</div>
 		
 		<div id="clubCont">
-			<h3>게시글 등록</h3>
+			<h3>사진첩 등록</h3>
 			
-			<form name="articleFrm" method="post" action="${path}/club_board/addNewArticle.do?cate=${cate}&tit=${tit}" enctype="multipart/form-data"  onsubmit="return validateForm(this)">
+			<form name="albumFrm" method="post" action="${path}/club_album/addNewAlbum.do?cate=${cate}&tit=${tit}" enctype="multipart/form-data" onsubmit="return validateForm()">
 				<input type="hidden" name="club_code" value="${param.club_code}" />
 				<input type="hidden" name="mem_id" value="${login.mem_id}" />
 				
-				<table id="boardFrm" style="border-bottom: none;">			
+				<table id="boardFrm">					
 					<tr>
 						<th>제목</th>
 						<td>
 							<input type="text" name="title" id="title" style="width: 70%" placeholder="제목을 입력해주세요." />
-							<select name="category" id="category">
-									<option value="">카테고리</option>
-									<option value="content">자유글</option>
-									<option value="review">정모후기</option>
-									<option value="signup">가입인사</option>
-									<option value="notice">공지사항</option>
-							</select>
 						</td>
 					</tr>
 					
 					<tr>
 						<th>내용</th>
 						<td>
-							<textarea name="contents" id="contents" rows="20" cols="30"></textarea>
+							<textarea name="contents" id="contents" rows="20" cols="20"></textarea>
 							<script>CKEDITOR.replace('contents')</script>
 						</td>
 					</tr>
 					
 					<tr>
-						<th>파일 첨부</th>
+						<th>이미지 첨부</th>
 						<td>
 							<div class="input-file">
 		  						<input type="text" readonly="readonly" class="file-name" />
@@ -158,12 +143,11 @@
 							<button type="reset" class="basicBtn" onclick="backToList(this.form)">취소</button>
 							<button type="submit" class="pointBtn" onclick="return validateForm(this.form)">등록하기</button>
 						</td>
-					</tr>						
+					</tr>
 				</table>	
-							
 			</form>
-		
-		</div>	
+		</div>
 	</section>
+	
 </body>
 </html>

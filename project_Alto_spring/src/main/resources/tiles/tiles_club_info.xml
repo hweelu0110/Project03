@@ -5,14 +5,9 @@
        
 <tiles-definitions>	
 	<!-- 소모임 메인 -->
-	<definition name="/club/clubInformation" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubInformation.jsp" />
-	</definition>
-	
-	<!-- 소모임 가입하기 -->
-	<definition name="/club/clubJoin" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubJoin.jsp" />
-	</definition>
+	<definition name="/club/clubInfo" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club/clubInfo.jsp" />
+	</definition>	
 	
 	<!-- 소모임 게시판 -->	
 	<definition name="/club_board/listArticles" extends="tiles-layout">
@@ -27,17 +22,25 @@
 		<put-attribute name="body" value="/WEB-INF/views/club_board/viewArticle.jsp" />
 	</definition>
 	
+	<definition name="/club_board/editArticle" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_board/editArticle.jsp" />
+	</definition>
+	
 	<!-- 소모임 사진첩 -->
-	<definition name="/club_album/Albumlist" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumlist.jsp" />
+	<definition name="/club_album/albumList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/albumList.jsp" />
 	</definition>
 	
-	<definition name="/club_album/Albumregistration" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumregistration.jsp" />
+	<definition name="/club_album/albumForm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/albumForm.jsp" />
 	</definition>
 	
-	<definition name="/club_album/Albumdetail" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club_album/Albumdetail.jsp" />
+	<definition name="/club_album/albumDetail" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/albumDetail.jsp" />
+	</definition>
+	
+	<definition name="/club_album/editAlbum" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_album/editAlbum.jsp" />
 	</definition>
 		
 	<!-- 소모임 일정 -->

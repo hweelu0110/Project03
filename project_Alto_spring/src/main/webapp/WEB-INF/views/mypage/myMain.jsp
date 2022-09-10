@@ -144,24 +144,24 @@
 			<div class="myLike">
 				<h3>관심 목록</h3>
 			</div>
-		</div>
-		
-		<div id="imgEdit_div" class="popup_div profile">
-			<h4>프로필 사진 변경</h4>
-			<button class="closeBtn">닫기</button>
-			<form action="${path}/mypage/updateImg.do" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
-				<c:if test="${login.img == null}">
-					<img id="mem_img" src="${path}/resources/img/profile_default.png" />
-				</c:if>
-				<c:if test="${login.img != null}">
-					<img id="mem_img" src="${path}/memImgDown.do?imageFileName=${login.img}" />				
-				</c:if>
-				<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
-				<button type="submit" class="pointBtn">적용</button>
-				<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>
-			</form>
-		</div>
+		</div>		
 	</section>
+	
+	<div id="imgEdit_div" class="popup_div profile">
+		<h4>프로필 사진 변경</h4>
+		<button class="closeBtn">닫기</button>
+		<form action="${path}/mypage/updateImg.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
+			<c:if test="${login.img == null}">
+				<img id="mem_img" src="${path}/resources/img/profile_default.png" />
+			</c:if>
+			<c:if test="${login.img != null}">
+				<img id="mem_img" src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+			</c:if>
+			<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
+			<button type="submit" class="pointBtn">적용</button>
+			<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>
+		</form>
+	</div>
 </body>
 </html>

@@ -15,6 +15,7 @@ import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.club.dao.ClubDAO;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.dto.ClubListDTO;
+import kr.co.alto.club.dto.JoinDTO;
 import kr.co.alto.hobby.dao.HobbyDAO;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
@@ -110,8 +111,29 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ClubDTO selectClubInfo(String club_code) throws DataAccessException {
-		return clubDAO.selectClubInfo(club_code);
+	public Map<String, Object> selectClubInfo(String club_code) throws DataAccessException {
+		Map<String, Object> clubInfoMap = new HashMap<>();
+		
+		ClubDTO clubInfo = clubDAO.selectClubInfo(club_code);
+		List<JoinDTO> clubMemberList = clubDAO.selectClubMemberList(club_code);
+		
+		if (clubInfo.getCate_s_name() == null) {
+			clubInfo.setCate_s_name("없음");
+		}
+		
+		clubInfoMap.put("clubInfo", clubInfo);
+		clubInfoMap.put("clubMemberList", clubMemberList);
+		
+		return clubInfoMap;
+	}
+
+	@Override
+	public void clubJoin(Map<String, Object> joinMap) throws DataAccessException {
+		String join_code = clubDAO.selectNewJoinCode();
+		
+		joinMap.put("join_code", join_code);
+		
+		clubDAO.clubJoin(joinMap);
 	}
 	
 }

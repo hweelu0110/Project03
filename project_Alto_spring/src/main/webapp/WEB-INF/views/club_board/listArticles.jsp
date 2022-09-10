@@ -31,9 +31,9 @@
 	<section>
 		<div id="clubMenu">
 			<ul>
-				<li><a href="${path}/club/clubInformation.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club/clubInfo.do?club_code=${club_code}">정보</a></li>
 				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
-				<li><a href="${path}/club_album/Albumlist.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
+				<li><a href="${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
 				<li><a href="${path}/club/clubChat.do?club_code=${club_code}&cate=${cate}&tit=${tit}">채팅</a></li>
 			</ul>
 		</div>
@@ -43,7 +43,7 @@
 		</div>			
 		
 		<div id="clubCont">
-			<h3>게시판</h3>
+			<h3>게시판 목록</h3>
 			
 			<c:choose>
 				<c:when test="${ empty articlesList }">		<!-- 게시물이 없을 때 -->
