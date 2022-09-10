@@ -20,13 +20,13 @@
 		<div class="container">
 			<div style="padding-top:50px;">
 				<table class="table table-hover">
-					<tr><td><h3>클래스 장바구니</h3></td></tr>
+					<tr><td colspan="5"><h3>클래스 장바구니</h3></td></tr>
 					<tr>
-						<th>상품</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>소계</th>
-						<th>비고</th>
+						<th width="60%">상품</th>
+						<th width="10%">가격</th>
+						<th width="10%">수량</th>
+						<th width="10%">소계</th>
+						<th width="10%">비고</th>
 					</tr>
 					<c:if test="${empty cartClassList}">
 								장바구니에 담긴 클래스가 없습니다
@@ -35,9 +35,9 @@
 						<c:forEach items="${cartClassList }" var="classDTO">
 							<tr>
 								<td>${classDTO.className }</td>
-								<td>${classDTO.price }</td>
+								<td><fmt:formatNumber value="${classDTO.price }" pattern="##,###,###" /></td>
 								<td>${classDTO.quantity }</td>
-								<td>${classDTO.price * classDTO.quantity }</td>
+								<td><fmt:formatNumber value="${classDTO.price * classDTO.quantity }" pattern="##,###,###" /></td>
 								<c:set var="classSum" value="${classSum + (classDTO.price * classDTO.quantity) }" />
 								<td>삭제</td>
 							</tr>
@@ -48,19 +48,19 @@
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th>${classSum }</th>
+						<th><fmt:formatNumber value="${classSum }" pattern="##,###,###" /> 원</th>
 						<th></th>
 					</tr>
 				</table>
 				
 				<table class="table table-hover">
-					<tr><td><h3>취미용품 장바구니</h3></td></tr>
+					<tr><td colspan="5"><h3>취미용품 장바구니</h3></td></tr>
 					<tr>
-						<th>상품</th>
-						<th>가격</th>
-						<th>수량</th>
-						<th>소계</th>
-						<th>비고</th>
+						<th width="60%">상품</th>
+						<th width="10%">가격</th>
+						<th width="10%">수량</th>
+						<th width="10%">소계</th>
+						<th width="10%">비고</th>
 					</tr>
 		
 					<c:if test="${empty cartItemList}">
@@ -70,9 +70,9 @@
 						<c:forEach items="${cartItemList }" var="itemDTO">
 							<tr>
 								<td>${itemDTO.item_name }</td>
-								<td>${itemDTO.price }</td>
+								<td><fmt:formatNumber value="${itemDTO.price }" pattern="##,###,###" /></td>
 								<td>${itemDTO.quantity }</td>
-								<td>${itemDTO.price * itemDTO.quantity }</td>
+								<td><fmt:formatNumber value="${itemDTO.price * itemDTO.quantity }" pattern="##,###,###" /></td>
 								<c:set var="itemSum" value="${itemSum + (itemDTO.price * itemDTO.quantity) }" />
 								<td>삭제</td>
 							</tr>
@@ -82,7 +82,7 @@
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th>${itemSum }</th>
+						<th><fmt:formatNumber value="${itemSum }" pattern="##,###,###" /> 원</th>
 						<th></th>
 					</tr>
 				</table>
