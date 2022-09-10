@@ -107,8 +107,21 @@
 				</div>
 				
 				<button type="button" class="basicBtn02" onclick="location.href='${path}/club/Schedule.do'">일정추가하기</button>
-				<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >가입하기</button>
+				<c:set var="memYn" value="N" />
+				<c:forEach var="member" items="${clubMember}">
+					<c:if test="${login.mem_id eq member.mem_id}">
+						<c:set var="memYn" value="Y" />
+					</c:if>
+				</c:forEach>
 				
+				<c:choose>
+					<c:when test="${memYn eq 'Y'}">
+						<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >탈퇴하기</button>
+					</c:when>
+					<c:otherwise>
+						<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >가입하기</button>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			
 			<div class="right">
