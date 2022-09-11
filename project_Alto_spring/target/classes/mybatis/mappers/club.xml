@@ -44,8 +44,8 @@
 	
 	<!-- 모임 등록하기 -->
 	<insert id="clubOpen" parameterType="clubDTO">
-		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
-		VALUES(#{club_code}, #{title}, #{cate_m}, #{area_code}, #{manager}, #{member_max} , #{intro})
+		INSERT INTO ALTO_CLUB (CLUB_CODE, TITLE, CATE_M, CATE_S, AREA_CODE, MANAGER, MEMBER_MAX, INTRO)
+		VALUES(#{club_code}, #{title}, #{cate_m}, #{cate_s}, #{area_code}, #{manager}, #{member_max} , #{intro})
 	</insert>
 	
 	<select id="selectNewClubCode" resultType="String">
@@ -72,8 +72,8 @@
 	<!-- 모임 가입하기 -->
 	<insert id="clubJoin" parameterType="java.util.Map">
 		<![CDATA[
-			INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE, MANAGER)
-			VALUES(#{join_code}, #{mem_id}, #{club_code}, #{manager})	
+			INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE)
+			VALUES(#{join_code}, #{mem_id}, #{club_code})	
 		]]>
 	</insert>
 	
@@ -86,6 +86,14 @@
 			ORDER BY REGIDATE
 		]]>
 	</select>
+	
+	<!-- 모임 탈퇴하기 -->
+	<insert id="clubOut" parameterType="String">
+		<![CDATA[
+			DELETE FROM ALTO_JOIN
+			WHERE MEM_ID = #{mem_id}	
+		]]>
+	</insert>
 	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
@@ -145,6 +153,7 @@
 				WHERE rowNum BETWEEN 1 AND 8
 			) A, ALTO_AREA B
 			WHERE A.AREA_CODE = B.AREA_CODE
+			ORDER BY REGIDATE DESC
 		]]>
 	</select>
 	
@@ -221,7 +230,6 @@
 		       A.IMG img
 		FROM ALTO_CLUB A, ALTO_AREA B
 		WHERE A.AREA_CODE = B.AREA_CODE
-		AND TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
 		AND CATE_M = #{hobby_code}
 		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
 	</select>

@@ -119,11 +119,11 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		clubDTO.setManager(manager);	
 		
 		try {	
-			clubService.clubOpen(clubDTO);			
+			String club_code = clubService.clubOpen(clubDTO);			
 			
 			message = "<script>";
 			message += " alert('모임 개설 완료');";
-			message += " location.href='"+request.getContextPath()+"/club/clubInformation.do?club_code=';";
+			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
 			message += "</script>";
 			
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
@@ -182,7 +182,6 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		articleMap.put("mem_id", mem_id);
 		joinMap.put("mem_id", mem_id);
 		joinMap.put("club_code", club_code);
-		joinMap.put("manager", articleMap.get("manager"));
 				
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
@@ -197,6 +196,49 @@ public class ClubControllerImpl extends BaseController implements ClubController
 							
 			message = "<script>";
 			message += " alert('가입 완료!');";
+			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";
+				
+			// 새 글을 추가한 후 메시지를 전달함
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				
+		} catch (Exception e) {
+							
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				
+			e.printStackTrace();
+		}		
+					
+		return resEnt;
+	}
+	
+	@Override
+	@RequestMapping(value = "/clubOut.do", method = RequestMethod.GET)
+	public ResponseEntity clubOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		
+		String club_code = request.getParameter("club_code");		
+		
+		//로그인 시 세션에 저장된 회원정보에서 아이디(글쓴이)를 Map에 저장
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+				
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+			
+		String message;
+		ResponseEntity resEnt = null;
+				
+		try {
+				
+			clubService.clubOut(mem_id);
+							
+			message = "<script>";
 			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
 			message += "</script>";
 				

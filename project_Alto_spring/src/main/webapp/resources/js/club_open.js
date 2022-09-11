@@ -41,10 +41,14 @@ $(function() {
 	$("#step1 ul li").click(function() {
 		let hobbyImg = $(this).children('img').attr('src')
 		let hobbyCode = $(this).find("input").val()
+		let hobbySubCode = hobbyCode.substring(6,8)
+		hobbySubCode = 'hs'+hobbySubCode+ '0000'
+		
 		$("#step2 .icon_hobby").css({
 			"background-image":"url("+hobbyImg+")"
 		})
 		$("#step2 #cate_m").attr("value",hobbyCode)
+		$("#step2 #cate_s").attr("value",hobbySubCode)
 		$("#step1").hide()
 		confirmPopup($("#step2"))
 	})

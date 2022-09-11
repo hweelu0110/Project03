@@ -36,17 +36,6 @@ public class ClubServiceImpl implements ClubService {
 	private MypageDAO mypageDAO;
 	
 	@Override
-	public void clubOpen(ClubDTO clubDTO) throws DataAccessException {
-
-		String club_code = clubDAO.selectNewClubCode();
-		System.out.println("new club_code: "+ club_code);
-		
-		clubDTO.setClub_code(club_code);
-		
-		clubDAO.clubOpen(clubDTO);
-	}
-
-	@Override
 	public Map<String, Object> clubMainList(String mem_id) throws DataAccessException {
 		Map<String, Object> clubMainMap = new HashMap<>();
 		
@@ -117,14 +106,34 @@ public class ClubServiceImpl implements ClubService {
 		ClubDTO clubInfo = clubDAO.selectClubInfo(club_code);
 		List<JoinDTO> clubMemberList = clubDAO.selectClubMemberList(club_code);
 		
-		if (clubInfo.getCate_s_name() == null) {
-			clubInfo.setCate_s_name("없음");
-		}
-		
 		clubInfoMap.put("clubInfo", clubInfo);
 		clubInfoMap.put("clubMemberList", clubMemberList);
 		
 		return clubInfoMap;
+	}
+	
+	@Override
+	public String clubOpen(ClubDTO clubDTO) throws DataAccessException {
+
+		String club_code = clubDAO.selectNewClubCode();
+		String join_code = clubDAO.selectNewJoinCode();
+		System.out.println("new club_code: "+ club_code);		
+		
+		Map<String, Object> joinMap = new HashMap<>();
+		
+		clubDTO.setClub_code(club_code);
+		
+		clubDAO.clubOpen(clubDTO);
+		
+		joinMap.put("join_code", join_code);
+		joinMap.put("club_code", club_code);
+		joinMap.put("mem_id", clubDTO.getManager());
+		joinMap.put("manager", 'Y');		
+		
+		clubDAO.clubJoin(joinMap);
+		
+		return club_code;
+		
 	}
 
 	@Override
@@ -134,6 +143,11 @@ public class ClubServiceImpl implements ClubService {
 		joinMap.put("join_code", join_code);
 		
 		clubDAO.clubJoin(joinMap);
+	}
+
+	@Override
+	public void clubOut(String mem_id) throws DataAccessException {
+		clubDAO.clubOut(mem_id);
 	}
 	
 }

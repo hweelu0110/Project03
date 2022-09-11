@@ -44,6 +44,12 @@
 		      }
 		}
 		
+		function fn_cluOut() {
+			if (confirm("모임에서 탈퇴해도 내가 등록한 글은 삭제되지 않습니다. 모임에서 지금 나가시겠습니까?")) {
+				location.href='${path}/club/clubOut.do?club_code=${club_code}';
+			}
+		}
+		
 		$(function() {
 			$("#editBtn").click(function() {
 				confirmPopup($("#step4"))
@@ -116,7 +122,7 @@
 				
 				<c:choose>
 					<c:when test="${memYn eq 'Y'}">
-						<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >탈퇴하기</button>
+						<button type="button" class="basicBtn" onclick="fn_cluOut()" >모임 나가기</button>
 					</c:when>
 					<c:otherwise>
 						<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >가입하기</button>
@@ -126,7 +132,7 @@
 			
 			<div class="right">
 				<div id="schedual_member">
-					<h3>일정 멤버 (14명)</h3>
+					<h3>모임 멤버 (${clubInfo.member_num}명)</h3>
 					<ul>
 						<c:forEach var="member" items="${clubMember}">
 							<li>
@@ -147,12 +153,7 @@
 	<div id="popupJoin" class="clubPopup">
 		<button type="button" class="closeBtn">닫기</button>
 		<h3>모임 가입</h3>
-		<form name="clubJoinFrm" method="post" action="${path}/club/clubJoin.do?club_code=${club_code}">
-			<c:if test="${login.mem_id eq clubInfo.manager}">
-				<input type="hidden" name="manager" value="Y" />
-			</c:if>	
-			<input type="hidden" name="manager" value="N" />
-			
+		<form name="clubJoinFrm" method="post" action="${path}/club/clubJoin.do?club_code=${club_code}">			
 			<img src="${path}/memImgDown.do?imageFileName=${login.img}" />
 			<p>${login.mem_name}님! 가입인사 글을 작성해 주세요.</p>			
 			<input type="text" name="title" id="title" placeholder="제목을 입력하세요" />
