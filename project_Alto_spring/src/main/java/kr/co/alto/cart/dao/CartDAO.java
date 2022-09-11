@@ -12,5 +12,6 @@ public interface CartDAO {
 	public List selectItemCart(String mem_id) throws DataAccessException;
 	public int cartGoods(Map cartMap) throws DataAccessException;
 	public int editCart(Map cartMap) throws DataAccessException;
+	public int deleteCartGoods(Map cartMap) throws DataAccessException;
 	
 }

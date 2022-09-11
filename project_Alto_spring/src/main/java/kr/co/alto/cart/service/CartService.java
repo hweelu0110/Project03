@@ -11,5 +11,6 @@ public interface CartService {
 	public int addCart(Map cartMap) throws Exception;
 	public int cartGoods(Map cartMap) throws Exception;
 	public int editCart(Map cartMap) throws Exception;
+	public int deleteCart(Map cartMap) throws Exception;
 	
 }

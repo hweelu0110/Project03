@@ -12,4 +12,5 @@ public interface CartController {
 	public ModelAndView cartMain(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	
 	public ResponseEntity addCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
+	public ResponseEntity deleteCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 }

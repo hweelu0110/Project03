@@ -60,4 +60,10 @@ public class CartServiceImpl implements CartService {
 		return cartDAO.editCart(cartMap);
 	}
 
+
+	@Override
+	public int deleteCart(Map cartMap) throws Exception {
+		return cartDAO.deleteCartGoods(cartMap);
+	}
+
 }
