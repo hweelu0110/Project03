@@ -2,7 +2,7 @@
 
 #clubMenu ul li:nth-child(1) { border-bottom: 3px solid #F3BE34; }
 
-.left { overflow: hidden; float: left; width: 70%; }
+.left { overflow: hidden; float: left; width: 60%; }
 .right { overflow: hidden; float: right; }
 
 .clubImg {
