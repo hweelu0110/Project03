@@ -105,7 +105,7 @@
 			</figure>
 		</div>
 		<div id="detail_table">
-			<form action="${contextPath }/mypage/cartClass.do" method="post">
+			<form action="${contextPath }/mypage/addCart.do" method="post">
 			<table>
 				<tbody>
 					<tr>

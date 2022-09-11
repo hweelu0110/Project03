@@ -1,5 +1,6 @@
 package kr.co.alto.cart.controller;
 
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +49,62 @@ public class CartControllerImpl implements CartController {
 		mav.addObject("cartMainMap", cartMainMap);
 		
 		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/mypage/addCart.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public ResponseEntity addCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+			throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		  
+		 Map cartMap = new HashMap();
+		  
+		 Enumeration enu = request.getParameterNames(); 
+		 
+		 while(enu.hasMoreElements()){
+			 String name=(String)enu.nextElement(); 
+			 String value=request.getParameter(name); 
+			 cartMap.put(name,value); 
+			}
+		  
+		 MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+			
+		 cartMap.put("mem_id", mem_id); 
+		  
+		 String message; 
+		 ResponseEntity resEnt=null; 
+		 HttpHeaders responseHeaders = new HttpHeaders(); 
+		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		 
+		 try { 
+			int addClassCart = cartService.addClassCart(cartMap);
+		 
+			 String class_code = (String) cartMap.get("class_code");
+			 
+			 message = "<script>"; message += " var con_test = confirm('장바구니로 이동하시겠습니까?');"; 
+			 message += " if(con_test == true){ location.href='"+request.getContextPath() +"/mypage/cartClass.do'; }"; 
+			 message += " else { location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; }";
+			 message +=" </script>"; 
+			 
+			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);	  
+		 } 
+		 
+		 catch(Exception e) {
+			 message = " <script>"; message +=" alert('오류가 발생했습니다. 다시 시도해주세요');"; 
+			 message +=" location.href='"+request.getContextPath()+"/class/listClass.do'; ";
+			 message +=" </script>"; 
+			 
+			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED); 
+			 e.printStackTrace(); 
+		} 
+		 
+		 return resEnt; 
+		 
 	}
 
 }

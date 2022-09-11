@@ -29,7 +29,9 @@
 						<th width="10%">비고</th>
 					</tr>
 					<c:if test="${empty cartClassList}">
-								장바구니에 담긴 클래스가 없습니다
+						<tr>
+							<td colspan="5">장바구니에 담긴 클래스가 없습니다</td>
+						</tr>
 					</c:if>
 					<c:if test="${not empty cartClassList}">
 						<c:forEach items="${cartClassList }" var="classDTO">
@@ -64,7 +66,9 @@
 					</tr>
 		
 					<c:if test="${empty cartItemList}">
-								장바구니에 담긴 클래스가 없습니다
+						<tr>
+							<td colspan="5">장바구니에 담긴 클래스가 없습니다</td>
+						</tr>
 					</c:if>
 					<c:if test="${not empty cartItemList}">
 						<c:forEach items="${cartItemList }" var="itemDTO">

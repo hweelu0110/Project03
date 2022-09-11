@@ -17,9 +17,8 @@ public class CartDAOImpl implements CartDAO {
 	
 
 	@Override
-	public String insertNewCart(Map cartMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertNewCart(Map cartMap) throws DataAccessException {
+		return sqlSession.insert("mapper.cart.insertCart", cartMap);
 	}
 
 	

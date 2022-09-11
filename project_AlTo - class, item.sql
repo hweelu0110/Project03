@@ -135,9 +135,3 @@ CREATE SEQUENCE seq_cart START WITH 10 INCREMENT BY 1;
 
 ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_fk FOREIGN KEY (mem_id)
 REFERENCES alto_member (mem_id);
-
-ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_class_fk FOREIGN KEY (goods_code)
-REFERENCES ALTO_CLASS (class_code);
-
-ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_item_fk FOREIGN KEY (goods_code)
-REFERENCES ALTO_ITEM (item_code);

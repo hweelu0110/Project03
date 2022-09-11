@@ -30,4 +30,10 @@
 		AND MEM_ID = #{mem_id}
 		AND GOODS_TYPE = 'item'
 	</select>
+	
+	<insert id="insertCart">
+		INSERT INTO ALTO_CART
+		(CART_NUM, MEM_ID, GOODS_TYPE, GOODS_CODE, QUANTITY)
+		VALUES(seq_cart.NEXTVAL, #{mem_id}, #{goods_type}, #{goods_code}, #{quantity})
+	</insert>
 </mapper>

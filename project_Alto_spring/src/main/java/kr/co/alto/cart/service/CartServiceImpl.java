@@ -42,10 +42,10 @@ public class CartServiceImpl implements CartService {
 		return cartMainMap;
 	}
 
+
 	@Override
-	public int addCart(Map cartMap) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addClassCart(Map cartMap) throws Exception {
+		return cartDAO.insertNewCart(cartMap);
 	}
 
 }
