@@ -12,8 +12,60 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		
+		setTotalInfo();
+		
+		$(".individual_cart_checkbox").on("change", function(){
+			setTotalInfo($(".cart_info_td"));
+		});
+		
+		$(".class_all_check_input").on("click", function(){
+			if($(".class_all_check_input").prop("checked")){
+				$(".individual_class_cart_checkbox").prop("checked", true);
+			} else{
+				$(".individual_class_cart_checkbox").prop("checked", false);
+			}
+			setTotalInfo($(".cart_info_td"));	
+		});
+		
+		$(".item_all_check_input").on("click", function(){
+			if($(".item_all_check_input").prop("checked")){
+				$(".individual_item_cart_checkbox").prop("checked", true);
+			} else{
+				$(".individual_item_cart_checkbox").prop("checked", false);
+			}
+			setTotalInfo($(".cart_info_td"));	
+		});
+	});
+	
+	
+	function setTotalInfo(){
+		let totalPrice = 0;
+		let totalCount = 0;
+		let totalKind = 0;
+
+		
+		$(".cart_info_td").each(function(index, element){
+			if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
+				totalCount += parseInt($(element).find(".individual_goodsCount_input").val());
+				totalKind += 1;			
+			}
+		});
+		
+		// 총 가격
+		$(".totalPrice_span").text(totalPrice.toLocaleString());
+		// 총 갯수
+		$(".totalCount_span").text(totalCount);
+		// 총 종류
+		$(".totalKind_span").text(totalKind);	
+	}
+	</script>
 </head>
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
 <body>
 	<section>
 		<div class="jumbotron">
@@ -21,9 +73,14 @@
 		<div class="container">
 			<div style="padding-top:50px;">
 				<table class="table table-hover">
-					<tr><td colspan="5"><h3>클래스 장바구니</h3></td></tr>
+					<tr><td colspan="6"><h3>클래스 장바구니</h3></td></tr>
 					<tr>
-						<th width="60%">상품</th>
+						<th width="5">
+							<div class="class_all_check_input_div">
+								<input type="checkbox" class="form-check-input class_all_check_input" checked="checked">
+							</div>		
+						</th>
+						<th width="55%">상품</th>
 						<th width="10%">가격</th>
 						<th width="10%">수량</th>
 						<th width="10%">소계</th>
@@ -31,23 +88,29 @@
 					</tr>
 					<c:if test="${empty cartClassList}">
 						<tr>
-							<td colspan="5">장바구니에 담긴 클래스가 없습니다</td>
+							<td colspan="6" align="center">장바구니에 담긴 클래스가 없습니다</td>
 						</tr>
 					</c:if>
 					<c:if test="${not empty cartClassList}">
 						<c:forEach items="${cartClassList }" var="classDTO">
-							<tr>
+							<tr>	
+								<td class="cart_info_td">
+									<input type="checkbox" class="form-check-input individual_cart_checkbox individual_class_cart_checkbox" checked="checked">
+									<input type="hidden" class="individual_totalPrice_input" value="${classDTO.price * classDTO.quantity }">
+									<input type="hidden" class="individual_goodsCount_input" value="${classDTO.quantity }">
+								</td>
 								<td><a href="${contextPath}/class/classDetail.do?class_code=${classDTO.goods_code}">${classDTO.className }</a></td>
 								<td><fmt:formatNumber value="${classDTO.price }" pattern="##,###,###" /></td>
 								<td>${classDTO.quantity }</td>
 								<td><fmt:formatNumber value="${classDTO.price * classDTO.quantity }" pattern="##,###,###" /></td>
 								<c:set var="classSum" value="${classSum + (classDTO.price * classDTO.quantity) }" />
-								<td><a href="${contextPath}/mypage/deleteCart.do?goods_code=${classDTO.goods_code}&mem_id=${classDTO.mem_id}&goods_type=class">삭제</td>
+								<td><a href="${contextPath}/mypage/deleteCart.do?goods_code=${classDTO.goods_code}&mem_id=${classDTO.mem_id}&goods_type=class">삭제</a></td>
 							</tr>
 						</c:forEach>
 					</c:if>	
 					
 					<tr>
+						<th></th>
 						<th></th>
 						<th></th>
 						<th>총액</th>
@@ -57,9 +120,14 @@
 				</table>
 				
 				<table class="table table-hover">
-					<tr><td colspan="5"><h3>취미용품 장바구니</h3></td></tr>
+					<tr><td colspan="6"><h3>취미용품 장바구니</h3></td></tr>
 					<tr>
-						<th width="60%">상품</th>
+						<th width="5">
+							<div class="item_all_check_input_div">
+								<input type="checkbox" class="form-check-input item_all_check_input" checked="checked">
+							</div>
+						</th>
+						<th width="55%">상품</th>
 						<th width="10%">가격</th>
 						<th width="10%">수량</th>
 						<th width="10%">소계</th>
@@ -68,12 +136,17 @@
 		
 					<c:if test="${empty cartItemList}">
 						<tr>
-							<td colspan="5">장바구니에 담긴 클래스가 없습니다</td>
+							<td colspan="6" align="center">장바구니에 담긴 클래스가 없습니다</td>
 						</tr>
 					</c:if>
 					<c:if test="${not empty cartItemList}">
 						<c:forEach items="${cartItemList }" var="itemDTO">
 							<tr>
+								<td class="cart_info_td">
+									<input type="checkbox" class="form-check-input individual_cart_checkbox individual_item_cart_checkbox" checked="checked">
+									<input type="hidden" class="individual_totalPrice_input" value="${itemDTO.price * itemDTO.quantity }">
+									<input type="hidden" class="individual_goodsCount_input" value="${itemDTO.quantity }">
+								</td>
 								<td><a href="${contextPath}/item/itemDetail.do?item_code=${itemDTO.goods_code}">${itemDTO.item_name }</a></td>
 								<td><fmt:formatNumber value="${itemDTO.price }" pattern="##,###,###" /></td>
 								<td>${itemDTO.quantity }</td>
@@ -86,9 +159,29 @@
 					<tr>
 						<th></th>
 						<th></th>
+						<th></th>
 						<th>총액</th>
 						<th><fmt:formatNumber value="${itemSum }" pattern="##,###,###" /> 원</th>
 						<th></th>
+					</tr>
+					
+					<table class="table table-hover">
+					<tr><td colspan="6"><h2>최종 집계</h3></td></tr>
+					<tr>
+						<th></th>
+						<th></th>
+						<th></th>
+						<th>전체 총액</th>
+						<th><span><fmt:formatNumber value="${classSum+itemSum}" pattern="##,###,###" /> 원</span></th>
+						<th></th>
+					</tr>
+					<tr>
+						<th width="1%"></th>
+						<th width="1%"></th>
+						<th width="20%"></th>
+						<th width="20%">선택 총액</th>
+						<th width="55%"><span class="totalKind_span"></span> 종  /  <span class="totalCount_span"></span> 개  /  <span class="totalPrice_span"></span>원</th>
+						<th width="2%"></th>
 					</tr>
 				</table>
 				<a href="products.jsp" class="btn btn-secondary">&raquo; 쇼핑 계속하기</a>
