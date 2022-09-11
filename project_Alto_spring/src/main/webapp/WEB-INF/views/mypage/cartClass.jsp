@@ -101,7 +101,13 @@
 								</td>
 								<td><a href="${contextPath}/class/classDetail.do?class_code=${classDTO.goods_code}">${classDTO.className }</a></td>
 								<td><fmt:formatNumber value="${classDTO.price }" pattern="##,###,###" /></td>
-								<td>${classDTO.quantity }</td>
+								<td>
+									<form action="${contextPath}/mypage/quanEditCart.do">
+									<input type="text" value="${classDTO.quantity }" name="quantity" style="width: 40px">
+									<input type="hidden" value="${classDTO.cart_num }" name="cart_num">
+									<input type="submit" value="변경">
+									</form>
+								</td>
 								<td><fmt:formatNumber value="${classDTO.price * classDTO.quantity }" pattern="##,###,###" /></td>
 								<c:set var="classSum" value="${classSum + (classDTO.price * classDTO.quantity) }" />
 								<td><a href="${contextPath}/mypage/deleteCart.do?goods_code=${classDTO.goods_code}&mem_id=${classDTO.mem_id}&goods_type=class">삭제</a></td>
@@ -149,7 +155,13 @@
 								</td>
 								<td><a href="${contextPath}/item/itemDetail.do?item_code=${itemDTO.goods_code}">${itemDTO.item_name }</a></td>
 								<td><fmt:formatNumber value="${itemDTO.price }" pattern="##,###,###" /></td>
-								<td>${itemDTO.quantity }</td>
+								<td>
+									<form action="${contextPath}/mypage/quanEditCart.do">
+									<input type="text" value="${itemDTO.quantity }" name="quantity" style="width: 40px">
+									<input type="hidden" value="${itemDTO.cart_num }" name="cart_num">
+									<input type="submit" value="변경">
+									</form>
+								</td>
 								<td><fmt:formatNumber value="${itemDTO.price * itemDTO.quantity }" pattern="##,###,###" /></td>
 								<c:set var="itemSum" value="${itemSum + (itemDTO.price * itemDTO.quantity) }" />
 								<td><a href="${contextPath}/mypage/deleteCart.do?goods_code=${itemDTO.goods_code}&mem_id=${itemDTO.mem_id}&goods_type=item">삭제</a></td>

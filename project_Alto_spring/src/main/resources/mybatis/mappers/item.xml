@@ -63,10 +63,10 @@
 			order by item_code desc 
 		</if>
 		<if test="sort == 'new'">
-			order by item_code desc 
+			order by regidate desc 
 		</if>
 		<if test="sort == 'old'">
-			order by item_code asc 
+			order by regidate asc 
 		</if>
 		<if test="sort == 'quantityL'">
 			order by quantity desc

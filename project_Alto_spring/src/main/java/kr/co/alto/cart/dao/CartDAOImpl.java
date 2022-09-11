@@ -52,4 +52,9 @@ public class CartDAOImpl implements CartDAO {
 		return sqlSession.delete("mapper.cart.deleteCartGoods", cartMap);
 	}
 
+	@Override
+	public int quanEditCart(Map cartMap) throws DataAccessException {
+		return sqlSession.update("mapper.cart.updateQuantityGoods", cartMap);
+	}
+
 }

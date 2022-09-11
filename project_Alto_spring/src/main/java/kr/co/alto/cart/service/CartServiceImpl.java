@@ -21,13 +21,6 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CartDAO cartDAO;
 	
-	@Autowired
-	private ClassDAO classDAO;
-	
-	@Autowired
-	private ItemDAO itemDAO;
-	
-	
 	@Override
 	public Map listCart(String mem_id) throws Exception {
 		
@@ -64,6 +57,12 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public int deleteCart(Map cartMap) throws Exception {
 		return cartDAO.deleteCartGoods(cartMap);
+	}
+
+
+	@Override
+	public int quanEditCart(Map cartMap) throws Exception {
+		return cartDAO.quanEditCart(cartMap);
 	}
 
 }

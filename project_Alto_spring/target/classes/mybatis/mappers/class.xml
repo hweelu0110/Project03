@@ -79,10 +79,10 @@
 			order by class_code desc 
 		</if>
 		<if test="sort == 'new'">
-			order by class_code desc 
+			order by regidate desc 
 		</if>
 		<if test="sort == 'old'">
-			order by class_code asc
+			order by regidate asc
 		</if>
 		<if test="sort == 'fast'">
 			order by startdate desc

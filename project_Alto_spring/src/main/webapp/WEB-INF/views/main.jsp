@@ -447,6 +447,7 @@
 		      <div class="swiper-wrapper product">
 			      <c:forEach var="classListBest" items="${classListBest }">
 			      	<div class="swiper-slide">
+			      		<a href="${path}/class/classDetail.do?class_code=${classListBest.class_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -472,6 +473,7 @@
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListBest.class_code}" />
+						</a>
 					</div>
 			      </c:forEach>    
 			      
@@ -486,12 +488,13 @@
 			<h2>지금 가장 잘 나가는 취미용품</h2>
 			<div class="swiper mySwiper6">
 		      <div class="swiper-wrapper product">
-		      	<c:forEach var="itemListNew" items="${itemListNew }">
+		      	<c:forEach var="itemListBest" items="${itemListBest }">
 			      	<div class="swiper-slide">
-						<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
+				      	<a href="${path}/item/itemDetail.do?item_code=${itemListBest.item_code}">
+						<img class="class_img" src="${path}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
-							<c:if test="${like.item_code eq itemListNew.item_code}">
+							<c:if test="${like.item_code eq itemListBest.item_code}">
 								<c:set var="in" value="true" />
 							</c:if>
 						</c:forEach>
@@ -506,12 +509,13 @@
 						</c:choose>
 
 						<div>
-							<p class="class_name">${itemListNew.item_name }</p>
-							<p class="hobby_name">${itemListNew.hobby_name }</p>
-							<p class="class_price"><fmt:formatNumber value="${itemListNew.price }" pattern="#,###원" /></p>				
+							<p class="class_name">${itemListBest.item_name }</p>
+							<p class="hobby_name">${itemListBest.hobby_name }</p>
+							<p class="class_price"><fmt:formatNumber value="${itemListBest.price }" pattern="#,###원" /></p>				
 						</div>
 						
-						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
+						<input type="hidden" name="item_code" id="item_code" value="${itemListBest.item_code}" />
+					</a>
 					</div>
 			    </c:forEach>		    
 			    
@@ -599,6 +603,7 @@
 		      <div class="swiper-wrapper product">
 		      	<c:forEach var="itemListNew" items="${itemListNew }">
 			      	<div class="swiper-slide">
+				      	<a href="${path}/item/itemDetail.do?item_code=${itemListNew.item_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -623,6 +628,7 @@
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
+					</a>
 					</div>
 			    </c:forEach>
 			    
@@ -652,6 +658,7 @@
 		      <div class="swiper-wrapper product">
 			      <c:forEach var="classListNew" items="${classListNew }">
 			      	<div class="swiper-slide">
+			      		<a href="${path}/class/classDetail.do?class_code=${classListNew.class_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
 						
 						<c:forEach var="like" items="${likeList}">
@@ -677,6 +684,7 @@
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
+					</a>
 					</div>
 			      </c:forEach>      
 			      

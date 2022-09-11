@@ -68,8 +68,8 @@
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListBest.class_code}" />
-					</div>
 					</a>
+					</div>
 			      </c:forEach>
 		      </div>
 		      <div class="swiper-button-next"></div>
@@ -109,8 +109,8 @@
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
-					</div>
 					</a>
+					</div>
 			      </c:forEach>
 		      </div>
 		      <div class="swiper-button-next"></div>

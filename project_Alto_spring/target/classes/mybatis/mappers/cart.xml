@@ -59,4 +59,10 @@
 		AND MEM_ID = #{mem_id}
 		AND GOODS_TYPE = #{goods_type}
 	</delete>
+	
+	<update id="updateQuantityGoods" parameterType="java.util.Map">
+		UPDATE ALTO_CART
+		SET QUANTITY = #{quantity}
+		WHERE cart_num = #{cart_num}
+	</update>
 </mapper>
