@@ -44,8 +44,20 @@ public class CartServiceImpl implements CartService {
 
 
 	@Override
-	public int addClassCart(Map cartMap) throws Exception {
+	public int addCart(Map cartMap) throws Exception {
 		return cartDAO.insertNewCart(cartMap);
+	}
+
+
+	@Override
+	public int cartGoods(Map cartMap) throws Exception {
+		return cartDAO.cartGoods(cartMap);
+	}
+
+
+	@Override
+	public int editCart(Map cartMap) throws Exception {
+		return cartDAO.editCart(cartMap);
 	}
 
 }

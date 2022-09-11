@@ -75,15 +75,21 @@ public class CartControllerImpl implements CartController {
 		}
 			
 		 cartMap.put("mem_id", mem_id); 
-		  
+		 
 		 String message; 
 		 ResponseEntity resEnt=null; 
 		 HttpHeaders responseHeaders = new HttpHeaders(); 
 		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		 
-		 try { 
-			int addClassCart = cartService.addClassCart(cartMap);
+		 int cart_goods = cartService.cartGoods(cartMap);
 		 
+		 try {
+			 if(cart_goods == 0) {
+				 int addCart = cartService.addCart(cartMap);
+			 } else {
+				 int editCart = cartService.editCart(cartMap);
+			 }
+			 
 			 String class_code = (String) cartMap.get("class_code");
 			 
 			 message = "<script>"; message += " var con_test = confirm('장바구니로 이동하시겠습니까?');"; 
@@ -92,6 +98,7 @@ public class CartControllerImpl implements CartController {
 			 message +=" </script>"; 
 			 
 			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);	  
+			
 		 } 
 		 
 		 catch(Exception e) {

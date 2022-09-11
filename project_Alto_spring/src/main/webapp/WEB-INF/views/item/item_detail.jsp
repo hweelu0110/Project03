@@ -94,6 +94,7 @@
 			</figure>
 		</div>
 		<div id="detail_table">
+			<form action="${contextPath }/mypage/addCart.do" method="post">
 			<table>
 				<tbody>
 					<tr>
@@ -132,21 +133,24 @@
 					<tr>
 						<td class="fixed">수량</td>
 						<td class="fixed">
-				     	  <select style="width: 60px;" id="order_goods_qty">
-					      <option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+				     	  <select style="width: 60px;" name="quantity">
+					      <option value="1">1개</option>
+								<option value="2">2개</option>
+								<option value="3">3개</option>
+								<option value="4">4개</option>
+								<option value="5">5개</option>
 				     </select>
 						 </td>
 					</tr>
 				</tbody>
 			</table>
+			<input type="hidden" name="goods_type" value="item">
+			<input type="hidden" name="goods_code" value="${itemDTO.item_code }">
 			<div align="right" style="margin-top: 10px">
 			<button type="submit" class="btn btn-warning">구매하기 </button>
-			<button type="reset" class="btn secondary">장바구니</button>
+			<button type="submit" class="btn secondary">장바구니</button>
 			</div>
+			</form>
 		</div>
 		<div class="clear"></div>
 		<!-- 내용 들어 가는 곳 -->

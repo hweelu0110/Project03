@@ -24,15 +24,26 @@ public class CartDAOImpl implements CartDAO {
 	
 	@Override
 	public List selectClassCart(String mem_id) throws DataAccessException {
-		List cartClassList  = sqlSession.selectList("mapper.cart.selectClassCart", mem_id);
-		return cartClassList;
+		return sqlSession.selectList("mapper.cart.selectClassCart", mem_id);
 	}
 
 
 	@Override
 	public List selectItemCart(String mem_id) throws DataAccessException {
-		List cartItemList = sqlSession.selectList("mapper.cart.selectItemCart", mem_id);
-		return cartItemList;
+		return sqlSession.selectList("mapper.cart.selectItemCart", mem_id);
+	}
+
+
+	@Override
+	public int cartGoods(Map cartMap) throws DataAccessException {
+		Integer testnum = sqlSession.selectOne("mapper.cart.selectCartGoods", cartMap);
+		return testnum = testnum == null ? 0 : testnum;
+	}
+
+
+	@Override
+	public int editCart(Map cartMap) throws DataAccessException {
+		return sqlSession.update("mapper.cart.updateCartGoods", cartMap);
 	}
 
 }

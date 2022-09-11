@@ -36,4 +36,20 @@
 		(CART_NUM, MEM_ID, GOODS_TYPE, GOODS_CODE, QUANTITY)
 		VALUES(seq_cart.NEXTVAL, #{mem_id}, #{goods_type}, #{goods_code}, #{quantity})
 	</insert>
+	
+	<select id="selectCartGoods" parameterType="java.util.Map" resultType="int">
+			SELECT ca.*
+			FROM ALTO_CART ca
+			WHERE ca.GOODS_CODE = #{goods_code}
+			AND MEM_ID = #{mem_id}
+			AND GOODS_TYPE = #{goods_type}
+	</select>
+	
+	<update id="updateCartGoods" parameterType="java.util.Map">
+		UPDATE ALTO_CART
+		SET QUANTITY = QUANTITY + #{quantity}
+		WHERE GOODS_CODE = #{goods_code}
+		AND MEM_ID = #{mem_id}
+		AND GOODS_TYPE = #{goods_type}
+	</update>
 </mapper>

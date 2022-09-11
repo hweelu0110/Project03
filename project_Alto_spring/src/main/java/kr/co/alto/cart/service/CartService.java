@@ -8,6 +8,8 @@ import kr.co.alto.cart.dto.CartDTO;
 public interface CartService {
 
 	public Map listCart(String mem_id) throws Exception;
-	public int addClassCart(Map cartMap) throws Exception;
+	public int addCart(Map cartMap) throws Exception;
+	public int cartGoods(Map cartMap) throws Exception;
+	public int editCart(Map cartMap) throws Exception;
 	
 }
