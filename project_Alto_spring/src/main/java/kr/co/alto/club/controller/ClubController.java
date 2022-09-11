@@ -25,4 +25,6 @@ public interface ClubController {
 
 	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity clubJoin(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ResponseEntity clubOut(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
