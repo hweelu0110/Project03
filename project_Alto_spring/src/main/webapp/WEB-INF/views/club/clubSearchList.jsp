@@ -202,6 +202,7 @@
 			<input type="hidden" name="area_code" id="area_code" />
 			<span class="icon_hobby"></span>
 			<input type="hidden" name="cate_m" id="cate_m" />
+			<input type="hidden" name="cate_s" id="cate_s" />
 			<input type="text" class="size1" name="title" value="" placeholder="모임 이름" autocomplete='off' /><br/>
 			<textarea name="intro" id="intro" placeholder="모임 소개 또는 목표" autocomplete='off'></textarea><br/>
 			<span class="icon_mem"></span><p>모임 최대 인원</p>

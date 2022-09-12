@@ -82,4 +82,9 @@ public class ClubDAOImpl implements ClubDAO {
 		System.out.println(club_code);
 		return clubMemberList;
 	}
+
+	@Override
+	public void clubOut(String mem_id) throws DataAccessException {
+		sqlSession.delete("mapper.club.clubOut", mem_id);
+	}
 }

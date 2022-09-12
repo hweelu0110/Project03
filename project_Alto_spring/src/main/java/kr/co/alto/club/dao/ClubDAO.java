@@ -12,22 +12,24 @@ import kr.co.alto.club.dto.JoinDTO;
 
 public interface ClubDAO {
 	
-	ClubDTO selectClubInfo(String club_code) throws DataAccessException;
+	public ClubDTO selectClubInfo(String club_code) throws DataAccessException;
 	
-	String selectNewClubCode() throws DataAccessException;
-	void clubOpen(ClubDTO clubDTO) throws DataAccessException;
+	public String selectNewClubCode() throws DataAccessException;
+	public void clubOpen(ClubDTO clubDTO) throws DataAccessException;
 	
-	List<ClubListDTO> selectBestClubList() throws DataAccessException;
-	List<ClubListDTO> selectNewClubList() throws DataAccessException;
-	List<ClubListDTO> selectPeoClubList() throws DataAccessException;
-	List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
-	List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
+	public List<ClubListDTO> selectBestClubList() throws DataAccessException;
+	public List<ClubListDTO> selectNewClubList() throws DataAccessException;
+	public List<ClubListDTO> selectPeoClubList() throws DataAccessException;
+	public List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
+	public List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
 	
-	List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;
+	public List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;
 
-	String selectNewJoinCode() throws DataAccessException;
-	void clubJoin(Map<String, Object> joinMap) throws DataAccessException;
+	public String selectNewJoinCode() throws DataAccessException;
+	public void clubJoin(Map<String, Object> joinMap) throws DataAccessException;
 
-	List<JoinDTO> selectClubMemberList(String club_code) throws DataAccessException;	
+	public List<JoinDTO> selectClubMemberList(String club_code) throws DataAccessException;
+
+	public void clubOut(String mem_id) throws DataAccessException;	
 
 }
