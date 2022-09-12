@@ -135,3 +135,31 @@ CREATE SEQUENCE seq_cart START WITH 10 INCREMENT BY 1;
 
 ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_fk FOREIGN KEY (mem_id)
 REFERENCES alto_member (mem_id);
+
+
+
+-- 주문 테이블
+DROP TABLE alto_order CASCADE CONSTRAINT;
+CREATE TABLE alto_order (
+	orderId			number			PRIMARY KEY,
+	memberId		varchar2(100)	NOT NULL,
+	zipcode			varchar2(100)	NOT NULL,
+	address			varchar2(2000)	NOT NULL,
+	dis_address		varchar2(2000)	NOT NULL,
+	orderState		varchar2(100)	NOT NULL,
+	orderDate		DATE 			DEFAULT sysdate NOT NULL
+);
+
+CREATE SEQUENCE seq_order START WITH 1000 INCREMENT BY 1;
+
+
+
+-- 주문아이템 테이블
+DROP TABLE alto_order_item CASCADE CONSTRAINT;
+CREATE TABLE alto_order_item (
+	orderId			number			NOT NULL,
+	goods_type		varchar2(100)	NOT NULL,
+	goods_code		char(8)			NOT NULL,
+	price			NUMBER			NOT NULL,
+	quantity		number			NOT NULL
+);
