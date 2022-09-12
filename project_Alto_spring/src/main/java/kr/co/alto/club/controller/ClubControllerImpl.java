@@ -221,12 +221,16 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	public ResponseEntity clubOut(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		
-		String club_code = request.getParameter("club_code");		
+		String club_code = request.getParameter("club_code");	
+		Map<String, Object> joinMap = new HashMap<>();
 		
 		//로그인 시 세션에 저장된 회원정보에서 아이디(글쓴이)를 Map에 저장
 		HttpSession session = request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
+		
+		joinMap.put("club_code", club_code);
+		joinMap.put("mem_id", mem_id);
 				
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
@@ -236,7 +240,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		try {
 				
-			clubService.clubOut(mem_id, club_code);
+			clubService.clubOut(joinMap);
 							
 			message = "<script>";
 			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
