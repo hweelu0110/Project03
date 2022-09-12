@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="mapper.order">
- 	<resultMap type="orderDTO" id="orderResult">
+ 	<resultMap type="goodsDTO" id="orderResult">
  		<result property="goods_type" column="goods_type" />		
 		<result property="goods_code" column="goods_code" />
 		<result property="quantity" column="quantity" />
@@ -12,5 +12,17 @@
 		<result property="price" column="price" />
 		<result property="totalPrice" column="totalPrice" />
  	</resultMap>
+ 	
+ 	<select id="OrderClassInfo" resultMap="orderResult">
+ 		SELECT CLASS_CODE AS goods_code, CLASSNAME AS goods_name, PRICE
+		FROM ALTO_CLASS
+		WHERE CLASS_CODE = #{goods_code}
+ 	</select>
 	
+	<select id="OrderItemInfo" resultMap="orderResult">
+ 		SELECT ITEM_CODE AS goods_code, ITEM_NAME AS goods_name, PRICE
+		FROM ALTO_ITEM
+		WHERE ITEM_CODE = #{goods_code}
+ 	</select>
+ 	
 </mapper>

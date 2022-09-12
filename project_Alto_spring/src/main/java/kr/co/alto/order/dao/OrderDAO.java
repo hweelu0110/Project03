@@ -9,4 +9,7 @@ import kr.co.alto.order.dto.GoodsDTO;
 
 public interface OrderDAO {
 
+	GoodsDTO getOrderClassInfo(String goods_code) throws DataAccessException;
+	GoodsDTO getOrderItemInfo(String goods_code) throws DataAccessException;
+
 }

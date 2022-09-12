@@ -33,22 +33,16 @@ public class OrderContollerImpl implements OrderController {
 
 	@Override
 	@RequestMapping(value = "/order/orderPage.do", method = RequestMethod.GET)
-	public ModelAndView orderPage(@RequestParam List<String> class_all_check_input,
-								  @RequestParam List<String> item_all_check_input,
-								HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+	public ModelAndView orderPage(OrderPageDTO opd, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
 			throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
 		
-		for (String c : class_all_check_input) {
-            System.out.println(c);
-        }
-		
-		for (String i : class_all_check_input) {
-            System.out.println(i);
-        }
-		
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		List orderList = orderService.getOrderListInfo(opd.getOrders());
+		
+		mav.addObject("orderList", orderList);
 		
 		return mav;
 	}

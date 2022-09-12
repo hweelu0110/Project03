@@ -7,4 +7,6 @@ import kr.co.alto.order.dto.GoodsDTO;
 
 public interface OrderService {
 
+	List getOrderListInfo(List<GoodsDTO> orders) throws Exception;
+
 }

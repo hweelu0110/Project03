@@ -3,8 +3,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />  
-<c:set var="orderList"  value="${orderMap.orderList}"  />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,14 +30,17 @@
 						</tr>
 					</c:if>
 					<c:if test="${not empty orderList}">
-						<c:forEach items="${orderList }" var="orederDTO">
+						<c:forEach items="${orderList }" var="orderList">
 							<tr>	
-								<td>{orderList.goods_type}</td>
-								<td>${orderList.item_name }</td>
+								<td>
+									<c:if test="${orderList.goods_type == 'class'}">클래스</c:if> 
+									<c:if test="${orderList.goods_type == 'item'}">취미용품</c:if> 
+								</td>
+								<td>${orderList.goods_name }</td>
 								<td><fmt:formatNumber value="${orderList.price }" pattern="##,###,###" /></td>
 								<td>${orderList.quantity }</td>
 								<td><fmt:formatNumber value="${orderList.totalPrice }" pattern="##,###,###" /></td>
-								<c:set var="classSum" value="${classSum + (classDTO.price * classDTO.quantity) }" />
+								<c:set var="TotalSum" value="${TotalSum + (orderList.totalPrice) }" />
 							</tr>
 						</c:forEach>
 					</c:if>	
@@ -47,7 +49,7 @@
 						<th></th>
 						<th></th>
 						<th>총액</th>
-						<th><fmt:formatNumber value="${classSum }" pattern="##,###,###" /> 원</th>
+						<th><fmt:formatNumber value="${TotalSum }" pattern="##,###,###" /> 원</th>
 						<th></th>
 					</tr>
 				</table>

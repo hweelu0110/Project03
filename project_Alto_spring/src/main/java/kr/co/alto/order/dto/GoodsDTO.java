@@ -65,4 +65,9 @@ public class GoodsDTO {
 	public void initTotalPrice() {
 		this.totalPrice = this.price * this.quantity;
 	}
+	
+	@Override
+	public String toString() {
+		return "GoodsDTO [goods_type:"+goods_type+", goods_code:"+goods_code+", quantity:"+quantity+", goods_name:"+goods_name+"price:"+price ;
+	}
 }

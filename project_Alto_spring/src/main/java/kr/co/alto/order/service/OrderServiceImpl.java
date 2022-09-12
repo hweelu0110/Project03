@@ -1,5 +1,6 @@
 package kr.co.alto.order.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,5 +18,29 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderDAO orderDAO;
+
+	@Override
+	public List getOrderListInfo(List<GoodsDTO> orders) throws Exception {
+		List result = new ArrayList<>();
+		
+		for(GoodsDTO goods : orders) {
+			if(goods.getGoods_type().equals("class")){
+				GoodsDTO goodsInfo = orderDAO.getOrderClassInfo(goods.getGoods_code());
+				goodsInfo.setGoods_type(goods.getGoods_type());
+				goodsInfo.setQuantity(goods.getQuantity());
+				goodsInfo.initTotalPrice();
+				
+				result.add(goodsInfo);
+			} else if(goods.getGoods_type().equals("item")) {
+				GoodsDTO goodsInfo = orderDAO.getOrderItemInfo(goods.getGoods_code());
+				goodsInfo.setGoods_type(goods.getGoods_type());
+				goodsInfo.setQuantity(goods.getQuantity());
+				goodsInfo.initTotalPrice();
+				
+				result.add(goodsInfo);
+			}
+		}
+		return result;
+	}
 	
 }

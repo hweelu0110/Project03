@@ -14,4 +14,8 @@ public class OrderPageDTO {
 		this.orders = orders;
 	}
 	
+	@Override
+	public String toString() {
+		return "GoodsDTO [orders="+orders+"]";
+	}
 }

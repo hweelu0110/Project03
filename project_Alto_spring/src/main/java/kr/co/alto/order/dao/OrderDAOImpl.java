@@ -16,4 +16,14 @@ public class OrderDAOImpl implements OrderDAO {
 	@Autowired
 	private SqlSession sqlSession;
 
+	@Override
+	public GoodsDTO getOrderClassInfo(String goods_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.order.OrderClassInfo", goods_code);
+	}
+
+	@Override
+	public GoodsDTO getOrderItemInfo(String goods_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.order.OrderItemInfo", goods_code);
+	}
+
 }

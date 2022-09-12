@@ -39,6 +39,36 @@
 			}
 			setTotalInfo($(".cart_info_td"));	
 		});
+		
+		$(".order_btn").on("click", function(){
+			let form_contents ='';
+			let orderNumber = 0;
+			
+			$(".cart_info_td").each(function(index, element){
+				
+				if($(element).find(".individual_cart_checkbox").is(":checked") === true){
+					let goods_type = $(element).find(".individual_goodsType_input").val();
+					let goods_code = $(element).find(".individual_goodsCode_input").val();
+					let quantity = $(element).find(".individual_goodsCount_input").val();
+					
+					let goods_type_input = "<input name='orders[" + orderNumber + "].goods_type' type='hidden' value='" + goods_type + "'>";
+					form_contents += goods_type_input;
+					
+					let goods_code_input = "<input name='orders[" + orderNumber + "].goods_code' type='hidden' value='" + goods_code + "'>";
+					form_contents += goods_code_input;
+					
+					let quantity_input = "<input name='orders[" + orderNumber + "].quantity' type='hidden' value='" + quantity + "'>";
+					form_contents += quantity_input;
+					
+					orderNumber += 1;
+				}
+				
+			});
+			
+			$(".order_form").html(form_contents);
+			$(".order_form").submit();
+		});
+		
 	});
 	
 	function setTotalInfo(){
@@ -97,6 +127,8 @@
 									<input type="checkbox" class="form-check-input individual_cart_checkbox individual_class_cart_checkbox" checked="checked">
 									<input type="hidden" class="individual_totalPrice_input" value="${classDTO.price * classDTO.quantity }">
 									<input type="hidden" class="individual_goodsCount_input" value="${classDTO.quantity }">
+									<input type="hidden" class="individual_goodsType_input" value="class">
+									<input type="hidden" class="individual_goodsCode_input" value="${classDTO.goods_code }">
 								</td>
 								<td><a href="${contextPath}/class/classDetail.do?class_code=${classDTO.goods_code}">${classDTO.className }</a></td>
 								<td><fmt:formatNumber value="${classDTO.price }" pattern="##,###,###" /></td>
@@ -151,6 +183,8 @@
 									<input type="checkbox" class="form-check-input individual_cart_checkbox individual_item_cart_checkbox" checked="checked">
 									<input type="hidden" class="individual_totalPrice_input" value="${itemDTO.price * itemDTO.quantity }">
 									<input type="hidden" class="individual_goodsCount_input" value="${itemDTO.quantity }">
+									<input type="hidden" class="individual_goodsType_input" value="item">
+									<input type="hidden" class="individual_goodsCode_input" value="${itemDTO.goods_code }">
 								</td>
 								<td><a href="${contextPath}/item/itemDetail.do?item_code=${itemDTO.goods_code}">${itemDTO.item_name }</a></td>
 								<td><fmt:formatNumber value="${itemDTO.price }" pattern="##,###,###" /></td>
@@ -197,7 +231,9 @@
 					</tr>
 				</table>
 				<div align="right" style="margin-top: 10px; margin-bottom: 20px">
-					<button type="submit" class="btn btn-warning">구매하기 </button>
+					<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
+						<button type="submit" class="btn btn-warning order_btn">구매하기 </button>
+					</form>
 				</div>
 			</div>
 		</div>
