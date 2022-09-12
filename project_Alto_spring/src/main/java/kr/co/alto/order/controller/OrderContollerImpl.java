@@ -37,12 +37,17 @@ public class OrderContollerImpl implements OrderController {
 			throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
-		
 		ModelAndView mav = new ModelAndView(viewName);
+		Map<String, Object> orderInfo = new HashMap<>();
 		
 		List orderList = orderService.getOrderListInfo(opd.getOrders());
+		orderInfo.put("orderList", orderList);
 		
-		mav.addObject("orderList", orderList);
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		orderInfo.put("memberDTO", memberDTO);
+		
+		mav.addObject("orderInfo", orderInfo);
+		
 		
 		return mav;
 	}

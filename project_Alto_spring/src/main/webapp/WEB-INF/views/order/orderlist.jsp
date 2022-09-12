@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="orderList" value="${orderInfo.orderList}" />
+<c:set var="memberDTO" value="${orderInfo.memberDTO}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +18,7 @@
 		<div class="container">
 			<div style="padding-top:50px;">
 				<table class="table table-hover">
-					<tr><td colspan="5"><h3>주문 내역</h3></td></tr>
+					<tr><td colspan="5" align="center"><h3>주문 내역</h3></td></tr>
 					<tr>
 						<th width="10">분류</th>
 						<th width="50%">상품</th>
@@ -54,22 +56,24 @@
 					</tr>
 				</table>
 				
-				<table>
-				<tr>
-					<td>주문 정보 확인<td>
-				</tr>
-				<tr>
-					<td>주문자</td>
-					<td>주문자이름(주문자 아이디)</td>
-				</tr>
-				<tr>
-					<td>주문자 연락처</td>
-					<td>010-1234-5678</td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td>주소1</td>
-				</tr>
+				<table class="table table-hover">
+					<tr><td colspan="5" align="center"><h3>주문자 정보 확인</h3></td></tr>
+					<tr>
+						<th width="10">이름</th>
+						<td width="90%">${memberDTO.mem_name }</td>
+					</tr>
+					<tr>
+						<th width="10">메일주소</th>
+						<td width="90%">${memberDTO.mem_id }</td>
+					</tr>
+					<tr>
+						<th width="10">연락처</th>
+						<td width="90%">${memberDTO.phone }</td>
+					</tr>
+					<tr>
+						<th width="10">주소</th>
+						<td width="90%"></td>
+					</tr>
 				</table>
 				
 				<div align="right" style="margin-top: 10px; margin-bottom: 20px">
