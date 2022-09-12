@@ -21,6 +21,7 @@ import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
 import kr.co.alto.order.dto.GoodsDTO;
+import kr.co.alto.order.dto.OrderDTO;
 import kr.co.alto.order.dto.OrderPageDTO;
 import kr.co.alto.order.service.OrderService;
 
@@ -48,6 +49,17 @@ public class OrderContollerImpl implements OrderController {
 		
 		mav.addObject("orderInfo", orderInfo);
 		
+		
+		return mav;
+	}
+	
+	@RequestMapping("/order/orderPagePost.do")
+	public ModelAndView orderPage(OrderDTO od, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		int orderAdd = orderService.addNewOrder(od);
 		
 		return mav;
 	}

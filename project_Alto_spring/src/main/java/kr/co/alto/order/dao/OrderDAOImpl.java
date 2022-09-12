@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import kr.co.alto.order.dto.GoodsDTO;
+import kr.co.alto.order.dto.OrderDTO;
 
 @Repository("orderDAO")
 public class OrderDAOImpl implements OrderDAO {
@@ -24,6 +25,18 @@ public class OrderDAOImpl implements OrderDAO {
 	@Override
 	public GoodsDTO getOrderItemInfo(String goods_code) throws DataAccessException {
 		return sqlSession.selectOne("mapper.order.OrderItemInfo", goods_code);
+	}
+
+	@Override
+	public int addNewOrder(OrderDTO od) throws DataAccessException {
+		int resultCount = sqlSession.insert("mapper.order.InsertNewOrder", od);
+		System.out.println("od.getOrderId() : "+resultCount);
+		return resultCount;
+	}
+
+	@Override
+	public int addNewOrderItem(List<GoodsDTO> orders) throws DataAccessException {
+		return sqlSession.insert("mapper.order.InsertNewOrderItem", orders);
 	}
 
 }

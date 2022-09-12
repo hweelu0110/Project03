@@ -92,4 +92,8 @@
 		<put-attribute name="body" value="/WEB-INF/views/order/orderlist.jsp" />		
 	</definition>
 	
+	<definition name="/order/orderPagePost" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderPagePost.jsp" />		
+	</definition>
+	
 </tiles-definitions>

@@ -2,6 +2,7 @@ package kr.co.alto.order.dto;
 
 public class GoodsDTO {
 
+	private int orderId;
 	/*뷰에서 넘길 값*/
 	private String goods_type;
 	private String goods_code;
@@ -66,6 +67,15 @@ public class GoodsDTO {
 		this.totalPrice = this.price * this.quantity;
 	}
 	
+	
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
 	@Override
 	public String toString() {
 		return "GoodsDTO [goods_type:"+goods_type+", goods_code:"+goods_code+", quantity:"+quantity+", goods_name:"+goods_name+"price:"+price ;
