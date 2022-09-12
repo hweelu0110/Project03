@@ -94,7 +94,8 @@
 			<mvc:mapping path="/mypage/**" />
 			<mvc:mapping path="/class/classform.do" />
 			<mvc:mapping path="/item/itemform.do" />
-			<mvc:mapping path="/class/cartClass.do" />				
+			<mvc:mapping path="/class/cartClass.do" />		
+			<mvc:mapping path="/order/orderPage.do" />			
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>	
 	</mvc:interceptors>

@@ -11,9 +11,12 @@
 <head>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	  <!-- jQuery -->
-	  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-	  <!-- iamport.payment.js -->
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	 <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<meta charset="UTF-8">
 	<script>
 	
@@ -24,9 +27,9 @@
 	    
 	      // IMP.request_pay(param, callback) 결제창 호출
 	      IMP.request_pay({ // param
-	    	  pg : 'kakaopay',
+	    	  pg : "kakaopay",
 	          pay_method: "card",
-	          merchant_uid: "ORD20220930-0000011",
+	          merchant_uid: "ORD" + new Date().getTime(),
 	          name: "ALTO 클래스 및 취미용품 수강",
 	          amount: 100000,
 	          buyer_email: "gildong@gmail.com",
@@ -41,7 +44,7 @@
 	          } else {
 	              // 결제 실패 시 로직,
 	          }
-	      });
+	      })
 	    }
 			
 		function orderSubmit() {
@@ -69,6 +72,7 @@
 		
 		
 		function kakaopost() {
+			
 		    new daum.Postcode({
 		        oncomplete: function(data) {
 		           document.querySelector("#zipcode").value = data.zonecode;
@@ -79,7 +83,6 @@
 	
 	</script>
 </head>
-<script src="http://code.jquery.com/jquery-latest.js"></script> 
 <body>
 	<section>
 		<div class="jumbotron">

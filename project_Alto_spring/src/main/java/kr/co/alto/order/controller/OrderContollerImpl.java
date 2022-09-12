@@ -54,12 +54,23 @@ public class OrderContollerImpl implements OrderController {
 	}
 	
 	@RequestMapping("/order/orderPagePost.do")
-	public ModelAndView orderPage(OrderDTO od, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+	public ModelAndView orderPagePost(OrderDTO od, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		
 		int orderAdd = orderService.addNewOrder(od);
+		
+		Map<String, Object> orderMap = new HashMap<>();
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		OrderDTO orderDTO = orderService.orderInfo(mem_id);
+		mav.addObject("orderDTO", orderDTO);
 		
 		return mav;
 	}

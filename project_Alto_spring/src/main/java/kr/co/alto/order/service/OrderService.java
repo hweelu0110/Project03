@@ -12,4 +12,6 @@ public interface OrderService {
 
 	int addNewOrder(OrderDTO od) throws Exception;
 
+	OrderDTO orderInfo(String mem_id) throws Exception;
+
 }

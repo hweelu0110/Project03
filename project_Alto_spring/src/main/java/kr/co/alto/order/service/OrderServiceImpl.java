@@ -75,5 +75,10 @@ public class OrderServiceImpl implements OrderService {
 		
 		return NewOrderItem;
 	}
+
+	@Override
+	public OrderDTO orderInfo(String mem_id) throws Exception {
+		return orderDAO.orderInfo(mem_id);
+	}
 	
 }

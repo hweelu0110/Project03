@@ -37,4 +37,9 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.insert("mapper.order.InsertNewOrderItem", orders);
 	}
 
+	@Override
+	public OrderDTO orderInfo(String mem_id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.order.OrderInfo", mem_id);
+	}
+
 }

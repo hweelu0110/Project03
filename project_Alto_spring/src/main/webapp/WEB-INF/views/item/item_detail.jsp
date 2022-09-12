@@ -81,6 +81,12 @@
 			$(".cart_form").find("input[name='quantity']").val(goodsCount);
 			$(".cart_form").submit();
 		});
+		
+		$(".order_submit").on("click", function(){
+			let goodsCount = $(".select_quantity").val();
+			$(".order_form").find("input[name='orders[0].quantity']").val(goodsCount);
+			$(".order_form").submit();
+		});
 
 	});
 	
@@ -159,8 +165,11 @@
 				</tbody>
 			</table>
 			<div align="right" style="margin-top: 10px">
-				<form>
-					<button type="submit" class="btn btn-warning">구매하기 </button>
+				<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
+					<input type="hidden" name="orders[0].goods_type" value="item">
+					<input type="hidden" name="orders[0].goods_code" value="${itemDTO.item_code }">
+					<input type="hidden" name="orders[0].quantity" value="">
+					<button type="submit" class="btn btn-warning order_submit">구매하기 </button>
 				</form>
 				<form action="${contextPath }/mypage/addCart.do" method="post" class="cart_form">
 					<input type="hidden" name="quantity" value="">
