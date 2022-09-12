@@ -138,7 +138,7 @@
 							<li>
 								<img src="${path}/memImgDown.do?imageFileName=${member.img}" />
 								<span class="memName">${member.name}</span>
-								<c:if test="${manager eq 'Y'}">
+								<c:if test="${member.manager eq 'Y'}">
 									<span class="manager">모임장</span>
 								</c:if>	
 							</li>

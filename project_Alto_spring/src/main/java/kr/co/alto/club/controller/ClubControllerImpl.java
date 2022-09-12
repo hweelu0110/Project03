@@ -236,7 +236,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		try {
 				
-			clubService.clubOut(mem_id);
+			clubService.clubOut(mem_id, club_code);
 							
 			message = "<script>";
 			message += " location.href='"+request.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";

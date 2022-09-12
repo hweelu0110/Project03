@@ -193,7 +193,7 @@
 		      
 		      	<c:forEach var="top" items="${topHobby}" varStatus="sts">
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubSearchList.do?hobby_code=${top.CATE_M}">
+						<a href="${path}/club/clubSearchList.do?hobbyC=${top.CATE_M}">
 							<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
 							<c:if test="${sts.count < 6}">
 								<span class="rank_info">${sts.count}</span>
