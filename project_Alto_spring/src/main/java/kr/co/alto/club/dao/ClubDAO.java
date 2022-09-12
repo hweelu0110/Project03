@@ -30,6 +30,22 @@ public interface ClubDAO {
 
 	public List<JoinDTO> selectClubMemberList(String club_code) throws DataAccessException;
 
-	public void clubOut(String mem_id) throws DataAccessException;	
+	public void clubOut(Map<String, Object> joinMap) throws DataAccessException;
+
+	public void addClubMemberNum(String club_code) throws DataAccessException;
+
+	public void minClubMemberNum(String club_code) throws DataAccessException;
+
+	public void addOutCount(String club_code) throws DataAccessException;
+
+	public String chkManager(Map<String, Object> joinMap) throws DataAccessException;
+
+	public String nextManager(String club_code) throws DataAccessException;
+
+	public void changeManagerJoin(Map<String, Object> joinMap) throws DataAccessException;
+	public void changeManagerClub(Map<String, Object> joinMap) throws DataAccessException;
+
+	public void deleteClub(String club_code) throws DataAccessException;
+
 
 }

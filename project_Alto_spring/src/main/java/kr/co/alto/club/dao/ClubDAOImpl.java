@@ -84,7 +84,49 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
-	public void clubOut(String mem_id) throws DataAccessException {
-		sqlSession.delete("mapper.club.clubOut", mem_id);
+	public void clubOut(Map<String, Object> joinMap) throws DataAccessException {
+		sqlSession.delete("mapper.club.clubOut", joinMap);
 	}
+
+	@Override
+	public void addClubMemberNum(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.addClubMemberNum", club_code);
+	}
+
+	@Override
+	public void minClubMemberNum(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.minClubMemberNum", club_code);
+	}
+
+	@Override
+	public void addOutCount(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.addOutCount", club_code);
+	}
+
+	@Override
+	public String chkManager(Map<String, Object> joinMap) throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.chkManager", joinMap);
+	}
+
+	@Override
+	public String nextManager(String club_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.nextManager", club_code);
+	}
+
+	@Override
+	public void changeManagerJoin(Map<String, Object> joinMap) throws DataAccessException {
+		sqlSession.update("mapper.club.changeManagerJoin", joinMap);
+	}
+	
+	@Override
+	public void changeManagerClub(Map<String, Object> joinMap) throws DataAccessException {
+		sqlSession.update("mapper.club.changeManagerClub", joinMap);
+	}
+
+	@Override
+	public void deleteClub(String club_code) throws DataAccessException {
+		sqlSession.delete("mapper.club.deleteClub", club_code);
+	}
+
+	
 }

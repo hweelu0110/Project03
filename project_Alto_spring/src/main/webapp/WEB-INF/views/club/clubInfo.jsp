@@ -44,7 +44,7 @@
 		      }
 		}
 		
-		function fn_cluOut() {
+		function fn_cluOut(manager) {
 			if (confirm("모임에서 탈퇴해도 내가 등록한 글은 삭제되지 않습니다. 모임에서 지금 나가시겠습니까?")) {
 				location.href='${path}/club/clubOut.do?club_code=${club_code}';
 			}
@@ -138,7 +138,7 @@
 							<li>
 								<img src="${path}/memImgDown.do?imageFileName=${member.img}" />
 								<span class="memName">${member.name}</span>
-								<c:if test="${manager eq 'Y'}">
+								<c:if test="${member.manager eq 'Y'}">
 									<span class="manager">모임장</span>
 								</c:if>	
 							</li>

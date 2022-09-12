@@ -193,7 +193,7 @@
 		      
 		      	<c:forEach var="top" items="${topHobby}" varStatus="sts">
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubSearchList.do?hobby_code=${top.CATE_M}">
+						<a href="${path}/club/clubSearchList.do?hobbyC=${top.CATE_M}">
 							<img src="${path}/resources/img/hobby_img/${top.CATE_M}.png" />
 							<c:if test="${sts.count < 6}">
 								<span class="rank_info">${sts.count}</span>
@@ -392,7 +392,7 @@
 		      
 	        	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
-		      			<a href="${path}/club/clubInformation.do?club_code=${best.club_code}">
+		      			<a href="${path}/club/clubInfo.do?club_code=${best.club_code}">
 		      				<img class="club_img" src="${path}/resources/img/club_test.png" />
 		      			</a>						
 						<span class="area">${best.area_name}</span>
@@ -546,7 +546,7 @@
 		      
 	        	<c:forEach var="brandnew" items="${newList}">		      		
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubInformation.do?club_code=${brandnew.club_code}">
+						<a href="${path}/club/clubInfo.do?club_code=${brandnew.club_code}">
 		      				<img class="club_img" src="${path}/resources/img/club_test.png" />
 		      			</a>
 						

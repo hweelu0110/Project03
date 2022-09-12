@@ -131,6 +131,7 @@ public class ClubServiceImpl implements ClubService {
 		joinMap.put("manager", 'Y');		
 		
 		clubDAO.clubJoin(joinMap);
+		clubDAO.addClubMemberNum(club_code);
 		
 		return club_code;
 		
@@ -141,13 +142,38 @@ public class ClubServiceImpl implements ClubService {
 		String join_code = clubDAO.selectNewJoinCode();
 		
 		joinMap.put("join_code", join_code);
+		String club_code = (String) joinMap.get("club_code");
 		
 		clubDAO.clubJoin(joinMap);
+		clubDAO.addClubMemberNum(club_code);
 	}
 
 	@Override
-	public void clubOut(String mem_id) throws DataAccessException {
-		clubDAO.clubOut(mem_id);
+	public void clubOut(Map<String, Object> joinMap) throws DataAccessException {
+		String managerYN = clubDAO.chkManager(joinMap);
+		String club_code = (String) joinMap.get("club_code");
+				
+		if (managerYN.equals("Y")) {
+			//가입일이 빠른 회원 찾기
+			String nextManagerId = clubDAO.nextManager(club_code);
+			
+			if (nextManagerId != null) {
+				Map<String, Object> manager = new HashMap<>();
+				manager.put("mem_id", nextManagerId);
+				manager.put("club_code", club_code);
+				//모임장 변경하기
+				clubDAO.changeManagerJoin(manager);
+				clubDAO.changeManagerClub(manager);
+			}else {
+				//다른 회원이 없는 경우 모임 삭제하기
+				clubDAO.deleteClub(club_code);
+			}
+			
+		}		
+		clubDAO.clubOut(joinMap);
+		
+		clubDAO.minClubMemberNum(club_code);
+		clubDAO.addOutCount(club_code);
 	}
 	
 }

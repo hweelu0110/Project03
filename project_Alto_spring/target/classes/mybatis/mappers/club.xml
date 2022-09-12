@@ -77,6 +77,13 @@
 		]]>
 	</insert>
 	
+	<!-- 모임 회원수 증가 -->
+	<update id="addClubMemberNum" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_NUM = NVL(MEMBER_NUM, 0) + 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
+	
 	<!-- 모임 회원 목록 가져오기 -->
 	<select id="selectClubMemberList" parameterType="String" resultType="joinDTO">
 		<![CDATA[
@@ -88,12 +95,72 @@
 	</select>
 	
 	<!-- 모임 탈퇴하기 -->
-	<insert id="clubOut" parameterType="String">
+	<insert id="clubOut" parameterType="java.util.Map">
 		<![CDATA[
 			DELETE FROM ALTO_JOIN
-			WHERE MEM_ID = #{mem_id}	
+			WHERE MEM_ID = '${mem_id}' AND CLUB_CODE = ${club_code}	
 		]]>
 	</insert>
+	
+	<!-- 모임 회원수 감소 -->
+	<update id="minClubMemberNum" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_NUM = NVL(MEMBER_NUM, 0) - 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
+	
+	<!-- 모임 탈퇴수 증가 -->
+	<update id="addOutCount" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_OUT = NVL(MEMBER_OUT, 0) + 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
+	
+	<!-- 모임장 여부 확인 -->
+	<select id="chkManager" parameterType="java.util.Map" resultType="String">
+		<![CDATA[
+			SELECT MANAGER
+			FROM ALTO_JOIN
+			WHERE MEM_ID = '${mem_id}' AND CLUB_CODE = ${club_code}
+		]]>
+	</select>
+	
+	<!-- 가입일이 가장 오래된 회원 찾기 -->
+	<select id="nextManager" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT MEM_ID
+			FROM (
+					SELECT * 
+					FROM ALTO_JOIN
+					WHERE CLUB_CODE = ${club_code} AND manager = 'N'
+					ORDER BY REGIDATE ASC  
+				)
+			WHERE rowNum = 1
+		]]>
+	</select>
+	
+	<!-- 모임장 변경 -->
+	<update id="changeManagerJoin" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE ALTO_JOIN
+			SET MANAGER = 'Y'
+			WHERE MEM_ID = '${mem_id}' AND CLUB_CODE = ${club_code}
+		]]>
+	</update>
+	
+	<update id="changeManagerClub" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE ALTO_CLUB
+			SET MANAGER = '${mem_id}'
+			WHERE CLUB_CODE = ${club_code}
+		]]>
+	</update>
+	
+	<!-- 모임 삭제하기 -->
+	<delete id="deleteClub" parameterType="String">
+		DELETE FROM ALTO_CLUB
+		WHERE CLUB_CODE = #{club_code}	
+	</delete>
 	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
