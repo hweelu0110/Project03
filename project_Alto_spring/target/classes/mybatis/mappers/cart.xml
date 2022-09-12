@@ -54,7 +54,7 @@
 	</update>
 	
 	<delete id="deleteCartGoods" parameterType="java.util.Map">
-		DELETE FROM EZEN.ALTO_CART
+		DELETE FROM ALTO_CART
 		WHERE GOODS_CODE = #{goods_code}
 		AND MEM_ID = #{mem_id}
 		AND GOODS_TYPE = #{goods_type}
@@ -65,4 +65,9 @@
 		SET QUANTITY = #{quantity}
 		WHERE cart_num = #{cart_num}
 	</update>
+	
+	<delete id="deleteAll" parameterType="String">
+		DELETE FROM ALTO_CART
+		WHERE MEM_ID = #{mem_id}
+	</delete>
 </mapper>

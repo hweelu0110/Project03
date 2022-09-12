@@ -93,6 +93,13 @@
 	}
 	
 	</script>
+	<style type="text/css">
+		form {
+		margin:0;
+		display:inline;
+		height:20px;
+	}
+	</style>
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
 <body>
@@ -234,6 +241,10 @@
 					<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
 						<button type="submit" class="btn btn-warning order_btn">구매하기 </button>
 					</form>
+					<form action="${contextPath }/mypage/deleteAll.do" method="get">
+						<button class="btn secondary cart_submit">장바구니 비우기</button>
+					</form>
+					
 				</div>
 			</div>
 		</div>

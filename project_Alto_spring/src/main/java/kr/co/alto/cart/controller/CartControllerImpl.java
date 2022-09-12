@@ -203,4 +203,44 @@ public class CartControllerImpl implements CartController {
 		 return resEnt; 
 	}
 
+	@Override
+	@RequestMapping(value = "/mypage/deleteAll.do", method = RequestMethod.GET)
+	public ResponseEntity deleteAll(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+			throws Exception {
+
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = "";
+		if (memberDTO != null) {
+			mem_id = memberDTO.getMem_id();
+		}
+		
+		String message; 
+		 ResponseEntity resEnt=null; 
+		 HttpHeaders responseHeaders = new HttpHeaders(); 
+		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		 
+		 try {
+			 int deleteAll = cartService.deleteAll(mem_id);
+			 
+			 message = " <script>"; 
+			 message +=" alert('장바구니를 비웠습니다.');";
+			 message +=" location.href='"+request.getContextPath() +"/mypage/cartClass.do'; "; 
+			 message +=" </script>"; 
+			 
+			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);	  
+			
+		 } 
+		 
+		 catch(Exception e) {
+			 message = " <script>"; 
+			 message +=" alert('오류가 발생했습니다. 다시 시도해주세요');"; 
+			 message +=" location.href='"+request.getContextPath() +"/mypage/cartClass.do'; ";
+			 message +=" </script>"; 
+			 
+			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED); 
+			 e.printStackTrace(); 
+		} 
+		 return resEnt; 
+	}
+
 }

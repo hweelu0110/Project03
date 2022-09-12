@@ -29,9 +29,7 @@ public class OrderDAOImpl implements OrderDAO {
 
 	@Override
 	public int addNewOrder(OrderDTO od) throws DataAccessException {
-		int resultCount = sqlSession.insert("mapper.order.InsertNewOrder", od);
-		System.out.println("od.getOrderId() : "+resultCount);
-		return resultCount;
+		return sqlSession.insert("mapper.order.InsertNewOrder", od);
 	}
 
 	@Override

@@ -14,4 +14,5 @@ public interface CartController {
 	public ResponseEntity addCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	public ResponseEntity deleteCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	public ResponseEntity quanEditCart(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
+	public ResponseEntity deleteAll(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 }

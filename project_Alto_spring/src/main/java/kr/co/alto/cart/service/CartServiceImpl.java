@@ -65,4 +65,10 @@ public class CartServiceImpl implements CartService {
 		return cartDAO.quanEditCart(cartMap);
 	}
 
+
+	@Override
+	public int deleteAll(String mem_id) throws Exception {
+		return cartDAO.deleteAll(mem_id);
+	}
+
 }
