@@ -77,6 +77,13 @@
 		]]>
 	</insert>
 	
+	<!-- 모임 회원수 증가 -->
+	<update id="addClubMemberNum" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_NUM = NVL(MEMBER_NUM, 0) + 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
+	
 	<!-- 모임 회원 목록 가져오기 -->
 	<select id="selectClubMemberList" parameterType="String" resultType="joinDTO">
 		<![CDATA[
@@ -94,6 +101,20 @@
 			WHERE MEM_ID = #{mem_id}	
 		]]>
 	</insert>
+	
+	<!-- 모임 회원수 감소 -->
+	<update id="minClubMemberNum" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_NUM = NVL(MEMBER_NUM, 0) - 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
+	
+	<!-- 모임 탈퇴수 증가 -->
+	<update id="addOutCount" parameterType="String">
+		UPDATE ALTO_CLUB
+		SET MEMBER_OUT = NVL(MEMBER_OUT, 0) + 1
+		WHERE CLUB_CODE = #{club_code}
+	</update>
 	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">

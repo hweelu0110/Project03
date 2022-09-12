@@ -18,6 +18,6 @@ public interface ClubService {
 	public String clubOpen(ClubDTO clubDTO) throws DataAccessException;
 	public void clubJoin(Map<String, Object> joinMap) throws DataAccessException;
 	
-	public void clubOut(String mem_id) throws DataAccessException;
+	public void clubOut(String mem_id, String club_code) throws DataAccessException;
 	
 }

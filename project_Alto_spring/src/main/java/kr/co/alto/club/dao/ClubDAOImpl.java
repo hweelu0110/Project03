@@ -87,4 +87,19 @@ public class ClubDAOImpl implements ClubDAO {
 	public void clubOut(String mem_id) throws DataAccessException {
 		sqlSession.delete("mapper.club.clubOut", mem_id);
 	}
+
+	@Override
+	public void addClubMemberNum(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.addClubMemberNum", club_code);
+	}
+
+	@Override
+	public void minClubMemberNum(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.minClubMemberNum", club_code);
+	}
+
+	@Override
+	public void addOutCount(String club_code) throws DataAccessException {
+		sqlSession.update("mapper.club.addOutCount", club_code);
+	}
 }
