@@ -41,13 +41,11 @@
 		});
 	});
 	
-	
 	function setTotalInfo(){
 		let totalPrice = 0;
 		let totalCount = 0;
 		let totalKind = 0;
 
-		
 		$(".cart_info_td").each(function(index, element){
 			if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
 				totalPrice += parseInt($(element).find(".individual_totalPrice_input").val());
@@ -63,6 +61,7 @@
 		// 총 종류
 		$(".totalKind_span").text(totalKind);	
 	}
+	
 	</script>
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
@@ -176,6 +175,7 @@
 						<th><fmt:formatNumber value="${itemSum }" pattern="##,###,###" /> 원</th>
 						<th></th>
 					</tr>
+					</table>
 					
 					<table class="table table-hover">
 					<tr><td colspan="6"><h2>최종 집계</h3></td></tr>
@@ -196,7 +196,9 @@
 						<th width="2%"></th>
 					</tr>
 				</table>
-				<a href="products.jsp" class="btn btn-secondary">&raquo; 쇼핑 계속하기</a>
+				<div align="right" style="margin-top: 10px; margin-bottom: 20px">
+					<button type="submit" class="btn btn-warning">구매하기 </button>
+				</div>
 			</div>
 		</div>
 	</section>

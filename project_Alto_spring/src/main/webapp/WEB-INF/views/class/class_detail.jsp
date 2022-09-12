@@ -40,9 +40,17 @@
 		z-index: 4;
 		float: right;
 	}
+	
+		
+	form {
+		margin:0;
+		display:inline;
+		height:20px;
+	}
+	
 	</style>
 	<script type="text/javascript">
-		
+	
 	$(document).ready(function() {
 
 		//When page loads...
@@ -61,14 +69,19 @@
 			$(activeTab).fadeIn(); //Fade in the active ID content
 			return false;
 		});
+		
+
+		$(".cart_submit").on("click", function(){
+			let goodsCount = $(".select_quantity").val();
+			$(".cart_form").find("input[name='quantity']").val(goodsCount);
+			$(".cart_form").submit();
+		});
 
 	});
-	
-	//별점 마킹 모듈 프로토타입으로 생성
+	 
 	function Rating(){};
 	Rating.prototype.rate = 0;
 	Rating.prototype.setRate = function(newrate){
-	    //별점 마킹 - 클릭한 별 이하 모든 별 체크 처리
 	    this.rate = newrate;
 	    let items = document.querySelectorAll('.rate_radio');
 	    items.forEach(function(item, idx){
@@ -79,7 +92,9 @@
 	        }
 	    });
 	}
-	let rating = new Rating();//별점 인스턴스 생성
+	let rating = new Rating();
+	
+	
 	</script>
 </head>
 <body>
@@ -105,7 +120,6 @@
 			</figure>
 		</div>
 		<div id="detail_table">
-			<form action="${contextPath }/mypage/addCart.do" method="post">
 			<table>
 				<tbody>
 					<tr>
@@ -151,7 +165,7 @@
 					<tr>
 						<td class="fixed">신청 인원</td>
 						<td class="fixed">
-				      <select style="width: 60px;" name="quantity">
+				      <select style="width: 60px;" class="select_quantity">
 					      <option value="1">1인</option>
 								<option value="2">2인</option>
 								<option value="3">3인</option>
@@ -162,13 +176,20 @@
 					</tr>
 				</tbody>
 			</table>
-			<input type="hidden" name="goods_type" value="class">
-			<input type="hidden" name="goods_code" value="${classDTO.class_code }">
 			<div align="right" style="margin-top: 10px">
-			<button type="submit" class="btn btn-warning">구매하기 </button>
-			<button type="submit" class="btn secondary">장바구니</button>
+				<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
+					<input type="hidden" name="quantity" value="">
+					<input type="hidden" name="goods_type" value="class">
+					<input type="hidden" name="goods_code" value="${classDTO.class_code }">
+					<button type="submit" class="btn btn-warning order_submit">구매하기 </button>
+				</form>
+				<form action="${contextPath }/mypage/addCart.do" method="post" class="cart_form">
+					<input type="hidden" name="quantity" value="">
+					<input type="hidden" name="goods_type" value="class">
+					<input type="hidden" name="goods_code" value="${classDTO.class_code }">
+					<button type="submit" class="btn secondary cart_submit">장바구니</button>
+				</form>
 			</div>
-			</form>
 		</div>
 		<div class="clear" ></div>
 		<!-- 내용 들어 가는 곳 -->

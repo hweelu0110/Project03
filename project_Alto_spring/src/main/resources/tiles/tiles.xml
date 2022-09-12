@@ -87,4 +87,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/item/item_detail.jsp" />		
 	</definition>
 	
+	<!-- 주문 -->
+	<definition name="/order/orderPage" extends="tiles-layout-class">
+		<put-attribute name="body" value="/WEB-INF/views/order/orderlist.jsp" />		
+	</definition>
+	
 </tiles-definitions>

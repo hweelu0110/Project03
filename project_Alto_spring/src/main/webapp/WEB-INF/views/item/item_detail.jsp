@@ -47,6 +47,13 @@
 		z-index: 4;
 		float: right;
 	}
+	
+	form {
+		margin:0;
+		display:inline;
+		height:20px;
+	}
+	
 	</style>
 	<script type="text/javascript">
 		
@@ -68,8 +75,16 @@
 			$(activeTab).fadeIn(); //Fade in the active ID content
 			return false;
 		});
+		
+		$(".cart_submit").on("click", function(){
+			let goodsCount = $(".select_quantity").val();
+			$(".cart_form").find("input[name='quantity']").val(goodsCount);
+			$(".cart_form").submit();
+		});
 
 	});
+	
+	
 	</script>
 </head>
 <body>
@@ -94,7 +109,6 @@
 			</figure>
 		</div>
 		<div id="detail_table">
-			<form action="${contextPath }/mypage/addCart.do" method="post">
 			<table>
 				<tbody>
 					<tr>
@@ -133,7 +147,7 @@
 					<tr>
 						<td class="fixed">수량</td>
 						<td class="fixed">
-				     	  <select style="width: 60px;" name="quantity">
+				     	  <select style="width: 60px;" class="select_quantity">
 					      <option value="1">1개</option>
 								<option value="2">2개</option>
 								<option value="3">3개</option>
@@ -144,13 +158,17 @@
 					</tr>
 				</tbody>
 			</table>
-			<input type="hidden" name="goods_type" value="item">
-			<input type="hidden" name="goods_code" value="${itemDTO.item_code }">
 			<div align="right" style="margin-top: 10px">
-			<button type="submit" class="btn btn-warning">구매하기 </button>
-			<button type="submit" class="btn secondary">장바구니</button>
+				<form>
+					<button type="submit" class="btn btn-warning">구매하기 </button>
+				</form>
+				<form action="${contextPath }/mypage/addCart.do" method="post" class="cart_form">
+					<input type="hidden" name="quantity" value="">
+					<input type="hidden" name="goods_type" value="item">
+					<input type="hidden" name="goods_code" value="${itemDTO.item_code }">
+					<button type="submit" class="btn secondary cart_submit">장바구니</button>
+				</form>
 			</div>
-			</form>
 		</div>
 		<div class="clear"></div>
 		<!-- 내용 들어 가는 곳 -->
