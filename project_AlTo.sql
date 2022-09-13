@@ -366,7 +366,7 @@ AND MEM_ID = 'hweelu0110@gmail.com';
 -- (v) 모임 테이블 -----------------------------------------------------
 DROP TABLE alto_club CASCADE CONSTRAINT;
 CREATE TABLE alto_club(
-	club_code	char(8) NOT NULL,
+	club_code	number NOT NULL,
 	title	 	varchar2(100) NOT NULL,
 	cate_m 		char(8) NOT NULL,
 	cate_s	 	char(8) NOT NULL,
@@ -666,7 +666,7 @@ AND A.MEM_ID = 'hweelu0110@gmail.com'
 -- 가입
 DROP TABLE alto_join CASCADE CONSTRAINT;
 CREATE TABLE alto_join(
-	join_code	char(8) NOT NULL,
+	join_code	number NOT NULL,
 	mem_id	 	varchar2(100) NOT NULL,
 	club_code	char(8) NOT NULL,
 	manager		char(1) DEFAULT 'N' NOT NULL,
