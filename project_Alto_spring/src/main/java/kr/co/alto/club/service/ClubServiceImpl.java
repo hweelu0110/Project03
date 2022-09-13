@@ -128,9 +128,11 @@ public class ClubServiceImpl implements ClubService {
 		joinMap.put("join_code", join_code);
 		joinMap.put("club_code", club_code);
 		joinMap.put("mem_id", clubDTO.getManager());
-		joinMap.put("manager", 'Y');		
+		joinMap.put("manager", 'Y');	
 		
-		clubDAO.clubJoin(joinMap);
+		System.out.println("모임장 가입 정보 : " + join_code+", "+ club_code+","+joinMap.get("mem_id"));
+		
+		clubDAO.clubManagerJoin(joinMap);
 		clubDAO.addClubMemberNum(club_code);
 		
 		return club_code;
@@ -174,6 +176,11 @@ public class ClubServiceImpl implements ClubService {
 		
 		clubDAO.minClubMemberNum(club_code);
 		clubDAO.addOutCount(club_code);
+	}
+
+	@Override
+	public String selectClubHobbyCode(String club_code) throws DataAccessException {
+		return clubDAO.selectClubHobbyCode(club_code);
 	}
 	
 }

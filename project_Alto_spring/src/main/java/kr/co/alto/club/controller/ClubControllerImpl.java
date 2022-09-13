@@ -1,6 +1,8 @@
 package kr.co.alto.club.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -27,11 +29,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.area.service.AreaService;
 import kr.co.alto.board.dto.FileDTO;
 import kr.co.alto.board.service.BoardService;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
+import kr.co.alto.hobby.dto.HobbysubDTO;
+import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
 import kr.co.alto.mypage.service.MypageService;
@@ -42,8 +48,15 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	private static final Logger logger = LoggerFactory.getLogger(ClubController.class);
 	
+	//모임 이미지파일 저장 위치 지정
+	private static final String CLUB_IMG_PATH = "C:\\workspace-spring\\alto\\club";
+	
 	@Autowired
 	private ClubService clubService;
+	@Autowired
+	private AreaService areaService;
+	@Autowired
+	private HobbyService hobbyService;
 	@Autowired
 	private MypageService mypageService;
 	@Autowired
@@ -147,13 +160,47 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		String viewName = (String)request.getAttribute("viewName");
 		
 		Map<String, Object> clubInfoMap = new HashMap<>();
+
+		clubInfoMap = clubService.selectClubInfo(club_code);
 		
-		clubInfoMap = clubService.selectClubInfo(club_code);		
+		List<AreaDTO> areaList = new ArrayList<>();
+		areaList = areaService.listAreas();
+		
+		String hobby_code = clubService.selectClubHobbyCode(club_code);
+		System.out.println("hobby_code" + hobby_code);
+		
+		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
 		
 		mav.addObject("clubInfoMap", clubInfoMap);
+		mav.addObject("areaList", areaList);
+		mav.addObject("hobbySubList", hobbySubList);
 		mav.setViewName(viewName);
 		
 		return mav;
+	}
+	
+	@RequestMapping("/clubImgDown.do")
+	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception {
+		
+		OutputStream out = response.getOutputStream();
+		
+		String downFile = CLUB_IMG_PATH + "\\"+ imageFileName;
+		//다운로드될 파일 객체 생성
+		File file = new File(downFile);
+		
+		response.setHeader("Cache-Control", "no-cache");
+		//헤더에 파일이름 설정
+		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
+		
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1) break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
 	}
 	
 	@Override

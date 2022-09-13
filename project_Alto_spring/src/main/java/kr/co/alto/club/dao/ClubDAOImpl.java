@@ -76,10 +76,14 @@ public class ClubDAOImpl implements ClubDAO {
 	}
 
 	@Override
+	public void clubManagerJoin(Map<String, Object> joinMap) throws DataAccessException {
+		sqlSession.insert("mapper.club.clubManagerJoin", joinMap);
+	}
+
+	@Override
 	public List<JoinDTO> selectClubMemberList(String club_code) throws DataAccessException {
 		List<JoinDTO> clubMemberList = sqlSession.selectList("mapper.club.selectClubMemberList", club_code);
 		
-		System.out.println(club_code);
 		return clubMemberList;
 	}
 
@@ -128,5 +132,9 @@ public class ClubDAOImpl implements ClubDAO {
 		sqlSession.delete("mapper.club.deleteClub", club_code);
 	}
 
+	@Override
+	public String selectClubHobbyCode(String club_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.selectClubHobbyCode", club_code);
+	}
 	
 }

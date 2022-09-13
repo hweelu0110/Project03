@@ -20,8 +20,11 @@ public class memImgDownloadController {
 			throws Exception {
 		
 		OutputStream out = response.getOutputStream();
+		String downFile = "";
+		if (imageFileName != null) {
+			downFile = MEM_IMG_PATH+"\\"+imageFileName;
+		}
 		
-		String downFile = MEM_IMG_PATH + "\\"+ imageFileName;
 		//다운로드될 파일 객체 생성
 		File file = new File(downFile);
 		
