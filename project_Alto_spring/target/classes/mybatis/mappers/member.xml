@@ -142,4 +142,11 @@
 		]]>
 	</select>
 	
+	
+	<!-- 주문 정보 조회 -->
+	<select id="orderUserInfo" resultMap="memResult">
+		SELECT MEM_ID, MEM_NAME, PHONE
+		FROM ALTO_MEMBER
+		WHERE MEM_ID = #{mem_id}
+	</select>
 </mapper>

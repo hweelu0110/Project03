@@ -25,6 +25,16 @@
 	  <result property="imageFileName" column="imageFileName" />
  	</resultMap>
 	
+	<resultMap id="itemReviewResult" type="itemReviewDTO">
+	  <result property="cmt_num" column="cmt_num" />
+	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_star" column="cmt_star" />
+	  <result property="cmt_content" column="cmt_content" />
+	  <result property="cmt_item" column="cmt_item" />
+	  <result property="cmt_regdate" column="cmt_regdate" />
+ 	</resultMap>
+	
+	
 	<!-- 전체 조회 -->
 	<select id="selectAllitemList" parameterType="java.util.Map" resultMap="itemResult">
 		SELECT h.NAME AS hobby_name, i.*
@@ -53,16 +63,16 @@
 			order by item_code desc 
 		</if>
 		<if test="sort == 'new'">
-			order by item_code desc 
+			order by regidate desc 
 		</if>
 		<if test="sort == 'old'">
-			order by item_code asc 
+			order by regidate asc 
 		</if>
 		<if test="sort == 'quantityL'">
 			order by quantity desc
 		</if>
 		<if test="sort == 'quantityS'">
-			order by quantity asc
+			order by item_count desc
 		</if>
 	</select>
 
@@ -84,16 +94,9 @@
     	</foreach>
  	</insert>
   
-  	<select id="selectNewitem_codeN" resultType="int">
+	<select id="selectNewitem_code" resultType="String">
 		<![CDATA[ 
-			SELECT nvl(max(item_code),0)+1
-			FROM ALTO_ITEM
-		]]>
-	</select>
-  
-	<select id="selectNewitem_code" parameterType="int" resultType="String">
-		<![CDATA[ 
-			SELECT LPAD(#{item_codeN}, 6, 0) FROM DUAL
+			SELECT LPAD(seq_item.NEXTVAL, 6, 0) FROM DUAL
 		]]>
 	</select>
 	
@@ -159,5 +162,27 @@
 		</foreach>
 	</update>
 	
+	
+	<!-- 리뷰 -->
+	<select id="selectAllreviewList" resultMap="itemReviewResult" parameterType="String">
+		SELECT i.ITEM_NAME, cr.*
+		FROM ALTO_ITEM_REVIEW cr, ALTO_ITEM i
+		WHERE i.item_CODE = cr.CMT_ITEM
+		AND i.ITEM_CODE = ${item_code}
+	</select>
+	
+	
+	<insert id="insertNewItemReview"  parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO ALTO_ITEM_REVIEW
+			(CMT_NUM, CMT_WRITER, CMT_STAR, CMT_CONTENT, CMT_ITEM)
+			VALUES(seq_item_review.NEXTVAL, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_item})
+		]]>      
+	</insert>
+	
+	<delete id="deleteItemReview">
+		DELETE FROM EZEN.ALTO_ITEM_REVIEW
+		WHERE CMT_NUM = #{cmt_num}
+	</delete>
 </mapper>
 

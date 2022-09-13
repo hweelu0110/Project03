@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="mapper.order">
+ 	<resultMap type="goodsDTO" id="orderResult">
+	 	<result property="orderId" column="orderId" />
+ 		<result property="goods_type" column="goods_type" />		
+		<result property="goods_code" column="goods_code" />
+		<result property="quantity" column="quantity" />
+		<result property="goods_name" column="goods_name" />
+		<result property="price" column="price" />
+		<result property="totalPrice" column="totalPrice" />
+ 	</resultMap>
+ 	
+ 	<resultMap type="orderDTO" id="orderPostResult">
+ 		<result property="orderId" column="orderId" />		
+		<result property="memberId" column="memberId" />
+		<result property="zipcode" column="zipcode" />
+		<result property="address" column="address" />
+		<result property="dis_address" column="dis_address" />
+		<result property="orderState" column="orderState" />
+		<result property="orderDate" column="orderDate" />
+ 	</resultMap>
+ 	
+ 	
+ 	<select id="OrderClassInfo" resultMap="orderResult">
+ 		SELECT CLASS_CODE AS goods_code, CLASSNAME AS goods_name, PRICE
+		FROM ALTO_CLASS
+		WHERE CLASS_CODE = #{goods_code}
+ 	</select>
+	
+	<select id="OrderItemInfo" resultMap="orderResult">
+ 		SELECT ITEM_CODE AS goods_code, ITEM_NAME AS goods_name, PRICE
+		FROM ALTO_ITEM
+		WHERE ITEM_CODE = #{goods_code}
+ 	</select>
+ 	
+ 	<insert id="InsertNewOrder">
+ 		INSERT INTO ALTO_ORDER
+		(ORDERID, MEMBERID, ZIPCODE, ADDRESS, DIS_ADDRESS, ORDERSTATE)
+		VALUES(seq_order.NEXTVAL, #{memberId}, #{zipcode}, #{address}, #{dis_address}, '결제완료')
+ 	</insert>
+ 	
+ 	<insert id="InsertNewOrderItem" parameterType="java.util.List" >
+ 		<selectKey resultType="int" keyProperty="orderId" order="BEFORE">
+ 			SELECT MAX(orderId) FROM alto_order
+ 		</selectKey>
+ 	
+	    <foreach collection="list" item="item" open="INSERT ALL" close="SELECT * FROM SYS.DUAL" 
+	        separator=" ">
+	    INTO alto_order_item
+	    	(ORDERID, GOODS_TYPE, GOODS_CODE, PRICE, QUANTITY)
+			VALUES (
+	          #{orderId},
+			  #{item.goods_type},
+			  #{item.goods_code},
+			  #{item.price},
+			  #{item.quantity}
+	    	)
+	    </foreach>
+	</insert>
+	
+	<select id="OrderInfo" parameterType="String" resultMap="orderPostResult">
+ 		SELECT orderId, orderDate
+		FROM ALTO_ORDER o
+		WHERE o.MEMBERID = #{mem_id}
+		AND o.ORDERDATE = (SELECT MAX(o.ORDERDATE) FROM ALTO_ORDER o)
+ 	</select>
+ 	
+ 	<update id="quanCheck" parameterType="java.util.List">
+	    <foreach collection="list" item="goods" separator=";" open="DECLARE BEGIN" close="; END;">
+	    	<if test="goods.goods_type == 'class'">
+ 				UPDATE ALTO_CLASS
+				SET MEMBER_NUM = MEMBER_NUM + #{goods.quantity}
+				WHERE CLASS_CODE = #{goods.goods_code}
+ 			</if>
+ 			<if test="goods.goods_type == 'item'">
+ 				UPDATE ALTO_ITEM 
+				SET item_count = item_count + #{goods.quantity}
+				WHERE ITEM_CODE = #{goods.goods_code}
+ 			</if>
+	    </foreach>
+	</update>
+
+</mapper>

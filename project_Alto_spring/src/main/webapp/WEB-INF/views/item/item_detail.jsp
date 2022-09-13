@@ -9,6 +9,7 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="itemDTO"  value="${itemMap.itemDTO}"  />
 <c:set var="imageList"  value="${itemMap.imageFileList }"  />
+<c:set var="reviewList"  value="${itemMap.reviewList }"  />
 <%@ page import="java.text.SimpleDateFormat" %>
 <%
 	Date nowTime = new Date();
@@ -46,6 +47,13 @@
 		z-index: 4;
 		float: right;
 	}
+	
+	form {
+		margin:0;
+		display:inline;
+		height:20px;
+	}
+	
 	</style>
 	<script type="text/javascript">
 		
@@ -67,8 +75,22 @@
 			$(activeTab).fadeIn(); //Fade in the active ID content
 			return false;
 		});
+		
+		$(".cart_submit").on("click", function(){
+			let goodsCount = $(".select_quantity").val();
+			$(".cart_form").find("input[name='quantity']").val(goodsCount);
+			$(".cart_form").submit();
+		});
+		
+		$(".order_submit").on("click", function(){
+			let goodsCount = $(".select_quantity").val();
+			$(".order_form").find("input[name='orders[0].quantity']").val(goodsCount);
+			$(".order_form").submit();
+		});
 
 	});
+	
+	
 	</script>
 </head>
 <body>
@@ -131,20 +153,31 @@
 					<tr>
 						<td class="fixed">수량</td>
 						<td class="fixed">
-				     	  <select style="width: 60px;" id="order_goods_qty">
-					      <option>1</option>
-								<option>2</option>
-								<option>3</option>
-								<option>4</option>
-								<option>5</option>
+				     	  <select style="width: 60px;" class="select_quantity">
+					      <option value="1">1개</option>
+								<option value="2">2개</option>
+								<option value="3">3개</option>
+								<option value="4">4개</option>
+								<option value="5">5개</option>
 				     </select>
 						 </td>
 					</tr>
 				</tbody>
 			</table>
 			<div align="right" style="margin-top: 10px">
-			<button type="submit" class="btn btn-warning">구매하기 </button>
-			<button type="reset" class="btn secondary">장바구니</button>
+				<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
+					<input type="hidden" name="orders[0].goods_type" value="item">
+					<input type="hidden" name="orders[0].goods_code" value="${itemDTO.item_code }">
+					<input type="hidden" name="orders[0].quantity" value="">
+					<button type="submit" class="btn btn-warning order_submit">구매하기 </button>
+				</form>
+				<form action="${contextPath }/mypage/addCart.do" method="post" class="cart_form">
+					<input type="hidden" name="quantity" value="">
+					<input type="hidden" name="goods_type" value="item">
+					<input type="hidden" name="goods_code" value="${itemDTO.item_code }">
+					<button type="submit" class="btn secondary cart_submit">장바구니</button>
+				</form>
+			</div>
 		</div>
 		<div class="clear"></div>
 		<!-- 내용 들어 가는 곳 -->
@@ -177,38 +210,91 @@
 				<div class="tab_content" id="tab3">
 					<h4>리뷰</h4>
 					<div class="wrap">
-					    <form name="reviewform" class="reviewform" method="post" action="/save">
-					        <input type="hidden" name="rate" id="rate" value="0"/>
-					        <p class="title_star">별점과 리뷰를 남겨주세요.</p>
-					 
-					        <div class="review_rating">
-					            <div class="warning_msg">별점을 선택해 주세요.</div>
-					            <div class="rating">
-					                <!-- 해당 별점을 클릭하면 해당 별과 그 왼쪽의 모든 별의 체크박스에 checked 적용 -->
-					                <input type="checkbox" name="rating" id="rating1" value="1" class="rate_radio" title="1점">
-					                <label for="rating1"></label>
-					                <input type="checkbox" name="rating" id="rating2" value="2" class="rate_radio" title="2점">
-					                <label for="rating2"></label>
-					                <input type="checkbox" name="rating" id="rating3" value="3" class="rate_radio" title="3점" >
-					                <label for="rating3"></label>
-					                <input type="checkbox" name="rating" id="rating4" value="4" class="rate_radio" title="4점">
-					                <label for="rating4"></label>
-					                <input type="checkbox" name="rating" id="rating5" value="5" class="rate_radio" title="5점">
-					                <label for="rating5"></label>
-					            </div>
-					        </div>
-					        <div class="review_contents">
-					            <div class="warning_msg">5자 이상으로 작성해 주세요.</div>
-					            <textarea rows="10" class="review_textarea"></textarea>
-					        </div>   
-					        <div class="cmd">
-					            <input type="button" name="save" id="save" value="등록">
-					        </div>
-					    </form>
+					    <form class="mb-3" name="myform" id="myform" method="post" action="${contextPath}/item/reviewAdd.do">
+							<fieldset>
+								<span class="text-bold">별점을 선택해주세요</span>
+								<input type="radio" name="CMT_STAR" value="5" id="rate1"><label
+									for="rate1">★</label>
+								<input type="radio" name="CMT_STAR" value="4" id="rate2"><label
+									for="rate2">★</label>
+								<input type="radio" name="CMT_STAR" value="3" id="rate3"><label
+									for="rate3">★</label>
+								<input type="radio" name="CMT_STAR" value="2" id="rate4"><label
+									for="rate4">★</label>
+								<input type="radio" name="CMT_STAR" value="1" id="rate5"><label
+									for="rate5">★</label>
+							</fieldset>
+							<c:if test="${not empty mem_name_s }">
+								<div>
+									<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT" placeholder="좋은 수강평을 남겨주시면 큰 힘이 됩니다!"></textarea>						
+								</div>
+								<input type="hidden" name="cmt_item" value="${itemDTO.item_code}">
+								<div align="right">
+								<button type="submit" class="btn btn-warning">리뷰 등록</button>
+								</div>
+							</c:if>
+							<c:if test="${empty mem_name_s }">
+								<div>
+									<textarea class="col-auto form-control" type="text" id="CMT_CONTENT" name="CMT_CONTENT" readonly="readonly">로그인 후 리뷰 작성이 가능합니다.</textarea>						
+								</div>
+							</c:if>
+						</form>
 					</div>
+					
+					<table id="review_table">
+						<tr>
+							<td width="10%">작성자</td>
+							<td width="50%">내용</td>
+							<td width="20%">별점</td>
+							<td width="10%">작성일</td>
+							<td width="10%">비고</td>
+ 						</tr>
+ 						<c:choose>
+ 							<c:when test="${not empty reviewList }">
+		 						<c:forEach var="cmt" items="${reviewList }">
+			 						<tr>
+			 							<td width="10%">${cmt.cmt_writer }</td>
+										<td width="50%">${cmt.cmt_content }</td>
+										<td width="20%">
+											<c:if test="${cmt.cmt_star == 5 }">
+												★★★★★
+											</c:if>
+											<c:if test="${cmt.cmt_star == 4 }">
+												★★★★☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 3 }">
+												★★★☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 2 }">
+												★★☆☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 1 }">
+												★☆☆☆☆
+											</c:if>
+											<c:if test="${cmt.cmt_star == 0 }">
+												☆☆☆☆☆
+											</c:if>
+										</td>
+										<td width="10%">${cmt.cmt_regdate }</td>
+										<td width="10%">
+											<c:if test="${cmt.cmt_writer == mem_name_s}">
+												<a href="${contextPath}/item/itemReviewRemove.do?item_code=${itemDTO.item_code}&cmt_num=${cmt.cmt_num}">삭제</a>
+											</c:if>
+										</td>
+									</tr>
+		 						</c:forEach>
+ 							</c:when>
+ 							<c:when test="${empty reviewList }">
+	 							<tr>
+	 								<td colspan="4">
+	 									등록된 리뷰가 없습니다.
+	 								</td>
+	 							</tr>
+ 							</c:when>
+ 						</c:choose>
+					</table>
 				</div>
 			</div>
-		</div>
-	</section>		
-</body>
+		</section>		
+	</body>
 </html>
