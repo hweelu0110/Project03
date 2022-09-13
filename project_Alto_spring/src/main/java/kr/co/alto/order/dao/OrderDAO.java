@@ -15,5 +15,6 @@ public interface OrderDAO {
 	int addNewOrder(OrderDTO od) throws DataAccessException;
 	int addNewOrderItem(List<GoodsDTO> orders) throws DataAccessException;
 	OrderDTO orderInfo(String mem_id) throws DataAccessException;
+	int quanCheck(List result) throws DataAccessException;
 
 }

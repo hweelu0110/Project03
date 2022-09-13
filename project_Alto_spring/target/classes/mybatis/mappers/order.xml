@@ -69,4 +69,19 @@
 		AND o.ORDERDATE = (SELECT MAX(o.ORDERDATE) FROM ALTO_ORDER o)
  	</select>
  	
+ 	<update id="quanCheck" parameterType="java.util.List">
+	    <foreach collection="list" item="goods" separator=";" open="DECLARE BEGIN" close="; END;">
+	    	<if test="goods.goods_type == 'class'">
+ 				UPDATE ALTO_CLASS
+				SET MEMBER_NUM = MEMBER_NUM + #{goods.quantity}
+				WHERE CLASS_CODE = #{goods.goods_code}
+ 			</if>
+ 			<if test="goods.goods_type == 'item'">
+ 				UPDATE ALTO_ITEM 
+				SET item_count = item_count + #{goods.quantity}
+				WHERE ITEM_CODE = #{goods.goods_code}
+ 			</if>
+	    </foreach>
+	</update>
+
 </mapper>

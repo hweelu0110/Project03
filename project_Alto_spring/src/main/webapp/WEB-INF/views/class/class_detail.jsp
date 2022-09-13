@@ -183,12 +183,19 @@
 				</tbody>
 			</table>
 			<div align="right" style="margin-top: 10px">
-				<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
-					<input type="hidden" name="orders[0].goods_type" value="class">
-					<input type="hidden" name="orders[0].goods_code" value="${classDTO.class_code }">
-					<input type="hidden" name="orders[0].quantity" value="">
-					<button type="submit" class="btn btn-warning order_submit">구매하기 </button>
-				</form>
+				<c:choose>
+					<c:when test="${(classDTO.member_max - classDTO.member_num) > 0}">
+						<form action="${contextPath }/order/orderPage.do" method="get" class="order_form">
+							<input type="hidden" name="orders[0].goods_type" value="class">
+							<input type="hidden" name="orders[0].goods_code" value="${classDTO.class_code }">
+							<input type="hidden" name="orders[0].quantity" value="">
+							<button type="submit" class="btn btn-warning order_submit">구매하기 </button>
+						</form>
+					</c:when>
+					<c:when test="${(classDTO.member_max - classDTO.member_num) <= 0}">
+						<button class="btn btn-warning order_submit">품절</button>
+					</c:when>
+				</c:choose>
 				<form action="${contextPath }/mypage/addCart.do" method="post" class="cart_form">
 					<input type="hidden" name="quantity" value="">
 					<input type="hidden" name="goods_type" value="class">

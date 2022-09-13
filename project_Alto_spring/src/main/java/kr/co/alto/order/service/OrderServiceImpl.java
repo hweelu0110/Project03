@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		
 		int NewOrderItem = orderDAO.addNewOrderItem(result);
+		int quanCheck = orderDAO.quanCheck(result);
 		
 		return NewOrderItem;
 	}

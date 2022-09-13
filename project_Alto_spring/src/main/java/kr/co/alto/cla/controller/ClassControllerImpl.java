@@ -473,7 +473,6 @@ public class ClassControllerImpl implements ClassController {
 		
 		HttpSession session = request.getSession();
 		String cmt_writer = (String) session.getAttribute("mem_name_s");
-		System.out.println("로그인 계정 : " + cmt_writer);
 		reviewMap.put("cmt_writer", cmt_writer);
 		
 

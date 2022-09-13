@@ -42,4 +42,9 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.selectOne("mapper.order.OrderInfo", mem_id);
 	}
 
+	@Override
+	public int quanCheck(List result) throws DataAccessException {
+		return sqlSession.update("mapper.order.quanCheck", result);
+	}
+
 }
