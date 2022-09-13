@@ -72,7 +72,7 @@
 			order by quantity desc
 		</if>
 		<if test="sort == 'quantityS'">
-			order by quantity asc
+			order by item_count desc
 		</if>
 	</select>
 
