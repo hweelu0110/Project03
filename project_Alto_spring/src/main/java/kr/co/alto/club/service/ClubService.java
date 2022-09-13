@@ -20,4 +20,6 @@ public interface ClubService {
 	
 	public void clubOut(Map<String, Object> joinMap) throws DataAccessException;
 	
+	public String selectClubHobbyCode(String club_code) throws DataAccessException;
+	
 }

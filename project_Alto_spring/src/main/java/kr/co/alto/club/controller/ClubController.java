@@ -22,7 +22,9 @@ public interface ClubController {
 	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception;
 		
 	public ResponseEntity clubRegister(@ModelAttribute("club") ClubDTO clubDTO, HttpServletRequest request, HttpSession httpSession) throws Exception;
-
+	
+	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity clubJoin(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	

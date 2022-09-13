@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="allAreaList" value="${areaList}" />
+<c:set var="subhobbyList" value="${hobbySubList}"/>
 <c:set var="clubInfo" value="${clubInfoMap.clubInfo}" />
 <c:set var="clubMember" value="${clubInfoMap.clubMemberList}" />
 <c:set var="club_code" value="${clubInfoMap.clubInfo.club_code}" />
@@ -50,9 +52,45 @@
 			}
 		}
 		
+		function readURL(input, index) {
+			if (input.files && input.files[index]) {
+				let reader = new FileReader()
+				reader.onload = function(e) {
+					$("#club_img").attr("src",e.target.result)
+					$("#step4 div.club_img").css("display","none")
+					$("#club_img").css("display","block")
+				}
+				reader.readAsDataURL(input.files[index])
+			}
+		}		
+		
 		$(function() {
+			
+			
 			$("#editBtn").click(function() {
 				confirmPopup($("#step4"))
+			})
+			
+			$("#step4 .mainArea").css("cursor","pointer")
+			$("#step4 .clubHobby").css("cursor","pointer")
+			$("#club_img").css("display","none")
+			
+			//주요지역 수정
+			$("#step4 .mainArea").click(function() {
+				confirmPopup($("#step3"))
+			})
+			
+			$("#step3 #areaList li").click(function() {
+				let areaName = $(this).text()
+				let areaCode = $(this).find("input").val()
+				$("#step3").hide()
+				$("#step4 .mainArea").attr("value",areaName.trim())
+				$("#step4 .area_code").attr("value",areaCode)
+			})
+			
+			//취미 수정
+			$("#step4 .clubHobby").click(function() {
+				confirmPopup($("#step5"))
 			})
 		})
 	</script>
@@ -79,7 +117,14 @@
 				</div>	
 				
 				<div class="clubImg">
-					<img src="${path}/resources/img/clubinformation_test.png">
+					<c:choose>
+						<c:when test="${clubInfo.img == 'noImg'}">
+							<img src="${path}/resources/img/club_noImg.png">
+						</c:when>
+						<c:otherwise>
+							<img src="${path}/club/clubImgDown.do?imageFileName=${clubInfo.img}" />
+						</c:otherwise>
+					</c:choose>					
 					<span class="like_icon">관심</span>
 				</div>
 				
@@ -136,7 +181,14 @@
 					<ul>
 						<c:forEach var="member" items="${clubMember}">
 							<li>
-								<img src="${path}/memImgDown.do?imageFileName=${member.img}" />
+								<c:choose>
+									<c:when test="${member.img eq null || member.img eq '' }">
+										<img src="${path}/resources/img/profile_default.png" />
+									</c:when>
+									<c:otherwise>
+										<img src="${path}/memImgDown.do?imageFileName=${member.img}" />	
+									</c:otherwise>
+								</c:choose>		
 								<span class="memName">${member.name}</span>
 								<c:if test="${member.manager eq 'Y'}">
 									<span class="manager">모임장</span>
@@ -147,42 +199,8 @@
 				</div>		
 			</div>
 		</div>			
-	</section>
+	</section>	
 	
-	<!-- 모임 가입 팝업 -->
-	<div id="popupJoin" class="clubPopup">
-		<button type="button" class="closeBtn">닫기</button>
-		<h3>모임 가입</h3>
-		<form name="clubJoinFrm" method="post" action="${path}/club/clubJoin.do?club_code=${club_code}">			
-			<img src="${path}/memImgDown.do?imageFileName=${login.img}" />
-			<p>${login.mem_name}님! 가입인사 글을 작성해 주세요.</p>			
-			<input type="text" name="title" id="title" placeholder="제목을 입력하세요" />
-			<input type="hidden" name="category" value="signup" />
-			<textarea name="contents" id="contents" rows="20" cols="30" placeholder="가입인사를 작성하세요"></textarea>
-			<button type="submit" id="joinBtn" class="pointBtn" onclick="return validateForm()">클럽 가입하기</button>
-		</form>			
-	</div>
-	
-	<!-- 모임 편집 팝업 -->
-	<div id="step4" class="clubPopup">
-		<button type="button" class="closeBtn">닫기</button>
-		<h3>모임 수정</h3>
-		<p class="club_since">모임 개설일 since 2022/06/10</p>
-		<form action="" name="clubEditFrm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
-			<span class="icon_area"></span><label>주요지역</label>
-			<input type="text" class="size3" name="mainArea" value="${clubInfo.area_name}" /><br/>
-			<span class="icon_hobby">
-				<img src="${path}/resources/img/hobby_img/${cate}.png" />
-			</span>
-			<label>상세 취미</label>			
-			<input type="text" class="size3" name="clubHobby" value="${clubInfo.cate_s_name}" /><br/>
-			<input type="button" class="size0 non_img" name="clubPhoto" value="모임 사진 등록하기" /><br/>
-			<textarea name="clubCont">${clubInfo.intro}</textarea><br/>
-			<span class="icon_mem"></span><p>모임 최대 인원</p>
-			<input type="text" class="size2" name="maxMam" value="${clubInfo.member_max}" /><br/>
-			<input type="submit" class="pointBtn size0" value="수정하기" />
-		</form>
-	</div>
-	
+	<%@include file="../layout/club_popup.jsp" %>
 </body>
 </html>
