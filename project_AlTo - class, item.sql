@@ -1,4 +1,4 @@
--- ≈¨∑°Ω∫
+-- ≈¨ÔøΩÔøΩÔøΩÔøΩ
 DROP TABLE alto_class CASCADE CONSTRAINT;
 CREATE TABLE alto_class (
 	class_code		char(8)			PRIMARY KEY,
@@ -19,6 +19,8 @@ CREATE TABLE alto_class (
 	teacherInfo		varchar2(1000)	NOT NULL
 );
 
+CREATE SEQUENCE seq_class START WITH 000100 INCREMENT BY 1;
+
 ALTER TABLE alto_class ADD CONSTRAINT alto_class_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
 
@@ -33,7 +35,7 @@ REFERENCES alto_member (mem_id);
 
 
 
--- ≈¨∑°Ω∫ ¿ÃπÃ¡ˆ
+-- ≈¨ÔøΩÔøΩÔøΩÔøΩ ÔøΩÃπÔøΩÔøΩÔøΩ
 DROP TABLE alto_class_image CASCADE CONSTRAINT;
 CREATE TABLE alto_class_image (
 	imageFileNO		number(10)	PRIMARY KEY,
@@ -46,7 +48,7 @@ CREATE TABLE alto_class_image (
 
 
 
--- √ÎπÃøÎ«∞
+-- ÔøΩÔøΩÃøÔøΩ«∞
 DROP TABLE alto_item CASCADE CONSTRAINT;
 CREATE TABLE alto_item (
 	item_code		char(8)			PRIMARY KEY,
@@ -61,6 +63,8 @@ CREATE TABLE alto_item (
 	quantity		NUMBER			NOT NULL
 );
 
+CREATE SEQUENCE seq_item START WITH 000100 INCREMENT BY 1;
+
 ALTER TABLE alto_item ADD CONSTRAINT alto_item_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
 
@@ -69,7 +73,7 @@ REFERENCES alto_hobby_sub (hobby_sub_code);
 
 
 
--- √ÎπÃøÎ«∞ ¿ÃπÃ¡ˆ
+-- ÔøΩÔøΩÃøÔøΩ«∞ ÔøΩÃπÔøΩÔøΩÔøΩ
 DROP TABLE alto_item_image CASCADE CONSTRAINT;
 CREATE TABLE alto_item_image (
 	imageFileNO		number(10)	PRIMARY KEY,
@@ -80,18 +84,82 @@ CREATE TABLE alto_item_image (
 	REFERENCES alto_item(item_code) ON DELETE CASCADE
 );
 
-COMMIT;
 
 
-INSERT INTO EZEN.ALTO_CLASS
-(CLASS_CODE, className, HOBBY_CODE, HOBBY_SUB_CODE, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, PRICE, IMGNAME, INTRO, REGIDATE, STARTDATE, ENDDATE, CURRICULUM, TEACHERINFO)
-VALUES('000001', '≈◊Ω∫∆Æ ≈¨∑°Ω∫', 'hm000001', 'hs010001', 'area0001', 'test', 0 , 99, 100000, '', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ', sysdate , '2022-07-01', '2022-08-24', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ');
+------------- ÌÅ¥ÎûòÏä§Î¶¨Î∑∞
+DROP TABLE alto_class_review CASCADE CONSTRAINT;
+CREATE TABLE alto_class_review (
+	cmt_num			number			PRIMARY KEY,
+	cmt_writer		varchar2(100)	NOT NULL,
+	cmt_star		number			NOT NULL,
+	cmt_content		varchar2(4000)	NOT NULL,
+	cmt_class		char(8)			NOT NULL,
+	cmt_regdate		DATE			DEFAULT sysdate NOT NULL
+);
 
-INSERT INTO EZEN.ALTO_CLASS
-(CLASS_CODE, className, HOBBY_CODE, HOBBY_SUB_CODE, AREA_CODE, MANAGER, MEMBER_NUM, MEMBER_MAX, PRICE, IMGNAME, INTRO, REGIDATE, STARTDATE, ENDDATE, CURRICULUM, TEACHERINFO)
-VALUES('000002', '≈◊Ω∫∆Æ ≈¨∑°Ω∫2', 'hm000002', 'hs020001', 'area0002', 'test', 0 , 80, 200000, '', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ2', sysdate , '2022-06-15', '2022-08-20', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ2', '≈◊Ω∫∆Æ ¡ﬂ¿‘¥œ¥Ÿ2');
+CREATE SEQUENCE seq_class_review START WITH 20 INCREMENT BY 1;
 
-INSERT INTO EZEN.ALTO_ITEM
-(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY)
-VALUES('000001', 'hm000001', 'hs010001', '≈◊Ω∫∆Æ √ÎπÃøÎ«∞', 10000, sysdate , '', 'ªÛ«∞ º“∞≥', 0 , 0);
+ALTER TABLE alto_class_review ADD CONSTRAINT alto_class_review_fk FOREIGN KEY (cmt_class)
+REFERENCES ALTO_CLASS (class_code);
 
+
+-- Ï∑®ÎØ∏Ïö©Ìíà Î¶¨Î∑∞
+DROP TABLE alto_item_review CASCADE CONSTRAINT;
+CREATE TABLE alto_item_review (
+	cmt_num			number			PRIMARY KEY,
+	cmt_writer		varchar2(100)	NOT NULL,
+	cmt_star		number			NOT NULL,
+	cmt_content		varchar2(4000)	NOT NULL,
+	cmt_item		char(8)			NOT NULL,
+	cmt_regdate		DATE			DEFAULT sysdate NOT NULL
+);
+
+CREATE SEQUENCE seq_item_review START WITH 20 INCREMENT BY 1;
+
+ALTER TABLE alto_item_review ADD CONSTRAINT alto_item_review_fk FOREIGN KEY (cmt_item)
+REFERENCES ALTO_ITEM (item_code);
+
+
+
+-- ÌÅ¥ÎûòÏä§, Ï∑®ÎØ∏Ïö©Ìíà Ïû•Î∞îÍµ¨Îãà
+DROP TABLE alto_cart CASCADE CONSTRAINT;
+CREATE TABLE alto_cart (
+	cart_num		number			PRIMARY KEY,
+	mem_id	 varchar2(100) NOT NULL,
+	goods_type		varchar2(100)	NOT NULL,
+	goods_code		char(8)			NOT NULL,
+	quantity		number			NOT NULL
+);
+
+CREATE SEQUENCE seq_cart START WITH 10 INCREMENT BY 1;
+
+ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_fk FOREIGN KEY (mem_id)
+REFERENCES alto_member (mem_id);
+
+
+
+-- Ï£ºÎ¨∏ ÌÖåÏù¥Î∏î
+DROP TABLE alto_order CASCADE CONSTRAINT;
+CREATE TABLE alto_order (
+	orderId			number			PRIMARY KEY,
+	memberId		varchar2(100)	NOT NULL,
+	zipcode			varchar2(100)	NOT NULL,
+	address			varchar2(2000)	NOT NULL,
+	dis_address		varchar2(2000)	NOT NULL,
+	orderState		varchar2(100)	NOT NULL,
+	orderDate		DATE 			DEFAULT sysdate NOT NULL
+);
+
+CREATE SEQUENCE seq_order START WITH 1000 INCREMENT BY 1;
+
+
+
+-- Ï£ºÎ¨∏ÏïÑÏù¥ÌÖú ÌÖåÏù¥Î∏î
+DROP TABLE alto_order_item CASCADE CONSTRAINT;
+CREATE TABLE alto_order_item (
+	orderId			number			NOT NULL,
+	goods_type		varchar2(100)	NOT NULL,
+	goods_code		char(8)			NOT NULL,
+	price			NUMBER			NOT NULL,
+	quantity		number			NOT NULL
+);

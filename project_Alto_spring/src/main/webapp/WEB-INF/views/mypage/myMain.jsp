@@ -121,7 +121,7 @@
 			
 			<h3>구매활동</h3>
 			<ul>
-				<li><a href="">장바구니</a></li>
+				<li><a href="${path}/mypage/cartClass.do">장바구니</a></li>
 				<li><a href="">구매 내역</a></li>
 			</ul>
 			

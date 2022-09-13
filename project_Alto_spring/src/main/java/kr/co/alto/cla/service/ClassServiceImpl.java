@@ -46,11 +46,13 @@ public class ClassServiceImpl implements ClassService {
 	public Map<String, Object> classDetail(String class_code) throws Exception {
 
 		ClassDTO classDTO = classDAO.selectClass(class_code);
-		List<ImageDTO> imageFileList = classDAO.selectImageFileList(class_code);		
+		List<ImageDTO> imageFileList = classDAO.selectImageFileList(class_code);
+		List reviewList = classDAO.selectReviewList(class_code);
 		
 		Map<String, Object> classMap = new HashMap<>();
 		classMap.put("classDTO", classDTO);
-		classMap.put("imageFileList", imageFileList);		
+		classMap.put("imageFileList", imageFileList);	
+		classMap.put("reviewList", reviewList);
 
 		return classMap;
 	}
@@ -85,6 +87,18 @@ public class ClassServiceImpl implements ClassService {
 		classMainMap.put("AllHobbyList", AllHobbyList);
 		
 		return classMainMap;
+	}
+
+	@Override
+	public int addClassReview(Map reviewMap) throws Exception {
+		int reviewNew = classDAO.insertNewClassreview(reviewMap);
+		return reviewNew;
+	}
+
+	@Override
+	public int removeClassReview(String cmt_num) throws Exception {
+		int reviewDel = classDAO.deleteClassReview(cmt_num);
+		return reviewDel;
 	}
 
 }

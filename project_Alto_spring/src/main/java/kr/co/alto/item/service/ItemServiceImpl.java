@@ -47,14 +47,15 @@ public class ItemServiceImpl implements ItemService {
 	public Map<String, Object> itemDetail(String item_code) throws Exception {
 
 		ItemDTO itemDTO = itemDAO.selectItem(item_code);
-		
 		List<ImageDTO> imageFileList = itemDAO.selectImageFileList(item_code);		
+		List reviewList = itemDAO.selectReviewList(item_code);
 		
-		Map<String, Object> classMap = new HashMap<>();
-		classMap.put("itemDTO", itemDTO);
-		classMap.put("imageFileList", imageFileList);		
+		Map<String, Object> itemMap = new HashMap<>();
+		itemMap.put("itemDTO", itemDTO);
+		itemMap.put("imageFileList", imageFileList);	
+		itemMap.put("reviewList", reviewList);
 
-		return classMap;
+		return itemMap;
 	}
 
 	@Override
@@ -89,4 +90,15 @@ public class ItemServiceImpl implements ItemService {
 		return itemMainMap;
 	}
 
+	@Override
+	public int addItemReview(Map reviewMap) throws Exception {
+		int reviewNew = itemDAO.insertNewItemreview(reviewMap);
+		return reviewNew;
+	}
+
+	@Override
+	public int removeItemReview(String cmt_num) throws Exception {
+		int reviewDel = itemDAO.deleteItemReview(cmt_num);
+		return reviewDel;
+	}
 }

@@ -20,4 +20,7 @@ public interface ItemController {
 	public ResponseEntity modItem(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 
 	public ModelAndView itemDetail(String item_code,HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ResponseEntity reviewAdd(HttpServletRequest request, HttpServletResponse response,  HttpSession httpSession) throws Exception;
+	public ResponseEntity itemReviewRemove(String item_code, String cmt_num, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

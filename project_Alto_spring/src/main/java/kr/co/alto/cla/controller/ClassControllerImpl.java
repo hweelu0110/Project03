@@ -233,7 +233,7 @@ public class ClassControllerImpl implements ClassController {
 			}
 			message = " <script>";
 			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
-			message +=" location.href='"+multipartRequest.getContextPath()+"/board/classform.do'; ";
+			message +=" location.href='"+multipartRequest.getContextPath()+"/class/listClass.do'; ";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -454,4 +454,86 @@ public class ClassControllerImpl implements ClassController {
 		mav.addObject("classMap", classMap);
 		return mav;
 	}
+
+	@Override
+	@RequestMapping(value="/class/reviewAdd.do", method = RequestMethod.POST)
+	public ResponseEntity reviewAdd(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+			throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		
+		Map reviewMap = new HashMap();
+		
+		Enumeration enu=request.getParameterNames();
+		while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=request.getParameter(name);
+			reviewMap.put(name,value);
+		}
+		
+		HttpSession session = request.getSession();
+		String cmt_writer = (String) session.getAttribute("mem_name_s");
+		reviewMap.put("cmt_writer", cmt_writer);
+		
+
+		String message;
+		ResponseEntity resEnt=null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+		try {
+			int reviewNew = classService.addClassReview(reviewMap);
+			
+			String class_code = (String) reviewMap.get("cmt_class");
+			
+			message = "<script>";
+			message += " alert('리뷰를 작성했습니다.');";
+			message += " location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    
+		}catch(Exception e) {
+			
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
+			message +=" location.href='"+request.getContextPath()+"/class/listClass.do'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+
+	@Override
+	@RequestMapping(value="/class/classReviewRemove.do", method = RequestMethod.GET)
+	public ResponseEntity classReviewRemove(@RequestParam("class_code") String class_code, 
+											@RequestParam("cmt_num") String cmt_num, 
+											HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+	    
+		try {
+			int reviewNew = classService.removeClassReview(cmt_num);
+			
+			message = "<script>";
+			message += " alert('리뷰를 삭제했습니다.');";
+			message += " location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; ";
+			message +=" </script>";
+		    resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		    
+		}catch(Exception e) {
+			
+			message = " <script>";
+			message +=" alert('오류가 발생했습니다. 다시 시도해주세요');";
+			message +=" location.href='"+request.getContextPath()+"/class/classDetail.do?class_code="+class_code+"'; ";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
+	}
+	
 }

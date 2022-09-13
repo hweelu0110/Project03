@@ -37,11 +37,7 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	private String selectNewItem_code() {
-		int item_codeN = sqlSession.selectOne("mapper.item.selectNewitem_codeN");
-		String item_code = sqlSession.selectOne("mapper.item.selectNewitem_code", item_codeN);
-		System.out.println(item_codeN);
-		System.out.println(item_code);
-		return item_code;
+		return sqlSession.selectOne("mapper.item.selectNewitem_code");
 	}
 
 	@Override
@@ -97,4 +93,21 @@ public class ItemDAOImpl implements ItemDAO {
 		}
 	}
 
+	@Override
+	public List selectReviewList(String item_code) throws DataAccessException {
+		List reviewList = sqlSession.selectList("mapper.item.selectAllreviewList", item_code);
+		return reviewList;
+	}
+
+	@Override
+	public int insertNewItemreview(Map reviewMap) throws DataAccessException {
+		int itemReview = sqlSession.insert("mapper.item.insertNewItemReview", reviewMap);
+		return itemReview;
+	}
+
+	@Override
+	public int deleteItemReview(String cmt_num) throws DataAccessException {
+		int deleteItemReview = sqlSession.delete("mapper.item.deleteItemReview", cmt_num);
+		return deleteItemReview;
+	}
 }

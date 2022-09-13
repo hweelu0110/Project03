@@ -80,7 +80,7 @@
 					<li><a href="${contextPath }/item/listItem.do??sort=new&hobbyC=${listMap.hobbyC }">최신순</a></li>
 					<li><a href="${contextPath }/item/listItem.do?sort=old&hobbyC=${listMap.hobbyC }">오래된순</a></li>
 					<li><a href="${contextPath }/item/listItem.do?sort=quantityL&hobbyC=${listMap.hobbyC }">재고순</a></li>
-					<li><a href="${contextPath }/item/listItem.do?sort=quantityS&hobbyC=${listMap.hobbyC }">품절임박순</a></li>
+					<li><a href="${contextPath }/item/listItem.do?sort=quantityS&hobbyC=${listMap.hobbyC }">판매인기순</a></li>
 				</ul>
 			</div>
 		</div>
