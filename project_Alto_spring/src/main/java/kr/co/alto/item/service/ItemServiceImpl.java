@@ -101,4 +101,9 @@ public class ItemServiceImpl implements ItemService {
 		int reviewDel = itemDAO.deleteItemReview(cmt_num);
 		return reviewDel;
 	}
+
+	@Override
+	public List<ItemDTO> keywordItem(String keyword) throws Exception {
+		return itemDAO.keywordItem(keyword);
+	}
 }

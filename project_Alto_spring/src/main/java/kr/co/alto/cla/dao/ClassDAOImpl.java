@@ -111,4 +111,9 @@ public class ClassDAOImpl implements ClassDAO {
 		return deleteClassReview;
 	}
 
+	@Override
+	public List<ClassDTO> keywordClass(String keyword) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.keywordSearch", keyword);
+	}
+
 }

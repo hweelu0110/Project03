@@ -274,7 +274,6 @@ public class ClassControllerImpl implements ClassController {
 		
 		HttpSession session = request.getSession();
 		
-		System.out.println("컨트롤러 : "+class_code);
 		Map<String, Object> classMap = classService.classDetail(class_code);
 
 		ModelAndView mav = new ModelAndView();
@@ -319,8 +318,6 @@ public class ClassControllerImpl implements ClassController {
 		int added_img_num = Integer.parseInt((String) classMap.get("added_img_num"));
 		int pre_img_num = Integer.parseInt((String) classMap.get("pre_img_num"));
 		List<ImageDTO> imageFileList = new ArrayList<ImageDTO>();
-		
-		System.out.println("added_img_num : " + added_img_num + " / pre_img_num : "+pre_img_num);
 		
 		if(fileList != null && fileList.size()!=0) {
 			String[] imageFileNO = (String[])classMap.get("imageFileNO");
@@ -417,14 +414,11 @@ public class ClassControllerImpl implements ClassController {
 	@RequestMapping(value = "/class/searchList.do", method = RequestMethod.POST)
 	public ModelAndView searchList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		System.out.println("컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
 		
 		String hobbyCodeList = request.getParameter("hobbyCodeList");
 		String areaCodeList = request.getParameter("areaCodeList");
 		
-		System.out.println("취미리스트 : "+hobbyCodeList);
-		System.out.println("지역리스트 : "+areaCodeList);
 		String[] arrhcodelist = hobbyCodeList.split(",");
 		HashMap<String, String> codeList = new HashMap<String, String>();
 //		

@@ -1,5 +1,7 @@
 package kr.co.alto.main;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.club.dao.ClubDAO;
 import kr.co.alto.club.dto.ClubListDTO;
+import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.cla.service.ClassService;
 import kr.co.alto.item.dto.ItemDTO;
@@ -92,4 +97,25 @@ public class MainController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value = "/main/searchMain.do", method = RequestMethod.POST)
+	public ModelAndView searchMain(@RequestParam("keyword") String keyword, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		Map<String, Object> searchMainMap = new HashMap<>();
+		searchMainMap.put("keyword", keyword);
+		
+		List classSearch = classService.keywordClass(keyword);
+		searchMainMap.put("classSearch", classSearch);
+		
+		List itemSearch = itemService.keywordItem(keyword);
+		searchMainMap.put("itemSearch", itemSearch);
+		
+		mav.addObject("searchMainMap", searchMainMap);
+		
+		return mav;
+	}
+	
 }

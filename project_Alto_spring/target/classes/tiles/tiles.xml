@@ -36,6 +36,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />		
 	</definition>	
 	
+	<definition name="/main/searchMain" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/searchMain.jsp" />		
+	</definition>	
+	
 	<!-- 클래스 -->
 	<definition name="/class/classMain" extends="tiles-layout-class">
 		<put-attribute name="body" value="/WEB-INF/views/class/classMain.jsp" />		

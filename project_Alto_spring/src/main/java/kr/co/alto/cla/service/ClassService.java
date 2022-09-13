@@ -8,6 +8,8 @@ import kr.co.alto.cla.dto.ClassDTO;
 public interface ClassService {
 
 	public List<ClassDTO> listClass(Map listMap) throws Exception;
+	public List<ClassDTO> keywordClass(String keyword) throws Exception;
+	
 	public String addNewArticle(Map classMap) throws Exception;
 	public void modClass(Map<String, Object> classMap) throws Exception;
 	public Map classDetail(String class_code) throws Exception;
