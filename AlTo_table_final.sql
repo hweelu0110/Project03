@@ -120,18 +120,18 @@ nocache
 -- (v) 모임 테이블 -----------------------------------------------------
 DROP TABLE alto_club CASCADE CONSTRAINT;
 CREATE TABLE alto_club(
-	club_code	number NOT NULL,
+	club_code	NUMBER NOT NULL,
 	title	 	varchar2(100) NOT NULL,
 	cate_m 		char(8) NOT NULL,
 	cate_s	 	char(8) NOT NULL,
 	area_code	char(8) NOT NULL,
 	manager	 	varchar2(100) NOT NULL,
-	member_num	number DEFAULT 1 NOT NULL,
-	member_max	number DEFAULT 200 NOT NULL,
+	member_num	NUMBER DEFAULT 1 NOT NULL,
+	member_max	NUMBER DEFAULT 200 NOT NULL,
 	img 		varchar2(500) NOT NULL DEFAULT 'club_noImg.png',
 	intro 		varchar2(1000) NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,
-	member_out 	number DEFAULT 0 NOT NULL,
+	member_out 	NUMBER DEFAULT 0 NOT NULL,
 	PRIMARY KEY (club_code)
 );
 
@@ -164,7 +164,7 @@ DROP TABLE alto_like CASCADE CONSTRAINT;
 CREATE TABLE alto_like(
 	like_code	char(8) NOT NULL,
 	mem_id	 	varchar2(100) NOT NULL,
-	club_code	number,
+	club_code	NUMBER,
 	class_code	char(8),
 	item_code	char(8),
 	PRIMARY KEY (like_code)
@@ -194,9 +194,9 @@ nocache
 -- 가입 테이블
 DROP TABLE alto_join CASCADE CONSTRAINT;
 CREATE TABLE alto_join(
-	join_code	number NOT NULL,
+	join_code	NUMBER NOT NULL,
 	mem_id	 	varchar2(100) NOT NULL,
-	club_code	char(8) NOT NULL,
+	club_code	NUMBER NOT NULL,
 	manager		char(1) DEFAULT 'N' NOT NULL,
 	bookmark	char(1) DEFAULT 'Y' NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,	
@@ -213,7 +213,7 @@ REFERENCES alto_club (club_code);
 --게시판
 DROP TABLE alto_club_notice CASCADE CONSTRAINTS;
 CREATE TABLE alto_club_notice(
-	club_code char(8) NOT NULL
+	club_code NUMBER NOT NULL
 	,notice_num NUMBER NOT NULL PRIMARY key
 	,category varchar2(10) NOT NULL
 	,title varchar2(200) NOT NULL
@@ -253,7 +253,7 @@ nocache
 -- 사진첩
 DROP TABLE alto_club_album CASCADE CONSTRAINT;
 CREATE TABLE alto_club_album(
-	club_code CHAR(8) NOT NULL
+	club_code NUMBER NOT NULL
 	,album_num NUMBER NOT NULL PRIMARY key
 	,title VARCHAR2(200) NOT NULL
 	,contents VARCHAR2(2000) NOT NULL
