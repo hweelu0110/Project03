@@ -82,6 +82,7 @@
   height: 100%;
   object-fit: cover;
 }
+.swiper-slide a.clubImg { width: 215px; height: 115px; }
 
 .swiper-slide span,.swiper-slide p { position: absolute; }
 .swiper-slide .area {
@@ -106,9 +107,9 @@
     height: 21px;
 	bottom: 9px;
     left: 2.5rem;
-    color: #fff;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
+    font-family: 'Noto Sans KR', sans-serif;
     text-align: left;
     overflow: hidden;
 }
@@ -122,16 +123,16 @@
 .swiper-slide .like_icon {
 	top: 3px;
     right: 3px;
-    width: 14px;
-    height: 13px;
+    width: 18px;
+    height: 15px;
     text-indent: -99999px;
     background-image: url(../../img/alto_common_icon.png);
-    background-size: 85px;
-    background-position: -22px 0px;   
+    background-size: 102px;
+    background-position: -25px 0px;   
     cursor: pointer;  
 }
 .swiper-slide .like_icon.select, .normalList .like_icon.select {
-	background-position: -36px 0px;
+	background-position: -145px 0px;
 }
 
 /* 인기 클래스 - 클래스, 취미용품 일반 리스트 */
@@ -179,7 +180,7 @@
 	font-size: 0.9rem;
 	font-weight: 700;
 }
-.club .swiper-slide img {
+.club .swiper-slide a {
 	margin-bottom: 5rem;
 }
 .club .swiper-slide div { 

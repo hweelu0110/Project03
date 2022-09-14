@@ -71,12 +71,16 @@
 	
 	<!-- 모임 가입하기 -->
 	<insert id="clubJoin" parameterType="java.util.Map">
-		<![CDATA[
-			INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE)
-			VALUES(#{join_code}, #{mem_id}, #{club_code})	
-		]]>
+		INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE)
+		VALUES(#{join_code}, #{mem_id}, #{club_code})
 	</insert>
 	
+	<!-- 모임개설시 모임장 가입처리  -->
+	<insert id="clubManagerJoin" parameterType="java.util.Map">		
+		INSERT INTO ALTO_JOIN (JOIN_CODE, MEM_ID, CLUB_CODE, MANAGER)
+		VALUES(#{join_code}, #{mem_id}, #{club_code}, #{manager})
+	</insert>
+		
 	<!-- 모임 회원수 증가 -->
 	<update id="addClubMemberNum" parameterType="String">
 		UPDATE ALTO_CLUB
@@ -161,6 +165,18 @@
 		DELETE FROM ALTO_CLUB
 		WHERE CLUB_CODE = #{club_code}	
 	</delete>
+	
+	<!-- 모임 취미코드 가져오기 -->
+	<select id="selectClubHobbyCode" parameterType="String" resultType="String">
+		SELECT CATE_M FROM ALTO_CLUB WHERE CLUB_CODE = #{club_code}
+	</select>
+	
+	<!-- 모임 정보 수정하기 -->
+	<insert id="updateClubInfo" parameterType="java.util.Map">
+		UPDATE ALTO_CLUB 
+		SET AREA_CODE = #{area_code}, CATE_M = #{cate_m}, CATE_S = #{cate_s}, IMG = #{club_img}, INTRO = #{intro}, MEMBER_MAX = #{member_max}
+		WHERE CLUB_CODE = ${club_code}
+	</insert>
 	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">

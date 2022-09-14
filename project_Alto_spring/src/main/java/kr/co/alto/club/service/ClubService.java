@@ -16,8 +16,14 @@ public interface ClubService {
 	public Map<String, Object> selectClubInfo(String club_code) throws DataAccessException;
 	
 	public String clubOpen(ClubDTO clubDTO) throws DataAccessException;
+	
+	public void clubInfoEdit(Map<String, Object> clubInfoMap) throws DataAccessException;
+	
 	public void clubJoin(Map<String, Object> joinMap) throws DataAccessException;
 	
 	public void clubOut(Map<String, Object> joinMap) throws DataAccessException;
+	
+	public String selectClubHobbyCode(String club_code) throws DataAccessException;
+	
 	
 }

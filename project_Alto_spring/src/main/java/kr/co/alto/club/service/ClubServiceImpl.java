@@ -128,9 +128,9 @@ public class ClubServiceImpl implements ClubService {
 		joinMap.put("join_code", join_code);
 		joinMap.put("club_code", club_code);
 		joinMap.put("mem_id", clubDTO.getManager());
-		joinMap.put("manager", 'Y');		
-		
-		clubDAO.clubJoin(joinMap);
+		joinMap.put("manager", 'Y');	
+				
+		clubDAO.clubManagerJoin(joinMap);
 		clubDAO.addClubMemberNum(club_code);
 		
 		return club_code;
@@ -174,6 +174,16 @@ public class ClubServiceImpl implements ClubService {
 		
 		clubDAO.minClubMemberNum(club_code);
 		clubDAO.addOutCount(club_code);
+	}
+
+	@Override
+	public String selectClubHobbyCode(String club_code) throws DataAccessException {
+		return clubDAO.selectClubHobbyCode(club_code);
+	}
+
+	@Override
+	public void clubInfoEdit(Map<String, Object> clubInfoMap) throws DataAccessException {
+		clubDAO.clubUpdate(clubInfoMap);
 	}
 	
 }

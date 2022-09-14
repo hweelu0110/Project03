@@ -6,9 +6,11 @@
 .right { overflow: hidden; float: right; }
 
 .clubImg {
+	width: 100%;
+    height: 350px;
 	margin: 20px 0;
-	width: 600px;
 }
+.clubImg img { height: 100%; }
 .like_icon {
 	position: absolute;
 	display: block;

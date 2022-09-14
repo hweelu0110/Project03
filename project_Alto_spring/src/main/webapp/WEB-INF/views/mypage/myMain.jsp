@@ -57,12 +57,14 @@
 		<div id="myInfo">
 			<div class="profile">				
 				<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
-				<c:if test="${login.img == null}">
-					<img src="${path}/resources/img/profile_default.png" />
-				</c:if>
-				<c:if test="${login.img != null}">
-					<img src="${path}/memImgDown.do?imageFileName=${login.img}" />				
-				</c:if>				
+				<c:choose>
+					<c:when test="${login.img eq null || login.img eq '' }">
+						<img src="${path}/resources/img/profile_default.png" />
+					</c:when>
+					<c:otherwise>
+						<img src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />	
+					</c:otherwise>
+				</c:choose>			
 				<a class="editBtn01" onclick="fn_imgEditPopup()">편집</a>
 				<h1>${login.mem_name}</h1>
 				<p>${login.mem_id}</p>
@@ -156,7 +158,7 @@
 				<img id="mem_img" src="${path}/resources/img/profile_default.png" />
 			</c:if>
 			<c:if test="${login.img != null}">
-				<img id="mem_img" src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+				<img id="mem_img" src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />				
 			</c:if>
 			<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
 			<button type="submit" class="pointBtn">적용</button>

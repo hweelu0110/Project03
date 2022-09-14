@@ -1,8 +1,5 @@
 package kr.co.alto.club.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,7 +11,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.club.dto.ClubDTO;
-import kr.co.alto.hobby.dto.HobbysubDTO;
 
 public interface ClubController {
 	
@@ -22,9 +18,15 @@ public interface ClubController {
 	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception;
 		
 	public ResponseEntity clubRegister(@ModelAttribute("club") ClubDTO clubDTO, HttpServletRequest request, HttpSession httpSession) throws Exception;
-
+	
 	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;
+	
+	public ResponseEntity clubInfoEdit(MultipartHttpServletRequest mpRequest, HttpSession httpSession) throws Exception;
+	
 	public ResponseEntity clubJoin(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity clubOut(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 }
