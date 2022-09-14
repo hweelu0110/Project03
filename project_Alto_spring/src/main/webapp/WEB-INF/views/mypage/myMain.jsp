@@ -62,7 +62,7 @@
 						<img src="${path}/resources/img/profile_default.png" />
 					</c:when>
 					<c:otherwise>
-						<img src="${path}/memImgDown.do?imageFileName=${login.img}" />	
+						<img src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />	
 					</c:otherwise>
 				</c:choose>			
 				<a class="editBtn01" onclick="fn_imgEditPopup()">편집</a>
@@ -158,7 +158,7 @@
 				<img id="mem_img" src="${path}/resources/img/profile_default.png" />
 			</c:if>
 			<c:if test="${login.img != null}">
-				<img id="mem_img" src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+				<img id="mem_img" src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />				
 			</c:if>
 			<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
 			<button type="submit" class="pointBtn">적용</button>

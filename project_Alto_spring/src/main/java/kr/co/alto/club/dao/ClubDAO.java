@@ -51,5 +51,7 @@ public interface ClubDAO {
 	public void deleteClub(String club_code) throws DataAccessException;
 
 	public String selectClubHobbyCode(String club_code) throws DataAccessException;
+	
+	public void clubUpdate(Map<String, Object> clubInfoMap) throws DataAccessException;
 
 }

@@ -71,13 +71,13 @@
 		      
 		      	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubInfo.do?club_code=${best.club_code}">
+						<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${best.club_code}">
 							<c:choose>
 								<c:when test="${best.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">
 								</c:when>
 								<c:otherwise>
-									<img src="${path}/club/clubImgDown.do?imageFileName=${best.img}" />
+									<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${best.img}" />
 								</c:otherwise>
 							</c:choose>
 						</a>
@@ -133,13 +133,13 @@
 		      
 		      	<c:forEach var="brandnew" items="${newList}">		      		
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubInfo.do?club_code=${brandnew.club_code}">
+						<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${brandnew.club_code}">
 							<c:choose>
 								<c:when test="${brandnew.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">
 								</c:when>
 								<c:otherwise>
-									<img src="${path}/club/clubImgDown.do?imageFileName=${brandnew.img}" />
+									<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${brandnew.img}" />
 								</c:otherwise>
 							</c:choose>
 						</a>
@@ -211,7 +211,7 @@
 			         				      		
 		      		<c:forEach var="top" items="${clubMainMap.topHobbyList0}">		      		
 			      		<div class="swiper-slide">
-							<a href="${path}/club/clubInfo.do?club_code=${top.club_code}">
+							<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${top.club_code}">
 								<c:choose>
 									<c:when test="${top.img == 'noImg'}">
 										<img class="club_img" src="${path}/resources/img/club_noImg.png">
@@ -258,7 +258,7 @@
 			         				      		
 		      		<c:forEach var="top" items="${clubMainMap.topHobbyList1}">		      		
 			      		<div class="swiper-slide">
-							<a href="${path}/club/clubInfo.do?club_code=${top.club_code}">
+							<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${top.club_code}">
 								<c:choose>
 									<c:when test="${top.img == 'noImg'}">
 										<img class="club_img" src="${path}/resources/img/club_noImg.png">
@@ -305,7 +305,7 @@
 			         				      		
 		      		<c:forEach var="top" items="${clubMainMap.topHobbyList2}">		      		
 			      		<div class="swiper-slide">
-							<a href="${path}/club/clubInfo.do?club_code=${top.club_code}">
+							<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${top.club_code}">
 								<c:choose>
 									<c:when test="${top.img == 'noImg'}">
 										<img class="club_img" src="${path}/resources/img/club_noImg.png">
@@ -374,7 +374,7 @@
 		      
 		      	<c:forEach var="people" items="${peoList}">		      		
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubInfo.do?club_code=${people.club_code}">
+						<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${people.club_code}">
 							<c:choose>
 								<c:when test="${people.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">

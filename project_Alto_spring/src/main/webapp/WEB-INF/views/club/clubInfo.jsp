@@ -5,6 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="allAreaList" value="${areaList}" />
 <c:set var="subhobbyList" value="${hobbySubList}"/>
+<c:set var="allHobbyList" value="${hobbyList}" />
 <c:set var="clubInfo" value="${clubInfoMap.clubInfo}" />
 <c:set var="clubMember" value="${clubInfoMap.clubMemberList}" />
 <c:set var="club_code" value="${clubInfoMap.clubInfo.club_code}" />
@@ -13,87 +14,14 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="${path}/resources/css/club/club.css" />
-	<link rel="stylesheet" href="${path}/resources/css/club/clubInfo.css" />
-	<script src="${path}/resources/js/club_open.js"></script>		
-	<script type="text/javascript">
-		function fn_articleForm(login) {
-			if (login != '' && login != 'false') {
-				confirmPopup($("#popupJoin"))
-			}else {
-				alert("로그인 후 가입이 가능합니다.")
-				location.href='${path}/member/loginFrm.do';
-			}
-		}
-		
-		function validateForm() {
-			if($("#title").val() == ""){
-		        alert("제목을 입력하세요.");
-		        $("#title").focus();
-		        return false;
-		      }
-			if($("#contents").val() == ""){
-		        alert("가입인사를 작성해주세요.");
-		        $("#contents").focus();
-		        return false;
-		      }
-		}
-		
-		function fn_cluOut(manager) {
-			if (confirm("모임에서 탈퇴해도 내가 등록한 글은 삭제되지 않습니다. 모임에서 지금 나가시겠습니까?")) {
-				location.href='${path}/club/clubOut.do?club_code=${club_code}';
-			}
-		}
-		
-		function readURL(input, index) {
-			if (input.files && input.files[index]) {
-				let reader = new FileReader()
-				reader.onload = function(e) {
-					$("#club_img").attr("src",e.target.result)
-					$("#step4 div.club_img").css("display","none")
-					$("#club_img").css("display","block")
-				}
-				reader.readAsDataURL(input.files[index])
-			}
-		}		
-		
-		$(function() {
-			
-			
-			$("#editBtn").click(function() {
-				confirmPopup($("#step4"))
-			})
-			
-			$("#step4 .mainArea").css("cursor","pointer")
-			$("#step4 .clubHobby").css("cursor","pointer")
-			$("#club_img").css("display","none")
-			
-			//주요지역 수정
-			$("#step4 .mainArea").click(function() {
-				confirmPopup($("#step3"))
-			})
-			
-			$("#step3 #areaList li").click(function() {
-				let areaName = $(this).text()
-				let areaCode = $(this).find("input").val()
-				$("#step3").hide()
-				$("#step4 .mainArea").attr("value",areaName.trim())
-				$("#step4 .area_code").attr("value",areaCode)
-			})
-			
-			//취미 수정
-			$("#step4 .clubHobby").click(function() {
-				confirmPopup($("#step5"))
-			})
-		})
-	</script>
+	<link rel="stylesheet" href="${path}/resources/css/club/clubInfo.css" />	
+	<script src="${path}/resources/js/club_info.js"></script>
 </head>
 <body>
 	<section>
@@ -186,7 +114,7 @@
 										<img src="${path}/resources/img/profile_default.png" />
 									</c:when>
 									<c:otherwise>
-										<img src="${path}/memImgDown.do?imageFileName=${member.img}" />	
+										<img src="${path}/mypage/memImgDown.do?imageFileName=${member.img}" />	
 									</c:otherwise>
 								</c:choose>		
 								<span class="memName">${member.name}</span>

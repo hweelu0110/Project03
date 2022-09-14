@@ -2,13 +2,16 @@ package kr.co.alto.club.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +40,7 @@ import kr.co.alto.board.service.BoardService;
 import kr.co.alto.club.dto.ClubDTO;
 import kr.co.alto.club.service.ClubService;
 import kr.co.alto.common.base.BaseController;
+import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
@@ -166,14 +171,16 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		List<AreaDTO> areaList = new ArrayList<>();
 		areaList = areaService.listAreas();
 		
+		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
+		
 		String hobby_code = clubService.selectClubHobbyCode(club_code);
-		System.out.println("hobby_code" + hobby_code);
 		
 		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
 		
 		mav.addObject("clubInfoMap", clubInfoMap);
 		mav.addObject("areaList", areaList);
 		mav.addObject("hobbySubList", hobbySubList);
+		mav.addObject("hobbyList", hobbyList);
 		mav.setViewName(viewName);
 		
 		return mav;
@@ -201,6 +208,99 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		}
 		in.close();
 		out.close();
+	}
+	
+	@Override
+	@RequestMapping(value = "/clubInfoEdit.do", method = {RequestMethod.POST, RequestMethod.GET})
+	public ResponseEntity clubInfoEdit(MultipartHttpServletRequest mpRequest, HttpSession httpSession) throws Exception {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type","text/html; charset=utf-8");
+		
+		String club_code = mpRequest.getParameter("club_code");
+		String club_img = upload(mpRequest);
+		
+		Map<String, Object> clubInfoMap = new HashMap<>();
+		
+		Enumeration enu = mpRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			
+			if (name.equals("oldFileName")) {
+				String value = mpRequest.getParameter(name);
+				clubInfoMap.put(name, value);
+			}
+			else {
+				String value = mpRequest.getParameter(name);
+				clubInfoMap.put(name, value);
+			}
+		}
+		
+		String oldFileName  = String.valueOf(clubInfoMap.get("oldFileName"));
+		
+		if(club_img == null) {
+			club_img = oldFileName;
+		}
+		
+		System.out.println("cate_M ? : " + clubInfoMap.get("cate_m"));
+		System.out.println("새로운 클럽이미지 : "+club_img);
+		System.out.println("기존 이미지? : " +oldFileName);
+				
+		String message;
+		ResponseEntity resEnt = null;
+		
+		clubInfoMap.put("club_code", club_code);
+		clubInfoMap.put("club_img", club_img);	
+						
+		try {	
+
+			clubService.clubInfoEdit(clubInfoMap);		
+			if(club_img != oldFileName) {
+				File oldFile = new File(CLUB_IMG_PATH +"\\"+ oldFileName);
+				oldFile.delete();
+			}			
+			
+			message = "<script>";
+			message += " alert('모임 정보 수정 완료');";
+			message += " location.href='"+mpRequest.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";
+			
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			message = "<script>";
+			message += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			message += " location.href='"+mpRequest.getContextPath()+"/club/clubInfo.do?club_code="+club_code+"';";
+			message += "</script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			
+			e.printStackTrace();
+		}
+				
+		return resEnt;
+	}
+	
+	private String upload(MultipartHttpServletRequest multipartRequest) throws ServletException, IOException {
+		
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		String fileName = fileNames.next();
+		MultipartFile mFile = multipartRequest.getFile(fileName);
+		String originalFilename = mFile.getOriginalFilename();
+		
+		if (originalFilename != "" && originalFilename != null) {
+			fileName = originalFilename;		
+			File file = new File(CLUB_IMG_PATH +"\\"+ fileName);
+			if (mFile.getSize() != 0) {
+				if (!file.exists()) {
+					file.getParentFile().mkdirs();		
+					mFile.transferTo(new File(CLUB_IMG_PATH +"\\"+ originalFilename));
+				}
+			}
+		}else {													//첨부한 파일이 없었을 경우
+			fileName = null;
+		}
+				
+		return fileName;
 	}
 	
 	@Override
