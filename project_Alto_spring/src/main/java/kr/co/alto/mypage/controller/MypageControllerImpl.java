@@ -1,7 +1,9 @@
 package kr.co.alto.mypage.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -240,6 +243,34 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		}
 		
 		return mem_img;
+	}
+	
+	@RequestMapping("/memImgDown.do")
+	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) 
+			throws Exception {
+		
+		OutputStream out = response.getOutputStream();
+		String downFile = "";
+		if (imageFileName != null) {
+			downFile = MEM_IMG_PATH+"\\"+imageFileName;
+		}
+		
+		//다운로드될 파일 객체 생성
+		File file = new File(downFile);
+		
+		response.setHeader("Cache-Control", "no-cache");
+		//헤더에 파일이름 설정
+		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
+		
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1) break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
 	}
 	
 	@Override

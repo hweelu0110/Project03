@@ -59,66 +59,7 @@
 			})
 						
 			quickList()	
-			
-			/* 좋아요 처리 */
-			$(".like_icon").click(function() {
-				let selectItem = $(this)
-				let codeNum, codeType
-				let mem_id = '${login.mem_id}'
-				
-				if ('${login}' != ''){
-					if ($(this).siblings('#club_code').val() != null) {
-						codeNum = $(this).siblings('#club_code').val()
-						codeType = 'club_code'
-					}else if ($(this).siblings('#class_code').val() != null) {
-						codeNum = $(this).siblings('#class_code').val()
-						codeType = 'class_code'
-					}else if ($(this).siblings('#item_code').val() != null) {
 						
-						codeNum = $(this).siblings('#item_code').val()
-						codeType = 'item_code'
-					}
-					
-					
-					if ($(this).hasClass("select")){
-						$(this).removeClass("select")
-						
-						$.ajax({
-							url: "${path}/mypage/likeDel.do",
-							type: "Get",
-							data: {codeNum: codeNum, codeType: codeType, mem_id: mem_id},
-							dataType: "text",
-							success: function(data) {
-								confirmPopup($("#like_popup"), "관심 해제 완료!")
-							},
-							error: function(data) {
-								alert("오류가 발생했습니다. 다시 시도해 주세요.")
-							}
-							
-						})	
-						
-					} else {
-						$(this).addClass("select")
-						
-						$.ajax({
-							url: "${path}/mypage/likeAdd.do",
-							type: "Get",
-							data: {codeNum: codeNum, codeType: codeType, mem_id: mem_id},
-							dataType: "text",
-							success: function(data) {
-								confirmPopup($("#like_popup"), "관심 목록 추가 완료!")
-							},
-							error: function(data) {
-								alert("오류가 발생했습니다. 다시 시도해 주세요.")
-							}
-							
-						})
-					}					
-				}else {
-					confirmPopup($("#login_popup"), "관심추가는 로그인이 필요합니다.")
-				}					
-			})
-			
 			$("#member_section .mem_close").click(function() {
 				$("#member_section").slideToggle();
 				$("#quick_btn").css("display","inline-block")
@@ -392,13 +333,13 @@
 		      
 	        	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
-		      			<a href="${path}/club/clubInfo.do?club_code=${best.club_code}">
+		      			<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${best.club_code}">
 		      				<c:choose>
 								<c:when test="${best.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">
 								</c:when>
 								<c:otherwise>
-									<img src="${path}/club/clubImgDown.do?imageFileName=${best.img}" />
+									<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${best.img}" />
 								</c:otherwise>
 							</c:choose>
 		      			</a>						
@@ -553,13 +494,13 @@
 		      
 	        	<c:forEach var="brandnew" items="${newList}">		      		
 		      		<div class="swiper-slide">
-						<a href="${path}/club/clubInfo.do?club_code=${brandnew.club_code}">
+						<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${brandnew.club_code}">
 		      				<c:choose>
 								<c:when test="${brandnew.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">
 								</c:when>
 								<c:otherwise>
-									<img src="${path}/club/clubImgDown.do?imageFileName=${brandnew.img}" />
+									<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${brandnew.img}" />
 								</c:otherwise>
 							</c:choose>
 		      			</a>

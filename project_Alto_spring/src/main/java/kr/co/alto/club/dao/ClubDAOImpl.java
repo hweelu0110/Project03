@@ -136,5 +136,10 @@ public class ClubDAOImpl implements ClubDAO {
 	public String selectClubHobbyCode(String club_code) throws DataAccessException {
 		return sqlSession.selectOne("mapper.club.selectClubHobbyCode", club_code);
 	}
+
+	@Override
+	public void clubUpdate(Map<String, Object> clubInfoMap) throws DataAccessException {
+		sqlSession.update("mapper.club.updateClubInfo", clubInfoMap);
+	}
 	
 }

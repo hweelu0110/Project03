@@ -171,6 +171,13 @@
 		SELECT CATE_M FROM ALTO_CLUB WHERE CLUB_CODE = #{club_code}
 	</select>
 	
+	<!-- 모임 정보 수정하기 -->
+	<insert id="updateClubInfo" parameterType="java.util.Map">
+		UPDATE ALTO_CLUB 
+		SET AREA_CODE = #{area_code}, CATE_M = #{cate_m}, CATE_S = #{cate_s}, IMG = #{club_img}, INTRO = #{intro}, MEMBER_MAX = #{member_max}
+		WHERE CLUB_CODE = ${club_code}
+	</insert>
+	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
 		SELECT A.CLUB_CODE CLUB_CODE, 

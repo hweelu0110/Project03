@@ -111,6 +111,7 @@
 	    <exclude-mapping path="/member/**"/>
 	    <exclude-mapping path="/download.do"/>
 	    <exclude-mapping path="/memImgDown.do"/>
+	    <exclude-mapping path="/club/clubImgDown.do"/>
 	    <beans:ref bean="uRlInterceptor"/>
 	  </mvc:interceptor>
 	</mvc:interceptors>

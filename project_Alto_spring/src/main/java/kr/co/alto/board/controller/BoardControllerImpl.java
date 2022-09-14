@@ -197,7 +197,7 @@ public class BoardControllerImpl implements BoardController {
 				if (mFile.getSize() != 0) {
 					if (!file.exists()) {
 						file.getParentFile().mkdirs();		
-						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\"+ "temp" +"\\"+ originalFilename));
+						mFile.transferTo(new File(ARTICLE_FILE_REPO +"\\temp\\"+ originalFilename));
 					}
 				}
 			}
@@ -506,10 +506,7 @@ public class BoardControllerImpl implements BoardController {
 		String fileNo = request.getParameter("fileNo");
 		String fileName = request.getParameter("fileName");
 		String notice_num = request.getParameter("notice_num");
-		
-		System.out.println("fileNo= " + fileNo);
-		System.out.println("notice_num= " + notice_num);
-		
+				
 		FileDTO fileDTO = new FileDTO();
 		fileDTO.setNotice_num(Integer.parseInt(notice_num));
 		fileDTO.setFileNo(Integer.parseInt(fileNo));
