@@ -8,6 +8,14 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<style type="text/css">
+		.paging {
+			font-size:large; 
+			text-decoration: overline; 
+			text-shadow: yellow;
+		}
+		
+	</style>
 </head>
 <body>
 	<section>
@@ -33,9 +41,9 @@
 							<tr>
 								<td></td>
 								<th></th>
-								<th>상품명</th>
-								<th colspan="2">수량</th>
-								<th colspan="2">가격</th>
+								<th style="text-align: center;">상품명</th>
+								<th colspan="2" style="text-align: center;">수량</th>
+								<th colspan="2" style="text-align: center;">가격</th>
 							</tr>
 								<c:if test="${empty orderList.orders}">
 									<tr>
@@ -46,31 +54,27 @@
 									<c:forEach items="${orderList.orders }" var="goodsList" varStatus="status">
 										<tr>	
 											<td></td>
-											<td>${status.count }</td>
-											<td>${goodsList.goods_name }</td>
-											<td colspan="2">${goodsList.quantity }</td>
-											<td colspan="2"><fmt:formatNumber value="${goodsList.price }" pattern="##,###,###" /></td>
+											<td align="center">${status.count }</td>
+											<td align="center">${goodsList.goods_name }</td>
+											<td colspan="2" align="center">${goodsList.quantity }</td>
+											<td colspan="2" align="center"><fmt:formatNumber value="${goodsList.price }" pattern="##,###,###" /></td>
 										</tr>
 									</c:forEach>
 									<tr style="border: none;"><td style="border: none; height: 30px;" colspan="7"></td></tr>
 								</c:if>
 							</c:forEach>	
 							
-							    <tr align="center" style="font-size:large; text-decoration: overline; text-shadow: yellow;">
-							    	<td colspan="2">
-							        <c:if test="${pageMarker.prev}">
-							            <a href="${contextPath }/order/contractList.do?page=${pageMaker.startPage - 1}">이전</a></li>
-							        </c:if>
-							        </td>
-							        <td colspan="4">
-							        <c:forEach begin="${pageMarker.startPage}" end="${pageMarker.endPage}" var="idx">
-							               <a href="${contextPath }/order/contractList.do?page=${idx}">${idx}</a>
-							        </c:forEach>
-							     	</td>
-							     	<td>
-							        <c:if test="${pageMarker.next && pageMarker.endPage > 0}">
-							            <a href="${contextPath }/order/contractList.do?page=${pageMaker.endPage + 1}">다음</a>
-							        </c:if>
+							    <tr align="center" class="paging">
+							    	<td colspan="7">
+								        <c:if test="${pageMarker.prev}">
+								            <a href="${contextPath }/order/contractList.do?page=${pageMaker.startPage - 1}">이전</a>
+								        </c:if>
+								        <c:forEach begin="${pageMarker.startPage}" end="${pageMarker.endPage}" var="idx">
+								               <a href="${contextPath }/order/contractList.do?page=${idx}">${idx}</a>
+								        </c:forEach>
+								        <c:if test="${pageMarker.next && pageMarker.endPage > 0}">
+								            <a href="${contextPath }/order/contractList.do?page=${pageMaker.endPage + 1}">다음</a>
+								        </c:if>
 							        </td>
 							    </tr>
 							    
