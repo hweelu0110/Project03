@@ -54,4 +54,5 @@ public interface ClubDAO {
 	
 	public void clubUpdate(Map<String, Object> clubInfoMap) throws DataAccessException;
 
+	public List<ClubDTO> keywordClub(String keyword) throws DataAccessException;
 }

@@ -11,18 +11,16 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.member.dto.MemberDTO;
-import kr.co.alto.member.service.MemberService;
-import kr.co.alto.order.dto.GoodsDTO;
+import kr.co.alto.order.dto.Criteria;
 import kr.co.alto.order.dto.OrderDTO;
 import kr.co.alto.order.dto.OrderPageDTO;
+import kr.co.alto.order.dto.PageMarker;
 import kr.co.alto.order.service.OrderService;
 
 
@@ -71,6 +69,33 @@ public class OrderContollerImpl implements OrderController {
 		
 		OrderDTO orderDTO = orderService.orderInfo(mem_id);
 		mav.addObject("orderDTO", orderDTO);
+		
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/order/contractList.do", method = RequestMethod.GET)
+	public ModelAndView contractList(Criteria cri, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+			throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> listMap = new HashMap<>();
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		listMap.put("mem_id", mem_id);
+		
+		PageMarker pageMarker = new PageMarker();
+		pageMarker.setCri(cri);
+		pageMarker.setTotalCount(orderService.countListTotal(mem_id));
+		listMap.put("cri", cri);
+		
+		List<OrderDTO> orderList = orderService.selectOrderList(listMap);
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("orderList", orderList);
+		mav.addObject("pageMarker", pageMarker);
+		mav.addObject("cri", cri);
 		
 		return mav;
 	}

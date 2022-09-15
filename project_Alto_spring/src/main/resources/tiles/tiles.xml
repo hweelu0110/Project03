@@ -36,6 +36,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />		
 	</definition>	
 	
+	<definition name="/main/searchMain" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/searchMain.jsp" />		
+	</definition>	
+	
 	<!-- 클래스 -->
 	<definition name="/class/classMain" extends="tiles-layout-class">
 		<put-attribute name="body" value="/WEB-INF/views/class/classMain.jsp" />		
@@ -61,10 +65,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/class/class_detail.jsp" />		
 	</definition>
 	
-	<definition name="/mypage/cartClass" extends="tiles-layout-class">
-		<put-attribute name="body" value="/WEB-INF/views/mypage/cartClass.jsp" />		
-	</definition>
-	
 	
 	<!-- 취미용품 -->
 	<definition name="/item/itemMain" extends="tiles-layout-item">
@@ -88,12 +88,20 @@
 	</definition>
 	
 	<!-- 주문 -->
-	<definition name="/order/orderPage" extends="tiles-layout-class">
+	<definition name="/mypage/cartClass" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/cartClass.jsp" />		
+	</definition>
+	
+	<definition name="/order/orderPage" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/order/orderlist.jsp" />		
 	</definition>
 	
-	<definition name="/order/orderPagePost" extends="tiles-layout-class">
+	<definition name="/order/orderPagePost" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/order/orderPagePost.jsp" />		
+	</definition>
+	
+	<definition name="/order/contractList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/order/contractList.jsp" />
 	</definition>
 	
 </tiles-definitions>

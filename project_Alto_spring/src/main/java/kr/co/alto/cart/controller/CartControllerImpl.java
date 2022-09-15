@@ -93,7 +93,7 @@ public class CartControllerImpl implements CartController {
 			 
 			 message = "<script>"; message += " var con_test = confirm('장바구니로 이동하시겠습니까?');"; 
 			 message += " if(con_test == true){ location.href='"+request.getContextPath() +"/mypage/cartClass.do'; }"; 
-			 message += " else { location.href='"+request.getContextPath()+"/class/listClass.do';}";
+			 message += " else { history.back(); }";
 			 message +=" </script>"; 
 			 
 			 resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);	  

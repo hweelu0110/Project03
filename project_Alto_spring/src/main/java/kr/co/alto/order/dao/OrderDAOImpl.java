@@ -47,4 +47,25 @@ public class OrderDAOImpl implements OrderDAO {
 		return sqlSession.update("mapper.order.quanCheck", result);
 	}
 
+	@Override
+	public List<OrderDTO> selectOrderList(Map listMap) {
+		return sqlSession.selectList("mapper.order.selectOrderList", listMap);
+	}
+
+	@Override
+	public List<GoodsDTO> selectGoodsList(int orderId) throws DataAccessException {
+		List<GoodsDTO> goodsList = sqlSession.selectList("mapper.order.selectGoodsList", orderId);
+		
+		for(GoodsDTO goods : goodsList) {
+			String goods_name = sqlSession.selectOne("mapper.order.GoodsInfo", goods);
+			goods.setGoods_name(goods_name);
+		}
+		
+		return goodsList;
+	}
+	
+	public int countList(String mem_id) {
+		return (Integer) sqlSession.selectOne("mapper.order.countList", mem_id);
+	}
+
 }

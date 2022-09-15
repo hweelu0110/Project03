@@ -26,9 +26,8 @@
 	</div>
 	<div class="container">
 		<p align="center">
-			<a href="${contextPath }/club/clubMain.do" class="btn btn-secondary">모임 둘러보기</a>
-			<a href="${contextPath }/class/classMain.do" class="btn btn-secondary">클래스 둘러보기</a>
-			<a href="${contextPath }/item/itemMain.do" class="btn btn-secondary">취미용품 둘러보기</a>
+			<a href="${contextPath }/main.do" class="btn btn-secondary">새로운 취미 둘러보기</a>
+			<a href="${contextPath }/order/contractList.do" class="btn btn-secondary">주문내역 확인하기</a>
 		</p>
 	</div>
 	</section>

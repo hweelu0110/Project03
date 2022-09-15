@@ -110,4 +110,9 @@ public class ItemDAOImpl implements ItemDAO {
 		int deleteItemReview = sqlSession.delete("mapper.item.deleteItemReview", cmt_num);
 		return deleteItemReview;
 	}
+
+	@Override
+	public List<ItemDTO> keywordItem(String keyword) throws DataAccessException {
+		return sqlSession.selectList("mapper.item.keywordSearch", keyword);
+	}
 }

@@ -83,5 +83,44 @@
  			</if>
 	    </foreach>
 	</update>
+	
+	
+	<!-- 주문내역 조회 -->
+	<select id="selectOrderList" parameterType="java.util.Map" resultMap="orderPostResult">
+		SELECT *
+		FROM (SELECT ROW_NUMBER() OVER (ORDER BY ORDERID DESC) NUM, ORDERID, ORDERDATE, ORDERSTATE
+				FROM ALTO_ORDER o
+				WHERE o.MEMBERID = #{mem_id}
+				ORDER BY ORDERID DESC)
+		WHERE NUM BETWEEN #{cri.rowStart} AND #{cri.rowEnd}
+	</select>
+	
+	<select id="selectGoodsList" resultMap="orderResult">
+		SELECT *
+		FROM ALTO_ORDER_ITEM oi
+		WHERE ORDERID = #{mem_id}
+	</select>
 
+	<select id="GoodsInfo" resultType="String">
+		<if test="goods_type == 'class'">
+ 			SELECT c.CLASSNAME
+			FROM ALTO_ORDER_ITEM oi, ALTO_CLASS c
+			WHERE oi.GOODS_CODE = c.CLASS_CODE
+			AND oi.GOODS_CODE = #{goods_code}
+			AND oi.ORDERID = #{orderId}
+ 		</if>
+ 		<if test="goods_type == 'item'">
+ 			SELECT i.ITEM_NAME
+			FROM ALTO_ORDER_ITEM oi, ALTO_ITEM i
+			WHERE oi.GOODS_CODE = i.ITEM_CODE
+			AND oi.GOODS_CODE = #{goods_code}
+			AND oi.ORDERID = #{orderId}
+ 		</if>
+	</select>
+	
+	<select id="countList" resultType="Integer">
+		SELECT count(*)
+		FROM ALTO_ORDER o
+		WHERE o.MEMBERID = #{mem_id}
+	</select>
 </mapper>

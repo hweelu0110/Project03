@@ -143,6 +143,7 @@ INSERT INTO alto_hobby_sub VALUES ('hs140006','hm000014','스티커/굿즈');
 INSERT INTO alto_hobby_sub VALUES ('hs140007','hm000014','출판물');
 INSERT INTO alto_hobby_sub VALUES ('hs140008','hm000014','기타');
 
+INSERT INTO alto_hobby_sub VALUES ('hs150000','hm000015','없음');
 
 -- (v) 지역 정보 추가  -----------------------------------------
 INSERT INTO ALTO_AREA VALUES ('area0001','온라인');
