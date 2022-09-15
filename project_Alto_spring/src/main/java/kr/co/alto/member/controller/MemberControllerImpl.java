@@ -1,6 +1,8 @@
 package kr.co.alto.member.controller;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.util.WebUtils;
 
 import kr.co.alto.common.base.BaseController;
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.member.service.MemberService;
@@ -190,6 +193,19 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 			return mav;
 		}
 		
+	}
+	
+	@Override
+	@RequestMapping(value = "/selectMemberInfo.do", method = RequestMethod.POST)
+	public ResponseEntity<Object> selectMemberInfo(@RequestParam("mem_id")String mem_id, HttpServletRequest request) throws Exception {
+				
+		Map<String, Object> map = new HashMap<>();
+		List<HobbysubDTO> memberInfoList = memberService.selectMemberInfo(mem_id);
+		map.put("memberInfoList", memberInfoList);
+		
+		ResponseEntity<Object> resEntity = new ResponseEntity<Object>(map, HttpStatus.OK);
+		
+		return resEntity;
 	}
 
 }

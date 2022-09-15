@@ -21,7 +21,7 @@
 					<img src="${path}/resources/img/profile_default.png" />
 				</c:when>
 				<c:otherwise>
-					<img src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />	
+					<img src="${path}/memberImgDown.do?imageFileName=${login.img}" />	
 				</c:otherwise>
 			</c:choose>	
 			<p>${login.mem_name}님! 가입인사 글을 작성해 주세요.</p>			
@@ -175,6 +175,10 @@
 		</div>
 		
 		<input type="button" id="hobbyEditBtn" class="size0 pointBtn" value="변경하기" />
+	</div>
+	
+	<!-- 모임 멤버 정보 -->	
+	<div id="memberInfo" class="clubPopup">
 	</div>
 </body>
 </html>

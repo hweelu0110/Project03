@@ -187,6 +187,11 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
+	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException {
+		return clubDAO.chkClubLikeYN(likeChk);
+	}
+	
+	@Override
 	public List<ClubDTO> keywordClub(String keyword) throws Exception {
 		return clubDAO.keywordClub(keyword);
 	}

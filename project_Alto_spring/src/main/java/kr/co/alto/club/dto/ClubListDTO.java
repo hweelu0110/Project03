@@ -12,6 +12,7 @@ public class ClubListDTO {
 	private String img;
 	private Date schedule;
 	private String place;
+	private String manager;
 	
 	public ClubListDTO() {}
 
@@ -85,6 +86,14 @@ public class ClubListDTO {
 
 	public void setPlace(String place) {
 		this.place = place;
+	}
+
+	public String getManager() {
+		return manager;
+	}
+
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 	
 	

@@ -23,6 +23,7 @@
 </head>
 <body>
 	<section>
+		<input type="hidden" name="loginChk" id="loginChk" value="${login.mem_id}" />
 		<div id="cate_menu">
 			<ul>
 				<c:forEach var="hobby" items="${hobbyList}">
@@ -43,8 +44,8 @@
 	        	<c:forEach var="itemListBest" items="${itemListBest }">
 			      	<div class="swiper-slide">
 				      	<a href="${contextPath}/item/itemDetail.do?item_code=${itemListBest.item_code}">
-						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
-						
+							<img class="class_img" src="${contextPath}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
+						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.item_code eq itemListBest.item_code}">
 								<c:set var="in" value="true" />
@@ -67,7 +68,6 @@
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListBest.item_code}" />
-					</a>
 					</div>
 			    </c:forEach>
 				</div>
@@ -83,8 +83,8 @@
 		      	<c:forEach var="itemListNew" items="${itemListNew }">
 			      	<div class="swiper-slide">
 			      		<a href="${contextPath}/item/itemDetail.do?item_code=${itemListNew.item_code}">
-						<img class="class_img" src="${contextPath}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
-						
+							<img class="class_img" src="${contextPath}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
+						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.item_code eq itemListNew.item_code}">
 								<c:set var="in" value="true" />
@@ -107,7 +107,6 @@
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
-					</a>
 					</div>
 			    </c:forEach>
 		      </div>

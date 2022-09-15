@@ -16,6 +16,8 @@ public class FileDownloadController {
 	private static final String CLASS_IMAGE_PATH = "C:\\workspace-jsp\\altoimg\\altoclass";
 	private static final String ITEM_IMAGE_PATH = "C:\\workspace-jsp\\altoimg\\altoitem";
 	
+	private static String MEM_IMG_PATH = "C:\\workspace-spring\\alto\\member";	
+	
 	@RequestMapping("/download")	//다운로드할 이미지 파일 이름을 전달
 	public void download(@RequestParam("imgName") String imgName, 
 						@RequestParam(value = "class_code", required = false) String class_code,
@@ -41,6 +43,27 @@ public class FileDownloadController {
 		
 		FileInputStream in = new FileInputStream(file);
 		byte[] buffer = new byte[1024*8];	//버퍼를 이용해 한꺼번에 8kb씩 브라우저에 전송됨
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1) break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();
+	}	
+
+	@RequestMapping("/memberImgDown.do")
+	public void memImgDown(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception {
+		
+		OutputStream out = response.getOutputStream();
+		String downFile = MEM_IMG_PATH+"\\"+imageFileName;		
+		File file = new File(downFile);
+		
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
+		
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024*8]; 	
 		while(true) {
 			int count = in.read(buffer);
 			if(count == -1) break;

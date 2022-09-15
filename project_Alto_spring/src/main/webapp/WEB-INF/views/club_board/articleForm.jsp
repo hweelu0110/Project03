@@ -85,9 +85,9 @@
 		<div id="clubMenu">
 			<ul>
 				<li><a href="${path}/club/clubInfo.do?club_code=${club_code}">정보</a></li>
+				<li><a href="${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}">일정</a></li>
 				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
 				<li><a href="${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
-				<li><a href="${path}/club/clubChat.do?club_code=${club_code}&cate=${cate}&tit=${tit}">채팅</a></li>
 			</ul>
 		</div>
 		<div id="clubTit">

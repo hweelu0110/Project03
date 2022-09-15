@@ -16,6 +16,7 @@
 		<result property="joinDate" column="JOINDATE" />
 		<result property="memberId_yn" column="MEMBER_ID_YN" />
 		<result property="del_yn" column="DEL_YN" />
+		<result property="hobby_code" column="hobby_code" />
 	</resultMap>
 	
 	<resultMap type="likeDTO" id="likeResult">
@@ -96,7 +97,7 @@
 	</update>
 	
 	<!-- 회원정보 불러오기 -->
-	<select id="selectMemInfo" parameterType="String" resultMap="memResult">
+	<select id="selectMemInfo" parameterType="String" resultType="memberDTO">
 		SELECT MEM_NAME, GENDER, BIRTH, PHONE, MEM_OPEN FROM ALTO_MEMBER WHERE MEM_ID = #{mem_id}
 	</select>
 	
@@ -139,6 +140,15 @@
 			SELECT LIKE_CODE, CLUB_CODE, CLASS_CODE, ITEM_CODE 
 			FROM ALTO_LIKE
 			WHERE MEM_ID = #{mem_id}
+		]]>
+	</select>
+	
+	<!-- 모임멤버 - 회원정보 -->
+	<select id="selectMemberInfo" parameterType="String" resultMap="memResult">
+		<![CDATA[
+			SELECT DISTINCT A.MEM_ID, A.MEM_NAME, A.GENDER, A.BIRTH, A.IMG, A.MEM_OPEN, B.HOBBY_CODE  
+			FROM ALTO_MEMBER A, ALTO_M_HOBBY B
+			WHERE A.MEM_ID = B.MEM_ID AND A.MEM_ID = #{mem_id}
 		]]>
 	</select>
 	

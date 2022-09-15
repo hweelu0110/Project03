@@ -26,6 +26,8 @@ public interface ClubService {
 	
 	public String selectClubHobbyCode(String club_code) throws DataAccessException;
 	
+	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException;
+	
 	
 	public List<ClubDTO> keywordClub(String keyword) throws Exception;
 }

@@ -1,6 +1,7 @@
 package kr.co.alto.member.service;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.mail.MailUtils;
 import kr.co.alto.mail.TempKey;
 import kr.co.alto.member.dao.MemberDAO;
@@ -97,6 +99,11 @@ public class MemberServiceImpl implements MemberService {
 		sendMail.setFrom("projectalto03@gmail.com", "ALTO");
 		sendMail.setTo(mem_id);
 		sendMail.send();
+	}
+
+	@Override
+	public List<HobbysubDTO> selectMemberInfo(String mem_id) throws Exception {
+		return memberDAO.selectMemberInfo(mem_id);
 	}	
 	
 }

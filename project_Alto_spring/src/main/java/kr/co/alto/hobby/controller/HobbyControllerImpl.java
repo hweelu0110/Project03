@@ -127,7 +127,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 		String[] sub_codeList = request.getParameterValues("sub_code");
 		int mCnt = main_codeList.length;
 		int sCnt = sub_codeList.length;
-		System.out.println("메인 개수 "+mCnt+" / 서브 개수 "+sCnt );
+
 		Map memHobbyMap = new HashMap<>();
 		List<HobbysubDTO> hobbysubList = new ArrayList<>();
 		if(sub_codeList != null && sCnt != 0) {
@@ -145,8 +145,7 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 				}
 				HobbysubDTO hobbysubDTO = new HobbysubDTO();
 				hobbysubDTO.setHobby_code(main_code);
-				hobbysubDTO.setHobby_sub_code(sub_code);
-				System.out.println("저장확인?? " + hobbysubDTO.getHobby_code() +", " + hobbysubDTO.getHobby_sub_code());
+				hobbysubDTO.setHobby_sub_code(sub_code);				
 				hobbysubList.add(hobbysubDTO);
 				
 			}
@@ -159,15 +158,13 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 					String sCode = sub_codeList[j].substring(2,4);				
 					if(mCode.equals(sCode)) {
 						++count;
-						System.out.println(count);
 					}
 				}
 				
 				if(count == 0) {
 					HobbysubDTO hobbysubDTO = new HobbysubDTO();
 					hobbysubDTO.setHobby_code(main_code);
-					hobbysubDTO.setHobby_sub_code("");
-					System.out.println("저장확인?? " + hobbysubDTO.getHobby_code() +", " + hobbysubDTO.getHobby_sub_code());
+					hobbysubDTO.setHobby_sub_code("");					
 					hobbysubList.add(hobbysubDTO);					
 				}else {
 					count = 0;

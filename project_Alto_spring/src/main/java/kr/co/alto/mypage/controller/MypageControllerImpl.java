@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -80,7 +81,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		
-		List<MemberDTO> memInfo = mypageService.selectMemInfo(mem_id);
+		MemberDTO memInfo = mypageService.selectMemInfo(mem_id);
 		
 		mav.addObject("memInfo", memInfo);
 		mav.setViewName(viewName);
@@ -213,7 +214,30 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
 		
+		Map<String, Object> memImgMap = new HashMap<>();
+		
+		Enumeration enu = mpRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			
+			if (name.equals("oldFileName")) {
+				String value = mpRequest.getParameter(name);
+				memImgMap.put(name, value);
+			}
+		}
+		
+		String oldFileName  = String.valueOf(memImgMap.get("oldFileName"));
+		
+		if(mem_img == null || mem_img == "") {
+			mem_img = oldFileName;
+		}
+				
 		mypageService.updateImg(mem_img, mem_id);
+		
+		if(mem_img != oldFileName) {
+			File oldFile = new File(MEM_IMG_PATH +"\\"+ oldFileName);
+			oldFile.delete();
+		}
 		
 		memberDTO.setImg(mem_img);
 		session.setAttribute("login", memberDTO);
@@ -245,32 +269,23 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		return mem_img;
 	}
 	
-	@RequestMapping("/memImgDown.do")
-	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) 
-			throws Exception {
+	
+	@Override
+	@RequestMapping(value = "/myActivList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView myActivList(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> myActivMap = new HashMap<>();
 		
-		OutputStream out = response.getOutputStream();
-		String downFile = "";
-		if (imageFileName != null) {
-			downFile = MEM_IMG_PATH+"\\"+imageFileName;
-		}
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
 		
-		//다운로드될 파일 객체 생성
-		File file = new File(downFile);
+		myActivMap = mypageService.selectActivList(mem_id);
 		
-		response.setHeader("Cache-Control", "no-cache");
-		//헤더에 파일이름 설정
-		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
+		mav.addObject("myActivMap", myActivMap);
+		mav.setViewName(viewName);
 		
-		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
-		while(true) {
-			int count = in.read(buffer);
-			if(count == -1) break;
-			out.write(buffer, 0, count);
-		}
-		in.close();
-		out.close();
+		return mav;
 	}
 	
 	@Override

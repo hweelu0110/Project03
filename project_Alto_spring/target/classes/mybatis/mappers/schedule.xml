@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="mapper.schedule">
+	<resultMap type="scheduleDTO" id="scheduleResult">
+		<result property="club_code" column="club_code" />
+		<result property="schedule_code" column="schedule_code" />
+		<result property="title" column="title" />
+		<result property="mem_id" column="mem_id" />
+		<result property="mem_name" column="mem_name" />
+		<result property="sdate" column="sdate" />
+		<result property="stime" column="stime" />
+		<result property="splace" column="splace" />
+		<result property="sprice" column="sprice" />
+		<result property="snum" column="snum" />
+		<result property="mem_cnt" column="mem_cnt" />
+		<result property="regidate" column="regidate" />
+	</resultMap>
+	
+	<resultMap type="promiseDTO" id="promiseResult">
+		<result property="promiseNo" column="promiseNo" />
+		<result property="club_code" column="club_code" />
+		<result property="schedule_code" column="schedule_code" />
+		<result property="mem_id" column="mem_id" />
+		<result property="mem_name" column="mem_name" />
+		<result property="img" column="img" />
+		<result property="manager" column="manager" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
+	
+	<!-- 모든 글 조회 -->
+	<select id="selectAllScheduleList" resultMap="scheduleResult" parameterType="java.util.Map" > 
+		<!-- 오라클의 계층형 SQL문 -->
+		<![CDATA[			
+			SELECT schedule_code
+				   ,club_code
+				   ,mem_id
+				   ,title
+				   ,mem_name
+				   ,regidate
+				   ,sdate
+				   ,stime
+				   ,splace
+				   ,sprice
+				   ,snum
+				   ,mem_cnt
+			FROM (
+					SELECT schedule_code
+						   ,club_code
+						   ,mem_id
+						   ,title
+						   ,mem_name
+						   ,regidate
+						   ,sdate
+						   ,stime
+						   ,splace
+						   ,sprice
+						   ,snum
+						   ,mem_cnt
+					FROM (
+							SELECT A.schedule_code, A.club_code, A.mem_id, A.title, A.regidate, A.sdate, A.stime, A.splace, A.sprice, A.snum, A.mem_cnt, B.MEM_NAME mem_name 
+							FROM alto_club_schedule A, ALTO_MEMBER B
+							WHERE schedule_code IN (
+								SELECT schedule_code 
+								FROM (
+									SELECT recNum, schedule_code
+									FROM (
+										SELECT rowNum recNum, schedule_code
+										FROM (
+											SELECT * 
+											FROM alto_club_schedule  
+											WHERE club_code = ${club_code}
+											ORDER BY regidate desc
+										)
+									)
+									WHERE recNum BETWEEN (#{section}-1)*100 + (#{pageNum}-1)*10+1 AND (#{section}-1)*100 + #{pageNum}*10
+								)
+							)
+							AND A.mem_id = B.mem_id
+					)
+					ORDER BY schedule_code DESC			
+			)
+		 ]]>
+	</select>
+	
+	<select id="selectTotSchedule" resultType="int" parameterType="String">
+		SELECT count(schedule_code) FROM ALTO_CLUB_schedule 
+		WHERE CLUB_CODE = ${club_code}	
+	</select>
+	
+	<select id="selectNewScheduleNo" resultType="int"> 	
+		<![CDATA[ 	
+			SELECT nvl(MAX(schedule_code),0) + 1 FROM alto_club_schedule
+		]]>
+	</select>	
+	
+	<insert id="insertNewSchedule" parameterType="java.util.Map">
+		<![CDATA[ 	
+			INSERT INTO ALTO_CLUB_schedule (CLUB_CODE, SCHEDULE_CODE, TITLE, SDATE, STIME, SPLACE, SPRICE, SNUM, MEM_ID)
+			VALUES(#{club_code}, #{schedule_code}, #{title}, #{sdate}, #{stime}, #{splace}, #{sprice}, #{snum}, #{mem_id})		
+		]]>
+	</insert>	
+	
+	<select id="selectSchedule" resultType="scheduleDTO" parameterType="int">
+		<![CDATA[
+			SELECT A.schedule_code, A.mem_id, A.club_code, A.title, A.sdate, A.stime, A.regidate, A.splace, A.sprice, A.snum, B.MEM_NAME mem_name  
+			FROM alto_club_schedule A, ALTO_MEMBER B
+			WHERE schedule_code = #{schedule_code} AND A.mem_id = B.mem_id	
+		]]>
+	</select>	
+		
+	<!-- 일정 수정 -->
+	<update id="updateSchedule" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE alto_club_schedule 
+			SET title = #{title}, sdate = #{sdate}, stime = #{stime}, splace = #{splace}, sprice = #{sprice}, snum = #{snum}
+			WHERE schedule_code = #{schedule_code}		
+		]]>
+	</update>
+			
+	<delete id="deleteSchedule" parameterType="String">
+		<![CDATA[
+			DELETE FROM alto_club_schedule
+			WHERE schedule_code = ${schedule_code}
+		]]>
+	</delete>	
+	
+	<delete id="deletePromise" parameterType="String">
+		<![CDATA[
+			DELETE FROM ALTO_PROMISE
+			WHERE schedule_code = ${schedule_code}
+		]]>
+	</delete>
+	
+	<!-- 모임 메인 일정 불러오기 -->
+	<select id="selectMainSchedule" parameterType="String" resultMap="scheduleResult">
+		<![CDATA[
+			SELECT *
+			FROM (
+				SELECT * 
+				FROM ALTO_CLUB_SCHEDULE
+				WHERE CLUB_CODE = #{club_code}
+				ORDER BY SDATE ASC  
+				)
+			WHERE rowNum = 1
+		]]>
+	</select>
+	
+	<select id="selectNewPromNo" resultType="int"> 	
+		<![CDATA[ 	
+			SELECT nvl(MAX(PROMISENO),0) + 1 FROM ALTO_PROMISE
+		]]>
+	</select>
+	
+	<!-- 등록자 일정 참석처리 -->
+	<insert id="insertManagerIn" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT INTO ALTO_PROMISE (PROMISENO, CLUB_CODE, SCHEDULE_CODE, MEM_ID, MANAGER)
+			VALUES(#{promiseNo}, #{club_code}, #{schedule_code}, #{mem_id}, 'Y')	
+		]]>	
+	</insert>
+	
+	<!-- 회원 일정 참석처리 -->
+	<insert id="insertMemberIn" parameterType="java.util.Map">
+		INSERT INTO ALTO_PROMISE (PROMISENO, CLUB_CODE, SCHEDULE_CODE, MEM_ID)
+		VALUES(#{promiseNo}, #{club_code}, #{schedule_code}, #{mem_id})		
+	</insert>
+	
+	<!-- 일정 참석자 목록 -->
+	<select id="selectPromiseList" resultMap="promiseResult" parameterType="String">
+		<![CDATA[
+			SELECT A.*, B.MEM_NAME, B.IMG 
+			FROM ALTO_PROMISE A, ALTO_MEMBER B
+			WHERE A.MEM_ID = B.MEM_ID AND SCHEDULE_CODE = #{schedule_code}
+			ORDER BY regdate ASC
+		]]>
+	</select>
+	
+	<!-- 일정 참석자 수 증가 -->
+	<update id="addMemCount" parameterType="String">
+		UPDATE ALTO_CLUB_SCHEDULE
+		SET MEM_CNT = NVL(MEM_CNT, 0) + 1
+		WHERE SCHEDULE_CODE = #{schedule_code}
+	</update>
+</mapper>
