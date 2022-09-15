@@ -37,26 +37,125 @@
     background-repeat: no-repeat;
 }
 
-.schDate {
-	float: left;
-	height: 50px;
-	width: 50px;
-	background-color: #F3BE34;
+p.noSchedule {
+	padding: 20px;
+	margin-bottom: 30px;
+	text-align: center;
+	font-size: 15px;
+	font-weight: 700;
 	font-family: 'Noto Sans KR', sans-serif;
+}
+
+#schedule {
+	float: left;
+	overflow: hidden;
+    padding: 5px;
+    margin: 0 0 20px 10px;
+    margin-bottom: 20px; 
+    width: 390px;
+    height: 130px;
+    border: 2px solid #EAEAEA;
+    border-radius: 3px;
+}
+.listMore {
+	float: right;
+    overflow: hidden;
+    margin-right: 10px;
+    width: 120px;
+    height: 116px;
+    font-size: 12px;
+    line-height: 116px;
+    text-align: center;
+    background: #EAEAEA;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.listMore:hover {
+	color: #000;
+	font-weight: 700;
+}
+
+.schDate {
+	position: relative;
+    float: left;
+    height: 60px;
+    padding: 0 15px;
+    text-align: center;
+    line-height: 65px;
+    font-size: 30px;
+    background-color: #F3BE34; 
+}
+.schDate span { font-family: 'Do Hyeon', sans-serif; }
+.schDate span.month { 
+	position: absolute;
+    top: -15px;
+    left: 9px;
+    font-size: 14px;
 }
 
 .schInfo { 
 	float: left;
     margin: 0 0 0 10px;
+    padding: 10px; 
 	width: 300px;
-	height: 50px;
 	background-color: #EAEAEA;
 }
-.schInfo .gps { width: 20px; height: 20px; margin-top:3px; margin-left: 20px; }
-.schInfo .span1 { margin-left: 10px; text-align: left; }
-.schInfo .span2 { margin-left: 10px; }
+.schInfo .title {
+	float: left;
+    margin-right: 10px;
+	font-size: 15px;
+	font-weight: 700;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.schInfo .promCount {
+	float: left;
+	font-size: 15px;
+	font-weight: 700;	
+}
+.schInfo .promCount span { margin: 0 3px; font-family: 'Do Hyeon', sans-serif; }
+.schInfo .promCount span:nth-child(1) { color: #00c7ae; }
+.schInfo ul { clear: both; }
+.schInfo ul li { 
+	overflow: hidden;
+	display: inline-block; 
+	font-size: 12px;
+}
+.schInfo ul li.promIcon {
+	width: 12px;
+    background: url(../../img/alto_common_icon.png) no-repeat;
+    background-size: 140px;
+    background-position: -22px -36px;
+    text-indent: -999px;
+}
+.schInfo ul li.promPrice {
+	width: 20px;
+    background-size: 123px;
+    background-position: -102px -30px;
+}
+.schInfo ul li.promData {
+	width: 85px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.schInfo ul li.promData2 {
+	width: 179px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.schInfo .edit {
+	margin: 0;
+    position: absolute;
+    top: 35%;
+    right: 10px;
+}
 
-.basicBtn02 { width: 360px; }
+.basicBtn02 { width: 390px; margin: 0 0 30px 10px; }
+.pointBtn,.basicBtn { width: 100% }
+
 
 .edit { 
 	margin: 0 0 10px 70px;
@@ -65,9 +164,21 @@
 	cursor: pointer;
 }
 
-.member { clear: both; margin-bottom: 20px; }
-.member ul li img { width: 40px; vertical-align: middle; }
+.member { clear: both; margin: 75px 0 0 10px; }
+.member ul li img { 
+	float: left;
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #f4f4f4;
+}
 .member ul li { display: inline; }
+.member ul li.manager img {
+	margin-right: 15px;
+	border: 3px solid #F3BE34;
+}
 .member .plus { width: 25px; margin-left: 5px; }
 
 #schedual_member { width: 300px; float: right; border: 1px solid; margin-top: 20px; }

@@ -105,8 +105,86 @@ table a:hover { color: #000; }
     border-bottom: 1px solid #fff;
 }
 #boardFrm td { padding: 10px; }
-#boardFrm #title { margin: 0 10px 0 0; text-align: left; }
+#boardFrm #title,#boardFrm #splace,#boardFrm #sprice,#boardFrm #snum { margin: 0 10px 0 0; text-align: left; }
 #boardFrm #category {
 	height: 30px;
     padding: 0 10px;
 }
+
+/* 일정 목록 */
+.schDate {
+	position: relative;
+    float: left;
+    height: 60px;
+    padding: 0 15px 0 20px;
+    text-align: center;
+    line-height: 65px;
+    font-size: 30px;
+    background-color: #F3BE34; 
+}
+.schDate span { font-family: 'Do Hyeon', sans-serif; }
+.schDate span.month { 
+	position: absolute;
+    top: -15px;
+    left: 9px;
+    font-size: 14px;
+}
+
+.schInfo { 
+	float: left;
+    margin: 10px 0 10px 10px;
+    padding: 10px;
+    width: 100%;
+    background-color: #EAEAEA;
+    border-radius: 3px;
+}
+.schInfo .title {
+	float: left;
+    margin-right: 10px;
+	font-size: 15px;
+	font-weight: 700;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+.schInfo .promCount {
+	float: left;
+	font-size: 15px;
+	font-weight: 700;	
+}
+.schInfo .promCount span { margin: 0 3px; font-family: 'Do Hyeon', sans-serif; }
+.schInfo .promCount span:nth-child(1) { color: #00c7ae; }
+.schInfo ul { clear: both; }
+.schInfo ul li { 
+	overflow: hidden;
+	display: inline-block; 
+	font-size: 12px;
+}
+.schInfo ul li.promIcon {
+	width: 12px;
+    background: url(../../img/alto_common_icon.png) no-repeat;
+    background-size: 140px;
+    background-position: -22px -36px;
+    text-indent: -999px;
+}
+.schInfo ul li.promPrice {
+	width: 20px;
+    background-size: 123px;
+    background-position: -102px -30px;
+}
+.schInfo ul li.promData {
+	width: 85px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.editBtn { padding-left: 30px; }
+.editBtn .editIcon {
+	display: inline-block;
+	width: 15px;
+	background: url(../../img/alto_common_icon.png) no-repeat;
+	background-size: 180px;
+	background-position: -148px -90px;
+    text-indent: -999999px;
+}
+.editBtn .del { margin-left: 5px; background-position: -165px -90px; }

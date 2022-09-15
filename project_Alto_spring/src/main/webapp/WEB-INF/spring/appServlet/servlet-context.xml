@@ -95,7 +95,10 @@
 			<mvc:mapping path="/class/classform.do" />
 			<mvc:mapping path="/item/itemform.do" />
 			<mvc:mapping path="/class/cartClass.do" />		
-			<mvc:mapping path="/order/orderPage.do" />			
+			<mvc:mapping path="/order/orderPage.do" />
+			<mvc:mapping path="/club_album/**" />
+			<mvc:mapping path="/club_board/**" />
+			<mvc:mapping path="/club_schedule/**" />		
 			<beans:ref bean="authInterceptor" />
 		</mvc:interceptor>	
 	</mvc:interceptors>
@@ -110,8 +113,9 @@
 	    <exclude-mapping path="/resources/**"/>
 	    <exclude-mapping path="/member/**"/>
 	    <exclude-mapping path="/download.do"/>
-	    <exclude-mapping path="/memImgDown.do"/>
+	    <exclude-mapping path="/mypage/memImgDown.do"/>
 	    <exclude-mapping path="/club/clubImgDown.do"/>
+	    <exclude-mapping path="/club_schedule/promiseIn.do"/>
 	    <beans:ref bean="uRlInterceptor"/>
 	  </mvc:interceptor>
 	</mvc:interceptors>

@@ -46,6 +46,9 @@ import kr.co.alto.hobby.service.HobbyService;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
 import kr.co.alto.mypage.service.MypageService;
+import kr.co.alto.schedule.dto.PromiseDTO;
+import kr.co.alto.schedule.dto.ScheduleDTO;
+import kr.co.alto.schedule.service.ScheduleService;
 
 @Controller("clubController")
 @RequestMapping("/club")
@@ -68,6 +71,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	private ClubDTO clubDTO;
 	@Autowired
 	private BoardService boardService;
+	@Autowired
+	private ScheduleService scheduleService;
 	
 	@Override
 	@RequestMapping(value = "/clubMain.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -168,19 +173,29 @@ public class ClubControllerImpl extends BaseController implements ClubController
 
 		clubInfoMap = clubService.selectClubInfo(club_code);
 		
-		List<AreaDTO> areaList = new ArrayList<>();
-		areaList = areaService.listAreas();
-		
+		//지역, 대분류 취미 전체 목록 가져오기
+		List<AreaDTO> areaList = areaService.listAreas();		
 		List<HobbyDTO> hobbyList = hobbyService.listHobbys();
-		
-		String hobby_code = clubService.selectClubHobbyCode(club_code);
-		
+		//클럽 주제 소분류 취미 목록 가져오기
+		String hobby_code = clubService.selectClubHobbyCode(club_code);		
 		List<HobbysubDTO> hobbySubList = hobbyService.selectSubHobbyList(hobby_code);
+		//메인 일정 정보
+		ScheduleDTO scheduleDTO = scheduleService.selectMainSchedule(club_code);
+		
+		if(scheduleDTO != null) {
+			String schedule_code = scheduleDTO.getSchedule_code();
+			List<PromiseDTO> promiseList = scheduleService.selectMainPromiseList(schedule_code);
+			
+			mav.addObject("promiseList", promiseList);
+		}
+		
 		
 		mav.addObject("clubInfoMap", clubInfoMap);
 		mav.addObject("areaList", areaList);
 		mav.addObject("hobbySubList", hobbySubList);
 		mav.addObject("hobbyList", hobbyList);
+		mav.addObject("scheduleInfo", scheduleDTO);
+		
 		mav.setViewName(viewName);
 		
 		return mav;
