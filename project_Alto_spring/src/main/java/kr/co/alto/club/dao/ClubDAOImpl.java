@@ -147,4 +147,9 @@ public class ClubDAOImpl implements ClubDAO {
 		return sqlSession.selectOne("mapper.club.chkClubLikeYN", likeChk);
 	}
 	
+	@Override
+	public List<ClubDTO> keywordClub(String keyword) throws DataAccessException {
+		return sqlSession.selectList("mapper.club.keywordSearch", keyword);
+	}
+	
 }

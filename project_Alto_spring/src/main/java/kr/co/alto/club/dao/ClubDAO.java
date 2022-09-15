@@ -56,4 +56,5 @@ public interface ClubDAO {
 	
 	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException;
 
+	public List<ClubDTO> keywordClub(String keyword) throws DataAccessException;
 }

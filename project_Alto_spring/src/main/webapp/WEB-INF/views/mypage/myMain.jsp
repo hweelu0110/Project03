@@ -122,7 +122,7 @@
 			<h3>구매활동</h3>
 			<ul>
 				<li><a href="${path}/mypage/cartClass.do">장바구니</a></li>
-				<li><a href="">구매 내역</a></li>
+				<li><a href="${path}/order/contractList.do">구매 내역</a></li>
 			</ul>
 			
 			<h3>게시물</h3>

@@ -101,4 +101,9 @@ public class ClassServiceImpl implements ClassService {
 		return reviewDel;
 	}
 
+	@Override
+	public List<ClassDTO> keywordClass(String keyword) throws Exception {
+		return classDAO.keywordClass(keyword);
+	}
+
 }

@@ -191,4 +191,9 @@ public class ClubServiceImpl implements ClubService {
 		return clubDAO.chkClubLikeYN(likeChk);
 	}
 	
+	@Override
+	public List<ClubDTO> keywordClub(String keyword) throws Exception {
+		return clubDAO.keywordClub(keyword);
+	}
+	
 }

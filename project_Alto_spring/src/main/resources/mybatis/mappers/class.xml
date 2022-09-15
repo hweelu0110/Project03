@@ -94,6 +94,14 @@
 			order by member_num asc
 		</if>
 	</select>
+	
+	<select id="keywordSearch" parameterType="String" resultMap="classResult">
+		SELECT a.NAME AS area_name, h.NAME AS hobby_name, c.*
+		FROM ALTO_CLASS c, ALTO_AREA a, ALTO_HOBBY h
+		WHERE a.AREA_CODE = c.AREA_CODE
+		AND c.HOBBY_CODE = h.HOBBY_CODE
+		AND (c.CLASSNAME LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%' OR a.NAME LIKE '%' || #{keyword} || '%')
+	</select>
 
 	<!-- 새글 쓰기 -->
 	<insert id="insertNewClass"  parameterType="java.util.Map">

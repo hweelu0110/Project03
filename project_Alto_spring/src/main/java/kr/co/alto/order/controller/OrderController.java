@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.alto.order.dto.Criteria;
 import kr.co.alto.order.dto.GoodsDTO;
 import kr.co.alto.order.dto.OrderDTO;
 import kr.co.alto.order.dto.OrderPageDTO;
@@ -18,4 +19,6 @@ public interface OrderController {
 
 	public ModelAndView orderPage(OrderPageDTO opd, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	public ModelAndView orderPagePost(OrderDTO od, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
+
+	public ModelAndView contractList (Criteria cri, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 }

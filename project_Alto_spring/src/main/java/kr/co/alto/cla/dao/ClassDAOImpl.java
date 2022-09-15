@@ -20,9 +20,6 @@ public class ClassDAOImpl implements ClassDAO {
 	
 	@Override
 	public List<ClassDTO> selectAllclassList(Map listMap) throws DataAccessException {
-		System.out.println("=============");
-		System.out.println(listMap);
-		System.out.println("=============");
 		List<ClassDTO> classlist = sqlSession.selectList("mapper.class.selectAllclassList", listMap);
 		return classlist;
 	}
@@ -109,6 +106,11 @@ public class ClassDAOImpl implements ClassDAO {
 	public int deleteClassReview(String cmt_num) throws DataAccessException {
 		int deleteClassReview = sqlSession.delete("mapper.class.deleteClassReview", cmt_num);
 		return deleteClassReview;
+	}
+
+	@Override
+	public List<ClassDTO> keywordClass(String keyword) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.keywordSearch", keyword);
 	}
 
 }

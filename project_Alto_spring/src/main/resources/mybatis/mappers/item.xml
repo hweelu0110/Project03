@@ -75,6 +75,13 @@
 			order by item_count desc
 		</if>
 	</select>
+	
+	<select id="keywordSearch" parameterType="String" resultMap="itemResult">
+		SELECT h.NAME AS hobby_name, i.*
+		FROM ALTO_ITEM i, ALTO_HOBBY h
+		WHERE i.HOBBY_CODE = h.HOBBY_CODE
+		AND (i.item_name LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%')
+	</select>
 
 	<!-- 새글 쓰기 -->
 	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/26) -->

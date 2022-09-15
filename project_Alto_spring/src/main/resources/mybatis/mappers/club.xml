@@ -339,4 +339,12 @@
 		AND CATE_M = #{hobby_code}
 		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
 	</select>
+	
+	<select id="keywordSearch" parameterType="String" resultMap="clubResult">
+		SELECT a.NAME AS area_name, h.NAME AS hobby_name, c.*
+		FROM ALTO_CLUB c, ALTO_AREA a, ALTO_HOBBY h
+		WHERE a.AREA_CODE = c.AREA_CODE
+		AND c.CATE_M = h.HOBBY_CODE
+		AND (c.TITLE LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%' OR a.NAME LIKE '%' || #{keyword} || '%')
+	</select>
 </mapper>

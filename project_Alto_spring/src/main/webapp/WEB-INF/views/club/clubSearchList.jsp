@@ -122,7 +122,7 @@
 		
 		
 		<div id="search_result">
-			<h2>검색 결과</h2>
+			<h2>모임 검색 결과</h2>
 			<div class="normalList">
 				<c:if test="${empty hobClubList}">
 					<h3 class="noList">검색 조건과 일치하는 모임이 없습니다.</h3>				

@@ -98,7 +98,14 @@
 		margin:0;
 		display:inline;
 		height:20px;
-	}
+		}
+		
+		.table-cart {
+			border-top: none;
+			border-left: none;
+			border-right: none;
+			margin-bottom: 40px;
+		}
 	</style>
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
@@ -108,7 +115,7 @@
 		</div>
 		<div class="container">
 			<div style="padding-top:50px;">
-				<table class="table table-hover">
+				<table class="table table-hover table-cart">
 					<tr><td colspan="6"><h3>클래스 장바구니</h3></td></tr>
 					<tr>
 						<th width="5">
@@ -153,7 +160,7 @@
 						</c:forEach>
 					</c:if>	
 					
-					<tr>
+					<tr style="border-bottom: hidden;">
 						<th></th>
 						<th></th>
 						<th></th>
@@ -163,7 +170,7 @@
 					</tr>
 				</table>
 				
-				<table class="table table-hover">
+				<table class="table table-hover table-cart">
 					<tr><td colspan="6"><h3>취미용품 장바구니</h3></td></tr>
 					<tr>
 						<th width="5">
@@ -208,7 +215,7 @@
 							</tr>
 						</c:forEach>
 					</c:if>
-					<tr>
+					<tr style="border-bottom: hidden;">
 						<th></th>
 						<th></th>
 						<th></th>
@@ -218,7 +225,7 @@
 					</tr>
 					</table>
 					
-					<table class="table table-hover">
+					<table class="table table-hover table-cart">
 					<tr><td colspan="6"><h2>최종 집계</h3></td></tr>
 					<tr>
 						<th></th>

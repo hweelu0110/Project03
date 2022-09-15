@@ -81,5 +81,21 @@ public class OrderServiceImpl implements OrderService {
 	public OrderDTO orderInfo(String mem_id) throws Exception {
 		return orderDAO.orderInfo(mem_id);
 	}
+
+	@Override
+	public List<OrderDTO> selectOrderList(Map listMap) throws Exception {
+
+		List<OrderDTO> orderList = orderDAO.selectOrderList(listMap);
+		
+		for(OrderDTO order : orderList) {
+			List<GoodsDTO> goodsList = orderDAO.selectGoodsList(order.getOrderId());
+			order.setOrders(goodsList);
+		}
+		
+		return orderList;
+	}
 	
+	public int countListTotal(String mem_id) {
+		return orderDAO.countList(mem_id);
+	}
 }

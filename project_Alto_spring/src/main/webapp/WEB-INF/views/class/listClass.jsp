@@ -143,7 +143,7 @@
 		
 		
 		<div id="search_result">
-			<h2>검색 결과</h2>
+			<h2>클래스 검색 결과</h2>
 			<div class="searchList">
 				<ul class="club">
 					<c:choose>

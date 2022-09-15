@@ -87,13 +87,13 @@
 		
 		
 		<div id="search_result">
-			<h2>검색 결과</h2>
+			<h2>취미용품 검색 결과</h2>
 			<div class="searchList">
 				<ul class="club">
 					<c:choose>
 						<c:when test="${empty itemList }">
 							<tr height="10">
-								<td colspan="4"><p><span style="font-size: 9pt;">입력된 글이 없습니다.</span></p></td>
+								<td colspan="4"><p><span style="font-size: 9pt;">등록된 취미용품이 없습니다.</span></p></td>
 							</tr>
 						</c:when>
 						

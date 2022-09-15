@@ -1,5 +1,6 @@
 package kr.co.alto.club.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
@@ -28,4 +29,5 @@ public interface ClubService {
 	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException;
 	
 	
+	public List<ClubDTO> keywordClub(String keyword) throws Exception;
 }
