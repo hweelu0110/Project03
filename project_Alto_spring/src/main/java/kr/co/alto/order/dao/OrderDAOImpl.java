@@ -48,8 +48,8 @@ public class OrderDAOImpl implements OrderDAO {
 	}
 
 	@Override
-	public List<OrderDTO> selectOrderList(String mem_id) {
-		return sqlSession.selectList("mapper.order.selectOrderList", mem_id);
+	public List<OrderDTO> selectOrderList(Map listMap) {
+		return sqlSession.selectList("mapper.order.selectOrderList", listMap);
 	}
 
 	@Override
@@ -62,6 +62,10 @@ public class OrderDAOImpl implements OrderDAO {
 		}
 		
 		return goodsList;
+	}
+	
+	public int countList(String mem_id) {
+		return (Integer) sqlSession.selectOne("mapper.order.countList", mem_id);
 	}
 
 }

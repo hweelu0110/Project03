@@ -83,9 +83,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderDTO> selectOrderList(String mem_id) throws Exception {
+	public List<OrderDTO> selectOrderList(Map listMap) throws Exception {
 
-		List<OrderDTO> orderList = orderDAO.selectOrderList(mem_id);
+		List<OrderDTO> orderList = orderDAO.selectOrderList(listMap);
 		
 		for(OrderDTO order : orderList) {
 			List<GoodsDTO> goodsList = orderDAO.selectGoodsList(order.getOrderId());
@@ -95,4 +95,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderList;
 	}
 	
+	public int countListTotal(String mem_id) {
+		return orderDAO.countList(mem_id);
+	}
 }

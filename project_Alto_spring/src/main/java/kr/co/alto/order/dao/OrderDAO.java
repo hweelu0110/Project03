@@ -10,14 +10,14 @@ import kr.co.alto.order.dto.OrderDTO;
 
 public interface OrderDAO {
 
-	GoodsDTO getOrderClassInfo(String goods_code) throws DataAccessException;
-	GoodsDTO getOrderItemInfo(String goods_code) throws DataAccessException;
-	int addNewOrder(OrderDTO od) throws DataAccessException;
-	int addNewOrderItem(List<GoodsDTO> orders) throws DataAccessException;
-	OrderDTO orderInfo(String mem_id) throws DataAccessException;
-	int quanCheck(List result) throws DataAccessException;
+	public GoodsDTO getOrderClassInfo(String goods_code) throws DataAccessException;
+	public GoodsDTO getOrderItemInfo(String goods_code) throws DataAccessException;
+	public int addNewOrder(OrderDTO od) throws DataAccessException;
+	public int addNewOrderItem(List<GoodsDTO> orders) throws DataAccessException;
+	public OrderDTO orderInfo(String mem_id) throws DataAccessException;
+	public int quanCheck(List result) throws DataAccessException;
 
-	List<OrderDTO> selectOrderList(String mem_id) throws DataAccessException;
-	List<GoodsDTO> selectGoodsList(int orderId) throws DataAccessException;
-
+	public List<OrderDTO> selectOrderList(Map listMap) throws DataAccessException;
+	public List<GoodsDTO> selectGoodsList(int orderId) throws DataAccessException;
+	public int countList(String mem_id);
 }

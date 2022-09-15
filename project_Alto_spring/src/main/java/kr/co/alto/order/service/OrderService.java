@@ -8,12 +8,12 @@ import kr.co.alto.order.dto.OrderDTO;
 
 public interface OrderService {
 
-	List getOrderListInfo(List<GoodsDTO> orders) throws Exception;
+	public List getOrderListInfo(List<GoodsDTO> orders) throws Exception;
 
-	int addNewOrder(OrderDTO od) throws Exception;
+	public int addNewOrder(OrderDTO od) throws Exception;
 
-	OrderDTO orderInfo(String mem_id) throws Exception;
+	public OrderDTO orderInfo(String mem_id) throws Exception;
 
-	List<OrderDTO> selectOrderList(String mem_id) throws Exception;
-
+	public List<OrderDTO> selectOrderList(Map listMap) throws Exception;
+	public int countListTotal(String mem_id);
 }
