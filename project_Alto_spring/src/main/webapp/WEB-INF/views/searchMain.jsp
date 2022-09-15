@@ -39,8 +39,38 @@
 						
 						<c:when test="${!empty clubSearch }">
 							<c:forEach var="clubList" items="${clubSearch }" end="5">
-								
+								<li>
+									<a href="${contextPath}/club/clubInfo.do?club_code=${clubList.club_code}">
+										<img class="club_img" src="${contextPath}/resources/img/club_test.png" />
+									</a>
+									<span class="area">${clubList.area_name}</span>
+									<span class="hobby_icon"><img src="${contextPath}/resources/img/hobby_img/${clubList.cate_m}.png" /></span>
+									<p class="club_name">${clubList.title}</p>
+									<span class="memNum">${clubList.member_num}명</span>
+									<p class="club_schedule">
+										<span class="s_icon"></span><span>6/11(토)</span>
+										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
+									</p>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq club.club_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+								</li>			
 							</c:forEach>
+							<div align="right" style="margin-right:30px">
+								<button onclick="location.href='${contextPath }/club/clubSearchList.do?keyword=${searchMainMap.keyword }'" class="btn secondary"> ... 검색 결과 전체보기</button>
+							</div>
 						</c:when>
 					</c:choose>
 				</ul>
@@ -73,11 +103,11 @@
 									</a>
 								</li>
 							</c:forEach>
+							<div align="right" style="margin-right:30px">
+								<button onclick="location.href='${contextPath }/class/listClass.do?keyword=${searchMainMap.keyword }'" class="btn secondary"> ... 검색 결과 전체보기</button>
+							</div>
 						</c:when>
 					</c:choose>
-					<div align="right" style="margin-right:30px">
-						<button onclick="location.href='${contextPath }/class/listClass.do?keyword=${searchMainMap.keyword }'" class="btn secondary"> ... 검색 결과 전체보기</button>
-					</div>
 				</ul>
 			</div>
 		</div>
@@ -106,11 +136,11 @@
 									</a>
 								</li>
 							</c:forEach>
+							<div align="right" style="margin-right:30px">
+								<button onclick="location.href='${contextPath }/item/listItem.do?keyword=${searchMainMap.keyword }'" class="btn secondary"> ... 검색 결과 전체보기</button>
+							</div>
 						</c:when>
 					</c:choose>
-					<div align="right" style="margin-right:30px">
-						<button onclick="location.href='${contextPath }/item/listItem.do?keyword=${searchMainMap.keyword }'" class="btn secondary"> ... 검색 결과 전체보기</button>
-					</div>
 				</ul>
 			</div>
 		</div>

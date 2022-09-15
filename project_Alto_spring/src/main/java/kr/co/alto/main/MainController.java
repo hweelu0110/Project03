@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.club.dao.ClubDAO;
 import kr.co.alto.club.dto.ClubListDTO;
+import kr.co.alto.club.service.ClubService;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.area.dto.AreaDTO;
 import kr.co.alto.cla.dto.ClassDTO;
@@ -44,6 +45,9 @@ public class MainController {
 	private ClassService classService;	
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private ClubService clubService;
+	
 	
 	@RequestMapping(value = "/main.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView altoMain(HttpServletRequest request, HttpSession httpSession, HttpServletResponse response) throws Exception {
@@ -106,6 +110,9 @@ public class MainController {
 		
 		Map<String, Object> searchMainMap = new HashMap<>();
 		searchMainMap.put("keyword", keyword);
+		
+		List clubSearch = clubService.keywordClub(keyword);
+		searchMainMap.put("clubSearch", clubSearch);
 		
 		List classSearch = classService.keywordClass(keyword);
 		searchMainMap.put("classSearch", classSearch);
