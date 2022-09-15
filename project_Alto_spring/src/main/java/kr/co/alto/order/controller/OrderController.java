@@ -18,4 +18,6 @@ public interface OrderController {
 
 	public ModelAndView orderPage(OrderPageDTO opd, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	public ModelAndView orderPagePost(OrderDTO od, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
+
+	public ModelAndView contractList (HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 }

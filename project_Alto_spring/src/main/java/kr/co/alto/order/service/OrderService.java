@@ -14,4 +14,6 @@ public interface OrderService {
 
 	OrderDTO orderInfo(String mem_id) throws Exception;
 
+	List<OrderDTO> selectOrderList(String mem_id) throws Exception;
+
 }

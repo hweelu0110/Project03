@@ -323,9 +323,6 @@ REFERENCES alto_hobby_sub (hobby_sub_code);
 ALTER TABLE alto_class ADD CONSTRAINT alto_class_fk3 FOREIGN KEY (area_code)
 REFERENCES alto_area (area_code);
 
-ALTER TABLE alto_class ADD CONSTRAINT alto_class_fk4 FOREIGN KEY (manager)
-REFERENCES alto_member (mem_id);
-
 -- 클래스 이미지
 DROP TABLE alto_class_image CASCADE CONSTRAINT;
 CREATE TABLE alto_class_image (

@@ -11,16 +11,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.member.dto.MemberDTO;
-import kr.co.alto.member.service.MemberService;
-import kr.co.alto.order.dto.GoodsDTO;
 import kr.co.alto.order.dto.OrderDTO;
 import kr.co.alto.order.dto.OrderPageDTO;
 import kr.co.alto.order.service.OrderService;
@@ -71,6 +66,22 @@ public class OrderContollerImpl implements OrderController {
 		
 		OrderDTO orderDTO = orderService.orderInfo(mem_id);
 		mav.addObject("orderDTO", orderDTO);
+		
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/order/contractList.do", method = RequestMethod.GET)
+	public ModelAndView contractList(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession)
+			throws Exception {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		
+		List<OrderDTO> orderList = orderService.selectOrderList(memberDTO.getMem_id());
+		
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("orderList", orderList);
 		
 		return mav;
 	}

@@ -83,5 +83,33 @@
  			</if>
 	    </foreach>
 	</update>
+	
+	
+	<!-- 주문내역 조회 -->
+	<select id="selectOrderList" resultMap="orderPostResult">
+		SELECT o.ORDERID, o.ORDERDATE, o.ORDERSTATE
+		FROM ALTO_ORDER o
+		WHERE o.MEMBERID = #{mem_id}
+	</select>
+	
+	<select id="selectGoodsList" resultMap="orderResult">
+		SELECT *
+		FROM ALTO_ORDER_ITEM oi
+		WHERE ORDERID = #{orderId}
+	</select>
 
+	<select id="GoodsInfo" resultType="String">
+		<if test="goods_type == 'class'">
+ 			SELECT c.CLASSNAME
+			FROM ALTO_ORDER_ITEM oi, ALTO_CLASS c
+			WHERE oi.GOODS_CODE = c.CLASS_CODE
+			AND oi.GOODS_CODE = #{goods_code}
+ 		</if>
+ 		<if test="goods_type == 'item'">
+ 			SELECT i.ITEM_NAME
+			FROM ALTO_ORDER_ITEM oi, ALTO_ITEM i
+			WHERE oi.GOODS_CODE = i.ITEM_CODE
+			AND oi.GOODS_CODE = #{goods_code}
+ 		</if>
+	</select>
 </mapper>
