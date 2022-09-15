@@ -16,14 +16,15 @@
 	display: block;
 	top: 3px;
     right: 3px;
-    width: 14px;
-    height: 13px;
+    width: 18px;
+    height: 15px;
     text-indent: -99999px;
     background-image: url(../../img/alto_common_icon.png);
-    background-size: 85px;
-    background-position: -22px 0px;   
+    background-size: 102px;
+    background-position: -25px 0px;   
     cursor: pointer;  
 }
+.like_icon.select { background-position: -145px 0px; }
 
 .clubIntro { width: 600px; }
 .clubIntro p { margin-left: 10px; }
@@ -154,7 +155,7 @@ p.noSchedule {
 }
 
 .basicBtn02 { width: 390px; margin: 0 0 30px 10px; }
-.pointBtn,.basicBtn { width: 100% }
+.clubBtn { width: 100% }
 
 
 .edit { 
@@ -179,30 +180,51 @@ p.noSchedule {
 	margin-right: 15px;
 	border: 3px solid #F3BE34;
 }
-.member .plus { width: 25px; margin-left: 5px; }
+.member .plus { padding: 10px; margin-left: 5px; }
 
-#schedual_member { width: 300px; float: right; border: 1px solid; margin-top: 20px; }
-#schedual_member ul li { position: relative; cursor: pointer; margin-left: 10px; }
-#schedual_member ul li img { width: 40px; vertical-align: middle; }
-#schedual_member ul li span {	
+#schedule_member { 
+	width: 300px; 
+	float: right; 
+	border: 1px solid;
+	padding: 10px 20px 30px; 
+	margin-top: 20px; 
+}
+#schedule_member ul li { 
+	position: relative;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #EAEAEA;
+}
+#schedule_member ul li:hover { background: #EAEAEA; }
+#schedule_member ul li img { 
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #f4f4f4;
+}
+#schedule_member ul li span {	
     position: absolute;
     font-size: 12px;
     display: inline-block;
     vertical-align: middle;
 }
-#schedual_member ul li span.memName { 
+#schedule_member ul li span.memName { 
 	width: 76px; 
-	height: 32px;
+	line-height: 35px;
 	overflow: hidden;
 }
-#schedual_member ul li span.manager { 
+#schedule_member ul li span.manager { 
 	margin-right: 30px;
 	right: 0; 
 	font-size: 10px;
 	font-weight: bold;
 	color: #777;
 }
-#schedual_member h3 {
+#schedule_member h3 {
 	margin-left: 10px;
 	margin-top:10px;
 }
@@ -213,4 +235,43 @@ p.noSchedule {
 #title { text-align: left; }
 #joinBtn { position: inherit; }
 
-
+/* 모임 멤버 정보 */
+#memberInfo { width: 240px; height: 110px; }
+#memberInfo span { font-family: 'Noto Sans KR', sans-serif; }
+#memberInfo img {
+	width: 40px;
+    height: 40px;
+    margin-right: 8px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #f4f4f4;
+}
+#memberInfo img.memImg { position: absolute; left: 20px; }
+#memberInfo .memHobbys {
+	position: absolute;
+    right: 10px;
+    bottom: 15px;
+}
+#memberInfo .memName { font-weight: 700; }
+#memberInfo .memGen {
+	display: inline-block;
+    width: 15px;
+    height: 13px;
+    margin: 0 5px 0 2px;
+    background: url(../../img/alto_common_icon.png) no-repeat;
+    background-size: 100px;
+    background-position: -63px -48px;
+    text-indent: -999px;
+}
+#memberInfo .memGen.IconM { background-position: -46px -48px; }
+#memberInfo .memBirth {
+	color: #777;
+	font-size: 10px;
+	font-weight: 700;
+}
+#memberInfo .noOpen {
+	position: absolute;
+    top: 50%;
+    left: 44%;
+    color: #777;
+}

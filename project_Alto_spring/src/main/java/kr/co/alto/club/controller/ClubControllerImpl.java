@@ -165,13 +165,28 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	}	
 	
 	@RequestMapping(value = "/clubInfo.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		ModelAndView mav = new ModelAndView();		
 		String viewName = (String)request.getAttribute("viewName");
 		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		if(memberDTO != null) {
+			String mem_id = memberDTO.getMem_id();
+			
+			//좋아요 여부 체크
+			Map<String, Object> likeChk = new HashMap<>();
+			likeChk.put("club_code", club_code);
+			likeChk.put("mem_id", mem_id);
+			String like_code = clubService.chkClubLikeYN(likeChk);
+			
+			if(like_code != null) {
+				mav.addObject("like_code", like_code);
+			}
+		}		
+		
 		Map<String, Object> clubInfoMap = new HashMap<>();
 
-		clubInfoMap = clubService.selectClubInfo(club_code);
+		clubInfoMap = clubService.selectClubInfo(club_code);				
 		
 		//지역, 대분류 취미 전체 목록 가져오기
 		List<AreaDTO> areaList = areaService.listAreas();		
@@ -187,8 +202,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 			List<PromiseDTO> promiseList = scheduleService.selectMainPromiseList(schedule_code);
 			
 			mav.addObject("promiseList", promiseList);
-		}
-		
+		}	
 		
 		mav.addObject("clubInfoMap", clubInfoMap);
 		mav.addObject("areaList", areaList);
@@ -204,18 +218,15 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	@RequestMapping("/clubImgDown.do")
 	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception {
 		
-		OutputStream out = response.getOutputStream();
-		
+		OutputStream out = response.getOutputStream();		
 		String downFile = CLUB_IMG_PATH + "\\"+ imageFileName;
-		//다운로드될 파일 객체 생성
 		File file = new File(downFile);
 		
 		response.setHeader("Cache-Control", "no-cache");
-		//헤더에 파일이름 설정
 		response.addHeader("Content-disposition", "attachment; fileName="+imageFileName);
 		
 		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024*8]; 	//버퍼 이용, 8kbyte씩 전송
+		byte[] buffer = new byte[1024*8]; 	
 		while(true) {
 			int count = in.read(buffer);
 			if(count == -1) break;

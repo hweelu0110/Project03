@@ -141,5 +141,10 @@ public class ClubDAOImpl implements ClubDAO {
 	public void clubUpdate(Map<String, Object> clubInfoMap) throws DataAccessException {
 		sqlSession.update("mapper.club.updateClubInfo", clubInfoMap);
 	}
+
+	@Override
+	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException {
+		return sqlSession.selectOne("mapper.club.chkClubLikeYN", likeChk);
+	}
 	
 }

@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="Info" value="${memInfo}" />
+<c:set var="info" value="${memInfo}" />
+<fmt:parseDate value="${info.birth}" var="birth" pattern="yyyy-MM-dd" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -56,19 +57,19 @@
 				<div class="memSection">
 					<div class="info_div">
 						<div class="align_div float_left">
-							<input type="text" name="mem_name" class="essential" placeholder="이름" value="${Info[0].mem_name}" />
+							<input type="text" name="mem_name" class="essential" placeholder="이름" value="${info.mem_name}" />
 							<span class="noti2">필수 입력입니다.</span>
 						</div>
 						<div class="align_div float_right">
-							<input type="hidden" name="gender" id="gender" value="${login.gender}" />
+							<input type="hidden" name="gender" id="gender" value="${info.gender}" />
 							<div class="gender_div"><span class="gender">남</span><span class="gender">여</span></div>
 							<span class="noti2">필수 선택</span>
 						</div>
 					</div>										
-					<input type="text" id="datepicker" name="birth" class="essential" placeholder="생일" value="${login.birth}" autocomplete='off' />
+					<input type="text" id="datepicker" name="birth" class="essential" placeholder="생일" value="<fmt:formatDate value="${birth}" pattern="yyyy-MM-dd" />" autocomplete='off' />
 					<span class="noti2">필수 입력입니다.</span>	
-					<input type="text" id="phone" name="phone" placeholder="휴대폰" value="${login.phone}" />
-					<input type="hidden" id="mem_open" name="mem_open" value="${login.mem_open}" />
+					<input type="text" id="phone" name="phone" placeholder="휴대폰" value="${info.phone}" />
+					<input type="hidden" id="mem_open" name="mem_open" value="${info.mem_open}" />
 					<input class="form-check-input" type="checkbox" name="_mem_open" id="_mem_open"/>
 					<label class="form-check-label" for="_mem_open">정보 공개 여부</label><br/>					
 				</div>

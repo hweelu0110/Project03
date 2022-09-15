@@ -52,6 +52,7 @@
 <body>	
 	<!-- CONTENTS -->
 	<section>
+		<input type="hidden" name="loginChk" id="loginChk" value="${login.mem_id}" />
 		<ul id="tab_menu">
 			<li><span>전체 취미</span></li>
 			<li><span>전체 지역</span></li>

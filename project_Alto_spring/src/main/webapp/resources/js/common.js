@@ -19,21 +19,23 @@ $(function () {
 	$(".popup_div").hide()
 		
 	/* 팝업창 닫기 버튼 */ 
-	$(".closeBtn").click(function() {
+	$(".clubPopup").on('click', '.closeBtn', function() {
 		$(this).parent("div").hide()
 	})
+	
 	
 	$(".closeBtn_style").click(function() {
 		$(this).parent("div").hide()
 	})
 	
 	
-	/* 좋아요 처리 */
+	/* 좋아요 처리 */			
 	$(".like_icon").click(function() {
+		let login = $("#loginChk").val()
 		let selectItem = $(this)
 		let codeNum, codeType
 		
-		if ('${login}' != ''){
+		if (login != ''){
 			if ($(this).siblings('#club_code').val() != null) {
 				codeNum = $(this).siblings('#club_code').val()
 				codeType = 'club_code'

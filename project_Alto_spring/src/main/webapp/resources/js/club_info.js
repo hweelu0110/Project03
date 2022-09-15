@@ -2,12 +2,27 @@
  * club info Edit js
  */
  
+ function memberChk(url) {
+	let loginYN = $("#loginChk").val()			
+	let memberYN = $("#memberYN").val()
+	
+	if (loginYN != "") {
+		if (memberYN == "Y") {
+			location.href = url;
+		}else {
+			confirmPopup($("#confirm_popup"), "모임 이용을 원하시면 모임에 가입해 주세요!")
+		}
+	}else {
+		confirmPopup($("#login_popup"), "모임이용은 로그인이 필요합니다!")
+	}
+	
+}
+ 
  function fn_articleForm(login) {
 	if (login != '' && login != 'false') {
 		confirmPopup($("#popupJoin"))
 	}else {
-		alert("로그인 후 가입이 가능합니다.")
-		location.href='${path}/member/loginFrm.do';
+		confirmPopup($("#login_popup"), "로그인 후 가입이 가능합니다.")
 	}
 }
 
@@ -44,6 +59,61 @@ function readURL(input, index) {
 
 $(function() {	
 	$(".clubPopup").hide()
+	
+	$("#schedule_member li").click(function() {
+		let mem_id = $(this).children('#mem_id').val()
+		
+		$.ajax({
+			url: "http://localhost:8080/alto/member/selectMemberInfo.do",
+			type: "post",
+			data: {mem_id: mem_id},
+			dataType: "json",
+			success: function(data, textStatus) {
+				if(data.memberInfoList.length > 0) {
+					$("#memberInfo").text("")
+					$.each(data.memberInfoList, function(index, item) {
+						if(index == 0) {
+							$("#memberInfo").append("<button type='button' class='closeBtn'>닫기</button>")
+							if(item.img == "" || item.img == null) {
+								$("#memberInfo").append("<img class='memImg' src='http://localhost:8080/alto/resources/img/profile_default.png' />")
+							}else {
+								$("#memberInfo").append("<img class='memImg' src='http://localhost:8080/alto/memberImgDown.do?imageFileName="+item.img+"' />")
+							}
+							
+							$("#memberInfo").append("<span class='memName'>"+item.mem_name+"</span>")
+						}
+						
+						if(item.mem_open == "N") {			
+							if(index == 0) {
+								$("#memberInfo").append("<span class='noOpen'>비공개</span>")
+							}							
+							
+						}else {							
+							if(index == 0) {
+								$("#memberInfo").append("<div class='memHobbys'>")
+								$("#memberInfo").append("<span class='memGen Icon"+item.gender+"'></span>")
+								let birth = item.birth
+								birth = birth.substring(0,11)
+								$("#memberInfo").append("<span class='memBirth'>"+birth+"</span>")
+							}
+							$("#memberInfo .memHobbys").append("<img src='http://localhost:8080/alto/resources/img/hobby_img/"+
+									item.hobby_code+".png' />")
+							if(index == 0) {
+								$("#memberInfo").append("</div>")
+							}
+						}
+						
+						
+					})
+					confirmPopup($("#memberInfo"))
+					
+				}
+			},
+			error: function(data) {
+			}
+			
+		})
+	})
 	
 	//클럽 정보 수정 팝업
 	$("#editBtn").click(function() {

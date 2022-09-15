@@ -28,4 +28,6 @@ public interface MemberController {
 	public void logout(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception;
 	
 	public ModelAndView findPw(MemberDTO memberDTO, HttpServletRequest request) throws Exception;
+	
+	public ResponseEntity<Object> selectMemberInfo(@RequestParam("mem_id")String mem_id, HttpServletRequest request) throws Exception;
 }

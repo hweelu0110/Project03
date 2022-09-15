@@ -185,5 +185,10 @@ public class ClubServiceImpl implements ClubService {
 	public void clubInfoEdit(Map<String, Object> clubInfoMap) throws DataAccessException {
 		clubDAO.clubUpdate(clubInfoMap);
 	}
+
+	@Override
+	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException {
+		return clubDAO.chkClubLikeYN(likeChk);
+	}
 	
 }

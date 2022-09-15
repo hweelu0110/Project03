@@ -18,7 +18,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/club/board.css" />
+	<link rel="stylesheet" href="${path}/resources/css/club/schedule.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script type="text/javascript">
 		$("select[name=searchField]").change(function() {
@@ -33,7 +33,7 @@
 			<ul>
 				<li><a href="${path}/club/clubInfo.do?club_code=${club_code}">정보</a></li>
 				<li><a href="${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}">일정</a></li>
-				<li><a href="${path}/club_schedule/listschedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
+				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
 				<li><a href="${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
 			</ul>
 		</div>

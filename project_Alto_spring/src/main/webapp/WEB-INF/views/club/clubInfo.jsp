@@ -26,12 +26,13 @@
 </head>
 <body>
 	<section>
+		<input type="hidden" name="loginChk" id="loginChk" value="${login.mem_id}" />		
 		<div id="clubMenu">
 			<ul>
 				<li><a href="${path}/club/clubInfo.do?club_code=${club_code}">정보</a></li>
-				<li><a href="${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}">일정</a></li>
-				<li><a href="${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}">게시판</a></li>
-				<li><a href="${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}">사진첩</a></li>
+				<li><a href="javascript:memberChk('${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}')">일정</a></li>
+				<li><a href="javascript:memberChk('${path}/club_board/listArticles.do?club_code=${club_code}&cate=${cate}&tit=${tit}')">게시판</a></li>
+				<li><a href="javascript:memberChk('${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}')">사진첩</a></li>
 			</ul>
 		</div>		
 			
@@ -53,8 +54,17 @@
 						<c:otherwise>
 							<img src="${path}/club/clubImgDown.do?imageFileName=${clubInfo.img}" />
 						</c:otherwise>
+					</c:choose>
+					
+					<c:choose>
+						<c:when test="${like_code eq null}">
+							<span class="like_icon">관심</span>
+						</c:when>
+						<c:otherwise>
+							<span class="like_icon select">관심</span>
+						</c:otherwise>							
 					</c:choose>					
-					<span class="like_icon">관심</span>
+					<input type="hidden" name="club_code" id="club_code" value="${club_code}" />
 				</div>
 				
 				<div class="clubIntro">					
@@ -116,7 +126,7 @@
 															<img src="${path}/resources/img/profile_default.png" />
 														</c:when>
 														<c:otherwise>
-															<img src="${path}/mypage/memImgDown.do?imageFileName=${prom.img}" />	
+															<img src="${path}/memberImgDown.do?imageFileName=${prom.img}" />	
 														</c:otherwise>
 													</c:choose>
 												</li>
@@ -128,7 +138,7 @@
 															<img src="${path}/resources/img/profile_default.png" />
 														</c:when>
 														<c:otherwise>
-															<img src="${path}/mypage/memImgDown.do?imageFileName=${prom.img}" />	
+															<img src="${path}/memberImgDown.do?imageFileName=${prom.img}" />	
 														</c:otherwise>
 													</c:choose>
 												</li>
@@ -147,11 +157,11 @@
 						
 						</div>
 						
-						<a class="listMore" href="${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}">일정 목록보기</a>
+						<a class="listMore" href="javascript:memberChk('${path}/club_schedule/listSchedule.do?club_code=${club_code}&cate=${cate}&tit=${tit}')">일정 목록보기</a>
 					</c:otherwise>
 				</c:choose>			
 				
-				<button type="button" class="basicBtn02" onclick="location.href='${path}/club_schedule/scheduleForm.do?club_code=${club_code}&cate=${cate}&tit=${tit}'">일정추가하기</button><br/>
+				<button type="button" class="basicBtn02" onclick="javascript:memberChk('${path}/club_schedule/scheduleForm.do?club_code=${club_code}&cate=${cate}&tit=${tit}')">일정추가하기</button><br/>
 				
 				<c:set var="memYn" value="N" />
 				<c:forEach var="member" items="${clubMember}">
@@ -162,26 +172,37 @@
 				
 				<c:choose>
 					<c:when test="${memYn eq 'Y'}">
-						<button type="button" class="basicBtn" onclick="fn_cluOut()" >모임 나가기</button>
+						<button type="button" class="clubBtn basicBtn" onclick="fn_cluOut()" >모임 나가기</button>
 					</c:when>
 					<c:otherwise>
-						<button type="button" class="pointBtn" onclick="fn_articleForm('${login}')" >가입하기</button>
+						<button type="button" class="clubBtn pointBtn" onclick="fn_articleForm('${login}')" >가입하기</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
 			
 			<div class="right">
-				<div id="schedual_member">
+				<div id="schedule_member">
 					<h3>모임 멤버 (${clubInfo.member_num}명)</h3>
 					<ul>
 						<c:forEach var="member" items="${clubMember}">
+							<c:choose>
+								<c:when test="${login.mem_id eq member.mem_id}">
+									<input type="hidden" name="memberYN" id="memberYN" value="Y" />
+								</c:when>
+								<c:otherwise>
+									<input type="hidden" name="memberYN" id="memberYN" value="N" />
+								</c:otherwise>	
+							</c:choose>
+							
+							
 							<li>
+								<input type="hidden" name="mem_id" id="mem_id" value="${member.mem_id}" />
 								<c:choose>
 									<c:when test="${member.img eq null || member.img eq '' }">
 										<img src="${path}/resources/img/profile_default.png" />
 									</c:when>
 									<c:otherwise>
-										<img src="${path}/mypage/memImgDown.do?imageFileName=${member.img}" />	
+										<img src="${path}/memberImgDown.do?imageFileName=${member.img}" />	
 									</c:otherwise>
 								</c:choose>		
 								<span class="memName">${member.name}</span>

@@ -46,8 +46,8 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	
 	@Override
 	public void deleteSchedule(String schedule_code) throws DataAccessException {
-		sqlSession.delete("mapper.schedule.deleteSchedule", schedule_code);
 		sqlSession.delete("mapper.schedule.deletePromise", schedule_code);
+		sqlSession.delete("mapper.schedule.deleteSchedule", schedule_code);		
 	}
 	
 	@Override

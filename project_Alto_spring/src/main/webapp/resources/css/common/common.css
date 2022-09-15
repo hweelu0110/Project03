@@ -117,5 +117,6 @@ button.size0 { width: 100%; }
     border: 1px solid #cdcdcd;
     border-radius: 12px;
     z-index: 100;
+    box-shadow: 3px 3px 5px #888888;
 }
 .popup_div p { margin-bottom: 20px; }

@@ -2,6 +2,7 @@ package kr.co.alto.member.dao;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 
@@ -80,5 +82,10 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("mem_pwd", mem_pwd);
 		map.put("mem_id", mem_id);
 		return sqlSession.delete("mapper.member.findPw", map);
+	}
+
+	@Override
+	public List<HobbysubDTO> selectMemberInfo(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.member.selectMemberInfo", mem_id);
 	}
 }

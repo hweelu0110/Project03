@@ -38,7 +38,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public List<MemberDTO> selectMemInfo(String mem_id) throws Exception {
+	public MemberDTO selectMemInfo(String mem_id) throws Exception {
 		return mypageDAO.selectMemInfo(mem_id);
 	}
 	
@@ -70,6 +70,25 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
 		return mypageDAO.selectLikeList(mem_id);
+	}
+	
+	@Override
+	public Map<String, Object> selectActivList(String mem_id) {
+		Map<String, Object> myActivMap = new HashMap<>();
+		
+		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
+		List<AreaDTO> areaList = mypageDAO.selectMyAreaList(mem_id);
+		
+		myActivMap.put("hobbyList", hobbyList);
+		myActivMap.put("areaList", areaList);
+		
+		List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+		List<ClubListDTO> clubList = mypageDAO.selectLikeClubList(mem_id);	
+		
+		myActivMap.put("memlikeList", memlikeList);
+		myActivMap.put("clubList", clubList);
+		
+		return myActivMap;
 	}
 	
 	@Override
@@ -133,6 +152,8 @@ public class MypageServiceImpl implements MypageService {
 		
 		mypageDAO.deletLike(codeNumMap, mem_id);
 	}
+
+	
 
 	
 	

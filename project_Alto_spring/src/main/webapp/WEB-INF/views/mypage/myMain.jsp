@@ -62,7 +62,7 @@
 						<img src="${path}/resources/img/profile_default.png" />
 					</c:when>
 					<c:otherwise>
-						<img src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />	
+						<img src="${path}/memberImgDown.do?imageFileName=${login.img}" />	
 					</c:otherwise>
 				</c:choose>			
 				<a class="editBtn01" onclick="fn_imgEditPopup()">편집</a>
@@ -115,7 +115,7 @@
 		<div id="myMenu">
 			<h3>관심사</h3>
 			<ul>
-				<li><a href="">내 취미활동</a></li>
+				<li><a href="${path}/mypage/myActivList.do">내 취미활동</a></li>
 				<li><a href="${path}/mypage/mylikeList.do">관심목록</a></li>
 			</ul>
 			
@@ -128,7 +128,6 @@
 			<h3>게시물</h3>
 			<ul>
 				<li><a href="">후기 관리</a></li>
-				<li><a href="">문의 내역</a></li>
 			</ul>
 		</div>
 		
@@ -154,12 +153,16 @@
 		<button class="closeBtn">닫기</button>
 		<form action="${path}/mypage/updateImg.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
-			<c:if test="${login.img == null}">
-				<img id="mem_img" src="${path}/resources/img/profile_default.png" />
-			</c:if>
-			<c:if test="${login.img != null}">
-				<img id="mem_img" src="${path}/mypage/memImgDown.do?imageFileName=${login.img}" />				
-			</c:if>
+			<input type="hidden" name="oldFileName" value="${login.img}" />
+			<c:choose>
+				<c:when test="${login.img eq null}">
+					<img id="mem_img" src="${path}/resources/img/profile_default.png" />
+				</c:when>
+				<c:otherwise>
+					<img id="mem_img" src="${path}/memberImgDown.do?imageFileName=${login.img}" />
+				</c:otherwise>
+			</c:choose>
+			
 			<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
 			<button type="submit" class="pointBtn">적용</button>
 			<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>

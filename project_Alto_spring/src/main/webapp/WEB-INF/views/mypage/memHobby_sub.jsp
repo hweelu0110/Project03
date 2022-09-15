@@ -73,51 +73,55 @@
 							
 							<c:choose>
 								<c:when test="${in}">
-									<c:choose>								
-										<c:when test="${mainCode == subcode.MAIN_CODE}">									
-											<div class="sub_hobby ${subcode.MAIN_CODE} select">
-												<input type="hidden" value="${subcode.SUB_CODE}" />
-												<p>${subcode.SUB_NAME}</p>	
-											</div>
-											<c:set var="in" value="false" />
-										</c:when>
-										<c:otherwise>
-											<p class="main_hobby">
-												<input type="hidden" name="main_code" value="${subcode.MAIN_CODE}" />
-												<img src="../resources/img/hobby_img/${subcode.MAIN_CODE}.png" />
-												${subcode.MAIN_NAME}
-											</p>
-											<c:set var="mainCode" value="${subcode.MAIN_CODE}" />
-											<div class="sub_hobby ${subcode.MAIN_CODE} select">
-												<input type="hidden" value="${subcode.SUB_CODE}" />
-												<p>${subcode.SUB_NAME}</p>	
-											</div>
-											<c:set var="in" value="false" />										
-										</c:otherwise>
-									</c:choose>
+									<c:if test="${subcode.SUB_NAME ne '없음'}">
+										<c:choose>								
+											<c:when test="${mainCode == subcode.MAIN_CODE}">									
+												<div class="sub_hobby ${subcode.MAIN_CODE} select">
+													<input type="hidden" value="${subcode.SUB_CODE}" />
+													<p>${subcode.SUB_NAME}</p>	
+												</div>
+												<c:set var="in" value="false" />
+											</c:when>
+											<c:otherwise>
+												<p class="main_hobby">
+													<input type="hidden" name="main_code" value="${subcode.MAIN_CODE}" />
+													<img src="../resources/img/hobby_img/${subcode.MAIN_CODE}.png" />
+													${subcode.MAIN_NAME}
+												</p>
+												<c:set var="mainCode" value="${subcode.MAIN_CODE}" />
+												<div class="sub_hobby ${subcode.MAIN_CODE} select">
+													<input type="hidden" value="${subcode.SUB_CODE}" />
+													<p>${subcode.SUB_NAME}</p>	
+												</div>
+												<c:set var="in" value="false" />										
+											</c:otherwise>
+										</c:choose>
+									</c:if>									
 								</c:when>
 								
 								<c:otherwise>
-									<c:choose>								
-										<c:when test="${mainCode == subcode.MAIN_CODE}">									
-											<div class="sub_hobby ${subcode.MAIN_CODE}">
-												<input type="hidden" value="${subcode.SUB_CODE}" />
-												<p>${subcode.SUB_NAME}</p>	
-											</div>
-										</c:when>
-										<c:otherwise>
-											<p class="main_hobby">
-												<input type="hidden" name="main_code" value="${subcode.MAIN_CODE}" />
-												<img src="../resources/img/hobby_img/${subcode.MAIN_CODE}.png" />
-												${subcode.MAIN_NAME}
-											</p>
-											<c:set var="mainCode" value="${subcode.MAIN_CODE}" />
-											<div class="sub_hobby ${subcode.MAIN_CODE}">
-												<input type="hidden" value="${subcode.SUB_CODE}" />
-												<p>${subcode.SUB_NAME}</p>	
-											</div>										
-										</c:otherwise>
-									</c:choose>
+									<c:if test="${subcode.SUB_NAME ne '없음'}">
+										<c:choose>								
+											<c:when test="${mainCode == subcode.MAIN_CODE}">									
+												<div class="sub_hobby ${subcode.MAIN_CODE}">
+													<input type="hidden" value="${subcode.SUB_CODE}" />
+													<p>${subcode.SUB_NAME}</p>	
+												</div>
+											</c:when>
+											<c:otherwise>
+												<p class="main_hobby">
+													<input type="hidden" name="main_code" value="${subcode.MAIN_CODE}" />
+													<img src="../resources/img/hobby_img/${subcode.MAIN_CODE}.png" />
+													${subcode.MAIN_NAME}
+												</p>
+												<c:set var="mainCode" value="${subcode.MAIN_CODE}" />
+												<div class="sub_hobby ${subcode.MAIN_CODE}">
+													<input type="hidden" value="${subcode.SUB_CODE}" />
+													<p>${subcode.SUB_NAME}</p>	
+												</div>										
+											</c:otherwise>
+										</c:choose>
+									</c:if>	
 								</c:otherwise>
 							</c:choose>
 							

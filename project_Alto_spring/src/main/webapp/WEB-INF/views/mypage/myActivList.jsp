@@ -5,10 +5,10 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="hobbyList" value="${mylikeMap.hobbyList}" />
-<c:set var="areaList" value="${mylikeMap.areaList}" />
-<c:set var="likeList" value="${mylikeMap.memlikeList}" />
-<c:set var="clubList" value="${mylikeMap.clubList}" />
+<c:set var="hobbyList" value="${myActivMap.hobbyList}" />
+<c:set var="areaList" value="${myActivMap.areaList}" />
+<c:set var="likeList" value="${myActivMap.memlikeList}" />
+<c:set var="clubList" value="${myActivMap.clubList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,7 +95,6 @@
 			<h3>게시물</h3>
 			<ul>
 				<li><a href="">후기 관리</a></li>
-				<li><a href="">문의 내역</a></li>
 			</ul>
 		</div>		
 		
@@ -103,7 +102,6 @@
 			<ul id="tab_menu">
 				<li class="select">모임</li>
 				<li>클래스</li>
-				<li>취미용품</li>
 			</ul>
 			
 			<div>
