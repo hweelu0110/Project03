@@ -10,8 +10,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.item.dto.ItemDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dto.likeDTO;
 
@@ -92,6 +94,28 @@ public class MypageDAOImpl implements MypageDAO {
 	public List<ClubListDTO> selectLikeClubList(String mem_id) throws DataAccessException {
 		return sqlSession.selectList("mapper.club.selectLikeClubList", mem_id);
 	}
+	
+	@Override
+	public List<ClassDTO> selectLikeClassList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.selectLikeClassList", mem_id);
+	}
+
+	@Override
+	public List<ItemDTO> selectLikeItemList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.item.selectLikeItemList", mem_id);
+	}
+
+	@Override
+	public List<ClubListDTO> selectActivClubList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.club.selectActivClubList", mem_id);
+	}
+
+	@Override
+	public List<ClassDTO> selectOrderClassList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.selectOrderClassList", mem_id);
+	}
+
+	
 
 	
 }

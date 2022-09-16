@@ -6,11 +6,13 @@ public class ClubListDTO {
 	private String club_code;
 	private String title;
 	private String cate_m;
+	private String cate_m_name;
 	private String cate_s;
+	private String cate_s_name;
 	private String area_name;
 	private String member_num;
 	private String img;
-	private Date schedule;
+	private String schedule;
 	private String place;
 	private String manager;
 	
@@ -72,11 +74,11 @@ public class ClubListDTO {
 		this.img = img;
 	}
 	
-	public Date getSchedule() {
+	public String getSchedule() {
 		return schedule;
 	}
 
-	public void setSchedule(Date schedule) {
+	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
 
@@ -94,6 +96,22 @@ public class ClubListDTO {
 
 	public void setManager(String manager) {
 		this.manager = manager;
+	}
+
+	public String getCate_m_name() {
+		return cate_m_name;
+	}
+
+	public void setCate_m_name(String cate_m_name) {
+		this.cate_m_name = cate_m_name;
+	}
+
+	public String getCate_s_name() {
+		return cate_s_name;
+	}
+
+	public void setCate_s_name(String cate_s_name) {
+		this.cate_s_name = cate_s_name;
 	}
 	
 	

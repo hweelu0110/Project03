@@ -59,13 +59,16 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> mypageMap = new HashMap<>();
+		Map<String, Object> myMainMap = new HashMap<>();
 		
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = memberDTO.getMem_id();
 		
 		mypageMap = mypageService.selectMyList(mem_id);
+		myMainMap = mypageService.myMainList(mem_id);
 		
 		mav.addObject("mypageMap", mypageMap);
+		mav.addObject("myMainMap", myMainMap);
 		mav.setViewName(viewName);
 		
 		return mav;
@@ -286,7 +289,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		mav.setViewName(viewName);
 		
 		return mav;
-	}
+	}	
 	
 	@Override
 	@RequestMapping(value = "/mylikeList.do", method = {RequestMethod.GET, RequestMethod.POST})

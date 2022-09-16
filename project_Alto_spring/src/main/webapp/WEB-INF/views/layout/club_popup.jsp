@@ -112,7 +112,9 @@
 			<input type="hidden" class="area_code" name="area_code" value="${clubInfo.area_code}"  />
 			
 			<span class="icon_hobby">
-				<img src="${path}/resources/img/hobby_img/${cate}.png" />
+				<c:if test="${cate ne null}">
+					<img src="${path}/resources/img/hobby_img/${cate}.png" />
+				</c:if>				
 			</span>
 			<input type="hidden" class="_cate" value="${cate}" />
 			<input type="hidden" class="cate_m" name="cate_m" value="${cate}" />
@@ -121,18 +123,20 @@
 			<input type="text" class="size3 clubHobby" name="clubHobby" value="${clubInfo.cate_s_name}" /><br/>
 			<input type="hidden" class="_cate_s" value="${clubInfo.cate_s_name}" />
 			<input type="hidden" class="cate_s" name="cate_s" value="${clubInfo.cate_s}" />
-			
-			<c:choose>
-				<c:when test="${clubInfo.img == 'noImg'}">
-					<div class="club_img">
-						모임 사진 등록하기
-					</div>
-					<img id="club_img" class="club_img noImg" />
-				</c:when>
-				<c:otherwise>
-					<img id="club_img" class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${clubInfo.img}" />
-				</c:otherwise>
-			</c:choose>				
+			<c:if test="${clubInfo ne null}">
+				<c:choose>				
+					<c:when test="${clubInfo.img == 'noImg'}">
+						<div class="club_img">
+							모임 사진 등록하기
+						</div>
+						<img id="club_img" class="club_img noImg" />
+					</c:when>
+					<c:otherwise>
+						<img id="club_img" class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${clubInfo.img}" />
+					</c:otherwise>
+				</c:choose>	
+			</c:if>
+							
 			<input type="file" class="size0" name="noImg" id="club_imgfile" onchange="readURL(this, 0)" />
 			<input type="hidden" name="oldFileName" value="${clubInfo.img}" />
 			<textarea name="intro" class="clubIntro">${clubInfo.intro}</textarea><br/>
