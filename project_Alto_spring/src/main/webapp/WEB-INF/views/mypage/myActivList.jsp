@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -9,6 +10,7 @@
 <c:set var="areaList" value="${myActivMap.areaList}" />
 <c:set var="likeList" value="${myActivMap.memlikeList}" />
 <c:set var="clubList" value="${myActivMap.clubList}" />
+<c:set var="classList" value="${myActivMap.classList}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,24 @@
 	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />	
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
 	<script type="text/javascript">
-		
+		$(function() {
+			$("#myMenu ul:eq(0)").find("li:eq(0)").addClass("select")
+			
+			$("#tab_menu li").click(function() {
+				$(this).addClass("select")
+				$(this).siblings().removeClass("select")
+			})
+			
+			$("#tab_menu li:eq(0)").click(function() {
+				$("#clubList").css("display","block")
+				$("#classList").css("display","none")
+			})
+			
+			$("#tab_menu li:eq(1)").click(function() {
+				$("#clubList").css("display","none")
+				$("#classList").css("display","block")
+			})
+		})
 	</script>
 </head>
 <body>
@@ -30,7 +49,7 @@
 					<img src="${path}/resources/img/profile_default.png" />
 				</c:if>
 				<c:if test="${login.img != null}">
-					<img src="${path}/memImgDown.do?imageFileName=${login.img}" />				
+					<img src="${path}/memberImgDown.do?imageFileName=${login.img}" />				
 				</c:if>				
 				<a class="editBtn01" onclick="fn_imgEditPopup()">편집</a>
 				<h1>${login.mem_name}</h1>
@@ -104,14 +123,20 @@
 				<li>클래스</li>
 			</ul>
 			
-			<div>
+			<div id="clubList">
 				<div class="normalList">
-					<ul class="club">
-						<c:if test="${not empty clubList}">
-							
+					<c:if test="${not empty clubList}">
+						<ul class="club">
 							<c:forEach var="club" items="${clubList}">
 								<li>
-									<img class="club_img" src="${path}/resources/img/club_test.png" />
+									<c:choose>
+										<c:when test="${club.img == 'noImg'}">
+											<img class="club_img" src="${path}/resources/img/club_noImg.png">
+										</c:when>
+										<c:otherwise>
+											<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
+										</c:otherwise>
+									</c:choose>
 									<span class="area">${club.area_name}</span>
 									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${club.cate_m}.png" /></span>
 									<p class="club_name">${club.title}</p>
@@ -120,18 +145,77 @@
 										<span class="s_icon"></span><span>6/11(토)</span>
 										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
 									</p>
-									<span class="like_icon select">관심</span>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq club.club_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+									
+									<c:if test="${club.manager == 'Y'}">
+										<span class="manager">모임장</span>
+									</c:if>	
+									
+									<input type="hidden" name="club_code" id="club_code" value="${club.club_code}" />
 								</li>	
-							</c:forEach>	
-							
-						</c:if>
-						<c:if test="${empty clubList}">
-							<li>관심 모임이 없습니다.</li>
-						</c:if>										
-					</ul>
-				</div>
+							</c:forEach>					
+						</ul>
+					</c:if>
+					<c:if test="${empty clubList}">
+						<div class="noList">활동 모임이 없습니다.</div>
+					</c:if>	
+				</div>			
+			</div>
 			
-		</div>
+			<div id="classList">
+				<div class="normalList">
+					<c:if test="${not empty classList}">
+						<ul class="club">
+							<c:forEach var="order" items="${classList}">
+								<li>
+									<a href="${path}/class/classDetail.do?class_code=${order.class_code}">
+										<img class="club_img" src="${path}/download.do?imgName=${order.imgName}&class_code=${order.class_code}" />
+									</a>
+									<span class="area">${order.area_name}</span>
+									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${order.hobby_code}.png" /></span>
+									<p class="club_name">${order.className}</p>
+									<p class="hobby_name">${order.hobby_name}</p>
+									<p class="class_price"><fmt:formatNumber value="${order.price}" pattern="#,###원" /></p>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq order.class_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+																		
+									<input type="hidden" name="class_code" id="class_code" value="${order.class_code}" />
+								</li>	
+							</c:forEach>					
+						</ul>
+					</c:if>
+					<c:if test="${empty classList}">
+						<div class="noList">수강중인 클래스가 없습니다.</div>
+					</c:if>	
+				</div>			
+			</div>
 			
 		</div>
 		

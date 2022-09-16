@@ -102,6 +102,15 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
+		String[] hobbyCodeList = request.getParameterValues("hobbyCode");
+		String[] hobbySubCodeList = request.getParameterValues("hobbySubCode");
+		String[] areaCodeList = request.getParameterValues("areaCode");
+		
+		Map<String, Object> searchMap = new HashMap<>();
+		searchMap.put("hobbyCodeList", hobbyCodeList);
+		searchMap.put("hobbySubCodeList", hobbySubCodeList);
+		searchMap.put("areaCodeList", areaCodeList);
+				
 		//로그인 상태인 경우 관심목록 가져오기
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		if (memberDTO != null) {
@@ -118,9 +127,16 @@ public class ClubControllerImpl extends BaseController implements ClubController
 			mav.addObject("hobbyC", hobbyC);
 			mav.addObject("clubSearchMap", clubSearchMap);
 		}else {
-			clubSearchMap = clubService.clubSearchList();
+			clubSearchMap = clubService.clubSearchList(searchMap);
 			
 			mav.addObject("clubSearchMap", clubSearchMap);
+			mav.addObject("searchMap", searchMap);
+		}
+		
+		if(hobbyCodeList != null) {
+			List<HobbysubDTO> selectHobbySubList = hobbyService.selectSubHobbyList(searchMap);
+			
+			mav.addObject("selectHobbySubList", selectHobbySubList);
 		}
 						
 		mav.setViewName(viewName);

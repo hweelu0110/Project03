@@ -21,13 +21,15 @@
 	</resultMap>
 	
 	<resultMap type="clubListDTO" id="clubListResult">
-		<result property="club_code" column="CLUB_CODE" />
-		<result property="title" column="TITLE" />
-		<result property="cate_m" column="CATE_M" />
-		<result property="cate_s" column="CATE_S" />
-		<result property="area_name" column="NAME" />
-		<result property="member_num" column="MEMBER_NUM" />
-		<result property="img" column="IMG" />
+		<result property="club_code" column="club_code" />
+		<result property="title" column="title" />
+		<result property="cate_m" column="cate_m" />
+		<result property="cate_m_name" column="cate_m_name" />
+		<result property="cate_s" column="cate_s" />
+		<result property="cate_s_name" column="cate_s_name" />
+		<result property="area_name" column="name" />
+		<result property="member_num" column="member_num" />
+		<result property="img" column="img" />
 		<result property="manager" column="manager" />
 	</resultMap>
 	
@@ -186,6 +188,8 @@
 		WHERE CLUB_CODE = #{club_code} AND MEM_ID = #{mem_id}
 	</select>
 	
+	
+	<!-- 마이페이지 -->
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
 		SELECT A.CLUB_CODE CLUB_CODE, 
@@ -201,64 +205,80 @@
 	</select>
 	
 	<!-- 활동 모임 목록 -->
-	<select id="selectMemberClubList" resultType="clubListDTO">
-		SELECT A.CLUB_CODE CLUB_CODE,
-			   A.MANAGER manager, 
-			   B.TITLE title, 
-		       B.CATE_M cate_m, 
-		       B.CATE_S cate_s, 
-		       C.NAME area_name, 
-		       B.MEMBER_NUM member_num, 
-		       B.IMG img
-		FROM ALTO_JOIN A, ALTO_CLUB B, ALTO_AREA C
-		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
-		AND A.MEM_ID = #{mem_id}
+	<select id="selectActivClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
+			FROM (
+				SELECT A.CLUB_CODE CLUB_CODE,
+					   A.MANAGER manager, 
+					   B.TITLE title, 
+				       B.CATE_M cate_m, 
+				       B.CATE_S cate_s, 
+				       C.NAME area_name, 
+				       B.MEMBER_NUM member_num, 
+				       B.IMG img
+				FROM ALTO_JOIN A, ALTO_CLUB B, ALTO_AREA C
+				WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+				AND A.MEM_ID = #{mem_id}
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
+		]]>
 	</select>	
 	
+	
+	<!-- 메인, 모임메인 -->
 	<!-- BEST 모임 목록 -->
 	<select id="selectBestClubList" resultType="clubListDTO">
 		<![CDATA[
-			SELECT A.CLUB_CODE club_code, 
-			       A.TITLE title, 
-			       A.CATE_M cate_m, 
-			       A.CATE_S cate_s, 
-			       B.NAME area_name, 
-			       A.MEMBER_NUM member_num, 
-			       A.IMG img
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
 			FROM (
-				SELECT rowNum, A.*
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cate_s, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img
 				FROM (
-					SELECT *
-					FROM ALTO_CLUB
-					WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
-					ORDER BY MEMBER_OUT ASC, REGIDATE ASC
-				) A
-				WHERE rowNum BETWEEN 1 AND 8
-			) A, ALTO_AREA B
-			WHERE A.AREA_CODE = B.AREA_CODE
+					SELECT rowNum, A.*
+					FROM (
+						SELECT *
+						FROM ALTO_CLUB A
+						WHERE TRUNC(MONTHS_BETWEEN(SYSDATE, REGIDATE)) >= 3
+						ORDER BY MEMBER_OUT ASC, REGIDATE ASC
+					) A
+					WHERE rowNum BETWEEN 1 AND 10
+				) A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE 
 		]]>
 	</select>
 	
 	<!-- 새로생긴 모임 목록 -->
 	<select id="selectNewClubList" resultType="clubListDTO">
 		<![CDATA[
-			SELECT A.CLUB_CODE club_code, 
-			       A.TITLE title, 
-			       A.CATE_M cate_m, 
-			       A.CATE_S cates, 
-			       B.NAME area_name, 
-			       A.MEMBER_NUM member_num, 
-			       A.IMG img
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
 			FROM (
-				SELECT rowNum, A.*
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cates, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img
 				FROM (
-					SELECT *
-					FROM ALTO_CLUB
-					ORDER BY REGIDATE DESC
-				) A
-				WHERE rowNum BETWEEN 1 AND 8
-			) A, ALTO_AREA B
-			WHERE A.AREA_CODE = B.AREA_CODE
+					SELECT rowNum, A.*
+					FROM (
+						SELECT *
+						FROM ALTO_CLUB
+						ORDER BY REGIDATE DESC
+					) A
+					WHERE rowNum BETWEEN 1 AND 10
+				) A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
 			ORDER BY REGIDATE DESC
 		]]>
 	</select>
@@ -281,51 +301,142 @@
 	
 	<select id="topHobbyList" parameterType="String" resultType="clubListDTO">
 		<![CDATA[
-			SELECT A.CLUB_CODE club_code, 
-			       A.TITLE title, 
-			       A.CATE_M cate_m, 
-			       A.CATE_S cate_s, 
-			       B.NAME area_name, 
-			       A.MEMBER_NUM member_num, 
-			       A.IMG img
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
 			FROM (
-				SELECT rowNum, A.*
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cate_s, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img
 				FROM (
-					SELECT *
-					FROM ALTO_CLUB
-					WHERE CATE_M = #{hobby_code}
-					ORDER BY REGIDATE DESC   
-				) A
-				WHERE rowNum BETWEEN 1 AND 8
-			) A, ALTO_AREA B
-			WHERE A.AREA_CODE = B.AREA_CODE
+					SELECT rowNum, A.*
+					FROM (
+						SELECT *
+						FROM ALTO_CLUB
+						WHERE CATE_M = #{hobby_code}
+						ORDER BY REGIDATE DESC   
+					) A
+					WHERE rowNum BETWEEN 1 AND 10
+				) A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
 		]]>
 	</select>
 	
 	<!-- 사람 많은 모임 -->
 	<select id="selectPeoClubList" resultType="clubListDTO">
 		<![CDATA[
-			SELECT A.CLUB_CODE club_code, 
-			       A.TITLE title, 
-			       A.CATE_M cate_m, 
-			       A.CATE_S cate_s, 
-			       B.NAME area_name, 
-			       A.MEMBER_NUM member_num, 
-			       A.IMG img
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
 			FROM (
-				SELECT rowNum, A.*
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cate_s, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img
 				FROM (
-					SELECT *
-					FROM ALTO_CLUB
-					ORDER BY MEMBER_NUM DESC
-				) A
-				WHERE rowNum BETWEEN 1 AND 8
-			) A, ALTO_AREA B
-			WHERE A.AREA_CODE = B.AREA_CODE
+					SELECT rowNum, A.*
+					FROM (
+						SELECT *
+						FROM ALTO_CLUB
+						ORDER BY MEMBER_NUM DESC
+					) A
+					WHERE rowNum BETWEEN 1 AND 10
+				) A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE				
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
 			ORDER BY member_num DESC
 		]]>
 	</select>
 	
+	
+	<!-- 모임 검색 목록 -->
+	<!-- 탭메뉴 검색 목록 -->
+	<select id="selectSearchClubList" parameterType="java.util.Map" resultType="clubListDTO">		
+		SELECT A.club_code, 
+		       A.title, 
+		       A.cate_m, 
+		       A.cate_m_name,
+		       A.cate_s, 
+		       A.cate_s_name,
+		       A.area_name, 
+		       A.member_num, 
+		       A.img,
+		       B.SDATE schedule, 
+		       B.SPLACE place 
+		FROM (		
+			SELECT A.CLUB_CODE club_code, 
+			       A.TITLE title, 
+			       A.CATE_M cate_m, 
+			       C.NAME cate_m_name,
+			       A.CATE_S cate_s, 
+			       D.NAME cate_s_name,
+			       B.NAME area_name, 
+			       A.MEMBER_NUM member_num, 
+			       A.IMG img
+			FROM ALTO_CLUB A, ALTO_AREA B, ALTO_HOBBY C, ALTO_HOBBY_SUB D
+			WHERE A.AREA_CODE = B.AREA_CODE
+			AND A.CATE_M = C.HOBBY_CODE		
+			AND A.CATE_S = D.HOBBY_SUB_CODE
+			
+			<if test=" hobbyC != null">
+				 <if test=" hobbyC == 'all'">
+				 </if>
+				 <if test="hobbyC != 'all'">
+				 	AND c.HOBBY_CODE = #{hobbyC}
+				 </if>
+			</if>
+							
+			<if test=" hobbyCodeList != null">
+				 AND A.CATE_M IN 
+				 <foreach item="item" index="index" collection="hobbyCodeList" open="(" separator="," close=")">
+				 	#{item}
+				 </foreach>
+			</if>				
+			<if test=" hobbySubCodeList != null">
+				 AND A.CATE_S IN 
+				 <foreach item="item" index="index" collection="hobbySubCodeList" open="(" separator="," close=")">
+				 	#{item}
+				 </foreach>
+			</if>				
+			<if test=" areaCodeList != null">
+				 AND A.AREA_CODE IN 
+				 <foreach item="item" index="index" collection="areaCodeList" open="(" separator="," close=")">
+				 	#{item}
+				 </foreach>
+			</if>				
+			<if test=" keyword != null">
+				 AND (A.TITLE LIKE '%' || #{keyword} || '%' OR B.NAME LIKE '%' || #{keyword} || '%' OR C.NAME LIKE '%' || #{keyword} || '%' OR D.NAME LIKE '%' || #{keyword} || '%')
+			</if>
+		) A LEFT JOIN ALTO_CLUB_SCHEDULE B
+		ON A.CLUB_CODE = B.CLUB_CODE
+	
+		<if test="sort == null">
+			ORDER BY A.club_code DESC 
+		</if>
+		<if test="sort == 'new'">
+			ORDER BY A.REGIDATE DESC 
+		</if>
+		<if test="sort == 'old'">
+			ORDER BY A.REGIDATE ASC
+		</if>
+		<if test="sort == 'fast'">
+			ORDER BY B.schedule DESC
+		</if>
+		<if test="sort == 'stuU'">
+			ORDER BY A.member_num DESC
+		</if>
+		<if test="sort == 'stuD'">
+			ORDER BY A.member_num ASC
+		</if>
+	</select>
+	
+	<!-- 대분류 취미 메뉴 검색 목록 -->
 	<select id="selectHobClubList" parameterType="String" resultType="clubListDTO">
 		SELECT A.CLUB_CODE club_code, 
 		       A.TITLE title, 
@@ -340,6 +451,7 @@
 		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
 	</select>
 	
+	<!-- 키워드 검색 목록 -->
 	<select id="keywordSearch" parameterType="String" resultMap="clubResult">
 		SELECT a.NAME AS area_name, h.NAME AS hobby_name, c.*
 		FROM ALTO_CLUB c, ALTO_AREA a, ALTO_HOBBY h

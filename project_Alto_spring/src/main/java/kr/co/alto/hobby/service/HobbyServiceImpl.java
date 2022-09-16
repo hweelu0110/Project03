@@ -66,6 +66,11 @@ public class HobbyServiceImpl implements HobbyService {
 	}
 	
 	@Override
+	public List<HobbysubDTO> selectSubHobbyList(Map<String, Object> searchMap) throws DataAccessException {
+		return hobbyDAO.selectSubHobbyList(searchMap);
+	}
+	
+	@Override
 	public List<HobbyDTO> listHobbys() throws DataAccessException {
 		List<HobbyDTO> hobbyList = hobbyDAO.selectAllHobbyList();
 		return hobbyList;
@@ -76,5 +81,6 @@ public class HobbyServiceImpl implements HobbyService {
 		List<HobbysubDTO> hobbysubList = hobbyDAO.selectHobbysubList(codeList);
 		return hobbysubList;
 	}
+	
 
 }

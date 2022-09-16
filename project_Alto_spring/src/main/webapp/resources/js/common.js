@@ -23,6 +23,10 @@ $(function () {
 		$(this).parent("div").hide()
 	})
 	
+	$(".popup_div").on('click', '.closeBtn', function() {
+		$(this).parent("div").hide()
+	})
+	
 	
 	$(".closeBtn_style").click(function() {
 		$(this).parent("div").hide()

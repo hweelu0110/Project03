@@ -60,15 +60,18 @@ public class MainController {
 			String mem_id = memberDTO.getMem_id();
 			
 			memInfoMap = mypageService.selectMyList(mem_id);			
-			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);	
+			List<likeDTO> memlikeList = mypageService.selectLikeList(mem_id);	
+			List<ClubListDTO> memclubList = mypageService.selectActivClubList(mem_id);
 			
-			memInfoMap.put("memlikeList", memlikeList);			
+			memInfoMap.put("memlikeList", memlikeList);	
+			memInfoMap.put("memclubList", memclubList);
 			mav.addObject("memInfoMap", memInfoMap);			
 		}
 		
-		List<HashMap<String, Object>> topHobby = clubDAO.selectTopHobby();
-		List<ClubListDTO> bestClubList = clubDAO.selectBestClubList();
-		List<ClubListDTO> newClubList = clubDAO.selectNewClubList();
+		List<HashMap<String, Object>> topHobby = clubService.selectTopHobby();
+		List<ClubListDTO> bestClubList = clubService.selectBestClubList();
+		List<ClubListDTO> newClubList = clubService.selectNewClubList();
+		
 		mainListMap.put("topHobby", topHobby);
 		mainListMap.put("bestClubList", bestClubList);
 		mainListMap.put("newClubList", newClubList);

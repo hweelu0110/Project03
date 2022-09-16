@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="hobbyList" value="${mypageMap.hobbyList}" />
 <c:set var="areaList" value="${mypageMap.areaList}" />
+<c:set var="likeList" value="${myMainMap.memlikeList}" />
+<c:set var="activeList" value="${myMainMap.activClubList}" />
+<c:set var="likeClubList" value="${myMainMap.likeClubList}" />
+<c:set var="classList" value="${myMainMap.classList}" />
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -12,6 +17,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />
+	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />
 	<script type="text/javascript">
 		function fn_imgEditPopup() {
 			confirmPopup($("#imgEdit_div"))
@@ -134,16 +140,228 @@
 		<div id="myPageCont">
 			<div class="myClub">
 				<h3>활동중인 모임</h3>
-				<p class="noCnt">아직 모임 활동을 하지 않았습니다. 모임을 찾으러 가자! <br/><a href="${path}/club/clubSearchList.do">모임검색하기</a></p>				
+				<c:choose>
+					<c:when test="${empty activeList}">
+						<p class="noCnt">아직 모임 활동을 하지 않았습니다. 모임을 찾으러 가자! <br/>
+						<a href="${path}/club/clubSearchList.do">모임검색하기</a></p>									
+					</c:when>
+					<c:otherwise>
+						<div class="swiper mySwiper4">
+					      <div class="swiper-wrapper club">
+					      
+					      	<c:forEach var="active" items="${activeList}">
+					      		<div class="swiper-slide">
+									<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${active.club_code}">
+										<c:choose>
+											<c:when test="${active.img == 'noImg'}">
+												<img class="club_img" src="${path}/resources/img/club_noImg.png">
+											</c:when>
+											<c:otherwise>
+												<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${active.img}" />
+											</c:otherwise>
+										</c:choose>
+									</a>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq active.club_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+									<c:if test="${active.manager == 'Y'}">
+										<span class="manager">모임장</span>
+									</c:if>
+									<span class="area">${active.area_name}</span>
+									<div class="club_info">
+										<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${active.cate_m}.png" /></span>
+										<p class="club_name">${active.title}</p>
+										<span class="memNum">${active.member_num}명</span>
+										<c:if test="${active.schedule ne null }">
+											<p class="club_schedule">
+												<span class="s_icon"></span><span><fmt:parseDate value="${active.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+												<span class="s_icon2"></span><span>${active.place}</span>
+											</p>
+										</c:if>
+									</div>
+									<input type="hidden" name="club_code" id="club_code" value="${active.club_code}" />
+								</div>
+					      	</c:forEach>
+				        	
+					      </div>
+					      <div class="swiper-button-next"></div>
+					      <div class="swiper-button-prev"></div>
+					    </div>
+						
+						<!-- Initialize Swiper -->
+					    <script>
+					      var swiper = new Swiper(".mySwiper4", {
+					        slidesPerView: 4,
+					        spaceBetween: 20,
+					        slidesPerGroup: 4,
+					        loop: false,
+					        loopFillGroupWithBlank: true,
+					        navigation: {
+					          nextEl: ".swiper-button-next",
+					          prevEl: ".swiper-button-prev",
+					        },
+					      });
+					    </script>
+					</c:otherwise>
+				</c:choose>								
 			</div>
 			
 			<div class="myClass">
-				<h3>수강중인 클래스</h3>
-				<p class="noCnt">아직 클래스 정보가 없습니다. 클래스를 찾아볼까요? <br/><a href="${path}/club/classSearchList.do">클래스검색하기</a></p>
+				<h3>수강중인 클래스</h3>				
+				<c:choose>
+					<c:when test="${empty classList}">
+						<p class="noCnt">아직 클래스 정보가 없습니다. 클래스를 찾아볼까요? <br/>
+						<a href="${path}/club/classSearchList.do">클래스검색하기</a></p>									
+					</c:when>
+					<c:otherwise>
+						<div class="swiper mySwiper4">
+					      <div class="swiper-wrapper club">
+					      
+					      	<c:forEach var="order" items="${classList}">
+					      		<div class="swiper-slide">
+									<a href="${path}/class/classDetail.do?class_code=${order.class_code}">
+										<img class="class_img" src="${path}/download.do?imgName=${order.imgName}&class_code=${order.class_code}" />
+									</a>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq order.class_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+									
+									<span class="area">${order.area_name}</span>
+									<div class="club_info">
+										<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${order.hobby_code}.png" /></span>
+										<p class="club_name">${order.className}</p>
+										<span class="memNum">${order.hobby_name}</span>
+										<p class="class_price"><fmt:formatNumber value="${order.price}" pattern="#,###원" /></p>
+									</div>
+									
+									<input type="hidden" name="class_code" id="class_code" value="${order.class_code}" />
+								</div>
+					      	</c:forEach>
+				        	
+					      </div>
+					      <div class="swiper-button-next"></div>
+					      <div class="swiper-button-prev"></div>
+					    </div>
+						
+						<!-- Initialize Swiper -->
+					    <script>
+					      var swiper = new Swiper(".mySwiper4", {
+					        slidesPerView: 4,
+					        spaceBetween: 20,
+					        slidesPerGroup: 4,
+					        loop: false,
+					        loopFillGroupWithBlank: true,
+					        navigation: {
+					          nextEl: ".swiper-button-next",
+					          prevEl: ".swiper-button-prev",
+					        },
+					      });
+					    </script>
+					</c:otherwise>
+				</c:choose>	
+				
 			</div>
 			
 			<div class="myLike">
 				<h3>관심 목록</h3>
+				
+				<c:choose>
+					<c:when test="${empty likeClubList}">
+						<p class="noCnt">관심 목록이 없습니다.<br/>							
+					</c:when>
+					<c:otherwise>
+						<div class="swiper mySwiper4">
+					      <div class="swiper-wrapper club">
+					      
+					      	<c:forEach var="likeClub" items="${likeClubList}">
+					      		<div class="swiper-slide">
+									<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${likeClub.club_code}">
+										<c:choose>
+											<c:when test="${likeClub.img == 'noImg'}">
+												<img class="club_img" src="${path}/resources/img/club_noImg.png">
+											</c:when>
+											<c:otherwise>
+												<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${likeClub.img}" />
+											</c:otherwise>
+										</c:choose>
+									</a>
+									
+									<c:forEach var="like" items="${likeList}">
+										<c:if test="${like.club_code eq likeClub.club_code}">
+											<c:set var="in" value="true" />
+										</c:if>
+									</c:forEach>
+									<c:choose>
+										<c:when test="${in}">
+											<span class="like_icon select">관심</span>
+											<c:set var="in" value="false" />
+										</c:when>
+										<c:otherwise>
+											<span class="like_icon">관심</span>
+										</c:otherwise>
+									</c:choose>
+									
+									<span class="area">${likeClub.area_name}</span>
+									<div class="club_info">
+										<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${likeClub.cate_m}.png" /></span>
+										<p class="club_name">${likeClub.title}</p>
+										<span class="memNum">${likeClub.member_num}명</span>
+										<c:if test="${likeClub.schedule ne null }">
+											<p class="club_schedule">
+												<span class="s_icon"></span><span><fmt:parseDate value="${likeClub.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+												<span class="s_icon2"></span><span>${likeClub.place}</span>
+											</p>
+										</c:if>
+									</div>
+									<input type="hidden" name="club_code" id="club_code" value="${likeClub.club_code}" />
+								</div>
+					      	</c:forEach>
+				        	
+					      </div>
+					      <div class="swiper-button-next"></div>
+					      <div class="swiper-button-prev"></div>
+					    </div>
+						
+						<!-- Initialize Swiper -->
+					    <script>
+					      var swiper = new Swiper(".mySwiper4", {
+					        slidesPerView: 4,
+					        spaceBetween: 20,
+					        slidesPerGroup: 4,
+					        loop: false,
+					        loopFillGroupWithBlank: true,
+					        navigation: {
+					          nextEl: ".swiper-button-next",
+					          prevEl: ".swiper-button-prev",
+					        },
+					      });
+					    </script>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>		
 	</section>

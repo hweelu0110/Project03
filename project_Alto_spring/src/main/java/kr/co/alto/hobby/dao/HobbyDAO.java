@@ -25,6 +25,7 @@ public interface HobbyDAO {
 	public void updateMemHobby(Map<String, Object> memHobbyMap) throws DataAccessException;
 	
 	public List<HobbysubDTO> selectSubHobbyList(String hobby_code) throws DataAccessException;
+	public List<HobbysubDTO> selectSubHobbyList(Map<String, Object> searchMap) throws DataAccessException;
 	
 	
 }

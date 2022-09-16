@@ -18,8 +18,8 @@ public interface ClubDAO {
 	public List<HashMap<String, Object>> selectTopHobby() throws DataAccessException;
 	public List<ClubListDTO> selectTopHobbyList(String hobby_code) throws DataAccessException;
 	
-	public List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;
-	
+	public List<ClubListDTO> selectHobClubList(String hobby_code) throws DataAccessException;	
+	public List<ClubListDTO> selectSearchClubList(Map<String, Object> searchMap) throws DataAccessException;
 	
 	public ClubDTO selectClubInfo(String club_code) throws DataAccessException;
 	
@@ -57,4 +57,5 @@ public interface ClubDAO {
 	public String chkClubLikeYN(Map<String, Object> likeChk) throws DataAccessException;
 
 	public List<ClubDTO> keywordClub(String keyword) throws DataAccessException;
+	
 }

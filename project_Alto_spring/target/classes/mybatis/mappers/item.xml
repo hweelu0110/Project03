@@ -191,5 +191,19 @@
 		DELETE FROM EZEN.ALTO_ITEM_REVIEW
 		WHERE CMT_NUM = #{cmt_num}
 	</delete>
+	
+	<!-- 마이페이지 관심 취미용품 목록 -->
+	<select id="selectLikeItemList" parameterType="String" resultMap="itemResult">
+		SELECT A.ITEM_CODE item_code, 
+			   B.ITEM_NAME item_name, 
+		       B.HOBBY_CODE hobby_code, 
+		       C.NAME hobby_name,
+		       B.HOBBY_SUB_CODE hobby_sub_code, 
+		       B.PRICE price, 
+		       B.IMGNAME imgName
+		FROM ALTO_LIKE A, ALTO_ITEM B, ALTO_HOBBY C
+		WHERE A.ITEM_CODE = B.ITEM_CODE AND B.HOBBY_CODE = C.HOBBY_CODE
+		AND A.MEM_ID = #{mem_id}
+	</select>
 </mapper>
 
