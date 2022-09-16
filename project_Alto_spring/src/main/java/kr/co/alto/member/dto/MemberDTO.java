@@ -10,7 +10,7 @@ public class MemberDTO {
 	private String mem_pwd;
 	private String mem_name;
 	private String gender;
-	private Date birth;
+	private String birth;
 	private String phone;
 	private String img;
 	private String mem_open;
@@ -18,6 +18,7 @@ public class MemberDTO {
 	private int authkey;
 	private String memberId_yn;
 	private String del_yn;
+	private String hobby_code;
 	
 	public MemberDTO() {}
 
@@ -53,11 +54,11 @@ public class MemberDTO {
 		this.gender = gender;
 	}
 
-	public Date getBirth() {
+	public String getBirth() {
 		return birth;
 	}
 
-	public void setBirth(Date birth) {
+	public void setBirth(String birth) {
 		this.birth = birth;
 	}
 
@@ -116,5 +117,12 @@ public class MemberDTO {
 	public void setDel_yn(String del_yn) {
 		this.del_yn = del_yn;
 	}
-	
+
+	public String getHobby_code() {
+		return hobby_code;
+	}
+
+	public void setHobby_code(String hobby_code) {
+		this.hobby_code = hobby_code;
+	}	
 }

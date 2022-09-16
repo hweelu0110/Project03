@@ -25,8 +25,7 @@ public interface MypageController {
 	
 	public String updateImg(MultipartHttpServletRequest mpRequest, HttpSession session, String mem_id) throws Exception;
 	
-	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;			
-			
+	public ModelAndView myActivList(HttpServletRequest request, HttpSession httpSession) throws Exception;
 	public ModelAndView mylikeList(HttpServletRequest request, HttpSession httpSession) throws Exception;
 	
 	public void insertLike(String codeNum, String codeType, HttpServletRequest request, HttpSession httpSession) throws Exception; 

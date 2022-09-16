@@ -19,7 +19,7 @@ public interface ClubController {
 		
 	public ResponseEntity clubRegister(@ModelAttribute("club") ClubDTO clubDTO, HttpServletRequest request, HttpSession httpSession) throws Exception;
 	
-	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	
 	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;
 	

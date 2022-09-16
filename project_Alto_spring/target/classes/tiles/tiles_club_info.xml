@@ -44,12 +44,20 @@
 	</definition>
 		
 	<!-- 소모임 일정 -->
-	<definition name="/club/Schedule" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/Schedule.jsp" />
-	</definition>	
+	<definition name="/club_schedule/listSchedule" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_schedule/listSchedule.jsp" />
+	</definition>
 	
-	<definition name="/club/clubChat" extends="tiles-layout">
-		<put-attribute name="body" value="/WEB-INF/views/club/clubChat.jsp" />
+	<definition name="/club_schedule/scheduleForm" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_schedule/scheduleForm.jsp" />
+	</definition>
+	
+	<definition name="/club_schedule/viewSchedule" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_schedule/viewSchedule.jsp" />
+	</definition>
+	
+	<definition name="/club_schedule/editSchedule" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/club_schedule/editSchedule.jsp" />
 	</definition>
 
 </tiles-definitions>

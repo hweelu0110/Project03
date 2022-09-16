@@ -50,6 +50,7 @@
 <body>	
 	<!-- CONTENTS -->
 	<section>
+		<input type="hidden" name="loginChk" id="loginChk" value="${login.mem_id}" />
 		<div id="cate_menu">
 			<ul>
 				<c:forEach var="hobby" items="${hobbyList}">
@@ -415,106 +416,8 @@
 		      <div class="swiper-button-next"></div>
 		      <div class="swiper-button-prev"></div>
 		    </div>
-		</div>
-		
-		<div id="sec_07">
-			<h2>빠른 일정 모임</h2>
-			<div class="swiper mySwiper4">
-		      <div class="swiper-wrapper club">
-	        	<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-		        <div class="swiper-slide">
-		        	<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-		        </div>
-		        <div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-		        <div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<img class="club_img" src="../resources/img/club_test.png" />
-					<span class="like_icon">관심</span>
-					<span class="area">성동구</span>
-					<div class="club_info">
-						<span class="hobby_icon"><img src="../resources/img/hobby_img/h_001.png" /></span>
-						<p class="club_name">미니어처의 세계미니어처의 세계미니어처의 세계</p>
-						<span class="memNum">50명</span>
-						<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
-					</div>
-				</div>
-		      </div>
-		      <div class="swiper-button-next"></div>
-		      <div class="swiper-button-prev"></div>
-		    </div>
-			
-			<!-- Initialize Swiper -->
+		    
+		    <!-- Initialize Swiper -->
 		    <script>
 		      var swiper = new Swiper(".mySwiper4", {
 		        slidesPerView: 5,
@@ -529,6 +432,7 @@
 		      });
 		    </script>
 		</div>
+		
 		
 	</section>
 	<%@include file="../layout/common_popup.jsp" %>

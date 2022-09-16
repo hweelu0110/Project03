@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-#clubMenu ul li:nth-child(2) { border-bottom: 3px solid #F3BE34; }
+#clubMenu ul li:nth-child(3) { border-bottom: 3px solid #F3BE34; }
 
 h3 { padding-top :20px; }
 
@@ -105,8 +105,19 @@ table a:hover { color: #000; }
     border-bottom: 1px solid #fff;
 }
 #boardFrm td { padding: 10px; }
-#boardFrm #title { margin: 0 10px 0 0; text-align: left; }
+#boardFrm #title,#boardFrm #splace,#boardFrm #sprice,#boardFrm #snum { margin: 0 10px 0 0; text-align: left; }
 #boardFrm #category {
 	height: 30px;
     padding: 0 10px;
 }
+
+.editBtn { padding-left: 30px; }
+.editBtn .editIcon {
+	display: inline-block;
+	width: 15px;
+	background: url(../../img/alto_common_icon.png) no-repeat;
+	background-size: 180px;
+	background-position: -148px -90px;
+    text-indent: -999999px;
+}
+.editBtn .del { margin-left: 5px; background-position: -165px -90px; }

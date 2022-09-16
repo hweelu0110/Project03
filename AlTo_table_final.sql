@@ -442,3 +442,42 @@ CREATE TABLE alto_order_item (
 	price			NUMBER			NOT NULL,
 	quantity		number			NOT NULL
 );
+
+
+-- 일정
+DROP TABLE alto_club_schedule CASCADE CONSTRAINT;
+CREATE TABLE alto_club_schedule(
+	club_code NUMBER NOT NULL
+	,schedule_code NUMBER NOT NULL PRIMARY key
+	,mem_id VARCHAR2(100) NOT NULL
+	,title VARCHAR2(200) NOT NULL
+	,sdate VARCHAR2(100) NOT NULL
+	,stime VARCHAR2(100) NOT NULL
+	,splace VARCHAR2(200) NOT NULL
+	,sprice varchar2(100)
+	,snum NUMBER NOT NULL
+	,mem_cnt NUMBER DEFAULT 1 NOT NULL 
+	,regidate DATE DEFAULT sysdate NOT NULL
+	,CONSTRAINT alto_club_schedule_fk FOREIGN KEY (club_code)
+	REFERENCES alto_club(club_code)
+	,CONSTRAINT alto_club_schedule_member_fk FOREIGN KEY (mem_id)
+	REFERENCES alto_member(mem_id)
+);
+
+
+-- 일정 참여 테이블
+DROP TABLE alto_promise CASCADE CONSTRAINT;
+CREATE TABLE alto_promise(
+	promiseNo NUMBER NOT NULL PRIMARY KEY
+	,club_code NUMBER NOT NULL
+	,schedule_code NUMBER NOT NULL
+	,mem_id VARCHAR2(100) NOT NULL
+	,manager char(1)
+	,regdate DATE DEFAULT sysdate NOT null
+	,CONSTRAINT alto_promise_club_fk FOREIGN KEY (club_code)
+	REFERENCES alto_club(club_code)
+	,CONSTRAINT alto_promise_schedule_fk FOREIGN KEY (schedule_code)
+	REFERENCES alto_club_schedule(schedule_code)
+	,CONSTRAINT alto_promise_member_fk FOREIGN KEY (mem_id)
+	REFERENCES alto_member(mem_id)
+); 

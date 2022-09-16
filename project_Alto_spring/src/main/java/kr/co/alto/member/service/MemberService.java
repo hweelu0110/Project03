@@ -1,7 +1,9 @@
 package kr.co.alto.member.service;
 
 import java.util.Date;
+import java.util.List;
 
+import kr.co.alto.hobby.dto.HobbysubDTO;
 import kr.co.alto.member.dto.LoginDTO;
 import kr.co.alto.member.dto.MemberDTO;
 
@@ -19,5 +21,7 @@ public interface MemberService {
 	
 	public int findPwCheck(MemberDTO memberDTO) throws Exception;
 	public void findPw(String mem_id) throws Exception;
+	
+	public List<HobbysubDTO> selectMemberInfo(String mem_id) throws Exception;
 		
 }

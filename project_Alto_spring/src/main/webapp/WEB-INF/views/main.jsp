@@ -67,7 +67,7 @@
 			$("#quick_btn").click(function() {
 				$("#member_section").slideToggle();
 				$("#quick_btn").css("display","none")
-			})
+			})		
 			
 		})
 	</script>
@@ -126,7 +126,8 @@
 	
 	
 	<!-- CONTENTS -->
-	<section>				
+	<section>
+		<input type="hidden" name="loginChk" id="loginChk" value="${login.mem_id}" />				
 		<div id="sec_01">
 			<h2>지금 가장 '핫'한 취미</h2>
 			<div class="swiper mySwiper">

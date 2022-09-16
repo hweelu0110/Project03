@@ -34,5 +34,8 @@
 		<typeAlias type="kr.co.alto.board.dto.FileDTO" alias="fileDTO"/>
 		<typeAlias type="kr.co.alto.album.dto.AlbumDTO" alias="albumDTO"/>
 		<typeAlias type="kr.co.alto.album.dto.ImageDTO" alias="imageDTO"/>
+		
+		<typeAlias type="kr.co.alto.schedule.dto.ScheduleDTO" alias="scheduleDTO"/>
+		<typeAlias type="kr.co.alto.schedule.dto.PromiseDTO" alias="promiseDTO"/>
 	</typeAliases>	
 </configuration>

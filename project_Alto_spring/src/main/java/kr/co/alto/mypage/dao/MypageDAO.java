@@ -13,7 +13,7 @@ import kr.co.alto.mypage.dto.likeDTO;
 
 public interface MypageDAO {
 	
-	public List<MemberDTO> selectMemInfo(String mem_id) throws DataAccessException;
+	public MemberDTO selectMemInfo(String mem_id) throws DataAccessException;
 	public void modMemInfo(MemberDTO memberDTO) throws DataAccessException;
 	
 	public String pwCheck(String mem_id) throws DataAccessException;

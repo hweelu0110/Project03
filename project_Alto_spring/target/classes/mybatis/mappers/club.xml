@@ -28,6 +28,7 @@
 		<result property="area_name" column="NAME" />
 		<result property="member_num" column="MEMBER_NUM" />
 		<result property="img" column="IMG" />
+		<result property="manager" column="manager" />
 	</resultMap>
 	
 	<resultMap type="joinDTO" id="clubMemberResult">
@@ -178,6 +179,13 @@
 		WHERE CLUB_CODE = ${club_code}
 	</insert>
 	
+	<!-- 모임 좋아요 여부 체크 -->
+	<select id="chkClubLikeYN" parameterType="java.util.Map" resultType="String">
+		SELECT LIKE_CODE 
+		FROM ALTO_LIKE
+		WHERE CLUB_CODE = #{club_code} AND MEM_ID = #{mem_id}
+	</select>
+	
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
 		SELECT A.CLUB_CODE CLUB_CODE, 
@@ -188,6 +196,21 @@
 		       B.MEMBER_NUM member_num, 
 		       B.IMG img
 		FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
+		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+		AND A.MEM_ID = #{mem_id}
+	</select>
+	
+	<!-- 활동 모임 목록 -->
+	<select id="selectMemberClubList" resultType="clubListDTO">
+		SELECT A.CLUB_CODE CLUB_CODE,
+			   A.MANAGER manager, 
+			   B.TITLE title, 
+		       B.CATE_M cate_m, 
+		       B.CATE_S cate_s, 
+		       C.NAME area_name, 
+		       B.MEMBER_NUM member_num, 
+		       B.IMG img
+		FROM ALTO_JOIN A, ALTO_CLUB B, ALTO_AREA C
 		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
 		AND A.MEM_ID = #{mem_id}
 	</select>	

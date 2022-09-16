@@ -82,7 +82,7 @@
 		<div id="myMenu">
 			<h3>관심사</h3>
 			<ul>
-				<li><a href="">내 취미활동</a></li>
+				<li><a href="${path}/mypage/myActivList.do">내 취미활동</a></li>
 				<li><a href="${path}/mypage/mylikeList.do">관심목록</a></li>
 			</ul>
 			
