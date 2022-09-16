@@ -192,16 +192,22 @@
 	<!-- 마이페이지 -->
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
-		SELECT A.CLUB_CODE CLUB_CODE, 
-			   B.TITLE title, 
-		       B.CATE_M cate_m, 
-		       B.CATE_S cate_s, 
-		       C.NAME area_name, 
-		       B.MEMBER_NUM member_num, 
-		       B.IMG img
-		FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
-		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
-		AND A.MEM_ID = #{mem_id}
+		<![CDATA[
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
+			FROM (
+				SELECT A.CLUB_CODE CLUB_CODE, 
+					   B.TITLE title, 
+				       B.CATE_M cate_m, 
+				       B.CATE_S cate_s, 
+				       C.NAME area_name, 
+				       B.MEMBER_NUM member_num, 
+				       B.IMG img
+				FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
+				WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+				AND A.MEM_ID = #{mem_id}
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
+		]]>
 	</select>
 	
 	<!-- 활동 모임 목록 -->
