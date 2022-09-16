@@ -15,6 +15,17 @@
 			text-shadow: yellow;
 		}
 		
+		.order_table {
+			background-color: none;
+			border-top: none;
+			border-left: none; 
+			border-right: none;
+		}
+		
+		.listTitle {
+			background-color: #ededed;
+		}
+		
 	</style>
 </head>
 <body>
@@ -23,28 +34,28 @@
 		</div>
 		<div class="container">
 			<div style="padding-top:50px;">
-				<table class="table table-hover" style="border-top: none; border-left: none; border-right: none;">
-					<tr><td colspan="7" align="center"><h3>주문 내역</h3></td></tr>
+				<h3>주문 내역</h3>
+				<table class="table order_table">
 						<c:if test="${empty orderList}">
 							<td colspan="7" align="center">주문 제품이 없습니다</td>
 						</c:if>
 						<c:if test="${not empty orderList}">
-							<c:forEach items="${orderList }" var="orderList">	
-							<tr style="background-color: #ededed;">
-								<th colspan="2" width="10%">주문번호</th>
-								<td width="50%">${orderList.orderId }</td>
-								<th width="10%">주문일자</th>
-								<td width="10%">${orderList.orderDate }</td>
-								<th width="10%">주문상태</th>
-								<td width="10%">${orderList.orderState }</td>
-							</tr>
-							<tr>
-								<td></td>
-								<th></th>
-								<th style="text-align: center;">상품명</th>
-								<th colspan="2" style="text-align: center;">수량</th>
-								<th colspan="2" style="text-align: center;">가격</th>
-							</tr>
+							<c:forEach items="${orderList }" var="orderList">
+								<tr class="listTitle">
+									<th colspan="2" width="10%">주문번호</th>
+									<td width="50%">${orderList.orderId }</td>
+									<th width="10%">주문일자</th>
+									<td width="10%">${orderList.orderDate }</td>
+									<th width="10%">주문상태</th>
+									<td width="10%">${orderList.orderState }</td>
+								</tr>
+								<tr>
+									<td></td>
+									<th></th>
+									<th style="text-align: center;">상품명</th>
+									<th colspan="2" style="text-align: center;">수량</th>
+									<th colspan="2" style="text-align: center;">가격</th>
+								</tr>
 								<c:if test="${empty orderList.orders}">
 									<tr>
 										<td colspan="7" align="center">주문 제품이 없습니다</td>

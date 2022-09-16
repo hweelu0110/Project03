@@ -106,6 +106,15 @@
 			border-right: none;
 			margin-bottom: 40px;
 		}
+		
+		.listTitle {
+			background-color: #ededed;
+		}
+		
+		.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+		  background-color: #fefaf0;
+		}
+		
 	</style>
 </head>
 <script src="http://code.jquery.com/jquery-latest.js"></script> 
@@ -115,9 +124,9 @@
 		</div>
 		<div class="container">
 			<div style="padding-top:50px;">
+				<h3>클래스 장바구니</h3>
 				<table class="table table-hover table-cart">
-					<tr><td colspan="6"><h3>클래스 장바구니</h3></td></tr>
-					<tr>
+					<tr class="listTitle">
 						<th width="5">
 							<div class="class_all_check_input_div">
 								<input type="checkbox" class="form-check-input class_all_check_input" checked="checked">
@@ -170,9 +179,9 @@
 					</tr>
 				</table>
 				
+				<h3>취미용품 장바구니</h3>
 				<table class="table table-hover table-cart">
-					<tr><td colspan="6"><h3>취미용품 장바구니</h3></td></tr>
-					<tr>
+					<tr class="listTitle">
 						<th width="5">
 							<div class="item_all_check_input_div">
 								<input type="checkbox" class="form-check-input item_all_check_input" checked="checked">
@@ -225,8 +234,8 @@
 					</tr>
 					</table>
 					
-					<table class="table table-hover table-cart">
-					<tr><td colspan="6"><h2>최종 집계</h3></td></tr>
+					<h3>최종 집계</h3>
+					<table class="table table-hover" style="border-left: none; border-right: none;">
 					<tr>
 						<th></th>
 						<th></th>
