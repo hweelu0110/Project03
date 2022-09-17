@@ -195,10 +195,13 @@
 	</delete>
 	
 	<select id="userReviewList" resultMap="itemReviewResult" parameterType="String">
-		SELECT *
-		FROM ALTO_ITEM_REVIEW r
+		SELECT r.*, i.ITEM_NAME
+		FROM ALTO_ITEM_REVIEW r, ALTO_ITEM i
 		WHERE CMT_WRITER = #{mem_id}
+		AND r.cmt_item = i.item_code
 	</select>
+	
+	
 	
 	<!-- 마이페이지 관심 취미용품 목록 -->
 	<select id="selectLikeItemList" parameterType="String" resultMap="itemResult">

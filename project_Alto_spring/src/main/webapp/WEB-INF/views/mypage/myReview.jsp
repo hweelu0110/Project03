@@ -222,7 +222,7 @@
 			
 			<h3>게시물</h3>
 			<ul>
-				<li><a href="">후기 관리</a></li>
+				<li><a href="${contextPath}/mypage/myReview.do">후기 관리</a></li>
 			</ul>
 		</div>		
 		
@@ -280,7 +280,7 @@
 												</c:if>
 											</td>
 											<td>${article.cmt_content }</td>
-											<td>${article.regidate }</td>
+											<td>${article.cmt_regdate }</td>
 											<td>수정 | 삭제</td>							
 										</tr>
 									</c:forEach>
@@ -314,7 +314,7 @@
 								</thead>
 								
 								<tbody>
-									<c:forEach var="article" items="${itemReviewList }" varStatus="articleNum">=
+									<c:forEach var="article" items="${itemReviewList }" varStatus="articleNum">
 										<tr>
 											<td>${articleNum.count }</td>
 											<td><a href="${contextPath}/item/itemDetail.do?class_code=${article.cmt_item}">${article.item_name}</a></td>
@@ -339,8 +339,8 @@
 												</c:if>
 											</td>
 											<td>${article.cmt_content }</td>
-											<td>${article.regidate }</td>
-											<td>수정 | 삭제</td>							
+											<td>${article.cmt_regdate }</td>
+											<td><input type="button" value="삭제"></td>							
 										</tr>
 									</c:forEach>
 								</tbody>

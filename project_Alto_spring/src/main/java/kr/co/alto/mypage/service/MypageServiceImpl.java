@@ -213,7 +213,10 @@ public class MypageServiceImpl implements MypageService {
 		
 		List<ReviewDTO> classReviewList = classDAO.userReviewList(mem_id);
 		List<kr.co.alto.item.dto.ReviewDTO> itemReviewList = itemDAO.userReviewList(mem_id);
-				
+		
+		reviewList.put("classReviewList", classReviewList);
+		reviewList.put("itemReviewList", itemReviewList);
+		
 		return reviewList;
 	}	
 	
