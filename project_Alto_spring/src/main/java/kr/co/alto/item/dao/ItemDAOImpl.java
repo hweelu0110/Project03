@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.alto.item.dto.ImageDTO;
 import kr.co.alto.item.dto.ItemDTO;
+import kr.co.alto.item.dto.ReviewDTO;
 
 
 @Repository("itemDAO")
@@ -114,5 +115,10 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public List<ItemDTO> keywordItem(String keyword) throws DataAccessException {
 		return sqlSession.selectList("mapper.item.keywordSearch", keyword);
+	}
+
+	@Override
+	public List<ReviewDTO> userReviewList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.item.userReviewList", mem_id);
 	}
 }

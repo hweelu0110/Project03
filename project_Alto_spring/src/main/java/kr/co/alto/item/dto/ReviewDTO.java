@@ -12,12 +12,14 @@ cmt_regdate		DATE			DEFAULT sysdate NOT NULL
 */
 public class ReviewDTO {
 
-	public String cmt_num;
-	public String cmt_writer;
-	public String cmt_star;
-	public String cmt_content;
-	public String cmt_item;
-	public Date cmt_regdate;
+	private String cmt_num;
+	private String cmt_writer;
+	private String cmt_writer_name;
+	private String cmt_star;
+	private String cmt_content;
+	private String cmt_item;
+	private Date cmt_regdate;
+	private String item_name;
 	
 	public String getCmt_num() {
 		return cmt_num;
@@ -55,6 +57,22 @@ public class ReviewDTO {
 	public void setCmt_regdate(Date cmt_regdate) {
 		this.cmt_regdate = cmt_regdate;
 	}
+	public String getCmt_writer_name() {
+		return cmt_writer_name;
+	}
+	public void setCmt_writer_name(String cmt_writer_name) {
+		this.cmt_writer_name = cmt_writer_name;
+	}
+	public void setCmt_item(String cmt_item) {
+		this.cmt_item = cmt_item;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	
 	
 	
 }

@@ -35,10 +35,12 @@
  	<resultMap id="classReviewResult" type="classReviewDTO">
 	  <result property="cmt_num" column="cmt_num" />
 	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_writer_name" column="cmt_writer_name" />
 	  <result property="cmt_star" column="cmt_star" />
 	  <result property="cmt_content" column="cmt_content" />
 	  <result property="cmt_class" column="cmt_class" />
 	  <result property="cmt_regdate" column="cmt_regdate" />
+	  <result property="className" column="className" />
  	</resultMap>
  	
 	
@@ -193,9 +195,10 @@
 	
 	<!-- 리뷰 -->
 	<select id="selectAllreviewList" resultMap="classReviewResult" parameterType="String">
-		SELECT c.CLASSNAME, cr.*
-		FROM ALTO_CLASS_REVIEW cr, ALTO_CLASS c
+		SELECT c.CLASSNAME, m.MEM_NAME as cmt_writer_name, cr.*
+		FROM ALTO_CLASS_REVIEW cr, ALTO_CLASS c, ALTO_MEMBER m
 		WHERE c.CLASS_CODE = cr.CMT_CLASS
+		AND m.MEM_ID = CMT_WRITER
 		AND c.CLASS_CODE = ${class_code}
 	</select>
 	
@@ -206,6 +209,13 @@
 			VALUES(seq_class_review.NEXTVAL, #{cmt_writer}, #{CMT_STAR}, #{CMT_CONTENT}, #{cmt_class})
 		]]>      
 	</insert>
+	
+	<select id="userReviewList" resultMap="classReviewResult" parameterType="String">
+		SELECT r.*, c.CLASSNAME 
+		FROM ALTO_CLASS_REVIEW r, ALTO_CLASS c
+		WHERE CMT_WRITER = #{mem_id}
+		AND r.CMT_CLASS = c.CLASS_CODE
+	</select>
 	
 	<delete id="deleteClassReview">
 		DELETE FROM EZEN.ALTO_CLASS_REVIEW

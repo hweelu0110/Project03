@@ -32,4 +32,5 @@ public interface MypageController {
 	public void deletLike(String codeNum, String codeType, HttpServletRequest request, HttpSession httpSession) throws Exception;
 
 	public ModelAndView myAddItem(HttpServletRequest request, HttpSession httpSession) throws Exception;
+	public ModelAndView myReviewList(HttpServletRequest request, HttpSession httpSession) throws Exception;
 }

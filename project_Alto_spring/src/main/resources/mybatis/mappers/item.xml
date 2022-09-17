@@ -29,10 +29,12 @@
 	<resultMap id="itemReviewResult" type="itemReviewDTO">
 	  <result property="cmt_num" column="cmt_num" />
 	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_writer_name" column="cmt_writer_name" />
 	  <result property="cmt_star" column="cmt_star" />
 	  <result property="cmt_content" column="cmt_content" />
 	  <result property="cmt_item" column="cmt_item" />
 	  <result property="cmt_regdate" column="cmt_regdate" />
+	  <result property="item_name" column="item_name" />
  	</resultMap>
 	
 	
@@ -172,12 +174,12 @@
 	
 	<!-- 리뷰 -->
 	<select id="selectAllreviewList" resultMap="itemReviewResult" parameterType="String">
-		SELECT i.ITEM_NAME, cr.*
-		FROM ALTO_ITEM_REVIEW cr, ALTO_ITEM i
-		WHERE i.item_CODE = cr.CMT_ITEM
+		SELECT i.ITEM_NAME, m.MEM_NAME as cmt_writer_name, cr.*
+		FROM ALTO_ITEM_REVIEW cr, ALTO_ITEM i, ALTO_MEMBER m
+		WHERE i.ITEM_CODE = cr.CMT_ITEM
+		AND m.MEM_ID = CMT_WRITER
 		AND i.ITEM_CODE = ${item_code}
 	</select>
-	
 	
 	<insert id="insertNewItemReview"  parameterType="java.util.Map">
 		<![CDATA[
@@ -191,6 +193,12 @@
 		DELETE FROM EZEN.ALTO_ITEM_REVIEW
 		WHERE CMT_NUM = #{cmt_num}
 	</delete>
+	
+	<select id="userReviewList" resultMap="itemReviewResult" parameterType="String">
+		SELECT *
+		FROM ALTO_ITEM_REVIEW r
+		WHERE CMT_WRITER = #{mem_id}
+	</select>
 	
 	<!-- 마이페이지 관심 취미용품 목록 -->
 	<select id="selectLikeItemList" parameterType="String" resultMap="itemResult">

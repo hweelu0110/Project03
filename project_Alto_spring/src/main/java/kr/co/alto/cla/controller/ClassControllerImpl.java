@@ -467,9 +467,9 @@ public class ClassControllerImpl implements ClassController {
 			reviewMap.put(name,value);
 		}
 		
-		HttpSession session = request.getSession();
-		String cmt_writer = (String) session.getAttribute("mem_name_s");
-		reviewMap.put("cmt_writer", cmt_writer);
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		reviewMap.put("cmt_writer", mem_id);
 		
 
 		String message;

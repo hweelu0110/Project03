@@ -11,9 +11,12 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.cla.dao.ClassDAO;
 import kr.co.alto.cla.dto.ClassDTO;
+import kr.co.alto.cla.dto.ReviewDTO;
 import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.item.dao.ItemDAO;
 import kr.co.alto.item.dto.ItemDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
@@ -22,9 +25,15 @@ import kr.co.alto.mypage.dto.likeDTO;
 @Service("mypageService")
 @Transactional(propagation = Propagation.REQUIRED)
 public class MypageServiceImpl implements MypageService {
+	
 	@Autowired
 	private MypageDAO mypageDAO;
 
+	@Autowired
+	private ClassDAO classDAO;
+	
+	@Autowired
+	private ItemDAO itemDAO;
 	
 	@Override
 	public Map<String, Object> selectMyList(String mem_id) throws Exception {
@@ -195,6 +204,17 @@ public class MypageServiceImpl implements MypageService {
 		addList.put("itemList", itemList);
 		
 		return addList;
+	}
+
+	@Override
+	public Map<String, Object> selectReviewList(String mem_id) throws Exception {
+
+		Map<String, Object> reviewList = new HashMap<>();
+		
+		List<ReviewDTO> classReviewList = classDAO.userReviewList(mem_id);
+		List<kr.co.alto.item.dto.ReviewDTO> itemReviewList = itemDAO.userReviewList(mem_id);
+				
+		return reviewList;
 	}	
 	
 }

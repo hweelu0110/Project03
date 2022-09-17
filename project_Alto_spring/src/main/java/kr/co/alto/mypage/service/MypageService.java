@@ -34,6 +34,7 @@ public interface MypageService {
 	
 	public Map<String, Object> myMainList(String mem_id) throws Exception;
 	public Map selectAddItemList(String mem_id) throws Exception;
+	public Map<String, Object> selectReviewList(String mem_id) throws Exception;
 		
 	
 }
