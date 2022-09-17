@@ -320,15 +320,19 @@ public class AlbumControllerImpl implements AlbumController {
 		
 		//수정시 새로 추가된 이미지 수
 		int add_img_num = fileList.size();
-		
-		
+				
 		//기존 이미지 수
-		int pre_img_num = oldName.length;
+		int pre_img_num = 0;
+		if(oldName != null) {
+			pre_img_num = oldName.length;
+		}
+		
 		
 		albumMap.put("add_file_num", add_img_num);
 		albumMap.put("pre_file_num", pre_img_num);
 		
 		System.out.println("새로추가 ? "+ add_img_num + "기존 ? " + pre_img_num);
+		System.out.println("fileList?? " + fileList.get(0));
 		
 		List<ImageDTO> imageFileList = new ArrayList<>();
 		List<ImageDTO> modAddImageFileList = new ArrayList<>();

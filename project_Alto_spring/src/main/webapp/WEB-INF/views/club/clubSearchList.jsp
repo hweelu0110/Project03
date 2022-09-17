@@ -267,7 +267,7 @@
 								<span class="memNum">${club.member_num}명</span>
 								<c:if test="${club.schedule ne null }">
 									<p class="club_schedule">
-										<span class="s_icon"></span><span><fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+										<span class="s_icon"></span><span><fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
 										<span class="s_icon2"></span><span>${club.place}</span>
 									</p>
 								</c:if>
@@ -311,7 +311,7 @@
 								<span class="memNum">${club.member_num}명</span>
 								<c:if test="${club.schedule ne null }">
 									<p class="club_schedule">
-										<span class="s_icon"></span><span><fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+										<span class="s_icon"></span><span><fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
 										<span class="s_icon2"></span><span>${club.place}</span>
 									</p>
 								</c:if>

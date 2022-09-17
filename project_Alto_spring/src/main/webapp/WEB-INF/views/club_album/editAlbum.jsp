@@ -15,17 +15,12 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="${path}/resources/css/club/album.css" />
 	<script src="${path}/resources/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript">
-		function backToList(obj) {
-			obj.action = "${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}"
-			obj.submit()
-		}
-			
-		//수정등록 버튼 클릭시 컨트롤러에게 수정 데이터를 전송 
+		 
 		function fn_modify_article(obj) {
 			obj.action = "${path}/club_album/modAlbum.do?album_num=${album.album_num}&cate=${cate}&tit=${tit}"
 			obj.submit()
@@ -56,9 +51,9 @@
 			})
 		}
 		
-		(function($){
+		$(function(){
 			  
-			  var $fileBox = null;
+			  let $fileBox = null;
 			  
 			  $(function() {
 			    init();
@@ -90,7 +85,7 @@
 			    })
 			  }
 			  
-			})(jQuery);
+			})
 	</script>
 </head>
 <body>
@@ -137,8 +132,8 @@
 												
 											<div class="input-file imgEdit">
 												<input type="text" readonly="readonly" class="file-name" value="${item.imageFileName}" />
-												<label for="upload0${status.count}" class="editOp">이미지 변경</label>											
-												<input type="file" name="file${status.index}" id="upload0${status.index}" class="file-upload" />												
+												<%-- <label for="upload0${status.count}" class="file-label">찾아보기</label> --%>										
+												<input type="file" name="file${status.count}" id="upload0${status.count}" class="file-upload" />												
 						  						
 												<input type="button" value="이미지 삭제" class="editOp"
 														onclick="fn_removeModImage(${item.imageFileNo}, ${item.album_num}, '${item.imageFileName}', ${status.count})">
@@ -156,6 +151,23 @@
 										</div>									
 									</c:forEach>
 								</c:when>
+								<c:otherwise>
+									<div class="input-file">
+				  						<input type="text" readonly="readonly" class="file-name" />
+									  	<label for="upload01" class="file-label">찾아보기</label>
+									  	<input type="file" name="file1" id="upload01" class="file-upload" />
+									</div>
+									<div class="input-file">
+				  						<input type="text" readonly="readonly" class="file-name" />
+									  	<label for="upload02" class="file-label">찾아보기</label>
+									 	<input type="file" name="file2" id="upload02" class="file-upload" />
+									</div>
+									<div class="input-file">
+				  						<input type="text" readonly="readonly" class="file-name" />
+									  	<label for="upload03" class="file-label">찾아보기</label>
+									  	<input type="file" name="file3" id="upload03" class="file-upload" />
+									</div>
+								</c:otherwise>
 							</c:choose>
 						</td>									
 					</tr>
@@ -171,8 +183,8 @@
 				</table>
 					
 				<div id="tr_btn" class="align_right">
-						<input type="button" class="pointBtn" value="수정등록" onclick="fn_modify_article(frmAlbum)" />
-						<input type="button" class="basicBtn" value="취소" onclick="backToList(frmAlbum)" />
+					<input type="button" class="pointBtn" value="수정등록" onclick="fn_modify_article(frmAlbum)" />
+					<input type="button" class="basicBtn" value="취소" onclick="location.href='${path}/club_album/albumList.do?club_code=${club_code}&cate=${cate}&tit=${tit}'" />					
 				</div>
 			</form>
 		</div>

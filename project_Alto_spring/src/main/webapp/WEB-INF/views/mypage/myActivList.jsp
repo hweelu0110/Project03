@@ -130,14 +130,16 @@
 						<ul class="club">
 							<c:forEach var="club" items="${clubList}">
 								<li>
-									<c:choose>
-										<c:when test="${club.img == 'noImg'}">
-											<img class="club_img" src="${path}/resources/img/club_noImg.png">
-										</c:when>
-										<c:otherwise>
-											<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
-										</c:otherwise>
-									</c:choose>
+									<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${club.club_code}">
+										<c:choose>
+											<c:when test="${club.img == 'noImg'}">
+												<img class="club_img" src="${path}/resources/img/club_noImg.png">
+											</c:when>
+											<c:otherwise>
+												<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
+											</c:otherwise>
+										</c:choose>
+									</a>
 									<span class="area">${club.area_name}</span>
 									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${club.cate_m}.png" /></span>
 									<p class="club_name">${club.title}</p>
