@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.alto.member.dto.MemberDTO;
+import kr.co.alto.mypage.service.MypageService;
 import kr.co.alto.order.dto.Criteria;
 import kr.co.alto.order.dto.OrderDTO;
 import kr.co.alto.order.dto.OrderPageDTO;
@@ -29,6 +30,9 @@ public class OrderContollerImpl implements OrderController {
 
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private MypageService mypageService;
 
 	@Override
 	@RequestMapping(value = "/order/orderPage.do", method = RequestMethod.GET)
@@ -92,7 +96,10 @@ public class OrderContollerImpl implements OrderController {
 		
 		List<OrderDTO> orderList = orderService.selectOrderList(listMap);
 		
+		Map<String, Object> mylikeMap = mypageService.selectAllLikeList(mem_id);
+		
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("mylikeMap", mylikeMap);
 		mav.addObject("orderList", orderList);
 		mav.addObject("pageMarker", pageMarker);
 		mav.addObject("cri", cri);

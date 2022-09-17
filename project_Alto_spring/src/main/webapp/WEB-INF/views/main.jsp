@@ -398,7 +398,7 @@
 			      <c:forEach var="classListBest" items="${classListBest }">
 			      	<div class="swiper-slide">
 			      		<a href="${path}/class/classDetail.do?class_code=${classListBest.class_code}">
-							<img class="class_img" src="${path}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
+						<img class="class_img" src="${path}/download.do?imgName=${classListBest.imgName}&class_code=${classListBest.class_code}" />
 						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.class_code eq classListBest.class_code}">
@@ -442,7 +442,7 @@
 			      	<div class="swiper-slide">
 				      	<a href="${path}/item/itemDetail.do?item_code=${itemListBest.item_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${itemListBest.imgName}&item_code=${itemListBest.item_code}" />
-						
+						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.item_code eq itemListBest.item_code}">
 								<c:set var="in" value="true" />
@@ -465,7 +465,7 @@
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListBest.item_code}" />
-					</a>
+					
 					</div>
 			    </c:forEach>		    
 			    
@@ -567,7 +567,7 @@
 			      	<div class="swiper-slide">
 				      	<a href="${path}/item/itemDetail.do?item_code=${itemListNew.item_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${itemListNew.imgName}&item_code=${itemListNew.item_code}" />
-						
+						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.item_code eq itemListNew.item_code}">
 								<c:set var="in" value="true" />
@@ -590,7 +590,7 @@
 						</div>
 						
 						<input type="hidden" name="item_code" id="item_code" value="${itemListNew.item_code}" />
-					</a>
+					
 					</div>
 			    </c:forEach>
 			    
@@ -622,7 +622,7 @@
 			      	<div class="swiper-slide">
 			      		<a href="${path}/class/classDetail.do?class_code=${classListNew.class_code}">
 						<img class="class_img" src="${path}/download.do?imgName=${classListNew.imgName}&class_code=${classListNew.class_code}" />
-						
+						</a>
 						<c:forEach var="like" items="${likeList}">
 							<c:if test="${like.class_code eq classListNew.class_code}">
 								<c:set var="in" value="true" />
@@ -646,7 +646,7 @@
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
-					</a>
+					
 					</div>
 			      </c:forEach>      
 			      

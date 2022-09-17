@@ -128,7 +128,7 @@ CREATE TABLE alto_club(
 	manager	 	varchar2(100) NOT NULL,
 	member_num	NUMBER DEFAULT 1 NOT NULL,
 	member_max	NUMBER DEFAULT 200 NOT NULL,
-	img 		varchar2(500) NOT NULL DEFAULT 'club_noImg.png',
+	img 		varchar2(500) NOT NULL DEFAULT 'noImg',
 	intro 		varchar2(1000) NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,
 	member_out 	NUMBER DEFAULT 0 NOT NULL,

@@ -40,4 +40,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/mypage/myActivList.jsp" />		
 	</definition>
 	
+	<definition name="/mypage/myAddItem" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/myAddItem.jsp" />		
+	</definition>
+	
+	<definition name="/mypage/myReview" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/mypage/myReview.jsp" />		
+	</definition>
+	
 </tiles-definitions>

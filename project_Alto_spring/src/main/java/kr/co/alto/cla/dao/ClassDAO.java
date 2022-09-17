@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.cla.dto.ImageDTO;
+import kr.co.alto.cla.dto.ReviewDTO;
 
 public interface ClassDAO {
 
@@ -21,4 +22,5 @@ public interface ClassDAO {
 	public List selectReviewList(String class_code) throws DataAccessException;
 	public int insertNewClassreview(Map reviewMap) throws DataAccessException;
 	public int deleteClassReview(String cmt_num) throws DataAccessException;
+	public List<ReviewDTO> userReviewList(String mem_id) throws DataAccessException;
 }
