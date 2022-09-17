@@ -13,6 +13,15 @@
 		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
 	</definition>
 	
+	<definition name="tiles-layout-club" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
+		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		
+		<put-attribute name="header" value="/WEB-INF/views/layout/header-club.jsp" />
+		<put-attribute name="body" value="" />		
+		<put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+		<put-attribute name="common_popup" value="/WEB-INF/views/layout/common_popup.jsp" />
+	</definition>
+	
 	<definition name="tiles-layout-class" template="/WEB-INF/views/layout/layout.jsp">
 		<put-attribute name="title" value="AlTo - 혼자, 다같이 Alone Together" />
 		<put-attribute name="headinfo" value="/WEB-INF/views/layout/headinfo.jsp" />		

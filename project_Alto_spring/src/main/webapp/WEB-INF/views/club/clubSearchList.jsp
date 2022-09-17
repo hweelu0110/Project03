@@ -22,18 +22,32 @@
 	<script src="${path}/resources/js/club_open.js"></script>
 	<script type="text/javascript">
 		function fn_sortList(sortType) {
-			alert(sortType)
 			let searchFrm = document.searchList
+			let sort = document.getElementById("sort")
+			
+			sort.value = sortType
 			searchFrm.method = 'get'				
-			searchFrm.action = '${path}/club/clubSearchList.do?sort='+sortType+'&hobbyC=${searchMap.hobbyC}&keyword=${searchMap.keyword}'
+			searchFrm.action = '${path}/club/clubSearchList.do?hobbyC=${searchMap.hobbyC}&keyword=${searchMap.keyword}'
 			searchFrm.submit()
 		}
 		
 		$(function() {			
-			/* 모임 메인에서 카테고리 선택 진입 시 */
-			/* let text = $("#tab_menu li:nth-child(1) span").text().trim()
-			$("#tab_menu li:nth-child(1) span").text(text) */
-						
+			/* select option */
+			let sortVal = $("#sort").val()
+			
+			if(sortVal == ' ' || sortVal == 'new') {
+				$("#selectBoxArea div:eq(0)").text('신규 모임순')
+			}else if(sortVal == 'old') {
+				$("#selectBoxArea div:eq(0)").text('오래된 모임순')
+			}else if(sortVal == 'fast') {
+				$("#selectBoxArea div:eq(0)").text('최근 일정순')
+			}else if(sortVal == 'stuU') {
+				$("#selectBoxArea div:eq(0)").text('회원수 많은순')
+			}else if(sortVal == 'stuD') {
+				$("#selectBoxArea div:eq(0)").text('회원수 적은순')
+			}
+			
+			/* 모임 메인에서 카테고리 선택 진입 시 */						
 			let _hobbyC = '${hobbyC}'
 			if (_hobbyC != "" || _hobbyC != null) {
 				$.ajax({
@@ -72,23 +86,37 @@
 		
 		<div id="tab_area">
 			<form action="${path}/club/clubSearchList.do" name="searchList">
+				<input type="hidden" name="sort" id="sort" value="${searchMap.sort}" />
 				<div id="m_cate">
 					<ul>
-						<li id="m_cate_all" class="all">
-							<input type="hidden" value="all" />
-							전체
-						</li>
+						<c:choose>
+							<c:when test="${searchMap.allhobbys}">
+								<li id="m_cate_all" class="all select">
+									<input type="hidden" value="all" name="hobbyCode" />
+									전체
+								</li>	
+							</c:when>
+							<c:otherwise>
+								<li id="m_cate_all" class="all">
+									<input type="hidden" value="all" />
+									전체
+								</li>
+							</c:otherwise>
+						</c:choose>
+						
 						<c:forEach var="hobby" items="${allHobbyList}">	
 							<c:choose>
 								<c:when test="${hobby.hobby_code eq hobbyC}">
 									<c:set var="in" value="true" />
 								</c:when>
 								<c:otherwise>
-									<c:forEach var="hobbyCode" items="${searchMap.hobbyCodeList}">
-										<c:if test="${hobby.hobby_code eq hobbyCode}">
-											<c:set var="in" value="true" />
-										</c:if>
-									</c:forEach>
+									<c:if test="${searchMap.hobbyCodeList ne null}">
+										<c:forEach var="hobbyCode" items="${searchMap.hobbyCodeList}">
+											<c:if test="${hobby.hobby_code eq hobbyCode}">
+												<c:set var="in" value="true" />
+											</c:if>
+										</c:forEach>
+									</c:if>									
 								</c:otherwise>
 							</c:choose>					
 							<c:if test="${hobby.hobby_code eq hobbyC}">
@@ -191,9 +219,7 @@
 										</c:otherwise>	
 									</c:choose>
 								</c:otherwise>							
-							</c:choose>
-													
-																		
+							</c:choose>																		
 						</c:forEach>
 					</ul>
 				</div>
@@ -202,14 +228,14 @@
 		</div>
 		
 		<div id="selectBoxArea">
-			<div class="selectBox">Best순</div>
+			<div class="selectBox">신규 모임순</div>
 			<div class="selectBox select_list">
 				<ul>
-					<li><a href="javascript:fn_sortList('stuU')">회원수 많은</a></li>
-					<li><a href="javascript:fn_sortList('stuD')">회원수 적은</a></li>
-					<li><a href="javascript:fn_sortList('fast')">최근 일정</a></li>
-					<li><a href="javascript:fn_sortList('new')">신규</a></li>
-					<li><a href="javascript:fn_sortList('old')">오래된</a></li>
+					<li><a href="javascript:fn_sortList('new')">신규 모임순</a></li>
+					<li><a href="javascript:fn_sortList('old')">오래된 모임순</a></li>
+					<li><a href="javascript:fn_sortList('fast')">최근 일정순</a></li>
+					<li><a href="javascript:fn_sortList('stuU')">회원수 많은순</a></li>
+					<li><a href="javascript:fn_sortList('stuD')">회원수 적은순</a></li>					
 				</ul>
 			</div>
 		</div>
