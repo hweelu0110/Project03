@@ -33,6 +33,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.common.base.BaseController;
 import kr.co.alto.hobby.dto.HobbyDTO;
 import kr.co.alto.member.controller.MemberController;
@@ -329,6 +331,28 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		String mem_id = memberDTO.getMem_id();
 		
 		mypageService.deletLike(codeNum, codeType, mem_id);		
+	}
+
+	@Override
+	@RequestMapping(value = "/myAddItem.do", method = RequestMethod.GET)
+	public ModelAndView myAddItem(HttpServletRequest request, HttpSession httpSession) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String viewName = (String) request.getAttribute("viewName");
+		
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		
+		Map<String, Object> mylikeMap = mypageService.selectAllLikeList(mem_id);
+		mav.addObject("mylikeMap", mylikeMap);
+		
+		Map addList = mypageService.selectAddItemList(mem_id);
+		mav.addObject("addList", addList);
+		
+		mav.setViewName(viewName);
+		
+		return mav;
 	}
 
 	

@@ -136,7 +136,7 @@
 				<tr>
 					<td width="10%"><b>개설자</b></td>
 					<td colspan="2" width="40%">
-						<input type="text" name="manager" value="${mem_name_s }" readonly="readonly" />
+						<input type="text" name="manager" value="${mem_id }" readonly="readonly" />
 					</td>
 					<td width="10%"><b>참여금액</b></td>
 					<td colspan="2" width="40%">

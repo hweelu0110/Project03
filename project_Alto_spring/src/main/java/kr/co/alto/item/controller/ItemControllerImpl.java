@@ -160,9 +160,9 @@ public class ItemControllerImpl implements ItemController {
 		}
 		
 		HttpSession session = multipartRequest.getSession();
-//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-//		String id = memberDTO.getId();
-//		classMap.put("id", id);
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		itemMap.put("mem_id", mem_id);
 		
 		List<String> fileList = upload(multipartRequest);
 		
@@ -343,7 +343,7 @@ public class ItemControllerImpl implements ItemController {
 			}
 			message = "<script>";
 			message += " alert('글이 수정되었습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/item/listItem.do';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/item/itemDetail.do?item_code="+item_code+"';";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, reHttpHeaders, HttpStatus.CREATED);
 			

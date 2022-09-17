@@ -95,6 +95,11 @@ public class ClassControllerImpl implements ClassController {
 
 		ModelAndView mav = new ModelAndView(viewName);
 
+		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("login");
+		String mem_id = memberDTO.getMem_id();
+		mav.addObject("mem_id", mem_id);
+		
 		List<AreaDTO> areaList = areaService.listAreas();
 		mav.addObject("areaList", areaList);
 
@@ -182,9 +187,6 @@ public class ClassControllerImpl implements ClassController {
 		}
 		
 		HttpSession session = multipartRequest.getSession();
-//		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-//		String id = memberDTO.getId();
-//		classMap.put("id", id);
 		
 		List<String> fileList = upload(multipartRequest);
 		
@@ -364,7 +366,7 @@ public class ClassControllerImpl implements ClassController {
 			}
 			message = "<script>";
 			message += " alert('글이 수정되었습니다.');";
-			message += " location.href='"+multipartRequest.getContextPath()+"/class/listClass.do';";
+			message += " location.href='"+multipartRequest.getContextPath()+"/class/classDetail.do?class_code="+class_code+"';";
 			message += "</script>";
 			resEnt = new ResponseEntity(message, reHttpHeaders, HttpStatus.CREATED);
 			

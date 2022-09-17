@@ -181,6 +181,20 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public List<ClubListDTO> selectActivClubList(String mem_id) throws Exception {
 		return mypageDAO.selectActivClubList(mem_id);
+	}
+
+	@Override
+	public Map selectAddItemList(String mem_id) throws Exception {
+		
+		Map<String, Object> addList = new HashMap<>();
+		
+		List<ClassDTO> classList = mypageDAO.selectAddClass(mem_id);
+		List<ItemDTO> itemList = mypageDAO.selectAddItem(mem_id);
+		
+		addList.put("classList", classList);
+		addList.put("itemList", itemList);
+		
+		return addList;
 	}	
 	
 }

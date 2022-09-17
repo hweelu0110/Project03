@@ -33,6 +33,7 @@ public interface MypageService {
 	public void deletLike(String codeNum, String codeType, String mem_id) throws Exception;
 	
 	public Map<String, Object> myMainList(String mem_id) throws Exception;
+	public Map selectAddItemList(String mem_id) throws Exception;
 		
 	
 }

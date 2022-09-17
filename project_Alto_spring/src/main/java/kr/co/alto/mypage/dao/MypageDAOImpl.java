@@ -115,6 +115,16 @@ public class MypageDAOImpl implements MypageDAO {
 		return sqlSession.selectList("mapper.class.selectOrderClassList", mem_id);
 	}
 
+	@Override
+	public List<ClassDTO> selectAddClass(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.selectAddClass", mem_id);
+	}
+
+	@Override
+	public List<ItemDTO> selectAddItem(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.item.selectAddItem", mem_id);
+	}
+
 	
 
 	

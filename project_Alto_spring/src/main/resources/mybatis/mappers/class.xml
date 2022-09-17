@@ -239,5 +239,11 @@
 		WHERE A.CLASS_CODE = B.CLASS_CODE AND B.AREA_CODE = C.AREA_CODE AND B.HOBBY_CODE = D.HOBBY_CODE
 		AND A.MEM_ID = #{mem_id}
 	</select>
+	
+	<select id="selectAddClass" resultMap="classResult">
+		SELECT *
+		FROM ALTO_CLASS c
+		WHERE c.MANAGER = #{mem_id}
+	</select>
 </mapper>
 

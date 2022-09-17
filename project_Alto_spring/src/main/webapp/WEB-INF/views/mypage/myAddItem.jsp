@@ -6,11 +6,16 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="hobbyList" value="${myActivMap.hobbyList}" />
-<c:set var="areaList" value="${myActivMap.areaList}" />
-<c:set var="likeList" value="${myActivMap.memlikeList}" />
-<c:set var="clubList" value="${myActivMap.clubList}" />
-<c:set var="classList" value="${myActivMap.classList}" />
+<c:set var="hobbyList" value="${mylikeMap.hobbyList}" />
+<c:set var="areaList" value="${mylikeMap.areaList}" />
+<c:set var="likeList" value="${mylikeMap.memlikeList}" />
+<c:set var="clubList" value="${mylikeMap.clubList}" />
+<c:set var="classList" value="${mylikeMap.classList}" />
+<c:set var="itemList" value="${mylikeMap.itemList}" />
+
+<c:set var="classAddList" value="${addList.classList}" />
+<c:set var="itemAddList" value="${addList.itemList}" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +25,7 @@
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
 	<script type="text/javascript">
 		$(function() {
-			$("#myMenu ul:eq(0)").find("li:eq(0)").addClass("select")
+			$("#myMenu ul:eq(0)").find("li:eq(2)").addClass("select")
 			
 			$("#tab_menu li").click(function() {
 				$(this).addClass("select")
@@ -28,13 +33,13 @@
 			})
 			
 			$("#tab_menu li:eq(0)").click(function() {
-				$("#clubList").css("display","block")
-				$("#classList").css("display","none")
+				$("#classList").css("display","block")
+				$("#itemList").css("display","none")
 			})
 			
 			$("#tab_menu li:eq(1)").click(function() {
-				$("#clubList").css("display","none")
-				$("#classList").css("display","block")
+				$("#classList").css("display","none")
+				$("#itemList").css("display","block")
 			})
 		})
 	</script>
@@ -120,100 +125,57 @@
 		
 		<div id="myPageCont">
 			<ul id="tab_menu">
-				<li class="select">모임</li>
 				<li>클래스</li>
+				<li class="select">취미용품</li>
 			</ul>
 			
-			<div id="clubList">
+			<div id="classList">
 				<div class="normalList">
-					<c:if test="${not empty clubList}">
+					<c:if test="${not empty classAddList}">
 						<ul class="club">
-							<c:forEach var="club" items="${clubList}">
+							<c:forEach var="addClass" items="${classAddList}">
 								<li>
-									<c:choose>
-										<c:when test="${club.img == 'noImg'}">
-											<img class="club_img" src="${path}/resources/img/club_noImg.png">
-										</c:when>
-										<c:otherwise>
-											<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
-										</c:otherwise>
-									</c:choose>
-									<span class="area">${club.area_name}</span>
-									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${club.cate_m}.png" /></span>
-									<p class="club_name">${club.title}</p>
-									<span class="memNum">${club.member_num}명</span>
-									<p class="club_schedule">
-										<span class="s_icon"></span><span>6/11(토)</span>
-										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
-									</p>
-									
-									<c:forEach var="like" items="${likeList}">
-										<c:if test="${like.club_code eq club.club_code}">
-											<c:set var="in" value="true" />
-										</c:if>
-									</c:forEach>
-									<c:choose>
-										<c:when test="${in}">
-											<span class="like_icon select">관심</span>
-											<c:set var="in" value="false" />
-										</c:when>
-										<c:otherwise>
-											<span class="like_icon">관심</span>
-										</c:otherwise>
-									</c:choose>
-									
-									<c:if test="${club.manager == 'Y'}">
-										<span class="manager">모임장</span>
-									</c:if>	
-									
-									<input type="hidden" name="club_code" id="club_code" value="${club.club_code}" />
+									<a href="${path}/class/classDetail.do?class_code=${addClass.class_code}">
+										<img class="club_img" src="${path}/download.do?imgName=${addClass.imgName}&class_code=${addClass.class_code}" />
+									</a>
+									<span class="area">${addClass.area_name}</span>
+									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${addClass.hobby_code}.png" /></span>
+									<p class="club_name">${addClass.className}</p>
+									<p class="hobby_name">${addClass.hobby_name}</p>
+									<div align="center">
+									<a href="${path}/class/editClass.do?class_code=${addClass.class_code}"><input type="button" class="warning" style="background-color: gold;" value="정보 수정"></a>
+									</div>
 								</li>	
 							</c:forEach>					
 						</ul>
 					</c:if>
-					<c:if test="${empty clubList}">
-						<div class="noList">활동 모임이 없습니다.</div>
+					<c:if test="${empty classAddList}">
+						<div class="noList">개설한 클래스가 없습니다.</div>
 					</c:if>	
 				</div>			
 			</div>
 			
-			<div id="classList">
+			<div id="itemList">
 				<div class="normalList">
-					<c:if test="${not empty classList}">
+					<c:if test="${not empty itemAddList}">
 						<ul class="club">
-							<c:forEach var="order" items="${classList}">
+							<c:forEach var="addItem" items="${itemAddList}">
 								<li>
-									<a href="${path}/class/classDetail.do?class_code=${order.class_code}">
-										<img class="club_img" src="${path}/download.do?imgName=${order.imgName}&class_code=${order.class_code}" />
+									<a href="${path}/class/classDetail.do?class_code=${addItem.item_code}">
+										<img class="club_img" src="${path}/download.do?imgName=${addItem.imgName}&item_code=${addItem.item_code}" />
 									</a>
-									<span class="area">${order.area_name}</span>
-									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${order.hobby_code}.png" /></span>
-									<p class="club_name">${order.className}</p>
-									<p class="hobby_name">${order.hobby_name}</p>
-									<p class="class_price"><fmt:formatNumber value="${order.price}" pattern="#,###원" /></p>
-									
-									<c:forEach var="like" items="${likeList}">
-										<c:if test="${like.club_code eq order.class_code}">
-											<c:set var="in" value="true" />
-										</c:if>
-									</c:forEach>
-									<c:choose>
-										<c:when test="${in}">
-											<span class="like_icon select">관심</span>
-											<c:set var="in" value="false" />
-										</c:when>
-										<c:otherwise>
-											<span class="like_icon">관심</span>
-										</c:otherwise>
-									</c:choose>
-																		
-									<input type="hidden" name="class_code" id="class_code" value="${order.class_code}" />
+									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${addItem.hobby_code}.png" /></span>
+									<p class="club_name">${addItem.item_name}</p>
+									<p class="hobby_name">${addItem.hobby_name}</p>
+									<div align="center">
+									<a href="${path}/item/editItem.do?item_code=${addItem.item_code}"><input type="button" class="warning" style="background-color: gold;" value="정보 수정"></a>
+									</div>
 								</li>	
 							</c:forEach>					
 						</ul>
 					</c:if>
-					<c:if test="${empty classList}">
-						<div class="noList">수강중인 클래스가 없습니다.</div>
+					<c:if test="${empty itemAddList}">
+						<div class="noList">개설한 클래스가 없습니다.</div>
 					</c:if>	
 				</div>			
 			</div>

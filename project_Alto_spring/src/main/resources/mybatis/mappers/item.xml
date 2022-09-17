@@ -17,6 +17,7 @@
 		<result property="imgName" column="imgName" />
 		<result property="intro" column="intro" />
 		<result property="regidate" column="regidate" />
+		<result property="manager" column="manager" />
 	</resultMap>
 	
 	<resultMap id="ItemImgResult" type="itemImageDTO">
@@ -84,12 +85,11 @@
 	</select>
 
 	<!-- 새글 쓰기 -->
-	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/26) -->
 	<insert id="insertNewItem"  parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO EZEN.ALTO_ITEM
-			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY)
-			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity})
+			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY, MANAGER)
+			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity}, #{mem_id})
 		]]>      
 	</insert>
 
@@ -205,5 +205,12 @@
 		WHERE A.ITEM_CODE = B.ITEM_CODE AND B.HOBBY_CODE = C.HOBBY_CODE
 		AND A.MEM_ID = #{mem_id}
 	</select>
+	
+	<select id="selectAddItem" parameterType="String" resultMap="itemResult">
+		SELECT *
+		FROM ALTO_Item i
+		WHERE i.manager = #{mem_id}
+	</select>
+	
 </mapper>
 
