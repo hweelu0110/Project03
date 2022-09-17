@@ -39,6 +39,8 @@ public interface MypageDAO {
 	public void deletLike(Map<String, String> codeNumMap, String mem_id) throws DataAccessException;
 	
 	public List<ClubListDTO> selectActivClubList(String mem_id) throws DataAccessException;
-	public List<ClassDTO> selectOrderClassList(String mem_id) throws DataAccessException;	
+	public List<ClassDTO> selectOrderClassList(String mem_id) throws DataAccessException;
+	public List<ClassDTO> selectAddClass(String mem_id) throws DataAccessException;
+	public List<ItemDTO> selectAddItem(String mem_id) throws DataAccessException;	
 
 }

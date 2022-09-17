@@ -123,6 +123,7 @@
 			<ul>
 				<li><a href="${path}/mypage/myActivList.do">내 취미활동</a></li>
 				<li><a href="${path}/mypage/mylikeList.do">관심목록</a></li>
+				<li><a href="${path}/mypage/myAddItem.do">내 등록상품</a></li>
 			</ul>
 			
 			<h3>구매활동</h3>

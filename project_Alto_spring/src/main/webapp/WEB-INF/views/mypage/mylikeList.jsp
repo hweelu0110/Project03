@@ -112,12 +112,13 @@
 			<ul>
 				<li><a href="${path}/mypage/myActivList.do">내 취미활동</a></li>
 				<li><a href="${path}/mypage/mylikeList.do">관심목록</a></li>
+				<li><a href="${path}/mypage/myAddItem.do">내 등록상품</a></li>
 			</ul>
 			
 			<h3>구매활동</h3>
 			<ul>
-				<li><a href="">장바구니</a></li>
-				<li><a href="">구매 내역</a></li>
+				<li><a href="${path}/mypage/cartClass.do">장바구니</a></li>
+				<li><a href="${path}/order/contractList.do">구매 내역</a></li>
 			</ul>
 			
 			<h3>게시물</h3>
@@ -163,7 +164,7 @@
 							
 						</c:if>
 						<c:if test="${empty clubList}">
-							<li>관심 모임이 없습니다.</li>
+							<div class="noList">관심 모임이 없습니다.</div>
 						</c:if>										
 					</ul>
 				</div>			
