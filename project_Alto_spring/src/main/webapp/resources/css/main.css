@@ -67,17 +67,27 @@
 #member_section div .my_club li .club_name,.my_club li .club_name {
 	position: absolute;
     top: 5px;
+    width: 100px;
     height: 15px;
     font-size: 12px;
     font-weight: 700;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 #member_section div .my_club li .club_schd,.my_club li .club_schd {
 	position: absolute;
     bottom: 5px;
+    width: 85ppx;
     height: 15px;
     font-size: 10px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #member_section div h2.my_area { float: left; margin-right: 10px; }

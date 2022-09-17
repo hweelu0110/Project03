@@ -68,15 +68,34 @@ public class ClubServiceImpl implements ClubService {
 		return clubMainMap;
 	}
 	
+
 	@Override
-	public Map<String, Object> clubSearchList() throws DataAccessException {
+	public List<HashMap<String, Object>> selectTopHobby() throws DataAccessException {
+		return clubDAO.selectTopHobby();
+	}
+	
+	@Override
+	public List<ClubListDTO> selectBestClubList() throws DataAccessException {
+		return clubDAO.selectBestClubList();
+	}
+
+	@Override
+	public List<ClubListDTO> selectNewClubList() throws DataAccessException {
+		return clubDAO.selectNewClubList();
+	}
+	
+	@Override
+	public Map<String, Object> clubSearchList(Map<String, Object> searchMap) throws DataAccessException {
 		Map<String, Object> clubSearchMap = new HashMap<>();
 		
 		List<HobbyDTO> allHobbyList = hobbyDAO.selectAllHobbyList();
-		List<AreaDTO> allAreaList = areaDAO.selectAllAreaList();				
+		List<AreaDTO> allAreaList = areaDAO.selectAllAreaList();	
+		
+		List<ClubListDTO> resultClubList = clubDAO.selectSearchClubList(searchMap);
 		
 		clubSearchMap.put("allHobbyList", allHobbyList);
 		clubSearchMap.put("allAreaList", allAreaList);
+		clubSearchMap.put("resultClubList", resultClubList);
 		
 		return clubSearchMap;
 		
@@ -194,6 +213,6 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubDTO> keywordClub(String keyword) throws Exception {
 		return clubDAO.keywordClub(keyword);
-	}
+	}	
 	
 }

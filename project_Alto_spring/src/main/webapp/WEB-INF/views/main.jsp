@@ -9,6 +9,7 @@
 <c:set var="hobbyList" value="${memInfoMap.hobbyList}" />
 <c:set var="areaList" value="${memInfoMap.areaList}" />
 <c:set var="likeList" value="${memInfoMap.memlikeList}" />
+<c:set var="clubList" value="${memInfoMap.memclubList}" />
 <c:set var="topHobby" value="${mainListMap.topHobby}" />
 <c:set var="bestList" value="${mainListMap.bestClubList}" />
 <c:set var="newList" value="${mainListMap.newClubList}" />
@@ -526,7 +527,12 @@
 							<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${brandnew.cate_m}.png" /></span>
 							<p class="club_name">${brandnew.title}</p>
 							<span class="memNum">${brandnew.member_num}명</span>
-							<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							<c:if test="${brandnew.schedule ne null }">
+								<p class="club_schedule">
+									<span class="s_icon"></span><span><fmt:parseDate value="${brandnew.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+									<span class="s_icon2"></span><span>${brandnew.place}</span>
+								</p>
+							</c:if>							
 						</div>
 						<input type="hidden" name="club_code" id="club_code" value="${brandnew.club_code}" />
 					</div>					
@@ -673,41 +679,21 @@
 		<h4>모임 바로가기 설정</h4>
 		<button type="button" name="closeBtn" class="closeBtn_style">닫기</button>
 		<ul class="my_club">
-			<li class="select">
-				<a href="">
-					<img src="resources/img/hobby_img/hm000001.png">
-					<span class="club_name">뜨개 모임1</span>
-					<span class="club_schd">6/11(화) 일정이름</span>
-				</a>
-			</li>
-			<li class="select">
-				<a href="">
-					<img src="resources/img/hobby_img/hm000002.png">
-					<span class="club_name">운동하자</span>
-					<span class="club_schd">6/22(수) 일정이름2</span>
-				</a>
-			</li>
-			<li class="select">
-				<a href="">
-					<img src="resources/img/hobby_img/hm000003.png">
-					<span class="club_name">캠핑클럽 :: 바깥바람 쐽시다</span>
-					<span class="club_schd">6/25(토) 일정이름3</span>
-				</a>
-			</li>
-			<li>
-				<a href="">
-					<img src="resources/img/hobby_img/hm000010.png">
-					<span class="club_name">사진의 고수</span>
-					<span class="club_schd"></span>
-				</a>
-			</li>
-			<li class="select">
-				<a href="">
-					<img src="resources/img/hobby_img/hm000006.png">
-					<span class="club_name">보컬 트레이닝</span>
-					<span class="club_schd"></span>
-				</a>
-			</li>
+			<c:forEach var="club" items="${clubList}">
+				<li class="select">
+					<a href="${path}/club/clubInfo.do?club_code=${club.club_code}">
+						<img src="${path}/resources/img/hobby_img/${club.cate_m}.png">
+						<span class="club_name">${club.title}</span>
+						<c:if test="${club.schedule ne null }">
+							<span class="club_schd">
+								<fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" />
+								<fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" />
+								${club.place}
+							</span>
+						</c:if>
+					</a>
+				</li>			
+			</c:forEach>			
 		</ul>
 		<button type="button" name="clubQuikBtn" class="basicBtn" onclick="return quickList()" >변경</button>
 	</div>		

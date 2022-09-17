@@ -11,8 +11,10 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.alto.area.dto.AreaDTO;
+import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.club.dto.ClubListDTO;
 import kr.co.alto.hobby.dto.HobbyDTO;
+import kr.co.alto.item.dto.ItemDTO;
 import kr.co.alto.member.dto.MemberDTO;
 import kr.co.alto.mypage.dao.MypageDAO;
 import kr.co.alto.mypage.dto.likeDTO;
@@ -68,12 +70,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	@Override
-	public List<likeDTO> selectLikeList(String mem_id) throws DataAccessException {
+	public List<likeDTO> selectLikeList(String mem_id) throws Exception {
 		return mypageDAO.selectLikeList(mem_id);
 	}
 	
 	@Override
-	public Map<String, Object> selectActivList(String mem_id) {
+	public Map<String, Object> selectActivList(String mem_id) throws Exception {
 		Map<String, Object> myActivMap = new HashMap<>();
 		
 		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
@@ -83,13 +85,15 @@ public class MypageServiceImpl implements MypageService {
 		myActivMap.put("areaList", areaList);
 		
 		List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
-		List<ClubListDTO> clubList = mypageDAO.selectLikeClubList(mem_id);	
+		List<ClubListDTO> clubList = mypageDAO.selectActivClubList(mem_id);
+		List<ClassDTO> classList = mypageDAO.selectOrderClassList(mem_id);
 		
 		myActivMap.put("memlikeList", memlikeList);
 		myActivMap.put("clubList", clubList);
+		myActivMap.put("classList", classList);
 		
 		return myActivMap;
-	}
+	}	
 	
 	@Override
 	public Map<String, Object> selectAllLikeList(String mem_id) throws Exception {
@@ -103,13 +107,13 @@ public class MypageServiceImpl implements MypageService {
 		
 		List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
 		List<ClubListDTO> clubList = mypageDAO.selectLikeClubList(mem_id);				
-		//List<ClassListDTO> classList = mypageDAO.selectLikeClassList(mem_id);	
-		//List<ItemListDTO> itemList = mypageDAO.selectLikeItemList(mem_id);	
+		List<ClassDTO> classList = mypageDAO.selectLikeClassList(mem_id);	
+		List<ItemDTO> itemList = mypageDAO.selectLikeItemList(mem_id);	
 		
 		mylikeMap.put("memlikeList", memlikeList);
 		mylikeMap.put("clubList", clubList);
-		//mylikeMap.put("classList", classList);
-		//mylikeMap.put("itemList", itemList);
+		mylikeMap.put("classList", classList);
+		mylikeMap.put("itemList", itemList);
 		
 		return mylikeMap;	
 	}
@@ -153,8 +157,30 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.deletLike(codeNumMap, mem_id);
 	}
 
-	
+	@Override
+	public Map<String, Object> myMainList(String mem_id) throws Exception {
+		Map<String, Object> myMainMap = new HashMap<>();
+		
+		if (!mem_id.equals("")) {
+			List<likeDTO> memlikeList = mypageDAO.selectLikeList(mem_id);		
+			
+			myMainMap.put("memlikeList", memlikeList);
+		}
+		
+		List<ClubListDTO> activClubList = mypageDAO.selectActivClubList(mem_id);
+		List<ClubListDTO> likeClubList = mypageDAO.selectLikeClubList(mem_id);
+		List<ClassDTO> classList = mypageDAO.selectOrderClassList(mem_id);
+		
+		myMainMap.put("activClubList", activClubList);
+		myMainMap.put("likeClubList", likeClubList);
+		myMainMap.put("classList", classList);
+		
+		return myMainMap;
+	}
 
-	
+	@Override
+	public List<ClubListDTO> selectActivClubList(String mem_id) throws Exception {
+		return mypageDAO.selectActivClubList(mem_id);
+	}	
 	
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	request.setCharacterEncoding("utf-8");
 %>
@@ -165,7 +166,13 @@
 							<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${brandnew.cate_m}.png" /></span>
 							<p class="club_name">${brandnew.title}</p>
 							<span class="memNum">${brandnew.member_num}명</span>
-							<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							
+							<c:if test="${brandnew.schedule ne null }">
+								<p class="club_schedule">
+									<span class="s_icon"></span><span><fmt:parseDate value="${brandnew.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
+									<span class="s_icon2"></span><span>${brandnew.place}</span>
+								</p>
+							</c:if>	
 						</div>
 						<input type="hidden" name="club_code" id="club_code" value="${brandnew.club_code}" />
 					</div>					
@@ -243,7 +250,13 @@
 								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
 								<p class="club_name">${top.title}</p>
 								<span class="memNum">${top.member_num}명</span>
-								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+								
+								<c:if test="${top.schedule ne null }">
+									<p class="club_schedule">
+										<span class="s_icon"></span><span><fmt:parseDate value="${top.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
+										<span class="s_icon2"></span><span>${top.place}</span>
+									</p>
+								</c:if>	
 							</div>
 							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
 						</div>					
@@ -290,7 +303,13 @@
 								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
 								<p class="club_name">${top.title}</p>
 								<span class="memNum">${top.member_num}명</span>
-								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+								
+								<c:if test="${top.schedule ne null }">
+									<p class="club_schedule">
+										<span class="s_icon"></span><span><fmt:parseDate value="${top.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
+										<span class="s_icon2"></span><span>${top.place}</span>
+									</p>
+								</c:if>	
 							</div>
 							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
 						</div>					
@@ -337,7 +356,12 @@
 								<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${top.cate_m}.png" /></span>
 								<p class="club_name">${top.title}</p>
 								<span class="memNum">${top.member_num}명</span>
-								<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+								<c:if test="${top.schedule ne null }">
+									<p class="club_schedule">
+										<span class="s_icon"></span><span><fmt:parseDate value="${top.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
+										<span class="s_icon2"></span><span>${top.place}</span>
+									</p>
+								</c:if>	
 							</div>
 							<input type="hidden" name="club_code" id="club_code" value="${top.club_code}" />
 						</div>					
@@ -406,7 +430,13 @@
 							<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${people.cate_m}.png" /></span>
 							<p class="club_name">${people.title}</p>
 							<span class="memNum">${people.member_num}명</span>
-							<p class="club_schedule"><span class="s_icon"></span><span>6/11(토)</span><span class="s_icon2"></span><span>B1 자수공방자수공방</span></p>
+							
+							<c:if test="${people.schedule ne null }">
+								<p class="club_schedule">
+									<span class="s_icon"></span><span><fmt:parseDate value="${people.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="MM/dd(E)" type="date" /></span>
+									<span class="s_icon2"></span><span>${people.place}</span>
+								</p>
+							</c:if>	
 						</div>
 						<input type="hidden" name="club_code" id="club_code" value="${people.club_code}" />
 					</div>					

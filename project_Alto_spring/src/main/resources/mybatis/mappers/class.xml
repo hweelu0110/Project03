@@ -211,5 +211,33 @@
 		DELETE FROM EZEN.ALTO_CLASS_REVIEW
 		WHERE CMT_NUM = #{cmt_num}
 	</delete>
+	
+	<!-- 마이페이지 수강중인 클래스 -->
+	<select id="selectOrderClassList" parameterType="String" resultMap="classResult">
+		<![CDATA[
+			SELECT C.*, D.NAME area_name, E.NAME hobby_name
+			FROM (
+				SELECT B.GOODS_CODE CLASS_CODE
+				FROM ALTO_ORDER A, ALTO_ORDER_ITEM B
+				WHERE A.ORDERID = B.ORDERID AND B.GOODS_TYPE = 'class' AND A.MEMBERID = #{mem_id}
+			) A, ALTO_CLASS C, ALTO_AREA D, ALTO_HOBBY E
+			WHERE A.CLASS_CODE = C.CLASS_CODE AND C.AREA_CODE = D.AREA_CODE AND C.HOBBY_CODE = E.HOBBY_CODE
+		]]>
+	</select>
+	
+	<!-- 마이페이지 관심 클래스 목록 -->
+	<select id="selectLikeClassList" parameterType="String" resultMap="classResult">
+		SELECT A.CLASS_CODE class_code, 
+			   B.CLASSNAME className, 
+		       B.HOBBY_CODE hobby_code, 
+		       D.NAME hobby_name,
+		       B.HOBBY_SUB_CODE hobby_sub_code, 
+		       C.NAME area_name, 
+		       B.PRICE price, 
+		       B.IMGNAME imgName
+		FROM ALTO_LIKE A, ALTO_CLASS B, ALTO_AREA C, ALTO_HOBBY D
+		WHERE A.CLASS_CODE = B.CLASS_CODE AND B.AREA_CODE = C.AREA_CODE AND B.HOBBY_CODE = D.HOBBY_CODE
+		AND A.MEM_ID = #{mem_id}
+	</select>
 </mapper>
 

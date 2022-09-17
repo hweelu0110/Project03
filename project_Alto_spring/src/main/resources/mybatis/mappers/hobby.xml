@@ -105,4 +105,16 @@
 		]]>
 	</select>
 	
+	<!-- 탭메뉴 검색결과 소분류목록 불러오기 -->
+	<select id="selectSubHobbyList2" parameterType="java.util.Map"  resultMap="hobbysubResult">
+		SELECT A.HOBBY_CODE main_code, B.NAME main_name, A.HOBBY_SUB_CODE sub_code, A.NAME sub_name
+		FROM ALTO_HOBBY_SUB A, ALTO_HOBBY B  
+		WHERE A.HOBBY_CODE = B.HOBBY_CODE
+		AND A.HOBBY_CODE IN
+		 <foreach item="item" index="index" collection="hobbyCodeList" open="(" separator="," close=")">
+		 	#{item}
+		 </foreach>
+     	ORDER BY SUB_CODE
+	</select>
+	
 </mapper>

@@ -15,13 +15,13 @@ import kr.co.alto.club.dto.ClubDTO;
 public interface ClubController {
 	
 	public ModelAndView clubMain(HttpServletRequest request, HttpSession httpSession) throws Exception;
-	public ModelAndView clubSearhList(@RequestParam(value="hobby_code", required = false) String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception;
+	public ModelAndView clubSearhList(String hobby_code, HttpServletRequest request, HttpSession httpSession) throws Exception;
 		
-	public ResponseEntity clubRegister(@ModelAttribute("club") ClubDTO clubDTO, HttpServletRequest request, HttpSession httpSession) throws Exception;
+	public ResponseEntity clubRegister(ClubDTO clubDTO, HttpServletRequest request, HttpSession httpSession) throws Exception;
 	
-	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
+	public ModelAndView clubInfo(String club_code, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception;
 	
-	public void download(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response) throws Exception;
+	public void download(String imageFileName, HttpServletResponse response) throws Exception;
 	
 	public ResponseEntity clubInfoEdit(MultipartHttpServletRequest mpRequest, HttpSession httpSession) throws Exception;
 	
