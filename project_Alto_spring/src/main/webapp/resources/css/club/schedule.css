@@ -37,7 +37,7 @@ table a:hover { color: #000; }
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-#clubBoard .promData { width: fit-content; }
+#clubboard .promData { width: fit-content; }
  
 
 #boardFrm { margin-bottom: 20px; }
