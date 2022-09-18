@@ -128,7 +128,7 @@ CREATE TABLE alto_club(
 	manager	 	varchar2(100) NOT NULL,
 	member_num	NUMBER DEFAULT 1 NOT NULL,
 	member_max	NUMBER DEFAULT 200 NOT NULL,
-	img 		varchar2(500) NOT NULL DEFAULT 'noImg',
+	img 		varchar2(500) DEFAULT 'noImg',
 	intro 		varchar2(1000) NOT NULL,
 	regidate 	DATE DEFAULT sysdate NOT NULL,
 	member_out 	NUMBER DEFAULT 0 NOT NULL,
@@ -143,9 +143,6 @@ REFERENCES alto_hobby_sub (hobby_sub_code);
 
 ALTER TABLE alto_club ADD CONSTRAINT club_area_fk FOREIGN KEY (area_code)
 REFERENCES alto_area (area_code);
-
-ALTER TABLE alto_club ADD CONSTRAINT club_member_fk FOREIGN KEY (manager)
-REFERENCES alto_member (mem_id);
 
 -- 모임코드(club_code) 일련번호 시퀀스 객체 생성 --------------------------
 DROP SEQUENCE seq_club_code;
@@ -314,6 +311,9 @@ CREATE TABLE alto_class (
 	teacherInfo		varchar2(1000)	NOT NULL
 );
 
+DROP SEQUENCE seq_class;
+CREATE SEQUENCE seq_class START WITH 100000 INCREMENT BY 1;
+
 ALTER TABLE alto_class ADD CONSTRAINT alto_class_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
 
@@ -347,8 +347,12 @@ CREATE TABLE alto_item (
 	imgName			varchar2(500),
 	intro			varchar2(1000)	NOT NULL,
 	item_count		NUMBER			DEFAULT 0 NOT NULL,
-	quantity		NUMBER			NOT NULL
+	quantity		NUMBER			NOT NULL,
+	manager			varchar2(100)	NOT NULL
 );
+
+DROP SEQUENCE seq_item;
+CREATE SEQUENCE seq_item START WITH 100000 INCREMENT BY 1;
 
 ALTER TABLE alto_item ADD CONSTRAINT alto_item_fk FOREIGN KEY (hobby_code)
 REFERENCES alto_hobby (hobby_code);
@@ -379,6 +383,7 @@ CREATE TABLE alto_class_review (
 	cmt_regdate		DATE			DEFAULT sysdate NOT NULL
 );
 
+DROP SEQUENCE seq_class_review;
 CREATE SEQUENCE seq_class_review START WITH 20 INCREMENT BY 1;
 
 ALTER TABLE alto_class_review ADD CONSTRAINT alto_class_review_fk FOREIGN KEY (cmt_class)
@@ -396,6 +401,7 @@ CREATE TABLE alto_item_review (
 	cmt_regdate		DATE			DEFAULT sysdate NOT NULL
 );
 
+DROP SEQUENCE seq_item_review;
 CREATE SEQUENCE seq_item_review START WITH 20 INCREMENT BY 1;
 
 ALTER TABLE alto_item_review ADD CONSTRAINT alto_item_review_fk FOREIGN KEY (cmt_item)
@@ -412,6 +418,7 @@ CREATE TABLE alto_cart (
 	quantity		number			NOT NULL
 );
 
+DROP SEQUENCE seq_cart;
 CREATE SEQUENCE seq_cart START WITH 10 INCREMENT BY 1;
 
 ALTER TABLE alto_cart ADD CONSTRAINT alto_cart_fk FOREIGN KEY (mem_id)
@@ -430,6 +437,7 @@ CREATE TABLE alto_order (
 	orderDate		DATE 			DEFAULT sysdate NOT NULL
 );
 
+DROP SEQUENCE seq_order;
 CREATE SEQUENCE seq_order START WITH 1000 INCREMENT BY 1;
 
 
@@ -460,8 +468,6 @@ CREATE TABLE alto_club_schedule(
 	,regidate DATE DEFAULT sysdate NOT NULL
 	,CONSTRAINT alto_club_schedule_fk FOREIGN KEY (club_code)
 	REFERENCES alto_club(club_code)
-	,CONSTRAINT alto_club_schedule_member_fk FOREIGN KEY (mem_id)
-	REFERENCES alto_member(mem_id)
 );
 
 

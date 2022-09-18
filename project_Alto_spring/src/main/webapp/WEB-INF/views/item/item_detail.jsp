@@ -241,7 +241,7 @@
 						</form>
 					</div>
 					
-					<table id="review_table">
+					<table id="review_table" style="margin-top: 20px">
 						<tr>
 							<td width="10%">작성자</td>
 							<td width="50%">내용</td>
@@ -278,7 +278,7 @@
 										<td width="10%">${cmt.cmt_regdate }</td>
 										<td width="10%">
 											<c:if test="${cmt.cmt_writer_name == mem_name_s}">
-												<a href="${contextPath}/item/itemReviewRemove.do?item_code=${itemDTO.item_code}&cmt_num=${cmt.cmt_num}">삭제</a>
+												<a href="${contextPath}/item/itemReviewRemove.do?item_code=${itemDTO.item_code}&cmt_num=${cmt.cmt_num}"><input type="button" value="삭제"></a>
 											</c:if>
 										</td>
 									</tr>

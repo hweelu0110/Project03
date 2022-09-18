@@ -222,6 +222,8 @@
 		WHERE CMT_NUM = #{cmt_num}
 	</delete>
 	
+	
+	
 	<!-- 마이페이지 수강중인 클래스 -->
 	<select id="selectOrderClassList" parameterType="String" resultMap="classResult">
 		<![CDATA[

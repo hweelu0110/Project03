@@ -119,7 +119,7 @@
 			
 			<h3>게시물</h3>
 			<ul>
-				<li><a href="">후기 관리</a></li>
+				<li><a href="${path}/mypage/myReview.do">후기 관리</a></li>
 			</ul>
 		</div>		
 		
