@@ -281,7 +281,7 @@
 											</td>
 											<td>${article.cmt_content }</td>
 											<td>${article.cmt_regdate }</td>
-											<td>수정 | 삭제</td>							
+											<td><a href="${contextPath}/class/classReviewRemove.do?class_code=${article.cmt_class}&cmt_num=${article.cmt_num}"><input type="button" value="삭제"></a></td>						
 										</tr>
 									</c:forEach>
 								</tbody>					
@@ -317,7 +317,7 @@
 									<c:forEach var="article" items="${itemReviewList }" varStatus="articleNum">
 										<tr>
 											<td>${articleNum.count }</td>
-											<td><a href="${contextPath}/item/itemDetail.do?class_code=${article.cmt_item}">${article.item_name}</a></td>
+											<td><a href="${contextPath}/item/itemDetail.do?item_code=${article.cmt_item}">${article.item_name}</a></td>
 											<td>
 												<c:if test="${article.cmt_star == 5 }">
 													★★★★★
@@ -340,7 +340,7 @@
 											</td>
 											<td>${article.cmt_content }</td>
 											<td>${article.cmt_regdate }</td>
-											<td><input type="button" value="삭제"></td>							
+											<td><a href="${contextPath}/item/itemReviewRemove.do?item_code=${article.cmt_item}&cmt_num=${article.cmt_num}"><input type="button" value="삭제"></a></td>							
 										</tr>
 									</c:forEach>
 								</tbody>

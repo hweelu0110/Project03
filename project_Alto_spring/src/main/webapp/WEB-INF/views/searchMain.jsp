@@ -41,16 +41,20 @@
 							<c:forEach var="clubList" items="${clubSearch }" end="5">
 								<li>
 									<a href="${contextPath}/club/clubInfo.do?club_code=${clubList.club_code}">
-										<img class="club_img" src="${contextPath}/resources/img/club_test.png" />
+										<c:choose>
+										<c:when test="${club.img == 'noImg'}">
+											<img class="club_img" src="${contextPath}/resources/img/club_noImg.png">
+										</c:when>
+										<c:otherwise>
+											<img class="club_img" src="${contextPath}/club/clubImgDown.do?imageFileName=${clubList.img}" style="height: 170px"/>
+										</c:otherwise>
+									</c:choose>
 									</a>
 									<span class="area">${clubList.area_name}</span>
-									<span class="hobby_icon"><img src="${contextPath}/resources/img/hobby_img/${clubList.cate_m}.png" /></span>
+									<span class="hobby_icon">
+									<img src="${contextPath}/resources/img/hobby_img/${clubList.cate_m}.png" /></span>
 									<p class="club_name">${clubList.title}</p>
 									<span class="memNum">${clubList.member_num}명</span>
-									<p class="club_schedule">
-										<span class="s_icon"></span><span>6/11(토)</span>
-										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
-									</p>
 									
 									<c:forEach var="like" items="${likeList}">
 										<c:if test="${like.club_code eq club.club_code}">
