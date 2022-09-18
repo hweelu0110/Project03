@@ -31,6 +31,7 @@
 		<result property="member_num" column="member_num" />
 		<result property="img" column="img" />
 		<result property="manager" column="manager" />
+		<result property="regidate" column="regidate" />
 	</resultMap>
 	
 	<resultMap type="joinDTO" id="clubMemberResult">
@@ -192,16 +193,22 @@
 	<!-- 마이페이지 -->
 	<!-- 관심 모임 목록 -->
 	<select id="selectLikeClubList" resultType="clubListDTO">
-		SELECT A.CLUB_CODE CLUB_CODE, 
-			   B.TITLE title, 
-		       B.CATE_M cate_m, 
-		       B.CATE_S cate_s, 
-		       C.NAME area_name, 
-		       B.MEMBER_NUM member_num, 
-		       B.IMG img
-		FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
-		WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
-		AND A.MEM_ID = #{mem_id}
+		<![CDATA[
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
+			FROM (
+				SELECT A.CLUB_CODE CLUB_CODE, 
+					   B.TITLE title, 
+				       B.CATE_M cate_m, 
+				       B.CATE_S cate_s, 
+				       C.NAME area_name, 
+				       B.MEMBER_NUM member_num, 
+				       B.IMG img
+				FROM ALTO_LIKE A, ALTO_CLUB B, ALTO_AREA C
+				WHERE A.CLUB_CODE = B.CLUB_CODE AND B.AREA_CODE = C.AREA_CODE
+				AND A.MEM_ID = #{mem_id}
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B 
+			ON A.CLUB_CODE = B.CLUB_CODE
+		]]>
 	</select>
 	
 	<!-- 활동 모임 목록 -->
@@ -367,6 +374,7 @@
 		       A.area_name, 
 		       A.member_num, 
 		       A.img,
+		       A.regidate,
 		       B.SDATE schedule, 
 		       B.SPLACE place 
 		FROM (		
@@ -378,26 +386,22 @@
 			       D.NAME cate_s_name,
 			       B.NAME area_name, 
 			       A.MEMBER_NUM member_num, 
-			       A.IMG img
+			       A.IMG img,
+			       A.REGIDATE regidate
 			FROM ALTO_CLUB A, ALTO_AREA B, ALTO_HOBBY C, ALTO_HOBBY_SUB D
 			WHERE A.AREA_CODE = B.AREA_CODE
 			AND A.CATE_M = C.HOBBY_CODE		
 			AND A.CATE_S = D.HOBBY_SUB_CODE
 			
-			<if test=" hobbyC != null">
-				 <if test=" hobbyC == 'all'">
-				 </if>
-				 <if test="hobbyC != 'all'">
-				 	AND c.HOBBY_CODE = #{hobbyC}
-				 </if>
-			</if>
+			<if test="allhobbys != 'true'">
+				<if test=" hobbyCodeList != null">
+					 AND A.CATE_M IN 
+					 <foreach item="item" index="index" collection="hobbyCodeList" open="(" separator="," close=")">
+					 	#{item}
+					 </foreach>
+				</if>
+			</if>										
 							
-			<if test=" hobbyCodeList != null">
-				 AND A.CATE_M IN 
-				 <foreach item="item" index="index" collection="hobbyCodeList" open="(" separator="," close=")">
-				 	#{item}
-				 </foreach>
-			</if>				
 			<if test=" hobbySubCodeList != null">
 				 AND A.CATE_S IN 
 				 <foreach item="item" index="index" collection="hobbySubCodeList" open="(" separator="," close=")">
@@ -416,17 +420,14 @@
 		) A LEFT JOIN ALTO_CLUB_SCHEDULE B
 		ON A.CLUB_CODE = B.CLUB_CODE
 	
-		<if test="sort == null">
-			ORDER BY A.club_code DESC 
-		</if>
 		<if test="sort == 'new'">
-			ORDER BY A.REGIDATE DESC 
+			ORDER BY A.regidate DESC
 		</if>
 		<if test="sort == 'old'">
-			ORDER BY A.REGIDATE ASC
+			ORDER BY A.regidate ASC
 		</if>
 		<if test="sort == 'fast'">
-			ORDER BY B.schedule DESC
+			ORDER BY B.SDATE ASC
 		</if>
 		<if test="sort == 'stuU'">
 			ORDER BY A.member_num DESC
@@ -444,11 +445,12 @@
 		       A.CATE_S cate_s, 
 		       B.NAME area_name, 
 		       A.MEMBER_NUM member_num, 
-		       A.IMG img
+		       A.IMG img,
+		       A.regidate
 		FROM ALTO_CLUB A, ALTO_AREA B
 		WHERE A.AREA_CODE = B.AREA_CODE
 		AND CATE_M = #{hobby_code}
-		ORDER BY MEMBER_OUT ASC, REGIDATE DESC
+		ORDER BY A.regidate DESC
 	</select>
 	
 	<!-- 키워드 검색 목록 -->

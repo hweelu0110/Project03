@@ -15,6 +15,7 @@ public class ClubListDTO {
 	private String schedule;
 	private String place;
 	private String manager;
+	private String regidate;
 	
 	public ClubListDTO() {}
 
@@ -112,6 +113,14 @@ public class ClubListDTO {
 
 	public void setCate_s_name(String cate_s_name) {
 		this.cate_s_name = cate_s_name;
+	}
+
+	public String getRegidate() {
+		return regidate;
+	}
+
+	public void setRegidate(String regidate) {
+		this.regidate = regidate;
 	}
 	
 	

@@ -118,11 +118,11 @@
 				</div>
 				
 				<div id="tr_btn" class="align_right">
-						<c:if test="${login.mem_id == album.mem_id }">
-							<input type="button" class="basicBtn" value="수정하기" onclick="fn_edit(frmAlbum)" />
-							<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_album/removeAlbum.do?club_code=${club_code}&cate=${cate}&tit=${tit}', ${album.album_num})" />
-						</c:if>
-						<input type="button" class="basicBtn02" value="목록보기" onclick="backToList(frmAlbum)" />
+					<c:if test="${login.mem_id == album.mem_id }">
+						<input type="button" class="basicBtn" value="수정하기" onclick="fn_edit(frmAlbum)" />
+						<input type="button" class="basicBtn" value="삭제하기" onclick="fn_remove_article('${path}/club_album/removeAlbum.do?club_code=${club_code}&cate=${cate}&tit=${tit}', ${album.album_num})" />
+					</c:if>
+					<input type="button" class="basicBtn02" value="목록보기" onclick="backToList(frmAlbum)" />
 				</div>
 				
 			</form>

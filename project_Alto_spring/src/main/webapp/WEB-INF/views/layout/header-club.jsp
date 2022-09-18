@@ -20,8 +20,8 @@
 					<li><a href="${path}/item/itemMain.do">취미용품</a></li>
 				</ul>
 			</nav>
-			<form action="${path}/main/searchMain.do" id="allSearch" name="allSearchForm" method="post">
-				<input type="text" id="allSearch_keyword" name="keyword" placeholder="취미를 검색해보세요!" />
+			<form action="${path}/club/clubSearchList.do" id="allSearch" name="allSearchForm" method="post">
+				<input type="text" id="allSearch_keyword" name="keyword" placeholder="모임을 검색해보세요!" />
 				<input type="submit" id="search_btn" value="검색" />
 			</form> 
 			<c:if test="${not empty login}">

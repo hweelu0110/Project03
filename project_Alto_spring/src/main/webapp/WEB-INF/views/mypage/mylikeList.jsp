@@ -141,22 +141,26 @@
 							
 							<c:forEach var="club" items="${clubList}">
 								<li>
-									<c:choose>
-										<c:when test="${club.img == 'noImg'}">
-											<img class="club_img" src="${path}/resources/img/club_noImg.png">
-										</c:when>
-										<c:otherwise>
-											<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
-										</c:otherwise>
-									</c:choose>
+									<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${club.club_code}">
+										<c:choose>
+											<c:when test="${club.img == 'noImg'}">
+												<img class="club_img" src="${path}/resources/img/club_noImg.png">
+											</c:when>
+											<c:otherwise>
+												<img class="club_img" src="${path}/club/clubImgDown.do?imageFileName=${club.img}" />
+											</c:otherwise>
+										</c:choose>
+									</a>
 									<span class="area">${club.area_name}</span>
 									<span class="hobby_icon"><img src="${path}/resources/img/hobby_img/${club.cate_m}.png" /></span>
 									<p class="club_name">${club.title}</p>
 									<span class="memNum">${club.member_num}명</span>
-									<p class="club_schedule">
-										<span class="s_icon"></span><span>6/11(토)</span>
-										<span class="s_icon2"></span><span>B1 자수공방자수공방</span>
-									</p>
+									<c:if test="${club.schedule ne null }">
+										<p class="club_schedule">
+											<span class="s_icon"></span><span><fmt:parseDate value="${club.schedule}" var="schedule" pattern="yyyy-MM-dd" /><fmt:formatDate value="${schedule}" pattern="yy/MM(E)" type="date" /></span>
+											<span class="s_icon2"></span><span>${club.place}</span>
+										</p>
+									</c:if>
 									<span class="like_icon select">관심</span>																	
 									<input type="hidden" name="club_code" id="club_code" value="${club.club_code}" />
 								</li>	

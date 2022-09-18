@@ -20,7 +20,6 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="${path}/resources/css/club/club.css" />
 	<link rel="stylesheet" href="${path}/resources/css/club/clubInfo.css" />	
 	<script src="${path}/resources/js/club_info.js"></script>
 </head>

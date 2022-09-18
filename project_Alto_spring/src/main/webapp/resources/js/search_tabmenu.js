@@ -9,33 +9,17 @@
 	$("#area_list").css("display","none")	
 	
 	let cateEle = $("#m_cate li.select")
-	let areaEle = $("#area_list li.select")
 	let selCate = $("#m_cate li.select").length
-	let selArea = $("#area_list li.select").length
 		
 	for (let i=0; i<selCate; i++) {
-		if ($("#tab_menu li:nth-child(1) span").text() == "전체 취미"){
+		if (cateEle.eq(0).text().trim() == "전체") {
+			$("#tab_menu li:nth-child(1)").html("<span>전체 취미</span>")
+		}else if ($("#tab_menu li:nth-child(1) span").text() == "전체 취미") {
 			$("#tab_menu li:nth-child(1)").html("")
-			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(0).text()+"</span>");
+			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(0).text().trim()+"</span>");
 		}else {
 			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.find("p").eq(i).text()+"</span>")
 		}
-	}
-		
-	for (let i=0; i<selArea; i++) {
-		if ($("#tab_menu li:nth-child(2) span").text() == "전체 지역"){
-			$("#tab_menu li:nth-child(2)").html("")
-			$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(i).text()+"</span>")
-		}else {
-			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
-		}
-	}
-	
-	if ($("#area_list ul li.all").nextAll().hasClass('select')) {
-		$("#area_list ul li.all").removeClass("select")
-		$("#area_list ul li.online").removeClass("select")
-	}else {
-		$("#area_list ul li.all").addClass("select")
 	}
 	
 	/* 메인카테고리 선택 시 - 해당 소분류 취미 목록 불러오기 */
@@ -128,13 +112,16 @@
 		
 		if ($(this).hasClass('all')) {
 			$(this).siblings().removeClass("select")
+			$(this).siblings().children('input').removeAttr("name")
 		}else {
 			if ($("#m_cate ul li.all").nextAll().hasClass('select')) {
 				$("#m_cate ul li.all").removeClass("select")
+				$("#m_cate ul li.all").children('input').removeAttr("name")
 				$("#s_cate").show()						
 			}else {
 				$("#s_cate").hide()
 				$("#m_cate ul li.all").addClass("select")
+				$("#m_cate ul li.all").children('input').attr('name','hobbyCode')
 			}
 		}
 		
@@ -173,9 +160,11 @@
 		$(this).toggleClass("select")
 		
 		if ($("#s_cate ul").find("li").hasClass('select')) {
-			$("#s_cate ul li.all").removeClass("select")					
+			$("#s_cate ul li.all").removeClass("select")
+			$("#s_cate ul li.all").children('input').removeAttr("name")						
 		}else {
 			$("#s_cate ul li.all").addClass("select")
+			$("#s_cate ul li.all").children('input').attr('name','hobbySubCode')
 		}
 		
 		if($(this).hasClass('select')) {
@@ -192,6 +181,7 @@
 		if ($("#area_list ul li.all").nextAll().hasClass('select')) {
 			$("#area_list ul li.all").removeClass("select")
 			$("#area_list ul li.online").removeClass("select")
+			$("#area_list ul li.online").children('input').removeAttr("name")
 		}else {
 			$("#area_list ul li.all").addClass("select")
 		}

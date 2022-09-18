@@ -4,11 +4,11 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-	<definition name="/club/clubMain" extends="tiles-layout">
+	<definition name="/club/clubMain" extends="tiles-layout-club">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubMain.jsp" />		
 	</definition>
 	
-	<definition name="/club/clubSearchList" extends="tiles-layout">
+	<definition name="/club/clubSearchList" extends="tiles-layout-club">
 		<put-attribute name="body" value="/WEB-INF/views/club/clubSearchList.jsp" />		
 	</definition>
 	

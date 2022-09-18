@@ -28,7 +28,7 @@ table img { margin: 10px 0; width: auto; }
 	width: 172px;
 	height: 172px;
 }
-#clubAlbum li:nth-child(5), #clubAlbum li:nth-child(10) { margin-right: 0; }
+#clubAlbum li:nth-child(5n) { margin-right: 0; }
 #clubAlbum dt { 
 	overflow: hidden;
 	width: 172px;
@@ -95,7 +95,6 @@ table img { margin: 10px 0; width: auto; }
 .editOp {
 	display: inline-block;
     padding: 0 10px;
-    margin: 6px;
     height: 27px;
     line-height: 27px;
     background: #BDBDBD;

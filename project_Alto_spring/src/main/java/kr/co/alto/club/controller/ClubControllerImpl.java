@@ -105,11 +105,29 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		String[] hobbyCodeList = request.getParameterValues("hobbyCode");
 		String[] hobbySubCodeList = request.getParameterValues("hobbySubCode");
 		String[] areaCodeList = request.getParameterValues("areaCode");
+		String keyword = request.getParameter("keyword");
+		String sort = request.getParameter("sort");
+		String allhobbys = "false";
 		
+		//전체검색처리
+		if(hobbyCodeList != null) {
+			System.out.println(hobbyCodeList[0]);
+			if(hobbyCodeList[0].equals("all")) {
+				hobbyCodeList = null;
+				allhobbys = "true";	
+			}			
+		}
+		
+		System.out.println("전체검색?? " + allhobbys);
+				
 		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("hobbyCodeList", hobbyCodeList);
 		searchMap.put("hobbySubCodeList", hobbySubCodeList);
 		searchMap.put("areaCodeList", areaCodeList);
+		searchMap.put("keyword", keyword);
+		searchMap.put("sort", sort);
+		searchMap.put("allhobbys", allhobbys);
+		
 				
 		//로그인 상태인 경우 관심목록 가져오기
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
@@ -282,10 +300,6 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		if(club_img == null) {
 			club_img = oldFileName;
 		}
-		
-		System.out.println("cate_M ? : " + clubInfoMap.get("cate_m"));
-		System.out.println("새로운 클럽이미지 : "+club_img);
-		System.out.println("기존 이미지? : " +oldFileName);
 				
 		String message;
 		ResponseEntity resEnt = null;
