@@ -47,7 +47,13 @@
     text-indent: -9999px;
     cursor: pointer;
 }
-
+#member_section p.noList {
+	margin: 20px;
+	color: #777;
+	text-align: center;
+	font-size: 12px;
+	font-weight: 700;
+}
 #member_section div .my_club li,.my_club li {
 	position: relative;
     background: #fff;

@@ -83,6 +83,13 @@
   object-fit: cover;
 }
 .swiper-slide a.clubImg { width: 215px; height: 115px; }
+.swiper-slide a span.bestBg {
+	display: block;
+    width: 215px;
+    height: 115px;
+    background-color: #000;
+    opacity: 40%;
+}
 
 .swiper-slide span,.swiper-slide p { position: absolute; }
 .swiper-slide .area {
@@ -107,11 +114,16 @@
     height: 21px;
 	bottom: 9px;
     left: 2.5rem;
+    color: #fff;
     font-size: 16px;
     font-weight: 700;
     font-family: 'Noto Sans KR', sans-serif;
     text-align: left;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .swiper-slide .memNum {
 	bottom: 10px;
@@ -217,6 +229,10 @@
     color: #000;
     font-size: 13.5px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 .club .memNum {
 	top: 22px;
