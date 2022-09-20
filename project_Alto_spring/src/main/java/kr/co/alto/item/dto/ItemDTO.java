@@ -31,6 +31,7 @@ public class ItemDTO {
 	private String imgName;
 	private String intro;
 	private Date regidate;
+	private String manager;
 	
 	public String getItem_code() {
 		return item_code;
@@ -103,6 +104,12 @@ public class ItemDTO {
 	}
 	public void setHobby_sub_name(String hobby_sub_name) {
 		this.hobby_sub_name = hobby_sub_name;
+	}
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
 	}
 	
 	

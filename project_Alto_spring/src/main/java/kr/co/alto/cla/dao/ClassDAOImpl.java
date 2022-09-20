@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.cla.dto.ImageDTO;
+import kr.co.alto.cla.dto.ReviewDTO;
 
 @Repository("classDAO")
 public class ClassDAOImpl implements ClassDAO {
@@ -113,4 +114,10 @@ public class ClassDAOImpl implements ClassDAO {
 		return sqlSession.selectList("mapper.class.keywordSearch", keyword);
 	}
 
+	@Override
+	public List<ReviewDTO> userReviewList(String mem_id) throws DataAccessException {
+		return sqlSession.selectList("mapper.class.userReviewList", mem_id);
+	}
+
+	
 }

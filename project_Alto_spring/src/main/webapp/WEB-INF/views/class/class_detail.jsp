@@ -289,7 +289,7 @@
  							<c:when test="${not empty reviewList }">
 		 						<c:forEach var="cmt" items="${reviewList }">
 			 						<tr>
-			 							<td width="10%">${cmt.cmt_writer }</td>
+			 							<td width="10%">${cmt.cmt_writer_name }</td>
 										<td width="50%">${cmt.cmt_content }</td>
 										<td width="20%">
 											<c:if test="${cmt.cmt_star == 5 }">
@@ -313,7 +313,7 @@
 										</td>
 										<td width="10%">${cmt.cmt_regdate }</td>
 										<td width="10%">
-											<c:if test="${cmt.cmt_writer == mem_name_s}">
+											<c:if test="${cmt.cmt_writer_name == mem_name_s}">
 												<a href="${contextPath}/class/classReviewRemove.do?class_code=${classDTO.class_code}&cmt_num=${cmt.cmt_num}">삭제</a>
 											</c:if>
 										</td>

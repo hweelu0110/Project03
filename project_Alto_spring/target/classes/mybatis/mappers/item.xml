@@ -17,6 +17,7 @@
 		<result property="imgName" column="imgName" />
 		<result property="intro" column="intro" />
 		<result property="regidate" column="regidate" />
+		<result property="manager" column="manager" />
 	</resultMap>
 	
 	<resultMap id="ItemImgResult" type="itemImageDTO">
@@ -28,10 +29,12 @@
 	<resultMap id="itemReviewResult" type="itemReviewDTO">
 	  <result property="cmt_num" column="cmt_num" />
 	  <result property="cmt_writer" column="cmt_writer" />
+	  <result property="cmt_writer_name" column="cmt_writer_name" />
 	  <result property="cmt_star" column="cmt_star" />
 	  <result property="cmt_content" column="cmt_content" />
 	  <result property="cmt_item" column="cmt_item" />
 	  <result property="cmt_regdate" column="cmt_regdate" />
+	  <result property="item_name" column="item_name" />
  	</resultMap>
 	
 	
@@ -84,12 +87,11 @@
 	</select>
 
 	<!-- 새글 쓰기 -->
-	<!-- 로그인 기능 구현전이라 아이디값 수기 기재해둠. 나중에 꼭 수정필요(7/26) -->
 	<insert id="insertNewItem"  parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO EZEN.ALTO_ITEM
-			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY)
-			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity})
+			(ITEM_CODE, HOBBY_CODE, HOBBY_SUB_CODE, ITEM_NAME, PRICE, REGIDATE, IMGNAME, INTRO, ITEM_COUNT, QUANTITY, MANAGER)
+			VALUES(#{item_code}, #{cate_m}, #{cate_s}, #{item_name}, #{price}, sysdate , #{isfile5}, #{intro}, 0 , #{quantity}, #{mem_id})
 		]]>      
 	</insert>
 
@@ -172,12 +174,12 @@
 	
 	<!-- 리뷰 -->
 	<select id="selectAllreviewList" resultMap="itemReviewResult" parameterType="String">
-		SELECT i.ITEM_NAME, cr.*
-		FROM ALTO_ITEM_REVIEW cr, ALTO_ITEM i
-		WHERE i.item_CODE = cr.CMT_ITEM
+		SELECT i.ITEM_NAME, m.MEM_NAME as cmt_writer_name, cr.*
+		FROM ALTO_ITEM_REVIEW cr, ALTO_ITEM i, ALTO_MEMBER m
+		WHERE i.ITEM_CODE = cr.CMT_ITEM
+		AND m.MEM_ID = CMT_WRITER
 		AND i.ITEM_CODE = ${item_code}
 	</select>
-	
 	
 	<insert id="insertNewItemReview"  parameterType="java.util.Map">
 		<![CDATA[
@@ -192,6 +194,12 @@
 		WHERE CMT_NUM = #{cmt_num}
 	</delete>
 	
+	<select id="userReviewList" resultMap="itemReviewResult" parameterType="String">
+		SELECT *
+		FROM ALTO_ITEM_REVIEW r
+		WHERE CMT_WRITER = #{mem_id}
+	</select>
+	
 	<!-- 마이페이지 관심 취미용품 목록 -->
 	<select id="selectLikeItemList" parameterType="String" resultMap="itemResult">
 		SELECT A.ITEM_CODE item_code, 
@@ -205,5 +213,12 @@
 		WHERE A.ITEM_CODE = B.ITEM_CODE AND B.HOBBY_CODE = C.HOBBY_CODE
 		AND A.MEM_ID = #{mem_id}
 	</select>
+	
+	<select id="selectAddItem" parameterType="String" resultMap="itemResult">
+		SELECT *
+		FROM ALTO_Item i
+		WHERE i.manager = #{mem_id}
+	</select>
+	
 </mapper>
 

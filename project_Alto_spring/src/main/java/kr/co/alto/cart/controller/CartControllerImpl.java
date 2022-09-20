@@ -23,12 +23,16 @@ import kr.co.alto.area.service.AreaService;
 import kr.co.alto.cart.service.CartService;
 import kr.co.alto.cla.dto.ClassDTO;
 import kr.co.alto.member.dto.MemberDTO;
+import kr.co.alto.mypage.service.MypageService;
 
 @Controller("cartController")
 public class CartControllerImpl implements CartController {
 
 	@Autowired
 	private CartService cartService;
+
+	@Autowired
+	private MypageService mypageService;
 	
 	@Override
 	@RequestMapping(value = "/mypage/cartClass.do", method = {RequestMethod.POST,RequestMethod.GET})
@@ -37,17 +41,19 @@ public class CartControllerImpl implements CartController {
 		
 		String viewName = (String) request.getAttribute("viewName");
 		
-		Map<String, Object> cartMainMap = new HashMap<>();
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
 		String mem_id = "";
 		if (memberDTO != null) {
 			mem_id = memberDTO.getMem_id();
 		}
 		
-		cartMainMap = cartService.listCart(mem_id);
+		Map<String, Object> cartMainMap = cartService.listCart(mem_id);
+		Map<String, Object> mylikeMap = mypageService.selectAllLikeList(mem_id);
 		
 		ModelAndView mav = new ModelAndView(viewName);
+		
 		mav.addObject("cartMainMap", cartMainMap);
+		mav.addObject("mylikeMap", mylikeMap);
 		
 		return mav;
 	}

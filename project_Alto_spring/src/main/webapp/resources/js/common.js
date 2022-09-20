@@ -31,13 +31,17 @@ $(function () {
 	$(".closeBtn_style").click(function() {
 		$(this).parent("div").hide()
 	})
-	
+		
 	
 	/* 좋아요 처리 */			
 	$(".like_icon").click(function() {
 		let login = $("#loginChk").val()
 		let selectItem = $(this)
 		let codeNum, codeType
+		
+		$(".closeBtn").click(function() {
+			$(this).parent("div").hide()
+		})
 		
 		if (login != ''){
 			if ($(this).siblings('#club_code').val() != null) {
