@@ -74,6 +74,7 @@
 		      	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
 						<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${best.club_code}">
+							<span class="bestBg"></span>
 							<c:choose>
 								<c:when test="${best.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">

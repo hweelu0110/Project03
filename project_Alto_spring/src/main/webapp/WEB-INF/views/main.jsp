@@ -88,13 +88,20 @@
 		<div id="member_section">
 			<div>
 				<h2>모임 바로가기</h2>
-				<ul class="sub_menu">
-					<li><a href="">전체목록</a></li>
-					<li>설정</li>
-				</ul>
-				<ul class="my_club">
-					
-				</ul>
+				<c:choose>
+					<c:when test="${empty clubList}">
+						<p class="noList">가입한 모임이 없습니다.</p>
+					</c:when>
+					<c:otherwise>
+						<ul class="sub_menu">
+						<li><a href="">전체목록</a></li>
+							<li>설정</li>
+						</ul>
+						<ul class="my_club">
+							
+						</ul>
+					</c:otherwise>
+				</c:choose>				
 			</div>
 			<div>
 				<p class="sub_menu"><a href="${path}/mypage/myMain.do">내정보수정</a></p>
@@ -336,6 +343,7 @@
 	        	<c:forEach var="best" items="${bestList}">
 		      		<div class="swiper-slide">
 		      			<a class="clubImg" href="${path}/club/clubInfo.do?club_code=${best.club_code}">
+		      				<span class="bestBg"></span>
 		      				<c:choose>
 								<c:when test="${best.img == 'noImg'}">
 									<img class="club_img" src="${path}/resources/img/club_noImg.png">

@@ -43,7 +43,7 @@ function fn_cluOut(manager) {
 	let club_code = $("#club_code").val()
 	
 	if (confirm("모임에서 탈퇴해도 내가 등록한 글은 삭제되지 않습니다. 모임에서 지금 나가시겠습니까?")) {
-		location.href='${path}/club/clubOut.do?club_code='+club_code;
+		location.href='http://localhost:8080/alto/club/clubOut.do?club_code='+club_code;
 	}
 }
 
