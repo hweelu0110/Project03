@@ -111,13 +111,19 @@
 								</ul>
 								
 								<c:if test="${login.mem_id eq schedule.mem_id}">
-									<a href="${path}/club_schedule/editSchedule.do?schedule_code=${schedule.schedule_code}&cate=${cate}&tit=${tit}"><img id="editBtn" class="edit" src="${path}/resources/img/edit.png"></a>
+									<a href="${path}/club_schedule/editSchedule.do?schedule_code=${schedule.schedule_code}&cate=${cate}&tit=${tit}">
+										<img id="editBtn" class="edit" src="${path}/resources/img/edit.png">
+									</a>
 								</c:if>	
 							</div>
 							
 							<div class="member">
 								<ul>
+									<c:set var="in" value="false" />
 									<c:forEach var="prom" items="${promiseList}">
+										<c:if test="${login.mem_id eq prom.mem_id}">	
+											<c:set var="in" value="ture" />
+										</c:if>
 										<c:choose>
 											<c:when test="${prom.manager eq 'Y'}">
 												<li class="manager">
@@ -146,9 +152,11 @@
 										</c:choose>	
 									</c:forEach>
 									
-									<c:if test="${login.mem_id ne schedule.mem_id}">
+									<c:if test="${in}">
 										<li>
-											<a href="${path}/club_schedule/promiseIn.do?club_code=${club_code}&schedule_code=${schedule.schedule_code}"><img class="plus" src="../resources/img/plus.png"/></a>
+											<a href="${path}/club_schedule/promiseIn.do?club_code=${club_code}&schedule_code=${schedule.schedule_code}">
+												<img class="plus" src="../resources/img/plus.png"/>
+											</a>
 										</li>
 									</c:if>
 									
