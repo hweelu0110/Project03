@@ -171,8 +171,6 @@ public class HobbyControllerImpl extends MultiActionController implements HobbyC
 				}
 			}
 			
-			System.out.println(hobbysubList.size()); 
-			
 			memHobbyMap.put("hobbysubList", hobbysubList);
 			memHobbyMap.put("mem_id", mem_id);
 		}		

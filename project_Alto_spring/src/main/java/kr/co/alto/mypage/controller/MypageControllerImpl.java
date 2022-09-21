@@ -106,8 +106,7 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 		String message;
 		ResponseEntity resEnt = null;
 		
-		try {
-			
+		try {		
 			
 			mypageService.modMemInfo(memberDTO);			
 			

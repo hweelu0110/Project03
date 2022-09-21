@@ -61,7 +61,8 @@ public class MemberControllerImpl extends BaseController implements MemberContro
 	}
 	
 	@RequestMapping(value = "/registerAuth.do", method=RequestMethod.GET)
-	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception {
+	public ModelAndView loginView(@RequestParam("memberEmail") String memberEmail, 
+								@RequestParam("memberName") String memberName, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		
