@@ -273,6 +273,7 @@
 	position: relative;
 	vertical-align: middle;
 }
+#clubList .club .club_schedule span, #likeClubList .club .club_schedule span { font-size: 12px; }
 .club .club_schedule span:nth-child(4) {
 	display: inline-block;
     width: 76px;

@@ -19,7 +19,7 @@ public interface MemberController {
 	public String register(MemberDTO memberDTO, RedirectAttributes rttr, Model model)throws Exception;
 	public ResponseEntity<String> idCnt(@RequestParam("mem_id") String mem_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView loginView(HttpServletRequest request, @RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName) throws Exception;
+	public ModelAndView loginView(@RequestParam("memberEmail") String memberEmail, @RequestParam("memberName") String memberName, HttpServletRequest request) throws Exception;
 	public String loginFrm(@ModelAttribute("loginDTO") LoginDTO loginDTO, HttpServletRequest request, Model model) throws Exception;
 	public String loginPost(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception;
 	

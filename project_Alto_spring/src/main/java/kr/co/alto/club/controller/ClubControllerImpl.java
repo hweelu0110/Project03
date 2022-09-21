@@ -97,7 +97,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	
 	@Override
 	@RequestMapping(value = "/clubSearchList.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView clubSearhList(@RequestParam(value="hobbyC", required = false) String hobbyC, HttpServletRequest request, HttpSession httpSession) throws Exception {
+	public ModelAndView clubSearhList(@RequestParam(value="hobbyC", required = false) String hobbyC, 
+			                         HttpServletRequest request, HttpSession httpSession) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		Map<String, Object> clubSearchMap = new HashMap<>();
@@ -117,17 +118,14 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				allhobbys = "true";	
 			}			
 		}
-		
-		System.out.println("전체검색?? " + allhobbys);
-				
+						
 		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("hobbyCodeList", hobbyCodeList);
 		searchMap.put("hobbySubCodeList", hobbySubCodeList);
 		searchMap.put("areaCodeList", areaCodeList);
 		searchMap.put("keyword", keyword);
 		searchMap.put("sort", sort);
-		searchMap.put("allhobbys", allhobbys);
-		
+		searchMap.put("allhobbys", allhobbys);		
 				
 		//로그인 상태인 경우 관심목록 가져오기
 		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
@@ -199,7 +197,8 @@ public class ClubControllerImpl extends BaseController implements ClubController
 	}	
 	
 	@RequestMapping(value = "/clubInfo.do", method = {RequestMethod.POST, RequestMethod.GET})
-	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+	public ModelAndView clubInfo(@RequestParam(value="club_code", required = false) String club_code, 
+			                     HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
 		ModelAndView mav = new ModelAndView();		
 		String viewName = (String)request.getAttribute("viewName");
 		
@@ -242,8 +241,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 		mav.addObject("areaList", areaList);
 		mav.addObject("hobbySubList", hobbySubList);
 		mav.addObject("hobbyList", hobbyList);
-		mav.addObject("scheduleInfo", scheduleDTO);
-		
+		mav.addObject("scheduleInfo", scheduleDTO);		
 		mav.setViewName(viewName);
 		
 		return mav;
