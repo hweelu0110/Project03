@@ -439,18 +439,24 @@
 	
 	<!-- 대분류 취미 메뉴 검색 목록 -->
 	<select id="selectHobClubList" parameterType="String" resultType="clubListDTO">
-		SELECT A.CLUB_CODE club_code, 
-		       A.TITLE title, 
-		       A.CATE_M cate_m, 
-		       A.CATE_S cate_s, 
-		       B.NAME area_name, 
-		       A.MEMBER_NUM member_num, 
-		       A.IMG img,
-		       A.regidate
-		FROM ALTO_CLUB A, ALTO_AREA B
-		WHERE A.AREA_CODE = B.AREA_CODE
-		AND CATE_M = #{hobby_code}
-		ORDER BY A.regidate DESC
+		<![CDATA[
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
+			FROM (
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cate_s, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img,
+				       A.regidate
+				FROM ALTO_CLUB A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE
+				AND CATE_M = #{hobby_code}
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B
+			ON A.CLUB_CODE = B.CLUB_CODE
+			ORDER BY A.regidate DESC
+		]]>
 	</select>
 	
 	<!-- 키워드 검색 목록 -->
