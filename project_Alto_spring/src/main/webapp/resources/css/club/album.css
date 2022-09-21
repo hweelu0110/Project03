@@ -23,7 +23,7 @@ table th, td { height: 40px; }
 table a:hover { color: #000; }
 table img { margin: 10px 0; width: auto; }
 
-#clubAlbum li { display: inline-block; margin: 0 5px 40px 0; }
+#clubAlbum li { display: inline-block; margin: 0 5px 40px 0; width: 170px; }
 #clubAlbum li img {
 	width: 172px;
 	height: 172px;

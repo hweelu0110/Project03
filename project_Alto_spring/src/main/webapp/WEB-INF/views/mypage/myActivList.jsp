@@ -18,6 +18,7 @@
 	<meta name="viewport" content="width=device-width, inital-scale=1.0">
 	<link rel="stylesheet" href="${path}/resources/css/common/list.css" />	
 	<link rel="stylesheet" href="${path}/resources/css/mypage.css" />	
+	<script src="${path}/resources/js/mypage.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$("#myMenu ul:eq(0)").find("li:eq(0)").addClass("select")
@@ -242,5 +243,26 @@
 			</form>
 		</div>		
 	</section>
+	
+	<div id="imgEdit_div" class="popup_div profile">
+		<h4>프로필 사진 변경</h4>
+		<button class="closeBtn">닫기</button>
+		<form action="${path}/mypage/updateImg.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mem_id" id="mem_id" value="${login.mem_id}" />
+			<input type="hidden" name="oldFileName" value="${login.img}" />
+			<c:choose>
+				<c:when test="${login.img eq null}">
+					<img id="mem_img" src="${path}/resources/img/profile_default.png" />
+				</c:when>
+				<c:otherwise>
+					<img id="mem_img" src="${path}/memberImgDown.do?imageFileName=${login.img}" />
+				</c:otherwise>
+			</c:choose>
+			
+			<input type="file" name="file" id="mem_imgfile" onchange="readURL(this, 0)" />
+			<button type="submit" class="pointBtn">적용</button>
+			<button type="button" class="basicBtn" onclick="fn_delURL()">삭제</button>
+		</form>
+	</div>
 </body>
 </html>
