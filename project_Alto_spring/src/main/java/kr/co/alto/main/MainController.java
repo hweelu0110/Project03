@@ -128,4 +128,43 @@ public class MainController {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/main/aloneList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView aloneList(HttpServletRequest request, HttpServletResponse response, HttpSession httpSession) throws Exception {
+
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		Map<String, Object> aloneMap = new HashMap<>();
+		
+		//로그인 상태인 경우 관심목록 가져오기
+		MemberDTO memberDTO = (MemberDTO) httpSession.getAttribute("login");
+		if (memberDTO != null) {
+			String mem_id = memberDTO.getMem_id();
+			List<likeDTO> memlikeList = new ArrayList<>();
+			memlikeList = mypageService.selectLikeList(mem_id);
+			
+			mav.addObject("memlikeList", memlikeList);
+		}		
+		
+		List<ClubListDTO> aloneClubList = clubService.aloneClubList();
+		
+		Map<String, Object> aloneClassMap = new HashMap<>();
+		List<String> areaSearchList = new ArrayList<>();
+		areaSearchList.add("area0001");
+		aloneClassMap.put("areaSearchList", areaSearchList);
+		List<ClassDTO> aloneClassList = classService.listClass(aloneClassMap);
+		
+		HashMap<String, Object> listMapItemNew = new HashMap<>();
+		listMapItemNew.put("sort", "new");
+		List<ItemDTO> itemListNew = itemService.listItem(listMapItemNew);
+		
+		aloneMap.put("aloneClubList", aloneClubList);
+		aloneMap.put("aloneClassList", aloneClassList);
+		aloneMap.put("itemListNew", itemListNew);
+		
+		mav.addObject("aloneMap", aloneMap);
+		
+		return mav;
+	}
+	
 }

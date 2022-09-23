@@ -38,5 +38,7 @@ public interface ClubService {
 	public List<ClubDTO> keywordClub(String keyword) throws Exception;
 	
 	
+	public List<ClubListDTO> aloneClubList() throws DataAccessException;
+	
 	
 }

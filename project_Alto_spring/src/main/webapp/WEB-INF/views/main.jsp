@@ -77,9 +77,9 @@
 	<!-- Top Banner Area -->
 	<div id="ban_area">
 		<div>
-			<div><a href=""><span>혼자 오셨어요?</span></a></div>
-			<div><a href=""><span>다함께 즐기는 취미생활</span></a></div>
-			<div><a href=""><span>취미!<br/>없으면 만들면 되지</span></a></div>
+			<div><a href="${path}/main/aloneList.do"><span>혼자 오셨어요?</span></a></div>
+			<div><a href="${path}/club/clubMain.do"><span>다함께 즐기는 취미생활</span></a></div>
+			<div><a href="${path}/class/classMain.do"><span>취미!<br/>없으면 만들면 되지</span></a></div>
 		</div>		
 	</div>
 	

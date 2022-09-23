@@ -213,6 +213,12 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubDTO> keywordClub(String keyword) throws Exception {
 		return clubDAO.keywordClub(keyword);
+	}
+
+
+	@Override
+	public List<ClubListDTO> aloneClubList() throws DataAccessException {			
+		return clubDAO.aloneClubList();
 	}	
 	
 }
