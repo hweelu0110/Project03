@@ -392,7 +392,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		try {
 				
-			boardService.addNewArticle(articleMap);		//articleMap을 서비스 클래스로 전달함
+			boardService.addNewArticle(articleMap);		
 			clubService.clubJoin(joinMap); 					//가입정보 전달하기
 							
 			message = "<script>";

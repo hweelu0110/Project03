@@ -264,9 +264,8 @@ public class MypageControllerImpl extends BaseController implements MypageContro
 				File file = new File(MEM_IMG_PATH+"\\"+fileName);
 				if (mFile.getSize() != 0) {
 					if(!file.exists()) {
-						file.getParentFile().mkdirs();		//경로에 해당하는 디렉토리 생성
-						mFile.transferTo(new File(MEM_IMG_PATH +"\\"+originalFileName ));
-								//저장된 MultipartFile을 실제 파일로 전송
+						file.getParentFile().mkdirs();		
+						mFile.transferTo(new File(MEM_IMG_PATH +"\\"+originalFileName ));								
 					}
 				}
 			}
