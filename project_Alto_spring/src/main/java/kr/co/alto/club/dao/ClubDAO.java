@@ -58,4 +58,6 @@ public interface ClubDAO {
 
 	public List<ClubDTO> keywordClub(String keyword) throws DataAccessException;
 	
+	public List<ClubListDTO> aloneClubList() throws DataAccessException;
+	
 }

@@ -118,6 +118,19 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				allhobbys = "true";	
 			}			
 		}
+		// 서브코드 확인
+		if(hobbySubCodeList != null) {
+			for(int i=0; i<hobbySubCodeList.length;i++) {
+				System.out.println(hobbySubCodeList[i]);
+			}
+		}
+		
+		//지역 코드 확인
+		if(areaCodeList != null) {
+			for(int i=0; i<areaCodeList.length;i++) {
+				System.out.println(areaCodeList[i]);
+			}
+		}
 						
 		Map<String, Object> searchMap = new HashMap<>();
 		searchMap.put("hobbyCodeList", hobbyCodeList);
@@ -392,7 +405,7 @@ public class ClubControllerImpl extends BaseController implements ClubController
 				
 		try {
 				
-			boardService.addNewArticle(articleMap);		//articleMap을 서비스 클래스로 전달함
+			boardService.addNewArticle(articleMap);		
 			clubService.clubJoin(joinMap); 					//가입정보 전달하기
 							
 			message = "<script>";

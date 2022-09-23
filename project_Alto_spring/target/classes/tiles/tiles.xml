@@ -47,6 +47,10 @@
 	
 	<definition name="/main/searchMain" extends="tiles-layout">
 		<put-attribute name="body" value="/WEB-INF/views/searchMain.jsp" />		
+	</definition>
+	
+	<definition name="/main/aloneList" extends="tiles-layout">
+		<put-attribute name="body" value="/WEB-INF/views/aloneList.jsp" />		
 	</definition>	
 	
 	<!-- 클래스 -->

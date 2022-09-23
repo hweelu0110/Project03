@@ -467,4 +467,26 @@
 		AND c.CATE_M = h.HOBBY_CODE
 		AND (c.TITLE LIKE '%' || #{keyword} || '%' OR h.NAME LIKE '%' || #{keyword} || '%' OR a.NAME LIKE '%' || #{keyword} || '%')
 	</select>
+	
+	<!-- 혼자하는 취미 모임(온라인 모임) -->
+	<select id="aloneClubList" resultType="clubListDTO">
+		<![CDATA[
+			SELECT A.*, B.SDATE schedule, B.SPLACE place
+			FROM (
+				SELECT A.CLUB_CODE club_code, 
+				       A.TITLE title, 
+				       A.CATE_M cate_m, 
+				       A.CATE_S cate_s, 
+				       B.NAME area_name, 
+				       A.MEMBER_NUM member_num, 
+				       A.IMG img,
+				       A.regidate
+				FROM ALTO_CLUB A, ALTO_AREA B
+				WHERE A.AREA_CODE = B.AREA_CODE
+				AND A.AREA_CODE = 'area0001'
+			) A LEFT JOIN ALTO_CLUB_SCHEDULE B
+			ON A.CLUB_CODE = B.CLUB_CODE
+			ORDER BY A.regidate DESC
+		]]>
+	</select>
 </mapper>

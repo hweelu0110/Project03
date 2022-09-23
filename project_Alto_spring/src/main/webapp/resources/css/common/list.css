@@ -75,6 +75,12 @@
 }
 
 #sec_02,#sec_03,#sec_04,#sec_05,#sec_06 { clear: both; margin-bottom: 70px; }
+#sec_08 { margin: 30px 0 70px; }
+#aloneList .moreBtn {
+	height: 160px;
+    background: #e4e4e4;
+    border-radius: 10px;
+}
 /* BEST 모임 swiper */
 .swiper-slide img {
   display: block;
@@ -273,7 +279,8 @@
 	position: relative;
 	vertical-align: middle;
 }
-#clubList .club .club_schedule span, #likeClubList .club .club_schedule span { font-size: 12px; }
+#clubList .club .club_schedule span, #likeClubList .club .club_schedule span
+, #search_result .club .club_schedule span { font-size: 12px; }
 .club .club_schedule span:nth-child(4) {
 	display: inline-block;
     width: 76px;

@@ -10,6 +10,8 @@
 	
 	let cateEle = $("#m_cate li.select")
 	let selCate = $("#m_cate li.select").length
+	let areaEle = $("#area_list li.select")
+	let selArea = $("#area_list li.select").length
 		
 	for (let i=0; i<selCate; i++) {
 		if (cateEle.eq(0).text().trim() == "전체") {
@@ -19,6 +21,17 @@
 			$("#tab_menu li:nth-child(1)").append("<span>"+cateEle.eq(0).text().trim()+"</span>");
 		}else {
 			$("#tab_menu li:nth-child(1)").append("<span style='margin-left:5px;'>"+cateEle.find("p").eq(i).text()+"</span>")
+		}
+	}
+	
+	for (let i=0; i<selArea; i++) {
+		if (areaEle.eq(0).text().trim() == "전체") {
+			$("#tab_menu li:nth-child(2)").html("<span>전체 지역</span>")
+		}else if ($("#tab_menu li:nth-child(2) span").text() == "전체 지역") {
+			$("#tab_menu li:nth-child(2)").html("")
+			$("#tab_menu li:nth-child(2)").append("<span>"+areaEle.eq(0).text().trim()+"</span>");
+		}else {
+			$("#tab_menu li:nth-child(2)").append("<span style='margin-left:5px;'>"+areaEle.eq(i).text()+"</span>")
 		}
 	}
 	
@@ -164,7 +177,6 @@
 			$("#s_cate ul li.all").children('input').removeAttr("name")						
 		}else {
 			$("#s_cate ul li.all").addClass("select")
-			$("#s_cate ul li.all").children('input').attr('name','hobbySubCode')
 		}
 		
 		if($(this).hasClass('select')) {
