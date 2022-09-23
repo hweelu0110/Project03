@@ -80,9 +80,13 @@
 								</c:if>							
 							</div>
 							<input type="hidden" name="club_code" id="club_code" value="${brandnew.club_code}" />
-						</div>
+						</div>						
 			      	</c:forEach>
 			      	
+			      	<div class="swiper-slide moreBtn">
+						<p><a href="${path}/club/clubMain.do">더 많은 모임보기</a></p>												
+					</div>
+								      	
 			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
@@ -142,6 +146,10 @@
 						</div>
 			      	</c:forEach>
 			      	
+			      	<div class="swiper-slide moreBtn">
+						<p><a href="${path}/class/classMain.do">더 많은 클래스보기</a></p>												
+					</div>
+							
 			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
@@ -199,6 +207,10 @@
 						</div>
 			      	</c:forEach>
 			      	
+			      	<div class="swiper-slide moreBtn">
+						<p><a href="${path}/item/itemMain.do">더 많은 취미용품보기</a></p>												
+					</div>
+							
 			      </div>
 			      <div class="swiper-button-next"></div>
 			      <div class="swiper-button-prev"></div>
