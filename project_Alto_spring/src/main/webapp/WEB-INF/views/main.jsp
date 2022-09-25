@@ -175,10 +175,10 @@
 		    </script>
 		</div>
 		
-		<%-- <!-- 회원인 경우에만 노출 추후 진행 -->
+		<!-- 회원인 경우에만 노출 추후 진행 -->
 		<c:if test="${not empty login}">
 			<div id="sec_member">
-			<h2>추천 모임</h2>
+			<h2>AlTo추천 모임</h2>
 			<div class="swiper mySwiper4">
 		      <div class="swiper-wrapper club">
 	        	<div class="swiper-slide">
@@ -331,7 +331,7 @@
 			    </script>			
 			</div>				
 		</div>
-		</c:if> --%>
+		</c:if>
 		
 		
 		<div id="sec_02">
@@ -650,7 +650,7 @@
 						<div>
 							<p class="class_name">${classListNew.className }</p>
 							<p class="hobby_name">${classListNew.hobby_name }</p>
-							<p class="class_price"><fmt:formatNumber value="${classListNew.price }" pattern="\#,###원" /></p>				
+							<p class="class_price"><fmt:formatNumber value="${classListNew.price }" pattern="#,###원" /></p>				
 						</div>
 						
 						<input type="hidden" name="class_code" id="class_code" value="${classListNew.class_code}" />
