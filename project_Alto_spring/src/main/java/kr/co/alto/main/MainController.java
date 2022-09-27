@@ -64,8 +64,14 @@ public class MainController {
 			List<ClubListDTO> memclubList = mypageService.selectActivClubList(mem_id);
 			
 			memInfoMap.put("memlikeList", memlikeList);	
-			memInfoMap.put("memclubList", memclubList);
-			mav.addObject("memInfoMap", memInfoMap);			
+			memInfoMap.put("memclubList", memclubList);			
+			
+			//추천 목록
+			List<ClubListDTO> recomClubList = clubService.recommendClubList(mem_id);
+			
+			memInfoMap.put("recomClubList", recomClubList);
+			
+			mav.addObject("memInfoMap", memInfoMap);
 		}
 		
 		List<HashMap<String, Object>> topHobby = clubService.selectTopHobby();

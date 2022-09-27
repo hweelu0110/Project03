@@ -42,6 +42,7 @@
 			AND A.HOBBY_CODE = #{main_code}
 		]]>
 	</select>
+	
 	<!-- 내취미 대분류 목록 불러오기 -->
 	<select id="memMainHobbyList" parameterType="String" resultMap="hobbyResult">
 		<![CDATA[
