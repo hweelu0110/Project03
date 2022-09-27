@@ -1,5 +1,6 @@
 package kr.co.alto.club.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,6 +220,32 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public List<ClubListDTO> aloneClubList() throws DataAccessException {			
 		return clubDAO.aloneClubList();
+	}
+
+
+	@Override
+	public List<ClubListDTO> recommendClubList(String mem_id) throws DataAccessException {
+		Map<String, Object> searchMap = new HashMap<>();
+		
+		List<HobbyDTO> hobbyList = mypageDAO.selectHobbyList(mem_id);
+		List<AreaDTO> areaList = mypageDAO.selectMyAreaList(mem_id);
+		int hobbyCnt = hobbyList.size();
+		int areaCnt = areaList.size();
+		String[] hobbyCodeList = new String[hobbyCnt];
+		String[] areaCodeList = new String[areaCnt];
+		
+		for(int i=0; i<hobbyList.size(); i++) {
+			hobbyCodeList[i] = hobbyList.get(i).getHobby_code();
+		}
+		
+		for(int i=0; i<areaList.size(); i++) {
+			areaCodeList[i] = areaList.get(i).getArea_code();
+		}
+		
+		searchMap.put("hobbyCodeList", hobbyCodeList);
+		searchMap.put("areaCodeList", areaCodeList);		
+		
+		return clubDAO.selectSearchClubList(searchMap);
 	}	
 	
 }

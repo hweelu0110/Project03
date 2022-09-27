@@ -40,5 +40,7 @@ public interface ClubService {
 	
 	public List<ClubListDTO> aloneClubList() throws DataAccessException;
 	
+	public List<ClubListDTO> recommendClubList(String mem_id) throws DataAccessException;
+	
 	
 }
